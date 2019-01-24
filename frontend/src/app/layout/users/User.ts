@@ -67,6 +67,12 @@ export class User {
       this.commissions.voucherSale = 33;
     }
 
+    static toModel(dto: any) {
+      const model = new User();
+      model.updateData(dto);
+      return model;
+    }
+
     toDto(): any {
       const {service, product, voucherSale} = this.commissions;
       return {
@@ -88,14 +94,35 @@ export class User {
     }
 
     updateData(data: any) {
-      const {find_user: {
+      const {
         id,
-        name,
-        email
-      }} = data;
+        firstName,
+        lastName,
+        email,
+        phone,
+        ennable_appointment_booking,
+        notes,
+        start_date,
+        end_date,
+        appointment_color,
+        dial_code,
+        service_commission,
+        product_commission,
+        voucher_sales_commission
+     } = data;
+
       this.id = id;
-      this.firstName = name;
+      this.firstName = firstName;
+      this.lastName = lastName;
       this.email = email;
+      this.dialCode = dial_code;
+      this.mobileNumber = phone;
+      this.notes = notes;
+      this.employmentStartDate = start_date;
+      this.employmentEndDate = end_date;
+      this.apointmentBooking = ennable_appointment_booking === 1 ? true : false;
+      this.apointmentColor = appointment_color;
+      this.commissions.updateData(service_commission, product_commission, voucher_sales_commission);
     }
 
 }
@@ -115,6 +142,13 @@ export class Commission {
     this.product = null;
     this.voucherSale = null;
   }
+
+  updateData(service_commission, product_commission, voucher_sales_commission) {
+    this.service = service_commission;
+    this.product = product_commission;
+    this.voucherSale = voucher_sales_commission;
+  }
+
 }
 
 export interface UserDto {

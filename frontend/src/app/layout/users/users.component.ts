@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
   public error = [];
 
 	closeResult: string;
-  listusers: any;
+  listusers: User[];
   isCreate: boolean;
   colors: string[];
   
@@ -49,7 +49,6 @@ export class UsersComponent implements OnInit {
     pressed.push(e.key);
     pressed.splice(-secret.length - 1, pressed.length - secret.length);
     if (pressed.join('').includes(secret)) {
-        console.log('lul');
       this.form.mockData();
     }
     });
@@ -91,7 +90,7 @@ export class UsersComponent implements OnInit {
 	getUser() {
 		return this.http.get('http://localhost:8000/api/list-user')
 		.subscribe((listusers:any) => {
-		    this.listusers = listusers.list_user;
+		    this.listusers = listusers.map(User.toModel);
 		});
 	}
 	
