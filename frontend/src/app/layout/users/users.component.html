@@ -134,7 +134,7 @@
                             <div class="row form-group">
                                 <div class="col-sm-6">
                                     <label class="control-label">EMPLOYMENT START DATE</label>
-                                    <input class="form-control" placeholder="yyyy-mm-dd" (click)="dst.toggle()"
+                                    <input class="form-control" placeholder="yyyy-mm-dd" (click)="dst.open()"
                                         name="start-date" [(ngModel)]="form.employmentStartDate" ngbDatepicker #dst="ngbDatepicker">
                                     <!-- <div class="input-group-append">
                                         <button class="btn btn-outline-secondary calendar" (click)="dst.toggle()" type="button"></button>
@@ -142,8 +142,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="control-label">EMPLOYMENT END DATE</label>
-                                    <input class="form-control" placeholder="yyyy-mm-dd" (click)="de.toggle()"
-                                        name="start-date" [(ngModel)]="form.employmentEndDate" ngbDatepicker #de="ngbDatepicker">
+                                    <input class="form-control" placeholder="yyyy-mm-dd" (click)="de.open()"
+                                        name="end-date" [(ngModel)]="form.employmentEndDate" ngbDatepicker #de="ngbDatepicker">
                                     <!-- <div class="input-group-append">
                                         <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"></button>
                                     </div> -->
