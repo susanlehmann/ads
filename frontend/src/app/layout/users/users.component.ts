@@ -13,7 +13,7 @@ animations: [routerTransition()]
 
 export class UsersComponent implements OnInit {
 
-  public form = new User();
+  form: User;
 
   modalOptions: NgbModalOptions;
   public error = [];
@@ -21,11 +21,16 @@ export class UsersComponent implements OnInit {
 	closeResult: string;
   listusers: any;
   isCreate: boolean;
+  colors: string[];
   
 	constructor(
 	private http: HttpClient,
 	private modal: NgbModal, 
 	) {
+    this.form = new User();
+    this.colors = [
+      'red', 'green', 'yellow', 'olive', 'orange', 'teal', 'blue', 'violet', 'purple', 'pink'
+    ];
 		this.getUser();
 	}
 
@@ -34,6 +39,20 @@ export class UsersComponent implements OnInit {
       backdrop: 'static',
       size: 'lg'
     };
+    this.test();
+  }
+
+  test() {
+    const pressed = [];
+    const secret = 'test';
+    window.addEventListener('keyup', e => {
+    pressed.push(e.key);
+    pressed.splice(-secret.length - 1, pressed.length - secret.length);
+    if (pressed.join('').includes(secret)) {
+        console.log('lul');
+      this.form.mockData();
+    }
+    });
   }
   
   openModal(content: NgbModalRef) {
@@ -70,10 +89,8 @@ export class UsersComponent implements OnInit {
   }
 	
 	getUser() {
-		// console.log('Get Products and Update Table');
 		return this.http.get('http://localhost:8000/api/list-user')
 		.subscribe((listusers:any) => {
-			console.log(listusers.list_user);
 		    this.listusers = listusers.list_user;
 		});
 	}
@@ -104,7 +121,6 @@ export class UsersComponent implements OnInit {
     }
 
 	dalete_user(id) {
-		// console.log('Get Products and Update Table');
 		return this.http.post('http://localhost:8000/api/delete_user',{'id':id})
       .subscribe((data:any) => {
               this.getUser();
