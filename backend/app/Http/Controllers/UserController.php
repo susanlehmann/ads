@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index()
     {
         // List all the products
-        $data['list_user'] = User::get();
+        $data = User::get();
         return response()->json($data);
     }
 
@@ -20,16 +20,16 @@ class UserController extends Controller
         echo json_encode(Auth::user());die;
         // Create new product
         $user = new User();
-        $user->business_id = 1;
-        $user->role_id = 1;
-        $user->id_user_create = Auth::user()->id;
-        $user->id_user_update = Auth::user()->id;
+        $user->business_id = $request->id;
+        $user->role_id = $request->id;
+        $user->id_user_create = $request->id;
+        $user->id_user_update = $request->id;
         $user->firstName = $request->firstName;
         $user->lastName = $request->lastName;
         $user->email = $request->email;
         $user->password = $request->password;
         $user->phone = $request->phone;
-        $user->ennable_appointment_booking = 1;
+        $user->ennable_appointment_booking = $request->ennable_appointment_booking;
         $user->notes = $request->notes;
         $user->start_date = $request->start_date;
         $user->end_date = $request->end_date;
@@ -40,7 +40,7 @@ class UserController extends Controller
         $user->product_commission = $request->product_commission;
         $user->voucher_sales_commission = $request->voucher_sales_commission;
         $user->sort_order = 1;
-        $user->level = 0;
+        // $user->level = 0; // ko co column level
         $check = $user->save();
         if($check == true)
         {
@@ -57,7 +57,7 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data['find_user'] = User::find($id);
+        $data = User::find($id);
         return response()->json($data);
     }
 
@@ -66,19 +66,19 @@ class UserController extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_user_update' => Auth::user()->id,
+                'id_user_update' => $request->id,
                 'firstName' => $request->firstName,
                 'lastName' => $request->lastName,
-                'email' => $request->lastName,
-                'phone' => $request->lastName,
-                'notes' => $request->lastName,
-                'start_date' => $request->lastName,
-                'end_date' => $request->lastName,
-                'appointment_color' => $request->lastName,
-                'service_commission' => $request->lastName,
-                'product_commission' => $request->lastName,
-                'voucher_sales_commission' => $request->lastName,
-                'updated_at' => date('yyyy-mm-dd H:i:s')
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'notes' => $request->notes,
+                // 'start_date' => $request->start_date,
+                // 'end_date' => $request->end_date,
+                'appointment_color' => $request->appointment_color,
+                'service_commission' => $request->service_commission,
+                'product_commission' => $request->product_commission,
+                'voucher_sales_commission' => $request->voucher_sales_commission,
+                // 'updated_at' => date('yyyy-mm-dd H:i:s')
             ];
             User::where('id', $id)->update($input);  
         }
