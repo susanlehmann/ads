@@ -9,9 +9,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StaffComponent } from './staff.component';
 import { MemberComponent } from './member/member.component';
 import { PermissionComponent } from './permission/permission.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
-    imports: [CommonModule, StaffRoutingModule, PageHeaderModule,FormsModule, NgbModule],
+    imports: [CommonModule, StaffRoutingModule, PageHeaderModule,FormsModule, NgbModule, NgxLoadingModule.forRoot({})],
     declarations: [StaffComponent, MemberComponent, PermissionComponent]
 })
 export class StaffModule { }
