@@ -1,39 +1,27 @@
-.control-label {
-  font-size: 13px;
-  text-transform: uppercase;
-  font-weight: 700;
+.nav-tabs-container {
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 20px;
+}
+.nav-pills .nav-link {
+    color: rgba(36,51,74,.55);
+    font-weight: 700;
+    position: relative;
+    padding: 1rem 0;
+    margin: 0 1rem;
 }
 
-.form-text-area {
-  resize: none;
+.nav-pills .nav-link.active, .nav-pills .nav-link:hover {
+    background-color: transparent;
+    color: #20a8d8;
 }
 
-.ng-invalid:not(form){
-    border-left:5px solid red;
+.nav-pills .nav-link.active:after, .nav-pills .nav-link:hover:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #20a8d8;
+    left: 0;
+    border-radius: 3px;
 }
-
-.ng-valid:not(form){
-    border-left:5px solid green;
-}
-
-.form-group {
-    padding: 8px 0;
-    input::-webkit-input-placeholder {
-        color: #656565 !important;
-    }
-
-    input:-moz-placeholder {
-        /* Firefox 18- */
-        color: #656565 !important;
-    }
-
-    input::-moz-placeholder {
-        /* Firefox 19+ */
-        color: #656565 !important;
-    }
-
-    input:-ms-input-placeholder {
-        color: #656565 !important;
-    }
-}
-
