@@ -10,6 +10,7 @@ import { Staff } from '../model/staff'
 })
 export class MemberComponent implements OnInit {
 
+  loading: boolean;
   
   form: Staff;
 
@@ -30,15 +31,15 @@ export class MemberComponent implements OnInit {
     this.colors = [
       'red', 'green', 'yellow', 'olive', 'orange', 'teal', 'blue', 'violet', 'purple', 'pink'
     ];
-		this.getUser();
-	}
-
-	ngOnInit() {
     this.modalOptions = {
       backdrop: 'static',
       size: 'lg'
     };
+	}
+
+	ngOnInit() {
     this.test();
+    this.getUser();
   }
 
   test() {
@@ -78,8 +79,10 @@ export class MemberComponent implements OnInit {
   }
 	
 	getUser() {
-		return this.http.get('http://localhost:8000/api/list-user')
+    this.loading = true;
+		this.http.get('http://localhost:8000/api/list-user')
 		.subscribe((listusers:any) => {
+        this.loading = false;
 		    this.listusers = listusers.map(Staff.toModel);
 		});
 	}
