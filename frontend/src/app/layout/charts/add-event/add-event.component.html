@@ -1,0 +1,68 @@
+<div class="modal-header">
+	<h4 class="modal-title col-sm-6 offset-sm-4">Add Event</h4>
+	<span class="col-sm-2 close" aria-label="Close" (click)="closeModal()">
+		<span aria-hidden="true">&times;</span>
+	</span>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="content-title">
+				<span><i class="fa fa-calendar"></i> {{ daySelected }}</span>
+			</div>
+			<div class="content-form">
+				<div class="box-title">
+					<label for="titleEvent">Title</label>
+					<input type="text" name="titleEvent" placeholder="Title" class="form-control">
+				</div>
+				<div class="clearfix"></div>
+				<div class="box-hours">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="startTime">
+										<label for="stTime">Start Time : </label>
+										<select name="stTime" class="form-control" #stTime="ngModel" [(ngModel)]="event_info.stTime">
+											<option *ngFor="let h of hours" value="{{h.value}}">{{h.name}}</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="endTime">
+										<label for="endTime">End Time : </label>
+										<select name="endTime" class="form-control" #endTime="ngModel" [(ngModel)]="event_info.endTime">
+											<option *ngFor="let h of hours" value="{{h.value}}">{{h.name}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="box-service">
+										<label for="serviceEvent">Service</label>
+										<select name="serEvent" class="form-control" #serEvent="ngModel" [(ngModel)]="event_info.serEvent">
+											<option value="" disabled selected="selected" hidden>-= Service =-</option>
+											<option *ngFor="let sv of service" value="{{sv.value}}">{{sv.name}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="box-desc">
+					<label for="descEvent">Description</label>
+					<textarea type="text" name="descEvent" placeholder="Description" class="form-control" rows="3"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" (click)="closeModal()"> Cancel </button>
+	<button type="submit" class="btn btn-primary"> Register </button>
+</div>
