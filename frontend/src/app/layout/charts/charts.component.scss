@@ -1,0 +1,19 @@
+.fc{
+	.fc-view-container{
+					background: #f00;
+		.fc-view{
+			table {
+				tbody {
+					.fc-slats{
+						background: #f00;
+						tr{
+							&:hover{
+								cursor: cell;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

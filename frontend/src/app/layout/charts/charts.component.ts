@@ -4,6 +4,8 @@ import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import * as $ from 'jquery';
 import { EventSesrvice } from './event.service';
+import {NgbModal, NgbModalRef, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
     selector: 'app-charts',
     templateUrl: './charts.component.html',
@@ -11,11 +13,15 @@ import { EventSesrvice } from './event.service';
     animations: [routerTransition()]
 })
 export class ChartsComponent implements OnInit {
-  calendarOptions: Options;
+    calendarOptions: Options;
     displayEvent: any;
-  
+    _clickEvent: any;
+    closeResult: any;
+    modalOptions: NgbModalOptions;
+
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-    constructor(protected eventService: EventSesrvice) {}
+    constructor(protected eventService: EventSesrvice,
+      private modal: NgbModal) {}
 
 
   ngOnInit() {
@@ -26,12 +32,19 @@ export class ChartsComponent implements OnInit {
         header: {
           left: 'prev,next today',
           center: 'title',
-          right: 'month,agendaWeek,agendaDay,listMonth'
+          right: 'agendaWeek,listMonth'
         },
-        events: data,
-        eventClick: (calEvent, jsEvent, view) => {
-                    console.log(calEvent);
-                }
+        defaultView: 'agendaWeek',
+        buttonText: {
+          prev: "< Trước ",
+          next: "Sau >",
+          today: 'Hôm nay',
+          month: 'Danh sách',
+          week: 'Tuần',
+          day: 'Ngày'
+        },
+        selectable: true,
+        events: data
       };
     });
   }
@@ -67,5 +80,32 @@ export class ChartsComponent implements OnInit {
       }
     }
     this.displayEvent = model;
+  }
+
+  dayClick(event: any, content){
+    this._clickEvent = event;
+    this.modalOptions = {
+      backdrop: 'static',
+      size: 'lg'
+    };
+    this.openModal(content);
+  }
+
+  openModal(content: NgbModalRef) {
+    this.modal.open(content, this.modalOptions).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }
