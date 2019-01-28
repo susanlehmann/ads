@@ -1,0 +1,8 @@
+.content-title {
+    text-align: center;
+    font-size: 1.7rem;
+}
+.clearfix{
+	clear: both;
+	margin: 5px 0;
+}

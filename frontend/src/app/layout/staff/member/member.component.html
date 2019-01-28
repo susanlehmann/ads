@@ -1,0 +1,240 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card mb-3">
+            <div class="card-header">
+              <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
+            </div>
+            <div class="card-body table-responsive">
+            <ngx-loading [show]="loading"></ngx-loading>
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th></th>  <!-- appointment color -->
+                        <th>{{'Name' | uppercase}}</th>
+                        <th>{{'Mobile number' | uppercase}}</th>
+                        <th>{{'Email' | uppercase}}</th>
+                        <th>{{'APPOINTMENTS	' | uppercase}}</th>
+                        <th>{{'USER PERMISSION' | uppercase}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)">
+                        <td>{{user.appointmentColor}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.mobileNumber}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.apointmentBooking}}</td>
+                        <td>{{user.userPermission}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+</div>
+
+<ng-template #content let-modal>
+<div class="modal-header">
+<h4 class="modal-title col-sm-4 offset-sm-4">{{isCreate ? 'New Staff' : 'Edit Staff'}}</h4>
+<button type="button" class="col-sm-4 close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<form #signupForm=ngForm (ngSubmit)="onSubmit()">
+<div class="modal-body">
+
+    <ngb-tabset>
+    <ngb-tab title="Details">
+        <ng-template ngbTabContent>
+            
+                <div class="col-md-12 form-content">
+                <div class="row">
+                  <div class="col-md-6">
+                      <div class="row form-group">
+                          <div class="col-sm-6">
+                            <label class="control-label">FIRST NAME</label>
+                            <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="first-name" placeholder="e.g. Jane" required>
+                            <div class="alert alert-danger" [hidden]="!error.name"> {{ error.name }} </div>
+                        </div>
+        
+                        <div class="col-sm-6">
+                            <label class="control-label">LAST NAME</label>
+                            <input [(ngModel)]="form.lastName" type="text" name="last-name" class="form-control input-underline input-lg" placeholder="e.g. Doe">
+                            <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-12">
+                        <label class="control-label">MOBILE NUMBER</label>
+                        <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78">
+                        <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-12">
+                            <label class="control-label">EMAIL</label>
+                            <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="mail@example.com">
+                            <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-12">
+                            <label class="control-label">USER PERMISSION</label>
+                            <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control">
+                                <option selected>No Access</option>
+                                <option>Basic</option>
+                                <option>Low</option>
+                                <option>Medium</option>
+                                <option>High</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-12 btn-switch">
+                            <label class="switch">
+                                <input type="checkbox" [(ngModel)]="form.apointmentBooking" name="apointmentBooking">
+                                <span class="slider round"></span>
+                            </label>
+                            <label class="control-label">ENABLE APPOINTMENT BOOKINGS</label>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                            <div class="col-sm-12 btn-switch">
+                                    <div class="color-picker" *ngIf="form.apointmentBooking">
+                                            <label class="control-label">APPOINTMENT COLOR</label> <br>
+                                            <ng-container *ngFor="let color of colors; index as i">
+                                                <input [(ngModel)]="form.apointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
+                                                <label for="{{color}}"><span class="{{color}}"></span></label>
+                                            </ng-container>
+                                        </div>
+                            </div>
+                        </div>
+
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="row form-group">
+                        <div class="col-sm-12">
+                            <label class="control-label">STAFF TITLE</label>
+                            <input [(ngModel)]="form.staffTitle" type="text" name="staff-title" class="form-control input-underline input-lg"
+                                placeholder="Add staff title (i.e. Hairdresser) viewable in online booking only (optional)">
+                            <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-12">
+                            <label class="control-label">NOTES</label>
+                            <textarea class="form-control form-text-area" [(ngModel)]="form.notes" name="notes"
+                                placeholder="Add private notes viewable in staff settings only (optional)" rows="9"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label class="control-label">EMPLOYMENT START DATE</label>
+                            <input class="form-control" placeholder="yyyy-mm-dd" (click)="dst.open()"
+                                name="start-date" [(ngModel)]="form.employmentStartDate" ngbDatepicker #dst="ngbDatepicker">
+                            <!-- <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="dst.toggle()" type="button"></button>
+                            </div> -->
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label">EMPLOYMENT END DATE</label>
+                            <input class="form-control" placeholder="yyyy-mm-dd" (click)="de.open()"
+                                name="end-date" [(ngModel)]="form.employmentEndDate" ngbDatepicker #de="ngbDatepicker">
+                            <!-- <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"></button>
+                            </div> -->
+                        </div>
+                    </div>
+
+                  </div>
+
+              </div>
+            </div>
+
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle>Services</ng-template>
+        <ng-template ngbTabContent>
+
+            <br>
+                <p style="font-size: 12px; color: rgba(98,98,98,.55);">Assign services this staff member can perform.</p>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Select All</label>
+                </div>
+                <hr>
+                <div class="container row">
+                <div class="col-sm-6 custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                        <label class="custom-control-label" for="customCheck2">Blow Dry</label>
+                </div>
+                <div class="col-sm-6 custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                        <label class="custom-control-label" for="customCheck3">Haircut</label>
+                </div>
+            </div>
+        
+                
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Commission">
+        <ng-template ngbTabContent>
+            
+            <div class="col-sm-6">
+                <form role="form">
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                                <label class="control-label">SERVICE COMMISSION</label>
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">%</span>
+                                    </div>
+                                    <input [(ngModel)]="form.commissions.service" name="service" type="number" class="form-control" placeholder="0.0">
+                                </div>
+                        </div>
+                        <div class="col-sm-6">
+                                <label class="control-label">PRODUCT COMMISSION</label>
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">%</span>
+                                    </div>
+                                    <input [(ngModel)]="form.commissions.product" name="product" type="number" class="form-control" placeholder="0.0">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-6">
+                                    <label class="control-label">VOUCHER SALES COMMISSION</label>
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">%</span>
+                                        </div>
+                                        <input [(ngModel)]="form.commissions.voucherSale" name="voucher" type="number" class="form-control" placeholder="0.0">
+                                    </div>
+                            </div>
+                    </div>
+                    </form>
+
+                </div>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>
+</div>
+<div class="modal-footer">
+<button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteStaff()"> Delete </button>
+<button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+<button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
+</div>
+</form>
+</ng-template>

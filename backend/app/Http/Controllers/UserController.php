@@ -18,7 +18,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        echo json_encode(Auth::user());die;
         // Create new product
         $user = new User();
         $user->business_id = $request->id;
