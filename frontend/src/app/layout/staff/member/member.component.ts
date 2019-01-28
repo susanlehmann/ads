@@ -87,7 +87,9 @@ export class MemberComponent implements OnInit {
 		.subscribe((listusers:any) => {
         this.loading = false;
 		    this.listusers = listusers.map(Staff.toModel);
-		});
+		}, err => {
+      this.loading = false;
+    });
 	}
 	
   onSubmit(): void {
