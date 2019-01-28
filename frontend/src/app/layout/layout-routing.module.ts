@@ -13,7 +13,7 @@ const routes: Routes = [
             { path: 'report', loadChildren: './report/report.module#ReportModule' },
             { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-            { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
+            { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarModule' },
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
             { path: 'forms', loadChildren: './form/form.module#FormModule' },
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },

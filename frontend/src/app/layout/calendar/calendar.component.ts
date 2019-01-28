@@ -1,25 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { routerTransition } from '../../router.animations';
-import { CalendarComponent } from 'ng-fullcalendar';
-import { Options } from 'fullcalendar';
+import { CalendarComponent as FullCalendarComponent } from 'ng-fullcalendar';
 import * as $ from 'jquery';
 import { EventSesrvice } from './event.service';
 import {NgbModal, NgbModalRef, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    selector: 'app-charts',
-    templateUrl: './charts.component.html',
-    styleUrls: ['./charts.component.scss'],
+    selector: 'app-calendar',
+    templateUrl: './calendar.component.html',
+    styleUrls: ['./calendar.component.scss'],
     animations: [routerTransition()]
 })
-export class ChartsComponent implements OnInit {
-    calendarOptions: Options;
+export class CalendarComponent implements OnInit {
+    calendarOptions: any;
     displayEvent: any;
     _clickEvent: any;
     closeResult: any;
     modalOptions: NgbModalOptions;
 
-    @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+    @ViewChild(FullCalendarComponent) ucCalendar: FullCalendarComponent;
     constructor(protected eventService: EventSesrvice,
       private modal: NgbModal) {}
 

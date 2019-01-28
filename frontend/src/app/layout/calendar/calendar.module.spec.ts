@@ -1,10 +1,10 @@
-import { ChartsModule } from './charts.module';
+import { CalendarModule } from './calendar.module';
 
 describe('ChartsModule', () => {
-    let chartsModule: ChartsModule;
+    let chartsModule: CalendarModule;
 
     beforeEach(() => {
-        chartsModule = new ChartsModule();
+        chartsModule = new CalendarModule();
     });
 
     it('should create an instance', () => {

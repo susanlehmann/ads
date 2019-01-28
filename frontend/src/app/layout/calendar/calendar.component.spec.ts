@@ -2,18 +2,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ChartsComponent } from './charts.component';
-import { ChartsModule } from './charts.module';
+import { CalendarComponent } from './calendar.component';
+import { CalendarModule } from './calendar.module';
 
 describe('ChartsComponent', () => {
-  let component: ChartsComponent;
-  let fixture: ComponentFixture<ChartsComponent>;
+  let component: CalendarComponent;
+  let fixture: ComponentFixture<CalendarComponent>;
 
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
         imports: [
-          ChartsModule,
+          CalendarModule,
           RouterTestingModule,
           BrowserAnimationsModule,
         ],
@@ -22,7 +22,7 @@ describe('ChartsComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartsComponent);
+    fixture = TestBed.createComponent(CalendarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
