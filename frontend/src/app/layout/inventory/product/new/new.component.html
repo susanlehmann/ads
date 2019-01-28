@@ -1,0 +1,104 @@
+<div class="col-md-12 form-content">
+  <div class="title-name">Create Product</div>
+    <div class="row">
+      <div class="col-md-6">
+          <div class="row form-group">
+              <div class="col-sm-12">
+                <label class="control-label">PRODUCT NAME</label>
+                <input  type="text" class="form-control input-underline input-lg" placeholder="e.g. Jane" required>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-12">
+                <label class="control-label">CATEGORY</label>
+                <select name="category" class="form-control">
+                    <option selected>Select category</option>
+                    <option>Two</option>
+                    <option>Three</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-12">
+                <label class="control-label">BRAND</label>
+                <select name="brand" class="form-control">
+                    <option selected>Select brand</option>
+                    <option>Two</option>
+                    <option>Three</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-12 btn-switch">
+                <label class="switch">
+                    <input type="checkbox" name="retailsale">
+                    <span class="slider round"></span>
+                </label>
+                <label class="control-label">Enable Retail Sales</label>
+            </div>
+        </div>
+
+        <div class="row form-group">
+                <div class="col-sm-12 btn-switch">
+                        <div class="color-picker">
+                                <label class="control-label">RETAIL PRICE</label> <br>
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">%</span>
+                                    </div>
+                                    <input name="price" type="number" class="form-control" placeholder="0.0">
+                                </div>
+                          </div>
+                </div>
+            </div>
+
+      </div>
+
+      <div class="col-md-6">
+        <div class="row form-group">
+            <div class="col-sm-6">
+                <label class="control-label">BARCODE<span style="font-size: 12px; color: rgba(98,98,98,.55);">  (ISBN,UPC,etc.)</span></label>
+                <input  type="text"  class="form-control input-underline input-lg"
+                    placeholder="e.g. 123ABC">
+            </div>
+            <div class="col-sm-6">
+                <label class="control-label">SKU<span style="font-size: 12px; color: rgba(98,98,98,.55);">  Stock Keeping Unit</span></label>
+                <input  type="text"  class="form-control input-underline input-lg"
+                    placeholder="e.g. 123ABC">
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-12">
+                <label class="control-label">DESCRIPTION</label>
+                <textarea class="form-control form-text-area"
+                  placeholder="e.g. the world's most spectacular product" rows="5"></textarea>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-6">
+                <label class="control-label">EMPLOYMENT START DATE</label>
+                <input class="form-control" placeholder="yyyy-mm-dd" (click)="dst.open()"
+                      ngbDatepicker #dst="ngbDatepicker">
+                <!-- <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="dst.toggle()" type="button"></button>
+                </div> -->
+            </div>
+            <div class="col-sm-6">
+                <label class="control-label">EMPLOYMENT END DATE</label>
+                <input class="form-control" placeholder="yyyy-mm-dd" (click)="de.open()"
+                      ngbDatepicker #de="ngbDatepicker">
+                <!-- <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"></button>
+                </div> -->
+            </div>
+        </div>
+
+      </div>
+
+  </div>
+</div>

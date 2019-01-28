@@ -21,6 +21,8 @@ import {
     TimepickerComponent
 } from './components';
 import { PageHeaderModule } from '../../shared';
+import { NewgroupComponent } from './components/newgroup/newgroup.component';
+import { NewserviceComponent } from './components/collapse/newservice/newservice.component';
 
 @NgModule({
     imports: [
@@ -45,7 +47,9 @@ import { PageHeaderModule } from '../../shared';
         TabsComponent,
         RatingComponent,
         TooltipComponent,
-        TimepickerComponent
+        TimepickerComponent,
+        NewgroupComponent,
+        NewserviceComponent
     ]
 })
 export class BsComponentModule {}

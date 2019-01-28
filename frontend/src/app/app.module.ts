@@ -12,6 +12,8 @@ import { AuthGuard } from './shared';
 import { HttpcallService } from './shared/services/httpcall.service';
 import { AuthService } from './shared/services/auth.service';
 import { TokenService } from './shared/services/token.service';
+// import { NewComponent } from './layout/inventory/product/new/new.component';
+
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -40,7 +42,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         AppRoutingModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, HttpcallService, AuthService,TokenService],
+    providers: [AuthGuard, HttpcallService, AuthService, TokenService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

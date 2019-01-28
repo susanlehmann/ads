@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { CalendarComponent } from 'ng-fullcalendar';
-import { Options } from 'fullcalendar';
 import * as $ from 'jquery';
 import { EventSesrvice } from './event.service';
 @Component({
@@ -11,9 +10,9 @@ import { EventSesrvice } from './event.service';
     animations: [routerTransition()]
 })
 export class ChartsComponent implements OnInit {
-  calendarOptions: Options;
+  calendarOptions;
     displayEvent: any;
-  
+
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(protected eventService: EventSesrvice) {}
 

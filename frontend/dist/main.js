@@ -18,8 +18,8 @@ var map = {
 	],
 	"./bs-component/bs-component.module": [
 		"./src/app/layout/bs-component/bs-component.module.ts",
-		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module~login-login~2768a08c",
-		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module",
+		"default~bs-component-bs-component-module~charts-charts-module~dashboard-dashboard-module~layout-layo~5ea81fff",
+		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module~staff-staff~233065f1",
 		"common",
 		"bs-component-bs-component-module"
 	],
@@ -30,13 +30,14 @@ var map = {
 	],
 	"./charts/charts.module": [
 		"./src/app/layout/charts/charts.module.ts",
+		"default~bs-component-bs-component-module~charts-charts-module~dashboard-dashboard-module~layout-layo~5ea81fff",
 		"common",
 		"charts-charts-module"
 	],
 	"./dashboard/dashboard.module": [
 		"./src/app/layout/dashboard/dashboard.module.ts",
-		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module~login-login~2768a08c",
-		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module",
+		"default~bs-component-bs-component-module~charts-charts-module~dashboard-dashboard-module~layout-layo~5ea81fff",
+		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module~staff-staff~233065f1",
 		"common",
 		"dashboard-dashboard-module"
 	],
@@ -52,14 +53,14 @@ var map = {
 	],
 	"./layout/layout.module": [
 		"./src/app/layout/layout.module.ts",
-		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module~login-login~2768a08c",
-		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module",
+		"default~bs-component-bs-component-module~charts-charts-module~dashboard-dashboard-module~layout-layo~5ea81fff",
+		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module~staff-staff~233065f1",
 		"common",
 		"layout-layout-module"
 	],
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
-		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module~login-login~2768a08c",
+		"default~bs-component-bs-component-module~charts-charts-module~dashboard-dashboard-module~layout-layo~5ea81fff",
 		"common",
 		"login-login-module"
 	],
@@ -73,13 +74,28 @@ var map = {
 	],
 	"./signup/signup.module": [
 		"./src/app/signup/signup.module.ts",
+		"default~bs-component-bs-component-module~charts-charts-module~dashboard-dashboard-module~layout-layo~5ea81fff",
 		"common",
 		"signup-signup-module"
+	],
+	"./staff/staff.module": [
+		"./src/app/layout/staff/staff.module.ts",
+		"default~bs-component-bs-component-module~charts-charts-module~dashboard-dashboard-module~layout-layo~5ea81fff",
+		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module~staff-staff~233065f1",
+		"common",
+		"staff-staff-module"
 	],
 	"./tables/tables.module": [
 		"./src/app/layout/tables/tables.module.ts",
 		"common",
 		"tables-tables-module"
+	],
+	"./users/users.module": [
+		"./src/app/layout/users/users.module.ts",
+		"default~bs-component-bs-component-module~charts-charts-module~dashboard-dashboard-module~layout-layo~5ea81fff",
+		"default~bs-component-bs-component-module~dashboard-dashboard-module~layout-layout-module~staff-staff~233065f1",
+		"common",
+		"users-users-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -158,7 +174,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\r\n"
+module.exports = "<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -364,7 +380,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************!*\
   !*** ./src/app/shared/index.ts ***!
   \*********************************/
-/*! exports provided: PageHeaderModule, StatModule, SharedPipesModule, AuthService, TokenService, HttpcallService, AuthGuard */
+/*! exports provided: SharedPipesModule, AuthService, TokenService, HttpcallService, PageHeaderModule, StatModule, AuthGuard */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -763,7 +779,11 @@ var HttpcallService = /** @class */ (function () {
     function HttpcallService(http) {
         this.http = http;
         this.baseUrl = 'http://localhost:8000/api';
+        this.Url = 'http://localhost:8000';
     }
+    HttpcallService.prototype.createuser = function (data) {
+        return this.http.post(this.Url + "/signup", data);
+    };
     HttpcallService.prototype.signup = function (data) {
         return this.http.post(this.baseUrl + "/signup", data);
     };
@@ -947,7 +967,14 @@ if (_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].produc
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["enableProdMode"])();
 }
 Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_2__["AppModule"])
-    .catch(function (err) { return console.error(err); });
+    .then(function (ref) {
+    // Ensure Angular destroys itself on hot reloads.
+    if (window['ngRef']) {
+        window['ngRef'].destroy();
+    }
+    window['ngRef'] = ref;
+    // Otherise, log the boot error
+}).catch(function (err) { return console.error(err); });
 
 
 /***/ }),
@@ -959,7 +986,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! c:\xampp\htdocs\laravel-angular-hachinet\frontend\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-angular-hachinet\frontend\src\main.ts */"./src/main.ts");
 
 
 /***/ })
