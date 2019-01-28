@@ -72,7 +72,7 @@ export class UsersComponent implements OnInit {
     this.isCreate = false;
     this.http.post('http://localhost:8000/api/show_user',{id : userId})
     .subscribe((data:any) => {
-            this.form.updateData(data);
+            this.form.updateData(data.user);
             this.openModal(content);
         });
   }

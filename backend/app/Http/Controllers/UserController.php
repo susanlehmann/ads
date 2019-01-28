@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Auth;
 class UserController extends Controller
 {
@@ -57,7 +58,12 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data = User::find($id);
+        $user = User::find($id);
+        $roles = Role::pluck('name','name')->all();
+        $data['role'] = Role::get();
+        $data['userRole'] = $user->roles->pluck('name','name')->all();
+        $data['user'] = $user;
+        $data['roles'] = $roles;
         return response()->json($data);
     }
 

@@ -18,6 +18,8 @@ Route::group([
 
 });
 
+Route::resource('roles','RoleController');
+
 Route::get('list-user', 'UserController@index');
 Route::post('create_user', 'UserController@store');
 Route::post('show_user', 'UserController@show');
