@@ -27,6 +27,14 @@ const routes: Routes = [{
           path: 'voucher',
           component: VoucherComponent
       },
+      {
+          path: 'dashboard',
+          component: VoucherComponent
+      },
+      {
+          path: 'list',
+          component: VoucherComponent
+      },
     ]
 }];
 
