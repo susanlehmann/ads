@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {NgbModal, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { Staff } from '../model/staff'
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-member',
@@ -24,6 +25,7 @@ export class MemberComponent implements OnInit {
   selectedId: string;
   
 	constructor(
+  private notifierService: NotifierService,
 	private http: HttpClient,
 	private modal: NgbModal, 
 	) {
@@ -38,6 +40,7 @@ export class MemberComponent implements OnInit {
 	}
 
 	ngOnInit() {
+    this.notifierService.notify( 'success', 'You are awesome! I mean it!' );
     this.test();
     this.getUser();
   }

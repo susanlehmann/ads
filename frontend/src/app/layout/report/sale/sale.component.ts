@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sale',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaleComponent implements OnInit {
 
-  constructor() { }
+  constructor(private notifier: NotifierService) { }
 
   ngOnInit() {
+  }
+
+  showNotification(id: string, message: string) {
+    this.notifier.notify( id, message );
   }
 
 }

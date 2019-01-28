@@ -16,14 +16,14 @@
 
     <div class="summary row">
       <div class="col-md-6">
-          <div style="margin-bottom: 10px;">Transaction Summary</div>
+          <div style="margin-bottom: 10px;">{{'Transaction Summary' | translate}}</div>
           <table class="table">
               <thead>
               <tr>
-                  <th>ITEM TYPE</th>
-                  <th>SALES QTY</th>
-                  <th>REFUND QTY</th>
-                  <th>GROSS TOTAL</th>
+                  <th>{{'ITEM TYPE' | translate}}</th>
+                  <th>{{'SALES QTY' | translate}}</th>
+                  <th>{{'REFUND QTY' | translate}}</th>
+                  <th>{{'GROSS TOTAL' | translate}}</th>
               </tr>
               </thead>
               <tbody>
@@ -54,16 +54,21 @@
           </table>
       </div>
       <div class="col-md-6">
-          <div style="margin-bottom: 10px;">Cash Movement Summary</div>
+          <div style="margin-bottom: 10px;">{{'Cash Movement Summary' | translate}}</div>
           <table class="table">
               <thead>
               <tr>
-                  <th>PAYMENT TYPE</th>
-                  <th>PAYMENTS COLLECTED</th>
-                  <th>REFUNDS PAID</th>
+                  <th>{{'PAYMENT TYPE' | translate}}</th>
+                  <th>{{'PAYMENTS COLLECTED' | translate}}</th>
+                  <th>{{'REFUNDS PAID' | translate}}</th>
               </tr>
               </thead>
               <tbody>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
               <tr>
                 <td>1</td>
                 <td>1</td>
@@ -83,3 +88,9 @@
           </table>
       </div>
     </div>
+    <button class="btn btn-lg btn-default" (click)="showNotification('default', 'Hello, you lovely person!')" type="button">Default</button>
+      <button class="btn btn-lg btn-info" (click)="showNotification( 'info', 'This library is built on top of Angular 2.' )" type="button">Info</button>
+      <button class="btn btn-lg btn-success" (click)="showNotification( 'success', 'Notification successfully opened.' )" type="button">Success</button>
+      <button class="btn btn-lg btn-warning" (click)="showNotification( 'warning', 'Warning! But not an error! Just a warning!' )" type="button">Warning</button>
+      <button class="btn btn-lg btn-danger" (click)="showNotification( 'error', 'Whoops, something went wrong. Probably.' )" type="button">Danger</button>
+   

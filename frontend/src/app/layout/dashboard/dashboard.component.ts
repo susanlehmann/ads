@@ -41,12 +41,7 @@ export class DashboardComponent implements OnInit {
     public lineChartLegend = true;
     public lineChartType = 'line';
 
-    constructor(private translate: TranslateService) {
-
-        this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de']);
-        this.translate.setDefaultLang('en');
-        const browserLang = this.translate.getBrowserLang();
-        this.translate.use(browserLang.match(/en|fr|ur|es|it|fa|de/) ? browserLang : 'en');
+    constructor() {
 
         this.appointments = [
             "Haircut with 1 asdfxc",
