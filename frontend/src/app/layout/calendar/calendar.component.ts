@@ -28,6 +28,7 @@ export class CalendarComponent implements OnInit {
       this.calendarOptions = {
         editable: true,
         eventLimit: false,
+        contentHeight: 450,
         header: {
           left: 'prev,next today',
           // center: 'title',

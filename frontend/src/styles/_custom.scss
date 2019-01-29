@@ -52,3 +52,10 @@
     left: 0;
     border-radius: 3px;
 }
+.cal-container {
+
+    .fc-scroller.fc-time-grid-container{
+		height: 350px;
+		max-height: 100%;
+    }
+}
