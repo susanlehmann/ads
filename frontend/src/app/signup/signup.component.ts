@@ -23,7 +23,13 @@ export class SignupComponent implements OnInit {
         password_confirmation: null
       };
 
-    public error = [];
+    public error = {
+
+        email: null,
+        firstName: null,
+        password: null,
+        password_confirmation: null
+    };
 
 
     constructor(

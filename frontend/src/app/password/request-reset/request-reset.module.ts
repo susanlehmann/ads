@@ -14,10 +14,5 @@ import { RequestResetRoutingModule } from './request-reset-routing.module';
     declarations: [
         RequestResetComponent,
     ]
-})@NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: []
 })
 export class RequestResetModule { }
