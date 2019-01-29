@@ -4,7 +4,7 @@
     [taskView]="true"
     [template]="template"
     (tuiCalendarCreated)="onTuiCalendarCreate($event)"></ngx-tui-calendar> -->
-<p>Display event : {{displayEvent | json}}</p>
+<!-- <p>Display event : {{displayEvent | json}}</p> -->
 <div *ngIf="calendarOptions">
     <ng-fullcalendar #ucCalendar 
     	[options]="calendarOptions" 
