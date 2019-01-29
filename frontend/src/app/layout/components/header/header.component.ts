@@ -51,6 +51,18 @@ export class HeaderComponent implements OnInit {
         }
         const dom: any = document.querySelector('body');
         dom.classList.toggle(this.pushRightClass);
+
+        if (!document.querySelector('.sidebar-mobile-menu.hide')) {
+            document.querySelector('.sidebar-mobile-menu').classList.add('hide');
+        }
+    }
+
+    toggleMobileMenu() {
+        const dom: any = document.querySelector('.sidebar-mobile-menu');
+        dom.classList.toggle('hide');
+        if (document.querySelector('body.push-right')) {
+            document.querySelector('body').classList.remove(this.pushRightClass);
+        }
     }
 
     rltAndLtr() {

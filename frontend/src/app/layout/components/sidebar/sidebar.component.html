@@ -53,3 +53,30 @@
         <i class="fa fa-fw fa-angle-left"></i>&nbsp;
     </div>
 </nav>
+
+
+<nav class="sidebar sidebar-mobile-menu hide">
+        <div class="list-group">
+            <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-cogs"></i>&nbsp;
+                <span>{{ 'My Settings' | translate }}</span>
+            </a>
+            <a [routerLink]="['/calendar']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-user"></i>&nbsp;
+                <span>{{ 'Account Setup' | translate }}</span>
+            </a>
+            <a [routerLink]="['/report']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-life-ring"></i>&nbsp;
+                <span>{{ 'Contact Support' | translate }}</span>
+            </a>
+            <a [routerLink]="['/client']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-headphones"></i>&nbsp;
+                <span>{{ 'Help Center' | translate }}</span>
+            </a>
+            <a [routerLink]="['/message']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-sign-out"></i>&nbsp;
+                <span>{{ 'Log out' | translate }}</span>
+            </a>
+        </div>
+    </nav>
+    

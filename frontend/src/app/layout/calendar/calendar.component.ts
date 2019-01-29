@@ -30,13 +30,13 @@ export class CalendarComponent implements OnInit {
         eventLimit: false,
         header: {
           left: 'prev,next today',
-          center: 'title',
+          // center: 'title',
           right: 'agendaWeek,listMonth'
         },
         defaultView: 'agendaWeek',
         buttonText: {
-          prev: "< Trước ",
-          next: "Sau >",
+          prev: "<",
+          next: ">",
           today: 'Hôm nay',
           month: 'Danh sách',
           week: 'Tuần',
