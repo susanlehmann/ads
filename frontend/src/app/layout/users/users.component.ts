@@ -3,6 +3,7 @@ import { routerTransition } from '../../router.animations';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {NgbModal, NgbModalRef, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { User } from './User'
+import { HttpcallService } from '../../shared/services/httpcall.service';
 
 @Component({
 selector: 'app-users',
@@ -24,6 +25,7 @@ export class UsersComponent implements OnInit {
   colors: string[];
   
 	constructor(
+	private httpService: HttpcallService,
 	private http: HttpClient,
 	private modal: NgbModal, 
 	) {
@@ -70,7 +72,7 @@ export class UsersComponent implements OnInit {
 
   openUpdateModal(content: NgbModalRef, userId) {
     this.isCreate = false;
-    this.http.post('http://localhost:8000/api/show_user',{id : userId})
+    this.http.post(`${this.httpService.getBaseUrl()}/show_user`,{id : userId})
     .subscribe((data:any) => {
             this.form.updateData(data.user);
             this.openModal(content);
@@ -88,7 +90,7 @@ export class UsersComponent implements OnInit {
   }
 	
 	getUser() {
-		return this.http.get('http://localhost:8000/api/list-user')
+		return this.http.get(`${this.httpService.getBaseUrl()}/list-user`)
 		.subscribe((listusers:any) => {
 		    this.listusers = listusers.map(User.toModel);
 		});
@@ -106,21 +108,21 @@ export class UsersComponent implements OnInit {
       }
 
   Crete_user(user) {
-    this.http.post('http://localhost:8000/api/create_user',user)
+    this.http.post(`${this.httpService.getBaseUrl()}/create_user`,user)
     .subscribe((data:any) => {
             this.getUser();
         });
     }
 
   update_user(user) {
-    this.http.post('http://localhost:8000/api/update_user',user)
+    this.http.post(`${this.httpService.getBaseUrl()}/update_user`,user)
     .subscribe((data:any) => {
             this.getUser();
         });
     }
 
 	dalete_user(id) {
-		return this.http.post('http://localhost:8000/api/delete_user',{'id':id})
+		return this.http.post(`${this.httpService.getBaseUrl()}/delete_user`,{'id':id})
       .subscribe((data:any) => {
               this.getUser();
           });

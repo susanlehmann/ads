@@ -8,6 +8,10 @@ export class HttpcallService {
 
   constructor(private http: HttpClient) { }
 
+  getBaseUrl() {
+    return this.baseUrl;
+  }
+
   createuser(data) {
     return this.http.post(`${this.Url}/signup`, data);
   }
