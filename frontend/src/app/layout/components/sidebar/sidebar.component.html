@@ -57,24 +57,24 @@
 
 <nav class="sidebar sidebar-mobile-menu hide">
         <div class="list-group">
-            <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                <i class="fa fa-cogs"></i>&nbsp;
+            <a class="list-group-item">
+                <i class="fa fa-cogs" style="color: #4dbd74 !important;"></i>&nbsp;
                 <span>{{ 'My Settings' | translate }}</span>
             </a>
-            <a [routerLink]="['/calendar']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                <i class="fa fa-user"></i>&nbsp;
+            <a class="list-group-item">
+                <i class="fa fa-user" style="color: #ffc107 !important;"></i>&nbsp;
                 <span>{{ 'Account Setup' | translate }}</span>
             </a>
-            <a [routerLink]="['/report']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                <i class="fa fa-life-ring"></i>&nbsp;
+            <a class="list-group-item">
+                <i class="fa fa-life-ring" style="color: #63c2de !important;"></i>&nbsp;
                 <span>{{ 'Contact Support' | translate }}</span>
             </a>
-            <a [routerLink]="['/client']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                <i class="fa fa-headphones"></i>&nbsp;
+            <a href="#" class="list-group-item">
+                <i class="fa fa-headphones" style="color: #20a8d8 !important;"></i>&nbsp;
                 <span>{{ 'Help Center' | translate }}</span>
             </a>
-            <a [routerLink]="['/message']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                <i class="fa fa-sign-out"></i>&nbsp;
+            <a [routerLink]="['/login']" (click)="onLoggedout()" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-sign-out" style="color: #f86c6b !important;"></i>&nbsp;
                 <span>{{ 'Log out' | translate }}</span>
             </a>
         </div>
