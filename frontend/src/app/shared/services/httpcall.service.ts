@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from './../../../environments/environment.prod';
 
 @Injectable()
 export class HttpcallService {
-  private baseUrl = 'http://localhost:8000/api';
-  private Url = 'http://localhost:8000';
+  private baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
-  createuser(data) {
-    return this.http.post(`${this.Url}/signup`, data);
+  getBaseUrl() {
+    return this.baseUrl;
   }
 
 

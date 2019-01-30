@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ReportRoutingModule } from './report-routing.module';
 import { ReportComponent } from './report.component';
@@ -12,7 +13,8 @@ import { VoucherComponent } from './voucher/voucher.component';
   declarations: [ReportComponent, SaleComponent, AppointmentComponent, InvoiceComponent, VoucherComponent],
   imports: [
     CommonModule,
-    ReportRoutingModule
+    ReportRoutingModule,
+    TranslateModule,
   ]
 })
 export class ReportModule { }

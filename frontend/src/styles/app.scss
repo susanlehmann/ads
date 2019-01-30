@@ -9,6 +9,7 @@
 @import "modal-custom";
 @import "custom";
 // @import "../../node_modules/angular-calendar/css/angular-calendar.css";
+@import "../../node_modules/angular-notifier/styles";
 @import "~fullcalendar/dist/fullcalendar.min.css";
 @media print {
     .breadcrumb {
@@ -16,3 +17,6 @@
     }
 }
 
+.margin-bottom-5px {
+    margin-bottom: 5px;
+}

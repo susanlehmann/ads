@@ -3,7 +3,7 @@
         <div class="col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
-                    RECENT SALES
+                    {{'RECENT SALES' | translate}}
                 </div>
                 <div class="card-body table-responsive">
                     <canvas baseChart height="130" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
@@ -14,7 +14,7 @@
         <div class="col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
-                    UPCOMING APPOINTMENTS
+                        {{'UPCOMING APPOINTMENTS' | translate}}
                 </div>
                 <div class="card-body table-responsive">
                         <div class="text-center">
@@ -28,7 +28,7 @@
         <div class="col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
-                    APPOINTMENTS ACTIVITY
+                        {{ 'APPOINTMENTS ACTIVITY' | translate}}
                 </div>
                 <div class="card-body table-responsive">
                     <div *ngFor="let appointment of appointments" class="row clickable-row">
@@ -46,7 +46,7 @@
         <div class="col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
-                    TODAY'S NEXT APPOINTMENTS
+                        {{"TODAY'S NEXT APPOINTMENTS" | translate}}
                 </div>
                 <div class="card-body table-responsive">
                     <div class="text-center">

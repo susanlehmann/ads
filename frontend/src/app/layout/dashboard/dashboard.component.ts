@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { ViewChild } from '@angular/core'
+import { TranslateService } from '@ngx-translate/core';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -41,6 +42,7 @@ export class DashboardComponent implements OnInit {
     public lineChartType = 'line';
 
     constructor() {
+
         this.appointments = [
             "Haircut with 1 asdfxc",
             "Haircut with 2 asdfxc",
