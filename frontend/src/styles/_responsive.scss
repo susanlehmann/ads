@@ -4,6 +4,13 @@
             left: 235px !important;
         }
     }
+    
+    .navbar-toggler.mobile {
+        display: block;
+    }
+    .navbar-toggler.desktop {
+        display: none;
+    }
 }
 @media screen and (min-width: 993px) {
     body {
@@ -15,4 +22,14 @@
             left: 0px !important;
         }
     }
+    .navbar-toggler.mobile {
+        display: none;
+    }
+    .navbar-toggler.desktop {
+        display: block;
+    }
+    .sidebar.sidebar-mobile-menu {
+        display: none;
+    }
 }
+

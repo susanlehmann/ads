@@ -91,7 +91,8 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        // console.log(this.form);
+        // localStorage.setItem('isLoggedin', 'true');
+        console.log(this.form);
         this.loading = true;
         this.httpcall.login(this.form).subscribe(
           data => this.handleResponse(data),

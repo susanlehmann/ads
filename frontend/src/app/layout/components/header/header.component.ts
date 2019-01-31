@@ -20,10 +20,10 @@ export class HeaderComponent implements OnInit {
         public token: TokenService
     ) {
 
-        this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
+        this.translate.addLangs(['en', 'vi', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
-        this.translate.use(browserLang.match(/en|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');
+        this.translate.use(browserLang.match(/en|vi|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');
 
         this.router.events.subscribe(val => {
             if (
@@ -51,6 +51,12 @@ export class HeaderComponent implements OnInit {
         }
         const dom: any = document.querySelector('body');
         dom.classList.toggle(this.pushRightClass);
+
+    }
+
+    toggleMobileMenu() {
+        const dom: any = document.querySelector('.sidebar-mobile-menu');
+        dom.classList.toggle('hide');
     }
 
     rltAndLtr() {

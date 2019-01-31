@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 // import { NewComponent } from './layout/inventory/product/new/new.component';
 
 const routes: Routes = [
-    { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard] },
+    // { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard]},
+    { path: '', loadChildren: './layout/layout.module#LayoutModule'},
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
     { path: 'error', loadChildren: './server-error/server-error.module#ServerErrorModule' },
@@ -16,7 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules})],
     exports: [RouterModule]
 })
 export class AppRoutingModule {}
