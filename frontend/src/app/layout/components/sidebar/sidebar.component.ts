@@ -76,6 +76,9 @@ export class SidebarComponent implements OnInit {
 
     changeLang(language: string) {
         this.translate.use(language);
+
+        // close menu after change language (mobile only)
+        document.querySelector('.sidebar.sidebar-mobile-menu').classList.add("hide");
     }
 
     onLoggedout() {
