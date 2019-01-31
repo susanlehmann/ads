@@ -196,6 +196,9 @@ $topnav-background-color: #007FC9;
     span {
         display: none;
     }
+    .fa.fa-angle-left {
+        transform: rotate(180deg);
+    }
 }
 
 
