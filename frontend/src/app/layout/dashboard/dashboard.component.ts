@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { ViewChild } from '@angular/core'
+import { TranslateService } from '@ngx-translate/core';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -10,8 +11,45 @@ import { ViewChild } from '@angular/core'
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
+    appointments: any[];
+
+    // lineChart
+    public lineChartData: Array<any> = [
+        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    ];
+    public lineChartLabels: Array<any> = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July'
+    ];
+    public lineChartOptions: any = {
+        responsive: true
+    };
+    public lineChartColors: Array<any> = [
+        {
+            borderColor: '#6da4e0',
+            pointBackgroundColor: '#6da4e0',
+            pointBorderColor: '#6da4e0',
+            pointHoverBackgroundColor: '#6da4e0',
+            pointHoverBorderColor: '#6da4e0'
+        }
+    ];
+    public lineChartLegend = true;
+    public lineChartType = 'line';
 
     constructor() {
+
+        this.appointments = [
+            "Haircut with 1 asdfxc",
+            "Haircut with 2 asdfxc",
+            "Haircut with 3 asdfxc",
+            "Haircut with 4 asdfxc",
+        ];
+
         this.sliders.push(
             {
                 imagePath: 'assets/images/slider1.jpg',

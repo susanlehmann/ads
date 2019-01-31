@@ -8,12 +8,13 @@ import { OrderComponent } from './order/order.component';
 import { CategoryComponent } from './category/category.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { NewComponent } from './product/new/new.component';
+import { NeworderComponent} from './order/neworder/neworder.component';
 
 const routes: Routes = [
     {
       path: '', component: InventoryComponent, children: [
         {
-          path: '',   redirectTo: 'product', pathMatch: 'full',
+          path: '',   redirectTo: 'products', pathMatch: 'full',
         },
         {
           path: 'products',
@@ -26,6 +27,10 @@ const routes: Routes = [
         {
           path: 'orders',
           component: OrderComponent
+        },
+        {
+          path: '/orders/neworder',
+          component: NeworderComponent
         },
         {
           path: 'brands',

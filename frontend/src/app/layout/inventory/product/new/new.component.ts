@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BootstrapSwitchModule } from 'angular2-bootstrap-switch';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
@@ -9,7 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 })
 
 export class NewComponent implements OnInit {
-
+  retailsale = false;
+  stockcontrol = false;
   constructor() { }
 
   ngOnInit() {

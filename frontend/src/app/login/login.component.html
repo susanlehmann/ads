@@ -1,6 +1,6 @@
 <div class="login-page" [@routerTransition]>
     <ngx-loading [show]="loading" [config]="{animationType: ngxLoadingAnimationTypes.circle, primaryColour: primaryColour, secondaryColour: secondaryColour, backdropBorderRadius: '3px'}"
-      [template]="loadingTemplate"></ngx-loading>
+      ></ngx-loading>
 
     <div class="row justify-content-md-center">
         <div class="col-md-4">
@@ -24,5 +24,5 @@
             </form>
         </div>
     </div>
-    <ng-snotify class="{{style}}"></ng-snotify>
+    <!-- <ng-snotify class="{{style}}"></ng-snotify> -->
 </div>

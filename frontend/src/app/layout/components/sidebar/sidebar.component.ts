@@ -37,6 +37,8 @@ export class SidebarComponent implements OnInit {
         this.collapsed = false;
         this.showMenu = '';
         this.pushRightClass = 'push-right';
+
+        document.addEventListener("mousedown", this.handleClick, false);
     }
 
 
@@ -77,6 +79,25 @@ export class SidebarComponent implements OnInit {
     }
 
     onLoggedout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         localStorage.removeItem('isLoggedin');
     }
+
+    handleClick(e) {
+        if (!document.querySelector('.navbar-toggler.mobile').contains(e.target)
+        && !document.querySelector('.navbar-toggler.desktop').contains(e.target)
+        && !document.querySelector('.sidebar').contains(e.target)
+        && document.body.classList.contains("push-right")) {
+            document.body.classList.remove("push-right");
+        }
+
+        const mobileMenu = document.querySelector('.sidebar.sidebar-mobile-menu');
+        if (!mobileMenu.contains(e.target)
+        && !document.querySelector('.navbar-toggler.mobile.mobile-menu').contains(e.target)
+        && !mobileMenu.classList.contains("hide")) {
+            mobileMenu.classList.add("hide");
+        }
+    }
+
 }

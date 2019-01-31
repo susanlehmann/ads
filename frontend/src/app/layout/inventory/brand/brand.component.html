@@ -96,6 +96,7 @@
                                 </div>
                               </div>
                             </div>
+
                           </div>
                         </div>
                         <div class="_1nM1bd" data-qa="loader-spinner-container">
@@ -113,3 +114,34 @@
     </div>
   </section>
 </div>
+<div class="rTWbSm" (mouseover)="changeText=true" (mouseout)="changeText=false">
+  <button class="_2N1Wwk _1K8-3O _1hszOe _1Hbk3p _1jAoG_">
+    <span class="_2FSeuB _240vE8 RCcMXQ" *ngIf="!changeText">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+        <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z"></path>
+      </svg>
+    </span>
+    <span *ngIf="changeText">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+        <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z" (click)="open(content)"></path>
+      </svg>
+    </span>
+  </button>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title offset-sm-4" id="modal-basic-title">Add Brand</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label class="font-weight-bold" style="font-size: 13px;">{{ 'brand name' | uppercase }}</label>
+    <input name="category" type="text" class="form-control" placeholder="e.g L'Oreal">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('close click')"> Cancel </button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>

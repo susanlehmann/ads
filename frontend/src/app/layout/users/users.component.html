@@ -21,7 +21,7 @@
                             <tr *ngFor="let user of listusers; index as i">
                                 <td>{{i+1}}</td>
                                 <td>{{user.id}}</td>
-                                <td>{{user.name}}</td>
+                                <td>{{user.firstName}}</td>
                                 <td>Admintrolr</td>
                                 <td>
                                   <label class="switch">
@@ -110,6 +110,18 @@
                                     <label class="control-label">ENABLE APPOINTMENT BOOKINGS</label>
                                 </div>
                             </div>
+
+                            <div class="row form-group">
+                                    <div class="col-sm-12 btn-switch">
+                                            <div class="color-picker" *ngIf="form.apointmentBooking">
+                                                    <label class="control-label">APPOINTMENT COLOR</label> <br>
+                                                    <ng-container *ngFor="let color of colors; index as i">
+                                                        <input [(ngModel)]="form.apointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
+                                                        <label for="{{color}}"><span class="{{color}}"></span></label>
+                                                    </ng-container>
+                                                </div>
+                                    </div>
+                                </div>
         
                           </div>
         
@@ -134,7 +146,7 @@
                             <div class="row form-group">
                                 <div class="col-sm-6">
                                     <label class="control-label">EMPLOYMENT START DATE</label>
-                                    <input class="form-control" placeholder="yyyy-mm-dd" (click)="dst.toggle()"
+                                    <input class="form-control" placeholder="yyyy-mm-dd" (click)="dst.open()"
                                         name="start-date" [(ngModel)]="form.employmentStartDate" ngbDatepicker #dst="ngbDatepicker">
                                     <!-- <div class="input-group-append">
                                         <button class="btn btn-outline-secondary calendar" (click)="dst.toggle()" type="button"></button>
@@ -142,8 +154,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="control-label">EMPLOYMENT END DATE</label>
-                                    <input class="form-control" placeholder="yyyy-mm-dd" (click)="de.toggle()"
-                                        name="start-date" [(ngModel)]="form.employmentEndDate" ngbDatepicker #de="ngbDatepicker">
+                                    <input class="form-control" placeholder="yyyy-mm-dd" (click)="de.open()"
+                                        name="end-date" [(ngModel)]="form.employmentEndDate" ngbDatepicker #de="ngbDatepicker">
                                     <!-- <div class="input-group-append">
                                         <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"></button>
                                     </div> -->
@@ -151,9 +163,6 @@
                             </div>
         
                           </div>
-                          <div *ngIf="form.apointmentBooking">
-                                <label class="control-label">APPOINTMENT COLOR</label>
-                            </div>
         
                       </div>
                     </div>

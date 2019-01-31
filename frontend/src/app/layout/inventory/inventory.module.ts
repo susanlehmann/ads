@@ -14,9 +14,11 @@ import { OrderComponent } from './order/order.component';
 import { CategoryComponent } from './category/category.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { NewComponent } from './product/new/new.component';
+import { NeworderComponent } from './order/neworder/neworder.component';
+
 
 @NgModule({
     imports: [CommonModule, InventoryRoutingModule, PageHeaderModule,FormsModule, NgbModule, NgxLoadingModule.forRoot({})],
-    declarations: [InventoryComponent, ProductComponent, BrandComponent, OrderComponent, CategoryComponent, SupplierComponent, NewComponent]
+    declarations: [InventoryComponent, ProductComponent, BrandComponent, OrderComponent, CategoryComponent, SupplierComponent, NewComponent, NeworderComponent]
 })
 export class InventoryModule { }
