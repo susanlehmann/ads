@@ -204,6 +204,7 @@ $topnav-background-color: #007FC9;
     right: 0 !important;
     bottom: -50px;
     background: #fff;
+    border-left: 1px solid #c2cfd6;
 
     .fa {
         width: 10px;
@@ -212,6 +213,7 @@ $topnav-background-color: #007FC9;
     .nested-menu .expand .submenu a {
         color: #333;
         text-decoration: none;
+        margin-left: 10px;
     }
 
     .list-group {
