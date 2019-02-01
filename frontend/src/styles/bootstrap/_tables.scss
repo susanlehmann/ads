@@ -27,6 +27,14 @@
   .table {
     background-color: $body-bg;
   }
+
+  tbody, tfoot {
+    color: #67768C;
+  }
+
+  tfoot td {
+    font-weight: 700;
+  }
 }
 
 
