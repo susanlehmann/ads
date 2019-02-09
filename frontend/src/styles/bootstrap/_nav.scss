@@ -29,14 +29,11 @@
 // Tabs
 //
 
-.nav-tabs {
+.nav-tabs, .nav-pills {
   border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
   flex-wrap: nowrap;
   overflow: auto;
-
-  .nav-item {
-    margin-bottom: -$nav-tabs-border-width;
-  }
+  margin-bottom: 20px;
 
   .nav-link {
     color: rgba(36, 51, 74, 0.55);
@@ -48,10 +45,9 @@
     text-transform: uppercase;
     font-size: 0.8rem;
 
-    @include border-top-radius($nav-tabs-border-radius);
-
     &:hover,
     &.active {
+      background-color: transparent;
       color: #20a8d8;
     }
 
@@ -74,13 +70,6 @@
     }
   }
 
-  .nav-link.active,
-  .nav-item.show .nav-link {
-    // color: $nav-tabs-link-active-color;
-    // background-color: $nav-tabs-link-active-bg;
-    border-color: $nav-tabs-link-active-border-color;
-  }
-
   .dropdown-menu {
     // Make dropdown border overlap tab border
     margin-top: -$nav-tabs-border-width;
@@ -88,24 +77,6 @@
     @include border-top-radius(0);
   }
 }
-
-
-//
-// Pills
-//
-
-.nav-pills {
-  .nav-link {
-    @include border-radius($nav-pills-border-radius);
-  }
-
-  .nav-link.active,
-  .show > .nav-link {
-    color: $nav-pills-link-active-color;
-    background-color: $nav-pills-link-active-bg;
-  }
-}
-
 
 //
 // Justified variants

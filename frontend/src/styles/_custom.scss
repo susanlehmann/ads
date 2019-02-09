@@ -1,3 +1,8 @@
+// global font color
+body {
+    color: #67768C;
+}
+
 .card-body.table-responsive {
     position: relative; min-height: 50%
 }
@@ -16,44 +21,6 @@
     cursor: pointer;
 }
 
-
-// nav bar
-.nav-tabs-container {
-    border-bottom: 1px solid #e8e8e8;
-    margin-bottom: 20px;
-}
-
-.nav.nav-pills.nav-main {
-    flex-wrap: nowrap;
-    overflow: auto;
-}
-
-.nav-pills .nav-link {
-    color: rgba(36,51,74,.55);
-    font-weight: 700;
-    position: relative;
-    padding: 1rem 0;
-    margin: 0 1rem;
-    white-space: nowrap;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-}
-
-.nav-pills .nav-link.active, .nav-pills .nav-link:hover {
-    background-color: transparent;
-    color: #20a8d8;
-}
-
-.nav-pills .nav-link.active:after, .nav-pills .nav-link:hover:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 4px;
-    background-color: #20a8d8;
-    left: 0;
-    border-radius: 3px;
-}
 .cal-container {
 
     .fc-scroller.fc-time-grid-container{

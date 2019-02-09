@@ -4,6 +4,15 @@
             <div class="card mb-3">
                 <div class="card-header">
                     {{'RECENT SALES' | translate}}
+                    <div class="filter">
+                        <select class="custom-select custom-select">
+                            <option value="1" selected>All Locations</option>
+                          </select>
+                        <select class="custom-select custom-select">
+                            <option value="1" selected>Last 7 days</option>
+                            <option value="2">Last 30 days</option>
+                          </select>
+                    </div>
                 </div>
                 <div class="card-body table-responsive">
                     <canvas baseChart height="130" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
@@ -15,6 +24,15 @@
             <div class="card mb-3">
                 <div class="card-header">
                         {{'UPCOMING APPOINTMENTS' | translate}}
+                        <div class="filter">
+                                <select class="custom-select custom-select">
+                                        <option value="1" selected>All Locations</option>
+                                  </select>
+                                <select class="custom-select custom-select">
+                                    <option value="1" selected>Last 7 days</option>
+                                    <option value="2">Last 30 days</option>
+                                  </select>
+                            </div>
                 </div>
                 <div class="card-body table-responsive">
                         <div class="text-center">
