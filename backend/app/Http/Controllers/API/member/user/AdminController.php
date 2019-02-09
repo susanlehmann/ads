@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\admin;
+namespace App\Http\Controllers\API\member\user;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function index()
     {
         // List all the products
-        $data['user'] = User::where('level',0)->get();
+        $data['user'] = User::where('level',2)->get();
         $data['role'] = Role::get();
         return response()->json($data);
     }
@@ -42,8 +42,8 @@ class AdminController extends Controller
             'product_commission' => $request->product_commission,
             'voucher_sales_commission' => $request->voucher_sales_commission,
             'sort_order' => 1,
-            'level' => 0,
-            'parent' => 0,
+            'level' => 2,
+            'parent' => $request->id,
         ];
         // $user->level = 0; // ko co column level
         $user = User::create($input);

@@ -73,7 +73,7 @@ export class UsersComponent implements OnInit {
 
   openUpdateModal(content: NgbModalRef, userId) {
     this.isCreate = false;
-    this.http.post(`${this.httpService.getBaseUrl()}/show_user`,{id : userId})
+    this.http.post(`${this.httpService.getBaseUrl()}/admin/show_user`,{id : userId})
     .subscribe((data:any) => {
             this.form.updateData(data.user);
             this.listrole = data.role;
@@ -92,7 +92,7 @@ export class UsersComponent implements OnInit {
   }
 	
 	getUser() {
-		return this.http.get(`${this.httpService.getBaseUrl()}/list-user`)
+		return this.http.get(`${this.httpService.getBaseUrl()}/admin/list-user`)
 		.subscribe((listusers:any) => {
         this.listusers = listusers.user.map(User.toModel);
         this.listrole = listusers.role;
@@ -111,21 +111,21 @@ export class UsersComponent implements OnInit {
       }
 
   Crete_user(user) {
-    this.http.post(`${this.httpService.getBaseUrl()}/create_user`,user)
+    this.http.post(`${this.httpService.getBaseUrl()}/admin/create_user`,user)
     .subscribe((data:any) => {
             this.getUser();
         });
     }
 
   update_user(user) {
-    this.http.post(`${this.httpService.getBaseUrl()}/update_user`,user)
+    this.http.post(`${this.httpService.getBaseUrl()}/admin/update_user`,user)
     .subscribe((data:any) => {
             this.getUser();
         });
     }
 
 	dalete_user(id) {
-		return this.http.post(`${this.httpService.getBaseUrl()}/delete_user`,{'id':id})
+		return this.http.post(`${this.httpService.getBaseUrl()}/admin/delete_user`,{'id':id})
       .subscribe((data:any) => {
               this.getUser();
           });

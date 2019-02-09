@@ -35,6 +35,8 @@ class CreateUsersTable extends Migration
             $table->decimal('product_commission', 18, 2)->nullable();
             $table->decimal('voucher_sales_commission', 18, 2)->nullable();
             $table->integer('sort_order')->nullable();
+            $table->integer('level')->nullable();
+            $table->integer('parent')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
