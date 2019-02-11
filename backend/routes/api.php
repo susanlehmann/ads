@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 
 Route::group([
 
-    'middleware' => 'api', 
+    'middleware' => 'web', 
 
 ], function ($router) {
 
