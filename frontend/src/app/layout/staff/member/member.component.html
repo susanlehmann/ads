@@ -18,7 +18,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <ng-container *ngIf="!listusers">
+                    <ng-container *ngIf="!loading && !listusers">
                             <tr style="background-color: #fff; cursor: default;">
                                     <td colspan="6" style="padding-top:40px;">
                                         <div class="text-center">
@@ -31,11 +31,13 @@
                     </ng-container>
                     <ng-container *ngIf="listusers">
                             <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)">
-                                    <td>{{user.appointmentColor}}</td>
+                                    <td>
+                                        <span class="appoinment-color" [ngStyle]="{'background': user.appointmentColor}"></span>
+                                    </td>
                                     <td>{{user.firstName}}</td>
                                     <td>{{user.mobileNumber}}</td>
                                     <td>{{user.email}}</td>
-                                    <td>{{user.apointmentBooking}}</td>
+                                    <td>{{user.appointmentBooking ? 'Calendar bookings enabled' : 'Calendar disabled'}}</td>
                                     <td>{{user.userPermission}}</td>
                                 </tr>
                     </ng-container>
@@ -110,7 +112,7 @@
                     <div class="row form-group">
                         <div class="col-sm-12 btn-switch">
                             <label class="switch">
-                                <input type="checkbox" [(ngModel)]="form.apointmentBooking" name="apointmentBooking">
+                                <input type="checkbox" [(ngModel)]="form.appointmentBooking" name="appointmentBooking">
                                 <span class="slider round"></span>
                             </label>
                             <label class="control-label">ENABLE APPOINTMENT BOOKINGS</label>
@@ -119,10 +121,10 @@
 
                     <div class="row form-group">
                             <div class="col-sm-12 btn-switch">
-                                    <div class="color-picker" *ngIf="form.apointmentBooking">
+                                    <div class="color-picker" *ngIf="form.appointmentBooking">
                                             <label class="control-label">APPOINTMENT COLOR</label> <br>
                                             <ng-container *ngFor="let color of colors; index as i">
-                                                <input [(ngModel)]="form.apointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
+                                                <input [(ngModel)]="form.appointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
                                                 <label for="{{color}}"><span class="{{color}}"></span></label>
                                             </ng-container>
                                         </div>
