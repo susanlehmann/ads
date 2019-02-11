@@ -14,7 +14,8 @@ class CustomerController extends Controller
     public function index()
     {
         // List all the products
-        $data['user'] = User::where('level',4)->get();
+        echo json_encode(Auth::user());die;
+        $data['user'] = User::where('level',4)->where('parent',Auth::user()->id)->get();
         $data['role'] = Role::get();
         return response()->json($data);
     }

@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         // List all the products
-        $data['user'] = User::where('level',3)->get();
+        $data['user'] = User::where('level',3)->where('parent',Auth::user()->id)->get();
         $data['role'] = Role::get();
         return response()->json($data);
     }
