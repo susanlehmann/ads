@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {NgbModal, NgbModalRef, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { User } from './User'
 import { HttpcallService } from '../../shared/services/httpcall.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
 selector: 'app-users',
@@ -13,7 +14,7 @@ animations: [routerTransition()]
 })
 
 export class UsersComponent implements OnInit {
-
+  loading: boolean;
   form: User;
 
   modalOptions: NgbModalOptions;
@@ -26,7 +27,8 @@ export class UsersComponent implements OnInit {
   colors: string[];
   
 	constructor(
-	private httpService: HttpcallService,
+  private httpService: HttpcallService,
+  private notifierService: NotifierService,
 	private http: HttpClient,
 	private modal: NgbModal, 
 	) {
@@ -92,9 +94,15 @@ export class UsersComponent implements OnInit {
   }
 	
 	getUser() {
+    this.loading = true;
 		return this.http.get(`${this.httpService.getBaseUrl()}/admin/list-user`)
 		.subscribe((listusers:any) => {
-        this.listusers = listusers.user.map(User.toModel);
+        this.loading = false;
+        this.listusers = listusers.user
+        .map(User.toModel)
+        .sort((a, b) => {
+          return a.id - b.id;
+        });
         this.listrole = listusers.role;
 		});
 	}
@@ -114,13 +122,19 @@ export class UsersComponent implements OnInit {
     this.http.post(`${this.httpService.getBaseUrl()}/admin/create_user`,user)
     .subscribe((data:any) => {
             this.getUser();
-        });
+            this.notifierService.notify('success', 'A Staff has been successfully add');
+        }), error => {
+          this.notifierService.notify('success', 'A Staff has been successfully add');
+        }, () => {
+          this.notifierService.notify('success', 'A Staff has been successfully add');
+        };
     }
 
   update_user(user) {
     this.http.post(`${this.httpService.getBaseUrl()}/admin/update_user`,user)
     .subscribe((data:any) => {
             this.getUser();
+            this.notifierService.notify('success', 'A Staff has been successfully deleted');
         });
     }
 
@@ -128,6 +142,7 @@ export class UsersComponent implements OnInit {
 		return this.http.post(`${this.httpService.getBaseUrl()}/admin/delete_user`,{'id':id})
       .subscribe((data:any) => {
               this.getUser();
+              this.notifierService.notify('success', 'A Staff has been successfully deleted');
           });
 	}
 }

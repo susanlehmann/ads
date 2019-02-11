@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'API\admin'], function(){
     Route::post('delete_user', 'AdminController@destroy'); 
 });
 
-Route::group(['prefix' => 'member', 'namespace' => 'API\member\admin'], function(){
+Route::group(['prefix' => 'user', 'namespace' => 'API\member\user'], function(){
     Route::get('list-user', 'AdminController@index');
     Route::post('create_user', 'AdminController@store');
     Route::post('show_user', 'AdminController@show');
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'API\member\admin'], function
     Route::post('delete_user', 'AdminController@destroy'); 
 });
 
-Route::group(['prefix' => 'member', 'namespace' => 'API\member\user'], function(){
+Route::group(['prefix' => 'user/staff', 'namespace' => 'API\member\user'], function(){
     Route::get('list-user', 'UserController@index');
     Route::post('create_user', 'UserController@store');
     Route::post('show_user', 'UserController@show');
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'member', 'namespace' => 'API\member\user'], function(
     Route::post('delete_user', 'UserController@destroy'); 
 });
 
-Route::group(['prefix' => 'member', 'namespace' => 'API\member\customer'], function(){
+Route::group(['prefix' => 'user/customer', 'namespace' => 'API\member\user'], function(){
     Route::get('list-user', 'CustomerController@index');
     Route::post('create_user', 'CustomerController@store');
     Route::post('show_user', 'CustomerController@show');

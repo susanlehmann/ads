@@ -38,7 +38,32 @@ class AuthController extends Controller
 
     public function signup(SignUpRequest $request)
     {
-        $user = User::create($request->all());
+        $input = [
+            'business_id' => $request->id,
+            'role_id' => $request->id,
+            'id_user_create' => $request->id,
+            'id_user_update' => $request->id,
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'email' => $request->email,
+            'password' => $request->password,
+            'phone' => $request->phone,
+            'ennable_appointment_booking' => $request->ennable_appointment_booking,
+            'notes' => $request->notes,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'appointment_color' => $request->appointment_color,
+            'dial_code' => $request->dial_code,
+            'first_login' => 0,
+            'service_commission' => $request->service_commission,
+            'product_commission' => $request->product_commission,
+            'voucher_sales_commission' => $request->voucher_sales_commission,
+            'sort_order' => 1,
+            'level' => 2,
+            'parent' => $request->id,
+        ];
+        // $user->level = 0; // ko co column level
+        $user = User::create($input);
         return $this->login($request);
 
     }
