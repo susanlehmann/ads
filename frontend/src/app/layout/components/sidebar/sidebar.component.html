@@ -25,28 +25,28 @@
             <span>{{ 'Staff' | translate }}</span>
         </a>
         <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-calculator"></i>&nbsp;
+            <i class="fa fa-fw fa-calculator"></i>&nbsp;
             <span>{{ 'Services' | translate }}</span>
         </a>
         <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-briefcase"></i>&nbsp;
+            <i class="fa fa-fw fa-briefcase"></i>&nbsp;
             <span>{{ 'Inventory' | translate }}</span>
         </a>
         <a [routerLink]="['/analytic']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-line-chart"></i>&nbsp;
+            <i class="fa fa-fw fa-line-chart"></i>&nbsp;
             <span>{{ 'Analytics' | translate }}</span>
         </a>
         <a [routerLink]="['/online_booking']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-cloud"></i>&nbsp;
+            <i class="fa fa-fw fa-cloud"></i>&nbsp;
             <span>{{ 'Online Booking' | translate }}</span>
         </a>
         <a [routerLink]="['/setup']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-gear"></i>&nbsp;
+            <i class="fa fa-fw fa-gear"></i>&nbsp;
             <span>{{ 'Setup' | translate }}</span>
         </a>
         <a [routerLink]="['/users']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-calendar"></i>&nbsp;
-            <span>{{ 'User' | translate }}</span>
+            <span>{{ 'Administrator' | translate }}</span>
         </a>
     </div>
     <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
