@@ -2,19 +2,21 @@ export class Client {
     id: number;
     firstName: string;
     lastName: string;
-    staffTitle: string;
-    dialCode: string;
-    mobileNumber: string;
+    telephone: string;
+    mobile: string;
     email: string;
     password: string;
-    userPermission: string;
+    notificationType: string;
+    acceptNotification: string;
+    gender: any;
+    referral: any;
     notes: string;
-    employmentStartDate: any;
-    employmentEndDate: any;
-    appointmentBooking: boolean;
-    appointmentColor: string
-    services: [];
-    commissions: Commission;
+    displayAllBooking: boolean;
+    address: string;
+    suburb: string
+    city: String;
+    state: String;
+    zip: String;
   
     constructor() {
       this.new();
@@ -24,47 +26,34 @@ export class Client {
     new() {
       this.firstName = "";
       this.lastName = "";
-      this.staffTitle = "";
-      this.dialCode = "";
-      this.mobileNumber = "";
+      this.telephone = "";
+      this.mobile = "";
       this.email = "";
-      this.userPermission = "";
+      this.notificationType = "";
       this.notes = "";
-      this.employmentStartDate = this.getCurrentDateObject();
-      this.employmentEndDate = "";
-      this.appointmentBooking = false;
-      this.appointmentColor = "";
-      this.services = [];
-      if (this.commissions === undefined) {
-        this.commissions = new Commission();
-      } else {
-        this.commissions.new();
-      }
+      this.gender = "";
+      this.referral = "";
+      this.address = "";
+      this.suburb = "";
+      this.state = "";
     }
   
-    getCurrentDateObject() {
-      const d = new Date();
-      return {year: d.getFullYear(), month: d.getMonth(), day: d.getDate() };
-    }
   
     mockData() {
       this.firstName = "Giang";
       this.lastName = "Mai";
-      this.staffTitle = "Admin";
-      this.dialCode = "84";
-      this.mobileNumber = "9123456789";
+      this.telephone = "123456789";
+      this.mobile = "987654321";
       this.email = "giang@mai.com";
-      this.userPermission = "Basic";
+      this.notificationType = "Basic";
       this.notes = "11111";
-      this.employmentStartDate = this.getCurrentDateObject();
-      this.employmentEndDate = this.getCurrentDateObject();
-      this.appointmentBooking = true;
-      this.appointmentColor = "red";
-      this.services = [];
-      this.commissions = new Commission();
-      this.commissions.product = 11;
-      this.commissions.service = 22;
-      this.commissions.voucherSale = 33;
+      this.gender = "1";
+      this.referral = "1";
+      this.address = "1234";
+      this.city = "Hanoi";
+      this.state = "Hanoi";
+      this.zip = "100000";
+      this.suburb = "red";
     }
   
     static toModel(dto: any) {
@@ -74,22 +63,18 @@ export class Client {
     }
   
     toDto(): any {
-      const {service, product, voucherSale} = this.commissions;
       return {
         id: this.id,
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
-        phone : this.mobileNumber,
-        ennable_appointment_bookig : this.appointmentBooking ? 1 : 0,
+        phone : this.mobile,
+        ennable_appointment_bookig : this.address ? 1 : 0,
         notes : this.notes,
         start_date : '',
         end_date : '',
-        appointment_color: this.appointmentColor,
-        dial_code : this.dialCode,
-        service_commission : service,
-        product_commission : product,
-        voucher_sales_commission : voucherSale,
+        appointment_color: this.suburb,
+        dial_code : this.telephone,
       };
     }
   
@@ -100,29 +85,25 @@ export class Client {
         lastName,
         email,
         phone,
-        ennable_appointment_booking,
         notes,
         start_date,
         end_date,
         appointment_color,
         dial_code,
-        service_commission,
-        product_commission,
-        voucher_sales_commission
+        address,
      } = data;
   
       this.id = id;
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
-      this.dialCode = dial_code;
-      this.mobileNumber = phone;
+      this.telephone = dial_code;
+      this.mobile = phone;
       this.notes = notes;
-      this.employmentStartDate = start_date;
-      this.employmentEndDate = end_date;
-      this.appointmentBooking = ennable_appointment_booking === 1 ? true : false;
-      this.appointmentColor = appointment_color;
-      this.commissions.updateData(service_commission, product_commission, voucher_sales_commission);
+      this.gender = start_date;
+      this.referral = end_date;
+      this.address = address;
+      this.suburb = appointment_color;
     }
   
     create_UUID() {
@@ -133,30 +114,6 @@ export class Client {
           return (c=='x' ? r :(r&0x3|0x8)).toString(16);
       });
       return uuid;
-  }
-  
-  }
-  
-  export class Commission {
-  service: number;
-  product: number;
-  voucherSale: number;
-  
-  constructor() {
-    this.new();
-    return this;
-  }
-  
-  new() {
-    this.service = null;
-    this.product = null;
-    this.voucherSale = null;
-  }
-  
-  updateData(service_commission, product_commission, voucher_sales_commission) {
-    this.service = service_commission;
-    this.product = product_commission;
-    this.voucherSale = voucher_sales_commission;
   }
   
   }

@@ -3,7 +3,7 @@ import { Client } from '../client';
 import { Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpcallService } from '../../../shared/services/httpcall.service';
-import { ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-edit',
@@ -11,13 +11,16 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
-  @Input() isAdd: boolean;
+  // add mode or update mode
+  isAdd = true; 
+
   form: Client;
 
   constructor(
     private http: HttpClient,
     private httpService: HttpcallService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.form = new Client();
     this.baseUrl = this.httpService.getBaseUrl();
@@ -44,37 +47,41 @@ export class EditComponent implements OnInit {
     
     onSubmit(): void {
       const dto = this.form.toDto();
+      console.table(dto);
       if (this.isAdd) {
-        this.addStaff(dto);
+        this.add(dto);
       } else {
-        this.updateStaff(dto);
+        this.update(dto);
       }
       }
   
-    addStaff(staff): void {
-      this.http.post(`${this.baseUrl}/user/customer/create_user`, staff)
+    add(client): void {
+      this.http.post(`${this.baseUrl}/user/customer/create_user`, client)
       .subscribe((data:any) => {
       }), err => {
 
       };
       }
   
-    updateStaff(staff) {
-      this.http.post(`${this.baseUrl}/user/customer/update_user`, staff)
+    update(client) {
+      this.http.post(`${this.baseUrl}/user/customer/update_user`, client)
       .subscribe((data:any) => {
       }), err => {
 
       };
       }
   
-    deleteStaff() {
+    delete() {
       this.http.post(`${this.baseUrl}/user/customer/delete_user`, {'id': ''})
         .subscribe((data:any) => {
             });
     }
 
-    back() {
-      
+    goBack() {
+      const confirm = window.confirm('Are you sure you want to cancel?');
+      if (confirm === true) {
+        this.router.navigate(['client']);
+      }
     }
     
 }

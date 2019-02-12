@@ -22,13 +22,13 @@
       <div class="row form-group">
         <div class="col-sm-6">
           <label class="control-label">Mobile</label>
-          <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg"
+          <input [(ngModel)]="form.mobile" type="number" name="number" class="form-control input-underline input-lg"
             >
         </div>
 
         <div class="col-sm-6">
           <label class="control-label">Telephone</label>
-          <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg"
+          <input [(ngModel)]="form.telephone" type="number" name="number" class="form-control input-underline input-lg"
             >
         </div>
       </div>
@@ -44,7 +44,7 @@
       <div class="row form-group">
         <div class="col-sm-12">
           <label class="control-label">{{'Send notifications by' }}</label>
-          <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control">
+          <select [(ngModel)]="form.notificationType" name="notification-type" class="form-control">
             <option *ngFor="let role of listrole" value="{{role.id}}">{{role.name}}</option>
           </select>
         </div>
@@ -53,7 +53,7 @@
       <div class="row form-group">
         <div class="col-sm-12">
             <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customCheck1">
+          <input [(ngModel)]="form.acceptNotification" name="notification-type" type="checkbox" class="custom-control-input" id="customCheck1">
           <label class="custom-control-label" for="customCheck1">Accepts marketing notifications</label>
           </div>
         </div>
@@ -103,7 +103,7 @@
               <div class="row form-group">
                   <div class="col-sm-12">
                     <label class="control-label">Client notes</label>
-                    <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg"
+                    <input [(ngModel)]="form.notes" name="notes" class="form-control input-underline input-lg"
                       >
                   </div>
                 </div>
@@ -111,7 +111,7 @@
               <div class="row form-group">
                   <div class="col-sm-12">
                       <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="customCheck2">
+                          <input [(ngModel)]="form.displayAllBooking" name="display-all" type="checkbox" class="custom-control-input" id="customCheck2">
                           <label class="custom-control-label" for="customCheck2">Display on all bookings</label>
                         </div>
                   </div>
@@ -124,14 +124,14 @@
               <div class="row form-group">
                   <div class="col-sm-12">
                     <label class="control-label">Address</label>
-                    <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg"
+                    <input [(ngModel)]="form.address" name="address" class="form-control input-underline input-lg"
                       >
                   </div>
                 </div>
               <div class="row form-group">
                   <div class="col-sm-12">
                     <label class="control-label">Suburb</label>
-                    <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg"
+                    <input [(ngModel)]="form.suburb" name="suburb" class="form-control input-underline input-lg"
                       >
                   </div>
                 </div>
@@ -139,13 +139,13 @@
                 <div class="row form-group">
                     <div class="col-sm-6">
                       <label class="control-label">City</label>
-                      <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="first-name"
+                      <input [(ngModel)]="form.city" type="text" class="form-control input-underline input-lg" name="first-name"
                         >
                     </div>
             
                     <div class="col-sm-6">
                       <label class="control-label">State</label>
-                      <input [(ngModel)]="form.lastName" type="text" name="last-name" class="form-control input-underline input-lg"
+                      <input [(ngModel)]="form.state" type="text" name="last-name" class="form-control input-underline input-lg"
                         >
                     </div>
                   </div>
@@ -153,7 +153,7 @@
                   <div class="row form-group">
                       <div class="col-sm-12">
                         <label class="control-label">Zip / Post Code</label>
-                        <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg"
+                        <input [(ngModel)]="form.zip" name="zip" class="form-control input-underline input-lg"
                           >
                       </div>
                     </div>
@@ -168,7 +168,7 @@
 
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-light pull-right" (click)="back()"> Cancel </button>
-    <button type="submit" class="btn btn-dark pull-right"> Save </button>
+    <button type="button" class="btn btn-light pull-right" (click)="goBack()"> Cancel </button>
+    <button type="submit" class="btn btn-dark pull-right" (click)="onSubmit()"> Save </button>
   </div>
 </form>
