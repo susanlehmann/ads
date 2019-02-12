@@ -15,6 +15,22 @@ export class EditComponent implements OnInit {
   isAdd = true; 
 
   form: Client;
+  notificationTypes = [
+    { id: 1, name: "Don't send notifications" },
+    { id: 2, name: "Email" },
+    { id: 3, name: "SMS" },
+    { id: 4, name: "Email & SMS" },
+  ];
+
+  genders = [
+    { id: 1, name: "Male" },
+    { id: 2, name: "Femail" },
+    { id: 3, name: "Unknown" },
+  ];
+
+  referralSources = [
+    { id: 1, name: "Walk-In" },
+  ];
 
   constructor(
     private http: HttpClient,
@@ -28,6 +44,15 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.test();
+    this.route.paramMap.subscribe(params => {
+      let id = params.get("id");
+      console.log(params.get("id"));
+      if (id) {
+        this.isAdd = false;
+      } else {
+        this.isAdd = true;
+      }
+    })
   }
 
     baseUrl: string;
@@ -72,9 +97,10 @@ export class EditComponent implements OnInit {
       }
   
     delete() {
-      this.http.post(`${this.baseUrl}/user/customer/delete_user`, {'id': ''})
-        .subscribe((data:any) => {
-            });
+      console.log(this.form.id);
+      // this.http.post(`${this.baseUrl}/user/customer/delete_user`, {'id': this.form.id})
+      //   .subscribe((data:any) => {
+      //       });
     }
 
     goBack() {

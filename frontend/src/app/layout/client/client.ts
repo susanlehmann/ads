@@ -6,10 +6,10 @@ export class Client {
     mobile: string;
     email: string;
     password: string;
-    notificationType: string;
+    notificationType: number;
     acceptNotification: string;
-    gender: any;
-    referral: any;
+    gender: number;
+    referral: number;
     notes: string;
     displayAllBooking: boolean;
     address: string;
@@ -29,13 +29,15 @@ export class Client {
       this.telephone = "";
       this.mobile = "";
       this.email = "";
-      this.notificationType = "";
+      this.notificationType = 1;
       this.notes = "";
-      this.gender = "";
-      this.referral = "";
+      this.gender = 1;
+      this.referral = 1;
       this.address = "";
       this.suburb = "";
+      this.city = "";
       this.state = "";
+      this.zip = ""
     }
   
   
@@ -45,15 +47,15 @@ export class Client {
       this.telephone = "123456789";
       this.mobile = "987654321";
       this.email = "giang@mai.com";
-      this.notificationType = "Basic";
+      this.notificationType = 2;
       this.notes = "11111";
-      this.gender = "1";
-      this.referral = "1";
-      this.address = "1234";
+      this.gender = 2;
+      this.referral = 2;
+      this.address = "Earth";
       this.city = "Hanoi";
       this.state = "Hanoi";
       this.zip = "100000";
-      this.suburb = "red";
+      this.suburb = "Green star";
     }
   
     static toModel(dto: any) {
@@ -68,13 +70,16 @@ export class Client {
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
-        phone : this.mobile,
-        ennable_appointment_bookig : this.address ? 1 : 0,
-        notes : this.notes,
-        start_date : '',
-        end_date : '',
-        appointment_color: this.suburb,
-        dial_code : this.telephone,
+        mobile: this.mobile,
+        telephone: this.telephone,
+        notes: this.notes,
+        gender: this.gender,
+        referral: this.referral,
+        address: this.address,
+        suburb: this.suburb,
+        city: this.city,
+        state: this.state,
+        zip: this.zip,
       };
     }
   
