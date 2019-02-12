@@ -1,0 +1,174 @@
+<form class="modal-content" style="border: none">
+  <div class="modal-header">
+    <h4 class="modal-title col-sm-4 offset-sm-4">{{isAdd ? 'New Staff' : 'Edit Staff'}}</h4>
+  </div>
+
+  <div class="modal-body row form-content">
+    <div class="col-md-5 offset-md-1" style="border-right: 1px solid #e9ecef; margin-right: 35px; padding-right: 50px;">
+      <div class="row form-group" style="margin-top: 72px;">
+        <div class="col-sm-6">
+          <label class="control-label">First Name</label>
+          <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="first-name"
+            >
+        </div>
+
+        <div class="col-sm-6">
+          <label class="control-label">Last Name</label>
+          <input [(ngModel)]="form.lastName" type="text" name="last-name" class="form-control input-underline input-lg"
+            >
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-sm-6">
+          <label class="control-label">Mobile</label>
+          <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg"
+            >
+        </div>
+
+        <div class="col-sm-6">
+          <label class="control-label">Telephone</label>
+          <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg"
+            >
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-sm-12">
+          <label class="control-label">Email</label>
+          <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg"
+            >
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-sm-12">
+          <label class="control-label">{{'Send notifications by' }}</label>
+          <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control">
+            <option *ngFor="let role of listrole" value="{{role.id}}">{{role.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-sm-12">
+            <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="customCheck1">
+          <label class="custom-control-label" for="customCheck1">Accepts marketing notifications</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-5">
+      <ngb-tabset>
+        <ngb-tab title="Personal Info">
+          <ng-template ngbTabContent>
+
+              <div class="row form-group">
+                  <div class="col-sm-6">
+                    <label class="control-label">{{'Gender' }}</label>
+                    <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control">
+                      <option *ngFor="let role of listrole" value="{{role.id}}">{{role.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="control-label">{{'Referral source' }}</label>
+                    <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control">
+                      <option *ngFor="let role of listrole" value="{{role.id}}">{{role.name}}</option>
+                    </select>
+                  </div>
+                </div>
+
+              <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label class="control-label">{{'Birthday' }}</label>
+                    <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control">
+                      <option *ngFor="let role of listrole" value="{{role.id}}">{{role.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-4">
+                    <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control" style="margin-top:31px;">
+                      <option *ngFor="let role of listrole" value="{{role.id}}">{{role.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-4">
+                    <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control" style="margin-top:31px;">
+                      <option *ngFor="let role of listrole" value="{{role.id}}">{{role.name}}</option>
+                    </select>
+                  </div>
+                </div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                    <label class="control-label">Client notes</label>
+                    <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg"
+                      >
+                  </div>
+                </div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck2">
+                          <label class="custom-control-label" for="customCheck2">Display on all bookings</label>
+                        </div>
+                  </div>
+                </div>
+
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Address">
+          <ng-template ngbTabContent>
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                    <label class="control-label">Address</label>
+                    <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg"
+                      >
+                  </div>
+                </div>
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                    <label class="control-label">Suburb</label>
+                    <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg"
+                      >
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                      <label class="control-label">City</label>
+                      <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="first-name"
+                        >
+                    </div>
+            
+                    <div class="col-sm-6">
+                      <label class="control-label">State</label>
+                      <input [(ngModel)]="form.lastName" type="text" name="last-name" class="form-control input-underline input-lg"
+                        >
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                      <div class="col-sm-12">
+                        <label class="control-label">Zip / Post Code</label>
+                        <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg"
+                          >
+                      </div>
+                    </div>
+
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+
+  </div>
+
+
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light pull-right" (click)="back()"> Cancel </button>
+    <button type="submit" class="btn btn-dark pull-right"> Save </button>
+  </div>
+</form>
