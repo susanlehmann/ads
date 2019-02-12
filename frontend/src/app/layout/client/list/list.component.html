@@ -23,7 +23,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let client of clients; index as i" routerLink="/client/edit/1">
+                <tr *ngFor="let client of clients; index as i" [routerLink]="['/client/detail', client.id]">
                         <td>{{client.name}}</td>
                         <td>{{client.number}}</td>
                         <td>{{client.email}}</td>

@@ -10,30 +10,35 @@ import { HttpcallService } from '../../../shared/services/httpcall.service';
 export class ListComponent implements OnInit {
   clients = [
     {
+      id: 1,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',
       gender: 'unknown'
     },
     {
+      id: 2,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',
       gender: 'unknown'
     },
     {
+      id: 3,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',
       gender: 'unknown'
     },
     {
+      id: 4,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',
       gender: 'unknown'
     },
     {
+      id: 5,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',

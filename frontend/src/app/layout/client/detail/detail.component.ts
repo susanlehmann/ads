@@ -10,35 +10,35 @@ export class DetailComponent implements OnInit {
 
 	clients = [
 		{
-			id: 123,
+			id: 1,
 			name: 'Giang Mai',
 			number: '123456789',
 			email: 'giang@mai.com',
 			gender: 'unknown'
 		},
 		{
-			id: 12375,
+			id: 2,
 			name: 'Giang Mai',
 			number: '123456789',
 			email: 'giang@mai.com',
 			gender: 'unknown'
 		},
 		{
-			id: 12345,
+			id: 3,
 			name: 'Giang Mai',
 			number: '123456789',
 			email: 'giang@mai.com',
 			gender: 'unknown'
 		},
 		{
-			id: 123234,
+			id: 4,
 			name: 'Giang Mai',
 			number: '123456789',
 			email: 'giang@mai.com',
 			gender: 'unknown'
 		},
 		{
-			id: 12354,
+			id: 5,
 			name: 'Giang Mai',
 			number: '123456789',
 			email: 'giang@mai.com',
@@ -61,6 +61,10 @@ export class DetailComponent implements OnInit {
 		let info = this.clients.filter(s => s.id == id);
 		this.client_info = info[0];
 		console.log(this.client_info);
+	}
+
+	goBack() {
+		this.route.navigate(['client']);
 	}
 
 }
