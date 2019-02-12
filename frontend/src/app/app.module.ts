@@ -12,6 +12,7 @@ import { AuthGuard } from './shared';
 import { HttpcallService } from './shared/services/httpcall.service';
 import { AuthService } from './shared/services/auth.service';
 import { TokenService } from './shared/services/token.service';
+import { SearchComponent } from './search/search.component';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -39,7 +40,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         }),
         AppRoutingModule
     ],
-    declarations: [AppComponent],
+    declarations: [AppComponent, SearchComponent],
     providers: [AuthGuard, HttpcallService, AuthService,TokenService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
     bootstrap: [AppComponent]
 })

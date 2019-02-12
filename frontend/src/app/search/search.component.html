@@ -1,0 +1,27 @@
+<button type="button" class="close" aria-label="Close" (click)="goBack()">
+  <span aria-hidden="true">&times;</span>
+</button>
+<div class="clearfix"></div>
+<div class="container">
+  <div class="row">
+    <input class="col-sm-12 search-query" type="text" name="query" placeholder="What are you looking for?">
+    <div class="col-sm-12">Search by client name, mobile, email or booking reference</div>
+  </div>
+  <div class="row" style="margin-top: 30px">
+      <div class="col-md-6">
+        <div class="result-header">UPCOMING APPOINTMENTS</div>
+        <div *ngFor="let appointment of appointments" class="row clickable-row">
+            <div class="appointment-item-home col-12">
+            <p><span class="badge text-uppercase badge-primary mr-2">New</span><span class="appoiment-title">Haircut with 1 asdfxc</span></p>
+            <p><span class="pr-2">Friday, 04 Jan 2019 at 20:35</span>
+                <span class="pr-2"><i class="fa fa-clock-o"></i> 45min</span>
+                <span class="pr-2"><i class="fa fa-user-o"></i> Minh Anh Nguyen</span>
+                <span class="pr-2"><i class="fa fa-home"></i> HACHINET</span></p>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="result-header">CLIENTS (RECENTLY ADDED)</div>
+      </div>
+  </div>
+</div>

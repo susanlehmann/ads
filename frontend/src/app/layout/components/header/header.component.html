@@ -6,7 +6,7 @@
     <a class="navbar-brand" href="#"></a>
     </div>
     <div style="display: flex">
-    <button class="navbar-toggler mobile" type="button">
+    <button class="navbar-toggler mobile" type="button" [routerLink]="[ '/search' ]">
         <i class="fa fa-search" style="color: #868e96 !important"></i>
     </button>
     <button class="navbar-toggler mobile" type="button">
@@ -24,7 +24,7 @@
         <ul class="navbar-nav ml-auto">
             
                 <li class="nav-item">
-                    <a href="javascript:void(0)" class="nav-link">
+                    <a class="nav-link" [routerLink]="[ '/search' ]">
                         <i class="fa fa-search"></i><b class="caret"></b>
                     </a>
                 </li>
