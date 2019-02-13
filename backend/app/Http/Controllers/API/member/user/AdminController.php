@@ -10,7 +10,6 @@ use Auth;
 use DB;
 class AdminController extends Controller
 {
-
     public function index()
     {
         // List all the products

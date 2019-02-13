@@ -84,7 +84,7 @@ export class MemberComponent implements OnInit {
 	
 	getUser() {
     this.startLoading();
-		this.http.get(`${this.baseUrl}/user/list-user`)
+		this.http.get(`${this.baseUrl}/user/staff/list-user`)
 		.subscribe((listusers:any) => {
         this.stopLoading();
         this.listusers = listusers.user

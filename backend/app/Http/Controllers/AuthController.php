@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use App\User;
-
-  
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 class AuthController extends Controller
 {
     /**
@@ -29,8 +29,12 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Email or password does not exist!'], 401);
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 400);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
         return $this->respondWithToken($token);
@@ -86,7 +90,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -113,7 +116,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()->name   /// user()->name
+            'user' => auth()->user(),   /// user()->name
         ]);
     }
 }

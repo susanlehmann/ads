@@ -10,7 +10,6 @@ use Auth;
 use DB;
 class AdminController extends Controller
 {
-
     public function index()
     {
         // List all the products
@@ -24,8 +23,8 @@ class AdminController extends Controller
         $input = [
             'business_id' => $request->id,
             'role_id' => $request->id,
-            'id_user_create' => $request->id,
-            'id_user_update' => $request->id,
+            'id_user_create' => $this->user_info,
+            'id_user_update' => $this->user_info,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
@@ -77,19 +76,19 @@ class AdminController extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_user_update' => $request->id,
+                'id_user_update' => $this->user_info->id,
                 'firstName' => $request->firstName,
                 'lastName' => $request->lastName,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'notes' => $request->notes,
-                // 'start_date' => $request->start_date,
-                // 'end_date' => $request->end_date,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
                 'appointment_color' => $request->appointment_color,
                 'service_commission' => $request->service_commission,
                 'product_commission' => $request->product_commission,
                 'voucher_sales_commission' => $request->voucher_sales_commission,
-                // 'updated_at' => date('yyyy-mm-dd H:i:s')
+                'updated_at' => date('yyyy-mm-dd H:i:s')
             ];
             $user = User::find($id);
             $user->update($input);
@@ -115,5 +114,29 @@ class AdminController extends Controller
 
             return response()->json($msg);
             }
+    }
+    public function search(Request $request){
+        $search_name = $request->name_user;
+        if(strlen($search_name) = 0)
+        {
+            $data['user'] = User::where('level','>', 2)
+            ->where('parent',$this->user_info->id)
+            ->get();
+        }
+        else
+        {
+            $data['user'] = User::where('level','>', 2)
+            ->where('parent',$this->user_info->id)
+            ->where(function ($query) use ($search_name) {
+                if(strlen($search_name) > 0)
+                {
+                    $query->where('firstName', 'LIKE', "%$search_name%");
+                          ->orWhere('lastName', 'LIKE', "%$search_name%");
+                          ->orWhere('email', 'LIKE', "%$search_name%");
+                }
+            })
+            ->get(); 
+        }
+        return response()->json($data);
     }
 }
