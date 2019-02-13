@@ -8,8 +8,14 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Auth;
 use DB;
+use Session;
 class AdminController extends Controller
 {
+    private $user_info = null;
+    public function __construct()
+    {
+        $this->user_info = session('info_login');
+    }
 
     public function index()
     {

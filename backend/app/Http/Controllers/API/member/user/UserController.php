@@ -8,13 +8,21 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Auth;
 use DB;
+use Session;
 class UserController extends Controller
 {
+    private $user_info = null;
+
+    public function __construct()
+    {
+        $this->user_info = session('info_login');
+    }
 
     public function index()
     {
         // List all the products
-        $data['user'] = User::where('level',3)->where('parent',Auth::user()->id)->get();
+        echo json_encode($this->user_info);die;
+        $data['user'] = User::where('level',3)->where('parent',$this->user_info->id)->get();
         $data['role'] = Role::get();
         return response()->json($data);
     }
@@ -43,7 +51,7 @@ class UserController extends Controller
             'voucher_sales_commission' => $request->voucher_sales_commission,
             'sort_order' => 1,
             'level' => 3,
-            'parent' => $request->id,
+            'parent' => $this->user_info->id,
         ];
         // $user->level = 0; // ko co column level
         $user = User::create($input);
@@ -77,19 +85,19 @@ class UserController extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_user_update' => $request->id,
+                'id_user_update' => $this->user_info->id,
                 'firstName' => $request->firstName,
                 'lastName' => $request->lastName,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'notes' => $request->notes,
-                // 'start_date' => $request->start_date,
-                // 'end_date' => $request->end_date,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
                 'appointment_color' => $request->appointment_color,
                 'service_commission' => $request->service_commission,
                 'product_commission' => $request->product_commission,
                 'voucher_sales_commission' => $request->voucher_sales_commission,
-                // 'updated_at' => date('yyyy-mm-dd H:i:s')
+                'updated_at' => date('yyyy-mm-dd H:i:s')
             ];
             $user = User::find($id);
             $user->update($input);

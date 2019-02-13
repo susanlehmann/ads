@@ -14,7 +14,7 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
-
+    Route::get('getinfo_user', 'User_infoController@index');
     Route::resource('roles','RoleController');
 
     // Route::get('list-user', 'UserController@index');
@@ -61,6 +61,9 @@ Route::group([
         Route::post('show-service-group', 'Service_GroupCtroller@show');
         Route::post('update-service-group', 'Service_GroupCtroller@update');
         Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
+    });
+    Route::group(['middleware' => ['jwt.verify']], function() {
+        Route::get('user', 'AuthController@getAuthenticatedUser');
     });
 });
 

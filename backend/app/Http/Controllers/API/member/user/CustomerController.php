@@ -6,16 +6,21 @@ use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use DB;
+use Session;
 class CustomerController extends Controller
 {
-
-    public function index()
+    private $user_info = null;
+    public function __construct()
     {
-        // List all the products
-        echo json_encode(Auth::user());die;
-        $data['user'] = User::where('level',4)->where('parent',Auth::user()->id)->get();
+        $this->user_info = session('info_login');
+    }
+
+    public function index(Request $request)
+    {
+        echo json_encode($this->user_info);die;
+        $data['user'] = User::where('level',4)->where('parent',$this->user_info->id)->get();
         $data['role'] = Role::get();
         return response()->json($data);
     }
@@ -25,8 +30,8 @@ class CustomerController extends Controller
         $input = [
             'business_id' => $request->id,
             'role_id' => $request->id,
-            'id_user_create' => $request->id,
-            'id_user_update' => $request->id,
+            'id_user_create' => $this->user_info->id,
+            'id_user_update' => $this->user_info->id,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
@@ -44,7 +49,7 @@ class CustomerController extends Controller
             'voucher_sales_commission' => $request->voucher_sales_commission,
             'sort_order' => 1,
             'level' => 4,
-            'parent' => $request->id,
+            'parent' => $this->user_info->id,
         ];
         // $user->level = 0; // ko co column level
         $user = User::create($input);
@@ -78,19 +83,19 @@ class CustomerController extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_user_update' => $request->id,
+                'id_user_update' => $this->user_info->id,
                 'firstName' => $request->firstName,
                 'lastName' => $request->lastName,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'notes' => $request->notes,
-                // 'start_date' => $request->start_date,
-                // 'end_date' => $request->end_date,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
                 'appointment_color' => $request->appointment_color,
                 'service_commission' => $request->service_commission,
                 'product_commission' => $request->product_commission,
                 'voucher_sales_commission' => $request->voucher_sales_commission,
-                // 'updated_at' => date('yyyy-mm-dd H:i:s')
+                'updated_at' => date('yyyy-mm-dd H:i:s')
             ];
             $user = User::find($id);
             $user->update($input);
