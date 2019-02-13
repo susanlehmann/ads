@@ -1,35 +1,83 @@
 <div class="row justify-content-between">
-    <div class="col-md-3 col-ms-12">
-        <input class="form-control" type="text" placeholder="Search by name, e-mail or mobile number">
-      </div>
-      <div class="col-md-1 col-sm-12">
-          <select class="custom-select custom-select mb-3">
-              <option selected>Options</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-      </div>
+	<div class="col-md-5 col-ms-12">
+		<div class="input-group mb-2">
+			<div class="input-group-prepend">
+				<div class="input-group-text">
+					<i class="fa fa-1x fa-search"></i>
+				</div>
+			</div>
+			<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search by name, e-mail or mobile number">
+		</div>
+	</div>
+	<div class="col-md-2 col-sm-12">
+		<button class="btn btn-primary" routerLink="/client/add">Add client</button>
+		<!-- <select class="custom-select custom-select mb-3 form-control">
+			<option selected>Options</option>
+			<option value="1">One</option>
+			<option value="2">Two</option>
+			<option value="3">Three</option>
+		</select> -->
+	</div>
 </div>
+<div class="clearfix"></div>
 <div class="row">
-    <div class="col-md-12 table-responsive">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>{{'Name' | translate}}</th>
-                <th>{{'Mobile number' | translate}}</th>
-                <th>{{'Email' | translate}}</th>
-                <th>{{'Gender' | translate}}</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let client of clients; index as i" [routerLink]="['/client/detail', client.id]">
-                        <td>{{client.name}}</td>
-                        <td>{{client.number}}</td>
-                        <td>{{client.email}}</td>
-                        <td>{{client.gender}}</td>
-                </tr>
-        </table>
-    </div>
-    </div>
-    <button class="btn btn-primary" routerLink="/client/add">Add client</button>
+	<div class="col-md-12 table-responsive">
+		<div class="box-mobile">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th colspan="2">{{'Name' | translate}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let client of clients; index as i" routerLink="/client/detail/{{client.id}}">
+						<td>
+							<span class="avatar">{{client.name | slice: 0:1}}</span>
+						</td>
+						<td class="ba">
+							<span>{{client.name}}</span>
+							<span>{{client.number}}</span>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th colspan="2">
+							paging
+						</th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<div class="box-desktop">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>{{'Name' | translate}}</th>
+						<th>{{'Mobile number' | translate}}</th>
+						<th>{{'Email' | translate}}</th>
+						<th>{{'Gender' | translate}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let client of clients; index as i" routerLink="/client/detail/{{client.id}}">
+						<td class="ba">
+							<span class="avatar">{{client.name | slice: 0:1}}</span>
+							<span>{{client.name}}</span>
+						</td>
+						<td>{{client.number}}</td>
+						<td>{{client.email}}</td>
+						<td>{{client.gender}}</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th colspan="4">
+							paging
+						</th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
