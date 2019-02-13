@@ -4,50 +4,62 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../shared/services/user.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+	selector: 'app-list',
+	templateUrl: './list.component.html',
+	styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  loading: boolean;
-  clients: any;
-  client: any = {};
+	loading: boolean;
+	clients: any;
+	client: any = {};
 
-  constructor(
-    private http: HttpClient,
-    private userService: UserService,
-    private route: Router,
-  ) { }
+	constructor(
+		private http: HttpClient,
+		private userService: UserService,
+		private route: Router,
+	) { }
 
-  ngOnInit() {
-    this.getUser();
-  }
-
-  getUser() {
-    this.startLoading();
-    this.client.getuser = JSON.parse(localStorage.getItem('user'));
-    this.userService.getListUser(this.client).subscribe(
-      success => {
-        this.stopLoading();
-        this.clients = success;
-        console.log(success);
-      },
-      error => {
-        this.stopLoading();
-        console.log(error);
-      }
-      );
+	ngOnInit() {
+		this.getUser();
 	}
 
-  addNewClient() {
-    this.route.navigateByUrl('client/add');
-  }
+	getUser() {
+		this.startLoading();
+		this.client.getuser = JSON.parse(localStorage.getItem('user'));
+		this.userService.getListUser(this.client).subscribe(
+			success => {
+				this.stopLoading();
+				this.clients = success;
+				console.log(success);
+			},
+			error => {
+				this.stopLoading();
+				console.log(error);
+			}
+		);
+	}
 
-  startLoading(): void {
-    this.loading = true;
-  }
+	addNewClient() {
+		this.route.navigateByUrl('client/add');
+	}
 
-  stopLoading(): void {
-    this.loading = false;
-  }
+	startLoading(): void {
+		this.loading = true;
+	}
+
+	stopLoading(): void {
+		this.loading = false;
+	}
+
+	searchClient(event) {
+		this.userService.searchUser(event.target.value).subscribe(
+			success => {
+				this.clients = success;
+				console.log(success);
+			},
+			error => {
+				console.log(error);
+			}
+		);
+	}
 }

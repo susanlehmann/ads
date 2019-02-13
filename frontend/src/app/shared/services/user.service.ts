@@ -27,4 +27,8 @@ export class UserService {
 	UpdateUserById(client: any) {
 		return this.http.post(this.baseUrl + '/user/customer/update_user', client);
 	}
+
+	searchUser(content: any) {
+		return this.http.post(this.baseUrl + '/user/customer/search_user', content);
+	}
 }
