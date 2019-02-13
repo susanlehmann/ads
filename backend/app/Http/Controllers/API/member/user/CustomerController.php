@@ -136,7 +136,7 @@ class CustomerController extends Controller
 
     public function search(Request $request){
         $search_name = $request->name_user;
-        if(strlen($search_name) = 0)
+        if(strlen($search_name) == 0)
         {
             $data['user'] = User::where('level',4)
             ->where('parent',$request->getuser->id)

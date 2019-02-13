@@ -117,7 +117,7 @@ class AdminController extends Controller
     }
     public function search(Request $request){
         $search_name = $request->name_user;
-        if(strlen($search_name) = 0)
+        if(strlen($search_name) == 0)
         {
             $data['user'] = User::where('level','>', 2)
             ->where('parent',$this->user_info->id)
