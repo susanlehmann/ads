@@ -23,8 +23,8 @@ class AdminController extends Controller
         $input = [
             'business_id' => $request->id,
             'role_id' => $request->id,
-            'id_user_create' => $this->user_info,
-            'id_user_update' => $this->user_info,
+            'id_user_create' => 0,
+            'id_user_update' => 0,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
@@ -117,7 +117,7 @@ class AdminController extends Controller
     }
     public function search(Request $request){
         $search_name = $request->name_user;
-        if(strlen($search_name) = 0)
+        if(strlen($search_name) == 0)
         {
             $data['user'] = User::where('level','>', 2)
             ->where('parent',$this->user_info->id)
@@ -130,8 +130,8 @@ class AdminController extends Controller
             ->where(function ($query) use ($search_name) {
                 if(strlen($search_name) > 0)
                 {
-                    $query->where('firstName', 'LIKE', "%$search_name%");
-                          ->orWhere('lastName', 'LIKE', "%$search_name%");
+                    $query->where('firstName', 'LIKE', "%$search_name%")
+                          ->orWhere('lastName', 'LIKE', "%$search_name%")
                           ->orWhere('email', 'LIKE', "%$search_name%");
                 }
             })

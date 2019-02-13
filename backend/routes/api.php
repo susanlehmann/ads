@@ -49,7 +49,7 @@ Route::group([
     });
     
     Route::group(['prefix' => 'user/customer', 'namespace' => 'API\member\user'], function(){
-        Route::get('list-user', 'CustomerController@index');
+        Route::post('list-user', 'CustomerController@index');
         Route::post('detail_user', 'CustomerController@detail');
         Route::post('create_user', 'CustomerController@store');
         Route::post('show_user', 'CustomerController@show');

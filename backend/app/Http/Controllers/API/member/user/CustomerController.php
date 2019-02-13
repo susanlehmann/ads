@@ -136,7 +136,7 @@ class CustomerController extends Controller
 
     public function search(Request $request){
         $search_name = $request->name_user;
-        if(strlen($search_name) = 0)
+        if(strlen($search_name) == 0)
         {
             $data['user'] = User::where('level',4)
             ->where('parent',$request->getuser->id)
@@ -149,8 +149,8 @@ class CustomerController extends Controller
             ->where(function ($query) use ($search_name) {
                 if(strlen($search_name) > 0)
                 {
-                    $query->where('firstName', 'LIKE', "%$search_name%");
-                          ->orWhere('lastName', 'LIKE', "%$search_name%");
+                    $query->where('firstName', 'LIKE', "%$search_name%")
+                          ->orWhere('lastName', 'LIKE', "%$search_name%")
                           ->orWhere('email', 'LIKE', "%$search_name%");
                 }
             })
