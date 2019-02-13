@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../shared/services/user.service';
 
@@ -8,13 +9,14 @@ import { UserService } from '../../../shared/services/user.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-
+  loading: boolean;
   clients: any;
   client: any = {};
 
   constructor(
     private http: HttpClient,
     private userService: UserService,
+    private route: Router,
   ) { }
 
   ngOnInit() {
@@ -22,16 +24,30 @@ export class ListComponent implements OnInit {
   }
 
   getUser() {
+    this.startLoading();
     this.client.getuser = JSON.parse(localStorage.getItem('user'));
     this.userService.getListUser(this.client).subscribe(
       success => {
+        this.stopLoading();
         this.clients = success;
         console.log(success);
       },
       error => {
+        this.stopLoading();
         console.log(error);
       }
       );
 	}
 
+  addNewClient() {
+    this.route.navigateByUrl('client/add');
+  }
+
+  startLoading(): void {
+    this.loading = true;
+  }
+
+  stopLoading(): void {
+    this.loading = false;
+  }
 }
