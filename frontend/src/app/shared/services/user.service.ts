@@ -8,11 +8,19 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getListUser() {
-    return this.http.get(this.baseUrl + '/user/customer/list-user');
+  getListUser(client: any) {
+    return this.http.post(this.baseUrl + '/user/customer/list-user', client);
   }
 
   createUser(client: any) {
   	return this.http.post(this.baseUrl + '/user/customer/create_user', client);
+  }
+
+  getUserById(userId: any) {
+  	return this.http.post(this.baseUrl + '/user/customer/detail_user', userId);
+  }
+
+  removeUserById(userId: any) {
+  	return this.http.post(this.baseUrl + '/user/customer/delete_user', userId);
   }
 }

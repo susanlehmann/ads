@@ -81,6 +81,7 @@
 				    align-items: center;
 				    font-weight: 700;
 				    background: #eee;
+				    text-transform: uppercase;
 				}
 			}
 			
@@ -139,6 +140,7 @@ $breakpoint-iphone: 667px;
 						    background: #eee;
 						    position: absolute;
 						    top: 25%;
+						    text-transform: uppercase;
 						}
 						span:not(avatar) {
 							&:first-child {

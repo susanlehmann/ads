@@ -8,43 +8,9 @@ import { UserService } from '../../../shared/services/user.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  clients = [
-    {
-      id: 123,
-      name: 'Giang Mai',
-      number: '123456789',
-      email: 'giang@mai.com',
-      gender: 'unknown'
-    },
-    {
-      id: 12375,
-      name: 'Giang Mai',
-      number: '123456789',
-      email: 'giang@mai.com',
-      gender: 'unknown'
-    },
-    {
-      id: 12345,
-      name: 'Giang Mai',
-      number: '123456789',
-      email: 'giang@mai.com',
-      gender: 'unknown'
-    },
-    {
-      id: 123234,
-      name: 'Giang Mai',
-      number: '123456789',
-      email: 'giang@mai.com',
-      gender: 'unknown'
-    },
-    {
-      id: 12354,
-      name: 'Giang Mai',
-      number: '123456789',
-      email: 'giang@mai.com',
-      gender: 'unknown'
-    },
-  ];
+
+  clients: any;
+  client: any = {};
 
   constructor(
     private http: HttpClient,
@@ -56,8 +22,10 @@ export class ListComponent implements OnInit {
   }
 
   getUser() {
-    this.userService.getListUser().subscribe(
+    this.client.getuser = JSON.parse(localStorage.getItem('user'));
+    this.userService.getListUser(this.client).subscribe(
       success => {
+        this.clients = success;
         console.log(success);
       },
       error => {

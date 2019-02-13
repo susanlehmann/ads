@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-
+import { UserService } from '../../../shared/services/user.service';
+import { NotifierService } from 'angular-notifier';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -9,43 +10,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DetailComponent implements OnInit {
 
-	clients = [
-		{
-	      id: 123,
-	      name: 'Giang Mai',
-	      number: '123456789',
-	      email: 'giang@mai.com',
-	      gender: 'unknown'
-	    },
-	    {
-	      id: 12375,
-	      name: 'Giang Mai',
-	      number: '123456789',
-	      email: 'giang@mai.com',
-	      gender: 'unknown'
-	    },
-	    {
-	      id: 12345,
-	      name: 'Giang Mai',
-	      number: '123456789',
-	      email: 'giang@mai.com',
-	      gender: 'unknown'
-	    },
-	    {
-	      id: 123234,
-	      name: 'Giang Mai',
-	      number: '123456789',
-	      email: 'giang@mai.com',
-	      gender: 'unknown'
-	    },
-	    {
-	      id: 12354,
-	      name: 'Giang Mai',
-	      number: '123456789',
-	      email: 'giang@mai.com',
-	      gender: 'unknown'
-	    },
-	];
+	clients = [];
 
 	client_id: any;
 	client_info: any = {};
@@ -53,7 +18,9 @@ export class DetailComponent implements OnInit {
 
   	constructor(private route: Router,
   		private router: ActivatedRoute,
-  		private modalService: NgbModal) { }
+  		private modalService: NgbModal,
+  		private userService: UserService,
+    	private notifierService: NotifierService) { }
 
 	ngOnInit() {
 		this.router.params.subscribe(params => {this.client_id = params.id;});
@@ -61,9 +28,15 @@ export class DetailComponent implements OnInit {
 	}
 
 	public loadDetails(id: any){
-		let info = this.clients.filter(s => s.id == id);
-		this.client_info = info[0];
-		console.log(this.client_info);
+		this.userService.getUserById(id).subscribe(
+			success => {
+				this.client_info = success;
+				console.log(success);
+			},
+			error => {}
+		);
+		// this.client_info = info[0];
+		// console.log(this.client_info);
 	}
 
 	goBack() {
@@ -87,6 +60,17 @@ export class DetailComponent implements OnInit {
         } else {
             return  `with: ${reason}`;
         }
+    }
+
+    removeUser(userId: any) {
+    	this.userService.removeUserById(userId).subscribe(
+    		success => {
+    			this.notifierService.notify('success', 'Delete successfully !!');
+    			this.modalService.dismissAll();
+    			this.route.navigateByUrl('client');
+    		},
+    		error => {}
+    	);
     }
 
 }

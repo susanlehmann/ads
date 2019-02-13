@@ -7,7 +7,7 @@ export class Client {
     email: string;
     password: string;
     notificationType: number;
-    acceptNotification: string;
+    acceptNotification: number;
     gender: number;
     referral: number;
     notes: string;
@@ -17,7 +17,8 @@ export class Client {
     city: String;
     state: String;
     zip: String;
-  
+    getuser: any;
+
     constructor() {
       this.new();
       return this;
@@ -37,7 +38,8 @@ export class Client {
       this.suburb = "";
       this.city = "";
       this.state = "";
-      this.zip = ""
+      this.zip = "";
+      this.getuser = null;
     }
   
   
@@ -62,6 +64,28 @@ export class Client {
       const model = new Client();
       model.updateData(dto);
       return model;
+    }
+
+    newUser(): any {
+      return {
+        getuser: this.getuser,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        mobile: this.mobile,
+        telephone: this.telephone,
+        notes: this.notes,
+        gender: this.gender,
+        referral: this.referral,
+        address: this.address,
+        suburb: this.suburb,
+        city: this.city,
+        state: this.state,
+        zip: this.zip,
+        password: this.password,
+        notificationType: this.notificationType,
+        acceptNotification: this.acceptNotification,
+      };
     }
   
     toDto(): any {

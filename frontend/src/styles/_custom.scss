@@ -50,3 +50,15 @@ body {
         color: #007bff;
     }
 }
+
+
+// card
+.card-custom {
+    border: none;
+
+    .card-header {
+        background: white;
+        display: unset;
+        border: none;
+    }
+}
