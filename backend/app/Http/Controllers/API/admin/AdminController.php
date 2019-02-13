@@ -23,8 +23,8 @@ class AdminController extends Controller
         $input = [
             'business_id' => $request->id,
             'role_id' => $request->id,
-            'id_user_create' => $this->user_info,
-            'id_user_update' => $this->user_info,
+            'id_user_create' => 0,
+            'id_user_update' => 0,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
