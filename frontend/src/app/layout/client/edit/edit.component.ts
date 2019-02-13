@@ -4,6 +4,7 @@ import { Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpcallService } from '../../../shared/services/httpcall.service';
 import { Router, ActivatedRoute } from "@angular/router";
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-edit',
@@ -37,6 +38,7 @@ export class EditComponent implements OnInit {
     private httpService: HttpcallService,
     private route: ActivatedRoute,
     private router: Router,
+    private userService: UserService,
   ) {
     this.form = new Client();
     this.baseUrl = this.httpService.getBaseUrl();
@@ -46,7 +48,7 @@ export class EditComponent implements OnInit {
     this.test();
     this.route.paramMap.subscribe(params => {
       let id = params.get("id");
-      console.log(params.get("id"));
+      //console.log(params.get("id"));
       if (id) {
         this.isAdd = false;
       } else {
@@ -72,21 +74,25 @@ export class EditComponent implements OnInit {
     
     onSubmit(): void {
       const dto = this.form.toDto();
-      console.table(dto);
+      //console.table(dto);
       if (this.isAdd) {
-        this.add(dto);
+        this.addUser(dto);
       } else {
         this.update(dto);
       }
       }
   
-    add(client): void {
-      this.http.post(`${this.baseUrl}/user/customer/create_user`, client)
-      .subscribe((data:any) => {
-      }), err => {
+    addUser(client): void {
+      // this.http.post(`${this.baseUrl}/user/customer/create_user`, client)
+      this.userService.createUser(client).subscribe(
+        success => {
+          console.log(success);
+        },
+        error => {
 
-      };
-      }
+        }
+      )      
+    }
   
     update(client) {
       this.http.post(`${this.baseUrl}/user/customer/update_user`, client)

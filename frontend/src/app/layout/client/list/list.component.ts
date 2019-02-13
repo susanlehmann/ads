@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpcallService } from '../../../shared/services/httpcall.service';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-list',
@@ -10,35 +10,35 @@ import { HttpcallService } from '../../../shared/services/httpcall.service';
 export class ListComponent implements OnInit {
   clients = [
     {
-      id: 1,
+      id: 123,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',
       gender: 'unknown'
     },
     {
-      id: 2,
+      id: 12375,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',
       gender: 'unknown'
     },
     {
-      id: 3,
+      id: 12345,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',
       gender: 'unknown'
     },
     {
-      id: 4,
+      id: 123234,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',
       gender: 'unknown'
     },
     {
-      id: 5,
+      id: 12354,
       name: 'Giang Mai',
       number: '123456789',
       email: 'giang@mai.com',
@@ -48,7 +48,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private httpService: HttpcallService,
+    private userService: UserService,
   ) { }
 
   ngOnInit() {
@@ -56,15 +56,14 @@ export class ListComponent implements OnInit {
   }
 
   getUser() {
-		this.http.get(`${this.httpService.getBaseUrl()}/user/customer/list-user`)
-		.subscribe((clients:any) => {
-        clients
-        //.map(Staff.toModel)
-        .sort((a, b) => {
-          return a.id - b.id;
-        });
-		}, err => {
-    });
+    this.userService.getListUser().subscribe(
+      success => {
+        console.log(success);
+      },
+      error => {
+        console.log(error);
+      }
+      );
 	}
 
 }
