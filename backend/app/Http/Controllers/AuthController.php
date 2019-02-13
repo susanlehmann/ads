@@ -8,7 +8,6 @@ use App\Http\Requests\SignUpRequest;
 use App\User;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Session;
 class AuthController extends Controller
 {
     /**
@@ -91,7 +90,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-        session()->flush();
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -114,8 +112,6 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        Session::put(['info_login' => auth()->user()]);
-        // echo json_encode(Session::get('info_login'));die;
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',

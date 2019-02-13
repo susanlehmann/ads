@@ -11,13 +11,6 @@ use DB;
 use Session;
 class UserController extends Controller
 {
-    private $user_info = null;
-
-    public function __construct()
-    {
-        $this->user_info = session('info_login');
-    }
-
     public function index()
     {
         // List all the products
@@ -123,5 +116,30 @@ class UserController extends Controller
 
             return response()->json($msg);
             }
+    }
+
+    public function search(Request $request){
+        $search_name = $request->name_user;
+        if(strlen($search_name) = 0)
+        {
+            $data['user'] = User::where('level',3)
+            ->where('parent',$this->user_info->id)
+            ->get();
+        }
+        else
+        {
+            $data['user'] = User::where('level',3)
+            ->where('parent',$this->user_info->id)
+            ->where(function ($query) use ($search_name) {
+                if(strlen($search_name) > 0)
+                {
+                    $query->where('firstName', 'LIKE', "%$search_name%");
+                          ->orWhere('lastName', 'LIKE', "%$search_name%");
+                          ->orWhere('email', 'LIKE', "%$search_name%");
+                }
+            })
+            ->get(); 
+        }
+        return response()->json($data);
     }
 }

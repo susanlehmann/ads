@@ -8,15 +8,8 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use DB;
-use Session;
 class CustomerController extends Controller
 {
-    private $user_info = null;
-    public function __construct()
-    {
-        $this->user_info = session('info_login');
-    }
-
     public function index(Request $request)
     {
         echo json_encode($this->user_info);die;
@@ -121,5 +114,30 @@ class CustomerController extends Controller
 
             return response()->json($msg);
             }
+    }
+
+    public function search(Request $request){
+        $search_name = $request->name_user;
+        if(strlen($search_name) = 0)
+        {
+            $data['user'] = User::where('level',4)
+            ->where('parent',$this->user_info->id)
+            ->get();
+        }
+        else
+        {
+            $data['user'] = User::where('level',4)
+            ->where('parent',$this->user_info->id)
+            ->where(function ($query) use ($search_name) {
+                if(strlen($search_name) > 0)
+                {
+                    $query->where('firstName', 'LIKE', "%$search_name%");
+                          ->orWhere('lastName', 'LIKE', "%$search_name%");
+                          ->orWhere('email', 'LIKE', "%$search_name%");
+                }
+            })
+            ->get(); 
+        }
+        return response()->json($data);
     }
 }
