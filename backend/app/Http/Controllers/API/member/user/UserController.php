@@ -8,14 +8,12 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Auth;
 use DB;
-use Session;
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // List all the products
-        echo json_encode($this->user_info);die;
-        $data['user'] = User::where('level',3)->where('parent',$this->user_info->id)->get();
+        $data['user'] = User::where('level',3)->where('parent',$request->getuser->id)->get();
         $data['role'] = Role::get();
         return response()->json($data);
     }
@@ -25,8 +23,8 @@ class UserController extends Controller
         $input = [
             'business_id' => $request->id,
             'role_id' => $request->id,
-            'id_user_create' => $request->id,
-            'id_user_update' => $request->id,
+            'id_user_create' => $request->getuser->id,
+            'id_user_update' => $request->getuser->id,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
@@ -78,7 +76,7 @@ class UserController extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_user_update' => $this->user_info->id,
+                'id_user_update' => $request->getuser->id,
                 'firstName' => $request->firstName,
                 'lastName' => $request->lastName,
                 'email' => $request->email,
@@ -123,13 +121,13 @@ class UserController extends Controller
         if(strlen($search_name) = 0)
         {
             $data['user'] = User::where('level',3)
-            ->where('parent',$this->user_info->id)
+            ->where('parent',$request->getuser->id)
             ->get();
         }
         else
         {
             $data['user'] = User::where('level',3)
-            ->where('parent',$this->user_info->id)
+            ->where('parent',$request->getuser->id)
             ->where(function ($query) use ($search_name) {
                 if(strlen($search_name) > 0)
                 {

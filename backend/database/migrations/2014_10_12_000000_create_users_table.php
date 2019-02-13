@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone')->nullable();
+            $table->string('tele_phone')->nullable();
             $table->integer('ennable_appointment_booking')->nullable();
             $table->text('notes')->nullable();
             $table->datetime('start_date')->nullable();
@@ -35,6 +36,17 @@ class CreateUsersTable extends Migration
             $table->decimal('product_commission', 18, 2)->nullable();
             $table->decimal('voucher_sales_commission', 18, 2)->nullable();
             $table->integer('sort_order')->nullable();
+            $table->integer('gender')->nullable();
+            $table->integer('referral_source')->nullable();
+            $table->date('birthday')->nullable();
+            $table->integer('appointment_notifications')->nullable();
+            $table->integer('accepts_notifications')->nullable();
+            $table->integer('display_bookings')->nullable();
+            $table->string('address')->nullable();
+            $table->string('suburb')->nullable();
+            $table->string('city')->nullable();
+            $table->string('sate')->nullable();
+            $table->integer('zip_postcode')->nullable();
             $table->integer('level')->nullable();
             $table->integer('parent')->nullable();
             $table->rememberToken();
