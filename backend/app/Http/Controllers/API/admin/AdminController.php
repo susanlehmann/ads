@@ -130,8 +130,8 @@ class AdminController extends Controller
             ->where(function ($query) use ($search_name) {
                 if(strlen($search_name) > 0)
                 {
-                    $query->where('firstName', 'LIKE', "%$search_name%");
-                          ->orWhere('lastName', 'LIKE', "%$search_name%");
+                    $query->where('firstName', 'LIKE', "%$search_name%")
+                          ->orWhere('lastName', 'LIKE', "%$search_name%")
                           ->orWhere('email', 'LIKE', "%$search_name%");
                 }
             })
