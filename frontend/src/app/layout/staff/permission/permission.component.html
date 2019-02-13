@@ -4,12 +4,8 @@
 
 <table class="table-permission">
   <thead>
-    <tr>
-      <td>LOCATIONS</td>
-      <td>LOW</td>
-      <td>MEDIUM</td>
-      <td>HIGH</td>
-    </tr>
+    <th>LOCATIONS</th>
+    <th *ngFor="let per of permissionTypes">{{per}}</th>
   </thead>
   <tbody>
     <tr>
@@ -21,41 +17,245 @@
       </td>
       <td>
         <div class="custom-control custom-checkbox">
-          <input  name="notification-type" type="checkbox" class="custom-control-input" id="customCheck1">
-          <label class="custom-control-label" for="customCheck1"></label></div>
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="customCheck2">
+          <label class="custom-control-label" for="customCheck2"></label></div>
       </td>
       <td>
         <div class="custom-control custom-checkbox">
-          <input  name="notification-type" type="checkbox" class="custom-control-input" id="customCheck1">
-          <label class="custom-control-label" for="customCheck1"></label></div>
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="customCheck3">
+          <label class="custom-control-label" for="customCheck3"></label></div>
       </td>
     </tr>
   </tbody>
   <thead>
-    <tr>
-      <td>BOOKINGS & CLIENTS</td>
-      <td>LOW</td>
-      <td>MEDIUM</td>
-      <td>HIGH</td>
-    </tr>
+    
+    <th>BOOKINGS & CLIENTS</th>
+    <th *ngFor="let per of permissionTypes">{{per}}</th>
+  
   </thead>
   <tbody>
     <tr>
       <td>Own Calendar</td>
-      <td>
+      <td *ngFor="let per of permissionTypes">
         <div class="custom-control custom-checkbox">
-          <input  name="notification-type" type="checkbox" class="custom-control-input" id="customCheck1">
-          <label class="custom-control-label" for="customCheck1"></label></div>
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'own'}}">
+          <label class="custom-control-label" for="{{per + 'own'}}"></label></div>
       </td>
-      <td>
+    </tr>
+    <tr>
+      <td>Other Staff Calendars</td>
+      <td *ngFor="let per of permissionTypes">
         <div class="custom-control custom-checkbox">
-          <input  name="notification-type" type="checkbox" class="custom-control-input" id="customCheck1">
-          <label class="custom-control-label" for="customCheck1"></label></div>
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'other'}}">
+          <label class="custom-control-label" for="{{per + 'other'}}"></label></div>
       </td>
-      <td>
+    </tr>
+    <tr>
+      <td>Home</td>
+      <td *ngFor="let per of permissionTypes">
         <div class="custom-control custom-checkbox">
-          <input  name="notification-type" type="checkbox" class="custom-control-input" id="customCheck1">
-          <label class="custom-control-label" for="customCheck1"></label></div>
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'home'}}">
+          <label class="custom-control-label" for="{{per + 'home'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Clients</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Clients'}}">
+          <label class="custom-control-label" for="{{per + 'Clients'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Can download clients</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'download '}}">
+          <label class="custom-control-label" for="{{per + 'download '}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Messages</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Messages'}}">
+          <label class="custom-control-label" for="{{per + 'Messages'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Services</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Services'}}">
+          <label class="custom-control-label" for="{{per + 'Services'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Online Booking</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Booking'}}">
+          <label class="custom-control-label" for="{{per + 'Booking'}}"></label></div>
+      </td>
+    </tr>
+  </tbody>
+  <thead>
+    
+    <th>SALES</th>
+    <th *ngFor="let per of permissionTypes">{{per}}</th>
+  
+  </thead>
+  <tbody>
+    <tr>
+      <td>Can delete invoices</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'delete'}}">
+          <label class="custom-control-label" for="{{per + 'delete'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Daily Sales</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Sales'}}">
+          <label class="custom-control-label" for="{{per + 'Sales'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Appointments</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Appointments'}}">
+          <label class="custom-control-label" for="{{per + 'Appointments'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Invoices</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Invoices'}}">
+          <label class="custom-control-label" for="{{per + 'Invoices'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Payments</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Payments'}}">
+          <label class="custom-control-label" for="{{per + 'Payments'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Vouchers</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Vouchers'}}">
+          <label class="custom-control-label" for="{{per + 'Vouchers'}}"></label></div>
+      </td>
+    </tr>
+  </tbody>
+  <thead>
+    
+    <th>STAFF</th>
+    <th *ngFor="let per of permissionTypes">{{per}}</th>
+  
+  </thead>
+  <tbody>
+    <tr>
+      <td>Working Hours</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Working'}}">
+          <label class="custom-control-label" for="{{per + 'Working'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Closed Dates</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Closed'}}">
+          <label class="custom-control-label" for="{{per + 'Closed'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Staff Members</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Staff'}}">
+          <label class="custom-control-label" for="{{per + 'Staff'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Permission Levels</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Permission'}}">
+          <label class="custom-control-label" for="{{per + 'Permission'}}"></label></div>
+      </td>
+    </tr>
+  </tbody>
+  <thead>
+    
+    <th>INVENTORY</th>
+    <th *ngFor="let per of permissionTypes">{{per}}</th>
+  
+  </thead>
+  <tbody>
+    <tr>
+      <td>Products</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Products'}}">
+          <label class="custom-control-label" for="{{per + 'Products'}}"></label></div>
+      </td>
+    </tr>
+  </tbody>
+  <thead>
+    
+    <th>REPORTS</th>
+    <th *ngFor="let per of permissionTypes">{{per}}</th>
+  
+  </thead>
+  <tbody>
+    <tr>
+      <td>All Reports</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Reports'}}">
+          <label class="custom-control-label" for="{{per + 'Reports'}}"></label></div>
+      </td>
+    </tr>
+  </tbody>
+  <thead>
+    
+    <th>SETUP</th>
+    <th *ngFor="let per of permissionTypes">{{per}}</th>
+  
+  </thead>
+  <tbody>
+    <tr>
+      <td>Account Setup</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Account'}}">
+          <label class="custom-control-label" for="{{per + 'Account'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Point of Sale</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Point'}}">
+          <label class="custom-control-label" for="{{per + 'Point'}}"></label></div>
+      </td>
+    </tr>
+    <tr>
+      <td>Client Settings</td>
+      <td *ngFor="let per of permissionTypes">
+        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="{{per + 'Settings'}}">
+          <label class="custom-control-label" for="{{per + 'Settings'}}"></label></div>
       </td>
     </tr>
   </tbody>

@@ -1,12 +1,13 @@
 .table-permission {
+    font-size: 14px;
     td {
         padding: 10px;
         min-width: 85px;
     }
     thead {
         font-weight: bolder;
-        td {
-            padding-top: 30px;
+        th {
+            padding: 20 10 10 0;
         }
     }
     tbody {
