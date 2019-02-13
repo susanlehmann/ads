@@ -1,3 +1,18 @@
-<p>
-  close-date works!
-</p>
+<table class="table ">
+    <thead>
+    <tr>
+        <th>{{'Date Range' | uppercase}}</th>
+        <th>{{'NO. OF DAYS' | uppercase}}</th>
+        <th>{{'LOCATIONS' | uppercase}}</th>
+        <th>{{'DESCRIPTION' | uppercase}}</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let d of dates; index as i">
+          <td>Mon, 11 Feb 2019 - Tue, 12 Feb 2019</td>
+          <td>1 Day</td>
+          <td>All locations</td>
+          <td></td>
+        </tr>
+    </tbody>
+  </table>

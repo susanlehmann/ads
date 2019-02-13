@@ -23,7 +23,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let client of clients; index as i" routerLink="/client/edit">
+                <tr *ngFor="let client of clients; index as i" [routerLink]="['/client/detail', client.id]">
                         <td>{{client.name}}</td>
                         <td>{{client.number}}</td>
                         <td>{{client.email}}</td>
@@ -32,4 +32,4 @@
         </table>
     </div>
     </div>
-    <button class="btn btn-primary" routerLink="/client/edit">Add client</button>
+    <button class="btn btn-primary" routerLink="/client/add">Add client</button>

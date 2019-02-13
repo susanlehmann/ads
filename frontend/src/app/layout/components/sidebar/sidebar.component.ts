@@ -102,10 +102,17 @@ export class SidebarComponent implements OnInit {
     }
 
     handleClick(e) {
+        // do nothing if sidebar is hidden
+        if (!document.querySelector('.sidebar')) {
+            return;
+        }
+
         if (!document.querySelector('.navbar-toggler.mobile').contains(e.target)
         && !document.querySelector('.navbar-toggler.desktop').contains(e.target)
         && !document.querySelector('.sidebar').contains(e.target)
-        && document.body.classList.contains("push-right")) {
+        && document.body.classList.contains("push-right")
+        && screen.width < 993
+        ) {
             document.body.classList.remove("push-right");
         }
 
