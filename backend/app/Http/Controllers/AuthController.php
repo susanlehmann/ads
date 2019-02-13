@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use App\User;
+use Mail;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 class AuthController extends Controller
@@ -28,6 +29,10 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
+        $user = User::whereEmail($credentials['email'])->first();
+        if (isset($user->email_verified) && $user->email_verified == 0) {
+            return response()->json(['error' =>'Email Unverified']);
+        }
 
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
@@ -42,6 +47,8 @@ class AuthController extends Controller
 
     public function signup(SignUpRequest $request)
     {
+        $verificationCode = str_random(40);
+
         $input = [
             'business_id' => $request->id,
             'role_id' => $request->id,
@@ -65,11 +72,27 @@ class AuthController extends Controller
             'sort_order' => 1,
             'level' => 2,
             'parent' => $request->id,
+            'email_verification_code' => $verificationCode,
         ];
         // $user->level = 0; // ko co column level
         $user = User::create($input);
+        $token = JWTAuth::fromUser($user);
+        Mail::send('emails.userverification', ['verificationCode' => $verificationCode], function ($m) use ($request) {
+            $m->to($request->email, 'test')->subject('Email Confirmation');
+        });
         return $this->login($request);
 
+    }
+
+    public function verifyUserEmail($verificationCode)
+    {
+        $user = User::whereEmailVerificationCode($verificationCode)->first();
+        if (!$user) {
+            return redirect('/#/userverification/failed');
+        }
+        $user->email_verified = 1;
+        $user->save();
+        return redirect('/#/userverification/success');
     }
 
     /**

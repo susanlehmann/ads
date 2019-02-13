@@ -47,7 +47,15 @@ Route::group([
         Route::post('delete_user', 'UserController@destroy');
         Route::post('search_user', 'UserController@search');
     });
-    
+
+    Route::group(['prefix' => 'user/closed_date', 'namespace' => 'API\member\user'], function(){
+        Route::get('list-close-date', 'Closed_DateController@index');
+        Route::post('create-close-date', 'Closed_DateController@store');
+        Route::post('show-close-date', 'Closed_DateController@show');
+        Route::post('update-close-date', 'Closed_DateController@update');
+        Route::post('delete-close-date', 'Closed_DateController@destroy'); 
+    });
+
     Route::group(['prefix' => 'user/customer', 'namespace' => 'API\member\user'], function(){
         Route::post('list-user', 'CustomerController@index');
         Route::post('detail_user', 'CustomerController@detail');
@@ -66,8 +74,6 @@ Route::group([
         Route::post('update-service-group', 'Service_GroupCtroller@update');
         Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
     });
-    Route::group(['middleware' => ['jwt.verify']], function() {
-        Route::get('user', 'AuthController@getAuthenticatedUser');
-    });
+
 });
 

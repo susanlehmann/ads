@@ -49,6 +49,12 @@ class CreateUsersTable extends Migration
             $table->integer('zip_postcode')->nullable();
             $table->integer('level')->nullable();
             $table->integer('parent')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('provider', 20)->nullable();
+            $table->string('provider_id')->nullable();
+            $table->string('access_token')->nullable();
+            $table->enum('email_verified', ['1', '0'])->default('0');
+            $table->string('email_verification_code', 60)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
