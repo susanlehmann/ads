@@ -110,6 +110,7 @@ export class LoginComponent implements OnInit {
       }
 
       handleError(error) {
+        this.loading = false;
         this.error = error.error.error;
     }
 
