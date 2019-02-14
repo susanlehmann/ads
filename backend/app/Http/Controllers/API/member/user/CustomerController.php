@@ -87,7 +87,6 @@ class CustomerController extends Controller
     {    
         $id = $request->id;
         if ($id != null) {
-        /*
             $input = [
                 'id_user_update' => $request->getuser['id'],
                 'firstName' => $request->firstName,
@@ -109,13 +108,10 @@ class CustomerController extends Controller
                 'city' => $request->city,
                 'sate' => $request->sate,
                 'zip_postcode' => $request->zip_postcode,
-                'updated_at' => date('yyyy-mm-dd H:i:s')
+                'updated_at' => date('Y-m-d H:i:s'),
             ];
             $user = User::find($id);
             $user->update($input);
-            */
-            //DB::table('model_has_roles')->where('model_id',$id)->delete();
-            //$user->assignRole($request->user_permission);
             if($user == true)
             {
                 $msg = ['success' => 'Update account successfully'];
@@ -130,6 +126,55 @@ class CustomerController extends Controller
         
     }
     
+    public function blockUser(Request $request)
+    {    
+        $id = $request->id;
+        if ($id != null) {
+            $input = [
+                'id_user_update' => $request->getuser['id'],
+                'status' => 2,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            $user = User::find($id);
+            $user->update($input);
+            if($user == true)
+            {
+                $msg = ['success' => 'Update account successfully'];
+            }
+            else
+            {
+                $msg = ['error' => 'There was an error updating the account'];
+            }
+
+            return response()->json($msg);
+        }
+        
+    }
+    
+    public function unblockUser(Request $request)
+    {    
+        $id = $request->id;
+        if ($id != null) {
+            $input = [
+                'id_user_update' => $request->getuser['id'],
+                'status' => 1,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ];
+            $user = User::find($id);
+            $user->update($input);
+            if($user == true)
+            {
+                $msg = ['success' => 'Update account successfully'];
+            }
+            else
+            {
+                $msg = ['error' => 'There was an error updating the account'];
+            }
+
+            return response()->json($msg);
+        }
+        
+    }
     
     public function destroy(Request $request)
     {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import {NgbModal, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { Staff } from '../model/staff'
 import { NotifierService } from 'angular-notifier';
@@ -25,7 +24,6 @@ export class MemberComponent implements OnInit {
   
 	constructor(
   private notifierService: NotifierService,
-  private http: HttpClient,
   private modal: NgbModal,
   private staffService: StaffService,
 	) {

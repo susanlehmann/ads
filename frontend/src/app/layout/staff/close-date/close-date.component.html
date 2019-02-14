@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading" [config]="{ fullScreenBackdrop: true }"></ngx-loading>
 <div class="card card-custom mb-3">
   <div class="card-header">
     <button class="btn btn-primary pull-right" type="button" (click)="openAddModal(content)">New Closed Date</button>
@@ -13,12 +14,26 @@
           </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let d of dates; index as i" (click)="openUpdateModal(content, d.id)">
-                <td>{{d.outputDate}}</td>
-                <td>{{d.noOfDays}}</td>
-                <td>All locations</td>
-                <td>{{d.description}}</td>
-              </tr>
+              <ng-container *ngIf="!dates && !loading">
+                  <tr style="background-color: #fff; cursor: default;">
+                          <td colspan="6" style="padding-top:40px;">
+                              <div class="text-center">
+                                      <h1><i class="fa fa-search fa-lg"></i></h1>
+                                      <h3 class="text-capitalize">No Results Found</h3>
+                                      <p>Try using different filter options to find what you're looking for</p>
+                                  </div>
+                          </td>
+                      </tr>
+          </ng-container>
+          <ng-container *ngIf="dates">
+            <tr *ngFor="let d of dates; index as i" (click)="openUpdateModal(content, d.id)">
+              <td>{{d.outputDate}}</td>
+              <td>{{d.noOfDays}}</td>
+              <td>All locations</td>
+              <td>{{d.description}}</td>
+            </tr>
+
+          </ng-container>
           </tbody>
         </table>
   </div>
@@ -36,6 +51,12 @@
           
           
           <div class="modal-body">
+              <div style="background-color: #daeffd;
+              color: #2b6994;
+              border-color: #2b6994; padding: 10px;
+    margin-bottom: 20px;">
+                  Online bookings can not be placed during closed dates.
+              </div>
   
               <div class="row form-group">
                   <div class="col-sm-6">
