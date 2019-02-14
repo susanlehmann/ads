@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\member\user;
 
-use ClosedDate;
+use App\ClosedDate;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -14,20 +14,20 @@ class Closed_DateController extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['close_date'] = ClosedDate::where('business_id',$request->getuser->id)->get();
-        return response()->json($data);
+        $close_date = ClosedDate::where('business_id',$request->ownerId)->get();
+        return response()->json($close_date);
     }
 
     public function store(Request $request)
     {
         $input = [
-            'business_id' => $request->getuser->id,
+            'business_id' => $request->ownerId,
             'start_date' => $request->end_date,
             'end_date' => $request->end_date,
             'noo_days' => $request->noo_days,
             'description' => $request->description,
-            'user_created' => $request->getuser->id,
-            'user_update' => $request->getuser->id,
+            'user_created' => $request->ownerId,
+            'user_update' => $request->ownerId,
             'status' => 0,
         ];
         // $user->level = 0; // ko co column level
@@ -61,7 +61,7 @@ class Closed_DateController extends Controller
                 'end_date' => $request->end_date,
                 'noo_days' => $request->noo_days,
                 'description' => $request->description,
-                'user_update' => $request->getuser->id,
+                'user_update' => $request->ownerId,
             ];
             $close_date = ClosedDate::find($id);
             $check = $close_date->update($input);
