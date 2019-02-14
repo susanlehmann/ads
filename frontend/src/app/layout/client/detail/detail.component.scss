@@ -36,6 +36,11 @@
 		    text-align: center;
 		    margin-bottom: 10px;
 		    color: #000;
+
+		    span.block {
+		    	color: #827e7e;
+    			text-decoration: line-through;
+		    }
 		}
 		.box-button {
 			select {

@@ -34,7 +34,6 @@ export class AddComponent implements OnInit {
 	genders = [
 		{ id: 1, name: "Male" },
 		{ id: 2, name: "Femail" },
-		{ id: 3, name: "Unknown" },
 	];
 
 	referralSources = [
