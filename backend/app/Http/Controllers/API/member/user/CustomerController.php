@@ -27,6 +27,7 @@ class CustomerController extends Controller
 
     public function store(Request $data)
     {
+      dd($data);
         $request = (object)json_decode($data->getContent(),true);
         $input = [
             'business_id' => 0,
@@ -83,9 +84,9 @@ class CustomerController extends Controller
         return response()->json($data);
     }
 
-    public function update(Request $data)
+    public function update(Request $request)
     {
-      $request = (object)json_decode($data->getContent(),true);
+    dd($request);
         $id = $request->id;
         if ($id != null) {
             $input = [
@@ -147,18 +148,19 @@ class CustomerController extends Controller
             }
     }
 
-    public function search(Request $request){
+    public function search(Request $dataRequest){
+        $request = (object)json_decode($dataRequest->getContent(), true);
         $search_name = $request->name_user;
         if(strlen($search_name) == 0)
         {
             $data['user'] = User::where('level',4)
-            ->where('parent',$request->getuser->id)
+            ->where('parent',$request->getuser['id'])
             ->get();
         }
         else
         {
             $data['user'] = User::where('level',4)
-            ->where('parent',$request->getuser->id)
+            ->where('parent',$request->getuser['id'])
             ->where(function ($query) use ($search_name) {
                 if(strlen($search_name) > 0)
                 {
