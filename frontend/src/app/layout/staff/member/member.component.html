@@ -68,13 +68,13 @@
                   <div class="col-md-6">
                       <div class="row form-group">
                           <div class="col-sm-6">
-                            <label class="control-label">FIRST NAME</label>
+                            <label class="control-label">First Name</label>
                             <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="first-name" placeholder="e.g. Jane" required>
                             <div class="alert alert-danger" [hidden]="!error.name"> {{ error.name }} </div>
                         </div>
         
                         <div class="col-sm-6">
-                            <label class="control-label">LAST NAME</label>
+                            <label class="control-label">Last Name</label>
                             <input [(ngModel)]="form.lastName" type="text" name="last-name" class="form-control input-underline input-lg" placeholder="e.g. Doe">
                             <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
                         </div>
@@ -82,7 +82,7 @@
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                        <label class="control-label">MOBILE NUMBER</label>
+                        <label class="control-label">Mobile Number</label>
                         <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78">
                         <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
                         </div>
@@ -90,7 +90,7 @@
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            <label class="control-label">EMAIL</label>
+                            <label class="control-label">Email</label>
                             <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="mail@example.com">
                             <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
                         </div>
@@ -98,7 +98,7 @@
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            <label class="control-label">USER PERMISSION</label>
+                            <label class="control-label">User Permission</label>
                             <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control">
                                 <option selected>No Access</option>
                                 <option>Basic</option>
@@ -115,14 +115,14 @@
                                 <input type="checkbox" [(ngModel)]="form.appointmentBooking" name="appointmentBooking">
                                 <span class="slider round"></span>
                             </label>
-                            <label class="control-label">ENABLE APPOINTMENT BOOKINGS</label>
+                            <label class="control-label">Enable Appointment Bookings</label>
                         </div>
                     </div>
 
                     <div class="row form-group">
                             <div class="col-sm-12 btn-switch">
                                     <div class="color-picker" *ngIf="form.appointmentBooking">
-                                            <label class="control-label">APPOINTMENT COLOR</label> <br>
+                                            <label class="control-label">Appointment Color</label> <br>
                                             <ng-container *ngFor="let color of colors; index as i">
                                                 <input [(ngModel)]="form.appointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
                                                 <label for="{{color}}"><span class="{{color}}"></span></label>
@@ -136,7 +136,7 @@
                   <div class="col-md-6">
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            <label class="control-label">STAFF TITLE</label>
+                            <label class="control-label">Staff Title</label>
                             <input [(ngModel)]="form.staffTitle" type="text" name="staff-title" class="form-control input-underline input-lg"
                                 placeholder="Add staff title (i.e. Hairdresser) viewable in online booking only (optional)">
                             <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
@@ -145,7 +145,7 @@
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            <label class="control-label">NOTES</label>
+                            <label class="control-label">Notes</label>
                             <textarea class="form-control form-text-area" [(ngModel)]="form.notes" name="notes"
                                 placeholder="Add private notes viewable in staff settings only (optional)" rows="9"></textarea>
                         </div>
@@ -153,7 +153,7 @@
 
                     <div class="row form-group">
                         <div class="col-sm-6">
-                            <label class="control-label">EMPLOYMENT START DATE</label>
+                            <label class="control-label">Employment Start Date</label>
                             <input class="form-control" placeholder="yyyy-mm-dd" (click)="dst.open()"
                                 name="start-date" [(ngModel)]="form.employmentStartDate" ngbDatepicker #dst="ngbDatepicker">
                             <!-- <div class="input-group-append">
@@ -161,7 +161,7 @@
                             </div> -->
                         </div>
                         <div class="col-sm-6">
-                            <label class="control-label">EMPLOYMENT END DATE</label>
+                            <label class="control-label">Employment End Date</label>
                             <input class="form-control" placeholder="yyyy-mm-dd" (click)="de.open()"
                                 name="end-date" [(ngModel)]="form.employmentEndDate" ngbDatepicker #de="ngbDatepicker">
                             <!-- <div class="input-group-append">
@@ -210,7 +210,7 @@
                     <br>
                     <div class="row">
                         <div class="col-sm-6">
-                                <label class="control-label">SERVICE COMMISSION</label>
+                                <label class="control-label">Service Commission</label>
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">%</span>
@@ -219,7 +219,7 @@
                                 </div>
                         </div>
                         <div class="col-sm-6">
-                                <label class="control-label">PRODUCT COMMISSION</label>
+                                <label class="control-label">Product Commission</label>
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">%</span>
@@ -230,7 +230,7 @@
                     </div>
                     <div class="row">
                             <div class="col-sm-6">
-                                    <label class="control-label">VOUCHER SALES COMMISSION</label>
+                                    <label class="control-label">Voucher Sales Commission</label>
                                     <div class="form-group input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">%</span>
