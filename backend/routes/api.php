@@ -40,7 +40,7 @@ Route::group([
     });
     
     Route::group(['prefix' => 'user/staff', 'namespace' => 'API\member\user'], function(){
-        Route::post('list-user', 'UserController@index');
+        Route::get('list-user', 'UserController@index');
         Route::post('create_user', 'UserController@store');
         Route::post('show_user', 'UserController@show');
         Route::post('update_user', 'UserController@update');
@@ -63,7 +63,10 @@ Route::group([
         Route::post('show_user', 'CustomerController@show');
         Route::post('update_user', 'CustomerController@update');
         Route::post('delete_user', 'CustomerController@destroy');
+        Route::post('delete_user', 'CustomerController@destroy');
         Route::post('search_user', 'UserController@search');
+        Route::post('block_user', 'CustomerController@blockUser');
+        Route::post('unblock_user', 'CustomerController@unblockUser');
     });
     
     Route::group(['prefix' => 'admin/service_group', 'namespace' => 'API\admin'], function(){
@@ -74,10 +77,9 @@ Route::group([
         Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
     });
 
-    Route::group(['prefix' => 'auth', 'Auth'], function(){
-        Route::post('create-service-group', 'Service_GroupCtroller@store');
-        Route::post('show-service-group', 'Service_GroupCtroller@show');
-        Route::post('update-service-group', 'Service_GroupCtroller@update');
-        Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
+    Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function(){
+        Route::post('password/email', 'PasswordResetController@sendResetLinkEmail');
+        Route::post('password/verify', 'PasswordResetController@verify');
+        Route::post('password/reset', 'Auth\PasswordResetController@reset');
     });
 });

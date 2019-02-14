@@ -16,18 +16,10 @@ Route::get('/', function () {
 });
 
     // Social Auth
-
+    
 Route::group(['middleware' => ['api']], function () {
     Route::get('user/verify/{verificationCode}', ['uses' => 'AuthController@verifyUserEmail']);
     Route::get('auth/{driver}', 'SocialAuthController@redirectToProvider');
     Route::get('auth/{driver}/callback', 'SocialAuthController@handleProviderCallback');
 });
 
-Route::group(['middleware' => ['api']], function () {
-    // Password Reset Routes...
-});
-    Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function(){
-        Route::post('password/email', 'PasswordResetController@sendResetLinkEmail');
-        Route::post('password/verify', 'PasswordResetController@verify');
-        Route::post('password/reset', 'Auth\PasswordResetController@reset');
-    });
