@@ -83,6 +83,14 @@
 				    background: #eee;
 				    text-transform: uppercase;
 				}
+
+				i.active {
+					color: #39ce0b;
+				}
+
+				i.block {
+					color: #f00;
+				}
 			}
 			
 		}
@@ -148,6 +156,14 @@ $breakpoint-iphone: 667px;
 								line-height: 20px;
 							}
 							display: block;
+						}
+
+						i.active {
+							color: #39ce0b;
+						}
+
+						i.block {
+							color: #f00;
 						}
 					}
 					position: relative;
