@@ -38,24 +38,24 @@ return [
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect'      => env('APP_URL') . '/oauth/github/callback',
+        'redirect'      => env('APP_URL') . '/auth/github/callback',
     ],
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect'      => env('APP_URL') . '/oauth/facebook/callback',
+        'redirect'      => env('APP_URL') . '/auth/facebook/callback',
     ],
 
     'twitter' => [
         'client_id'     => env('TW_ID'),
         'client_secret' => env('TW_SECRET'),
-        'redirect'      => env('APP_URL') . '/oauth/twitter/callback',
+        'redirect'      => env('APP_URL') . '/auth/twitter/callback',
     ],
 
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect'      => env('APP_URL') . '/oauth/google/callback',
+        'redirect'      => env('APP_URL') . '/auth/google/callback',
     ]
 ];

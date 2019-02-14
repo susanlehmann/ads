@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {NgbModal, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { Staff } from '../model/staff'
 import { NotifierService } from 'angular-notifier';
-import { HttpcallService } from '../../../shared/services/httpcall.service';
+import { StaffService } from '../staff.service';
 
 @Component({
   selector: 'app-member',
@@ -12,7 +12,6 @@ import { HttpcallService } from '../../../shared/services/httpcall.service';
 })
 export class MemberComponent implements OnInit {
   loading: boolean;
-  baseUrl: string;
   form: Staff;
 
   modalOptions: NgbModalOptions;
@@ -27,8 +26,8 @@ export class MemberComponent implements OnInit {
 	constructor(
   private notifierService: NotifierService,
   private http: HttpClient,
-  private httpService: HttpcallService,
-	private modal: NgbModal, 
+  private modal: NgbModal,
+  private staffService: StaffService,
 	) {
     this.form = new Staff();
     this.colors = [
@@ -38,7 +37,6 @@ export class MemberComponent implements OnInit {
       backdrop: 'static',
       size: 'lg'
     };
-    this.baseUrl = this.httpService.getBaseUrl();
 	}
 
 	ngOnInit() {
@@ -75,7 +73,7 @@ export class MemberComponent implements OnInit {
   openUpdateModal(content: NgbModalRef, userId) {
     this.isCreate = false;
     this.selectedId = userId;
-    this.http.post(`${this.baseUrl}/user/show_user`,{id : userId})
+    this.staffService.findById(userId)
     .subscribe((data:any) => {
             this.form.updateData(data.user);
             this.openModal(content);
@@ -84,7 +82,7 @@ export class MemberComponent implements OnInit {
 	
 	getUser() {
     this.startLoading();
-		this.http.get(`${this.baseUrl}/user/staff/list-user`)
+    this.staffService.getList()
 		.subscribe((listusers:any) => {
         this.stopLoading();
         this.listusers = listusers.user
@@ -109,7 +107,7 @@ export class MemberComponent implements OnInit {
     }
 
   addStaff(staff): void {
-    this.http.post(`${this.baseUrl}/user/create_user`, staff)
+    this.staffService.add(staff)
     .subscribe((data:any) => {
             this.stopLoading();
             this.getUser();
@@ -120,7 +118,7 @@ export class MemberComponent implements OnInit {
     }
 
   updateStaff(staff) {
-    this.http.post(`${this.baseUrl}/user/update_user`, staff)
+    this.staffService.update(staff)
     .subscribe((data:any) => {
             this.stopLoading();
             this.getUser();
@@ -131,7 +129,7 @@ export class MemberComponent implements OnInit {
     }
 
   deleteStaff() {
-    this.http.post(`${this.baseUrl}/user/delete_user`, {'id': this.selectedId})
+      this.staffService.deleteStaff(this.selectedId)
       .subscribe((data:any) => {
               this.getUser();
               this.notifierService.notify('success', 'A Staff has been successfully deleted');

@@ -16,20 +16,9 @@ import { HttpcallService } from './../shared/services/httpcall.service';
 })
 export class SignupComponent implements OnInit {
 
-    public form = {
-        email: null,
-        firstName: null,
-        password: null,
-        password_confirmation: null
-      };
+    public form: any = {};
 
-    public error = {
-
-        email: null,
-        firstName: null,
-        password: null,
-        password_confirmation: null
-    };
+    public error: any = {};
 
 
     constructor(
