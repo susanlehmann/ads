@@ -40,7 +40,7 @@ Route::group([
     });
     
     Route::group(['prefix' => 'user/staff', 'namespace' => 'API\member\user'], function(){
-        Route::post('list-user', 'UserController@index');
+        Route::get('list-user', 'UserController@index');
         Route::post('create_user', 'UserController@store');
         Route::post('show_user', 'UserController@show');
         Route::post('update_user', 'UserController@update');
@@ -63,6 +63,7 @@ Route::group([
         Route::post('show_user', 'CustomerController@show');
         Route::post('update_user', 'CustomerController@update');
         Route::post('delete_user', 'CustomerController@destroy');
+        Route::post('delete_user', 'CustomerController@destroy');
         Route::post('search_user', 'UserController@search');
     });
     
@@ -74,20 +75,5 @@ Route::group([
         Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
     });
 
-    Route::group(['middleware' => ['api']], function ($router) {
-
-        Route::post('auth/password/email', 'Auth\PasswordResetController@sendResetLinkEmail');
-        Route::get('auth/password/verify', 'Auth\PasswordResetController@verify');
-        Route::post('auth/password/reset', 'Auth\PasswordResetController@reset');
-    
 });
 
-});
-
-Route::group(['middleware' => ['api']], function ($router) {
-
-        Route::post('auth/password/email', 'Auth\PasswordResetController@sendResetLinkEmail');
-        Route::get('auth/password/verify', 'Auth\PasswordResetController@verify');
-        Route::post('auth/password/reset', 'Auth\PasswordResetController@reset');
-    
-});

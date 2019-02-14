@@ -13,7 +13,7 @@ class PasswordResetController extends Controller
             'email' => 'required|email|exists:users,email',
         ]);
         //invalidate old tokens
-        PasswordReset::whereEmail($request->email)->delete();
+        $check = PasswordReset::whereEmail($request->email)->delete();
         $email = $request->email;
         $reset = PasswordReset::create([
             'email' => $email,
