@@ -26,7 +26,7 @@ export class HttpcallService {
   }
 
   sendPasswordResetLink(data) {
-    return this.http.post(`${this.baseUrl}/auth/password/email`, data);
+    return this.http.post(this.baseUrl + '/auth/password/email', data);
   }
 
 }
