@@ -26,14 +26,14 @@ class PasswordResetController extends Controller
             ->from('noreply@example.com')
             ->subject('Password reset link');
         });
-        return response()->success(true);
+        return response()->json(true);
     }
     public function verify(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'token' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'email' => 'required|email',
+        //     'token' => 'required',
+        // ]);
         $check = PasswordReset::whereEmail($request->email)
         ->whereToken($request->token)
         ->first();

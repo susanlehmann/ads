@@ -54,6 +54,7 @@ class CustomerController extends Controller
             'zip_postcode' => $request->zip_postcode,
             'sort_order' => 1,
             'level' => 4,
+            'status' => 1,
             'parent' => $request->getuser['id'],
         ];
         // $user->level = 0; // ko co column level
