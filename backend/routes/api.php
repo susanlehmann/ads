@@ -75,15 +75,9 @@ Route::group([
         Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
     });
 
-<<<<<<< HEAD
-});
-
-=======
-    Route::group(['prefix' => 'auth', 'Auth'], function(){
-        Route::post('create-service-group', 'Service_GroupCtroller@store');
-        Route::post('show-service-group', 'Service_GroupCtroller@show');
-        Route::post('update-service-group', 'Service_GroupCtroller@update');
-        Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
+    Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function(){
+        Route::post('password/email', 'PasswordResetController@sendResetLinkEmail');
+        Route::post('password/verify', 'PasswordResetController@verify');
+        Route::post('password/reset', 'Auth\PasswordResetController@reset');
     });
 });
->>>>>>> a7bc89eb2e63a5e0cea4f9ba730fd9b496ab0a15
