@@ -22,7 +22,7 @@ class Closed_DateController extends Controller
     {
         $input = [
             'business_id' => $request->ownerId,
-            'start_date' => $request->end_date,
+            'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'noo_days' => $request->noo_days,
             'description' => $request->description,
@@ -57,7 +57,7 @@ class Closed_DateController extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'start_date' => $request->end_date,
+                'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
                 'noo_days' => $request->noo_days,
                 'description' => $request->description,
