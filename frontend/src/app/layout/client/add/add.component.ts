@@ -57,7 +57,8 @@ export class AddComponent implements OnInit {
 	ngOnInit() {
 		this.regularForm = new FormGroup({
           'email': new FormControl(null, [Validators.required, Validators.email]),
-          'text': new FormControl(null, [Validators.required])
+          'text': new FormControl(null, [Validators.required]),
+          'select': new FormControl(null, [Validators.required])
         }, {updateOn: 'blur'});
 		this.form.notificationType = "";
 		this.form.gender = "";

@@ -42,7 +42,21 @@ export class StaffService {
 
     // closed date
     getListClosedDate() {
-        return this._http.get(`${this.baseUrl}/user/closed_date/list-close-date`);
+        return this._http.post(`${this.baseUrl}/user/closed_date/list-close-date`, {ownerId : this.currentUserId});
+    }
+
+    findClosedDateById(id: string) {
+        return this._http.post(`${this.baseUrl}/user/closed_date/show-close-date`, {id: id});
+    }
+
+    addClosedDate(closedDate) {
+        closedDate.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/closed_date/create-close-date`, closedDate);
+    }
+
+    updateClosedDate(closedDate) {
+        closedDate.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/closed_date/update-close-date`, closedDate);
     }
 
 

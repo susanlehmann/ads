@@ -68,10 +68,11 @@
       <div class="row form-group">
         <div class="col-sm-12">
           <label class="control-label">{{'Send notifications by' }}</label>
-          <select [(ngModel)]="form.notificationType" name="notificationType" class="form-control" #notificationType="ngModel">
+          <select [(ngModel)]="form.notificationType" name="notificationType" class="form-control" #notificationType="ngModel" required select [ngModelOptions]="{updateOn: 'blur'}">
             <option value="" disabled selected="selected" hidden> -= Select notifications =-</option>
             <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
           </select>
+          <small class="form-text text-danger " *ngIf="!notificationType.valid && (notificationType.dirty || notificationType.touched)">Selected Notification Type !</small> 
         </div>
       </div>
 
@@ -94,10 +95,11 @@
               <div class="row form-group">
                   <div class="col-sm-6">
                     <label class="control-label">{{'Gender' }}</label>
-                    <select [(ngModel)]="form.gender" name="gender" class="form-control" #gender="ngModel">
+                    <select [(ngModel)]="form.gender" name="gender" class="form-control" #gender="ngModel" required select [ngModelOptions]="{updateOn: 'blur'}">
                       <option value="" disabled selected="selected" hidden> -= Select Gender =-</option>
                       <option *ngFor="let gen of genders" value="{{gen.id}}">{{gen.name}}</option>
                     </select>
+                    <small class="form-text text-danger " *ngIf="!gender.valid && (gender.dirty || gender.touched)">Selected Gender !</small> 
                   </div>
                   <div class="col-sm-6">
                     <label class="control-label">{{'Referral source' }}</label>
