@@ -22,11 +22,3 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('oauth/{driver}', 'SocialAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'SocialAuthController@handleProviderCallback');
 });
-
-$api->group(['middleware' => ['api']], function ($api) {
-    $api->controller('auth', 'Auth\AuthController');
-    // Password Reset Routes...
-    $api->post('auth/password/email', 'Auth\PasswordResetController@sendResetLinkEmail');
-    $api->get('auth/password/verify', 'Auth\PasswordResetController@verify');
-    $api->post('auth/password/reset', 'Auth\PasswordResetController@reset');
-});
