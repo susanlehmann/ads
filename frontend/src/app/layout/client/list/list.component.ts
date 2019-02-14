@@ -12,6 +12,7 @@ export class ListComponent implements OnInit {
 	loading: boolean;
 	clients: any;
 	client: any = {};
+	numberList: number;
 
 	constructor(
 		private http: HttpClient,
@@ -30,7 +31,7 @@ export class ListComponent implements OnInit {
 			success => {
 				this.stopLoading();
 				this.clients = success;
-				console.log(success);
+				this.numberList = this.clients.user.length;
 			},
 			error => {
 				this.stopLoading();
@@ -52,12 +53,18 @@ export class ListComponent implements OnInit {
 	}
 
 	searchClient(event) {
-		this.userService.searchUser(event.target.value).subscribe(
+		const search: any = {};
+		Object.assign(search, { 'getuser': JSON.parse(localStorage.getItem('user')), 'name_user': event.target.value});
+		this.startLoading();
+		this.userService.searchUser(search).subscribe(
 			success => {
+				this.stopLoading();
 				this.clients = success;
+				this.numberList = this.clients.user.length;
 				console.log(success);
 			},
 			error => {
+				this.stopLoading();
 				console.log(error);
 			}
 		);

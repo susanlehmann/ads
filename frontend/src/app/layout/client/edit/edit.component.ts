@@ -80,10 +80,20 @@ export class EditComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		this.update(this.form);
+		this.user.username = "abc";
+		
+		this.userService.updateUserById(this.user).subscribe(
+			success => {
+				console.log(success);
+				this.notifierService.notify('success', 'Update has been successfully updated');
+			},
+			error => {
+				console.log(error);
+			}
+		)
 	}
 
-	update(client) {
+	update(client: any = {}) {
 		client.getuser = JSON.parse(localStorage.getItem('user'));
 		if(this.form.acceptNotification){
 			client.acceptNotification = 1;
@@ -98,8 +108,10 @@ export class EditComponent implements OnInit {
 		client.password = "";
 		client.birthday = this.datePipe.transform(this.form.birthday, 'yyyy-MM-dd');
 		this.form.birthday = new Date(client.birthday);
-		this.userService.UpdateUserById(client).subscribe(
+
+		this.userService.updateUserById(client).subscribe(
 			success => {
+				console.log(success);
 				this.notifierService.notify('success', 'Update has been successfully updated');
 			},
 			error => {

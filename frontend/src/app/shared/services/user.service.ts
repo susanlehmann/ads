@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../../environments/environment.prod';
 
 @Injectable()
@@ -24,8 +24,8 @@ export class UserService {
 		return this.http.post(this.baseUrl + '/user/customer/delete_user', userId);
 	}
 
-	UpdateUserById(client: any) {
-		return this.http.post(this.baseUrl + '/user/customer/update_user', client);
+	updateUserById(params: any) {
+		return this.http.post<any>(this.baseUrl + '/user/customer/update_user', params);
 	}
 
 	searchUser(content: any) {

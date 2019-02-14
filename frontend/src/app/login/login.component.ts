@@ -96,8 +96,8 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         this.httpcall.login(this.form).subscribe(
           data => {
-            console.log(data);
-            if(data.error == "Email Unverified") {
+            const err: any = data;
+            if(err.error == "Email Unverified") {
               this.handleUnVeri(data);
             } else {
               this.handleResponse(data);
