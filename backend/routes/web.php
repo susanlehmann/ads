@@ -23,3 +23,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::get('auth/{driver}/callback', 'SocialAuthController@handleProviderCallback');
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

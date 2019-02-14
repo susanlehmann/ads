@@ -9,9 +9,10 @@ class PasswordResetController extends Controller
 {
     public function sendResetLinkEmail(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email|exists:users,email',
-        ]);
+//__echo $request->email; die();
+        //$this->validate($request, [
+          //  'email' => 'required|email|exists:users,email',
+        //]);
         //invalidate old tokens
         $check = PasswordReset::whereEmail($request->email)->delete();
         $email = $request->email;
