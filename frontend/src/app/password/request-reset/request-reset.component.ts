@@ -25,6 +25,7 @@ export class RequestResetComponent implements OnInit {
   }
 
   onSubmit() {
+      console.log(this.form)
       this.httcall.sendPasswordResetLink(this.form).subscribe(
           data => this.handleResponse(data),
         //   error => this.notify.error(error.error.error)
