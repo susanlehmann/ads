@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['user'] = User::where('level',3)->where('parent',$request->getuser->id)->get();
+        $data['user'] = User::where('level',3)->where('parent',$request->id)->get();
         $data['role'] = Role::get();
         return response()->json($data);
     }
@@ -23,8 +23,8 @@ class UserController extends Controller
         $input = [
             'business_id' => $request->id,
             'role_id' => $request->id,
-            'id_user_create' => $request->getuser->id,
-            'id_user_update' => $request->getuser->id,
+            'id_user_create' => $request->ownerId,
+            'id_user_update' => $request->ownerId,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
@@ -42,7 +42,7 @@ class UserController extends Controller
             'voucher_sales_commission' => $request->voucher_sales_commission,
             'sort_order' => 1,
             'level' => 3,
-            'parent' => $this->user_info->id,
+            'parent' => $request->ownerId,
         ];
         // $user->level = 0; // ko co column level
         $user = User::create($input);
@@ -76,19 +76,22 @@ class UserController extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_user_update' => $request->getuser->id,
-                'firstName' => $request->firstName,
-                'lastName' => $request->lastName,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'notes' => $request->notes,
-                'start_date' => $request->start_date,
-                'end_date' => $request->end_date,
-                'appointment_color' => $request->appointment_color,
-                'service_commission' => $request->service_commission,
-                'product_commission' => $request->product_commission,
-                'voucher_sales_commission' => $request->voucher_sales_commission,
-                'updated_at' => date('yyyy-mm-dd H:i:s')
+            'id_user_update' => $request->ownerId,
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'email' => $request->email,
+            'password' => $request->password,
+            'phone' => $request->phone,
+            'ennable_appointment_booking' => $request->ennable_appointment_booking,
+            'notes' => $request->notes,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'appointment_color' => $request->appointment_color,
+            'dial_code' => $request->dial_code,
+            'first_login' => 0,
+            'service_commission' => $request->service_commission,
+            'product_commission' => $request->product_commission,
+            'voucher_sales_commission' => $request->voucher_sales_commission,
             ];
             $user = User::find($id);
             $user->update($input);

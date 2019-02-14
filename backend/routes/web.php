@@ -17,16 +17,16 @@ Route::get('/', function () {
 
     // Social Auth
 
+<<<<<<< HEAD
+Route::group(['middleware' => ['api']], function () {
+    Route::get('user/verify/{verificationCode}', ['uses' => 'AuthController@verifyUserEmail']);
+    Route::get('auth/{driver}', 'SocialAuthController@redirectToProvider');
+    Route::get('auth/{driver}/callback', 'SocialAuthController@handleProviderCallback');
+});
+=======
 Route::group(['middleware' => ['web']], function () {
-    Route::get('user/verify/{verificationCode}', ['uses' => 'Auth\AuthController@verifyUserEmail']);
+    Route::get('user/verify/{verificationCode}', ['uses' => 'AuthController@verifyUserEmail']);
     Route::get('oauth/{driver}', 'SocialAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'SocialAuthController@handleProviderCallback');
 });
-
-$api->group(['middleware' => ['api']], function ($api) {
-    $api->controller('auth', 'Auth\AuthController');
-    // Password Reset Routes...
-    $api->post('auth/password/email', 'Auth\PasswordResetController@sendResetLinkEmail');
-    $api->get('auth/password/verify', 'Auth\PasswordResetController@verify');
-    $api->post('auth/password/reset', 'Auth\PasswordResetController@reset');
-});
+>>>>>>> 24a83f1e228c4dcf0948cdecfe1e68071b9782d6

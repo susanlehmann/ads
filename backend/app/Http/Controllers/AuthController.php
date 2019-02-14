@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup','verifyUserEmail']]);
     }
 
     /**
@@ -33,16 +33,18 @@ class AuthController extends Controller
         if (isset($user->email_verified) && $user->email_verified == 0) {
             return response()->json(['error' =>'Email Unverified']);
         }
-
-        try {
+        else {
+          try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 400);
             }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+          } catch (JWTException $e) {
+              return response()->json(['error' => 'could_not_create_token'], 500);
+          }
+  
+          return $this->respondWithToken($token);
         }
-
-        return $this->respondWithToken($token);
+        
     }
 
     public function signup(SignUpRequest $request)
@@ -50,28 +52,28 @@ class AuthController extends Controller
         $verificationCode = str_random(40);
 
         $input = [
-            'business_id' => $request->id,
-            'role_id' => $request->id,
-            'id_user_create' => $request->id,
-            'id_user_update' => $request->id,
+            'business_id' => 0,
+            'role_id' => 0,
+            'id_user_create' => 0,
+            'id_user_update' => 0,
             'firstName' => $request->firstName,
-            'lastName' => $request->lastName,
+            //'lastName' => $request->lastName,
             'email' => $request->email,
             'password' => $request->password,
-            'phone' => $request->phone,
-            'ennable_appointment_booking' => $request->ennable_appointment_booking,
-            'notes' => $request->notes,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'appointment_color' => $request->appointment_color,
-            'dial_code' => $request->dial_code,
+            //'phone' => $request->phone,
+            //'ennable_appointment_booking' => $request->ennable_appointment_booking,
+            //'notes' => $request->notes,
+            //'start_date' => $request->start_date,
+            //'end_date' => $request->end_date,
+            //'appointment_color' => $request->appointment_color,
+            //'dial_code' => $request->dial_code,
             'first_login' => 0,
-            'service_commission' => $request->service_commission,
-            'product_commission' => $request->product_commission,
-            'voucher_sales_commission' => $request->voucher_sales_commission,
+            //'service_commission' => $request->service_commission,
+            //'product_commission' => $request->product_commission,
+            //'voucher_sales_commission' => $request->voucher_sales_commission,
             'sort_order' => 1,
             'level' => 2,
-            'parent' => $request->id,
+            'parent' => 0,
             'email_verification_code' => $verificationCode,
         ];
         // $user->level = 0; // ko co column level
