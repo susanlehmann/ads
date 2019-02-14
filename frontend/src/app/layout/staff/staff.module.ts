@@ -7,9 +7,11 @@ import { MemberComponent } from './member/member.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { CloseDateComponent } from './close-date/close-date.component';
+import { StaffService } from './staff.service';
 
 @NgModule({
     imports: [StaffRoutingModule, SharedModule],
-    declarations: [StaffComponent, MemberComponent, PermissionComponent, ScheduleComponent, CloseDateComponent]
+    declarations: [StaffComponent, MemberComponent, PermissionComponent, ScheduleComponent, CloseDateComponent],
+    providers: [StaffService]
 })
 export class StaffModule { }
