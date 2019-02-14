@@ -73,4 +73,28 @@ export class DetailComponent implements OnInit {
     	);
     }
 
+    blockUser(userInfo: any) {
+      userInfo.getuser = JSON.parse(localStorage.getItem('user'));
+      this.userService.blockUser(userInfo).subscribe(
+        success => {
+          this.notifierService.notify('success', 'Block successfully !!');
+          this.modalService.dismissAll();
+          this.loadDetails(this.client_id);
+        },
+        error => {}
+      );
+    }
+
+    unblockUser(userInfo: any) {
+      userInfo.getuser = JSON.parse(localStorage.getItem('user'));
+      this.userService.unblockUser(userInfo).subscribe(
+        success => {
+          this.notifierService.notify('success', 'UnBlock successfully !!');
+          this.modalService.dismissAll();
+          this.loadDetails(this.client_id);
+        },
+        error => {}
+      );
+    }
+
 }

@@ -49,6 +49,10 @@ export class StaffService {
         return this._http.post(`${this.baseUrl}/user/closed_date/show-close-date`, {id: id});
     }
 
+    deleteClosedDateById(id: string) {
+        return this._http.post(`${this.baseUrl}/user/closed_date/delete-close-date`, {id: id});
+    }
+
     addClosedDate(closedDate) {
         closedDate.ownerId = this.currentUserId;
         return this._http.post(`${this.baseUrl}/user/closed_date/create-close-date`, closedDate);

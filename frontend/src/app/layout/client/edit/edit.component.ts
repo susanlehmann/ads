@@ -29,7 +29,6 @@ export class EditComponent implements OnInit {
 	genders = [
 		{ id: 1, name: "Male" },
 		{ id: 2, name: "Femail" },
-		{ id: 3, name: "Unknown" },
 	];
 
 	referralSources = [
@@ -80,17 +79,7 @@ export class EditComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		this.user.username = "abc";
-		
-		this.userService.updateUserById(this.user).subscribe(
-			success => {
-				console.log(success);
-				this.notifierService.notify('success', 'Update has been successfully updated');
-			},
-			error => {
-				console.log(error);
-			}
-		)
+		this.update(this.form);
 	}
 
 	update(client: any = {}) {
