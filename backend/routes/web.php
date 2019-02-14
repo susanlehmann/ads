@@ -18,7 +18,7 @@ Route::get('/', function () {
     // Social Auth
 
 Route::group(['middleware' => ['web']], function () {
-    Route::get('user/verify/{verificationCode}', ['uses' => 'Auth\AuthController@verifyUserEmail']);
+    Route::get('user/verify/{verificationCode}', ['uses' => 'AuthController@verifyUserEmail']);
     Route::get('oauth/{driver}', 'SocialAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'SocialAuthController@handleProviderCallback');
 });

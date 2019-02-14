@@ -12,35 +12,37 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-        $data['user'] = User::where('level',4)->where('parent',$request->getuser->id)->get();
+        $userId = (object)json_decode($request->getContent(),true);
+        $data['user'] = User::where('level',4)->where('parent',$userId->getuser['id'])->get();
         $data['role'] = Role::get();
         return response()->json($data);
     }
 
     public function detail(Request $request)
     {
-        $id = $request->id;
-        $user = User::find($id);
+        $id = $request->getContent();
+        $data = User::find($id);
         return response()->json($data);
     }
 
-    public function store(Request $request)
+    public function store(Request $data)
     {
+        $request = (object)json_decode($data->getContent(),true);
         $input = [
-            'business_id' => $request->id,
-            'role_id' => $request->id,
-            'id_user_create' => $request->getuser->id,
-            'id_user_update' => $request->getuser->id,
+            'business_id' => 0,
+            'role_id' => 0,
+            'id_user_create' => $request->getuser['id'],
+            'id_user_update' => $request->getuser['id'],
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
             'password' => $request->password,
-            'phone' => $request->phone,
-            'tele_phone' => $request->tele_phone,
-            'appointment_notifications' => $request->appointment_notifications,
-            'accepts_notifications' => $request->accepts_notifications,
+            'phone' => $request->mobile,
+            'tele_phone' => $request->telephone,
+            'appointment_notifications' => $request->notificationType,
+            'accepts_notifications' => $request->acceptNotification,
             'gender' => $request->gender,
-            'referral_source' => $request->referral_source,
+            'referral_source' => $request->referral,
             'birthday' => $request->birthday,
             'display_bookings' => $request->display_bookings,
             'first_login' => 0,
@@ -52,11 +54,11 @@ class CustomerController extends Controller
             'zip_postcode' => $request->zip_postcode,
             'sort_order' => 1,
             'level' => 4,
-            'parent' => $request->getuser->id,
+            'parent' => $request->getuser['id'],
         ];
         // $user->level = 0; // ko co column level
         $user = User::create($input);
-        $user->assignRole($request->user_permission);
+        //$user->assignRole($request->user_permission);
         if($user == true)
         {
             $msg = ['success' => 'Create a new account successfully'];
@@ -81,22 +83,23 @@ class CustomerController extends Controller
         return response()->json($data);
     }
 
-    public function update(Request $request)
+    public function update(Request $data)
     {
+      $request = (object)json_decode($data->getContent(),true);
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_user_update' => $request->getuser->id,
+                'id_user_update' => $request->getuser['id'],
                 'firstName' => $request->firstName,
                 'lastName' => $request->lastName,
                 'email' => $request->email,
                 'password' => $request->password,
-                'phone' => $request->phone,
-                'tele_phone' => $request->tele_phone,
-                'appointment_notifications' => $request->appointment_notifications,
-                'accepts_notifications' => $request->accepts_notifications,
+                'phone' => $request->mobile,
+                'tele_phone' => $request->telephone,
+                'appointment_notifications' => $request->notificationType,
+                'accepts_notifications' => $request->acceptNotification,
                 'gender' => $request->gender,
-                'referral_source' => $request->referral_source,
+                'referral_source' => $request->referral,
                 'birthday' => $request->birthday,
                 'display_bookings' => $request->display_bookings,
                 'first_login' => 0,
@@ -110,14 +113,24 @@ class CustomerController extends Controller
             ];
             $user = User::find($id);
             $user->update($input);
-            DB::table('model_has_roles')->where('model_id',$id)->delete();
-            $user->assignRole($request->user_permission);
+            //DB::table('model_has_roles')->where('model_id',$id)->delete();
+            //$user->assignRole($request->user_permission);
+            if($user == true)
+            {
+                $msg = ['success' => 'Update account successfully'];
+            }
+            else
+            {
+                $msg = ['error' => 'There was an error updating the account'];
+            }
+
+            return response()->json($msg);
         }
     }
 
     public function destroy(Request $request)
     {
-        $id = $request->id;
+        $id = $request->getContent();
         if ($id != null) {
             $user = User::find($id);
             $check = $user->delete();
