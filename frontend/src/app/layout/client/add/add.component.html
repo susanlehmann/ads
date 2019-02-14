@@ -95,11 +95,10 @@
               <div class="row form-group">
                   <div class="col-sm-6">
                     <label class="control-label">{{'Gender' }}</label>
-                    <select [(ngModel)]="form.gender" name="gender" class="form-control" #gender="ngModel" required select [ngModelOptions]="{updateOn: 'blur'}">
-                      <option value="" disabled selected="selected" hidden> -= Select Gender =-</option>
+                    <select [(ngModel)]="form.gender" name="gender" class="form-control" #gender="ngModel" >
+                      <option value="3" disabled selected="selected" hidden> -= Select Gender =-</option>
                       <option *ngFor="let gen of genders" value="{{gen.id}}">{{gen.name}}</option>
                     </select>
-                    <small class="form-text text-danger " *ngIf="!gender.valid && (gender.dirty || gender.touched)">Selected Gender !</small> 
                   </div>
                   <div class="col-sm-6">
                     <label class="control-label">{{'Referral source' }}</label>
@@ -115,9 +114,8 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">B</div>
                   </div>
-                  <input [(ngModel)]="form.birthday" type="text" placeholder="yyyy-MM-dd" class="form-control" name="birthday" [(ngModel)]="model2" #birthday="ngModel" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" required text dateFormat="yyyy-MM-dd">
+                  <input [(ngModel)]="form.birthday" type="text" placeholder="yyyy-MM-dd" class="form-control" name="birthday" [(ngModel)]="model2" #birthday="ngModel" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" dateFormat="yyyy-MM-dd">
                 </div>
-                <small class="form-text text-danger " *ngIf="!birthday.valid && (birthday.dirty || birthday.touched)">Invaild Birthday !</small> 
               </div>
 
               <div class="row form-group">
