@@ -89,6 +89,7 @@ export class LoginComponent implements OnInit {
     onLoggedin() {
         // localStorage.setItem('isLoggedin', 'true');
     }
+    err: any;
 
     onSubmit() {
         // localStorage.setItem('isLoggedin', 'true');
@@ -96,8 +97,8 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         this.httpcall.login(this.form).subscribe(
           data => {
-            console.log(data);
-            if(data.error == "Email Unverified") {
+            this.err = data;
+            if(this.err.error == "Email Unverified") {
               this.handleUnVeri(data);
             } else {
               this.handleResponse(data);
