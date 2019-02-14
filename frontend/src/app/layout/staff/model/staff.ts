@@ -81,7 +81,7 @@ export class Staff {
       lastName: this.lastName,
       email: this.email,
       phone : this.mobileNumber,
-      ennable_appointment_bookig : this.appointmentBooking ? 1 : 0,
+      ennable_appointment_booking : this.appointmentBooking ? 1 : 0,
       notes : this.notes,
       start_date : '',
       end_date : '',

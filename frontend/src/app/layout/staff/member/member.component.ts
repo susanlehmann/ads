@@ -107,7 +107,7 @@ export class MemberComponent implements OnInit {
     }
 
   addStaff(staff): void {
-    this.staffService.update(staff)
+    this.staffService.add(staff)
     .subscribe((data:any) => {
             this.stopLoading();
             this.getUser();

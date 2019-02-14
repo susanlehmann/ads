@@ -8,7 +8,8 @@ export class StaffService {
 
     //const API_URL = environment.apiUrl;
     baseUrl: string;
-    
+    currentUserId = JSON.parse(localStorage.getItem('user')).id;
+
   constructor(
       private _http: HttpClient,
       private httpService: HttpcallService,
@@ -17,24 +18,33 @@ export class StaffService {
     }
 
     getList() {
-        return this._http.get(`${this.baseUrl}/user/staff/list-user`);
+        return this._http.post(`${this.baseUrl}/user/staff/list-user`, {id : this.currentUserId});
     }
 
     findById(id) {
-        return this._http.post(`${this.baseUrl}/user/show_user`,{id : id});
+        return this._http.post(`${this.baseUrl}/user/staff/show_user`,{id : id});
     }
 
     add(staff) {
-        return this._http.post(`${this.baseUrl}/user/create_user`, staff);
+        staff.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/staff/create_user`, staff);
     }
 
     update(staff) {
-        return this._http.post(`${this.baseUrl}/user/update_user`, staff);
+        staff.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/staff/update_user`, staff);
     }
 
     deleteStaff(id) {
-        return this._http.post(`${this.baseUrl}/user/delete_user`, {'id': id});
+        return this._http.post(`${this.baseUrl}/user/staff/delete_user`, {'id': id});
     }
+
+
+    // closed date
+    getListClosedDate() {
+        return this._http.get(`${this.baseUrl}/user/closed_date/list-close-date`);
+    }
+
 
   getUsers(){
       return this._http.get('http://task-treking/public/api/users',{
