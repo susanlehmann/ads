@@ -6,11 +6,11 @@
 					<i class="fa fa-1x fa-search"></i>
 				</div>
 			</div>
-			<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search by name, e-mail or mobile number">
+			<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search by name, e-mail or mobile number" (change)="searchClient($event)">
 		</div>
 	</div>
 	<div class="col-md-2 col-sm-12">
-		<button class="btn btn-primary" routerLink="/client/add">Add client</button>
+		<button class="btn btn-primary" (click)="addNewClient()"><i class="fa fa-plus"></i> Add client</button>
 		<!-- <select class="custom-select custom-select mb-3 form-control">
 			<option selected>Options</option>
 			<option value="1">One</option>
@@ -22,6 +22,7 @@
 <div class="clearfix"></div>
 <div class="row">
 	<div class="col-md-12 table-responsive">
+		<ngx-loading [show]="loading"></ngx-loading>
 		<div class="box-mobile">
 			<table class="table table-hover">
 				<thead>
@@ -30,17 +31,30 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let client of clients?.user; index as i" routerLink="/client/detail/{{client.id}}">
-						<td>
-							<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
-						</td>
-						<td class="ba">
-							<span>{{client?.firstName}} {{client?.lastName}}</span>
-							<span>{{client?.phone}}</span>
-						</td>
-					</tr>
+					<ng-container *ngIf="!loading && !clients?.user">
+						<tr style="background-color: #fff; cursor: default;">
+                            <td colspan="2" style="padding-top:40px;">
+                                <div class="text-center">
+                                        <h1><i class="fa fa-search fa-lg"></i></h1>
+                                        <h3 class="text-capitalize">No Results Found</h3>
+                                        <p>Try using different filter options to find what you're looking for</p>
+                                    </div>
+                            </td>
+                        </tr>
+					</ng-container>
+					<ng-container *ngIf="clients?.user">
+						<tr *ngFor="let client of clients?.user; index as i" routerLink="/client/detail/{{client.id}}">
+							<td>
+								<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
+							</td>
+							<td class="ba">
+								<span>{{client?.firstName}} {{client?.lastName}}</span>
+								<span>{{client?.phone}}</span>
+							</td>
+						</tr>
+					</ng-container>
 				</tbody>
-				<tfoot>
+				<tfoot *ngIf="clients?.user">
 					<tr>
 						<th colspan="2">
 							paging
@@ -60,17 +74,30 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="let client of clients?.user; index as i" routerLink="/client/detail/{{client.id}}">
-						<td class="ba">
-							<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
-							<span>{{client?.firstName}} {{client?.lastName}}</span>
-						</td>
-						<td>{{client?.phone}}</td>
-						<td>{{client?.email}}</td>
-						<td>{{client?.gender}}</td>
-					</tr>
+					<ng-container *ngIf="!loading && !clients?.user">
+                        <tr style="background-color: #fff; cursor: default;">
+                            <td colspan="4" style="padding-top:40px;">
+                                <div class="text-center">
+                                        <h1><i class="fa fa-search fa-lg"></i></h1>
+                                        <h3 class="text-capitalize">No Results Found</h3>
+                                        <p>Try using different filter options to find what you're looking for</p>
+                                    </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="clients?.user">
+						<tr *ngFor="let client of clients?.user; index as i" routerLink="/client/detail/{{client.id}}">
+							<td class="ba">
+								<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
+								<span>{{client?.firstName}} {{client?.lastName}}</span>
+							</td>
+							<td>{{client?.phone}}</td>
+							<td>{{client?.email}}</td>
+							<td>{{client?.gender}}</td>
+						</tr>
+					</ng-container>
 				</tbody>
-				<tfoot>
+				<tfoot *ngIf="clients?.user">
 					<tr>
 						<th colspan="4">
 							paging

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Client } from '../client';
 import { Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -7,15 +7,20 @@ import { HttpcallService } from '../../../shared/services/httpcall.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../../../shared/services/user.service';
 import { NotifierService } from 'angular-notifier';
+import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-	selector: 'app-edit',
-	templateUrl: './edit.component.html',
-	styleUrls: ['./edit.component.scss'],
+	selector: 'app-add',
+	templateUrl: './add.component.html',
+	styleUrls: ['./add.component.scss'],
 	providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
 })
-export class EditComponent implements OnInit {
+export class AddComponent implements OnInit {
+
+	@ViewChild('f') floatingLabelForm: NgForm;
+    @ViewChild('vform') validationForm: FormGroup;
+    regularForm: FormGroup;
 
 	form: any = {};
 
@@ -42,48 +47,29 @@ export class EditComponent implements OnInit {
 	constructor(
 		private http: HttpClient,
 		private httpService: HttpcallService,
-		private router: ActivatedRoute,
-		private route: Router,
+		private route: ActivatedRoute,
+		private router: Router,
 		private userService: UserService,
 		private notifierService: NotifierService,
 		private datePipe: DatePipe
-	) { }
+	) {}
 
 	ngOnInit() {
-		this.router.params.subscribe(params => {this.userId = params.id;});
-		this.loadInfo(this.userId);
+		this.regularForm = new FormGroup({
+          'email': new FormControl(null, [Validators.required, Validators.email]),
+          'text': new FormControl(null, [Validators.required])
+        }, {updateOn: 'blur'});
+		this.form.notificationType = "";
+		this.form.gender = "";
+		this.form.referral = "1";
 	}
 
-	private loadInfo(id) {
-		this.userService.getUserById(id).subscribe(
-			success => {
-				this.form = success;
-				this.form.mobile = this.form.phone;
-				this.form.telephone = this.form.tele_phone;
-				this.form.birthday = new Date(this.form.birthday);
-				this.form.notificationType = this.form.appointment_notifications;
-				if(this.form.accepts_notifications == 1) {
-					this.form.acceptNotification = true;
-				} else {
-					this.form.acceptNotification = false;
-				}
-				if(this.form.display_bookings == 0 ){
-					this.form.display_bookings = false;
-				} else {
-					this.form.display_bookings = true;
-				}
-
-				this.form.referral = this.form.referral_source;
-			},
-			error => {}
-		);
-	}
 
 	onSubmit(): void {
-		this.update(this.form);
+		this.addUser(this.form);
 	}
 
-	update(client) {
+	addUser(client): void {
 		client.getuser = JSON.parse(localStorage.getItem('user'));
 		if(this.form.acceptNotification){
 			client.acceptNotification = 1;
@@ -96,22 +82,27 @@ export class EditComponent implements OnInit {
 			client.display_bookings = 0;
 		}
 		client.password = "";
-		client.birthday = this.datePipe.transform(this.form.birthday, 'yyyy-MM-dd');
-		this.form.birthday = new Date(client.birthday);
-		this.userService.UpdateUserById(client).subscribe(
+		client.address = "0";
+		client.suburb = "0";
+		client.city = "0";
+		client.sate = '0';
+		client.zip_postcode = 0;
+		// this.http.post(`${this.baseUrl}/user/customer/create_user`, client)
+		this.userService.createUser(client).subscribe(
 			success => {
-				this.notifierService.notify('success', 'Update has been successfully updated');
+				this.notifierService.notify('success', 'A new has been successfully added');
+				this.router.navigateByUrl('client');
 			},
 			error => {
 				console.log(error);
 			}
-		)
+		)      
 	}
 
 	goBack() {
 		const confirm = window.confirm('Are you sure you want to cancel?');
 		if (confirm === true) {
-			this.route.navigate(['client']);
+			this.router.navigate(['client']);
 		}
 	}
 

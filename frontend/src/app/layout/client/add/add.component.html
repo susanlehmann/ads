@@ -1,6 +1,6 @@
 <form class="modal-content" style="border: none" #f="ngForm">
   <div class="modal-header">
-    <h4 class="modal-title col-sm-4 offset-sm-4">Edit Client</h4>
+    <h4 class="modal-title col-sm-4 offset-sm-4">New Client</h4>
   </div>
 
   <div class="modal-body row form-content">
@@ -113,8 +113,9 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">B</div>
                   </div>
-                  <input [(ngModel)]="form.birthday" type="text" placeholder="yyyy-MM-dd" class="form-control" name="birthday" [(ngModel)]="model2" #c2="ngModel" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" required text dateFormat="yyyy-MM-dd">
+                  <input [(ngModel)]="form.birthday" type="text" placeholder="yyyy-MM-dd" class="form-control" name="birthday" [(ngModel)]="model2" #birthday="ngModel" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" required text dateFormat="yyyy-MM-dd">
                 </div>
+                <small class="form-text text-danger " *ngIf="!birthday.valid && (birthday.dirty || birthday.touched)">Invaild Birthday !</small> 
               </div>
 
               <div class="row form-group">
@@ -204,6 +205,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
-    <button type="submit" class="btn btn-success pull-right" (click)="onSubmit()" [disabled]="!f.valid"><i class="fa fa-save"></i> Save </button>
+    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()" [disabled]="!f.valid"><i class="fa fa-plus"></i> Add New </button>
   </div>
 </form>

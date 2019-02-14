@@ -1,4 +1,4 @@
-import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { CommonModule, LocationStrategy, HashLocationStrategy, DatePipe } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -47,6 +47,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         AuthService,
         TokenService, 
         UserService,
+        DatePipe,
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     bootstrap: [AppComponent]
