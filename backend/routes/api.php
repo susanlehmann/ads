@@ -40,7 +40,7 @@ Route::group([
     });
     
     Route::group(['prefix' => 'user/staff', 'namespace' => 'API\member\user'], function(){
-        Route::get('list-user', 'UserController@index');
+        Route::post('list-user', 'UserController@index');
         Route::post('create_user', 'UserController@store');
         Route::post('show_user', 'UserController@show');
         Route::post('update_user', 'UserController@update');

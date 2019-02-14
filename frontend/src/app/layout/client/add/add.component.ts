@@ -60,7 +60,7 @@ export class AddComponent implements OnInit {
           'select': new FormControl(null, [Validators.required])
         }, {updateOn: 'blur'});
 		this.form.notificationType = "";
-		this.form.gender = "";
+		this.form.gender = "3";
 		this.form.referral = "1";
 	}
 
@@ -69,7 +69,8 @@ export class AddComponent implements OnInit {
 		this.addUser(this.form);
 	}
 
-	addUser(client): void {
+	addUser(client:any = {}): void {
+		console.log(client);
 		client.getuser = JSON.parse(localStorage.getItem('user'));
 		if(this.form.acceptNotification){
 			client.acceptNotification = 1;
@@ -82,11 +83,21 @@ export class AddComponent implements OnInit {
 			client.display_bookings = 0;
 		}
 		client.password = "";
-		client.address = "0";
-		client.suburb = "0";
-		client.city = "0";
-		client.sate = '0';
+		client.address = "";
+		client.suburb = "";
+		client.city = "";
+		client.sate = "";
 		client.zip_postcode = 0;
+		if(this.form.birthday != ""){
+			client.birthday = this.datePipe.transform(this.form.birthday, 'yyyy-MM-dd');
+		} else {
+			client.birthday = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+		}
+		if(typeof(this.form.notes) == "undefined" || typeof(this.form.notes) == undefined){
+			client.notes = "";
+		} else {
+			client.notes = this.form.notes;
+		}
 		// this.http.post(`${this.baseUrl}/user/customer/create_user`, client)
 		this.userService.createUser(client).subscribe(
 			success => {
