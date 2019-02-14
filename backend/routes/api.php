@@ -64,6 +64,8 @@ Route::group([
         Route::post('update_user', 'CustomerController@update');
         Route::post('delete_user', 'CustomerController@destroy');
         Route::post('search_user', 'UserController@search');
+        Route::post('block_user', 'CustomerController@blockUser');
+        Route::post('unblock_user', 'CustomerController@unblockUser');
     });
     
     Route::group(['prefix' => 'admin/service_group', 'namespace' => 'API\admin'], function(){
