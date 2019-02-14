@@ -27,7 +27,6 @@ class CustomerController extends Controller
 
     public function store(Request $data)
     {
-      dd($data);
         $request = (object)json_decode($data->getContent(),true);
         $input = [
             'business_id' => 0,
@@ -83,12 +82,12 @@ class CustomerController extends Controller
         // $data['roles'] = $roles;
         return response()->json($data);
     }
-
+     
     public function update(Request $request)
-    {
-    dd($request);
+    {    
         $id = $request->id;
         if ($id != null) {
+        /*
             $input = [
                 'id_user_update' => $request->getuser['id'],
                 'firstName' => $request->firstName,
@@ -114,6 +113,7 @@ class CustomerController extends Controller
             ];
             $user = User::find($id);
             $user->update($input);
+            */
             //DB::table('model_has_roles')->where('model_id',$id)->delete();
             //$user->assignRole($request->user_permission);
             if($user == true)
@@ -127,8 +127,10 @@ class CustomerController extends Controller
 
             return response()->json($msg);
         }
+        
     }
-
+    
+    
     public function destroy(Request $request)
     {
         $id = $request->getContent();

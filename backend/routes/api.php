@@ -49,7 +49,7 @@ Route::group([
     });
 
     Route::group(['prefix' => 'user/closed_date', 'namespace' => 'API\member\user'], function(){
-        Route::get('list-close-date', 'Closed_DateController@index');
+        Route::post('list-close-date', 'Closed_DateController@index');
         Route::post('create-close-date', 'Closed_DateController@store');
         Route::post('show-close-date', 'Closed_DateController@show');
         Route::post('update-close-date', 'Closed_DateController@update');
@@ -74,20 +74,10 @@ Route::group([
         Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
     });
 
-    Route::group(['middleware' => ['api']], function ($router) {
-
-        Route::post('auth/password/email', 'Auth\PasswordResetController@sendResetLinkEmail');
-        Route::get('auth/password/verify', 'Auth\PasswordResetController@verify');
-        Route::post('auth/password/reset', 'Auth\PasswordResetController@reset');
-    
-});
-
-});
-
-Route::group(['middleware' => ['api']], function ($router) {
-
-        Route::post('auth/password/email', 'Auth\PasswordResetController@sendResetLinkEmail');
-        Route::get('auth/password/verify', 'Auth\PasswordResetController@verify');
-        Route::post('auth/password/reset', 'Auth\PasswordResetController@reset');
-    
+    Route::group(['prefix' => 'auth', 'Auth'], function(){
+        Route::post('create-service-group', 'Service_GroupCtroller@store');
+        Route::post('show-service-group', 'Service_GroupCtroller@show');
+        Route::post('update-service-group', 'Service_GroupCtroller@update');
+        Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
+    });
 });
