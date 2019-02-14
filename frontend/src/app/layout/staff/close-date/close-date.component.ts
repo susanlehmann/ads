@@ -96,32 +96,33 @@ class ClosedDate  {
     this.startDate = null;
     this.endDate = null;
     this.locations = [];
-    this.noOfDays = '3 Days';
+    this.noOfDays = '';
   }
 
-  getOutputDate() {
+  getOutputDate(data) {
     const options = {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'};
-    const startDate = new Date(this.startDate).toLocaleDateString('en-US', options);
-    const endDate = new Date(this.endDate).toLocaleDateString('en-US', options);
+    const startDate = new Date(data.start_date).toLocaleDateString('en-US', options);
+    const endDate = new Date(data.end_date).toLocaleDateString('en-US', options);
     this.outputDate = `${startDate} - ${endDate}`;
   }
 
   updateData(data){
     // this.businessId = data.business_id;
-    this.startDate = data.start_date;
-    this.endDate = data.end_date;
+    const one_day=1000*60*60*24;
+    const str = new Date(data.start_date);
+    const end = new Date(data.end_date);
+    this.startDate = new NgbDate(str.getFullYear(), str.getMonth(), str.getDay());
+    this.endDate = new NgbDate(end.getFullYear(), end.getMonth(), end.getDay());
+    this.noOfDays = `${ Math.round((end.getTime() - str.getTime() ) / one_day)} days`;
     this.description = data.description;
-    this.getOutputDate();
+    this.getOutputDate(data);
   }
 
   toDto(){
-    
     return {
       id: this.id,
       start_date: new Date(this.startDate.year, this.startDate.month, this.startDate.day),
       end_date: new Date(this.endDate.year, this.endDate.month, this.endDate.day),
-      // start_date: new Date(),
-      // end_date: new Date(),
       description: this.description,
       locations: [],
     }
