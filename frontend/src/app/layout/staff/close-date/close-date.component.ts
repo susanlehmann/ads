@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, NgbModalRef, NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef, NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import { StaffService } from '../staff.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-close-date',
@@ -17,6 +18,7 @@ export class CloseDateComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     private staffService: StaffService,
+    private notifierService: NotifierService,
   ) {
       this.form = new ClosedDate();
    }
@@ -26,8 +28,9 @@ export class CloseDateComponent implements OnInit {
   }
 
   getList() {
+    let sort = (a,b) => {return a.id - b.id};
     this.staffService.getListClosedDate().subscribe((dates: []) => {
-      this.dates = dates.map(ClosedDate.toModel);
+      this.dates = dates.map(ClosedDate.toModel).sort(sort);
     });
   }
 
@@ -55,7 +58,13 @@ export class CloseDateComponent implements OnInit {
         });
   }
 
-  delete(){}
+  delete(){
+    this.staffService.deleteClosedDateById(this.selectedId).subscribe(v=>{
+      this.getList();
+      this.notifierService.notify('success', 'Closed date has been successfully deleted');
+    });
+    this.modal.dismissAll();
+  }
 
   save(){
     const dto = this.form.toDto();
@@ -70,12 +79,14 @@ export class CloseDateComponent implements OnInit {
   add(dto){
     this.staffService.addClosedDate(dto).subscribe(v => {
       this.getList();
+      this.notifierService.notify('success', 'A new closed date has been successfully added');
     });
   }
 
   update(dto) {
     this.staffService.updateClosedDate(dto).subscribe(v => {
       this.getList();
+      this.notifierService.notify('success', 'Closed date has been successfully updated');
     });
   }
 
@@ -107,12 +118,13 @@ class ClosedDate  {
   }
 
   updateData(data){
-    // this.businessId = data.business_id;
+    this.id = data.id;
+    this.businessId = data.business_id;
     const one_day=1000*60*60*24;
     const str = new Date(data.start_date);
     const end = new Date(data.end_date);
-    this.startDate = new NgbDate(str.getFullYear(), str.getMonth(), str.getDay());
-    this.endDate = new NgbDate(end.getFullYear(), end.getMonth(), end.getDay());
+    this.startDate = new NgbDate(str.getUTCFullYear(), str.getUTCMonth()+1, str.getUTCDate());
+    this.endDate = new NgbDate(end.getUTCFullYear(), end.getUTCMonth()+1, end.getUTCDate());
     this.noOfDays = `${ Math.round((end.getTime() - str.getTime() ) / one_day)} days`;
     this.description = data.description;
     this.getOutputDate(data);
@@ -121,8 +133,8 @@ class ClosedDate  {
   toDto(){
     return {
       id: this.id,
-      start_date: new Date(this.startDate.year, this.startDate.month, this.startDate.day),
-      end_date: new Date(this.endDate.year, this.endDate.month, this.endDate.day),
+      start_date: `${this.startDate.year}-${this.startDate.month}-${this.startDate.day}`,
+      end_date: `${this.endDate.year}-${this.endDate.month}-${this.endDate.day}`,
       description: this.description,
       locations: [],
     }
