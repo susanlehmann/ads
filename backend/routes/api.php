@@ -75,5 +75,13 @@ Route::group([
         Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
     });
 
+    Route::group(['middleware' => ['api']], function ($router) {
+
+        Route::post('auth/password/email', 'Auth\PasswordResetController@sendResetLinkEmail');
+        Route::get('auth/password/verify', 'Auth\PasswordResetController@verify');
+        Route::post('auth/password/reset', 'Auth\PasswordResetController@reset');
+    
+});
+
 });
 
