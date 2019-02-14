@@ -1,18 +1,87 @@
-<table class="table ">
-    <thead>
-    <tr>
-        <th>{{'Date Range' | uppercase}}</th>
-        <th>{{'NO. OF DAYS' | uppercase}}</th>
-        <th>{{'LOCATIONS' | uppercase}}</th>
-        <th>{{'DESCRIPTION' | uppercase}}</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let d of dates; index as i">
-          <td>Mon, 11 Feb 2019 - Tue, 12 Feb 2019</td>
-          <td>1 Day</td>
-          <td>All locations</td>
-          <td></td>
-        </tr>
-    </tbody>
-  </table>
+<div class="card card-custom mb-3">
+  <div class="card-header">
+    <button class="btn btn-primary pull-right" type="button" (click)="openAddModal(content)">New Closed Date</button>
+  </div>
+  <div class="card-body table-responsive">
+      <table class="table table-hover">
+          <thead>
+          <tr>
+              <th>{{'Date Range' | uppercase}}</th>
+              <th>{{'NO. OF DAYS' | uppercase}}</th>
+              <th>{{'LOCATIONS' | uppercase}}</th>
+              <th>{{'DESCRIPTION' | uppercase}}</th>
+          </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let d of dates; index as i" (click)="openUpdateModal(content, d.id)">
+                <td>{{d.outputDate}}</td>
+                <td>{{d.noOfDays}}</td>
+                <td>All locations</td>
+                <td>{{d.description}}</td>
+              </tr>
+          </tbody>
+        </table>
+  </div>
+  
+  </div>
+
+
+  <ng-template #content let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title col-sm-4 offset-sm-4">{{isAdd ? 'Create' : 'Edit'}} Closed Date</h4>
+          <button type="button" class="col-sm-4 close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          
+          
+          <div class="modal-body">
+  
+              <div class="row form-group">
+                  <div class="col-sm-6">
+                      
+                        <label class="control-label">START DATE</label>
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+             name="str" [(ngModel)]="form.startDate" ngbDatepicker #str="ngbDatepicker" (click)="str.toggle()">
+                    
+                    </div>
+                  <div class="col-sm-6">
+                      
+                        <label class="control-label">END DATE</label>
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+             name="end" [(ngModel)]="form.endDate" ngbDatepicker #end="ngbDatepicker" (click)="end.toggle()">
+                    
+                    </div>
+            </div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <label class="control-label">DESCRIPTION</label>
+                        <input [(ngModel)]="form.description" type="text" class="form-control input-underline input-lg" name="description">
+                    
+                    </div>
+            </div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="location">
+          <label class="custom-control-label" for="location"></label>All Locations</div>
+                    
+                    </div>
+            </div>
+  
+  
+            
+          </div>
+  
+          <div class="modal-footer">
+              <button *ngIf="!isAdd" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="delete()"> Delete </button>
+              <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+              <button type="submit" class="btn btn-dark pull-right" (click)="save()"> Save </button>
+        </div>
+  
+  
+  </ng-template>
