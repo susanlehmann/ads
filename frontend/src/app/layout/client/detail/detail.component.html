@@ -47,7 +47,7 @@
 							<label for="Mobile">Mobile</label>
 							<span>{{client_info?.phone}}</span>
 						</div>
-						<div class="form-group">
+						<div class="form-group" *ngIf="client_info?.tele_phone">
 							<label for="Mobile">Telephone</label>
 							<span>{{client_info?.tele_phone}}</span>
 						</div>

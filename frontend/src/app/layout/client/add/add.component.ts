@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Client } from '../client';
 import { Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -8,21 +8,26 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../../../shared/services/user.service';
 import { NotifierService } from 'angular-notifier';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
-import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateFRParserFormatter } from '../../../shared/pipes/ngb-dateformat';
+
 
 @Component({
 	selector: 'app-add',
 	templateUrl: './add.component.html',
 	styleUrls: ['./add.component.scss'],
-	providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
+	providers: [{provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter}]
 })
 export class AddComponent implements OnInit {
 
 	@ViewChild('f') floatingLabelForm: NgForm;
     @ViewChild('vform') validationForm: FormGroup;
+    @ViewChild('email') emailElement: ElementRef;
     regularForm: FormGroup;
 
 	form: any = {};
+	navigation = "arrows";
+	birthday: any = {};
 
 	notificationTypes = [
 		{ id: 1, name: "Don't send notifications" },
@@ -56,21 +61,30 @@ export class AddComponent implements OnInit {
 	ngOnInit() {
 		this.regularForm = new FormGroup({
           'email': new FormControl(null, [Validators.required, Validators.email]),
-          'text': new FormControl(null, [Validators.required]),
-          'select': new FormControl(null, [Validators.required])
+          'text': new FormControl(null, [Validators.required])
         }, {updateOn: 'blur'});
-		this.form.notificationType = "";
+		this.form.notificationType = "0";
 		this.form.gender = "3";
 		this.form.referral = "1";
 	}
 
 
 	onSubmit(): void {
+		if(this.birthday.year){
+			if(typeof(this.form.birthdayYear) == "undefined" || typeof(this.form.birthdayYear) == undefined){
+				let dayNotYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
+				this.form.birthday = this.datePipe.transform(dayNotYear, 'yyyy-MM-dd');
+			} else {
+				let dayYear = this.form.birthdayYear + "-" + this.birthday.month + "-" + this.birthday.day;
+				this.form.birthday = this.datePipe.transform(dayYear, 'yyyy-MM-dd');
+			}
+		} else {
+			this.form.birthday = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+		}
 		this.addUser(this.form);
 	}
 
 	addUser(client:any = {}): void {
-		console.log(client);
 		client.getuser = JSON.parse(localStorage.getItem('user'));
 		if(this.form.acceptNotification){
 			client.acceptNotification = 1;
@@ -88,10 +102,12 @@ export class AddComponent implements OnInit {
 		client.city = "";
 		client.sate = "";
 		client.zip_postcode = 0;
-		if(this.form.birthday != ""){
-			client.birthday = this.datePipe.transform(this.form.birthday, 'yyyy-MM-dd');
+		client.birthday = this.form.birthday;
+		
+		if(typeof(this.form.telephone) == "undefined" || typeof(this.form.telephone) == undefined){ 
+			client.telephone = "";
 		} else {
-			client.birthday = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+			client.telephone = this.form.telephone;
 		}
 		if(typeof(this.form.notes) == "undefined" || typeof(this.form.notes) == undefined){
 			client.notes = "";
@@ -105,7 +121,11 @@ export class AddComponent implements OnInit {
 				this.router.navigateByUrl('client');
 			},
 			error => {
-				console.log(error);
+				let message = error.error.message;
+				if(message.search("users_email_unique") > 0){
+					this.emailElement.nativeElement.focus();
+					this.notifierService.notify('warning', 'Email Unique !');
+				}
 			}
 		)      
 	}
@@ -116,5 +136,11 @@ export class AddComponent implements OnInit {
 			this.router.navigate(['client']);
 		}
 	}
+
+	selectDate(event) {
+		this.birthday = event;
+	}
+
+
 
 }
