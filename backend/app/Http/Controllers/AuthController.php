@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup','verifyUserEmail']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup','verifyUserEmail','me']]);
     }
 
     /**
@@ -41,7 +41,6 @@ class AuthController extends Controller
           } catch (JWTException $e) {
               return response()->json(['error' => 'could_not_create_token'], 500);
           }
-  
           return $this->respondWithToken($token);
         }
         

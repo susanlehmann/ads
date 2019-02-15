@@ -68,9 +68,9 @@ class SocialAuthController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function sendSuccessResponse()
+    protected function sendSuccessResponse($user)
     {
-        return \Redirect::to('/#/login-loader');
+        return \Redirect::to('/#/login-loader')->withErrors(['msg' => $user ?: 'Unable to login, try with another provider to login.']);
     }
 
     /**
@@ -102,25 +102,24 @@ class SocialAuthController extends Controller
         } else {
             // create a new user
             $user = User::create([
-                'business_id' => '',
-                'role_id' => '',
-                'id_user_create' => '',
-                'id_user_update' => '',
+                'business_id' => 0,
+                'role_id' => 0,
+                'id_user_create' => 0,
+                'id_user_update' => 0,
                 'firstName' => $providerUser->getName(),
                 'lastName' => $providerUser->getName(),
                 'email' => $providerUser->getEmail(),
                 'password' => '',
-                'phone' => $request->phone,
-                'ennable_appointment_booking' => $request->ennable_appointment_booking,
-                'notes' => $request->notes,
-                'start_date' => $request->start_date,
-                'end_date' => $request->end_date,
-                'appointment_color' => $request->appointment_color,
-                'dial_code' => $request->dial_code,
-                'first_login' => 0,
-                'service_commission' => $request->service_commission,
-                'product_commission' => $request->product_commission,
-                'voucher_sales_commission' => $request->voucher_sales_commission,
+                // 'ennable_appointment_booking' => '',
+                // 'notes' => '',
+                // 'start_date' => '',
+                // 'end_date' => '',
+                // 'appointment_color' => '',
+                // 'dial_code' => '',
+                // 'first_login' => 0,
+                // 'service_commission' => '',
+                // 'product_commission' => '',
+                // 'voucher_sales_commission' => '',
                 'sort_order' => 1,
                 'level' => 2,
                 'parent' => 0,
@@ -128,6 +127,7 @@ class SocialAuthController extends Controller
                 'provider' => $driver,
                 'provider_id' => $providerUser->getId(),
                 'access_token' => $providerUser->token,
+                'email_verified' => 1,
                 // user can use reset password to create a password
             ]);
         }
@@ -135,7 +135,7 @@ class SocialAuthController extends Controller
         // login the user
         Auth::login($user, true);
 
-        return $this->sendSuccessResponse();
+        return $this->sendSuccessResponse($user);
     }
 
     /**

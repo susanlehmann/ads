@@ -1,3 +1,16 @@
+.client-left-content{
+	label {
+		&.control-label {
+			strong {
+				color: #f00;
+			}
+		}
+	}
+	.focus-color {
+	    border: 1px solid #f00;
+	}
+}
+
 @media screen and (min-width: 768px) {
     .client-left-content {
         padding-top: 73px;
