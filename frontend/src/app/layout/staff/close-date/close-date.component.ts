@@ -41,7 +41,7 @@ export class CloseDateComponent implements OnInit {
   openModal(content: NgbModalRef) {
     this.modal.open(content, {
       backdrop: 'static',
-      size: 'lg'
+      size: 'md'
     });
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffSchedule } from './schedule';
-import {NgbModal, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-schedule',
@@ -20,6 +20,7 @@ export class ScheduleComponent implements OnInit {
   schedules: StaffSchedule[];
   selectedStaff: StaffSchedule;
   isCreate = false;
+  showShift2 = false;
 
   constructor(
     private modal: NgbModal,
@@ -35,11 +36,17 @@ export class ScheduleComponent implements OnInit {
   }
 
   openModal(staff, content: NgbModalRef) {
+    this.showShift2 = false; // test
+
     this.selectedStaff = staff;
-    // this.modal.open(content, {
-    //   backdrop: 'static',
-    //   size: 'lg'
-    // });
+    this.modal.open(content, {
+      backdrop: 'static',
+      size: 'md'
+    });
+  }
+
+  toggleShift2() {
+    this.showShift2 = !this.showShift2;
   }
 
 }
