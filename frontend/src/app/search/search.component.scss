@@ -1,0 +1,24 @@
+.close {
+    float: right;
+    font-size: 4rem;
+    font-weight: 100;
+    outline: none;
+    margin-right: 15px;
+}
+.search-query {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #DEE3E7;
+    font-size: 48px;
+    outline: none;
+    margin-bottom: 10px
+}
+
+.result-header {
+    font-size: 12px;
+    font-weight: 700;
+    color: #24334A;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #DEE3E7;
+    padding-bottom: 10px
+}

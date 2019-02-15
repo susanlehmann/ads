@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
-
+Route::group(['middleware' => ['api']], function ($router) {
+    Route::post('me', 'AuthController@me');
+});
 Route::group([
 
     'middleware' => 'api', 
@@ -12,7 +14,6 @@ Route::group([
     Route::post('signup', 'AuthController@signup');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
     Route::get('getinfo_user', 'User_infoController@index');
     Route::resource('roles','RoleController');

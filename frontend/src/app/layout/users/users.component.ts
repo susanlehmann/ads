@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {NgbModal, NgbModalRef, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { User } from './User'
 import { HttpcallService } from '../../shared/services/httpcall.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
 selector: 'app-users',
@@ -13,7 +14,7 @@ animations: [routerTransition()]
 })
 
 export class UsersComponent implements OnInit {
-
+  loading: boolean;
   form: User;
 
   modalOptions: NgbModalOptions;
@@ -21,11 +22,13 @@ export class UsersComponent implements OnInit {
 
 	closeResult: string;
   listusers: User[];
+  listrole: [];
   isCreate: boolean;
   colors: string[];
   
 	constructor(
-	private httpService: HttpcallService,
+  private httpService: HttpcallService,
+  private notifierService: NotifierService,
 	private http: HttpClient,
 	private modal: NgbModal, 
 	) {
@@ -72,9 +75,10 @@ export class UsersComponent implements OnInit {
 
   openUpdateModal(content: NgbModalRef, userId) {
     this.isCreate = false;
-    this.http.post(`${this.httpService.getBaseUrl()}/show_user`,{id : userId})
+    this.http.post(`${this.httpService.getBaseUrl()}/admin/show_user`,{id : userId})
     .subscribe((data:any) => {
             this.form.updateData(data.user);
+            this.listrole = data.role;
             this.openModal(content);
         });
   }
@@ -90,9 +94,16 @@ export class UsersComponent implements OnInit {
   }
 	
 	getUser() {
-		return this.http.get(`${this.httpService.getBaseUrl()}/list-user`)
+    this.loading = true;
+		return this.http.get(`${this.httpService.getBaseUrl()}/admin/list-user`)
 		.subscribe((listusers:any) => {
-		    this.listusers = listusers.map(User.toModel);
+        this.loading = false;
+        this.listusers = listusers.user
+        .map(User.toModel)
+        .sort((a, b) => {
+          return a.id - b.id;
+        });
+        this.listrole = listusers.role;
 		});
 	}
 	
@@ -108,23 +119,30 @@ export class UsersComponent implements OnInit {
       }
 
   Crete_user(user) {
-    this.http.post(`${this.httpService.getBaseUrl()}/create_user`,user)
+    this.http.post(`${this.httpService.getBaseUrl()}/admin/create_user`,user)
     .subscribe((data:any) => {
             this.getUser();
-        });
+            this.notifierService.notify('success', 'A Staff has been successfully add');
+        }), error => {
+          this.notifierService.notify('success', 'A Staff has been successfully add');
+        }, () => {
+          this.notifierService.notify('success', 'A Staff has been successfully add');
+        };
     }
 
   update_user(user) {
-    this.http.post(`${this.httpService.getBaseUrl()}/update_user`,user)
+    this.http.post(`${this.httpService.getBaseUrl()}/admin/update_user`,user)
     .subscribe((data:any) => {
             this.getUser();
+            this.notifierService.notify('success', 'A Staff has been successfully deleted');
         });
     }
 
 	dalete_user(id) {
-		return this.http.post(`${this.httpService.getBaseUrl()}/delete_user`,{'id':id})
+		return this.http.post(`${this.httpService.getBaseUrl()}/admin/delete_user`,{'id':id})
       .subscribe((data:any) => {
               this.getUser();
+              this.notifierService.notify('success', 'A Staff has been successfully deleted');
           });
 	}
 }

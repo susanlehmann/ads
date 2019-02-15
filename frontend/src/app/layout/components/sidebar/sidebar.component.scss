@@ -196,45 +196,59 @@ $topnav-background-color: #007FC9;
     span {
         display: none;
     }
+    .fa.fa-angle-left {
+        transform: rotate(180deg);
+    }
 }
 
 
-    .sidebar-mobile-menu {
-        left: auto !important;
-        right: 0 !important;
-        bottom: -50px;
-        background: #fff;
+.sidebar-mobile-menu {
+    left: auto !important;
+    right: 0 !important;
+    bottom: -50px;
+    background: #fff;
+    border-left: 1px solid #c2cfd6;
 
-        .list-group {
-            a.list-group-item {
-                background: #fff;
-                border: 0;
-                border-radius: 0;
-                color: #333;
-                text-decoration: none;
-                .fa {
-                    margin-right: 10px;
-                }
+    .fa {
+        width: 10px;
+    }
+
+    .nested-menu .expand .submenu a {
+        color: #333;
+        text-decoration: none;
+        margin-left: 10px;
+    }
+
+    .list-group {
+        a.list-group-item {
+            background: #fff;
+            border: 0;
+            border-radius: 0;
+            color: #333;
+            text-decoration: none;
+            .fa {
+                margin-right: 10px;
             }
-            a:hover {
-                background: darken(#fff, 5%);
-                color: #333;
-            }
-            a.router-link-active {
-                background: darken(#fff, 5%);
-                color: #333;
-            }
-            .header-fields {
-                padding-top: 10px;
-            
-                > .list-group-item:first-child {
-                    border-top: 1px solid rgba(255, 255, 255, 0.2);
-                }
+        }
+        a:hover {
+            background: darken(#fff, 5%);
+            color: #333;
+        }
+        a.router-link-active {
+            background: darken(#fff, 5%);
+            color: #333;
+        }
+        .header-fields {
+            padding-top: 10px;
+        
+            > .list-group-item:first-child {
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
             }
         }
     }
-    .hide {
-        right: -237 !important;
-    }
-    
-    
+}
+.hide {
+    right: -237 !important;
+}
+
+

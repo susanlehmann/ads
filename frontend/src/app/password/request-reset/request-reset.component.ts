@@ -12,12 +12,10 @@ import { HttpcallService } from './../../shared/services/httpcall.service';
   animations: [routerTransition()]
 })
 export class RequestResetComponent implements OnInit {
-    public form = {
-        email: null
-    };
+    public form :any = {};
 
   constructor(
-      private httcall: HttpcallService,
+      private httpcall: HttpcallService,
     //   private notify: SnotifyService
     ) { }
 
@@ -25,7 +23,8 @@ export class RequestResetComponent implements OnInit {
   }
 
   onSubmit() {
-      this.httcall.sendPasswordResetLink(this.form).subscribe(
+      console.log(this.form)
+      this.httpcall.sendPasswordResetLink(this.form).subscribe(
           data => this.handleResponse(data),
         //   error => this.notify.error(error.error.error)
       );

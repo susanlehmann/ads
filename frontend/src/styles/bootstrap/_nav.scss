@@ -29,19 +29,38 @@
 // Tabs
 //
 
-.nav-tabs {
+.nav-tabs, .nav-pills {
   border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
-
-  .nav-item {
-    margin-bottom: -$nav-tabs-border-width;
-  }
+  flex-wrap: nowrap;
+  overflow: auto;
+  margin-bottom: 20px;
 
   .nav-link {
-    border: $nav-tabs-border-width solid transparent;
-    @include border-top-radius($nav-tabs-border-radius);
+    color: rgba(36, 51, 74, 0.55);
+    font-weight: 700;
+    position: relative;
+    padding: 1rem 0;
+    margin: 0 1rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+    font-size: 0.8rem;
 
-    @include hover-focus {
-      border-color: $nav-tabs-link-hover-border-color;
+    &:hover,
+    &.active {
+      background-color: transparent;
+      color: #20a8d8;
+    }
+
+    &:hover:after,
+    &.active:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 4px;
+      background-color: #20a8d8;
+      left: 0;
+      border-radius: 3px;
     }
 
     &.disabled {
@@ -51,13 +70,6 @@
     }
   }
 
-  .nav-link.active,
-  .nav-item.show .nav-link {
-    color: $nav-tabs-link-active-color;
-    background-color: $nav-tabs-link-active-bg;
-    border-color: $nav-tabs-link-active-border-color;
-  }
-
   .dropdown-menu {
     // Make dropdown border overlap tab border
     margin-top: -$nav-tabs-border-width;
@@ -65,24 +77,6 @@
     @include border-top-radius(0);
   }
 }
-
-
-//
-// Pills
-//
-
-.nav-pills {
-  .nav-link {
-    @include border-radius($nav-pills-border-radius);
-  }
-
-  .nav-link.active,
-  .show > .nav-link {
-    color: $nav-pills-link-active-color;
-    background-color: $nav-pills-link-active-bg;
-  }
-}
-
 
 //
 // Justified variants

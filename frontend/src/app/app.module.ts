@@ -1,4 +1,4 @@
-import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { CommonModule, LocationStrategy, HashLocationStrategy, DatePipe } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,9 +12,8 @@ import { AuthGuard } from './shared';
 import { HttpcallService } from './shared/services/httpcall.service';
 import { AuthService } from './shared/services/auth.service';
 import { TokenService } from './shared/services/token.service';
-// import { NewComponent } from './layout/inventory/product/new/new.component';
-
-
+import { SearchComponent } from './search/search.component';
+import { UserService } from './shared/services/user.service';
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
@@ -41,8 +40,16 @@ export const createTranslateLoader = (http: HttpClient) => {
         }),
         AppRoutingModule
     ],
-    declarations: [AppComponent],
-    providers: [AuthGuard, HttpcallService, AuthService,TokenService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+    declarations: [AppComponent, SearchComponent],
+    providers: [
+        AuthGuard,
+        HttpcallService,
+        AuthService,
+        TokenService,
+        UserService,
+        DatePipe,
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

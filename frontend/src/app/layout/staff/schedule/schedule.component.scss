@@ -1,0 +1,31 @@
+.no-shift {
+    vertical-align: middle;
+    cursor: pointer;
+
+    &::after {
+        text-align: center;
+        content: '+';
+        display: block;
+        font-size: 2em;
+        color: #626262;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+    }
+
+    &:hover::after {
+        opacity: 1;
+    }
+}
+
+.work-hour {
+    cursor: pointer;
+
+    &:hover div {
+        background: #d9f3ff;
+    }
+    
+    div {
+        background-color: #c3e5f4;
+        padding: 5px;
+    }
+}

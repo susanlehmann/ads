@@ -17,13 +17,16 @@ export class HttpcallService {
     return this.http.post(`${this.baseUrl}/signup`, data);
   }
 
+  getuser() {
+    return this.http.get(`${this.baseUrl}/user/staff/list-user`);
+  }
 
   login(data) {
     return this.http.post(`${this.baseUrl}/login`, data);
   }
 
   sendPasswordResetLink(data) {
-    return this.http.post(`${this.baseUrl}/sendPasswordResetLink`, data);
+    return this.http.post(this.baseUrl + '/auth/password/email', data);
   }
 
 }

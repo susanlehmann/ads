@@ -1,39 +1,46 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Users'" [icon]="'fa-users'"></app-page-header>
+    <!-- <app-page-header [heading]="'Users'" [icon]="'fa-users'"></app-page-header> -->
     <div class="row">
             <div class="col-sm-12">
 
                 <div class="card mb-3">
-                    <div class="card-header">List User <button class="btn btn-sm btn-success pull-right" type="button" (click)="openCreateModal(content)">Thêm mới</button></div>
+                    <div class="card-header">List User <button class="btn btn-sm btn-success pull-right" type="button" (click)="openCreateModal(content)">New User</button></div>
                     <div class="card-body table-responsive">
+                        <ngx-loading [show]="loading"></ngx-loading>
                         <table class="table table-hover table-striped">
                             <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>ID</th>
                                 <th>User name</th>
                                 <th>Role</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <!-- <th>Status</th> -->
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let user of listusers; index as i">
+                            <ng-container *ngIf="!loading && !listusers">
+                                    <tr style="background-color: #fff; cursor: default;">
+                                            <td colspan="6" style="padding-top:40px;">
+                                                <div class="text-center">
+                                                        <h1><i class="fa fa-search fa-lg"></i></h1>
+                                                        <h3 class="text-capitalize">No Results Found</h3>
+                                                        <p>Try using different filter options to find what you're looking for</p>
+                                                    </div>
+                                            </td>
+                                    </tr>
+                            </ng-container>
+                            <ng-container *ngIf="listusers">
+                            <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)">
                                 <td>{{i+1}}</td>
-                                <td>{{user.id}}</td>
                                 <td>{{user.firstName}}</td>
-                                <td>Admintrolr</td>
-                                <td>
+                                <td>Admin</td>
+                                <!-- <td>
                                   <label class="switch">
                                     <input type="checkbox" checked="checked">
                                     <span class="slider round"></span>
                                   </label>
-                                </td>
-                                <td>
-                                  <button _ngcontent-c31="" class="btn btn-sm btn-success" type="button" (click)="openUpdateModal(content, user.id)"><i class="fa fa-pencil-square-o"></i></button>
-                                  <button _ngcontent-c31="" class="btn btn-sm btn-danger" type="button"  (click)="dalete_user(user.id)"><i class="fa fa-trash-o"></i></button>
-                                </td>
+                                </td> -->
                             </tr>
+                            </ng-container>
                             </tbody>
                         </table>
                     </div>
@@ -92,36 +99,10 @@
                                 <div class="col-sm-12">
                                     <label class="control-label">USER PERMISSION</label>
                                     <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control">
-                                        <option selected>No Access</option>
-                                        <option>Basic</option>
-                                        <option>Low</option>
-                                        <option>Medium</option>
-                                        <option>High</option>
+                                        <option *ngFor="let role of listrole" value="{{role.id}}">{{role.name}}</option>
                                     </select>
                                 </div>
                             </div>
-        
-                            <div class="row form-group">
-                                <div class="col-sm-12 btn-switch">
-                                    <label class="switch">
-                                        <input type="checkbox" [(ngModel)]="form.apointmentBooking" name="apointmentBooking">
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <label class="control-label">ENABLE APPOINTMENT BOOKINGS</label>
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
-                                    <div class="col-sm-12 btn-switch">
-                                            <div class="color-picker" *ngIf="form.apointmentBooking">
-                                                    <label class="control-label">APPOINTMENT COLOR</label> <br>
-                                                    <ng-container *ngFor="let color of colors; index as i">
-                                                        <input [(ngModel)]="form.apointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
-                                                        <label for="{{color}}"><span class="{{color}}"></span></label>
-                                                    </ng-container>
-                                                </div>
-                                    </div>
-                                </div>
         
                           </div>
         

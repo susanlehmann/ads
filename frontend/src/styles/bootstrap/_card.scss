@@ -66,10 +66,18 @@
 //
 
 .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
   padding: $card-spacer-y $card-spacer-x;
   margin-bottom: 0; // Removes the default margin-bottom of <hN>
   background-color: $card-cap-bg;
   border-bottom: $card-border-width solid $card-border-color;
+
+  .custom-select {
+    margin-left: 10px;
+  }
 
   &:first-child {
     @include border-radius($card-inner-border-radius $card-inner-border-radius 0 0);

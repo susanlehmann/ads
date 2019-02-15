@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import {NgbModal, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { Staff } from '../model/staff'
 import { NotifierService } from 'angular-notifier';
+import { StaffService } from '../staff.service';
 
 @Component({
   selector: 'app-member',
@@ -10,9 +10,7 @@ import { NotifierService } from 'angular-notifier';
   styleUrls: ['./member.component.scss']
 })
 export class MemberComponent implements OnInit {
-
   loading: boolean;
-  
   form: Staff;
 
   modalOptions: NgbModalOptions;
@@ -26,8 +24,8 @@ export class MemberComponent implements OnInit {
   
 	constructor(
   private notifierService: NotifierService,
-	private http: HttpClient,
-	private modal: NgbModal, 
+  private modal: NgbModal,
+  private staffService: StaffService,
 	) {
     this.form = new Staff();
     this.colors = [
@@ -40,7 +38,6 @@ export class MemberComponent implements OnInit {
 	}
 
 	ngOnInit() {
-    this.notifierService.notify( 'success', 'You are awesome! I mean it!' );
     this.test();
     this.getUser();
   }
@@ -74,27 +71,31 @@ export class MemberComponent implements OnInit {
   openUpdateModal(content: NgbModalRef, userId) {
     this.isCreate = false;
     this.selectedId = userId;
-    this.http.post('http://localhost:8000/api/show_user',{id : userId})
+    this.staffService.findById(userId)
     .subscribe((data:any) => {
-            this.form.updateData(data);
+            this.form.updateData(data.user);
             this.openModal(content);
         });
   }
 	
 	getUser() {
-    this.loading = true;
-		this.http.get('http://localhost:8000/api/list-user')
+    this.startLoading();
+    this.staffService.getList()
 		.subscribe((listusers:any) => {
-        this.loading = false;
-		    this.listusers = listusers.map(Staff.toModel);
+        this.stopLoading();
+        this.listusers = listusers.user
+        .map(Staff.toModel)
+        .sort((a, b) => {
+          return a.id - b.id;
+        });
 		}, err => {
-      this.loading = false;
+      this.stopLoading();
     });
 	}
 	
   onSubmit(): void {
     const dto = this.form.toDto();
-    console.table(dto);
+    this.startLoading();
     if (this.isCreate) {
       this.addStaff(dto);
     } else {
@@ -104,26 +105,42 @@ export class MemberComponent implements OnInit {
     }
 
   addStaff(staff): void {
-    this.http.post('http://localhost:8000/api/create_user',staff)
+    this.staffService.add(staff)
     .subscribe((data:any) => {
+            this.stopLoading();
             this.getUser();
-        });
+            this.notifierService.notify('success', 'A new Staff has been successfully added');
+    }), err => {
+      this.stopLoading();
+    };
     }
 
   updateStaff(staff) {
-    this.http.post('http://localhost:8000/api/update_user',staff)
+    this.staffService.update(staff)
     .subscribe((data:any) => {
+            this.stopLoading();
             this.getUser();
-        });
+            this.notifierService.notify('success', 'Staff information has been successfully updated');
+    }), err => {
+      this.stopLoading();
+    };
     }
 
   deleteStaff() {
-    this.http.post('http://localhost:8000/api/delete_user',{'id': this.selectedId})
+      this.staffService.deleteStaff(this.selectedId)
       .subscribe((data:any) => {
               this.getUser();
+              this.notifierService.notify('success', 'A Staff has been successfully deleted');
           });
     this.modal.dismissAll();
   }
   
+  startLoading(): void {
+    this.loading = true;
+  }
+
+  stopLoading(): void {
+    this.loading = false;
+  }
 
 }

@@ -89,13 +89,21 @@ export class LoginComponent implements OnInit {
     onLoggedin() {
         // localStorage.setItem('isLoggedin', 'true');
     }
+    err: any;
 
     onSubmit() {
         // localStorage.setItem('isLoggedin', 'true');
-        console.log(this.form);
+        //console.log(this.form);
         this.loading = true;
         this.httpcall.login(this.form).subscribe(
-          data => this.handleResponse(data),
+          data => {
+            this.err = data;
+            if(this.err.error == "Email Unverified") {
+              this.handleUnVeri(data);
+            } else {
+              this.handleResponse(data);
+            }
+          },
           error => this.handleError(error)
         );
       }
@@ -110,7 +118,13 @@ export class LoginComponent implements OnInit {
       }
 
       handleError(error) {
+        this.loading = false;
         this.error = error.error.error;
+    }
+
+    handleUnVeri(error) {
+        this.loading = false;
+        this.error = error.error;
     }
 
 

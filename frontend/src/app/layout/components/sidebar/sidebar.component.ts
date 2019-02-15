@@ -1,7 +1,8 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpcallService } from '../../../shared/services/httpcall.service';
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
@@ -12,10 +13,15 @@ export class SidebarComponent implements OnInit {
     collapsed: boolean;
     showMenu: string;
     pushRightClass: string;
-
+    listusers: {};
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(
+        private translate: TranslateService,
+        public router: Router,
+        private httpService: HttpcallService,
+        private http: HttpClient,
+        ) {
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de']);
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
@@ -33,6 +39,7 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getUser();
         this.isActive = false;
         this.collapsed = false;
         this.showMenu = '';
@@ -41,6 +48,12 @@ export class SidebarComponent implements OnInit {
         document.addEventListener("mousedown", this.handleClick, false);
     }
 
+    getUser() {
+            return this.http.get(`${this.httpService.getBaseUrl()}/getinfo_user`)
+            .subscribe((listusers:any) => {
+            this.listusers = listusers.user;
+            });
+        }
 
     eventCalled() {
         this.isActive = !this.isActive;
@@ -76,6 +89,10 @@ export class SidebarComponent implements OnInit {
 
     changeLang(language: string) {
         this.translate.use(language);
+
+        // close menu after change language (mobile only)
+        document.querySelector('.sidebar.sidebar-mobile-menu').classList.add("hide");
+        setTimeout(() => this.addExpandClass("languages"), 500);
     }
 
     onLoggedout() {
@@ -85,10 +102,17 @@ export class SidebarComponent implements OnInit {
     }
 
     handleClick(e) {
+        // do nothing if sidebar is hidden
+        if (!document.querySelector('.sidebar')) {
+            return;
+        }
+
         if (!document.querySelector('.navbar-toggler.mobile').contains(e.target)
         && !document.querySelector('.navbar-toggler.desktop').contains(e.target)
         && !document.querySelector('.sidebar').contains(e.target)
-        && document.body.classList.contains("push-right")) {
+        && document.body.classList.contains("push-right")
+        && screen.width < 993
+        ) {
             document.body.classList.remove("push-right");
         }
 

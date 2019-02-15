@@ -1,0 +1,191 @@
+<div *ngIf="client_info" class="box-details">
+	<div class="col-lg-12 col-md-12">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="box-info mb-4">
+					<div class="avatar">
+						<div class="circle-avatar">
+							<span>{{client_info?.firstName | slice : 0:1 }}</span>
+						</div>
+					</div>
+					<div class="name">
+						<span [ngClass]="client_info?.status == '1' ? '' : 'block' ">{{client_info?.firstName}} {{client_info?.lastName}}</span>
+					</div>
+					<div class="box-button">
+						<div class="col-lg-12">
+							<div class="row">
+								<div class="col-lg-6">
+									<div ngbDropdown>
+					                    <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+						                    <span>More Options <b class="caret"></b></span>
+						                </a>
+					                    <div ngbDropdownMenu>
+					                        <a routerLink="/client/edit/{{client_info.id}}" class="dropdown-item">
+						                        Edit
+						                    </a>
+						                    <a *ngIf="client_info?.status == 1" href="javascript:void(0)" class="dropdown-item" (click)="open(content_block)">
+						                        Block
+						                    </a>
+						                    <a *ngIf="client_info?.status !== 1" href="javascript:void(0)" class="dropdown-item" (click)="open(content_unblock)">
+						                        UnBlock
+						                    </a>
+						                    <a href="javascript:void(0)" class="dropdown-item" (click)="open(content)">
+						                        Delete
+						                    </a>
+					                    </div>
+					                </div>
+								</div>
+								<div class="col-lg-6 no-pd">
+									<span class="btn btn-dark">New appointment</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="hrbox"></div>
+					<div class="box-ephone">
+						<div class="form-group">
+							<label for="Mobile">Mobile</label>
+							<span>{{client_info?.phone}}</span>
+						</div>
+						<div class="form-group" *ngIf="client_info?.tele_phone">
+							<label for="Mobile">Telephone</label>
+							<span>{{client_info?.tele_phone}}</span>
+						</div>
+						<div class="form-group">
+							<label for="Email">Email</label>
+							<span>{{client_info?.email}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8">
+				<div class="box-info mb-4">
+					<div class="row mb-3">
+						<div class="col-lg-6 pd-no-right bd-right">
+							<div class="text-sales">
+								<p>£35</p>
+								<span>Total Sales</span>
+							</div>
+						</div>
+						<div class="col-lg-6 pd-no-left">
+							<div class="text-outstanding">
+								<p>£0</p>
+								<span>Outstanding</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="text-normal">
+								<p>3</p>
+								<span>All bookings</span>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="text-normal">
+								<p>1</p>
+								<span>Completed</span>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="text-normal">
+								<p>0</p>
+								<span>Cancelled</span>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="text-normal">
+								<p>0</p>
+								<span>No Shows</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="box-info">
+					<div class="row">
+						<div class="col-lg-12">
+							<ngb-tabset>
+								<ngb-tab title="Appointments">
+									<ng-template ngbTabContent>
+										<div class="col-md-12 form-content">
+											Appointments
+										</div>
+									</ng-template>
+								</ngb-tab>
+								<ngb-tab title="Products">
+									<ng-template ngbTabContent>
+										<div class="col-md-12 form-content">
+											Products
+										</div>
+									</ng-template>
+								</ngb-tab>
+								<ngb-tab title="Invoices">
+									<ng-template ngbTabContent>
+										<div class="col-md-12 form-content">
+											Invoices
+										</div>
+									</ng-template>
+								</ngb-tab>
+							</ngb-tabset>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ng-template #content let-c="close" let-d="dismiss">
+	        <div class="modal-header">
+	            <h5 class="modal-title">Xóa bỏ nhân viên : {{client_info?.firstName}} {{client_info?.lastName}}</h5>
+	            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+	                <span aria-hidden="true">&times;</span>
+	            </button>
+	        </div>
+	        <div class="modal-body">
+	            <p>Bạn có đồng ý xóa toàn bộ dữ liệu liên quan đến nhân viên {{client_info?.firstName}} {{client_info?.lastName}} ?</p>
+	        </div>
+	        <div class="modal-footer">
+	            <button type="button" class="btn btn-primary" (click)="removeUser(client_info?.id)">Confirm</button>
+	            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+	        </div>
+	    </ng-template>
+		<ng-template #content_block let-c="close" let-d="dismiss">
+	        <div class="modal-header">
+	            <h5 class="modal-title">Khóa nhân viên : {{client_info?.firstName}} {{client_info?.lastName}}</h5>
+	            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+	                <span aria-hidden="true">&times;</span>
+	            </button>
+	        </div>
+	        <div class="modal-body">
+	            <p>Bạn có đồng ý khóa nhân viên {{client_info?.firstName}} {{client_info?.lastName}} ?</p>
+	        </div>
+	        <div class="modal-footer">
+	            <button type="button" class="btn btn-primary" (click)="blockUser(client_info)">Confirm</button>
+	            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+	        </div>
+	    </ng-template>
+		<ng-template #content_unblock let-c="close" let-d="dismiss">
+	        <div class="modal-header">
+	            <h5 class="modal-title">Mở khóa nhân viên : {{client_info?.firstName}} {{client_info?.lastName}}</h5>
+	            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+	                <span aria-hidden="true">&times;</span>
+	            </button>
+	        </div>
+	        <div class="modal-body">
+	            <p>Bạn có đồng ý mở khóa nhân viên {{client_info?.firstName}} {{client_info?.lastName}} ?</p>
+	        </div>
+	        <div class="modal-footer">
+	            <button type="button" class="btn btn-primary" (click)="unblockUser(client_info)">Confirm</button>
+	            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+	        </div>
+	    </ng-template>
+	</div>
+</div>
+
+<div *ngIf="!client_info" class="text-center" style="margin-top: 30px;">
+	<h1><i class="fa fa-fw fa-search"></i></h1>
+	<h3 class="text-capitalize">Unable to load data</h3>
+	<p>Your request couldn’t be processed at this point.</p>
+	<p>Please try again later or contact our support.</p>
+	<button class="btn" (click)="goBack()">Go back</button>
+</div>
+	

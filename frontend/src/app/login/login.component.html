@@ -22,6 +22,40 @@
                 <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
                 <small class="float-right"><a [routerLink]="['/request-password-reset'] "> Reset Password</a></small>
             </form>
+            <!-- <div class="panel panel-default">
+                <div class="panel-heading text-center">Social Login </div>
+        
+                <div class="panel-body">
+                    <a href="#" class="btn btn-primary btn-block">
+                        Login with Facebook
+                    </a>
+                    <a href="#" class="btn btn-info btn-block">
+                        Login with Twitter
+                    </a>
+                    <a href="#" class="btn btn-danger btn-block">
+                        Login with Google
+                    </a>
+                    <a href="#" class="btn btn-default btn-block">
+                        Login with Github
+                    </a>
+                    <hr>
+                    <a href="#" class="btn btn-danger btn-block">
+                        Login with Email
+                    </a>
+                </div>
+            </div> -->
+            <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="/backend/public/auth/github" class="btn btn-block btn-social btn-github btn-flat">
+                  <i class="fa fa-github"></i> Sign in using Github
+                </a>
+                <a href="/backend/public/auth/google" class="btn btn-block btn-social btn-google btn-flat">
+                  <i class="fa fa-google"></i> Sign in using Google+
+                </a>
+                <a href="/backend/public/auth/facebook" class="btn btn-block btn-social btn-facebook btn-flat">
+                  <i class="fa fa-facebook"></i> Sign in using Facebook
+                </a>
+              </div>
         </div>
     </div>
     <!-- <ng-snotify class="{{style}}"></ng-snotify> -->

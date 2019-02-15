@@ -9,6 +9,7 @@ import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { NgxLoadingModule  } from 'ngx-loading';
 
 const customNotifierOptions: NotifierOptions = {
     behaviour: {
@@ -38,6 +39,7 @@ const customNotifierOptions: NotifierOptions = {
         TranslateModule,
         NgbModule.forRoot(),
         LoadingBarHttpClientModule,
+        NgxLoadingModule,
         NotifierModule.withConfig(customNotifierOptions),
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent]

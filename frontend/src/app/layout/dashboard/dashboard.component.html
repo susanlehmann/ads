@@ -4,6 +4,15 @@
             <div class="card mb-3">
                 <div class="card-header">
                     {{'RECENT SALES' | translate}}
+                    <div class="filter">
+                        <select class="custom-select custom-select">
+                            <option value="1" selected>All Locations</option>
+                          </select>
+                        <select class="custom-select custom-select">
+                            <option value="1" selected>Last 7 days</option>
+                            <option value="2">Last 30 days</option>
+                          </select>
+                    </div>
                 </div>
                 <div class="card-body table-responsive">
                     <canvas baseChart height="130" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
@@ -15,6 +24,15 @@
             <div class="card mb-3">
                 <div class="card-header">
                         {{'UPCOMING APPOINTMENTS' | translate}}
+                        <div class="filter">
+                                <select class="custom-select custom-select">
+                                        <option value="1" selected>All Locations</option>
+                                  </select>
+                                <select class="custom-select custom-select">
+                                    <option value="1" selected>Last 7 days</option>
+                                    <option value="2">Last 30 days</option>
+                                  </select>
+                            </div>
                 </div>
                 <div class="card-body table-responsive">
                         <div class="text-center">
@@ -33,7 +51,7 @@
                 <div class="card-body table-responsive">
                     <div *ngFor="let appointment of appointments" class="row clickable-row">
                         <div class="appointment-item-home col-12">
-                        <p><span class="badge text-uppercase badge-primary mr-2">New</span><span>Haircut with 1 asdfxc</span></p>
+                        <p><span class="badge text-uppercase badge-primary mr-2">New</span><span class="appoiment-title">Haircut with 1 asdfxc</span></p>
                         <p><span class="pr-2">Friday, 04 Jan 2019 at 20:35</span>
                             <span class="pr-2"><i class="fa fa-clock-o"></i> 45min</span>
                             <span class="pr-2"><i class="fa fa-user-o"></i> Minh Anh Nguyen</span>
@@ -52,7 +70,7 @@
                     <div class="text-center">
                         <h1><i class="fa fa-calendar fa-lg"></i></h1>
                         <h3 class="text-capitalize">No Appointments Today</h3>
-                        <p>Visit the <a href="/Calendar/Index" class="btn-link p-0">Calendar</a> section to add some appointments</p>
+                        <p>Visit the <a [routerLink]="[ '/calendar' ]" class="btn-link p-0">Calendar</a> section to add some appointments</p>
                     </div>
                 </div>
             </div>

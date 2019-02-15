@@ -1,0 +1,18 @@
+.table-permission {
+    font-size: 14px;
+    td {
+        padding: 10px;
+        min-width: 85px;
+    }
+    thead {
+        font-weight: bolder;
+        th {
+            padding: 20 10 10 0;
+        }
+    }
+    tbody {
+        td {
+            border: 1px solid #ddd;
+        }
+    }
+}

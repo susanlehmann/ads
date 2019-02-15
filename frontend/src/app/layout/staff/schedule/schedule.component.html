@@ -1,3 +1,115 @@
-<p>
-  schedule works!
-</p>
+<select class="custom-select custom-select mb-3">
+    <option selected>All Staff</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+  </select>
+  <div class="table-responsive">
+<table class="table table-bordered">
+  <thead>
+    <th class="head-col">Staff</th>
+    <th *ngFor="let day of weekdays">{{day}}</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sche of schedules">
+      <th class="head-col" style="vertical-align: middle">
+        <div style="font-weight: 700; margin-bottom: 5px;">{{sche.staffName}}</div>
+        <div>{{sche.weeklyHours}}</div>
+      </th>
+      <ng-container *ngFor="let w of sche.weekSchedule">
+          <ng-container *ngIf="w == null; else elseTemplate">
+              <td (click)="openModal(sche, content)" class="no-shift"></td>
+          </ng-container>
+          <ng-template #elseTemplate>
+              <td class="work-hour" (click)="openModal(sche, content)">
+                  <div style="margin-bottom: 10px;">{{w.start}}</div>
+                  <div>{{w.end}}</div>
+              </td>
+          </ng-template>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title col-sm-6 offset-sm-3">Edit {{selectedStaff.staffName}}'s Hours</h4>
+        <button type="button" class="col-sm-3 close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <br>
+        <div class="col-sm-12 text-center">Thursday, 14 February 2019</div>
+        </div>
+        
+        
+        <div class="modal-body">
+            <div class="row form-group" style="flex-wrap: nowrap;">
+                <div class="col-sm-6">
+                  <label class="control-label">SHIFT START</label>
+                  <ngb-timepicker [(ngModel)]="selectedStaff.shiftStart1" [minuteStep]="5"></ngb-timepicker>
+              </div>
+
+              <div class="col-sm-6">
+                  <label class="control-label">SHIFT END</label>
+                  <ngb-timepicker [(ngModel)]="selectedStaff.shiftEnd1" [minuteStep]="5"></ngb-timepicker>
+              </div>
+          </div>
+
+          <ng-container *ngIf="showShift2">
+              <div class="row form-group" style="flex-wrap: nowrap;">
+                  <div class="col-sm-6">
+                    <ngb-timepicker [(ngModel)]="selectedStaff.shiftStart2" [minuteStep]="5"></ngb-timepicker>
+                </div>
+    
+                <div class="col-sm-5">
+                    <ngb-timepicker [(ngModel)]="selectedStaff.shiftEnd2" [minuteStep]="5"></ngb-timepicker>
+                  </div>
+
+                  <!-- <div class="col-sm-1" style="align-self: center;">
+                    <button (click)="toggleShift2()" style="background-color: white; border: none; color:red;cursor: pointer;">x</button>
+                </div> -->
+            </div>
+            <div class="row form-group" style="justify-content: center;">
+                1 hour break time
+            </div>
+          </ng-container>
+
+          <div *ngIf="!showShift2" class="row form-group">
+              <div class="col-sm-12">
+                <button class="btn btn-block btn-light" (click)="toggleShift2()">Add another shift</button>
+            </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-sm-12 btn-switch">
+                    <label class="control-label">Repeat weekly  </label>
+                      <label class="switch">
+                          <input type="checkbox" [(ngModel)]="selectedStaff.repeatWeekly" name="repeat">
+                          <span class="slider round"></span>
+                      </label>
+                  </div>
+          </div>
+
+            <div *ngIf="selectedStaff.repeatWeekly" class="row form-group">
+                <div class="col-sm-12">
+                    <select class="custom-select custom-select mb-3" style="width: 100%">
+                        <option selected>Don't Repeat</option>
+                        <option value="1">Weekly</option>
+                      </select>
+                  </div>
+          </div>
+
+          
+          
+        </div>
+
+        <div class="modal-footer">
+            <!-- <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteStaff()"> Delete </button> -->
+            <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+            <button type="submit" class="btn btn-dark pull-right" (click)="modal.dismiss('Cancel click')"> Save </button>
+      </div>
+
+
+</ng-template>
