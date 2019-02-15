@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-Route::group(['middleware' => ['api', 'api.auth']], function ($router) {
+Route::group(['middleware' => ['api']], function ($router) {
     Route::post('me', 'AuthController@me');
 });
 Route::group([
