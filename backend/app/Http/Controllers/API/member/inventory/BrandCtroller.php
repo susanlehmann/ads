@@ -16,7 +16,7 @@ class BrandCtroller extends Controller
     }
 
     public function store(Request $request)
-    {
+    { 
         $input = [
             'id_client_brand' => $request->ownerId,
             'id_create' => $request->ownerId,

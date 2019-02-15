@@ -16,7 +16,7 @@ class ProductCtroller extends Controller
     }
 
     public function store(Request $request)
-    {
+    { 
         $input = [
             'id_client_supplier' => $request->ownerId,
             'id_create' => $request->ownerId,
