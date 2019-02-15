@@ -70,7 +70,7 @@ class CategoryCtroller extends Controller
     }
 
     public function destroy(Request $request)
-    {
+    { 
         $id = $request->id;
         if ($id != null) {
             $service = service::find($id);

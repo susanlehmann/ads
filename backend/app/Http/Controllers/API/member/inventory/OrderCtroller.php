@@ -19,7 +19,7 @@ class OrderCtroller extends Controller
     {
         $product = $request->info_product;
         if(isset($product))
-        {
+        { 
             $arr_product = [];
             foreach ($product as $value) {
                 $arr_product[] = [
