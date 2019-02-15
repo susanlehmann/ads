@@ -25,7 +25,7 @@ class CreateServicesTable extends Migration
             $table->decimal('retail_price_service',18,2)->nullable();
             $table->string('name_pricing_service')->nullable();
             $table->decimal('special_price_service',18,2)->nullable();
-            $table->text('id_staff')->nullable();
+            $table->json('id_staff')->nullable();
             $table->string('resource_requireb_service')->nullable();
             $table->text('online_booking_service')->nullable();
             $table->text('setting_service')->nullable();
