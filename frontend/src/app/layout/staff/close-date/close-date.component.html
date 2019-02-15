@@ -43,9 +43,9 @@
 
   <ng-template #content let-modal>
       <div class="modal-header">
-          <h4 class="modal-title col-sm-4 offset-sm-4">{{isAdd ? 'Create' : 'Edit'}} Closed Date</h4>
-          <button type="button" class="col-sm-4 close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
+          <h4 class="modal-title col-sm-6 offset-sm-3">{{isAdd ? 'Create' : 'Edit'}} Closed Date</h4>
+          <button type="button" class="col-sm-3 close" aria-label="Close">
+            <span aria-hidden="true" (click)="modal.dismiss('Cross click')">&times;</span>
           </button>
           </div>
           

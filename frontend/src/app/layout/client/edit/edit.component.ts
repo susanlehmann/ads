@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Client } from '../client';
 import { Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -7,17 +7,20 @@ import { HttpcallService } from '../../../shared/services/httpcall.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../../../shared/services/user.service';
 import { NotifierService } from 'angular-notifier';
-import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateFRParserFormatter } from '../../../shared/pipes/ngb-dateformat';
 
 @Component({
 	selector: 'app-edit',
 	templateUrl: './edit.component.html',
 	styleUrls: ['./edit.component.scss'],
-	providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
+	providers: [{provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter}]
 })
 export class EditComponent implements OnInit {
 
 	form: any = {};
+	birthday: any = {};
+	model12: any = {}; 
 
 	notificationTypes = [
 		{ id: 1, name: "Don't send notifications" },
@@ -55,11 +58,11 @@ export class EditComponent implements OnInit {
 
 	private loadInfo(id) {
 		this.userService.getUserById(id).subscribe(
-			success => {
+			async (success) => {
 				this.form = success;
 				this.form.mobile = this.form.phone;
 				this.form.telephone = this.form.tele_phone;
-				this.form.birthday = new Date(this.form.birthday);
+				this.form.birthdayYear = this.datePipe.transform(this.form.birthday, 'yyyy');
 				this.form.notificationType = this.form.appointment_notifications;
 				if(this.form.accepts_notifications == 1) {
 					this.form.acceptNotification = true;
@@ -71,14 +74,29 @@ export class EditComponent implements OnInit {
 				} else {
 					this.form.display_bookings = true;
 				}
-
 				this.form.referral = this.form.referral_source;
+				await Object.assign(this, this.model12, {
+					year: Number(this.datePipe.transform(this.form.birthday, 'yyyy')), 
+					month: Number(this.datePipe.transform(this.form.birthday, 'M')), 
+					day: Number(this.datePipe.transform(this.form.birthday, 'dd'))
+				});
 			},
 			error => {}
 		);
 	}
 
 	onSubmit(): void {
+		if(this.birthday.year){
+			if(typeof(this.form.birthdayYear) == "undefined" || typeof(this.form.birthdayYear) == undefined){
+				let dayNotYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
+				this.form.birthday = this.datePipe.transform(dayNotYear, 'yyyy-MM-dd');
+			} else {
+				let dayYear = this.form.birthdayYear + "-" + this.birthday.month + "-" + this.birthday.day;
+				this.form.birthday = this.datePipe.transform(dayYear, 'yyyy-MM-dd');
+			}
+		} else {
+			this.form.birthday = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+		}
 		this.update(this.form);
 	}
 
@@ -100,7 +118,6 @@ export class EditComponent implements OnInit {
 
 		this.userService.updateUserById(client).subscribe(
 			success => {
-				console.log(success);
 				this.notifierService.notify('success', 'Update has been successfully updated');
 			},
 			error => {
@@ -116,4 +133,15 @@ export class EditComponent implements OnInit {
 		}
 	}
 
+	loadDate(dayxx){
+		Object.assign(this, this.model12, {
+			year: Number(this.datePipe.transform(dayxx, 'yyyy')), 
+			month: Number(this.datePipe.transform(dayxx, 'M')), 
+			day: Number(this.datePipe.transform(dayxx, 'dd'))
+		});
+	}
+
+	selectDate(event) {
+		this.birthday = event;
+	}
 }

@@ -7,22 +7,22 @@
     <div class="col-md-5 offset-md-1 client-left-content">
       <div class="row form-group">
         <div class="col-sm-6">
-          <label class="control-label">First Name</label>
+          <label class="control-label">First Name <strong>*</strong></label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text">F</div>
             </div>
-            <input [(ngModel)]="form.firstName" type="text" required text class="form-control input-underline input-lg" name="firstName" placeholder="First Name" [ngModelOptions]="{updateOn: 'blur'}" #firstName="ngModel">
+            <input [(ngModel)]="form.firstName" type="text" required text class="form-control input-underline input-lg" name="firstName" placeholder="First Name" [ngModelOptions]="{updateOn: 'blur'}" #firstName="ngModel" #firstName>
           </div>
           <small class="form-text text-danger " *ngIf="!firstName.valid && (firstName.dirty || firstName.touched)">Invaild firstName !</small>
         </div>
         <div class="col-sm-6">
-          <label class="control-label">Last Name</label>
+          <label class="control-label">Last Name <strong>*</strong></label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text">L</div>
             </div>
-            <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="Last Name" required text #lastName="ngModel" [ngModelOptions]="{updateOn: 'blur'}">
+            <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="Last Name" required text #lastName="ngModel" [ngModelOptions]="{updateOn: 'blur'}" #lastName>
           </div>
           <small class="form-text text-danger " *ngIf="!lastName.valid && (lastName.dirty || lastName.touched)">Invaild lastName !</small>
         </div>
@@ -30,14 +30,14 @@
 
       <div class="row form-group">
         <div class="col-sm-6">
-          <label class="control-label">Mobile</label>
+          <label class="control-label">Mobile <strong>*</strong></label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text">M</div>
             </div>
-            <input [(ngModel)]="form.mobile" type="text" name="mobile" class="form-control input-underline input-lg" placeholder="Mobile" required text #mobile="ngModel" [ngModelOptions]="{updateOn: 'blur'}" minlength="9" maxlength="11">
+            <input [(ngModel)]="form.mobile" type="text" name="mobile" class="form-control input-underline input-lg" placeholder="Mobile" required text #mobile="ngModel" [ngModelOptions]="{updateOn: 'blur'}" minlength="9" maxlength="12" pattern="^[0-9]{9,12}$" #mobileChild>
           </div>
-          <small class="form-text text-danger" *ngIf="!mobile.valid && (mobile.dirty || mobile.touched)">Mobile number length must be between 9 and 11 !</small>
+          <small class="form-text text-danger" *ngIf="!mobile.valid && (mobile.dirty || mobile.touched || mobile.pattern)">Mobile number length must be between 9 and 11 (Number Only)!</small>
         </div>
 
         <div class="col-sm-6">
@@ -46,20 +46,20 @@
             <div class="input-group-prepend">
               <div class="input-group-text">T</div>
             </div>
-            <input [(ngModel)]="form.telephone" type="text" name="telephone" class="form-control input-underline input-lg" placeholder="Telephone" required text #telephone="ngModel" [ngModelOptions]="{updateOn: 'blur'}" minlength="9" maxlength="11">
+            <input [(ngModel)]="form.telephone" type="text" name="telephone" class="form-control input-underline input-lg" placeholder="Telephone" #telephone="ngModel" minlength="1" maxlength="12" pattern="^[0-9]{1,12}$">
           </div>
-          <small class="form-text text-danger" *ngIf="!telephone.valid && (telephone.dirty || telephone.touched)">Telephone number length must be between 9 and 11 !</small>
+          <small class="form-text text-danger" *ngIf="!telephone.valid">Number Only!</small>
         </div>
       </div>
 
       <div class="row form-group">
         <div class="col-sm-12">
-          <label class="control-label">Email</label>
+          <label class="control-label">Email <strong>*</strong></label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text">@</div>
             </div>
-            <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="Email" required email #email="ngModel" [ngModelOptions]="{updateOn: 'blur'}">
+            <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="Email" #email required email #email="ngModel" [ngModelOptions]="{updateOn: 'blur'}">
           </div>
           <small class="form-text text-danger " *ngIf="!email.valid && (email.dirty || email.touched)">Invaild Email !</small> 
         </div>
@@ -68,11 +68,10 @@
       <div class="row form-group">
         <div class="col-sm-12">
           <label class="control-label">{{'Send notifications by' }}</label>
-          <select [(ngModel)]="form.notificationType" name="notificationType" class="form-control" #notificationType="ngModel" required select [ngModelOptions]="{updateOn: 'blur'}">
-            <option value="" disabled selected="selected" hidden> -= Select notifications =-</option>
+          <select [(ngModel)]="form.notificationType" name="notificationType" class="form-control" #notificationType="ngModel">
+            <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
             <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
           </select>
-          <small class="form-text text-danger " *ngIf="!notificationType.valid && (notificationType.dirty || notificationType.touched)">Selected Notification Type !</small> 
         </div>
       </div>
 
@@ -108,13 +107,24 @@
                   </div>
                 </div>
 
-              <div class="form-group">
-                <label class="control-label">Birthday</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">B</div>
+              <div class="row form-group">
+                <div class="col-md-6 col-sm-12">
+                  <label class="control-label">Birthday</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">B</div>
+                    </div>
+                    <input type="text" placeholder="MM-dd" class="form-control" name="birthday" [(ngModel)]="form.birthday" #birthday="ngModel" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" (ngModelChange)="selectDate($event)" [navigation]="navigation">
                   </div>
-                  <input [(ngModel)]="form.birthday" type="text" placeholder="yyyy-MM-dd" class="form-control" name="birthday" [(ngModel)]="model2" #birthday="ngModel" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" dateFormat="yyyy-MM-dd">
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <label class="control-label">Year</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Y</div>
+                    </div>
+                    <input [(ngModel)]="form.birthdayYear" type="text" placeholder="yyyy" class="form-control" name="birthdayYear" #birthdayYear="ngModel">
+                  </div>
                 </div>
               </div>
 
@@ -205,6 +215,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
-    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()" [disabled]="!f.valid"><i class="fa fa-plus"></i> Add New </button>
+    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"><i class="fa fa-plus"></i> Add New </button>
   </div>
 </form>
