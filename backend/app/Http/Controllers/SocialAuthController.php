@@ -57,10 +57,10 @@ class SocialAuthController extends Controller
             return $this->sendFailedResponse($e->getMessage());
         }
 
+        $authUser = $this->loginOrCreateAccount($user, $driver);
 
-        $authUser = $this->findOrCreateUser($user, $provider);
         \Auth::login($authUser, true);
-        return \Redirect::to('../../#/login-loader');
+        return \Redirect::to('/../../#/login-loader');
     }
 
     /**
