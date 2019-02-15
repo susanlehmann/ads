@@ -15,4 +15,15 @@ Route::get('/', function () {
     return view('frontend');
 });
 
-Route::post('create_users', 'UserController@store');
+    // Social Auth
+    
+Route::group(['middleware' => ['api']], function () {
+    Route::get('user/verify/{verificationCode}', ['uses' => 'AuthController@verifyUserEmail']);
+    Route::get('auth/{driver}', 'SocialAuthController@redirectToProvider');
+    Route::get('auth/{driver}/callback', 'SocialAuthController@handleProviderCallback');
+});
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
