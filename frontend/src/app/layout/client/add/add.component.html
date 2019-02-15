@@ -12,7 +12,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text">F</div>
             </div>
-            <input [(ngModel)]="form.firstName" type="text" required text class="form-control input-underline input-lg" name="firstName" placeholder="First Name" [ngModelOptions]="{updateOn: 'blur'}" #firstName="ngModel">
+            <input [(ngModel)]="form.firstName" type="text" required text class="form-control input-underline input-lg" name="firstName" placeholder="First Name" [ngModelOptions]="{updateOn: 'blur'}" #firstName="ngModel" #firstName>
           </div>
           <small class="form-text text-danger " *ngIf="!firstName.valid && (firstName.dirty || firstName.touched)">Invaild firstName !</small>
         </div>
@@ -22,7 +22,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text">L</div>
             </div>
-            <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="Last Name" required text #lastName="ngModel" [ngModelOptions]="{updateOn: 'blur'}">
+            <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="Last Name" required text #lastName="ngModel" [ngModelOptions]="{updateOn: 'blur'}" #lastName>
           </div>
           <small class="form-text text-danger " *ngIf="!lastName.valid && (lastName.dirty || lastName.touched)">Invaild lastName !</small>
         </div>
@@ -35,7 +35,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text">M</div>
             </div>
-            <input [(ngModel)]="form.mobile" type="text" name="mobile" class="form-control input-underline input-lg" placeholder="Mobile" required text #mobile="ngModel" [ngModelOptions]="{updateOn: 'blur'}" minlength="9" maxlength="12" pattern="^[0-9]{9,12}$">
+            <input [(ngModel)]="form.mobile" type="text" name="mobile" class="form-control input-underline input-lg" placeholder="Mobile" required text #mobile="ngModel" [ngModelOptions]="{updateOn: 'blur'}" minlength="9" maxlength="12" pattern="^[0-9]{9,12}$" #mobileChild>
           </div>
           <small class="form-text text-danger" *ngIf="!mobile.valid && (mobile.dirty || mobile.touched || mobile.pattern)">Mobile number length must be between 9 and 11 (Number Only)!</small>
         </div>
@@ -215,6 +215,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
-    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()" [disabled]="!f.valid"><i class="fa fa-plus"></i> Add New </button>
+    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"><i class="fa fa-plus"></i> Add New </button>
   </div>
 </form>

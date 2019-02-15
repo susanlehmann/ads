@@ -23,6 +23,9 @@ export class AddComponent implements OnInit {
 	@ViewChild('f') floatingLabelForm: NgForm;
     @ViewChild('vform') validationForm: FormGroup;
     @ViewChild('email') emailElement: ElementRef;
+    @ViewChild('firstName') firstNameElement: ElementRef;
+    @ViewChild('lastName') lastNameElement: ElementRef;
+    @ViewChild('mobileChild') mobileElement: ElementRef;
     regularForm: FormGroup;
 
 	form: any = {};
@@ -122,12 +125,33 @@ export class AddComponent implements OnInit {
 			},
 			error => {
 				let message = error.error.message;
-				if(message.search("users_email_unique") > 0){
-					this.emailElement.nativeElement.focus();
-					this.notifierService.notify('warning', 'Email Unique !');
-				}
+				this.alertError(message);
 			}
 		)      
+	}
+
+	alertError(message: string) {
+		let arrErr = message.split("$");
+		if(message.search("users_email_unique") > 0){
+			this.emailElement.nativeElement.focus();
+			this.notifierService.notify('warning', 'Email Unique !');
+		}
+		if (arrErr[1] == "firstName") {
+			this.firstNameElement.nativeElement.focus();
+			this.notifierService.notify('warning', 'First Name is not empty !');
+		}
+		if (arrErr[1] == "lastName") {
+			this.lastNameElement.nativeElement.focus();
+			this.notifierService.notify('warning', 'Last Name is not empty !');
+		}
+		if (arrErr[1] == "mobile") {
+			this.mobileElement.nativeElement.focus();
+			this.notifierService.notify('warning', 'Mobile is not empty !');
+		}
+		if (arrErr[1] == "email") {
+			this.emailElement.nativeElement.focus();
+			this.notifierService.notify('warning', 'Email is not empty !');
+		}
 	}
 
 	goBack() {
@@ -140,7 +164,6 @@ export class AddComponent implements OnInit {
 	selectDate(event) {
 		this.birthday = event;
 	}
-
 
 
 }
