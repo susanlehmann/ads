@@ -102,10 +102,10 @@ class SocialAuthController extends Controller
         } else {
             // create a new user
             $user = User::create([
-                'business_id' => '',
-                'role_id' => '',
-                'id_user_create' => '',
-                'id_user_update' => '',
+                // 'business_id' => '',
+                // 'role_id' => '',
+                // 'id_user_create' => '',
+                // 'id_user_update' => '',
                 'firstName' => $providerUser->getName(),
                 'lastName' => $providerUser->getName(),
                 'email' => $providerUser->getEmail(),
