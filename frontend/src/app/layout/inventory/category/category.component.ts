@@ -9,7 +9,7 @@ import { NgbModalRef, NgbModalOptions, NgbModal, NgbModalConfig, NgbActiveModal,
 export class CategoryComponent implements OnInit {
 
   closeResult: string;
-
+  categories = [{name: 'Hair product',productassigned: '1'},{name: 'Da product',productassigned: '2'}]
   constructor(private modalService: NgbModal) {}
 
   open(content) {

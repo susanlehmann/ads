@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { CountryPickerModule } from 'ngx-country-picker';
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
@@ -14,7 +13,7 @@ export class SupplierComponent implements OnInit {
   countryForm: FormGroup;
   modalOptions: NgbModalOptions;
   countries = ['USA', 'Canada', 'Uk', 'VN', 'JP']
-
+  suppliers =[{name: 'aaa',phone: '11028883', email: 'asdjhajs@gmail.com',productassigned: '1',updatetime: '25 Jan 2019, 13:52'},{name: 'awwwwaa',phone: '11028883', email: 'asasddjhajs@gmail.com',productassigned: '2',updatetime: '27 Jan 2019, 13:52'}]
   constructor(private modalService: NgbModal) {
     this.modalOptions = {
       backdrop: 'static',

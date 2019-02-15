@@ -9,7 +9,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class BrandComponent implements OnInit {
 
   closeResult: string;
-
+  brands = [{name: 'killua',productassigned: '1',updatetime: '25 Jan 2019, 13:52'},{name: 'kim',productassigned: '2',updatetime: '26 Jan 2019, 13:52'}]
   constructor(private modalService: NgbModal) {}
 
   open(content) {
@@ -29,7 +29,6 @@ export class BrandComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-
 
   ngOnInit() {
   }

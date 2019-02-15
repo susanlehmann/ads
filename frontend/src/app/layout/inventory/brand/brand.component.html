@@ -78,13 +78,13 @@
                                     </th>
                                   </tr>
                                 </thead>
-                                <tbody>
+                                <tbody *ngFor="let brand of brands">
                                   <tr class="_1A0eEb _1zQ7jO">
-                                    <td class="N3OZB6 _1vLxYz">killua</td>
+                                    <td class="N3OZB6 _1vLxYz">{{brand.name}}</td>
                                     <td class="N3OZB6 _1vLxYz">
-                                      <div class="_2mmSvJ">1</div>
+                                      <div class="_2mmSvJ">{{brand.productassigned}}</div>
                                     </td>
-                                    <td class="N3OZB6 _1vLxYz">25 Jan 2019, 13:52</td>
+                                    <td class="N3OZB6 _1vLxYz">{{brand.updatetime}}</td>
                                   </tr>
                                 </tbody>
                               </table>

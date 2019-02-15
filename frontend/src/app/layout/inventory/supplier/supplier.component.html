@@ -85,22 +85,22 @@
                                       </th>
                                     </tr>
                                   </thead>
-                                  <tbody>
+                                  <tbody *ngFor="let supplier of suppliers">
                                     <tr class="_1A0eEb _1zQ7jO">
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div>asd</div>
+                                        <div>{{supplier.name}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div></div>
+                                        <div>{{supplier.phone}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div></div>
+                                        <div>{{supplier.email}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div class="_3uGQFE">0</div>
+                                        <div class="_3uGQFE">{{supplier.productassigned}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div>25 Jan 2019, 13:52</div>
+                                        <div>{{supplier.updatetime}}</div>
                                       </td>
                                     </tr>
                                   </tbody>

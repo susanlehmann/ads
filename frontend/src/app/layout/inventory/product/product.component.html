@@ -43,7 +43,7 @@
             </span>Filters
           </button>
         </div>
-        <div class="_1mW557 coKyrs">
+        <div class="_1mW557 coKyrs" >
           <div class="_2hndFf">
             <div>
               <div class="nsuqUP">
@@ -115,22 +115,22 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody *ngFor="let product of products">
                     <tr class="_1A0eEb _1zQ7jO">
-                      <td class="N3OZB6 _1vLxYz">ad</td>
+                      <td class="N3OZB6 _1vLxYz">{{ product.name }}</td>
                       <td class="N3OZB6 _1vLxYz"></td>
                       <td class="N3OZB6 _1vLxYz">
                         <div class="_1BMD-j">
                           <span>
-                            <span class="_28pPyW _3YUJNN">₫121</span>
-                            <span class="DBfVhs">₫12</span>
+                            <span class="_28pPyW _3YUJNN">{{ product.salesprice }}</span>
+                            <span class="DBfVhs">{{ product.retailprice }}</span>
                           </span>
                         </div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
-                        <div class="_1BMD-j">1</div>
+                        <div class="_1BMD-j">{{ product.stockhand }}</div>
                       </td>
-                      <td class="N3OZB6 _1vLxYz">25 Jan 2019, 13:53</td>
+                      <td class="N3OZB6 _1vLxYz">{{ product.updatetime }}</td>
                     </tr>
                   </tbody>
                 </table>

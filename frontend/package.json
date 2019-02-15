@@ -29,7 +29,6 @@
     "@ngx-translate/core": "11.0.0",
     "@ngx-translate/http-loader": "4.0.0",
     "angular-notifier": "^4.1.1",
-    "angular2-countrypicker": "^1.0.0",
     "chart.js": "2.7.3",
     "core-js": "2.5.7",
     "font-awesome": "^4.7.0",

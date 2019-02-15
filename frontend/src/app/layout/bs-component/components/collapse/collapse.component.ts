@@ -1,13 +1,20 @@
-import { Component  } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { HttpcallService } from '../../../shared/services/httpcall.service';
-
+import { Component, OnInit, NgModule  } from '@angular/core';
+import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Collapse } from './model/group';
+import { HttpcallService } from '../../../../shared/services/httpcall.service';
+import { NotifierService } from 'angular-notifier';
+import { HttpClient } from '@angular/common/http';
+//import { group } from '@angular/animations';
+//import { Employee, Service } from './collapse.service';
 @Component({
     selector: 'app-collapse',
     templateUrl: './collapse.component.html',
     styleUrls: ['./collapse.component.scss']
 })
-export class CollapseComponent {
+
+export class CollapseComponent implements OnInit {
+  vouchersale = true;
+  loading: boolean;
   online_booking = true;
   closeResult: string;
   title = 'Checkbox';
@@ -17,8 +24,38 @@ export class CollapseComponent {
   name: any;
   selectedAll: any;
   selectedNames: any;
-  constructor(private modalService: NgbModal) {
-    this.treatment = this.treatments[1];
+  groupColors: string[];
+  public error = [];
+  listgroups: Collapse[];
+  names;
+  form = new Collapse();
+  groupDescription: string;
+  eid: number;
+  selectedId: string;
+  isUpdate: boolean;
+  isOpened = true;
+  public isCollapsed = false;
+  // mock data
+  treatments = [{name: 'demo'},{name: 'dmeo1'},{name: 'demo2'}];
+  durations = [{name: '1h'},{name: '2h'},{name:'3h'}];
+  services = [{name: 'Everyone'},{name: 'Males only'},{name: 'Females only'}];
+  extratimes = [{name: 'No extra time', eid: '1'},{name: 'Processing time after',eid:'2'},{name: 'Blocked time after',eid:'3'}];
+  durationextras = [{name: 'asdsad', eid:'1'},{name: 'asdasdasdasd',eid:'1'},{name: 'sadasdasdasdasd',eid:'2'}]
+  taxs =[{name: 'No tax'},{name: 'Default: No tax'}]
+  voucherexpirys = [{name: 'Default: 6 month'},{name: '1 month'},{name: '2 month'},{name: '3 month'},{name: '4 month'},{name: '5 month'},{name: 'no expiry'}]
+  public isDisabledDurationExtras: boolean = true;
+  modal: any;
+  ngOnInit() {
+    this.getGroup();
+  }
+
+  constructor(private modalService: NgbModal, private http: HttpClient,
+    private httpService: HttpcallService,
+    private notifierService: NotifierService
+  ) {
+    this.groupColors = [
+      'red', 'green', 'yellow', 'olive', 'orange', 'teal', 'blue', 'violet', 'purple', 'pink'
+    ];
     this.title = "Select all/Deselect all checkbox - Angular 2";
     this.names = [
       { name: 'Prashobh', selected: false },
@@ -30,11 +67,10 @@ export class CollapseComponent {
       { name: 'Zian', selected: false },
       { name: 'karan', selected: false },
     ]
-      this.selectedAll = !this.selectedAll;
-
-      for (var i = 0; i < this.names.length; i++) {
-          this.names[i].selected = this.selectedAll;
-      }
+    this.selectedAll = !this.selectedAll;
+    for (var i = 0; i < this.names.length; i++) {
+        this.names[i].selected = this.selectedAll;
+    };
 
   }
   checkIfAllSelected() {
@@ -46,10 +82,9 @@ export class CollapseComponent {
 
   return true;
   }
-
-
-
   open(contents) {
+    this.isCreate = true;
+    this.form.new();
     this.modalService.open(contents, { size: 'lg', backdrop: 'static' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -57,6 +92,16 @@ export class CollapseComponent {
     });
   }
 
+  updategroup(service_groups,groupID){
+    this.isUpdate = true;
+    this.selectedId = groupID;
+    //this.Collapse.findById(groupID)
+    this.modalService.open(service_groups, { size: 'lg', backdrop: 'static' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -68,74 +113,80 @@ export class CollapseComponent {
   }
   selectedColor = '';
 
-  colors = [
-    {
-      name: 'yellow',
-      value: '#ffff00'
-    },
-    {
-      name: 'red',
-      value: '#ff3300'
-    },
-    {
-      name: 'blue',
-      value: '#0000ff'
-    }
-  ];
-
-  onChange(value){
-    this.selectedColor = value;
+  getGroup() {
+    this.startLoading();
+    this.http.get(`http://localhost:8000/api/admin/service_group/list-service-group`)
+    .subscribe((listservicegroups:any) => {
+        this.stopLoading();
+        this.listgroups = listservicegroups.service_group
+        .map(Collapse.toModel)
+        .sort((a, b) => {
+          return a.id - b.id;
+        });
+    }, err => {
+      this.stopLoading();
+    });
   }
 
-  treatments = [{name: 'demo'},{name: 'dmeo1'},{name: 'demo2'}];
-  durations = [{name: '1h'},{name: '2h'},{name:'3h'}];
-  services = [{name: 'Everyone'},{name: 'Males only'},{name: 'Females only'}];
-  onSubmit(): void {
+  onSubmit(): void{
     const dto = this.form.toDto();
     this.startLoading();
     if (this.isCreate) {
-      this.addService(dto);
+       this.addGroup(dto);
     } else {
-      this.updateService(dto);
+       alert('something wrong');
     }
-    this.modal.dismissAll();
+     this.modalService.dismissAll();
+    }
+
+  onUpdate(): void{
+    const dto = this.form.toDto();
+    this.startLoading();
+    if (this.isUpdate){
+      this.updateGroup(dto);
+    }
+     this.modalService.dismissAll();
   }
-  addService(service): void {
-    this.http.post(`${this.baseUrl}/user/create_user`, service)
+  addGroup(service_group): void {
+    this.http.post(`http://localhost:8000/api/admin/service_group/create-service-group`, service_group)
     .subscribe((data:any) => {
-            this.stopLoading();
-            this.getUser();
-            this.notifierService.notify('success', 'A new Service has been successfully create');
+      this.stopLoading();
+      this.getGroup();
+      this.notifierService.notify('success', 'A new Group has been successfully added');
     }), err => {
       this.stopLoading();
     };
-  }
-  updateService(service) {
-    this.http.post(`${this.baseUrl}/user/update_user`, service)
+    }
+
+  updateGroup(service_group): void {
+    this.http.post(`http://localhost:8000/api/admin/service_group/update-service-group`, service_group)
     .subscribe((data:any) => {
-            this.stopLoading();
-            this.getUser();
-            this.notifierService.notify('success', 'Service information has been successfully updated');
+      this.stopLoading();
+      this.getGroup();
+      this.notifierService.notify('success', 'Group information has been successfully updated');
     }), err => {
       this.stopLoading();
     };
-  }
-  deleteStaff() {
-    this.http.post(`${this.baseUrl}/user/delete_user`, {'id': this.selectedId})
+    }
+
+  deleteGroup() {
+    if(confirm("are you sure you want to delete"  + "?")){
+    this.http.post(`http://localhost:8000/api/admin/service_group/delete-service-group`, {'id':  this.selectedId})
       .subscribe((data:any) => {
-              this.getUser();
-              this.notifierService.notify('success', 'A Service has been successfully deleted');
-          });
-    this.modal.dismissAll();
+        console.log(data);
+        this.getGroup();
+        this.notifierService.notify('success', 'A Group has been successfully deleted');
+      });
+     this.modalService.dismissAll();
+    }
   }
 
-  startLoading(): void {
+  startLoading(){
     this.loading = true;
   }
 
-  stopLoading(): void {
+  stopLoading(){
     this.loading = false;
   }
-
 
 }

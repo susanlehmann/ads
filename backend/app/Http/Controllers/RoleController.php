@@ -49,7 +49,7 @@ class RoleController extends Controller
     public function create()
     {
         $permission = Permission::get();
-        return view('roles.create',compact('permission'));
+        return response()->json($permission);
     }
 
 
@@ -69,10 +69,15 @@ class RoleController extends Controller
 
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
-
-
-        return redirect()->route('roles.index')
-                        ->with('success','Role created successfully');
+        if($role == true)
+        {
+            $msg = ['success' => 'Create a new role successfully'];
+        }
+        else
+        {
+            $msg = ['error' => 'There was an error creating the account'];
+        }
+        return response()->json($msg);
     }
     /**
      * Display the specified resource.
@@ -132,10 +137,15 @@ class RoleController extends Controller
 
 
         $role->syncPermissions($request->input('permission'));
-
-
-        return redirect()->route('roles.index')
-                        ->with('success','Role updated successfully');
+        if($role == true)
+        {
+            $msg = ['success' => 'Update a new role successfully'];
+        }
+        else
+        {
+            $msg = ['error' => 'There was an error update the role'];
+        }
+        return response()->json($msg);
     }
     /**
      * Remove the specified resource from storage.
@@ -145,8 +155,15 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('roles.index')
-                        ->with('success','Role deleted successfully');
+        $role = DB::table("roles")->where('id',$id)->delete();
+        if($role == true)
+        {
+            $msg = ['success' => 'Delete a new role successfully'];
+        }
+        else
+        {
+            $msg = ['error' => 'There was an error delete the role'];
+        }
+        return response()->json($msg);
     }
 }

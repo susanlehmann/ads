@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use App\User;
-
-  
+use Mail;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 class AuthController extends Controller
 {
     /**
@@ -17,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup','verifyUserEmail']]);
     }
 
     /**
@@ -28,19 +29,72 @@ class AuthController extends Controller
     public function login()
     {
         $credentials = request(['email', 'password']);
-
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Email or password does not exist!'], 401);
+        $user = User::whereEmail($credentials['email'])->first();
+        if (isset($user->email_verified) && $user->email_verified == 0) {
+            return response()->json(['error' =>'Email Unverified']);
         }
-
-        return $this->respondWithToken($token);
+        else {
+          try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 400);
+            }
+          } catch (JWTException $e) {
+              return response()->json(['error' => 'could_not_create_token'], 500);
+          }
+  
+          return $this->respondWithToken($token);
+        }
+        
     }
 
     public function signup(SignUpRequest $request)
     {
-        $user = User::create($request->all());
+        $verificationCode = str_random(40);
+
+        $input = [
+            'business_id' => 0,
+            'role_id' => 0,
+            'id_user_create' => 0,
+            'id_user_update' => 0,
+            'firstName' => $request->firstName,
+            //'lastName' => $request->lastName,
+            'email' => $request->email,
+            'password' => $request->password,
+            //'phone' => $request->phone,
+            //'ennable_appointment_booking' => $request->ennable_appointment_booking,
+            //'notes' => $request->notes,
+            //'start_date' => $request->start_date,
+            //'end_date' => $request->end_date,
+            //'appointment_color' => $request->appointment_color,
+            //'dial_code' => $request->dial_code,
+            'first_login' => 0,
+            //'service_commission' => $request->service_commission,
+            //'product_commission' => $request->product_commission,
+            //'voucher_sales_commission' => $request->voucher_sales_commission,
+            'sort_order' => 1,
+            'level' => 2,
+            'parent' => 0,
+            'email_verification_code' => $verificationCode,
+        ];
+        // $user->level = 0; // ko co column level
+        $user = User::create($input);
+        $token = JWTAuth::fromUser($user);
+        Mail::send('emails.userverification', ['verificationCode' => $verificationCode], function ($m) use ($request) {
+            $m->to($request->email, 'test')->subject('Email Confirmation');
+        });
         return $this->login($request);
 
+    }
+
+    public function verifyUserEmail($verificationCode)
+    {
+        $user = User::whereEmailVerificationCode($verificationCode)->first();
+        if (!$user) {
+            return redirect('/#/userverification/failed');
+        }
+        $user->email_verified = 1;
+        $user->save();
+        return redirect('/#/userverification/success');
     }
 
     /**
@@ -61,7 +115,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -88,7 +141,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()->name   /// user()->name
+            'user' => auth()->user(),   /// user()->name
         ]);
     }
 }
