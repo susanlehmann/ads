@@ -77,6 +77,15 @@ Route::group([
         Route::post('update-service-group', 'Service_GroupCtroller@update');
         Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
     });
+    
+    Route::group(['prefix' => 'admin/service', 'namespace' => 'API\admin'], function(){
+        Route::get('list-service', 'ServiceController@index');
+        Route::post('create-service', 'ServiceController@store');
+        Route::post('show-service', 'ServiceController@show');
+        Route::post('update-service', 'ServiceController@update');
+        Route::post('delete-service', 'ServiceController@destroy'); 
+    });
+
 
     Route::group(['prefix' => 'user/service', 'namespace' => 'API\member\service'], function(){
         Route::post('list-service', 'ServiceCtroller@index');

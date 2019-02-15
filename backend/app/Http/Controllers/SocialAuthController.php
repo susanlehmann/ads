@@ -131,7 +131,10 @@ class SocialAuthController extends Controller
                 // user can use reset password to create a password
             ]);
         }
+<<<<<<< HEAD
+=======
         echo json_encode($user);die;
+>>>>>>> 4c276610936379f9e2b3e0961a42dcb34de14268
         // login the user
         Auth::login($user, true);
 
