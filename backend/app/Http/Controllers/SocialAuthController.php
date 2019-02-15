@@ -57,10 +57,10 @@ class SocialAuthController extends Controller
             return $this->sendFailedResponse($e->getMessage());
         }
 
-        $authUser = $this->loginOrCreateAccount($user, $driver);
-
-        Auth::login($authUser, true);
-        return \Redirect::to('/../../#/login-loader');
+        // check for email in returned user
+        return empty( $user->email )
+            ? $this->sendFailedResponse("No email id returned from {$driver} provider.")
+            : $this->loginOrCreateAccount($user, $driver);
     }
 
     /**
@@ -68,9 +68,10 @@ class SocialAuthController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function sendSuccessResponse()
+    protected function sendSuccessResponse($user)
     {
-        return \Redirect::to('../../#/login-loader');
+        Auth::login($user, true);
+        return \Redirect::to('/../../#/login-loader');
     }
 
     /**
@@ -101,7 +102,7 @@ class SocialAuthController extends Controller
             ]);
         } else {
             // create a new user
-            return User::create([
+            $user = User::create([
                 'business_id' => 0,
                 'role_id' => 0,
                 'id_user_create' => 0,
@@ -133,9 +134,8 @@ class SocialAuthController extends Controller
         }
 
         // login the user
-        // Auth::login($user, true);
 
-        // return $this->sendSuccessResponse();
+        return $this->sendSuccessResponse($user);
     }
 
     /**
