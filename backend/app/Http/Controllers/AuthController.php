@@ -41,7 +41,6 @@ class AuthController extends Controller
           } catch (JWTException $e) {
               return response()->json(['error' => 'could_not_create_token'], 500);
           }
-          auth()->login($user,true);
           return $this->respondWithToken($token);
         }
         
@@ -104,7 +103,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth()->guard('api')->user());
     }
 
     /**
