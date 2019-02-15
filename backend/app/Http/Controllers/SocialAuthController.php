@@ -68,9 +68,9 @@ class SocialAuthController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function sendSuccessResponse()
+    protected function sendSuccessResponse($user)
     {
-        return \Redirect::to('/#/login-loader');
+        return \Redirect::to('../../#/login-loader')->withErrors(['msg' => $user ?: 'Unable to login, try with another provider to login.']);
     }
 
     /**
@@ -135,7 +135,7 @@ class SocialAuthController extends Controller
         // login the user
         Auth::login($user, true);
 
-        return $this->sendSuccessResponse();
+        return $this->sendSuccessResponse($user);
     }
 
     /**
