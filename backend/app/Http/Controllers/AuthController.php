@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup','verifyUserEmail','me']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup','verifyUserEmail']]);
     }
 
     /**
@@ -103,7 +103,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->guard('api')->user());
+        return response()->json(auth()->user());
     }
 
     /**
