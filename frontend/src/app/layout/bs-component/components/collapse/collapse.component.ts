@@ -42,7 +42,8 @@ export class CollapseComponent implements OnInit {
   eid: number;
   selectedId: string;
   isUpdate: boolean;
-
+  isOpened = true;
+  public isCollapsed = false;
   // mock data
   treatments = [{name: 'demo'},{name: 'dmeo1'},{name: 'demo2'}];
   durations = [{name: '1h'},{name: '2h'},{name:'3h'}];
@@ -100,9 +101,10 @@ export class CollapseComponent implements OnInit {
     });
   }
 
-  updategroup(service_groups){
+  updategroup(service_groups,groupID){
     this.isUpdate = true;
-    this.form.new();
+    this.selectedId = groupID;
+    //this.Collapse.findById(groupID)
     this.modalService.open(service_groups, { size: 'lg', backdrop: 'static' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

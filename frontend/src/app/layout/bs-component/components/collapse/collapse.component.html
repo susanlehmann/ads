@@ -9,24 +9,28 @@
                 <div class="_3o5M5s" style="display: flex; flex-direction: row;">
                   <div class="_2yU4mG" style="display: flex; flex-direction: row;">
                     <div class="_2mPFMy _1Ov_P6 ex0yBB _1uoK7S _3KrHdu _2Ihtwi _1FszNF" style="display: flex; flex-direction: column;">
-                      <span class="_2FSeuB _240vE8 _2CXiYN _3vTBXo">
-                        <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
-                          <g>
-                            <path d="M1.5 1.5v15h17v-15h-17zM1 0h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1z"></path>
-                            <path d="M4 5h12H4zm0-1h12a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zM4 9h12H4zm0-1h12a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zM4 13h12H4zm0-1h12a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
-                          </g>
-                        </svg>
-                      </span>
+                      <button (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
+                        <span class="_2FSeuB _240vE8 _2CXiYN _3vTBXo">
+                          <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                              <path d="M1.5 1.5v15h17v-15h-17zM1 0h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1z"></path>
+                              <path d="M4 5h12H4zm0-1h12a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zM4 9h12H4zm0-1h12a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zM4 13h12H4zm0-1h12a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                            </g>
+                          </svg>
+                        </span>
+                      </button>
                     </div>
                     <div class="_2mPFMy _1Ov_P6 ex0yBB _1uoK7S _3KrHdu _1FszNF" style="display: flex; flex-direction: column;">
-                      <span class="_2FSeuB _240vE8 _2CXiYN _3vTBXo">
-                        <svg viewBox="0 0 20 17" xmlns="http://www.w3.org/2000/svg">
-                          <g>
-                            <path d="M1.5 1.5v2h17v-2h-17zM1 0h18a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM1.5 7.5v2h17v-2h-17zM1 6h18a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a1 1 0
-0 1 1-1zM1.5 13.5v2h17v-2h-17zM1 12h18a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1z"></path>
-                          </g>
-                        </svg>
-                      </span>
+                      <button (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
+                        <span class="_2FSeuB _240vE8 _2CXiYN _3vTBXo">
+                          <svg viewBox="0 0 20 17" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                              <path d="M1.5 1.5v2h17v-2h-17zM1 0h18a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM1.5 7.5v2h17v-2h-17zM1 6h18a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V7a1 1 0
+0 1 1-1zM1.5 13.5v2h17  v-2h-17zM1 12h18a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1z"></path>
+                            </g>
+                          </svg>
+                        </span>
+                      </button>
                     </div>
                   </div>
                   <div style="flex-shrink: 1; flex-grow: 1;"></div>
@@ -49,11 +53,13 @@
                         <div class="ZeB6l7" data-react-beautiful-dnd-draggable="0" tabindex="0" data-react-beautiful-dnd-drag-handle="0" aria-roledescription="Draggable item. Press space bar to lift" draggable="false"  *ngFor="let group of listgroups">
                           <div class="_27C1WR" style="display: flex; flex-direction: row;margin-top: -16px;" ngbDropdown >
                             <div class="_3piVXo" style="display: flex; flex-direction: row;">
-                              <span class="_2FSeuB _240vE8 _2p3gj5 _25R4LF _1rnkiM">
-                                <svg viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M1 0h14a1 1 0 1 1 0 2H1a1 1 0 1 1 0-2zm0 4h14a1 1 0 1 1 0 2H1a1 1 0 1 1 0-2zm0 4h14a1 1 0 1 1 0 2H1a1 1 0 1 1 0-2z"></path>
-                                </svg>
-                              </span>
+
+                                <span class="_2FSeuB _240vE8 _2p3gj5 _25R4LF _1rnkiM">
+                                  <svg viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 0h14a1 1 0 1 1 0 2H1a1 1 0 1 1 0-2zm0 4h14a1 1 0 1 1 0 2H1a1 1 0 1 1 0-2zm0 4h14a1 1 0 1 1 0 2H1a1 1 0 1 1 0-2z"></path>
+                                  </svg>
+                                </span>
+
                               <div class="_1p62pX _2VnNQQ _1f5dc9">{{ group.groupName}}</div>
                             </div>
                             <button class="_JXDTj _28JDiI -AN3nQ _1FszNF _3ttzJg _2DZ1oJ _26WQGn _311OLi" data-qa="service-group-options" style="flex-shrink: 0;" id="dropdownBasic1" ngbDropdownToggle>
@@ -66,7 +72,7 @@
                               </span>
                             </button>
                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                              <button class="dropdown-item" (click)="openservice(service)">Add New Service</button>
+                              <button class="dropdown-item" (click)="open(service)">Add New Service</button>
                               <ng-template #service let-modal>
                                   <div class="modal-header">
                                     <h4 class="modal-title offset-sm-4" id="modal-basic-title">New Service Group</h4>
@@ -266,17 +272,16 @@ online bookings menu</h4>
                                 </ng-template>
                               <div class="dropdown-divider"></div>
                               <button *ngIf="!isCreate" class="dropdown-item" style="color: red;" (click)="deleteGroup()">Delete Group</button>
-
                             </div>
                           </div>
-                          <div aria-hidden="false" class="rah-static rah-static--height-auto" style="height: auto; overflow: visible;"><div>
+                          <div aria-hidden="false" class="rah-static rah-static--height-auto" style="height: auto; overflow: visible;" [ngbCollapse]="isCollapsed"><div>
                             <div class="_2mPFMy _1uoK7S _1TXHtj" data-react-beautiful-dnd-droppable="0" style="display: flex; flex-direction: column;">
                               <div>
                                 <div class="_1IZ51C">
                                   <div class="_15Cf1e" data-react-beautiful-dnd-draggable="0" tabindex="0" data-react-beautiful-dnd-drag-handle="0" aria-roledescription="Draggable item. Press space bar to lift"
 draggable="false">
                                     <div class="TKzXaQ _1FszNF">
-                                      <div class="_G2V6_" style="background-color: rgb(226, 166, 230);"></div>
+                                      <div class="_G2V6_" [ngStyle]="{'background': group.groupColor}"></div>
                                       <div class="_3Rm-Lo">
                                         <div style="display: flex; flex-direction: row; flex-grow: 1; align-items: center;">
                                           <span class="_2FSeuB _240vE8 _2p3gj5 _25R4LF _2j8b8s">
@@ -284,7 +289,7 @@ draggable="false">
                                               <path d="M1 0h14a1 1 0 1 1 0 2H1a1 1 0 1 1 0-2zm0 4h14a1 1 0 1 1 0 2H1a1 1 0 1 1 0-2zm0 4h14a1 1 0 1 1 0 2H1a1 1 0 1 1 0-2z"></path>
                                             </svg>
                                           </span>
-                                          <div class="-Ypemc" style="flex-grow: 1;">
+                                          <div class="-Ypemc" style="flex-grow: 1;" >
                                             <div class="_16CLpx" style="display: flex; flex-direction: row; flex-grow: 1;">
                                               <div class="_1p62pX _2wRsul _28kZVp" data-qa="service-pricng-level-name" style="flex-grow: 1;">ádasd</div>
                                               <div class="_1p62pX _3CbXpB _29aaBJ" data-qa="service-duration">1h</div>
@@ -305,6 +310,7 @@ draggable="false">
                             </div>
                           </div>
                         </div>
+                        <div aria-hidden="false" class="rah-static rah-static--height-auto" style="height: auto; overflow: visible;" *ngIf="!isOpened"></div>
                       </div>
                     </div>
                   </div>

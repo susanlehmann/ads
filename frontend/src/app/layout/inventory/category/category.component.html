@@ -1,66 +1,85 @@
 <div class="shedul-app">
-    <section class="main-content">
-      <div class="react">
-        <div class="_2uCs3H">
-          <div class="_2gzTLZ">
-            <div class="WCtapg">
-              <div class="GVEv-Y" style="display: flex; flex-direction: column;">
-                <div>
-                  <div class="_2jGgaE">
+  <section class="main-content">
+    <div class="react">
+      <div class="_2uCs3H">
+        <div class="_2gzTLZ">
+          <div class="WCtapg">
+            <div class="GVEv-Y" style="display: flex; flex-direction: column;">
+              <div>
+                <div class="_2jGgaE">
+                  <div>
                     <div>
-                      <div>
-                        <div class="_3ggHzc">
-                          <div class="_2m5494">
-                            <div class="_1XOh8M _1jFEEZ" placeholder="Search by category name" value="">
-                              <div class="H9L5q0">
-                                <input class="JOAm_M _1FszNF" placeholder="Search by category name" value="">
-                                <span class="_2FSeuB _240vE8 RCcMXQ _1bHTmd">
-                                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
-                                    <path d="M21.285 19.399c1.285-1.682 2.049-3.785 2.049-6.065 0-5.523-4.477-10-10-10s-10 4.477-10 10c0 5.523 4.477 10 9.999 10 0.006 0 0.011 0 0.017 0 2.286 0 4.392-0.77 6.049-2.049l7.239 7.238c0.24 0.24 0.572 0.388 0.939 0.388 0.368 0 0.702-0.15 0.943-0.392 0.243-0.24 0.393-0.574 0.393-0.943 0-0.367-0.149-0.699-0.389-0.939l-7.238-7.239zM13.333 20.667c-4.050 0-7.333-3.283-7.333-7.333s3.283-7.333 7.333-7.333 7.333 3.283 7.333 7.333-3.283 7.333-7.333 7.333z"></path>
-                                  </svg>
-                                </span>
-                              </div>
+                      <div class="_3ggHzc">
+                        <div class="_2m5494">
+                          <div class="_1XOh8M _1jFEEZ" placeholder="Search by category name" value="">
+                            <div class="H9L5q0">
+                              <input class="JOAm_M _1FszNF" placeholder="Search by category name" value="">
+                              <span class="_2FSeuB _240vE8 RCcMXQ _1bHTmd">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
+                                  <path d="M21.285 19.399c1.285-1.682 2.049-3.785 2.049-6.065 0-5.523-4.477-10-10-10s-10 4.477-10 10c0 5.523 4.477 10 9.999 10 0.006 0 0.011 0 0.017 0 2.286 0 4.392-0.77 6.049-2.049l7.239 7.238c0.24 0.24 0.572 0.388 0.939 0.388 0.368 0 0.702-0.15 0.943-0.392 0.243-0.24 0.393-0.574 0.393-0.943 0-0.367-0.149-0.699-0.389-0.939l-7.238-7.239zM13.333 20.667c-4.050 0-7.333-3.283-7.333-7.333s3.283-7.333 7.333-7.333 7.333 3.283 7.333 7.333-3.283 7.333-7.333 7.333z"></path>
+                                </svg>
+                              </span>
                             </div>
                           </div>
-                          <div class="_2xbMaI _1dzVLv"></div>
                         </div>
-                        <div class="_1mW557 oVCmL5">
-                          <div class="_2hndFf">
-                            <div>
-                              <div class="nsuqUP">
-                                <table class="_3rpc36">
-                                  <thead>
-                                    <tr>
-                                      <th class="_3jHaBz _1hEJSa">
-                                        <div>Category name</div>
-                                      </th>
-                                      <th class="_3jHaBz _1hEJSa PZtzwq">
-                                        <div>Products Assigned</div>
-                                      </th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr class="_1A0eEb _1zQ7jO">
-                                      <td class="N3OZB6 _1vLxYz">Hair product</td>
-                                      <td class="N3OZB6 _1vLxYz">
-                                        <div class="PZtzwq">1</div>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                              <div class="_2f96-_">
-                                <div class="_3Cd6wq">
-                                  <div class="_3oGeTh">Displaying
-                                    <b class="_2P0kb0">1</b>product category
-                                  </div>
+                        <div class="_2xbMaI _1dzVLv"></div>
+                      </div>
+                      <div class="_1mW557 oVCmL5">
+                        <div class="_2hndFf">
+                          <div>
+                            <div class="nsuqUP">
+                              <table class="_3rpc36">
+                                <thead>
+                                  <tr>
+                                    <th class="_3jHaBz _1hEJSa">
+                                      <div>Category name</div>
+                                    </th>
+                                    <th class="_3jHaBz _1hEJSa PZtzwq">
+                                      <div>Products Assigned</div>
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody *ngFor="let category of categories">
+                                  <tr class="_1A0eEb _1zQ7jO">
+                                    <td class="N3OZB6 _1vLxYz">{{category.name}}</td>
+                                    <td class="N3OZB6 _1vLxYz">
+                                      <div class="PZtzwq">{{category.productassigned}}</div>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="_2f96-_">
+                              <div class="_3Cd6wq">
+                                <div class="_3oGeTh">Displaying
+                                  <b class="_2P0kb0">1</b>product category
                                 </div>
                               </div>
                             </div>
+
+                            <ng-template #content let-modal>
+                              <div class="modal-header">
+                                <h4 class="modal-title text-xs-center" id="modal-basic-title">Add Category</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
+                                <input name="category" type="text" class="form-control" placeholder="e.g Hair Products">
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('close click')"> Cancel </button>
+                                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+                              </div>
+                            </ng-template>
+                            <!----div class="row">
+                                <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Categories</button>
+                            </div-->
                           </div>
-                          <div class="_1nM1bd" data-qa="loader-spinner-container">
-                            <div class="_2Nn7vB QZeBYP" data-qa="loader-spinner"></div>
-                          </div>
+                        </div>
+                        <div class="_1nM1bd" data-qa="loader-spinner-container">
+                          <div class="_2Nn7vB QZeBYP" data-qa="loader-spinner"></div>
                         </div>
                       </div>
                     </div>
@@ -71,5 +90,38 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+</div>
+<div class="rTWbSm" (mouseover)="changeText=true" (mouseout)="changeText=false">
+    <button class="_2N1Wwk _1K8-3O _1hszOe _1Hbk3p _1jAoG_">
+      <span class="_2FSeuB _240vE8 RCcMXQ" *ngIf="!changeText">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z"></path>
+        </svg>
+      </span>
+      <span *ngIf="changeText">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+          <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z" (click)="open(content)"></path>
+        </svg>
+      </span>
+    </button>
   </div>
+  <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title offset-sm-4" id="modal-basic-title">Add Category</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
+        <input name="category" type="text" class="form-control" placeholder="e.g Hair Products">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('close click')"> Cancel </button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+      </div>
+    </ng-template>
+
+
