@@ -68,10 +68,9 @@ class SocialAuthController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function sendSuccessResponse($user)
+    protected function sendSuccessResponse()
     {
-        Auth::login($user, true);
-        return \Redirect::to('/../../#/login-loader');
+        return \Redirect::to('/#/login-loader');
     }
 
     /**
@@ -134,8 +133,9 @@ class SocialAuthController extends Controller
         }
 
         // login the user
+        Auth::login($user, true);
 
-        return $this->sendSuccessResponse($user);
+        return $this->sendSuccessResponse();
     }
 
     /**
