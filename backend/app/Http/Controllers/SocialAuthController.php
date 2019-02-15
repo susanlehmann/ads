@@ -59,7 +59,7 @@ class SocialAuthController extends Controller
 
         $authUser = $this->loginOrCreateAccount($user, $driver);
 
-        \Auth::login($authUser, true);
+        Auth::login($authUser, true);
         return \Redirect::to('/../../#/login-loader');
     }
 
