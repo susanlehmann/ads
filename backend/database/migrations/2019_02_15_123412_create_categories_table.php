@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('id_update');
             $table->string('name_category');
             $table->text('description')->nullable();
+            $table->integer('status_category');
             $table->timestamps();
         });
     }
