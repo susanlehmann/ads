@@ -18,11 +18,11 @@ Route::group([
     Route::get('getinfo_user', 'User_infoController@index');
     Route::resource('roles','RoleController');
 
-    // Route::get('list-user', 'UserController@index');
-    // Route::post('create_user', 'UserController@store');
-    // Route::post('show_user', 'UserController@show');
-    // Route::post('update_user', 'UserController@update');
-    // Route::post('delete_user', 'UserController@destroy');
+    Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function(){
+        Route::post('password/email', 'PasswordResetController@sendResetLinkEmail');
+        Route::post('password/verify', 'PasswordResetController@verify');
+        Route::post('password/reset', 'Auth\PasswordResetController@reset');
+    });
     
     Route::group(['prefix' => 'admin', 'namespace' => 'API\admin'], function(){
         Route::get('list-user', 'AdminController@index');
@@ -70,17 +70,69 @@ Route::group([
         Route::post('unblock_user', 'CustomerController@unblockUser');
     });
     
-    Route::group(['prefix' => 'admin/service_group', 'namespace' => 'API\admin'], function(){
-        Route::get('list-service-group', 'Service_GroupCtroller@index');
+    Route::group(['prefix' => 'admin/service_group', 'namespace' => 'API\member\service'], function(){
+        Route::post('list-service-group', 'Service_GroupCtroller@index');
         Route::post('create-service-group', 'Service_GroupCtroller@store');
         Route::post('show-service-group', 'Service_GroupCtroller@show');
         Route::post('update-service-group', 'Service_GroupCtroller@update');
         Route::post('delete-service-group', 'Service_GroupCtroller@destroy'); 
     });
-
-    Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function(){
-        Route::post('password/email', 'PasswordResetController@sendResetLinkEmail');
-        Route::post('password/verify', 'PasswordResetController@verify');
-        Route::post('password/reset', 'Auth\PasswordResetController@reset');
+    
+    Route::group(['prefix' => 'admin/service', 'namespace' => 'API\admin'], function(){
+        Route::get('list-service', 'ServiceController@index');
+        Route::post('create-service', 'ServiceController@store');
+        Route::post('show-service', 'ServiceController@show');
+        Route::post('update-service', 'ServiceController@update');
+        Route::post('delete-service', 'ServiceController@destroy'); 
     });
+
+
+    Route::group(['prefix' => 'user/service', 'namespace' => 'API\member\service'], function(){
+        Route::post('list-service', 'ServiceCtroller@index');
+        Route::post('create-service', 'ServiceCtroller@store');
+        Route::post('show-service', 'ServiceCtroller@show');
+        Route::post('update-service', 'ServiceCtroller@update');
+        Route::post('delete-service', 'ServiceCtroller@destroy'); 
+    });
+
+    Route::group(['prefix' => 'user/inventory/category', 'namespace' => 'API\member\inventory'], function(){
+        Route::post('list-category', 'CategoryCtroller@index');
+        Route::post('create-category', 'CategoryCtroller@store');
+        Route::post('show-category', 'CategoryCtroller@show');
+        Route::post('update-category', 'CategoryCtroller@update');
+        Route::post('delete-category', 'CategoryCtroller@destroy'); 
+    });
+
+    Route::group(['prefix' => 'user/inventory/brand', 'namespace' => 'API\member\inventory'], function(){
+        Route::post('list-brand', 'BrandCtroller@index');
+        Route::post('create-brand', 'BrandCtroller@store');
+        Route::post('show-brand', 'BrandCtroller@show');
+        Route::post('update-brand', 'BrandCtroller@update');
+        Route::post('delete-brand', 'BrandCtroller@destroy'); 
+    });
+
+    Route::group(['prefix' => 'user/inventory/product', 'namespace' => 'API\member\inventory'], function(){
+        Route::post('list-product', 'ProductCtroller@index');
+        Route::post('create-product', 'ProductCtroller@store');
+        Route::post('show-product', 'ProductCtroller@show');
+        Route::post('update-product', 'ProductCtroller@update');
+        Route::post('delete-product', 'ProductCtroller@destroy'); 
+    });
+
+    Route::group(['prefix' => 'user/inventory/order', 'namespace' => 'API\member\inventory'], function(){
+        Route::post('list-order', 'OrderCtroller@index');
+        Route::post('create-order', 'OrderCtroller@store');
+        Route::post('show-order', 'OrderCtroller@show');
+        Route::post('update-order', 'OrderCtroller@update');
+        Route::post('delete-order', 'OrderCtroller@destroy'); 
+    });
+    
+    Route::group(['prefix' => 'user/inventory/supplier', 'namespace' => 'API\member\inventory'], function(){
+        Route::post('list-order', 'Ctroller@index');
+        Route::post('create-order', 'SupplierCtroller@store');
+        Route::post('show-order', 'SupplierCtroller@show');
+        Route::post('update-order', 'SupplierCtroller@update');
+        Route::post('delete-order', 'SupplierCtroller@destroy'); 
+    });
+
 });
