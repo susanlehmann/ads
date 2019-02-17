@@ -14,6 +14,7 @@ export class Supplier {
   sate: string;
   postCode: string;
   country: any;
+  timeupdate: any;
   constructor() {
     this.new();
     return this;
@@ -66,7 +67,7 @@ export class Supplier {
     const {
       id,
       name_supplier,
-      discription_supplier,
+      description_supplier,
       firstName_supplier,
       lastName_supplier,
       mobilenumber_supplier,
@@ -78,12 +79,13 @@ export class Supplier {
       city_supplier,
       state_supplier,
       zipcode_supplier,
-      countryid_supplier
+      countryid_supplier,
+      updated_at,
    } = data;
 
     this.id = id;
     this.name_supplier = name_supplier;
-    this.description_supplier = this.description_supplier;
+    this.description_supplier = description_supplier;
     this.firstName = firstName_supplier;
     this.lastName = lastName_supplier;
     this.mobileNumber = mobilenumber_supplier;
@@ -96,6 +98,7 @@ export class Supplier {
     this.sate = state_supplier;
     this.postCode = zipcode_supplier;
     this.country = countryid_supplier;
+    this.timeupdate = updated_at;
   }
 
   create_UUID() {

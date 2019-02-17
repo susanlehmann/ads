@@ -85,13 +85,13 @@
                                       </th>
                                     </tr>
                                   </thead>
-                                  <tbody *ngFor="let supplier of suppliers">
-                                    <tr class="_1A0eEb _1zQ7jO">
+                                  <tbody *ngFor="let supplier of listsupplier">
+                                    <tr class="_1A0eEb _1zQ7jO" (click)="openUpdateModal(content, supplier.id)">
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div>{{supplier.name}}</div>
+                                        <div>{{supplier.name_supplier}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div>{{supplier.phone}}</div>
+                                        <div>{{supplier.mobileNumber}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
                                         <div>{{supplier.email}}</div>
@@ -100,7 +100,7 @@
                                         <div class="_3uGQFE">{{supplier.productassigned}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div>{{supplier.updatetime}}</div>
+                                        <div>{{supplier.timeupdate}}</div>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -184,14 +184,14 @@
                         <div class="row form-group">
                             <div class="col-sm-6">
                               <label class="control-label">First Name</label>
-                              <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="first-name" placeholder="e.g. Jane" required>
-                              <div class="alert alert-danger" [hidden]="!error.name"> {{ error.name }} </div>
+                              <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="firstName" placeholder="e.g. Jane" required>
+                              <div class="alert alert-danger" [hidden]="!error.firstName"> {{ error.firstName }} </div>
                           </div>
           
                           <div class="col-sm-6">
                               <label class="control-label">Last Name</label>
-                              <input [(ngModel)]="form.lastName" type="text" name="last-name" class="form-control input-underline input-lg" placeholder="e.g. Doe">
-                              <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                              <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="e.g. Doe">
+                              <div class="alert alert-danger" [hidden]="!error.lastName"> {{ error.lastName }} </div>
                           </div>
                       </div>
 
@@ -286,7 +286,7 @@
 
     </div>
     <div class="modal-footer">
-    <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteStaff()"> Delete </button>
+    <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deletesupplier()"> Delete </button>
     <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
     <button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
     </div>

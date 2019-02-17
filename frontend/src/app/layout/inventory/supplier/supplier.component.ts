@@ -17,7 +17,7 @@ export class SupplierComponent implements OnInit {
   public error = [];
 
 	closeResult: string;
-  listusers: Supplier[];
+  listsupplier: Supplier[];
   isCreate: boolean;
   colors: string[];
   selectedId: string;
@@ -35,7 +35,7 @@ export class SupplierComponent implements OnInit {
 	}
 
 	ngOnInit() {
-    this.getUser();
+    this.getSupplier();
   }
   
   openModal(content: NgbModalRef) {
@@ -52,22 +52,22 @@ export class SupplierComponent implements OnInit {
     this.openModal(content);
   }
 
-  openUpdateModal(content: NgbModalRef, userId) {
+  openUpdateModal(content: NgbModalRef, id_supplier) {
     this.isCreate = false;
-    this.selectedId = userId;
-    this.SupplierService.findById(userId)
+    this.selectedId = id_supplier;
+    this.SupplierService.findById(id_supplier)
     .subscribe((data:any) => {
-            this.form.updateData(data.user);
+            this.form.updateData(data.supplier);
             this.openModal(content);
         });
   }
 	
-	getUser() {
+	getSupplier() {
     this.startLoading();
     this.SupplierService.getList()
 		.subscribe((listusers:any) => {
         this.stopLoading();
-        this.listusers = listusers.user
+        this.listsupplier = listusers.supplier
         .map(Supplier.toModel)
         .sort((a, b) => {
           return a.id - b.id;
@@ -81,40 +81,40 @@ export class SupplierComponent implements OnInit {
     const dto = this.form.toDto();
     this.startLoading();
     if (this.isCreate) {
-      this.addStaff(dto);
+      this.addsupplier(dto);
     } else {
-      this.updateStaff(dto);
+      this.updatesupplier(dto);
     }
     this.modal.dismissAll();
     }
 
-  addStaff(staff): void {
-    this.SupplierService.add(staff)
+  addsupplier(supplier): void {
+    this.SupplierService.add(supplier)
     .subscribe((data:any) => {
             this.stopLoading();
-            this.getUser();
-            this.notifierService.notify('success', 'A new Staff has been successfully added');
+            this.getSupplier();
+            this.notifierService.notify('success', 'A new supplier has been successfully added');
     }), err => {
       this.stopLoading();
     };
     }
 
-  updateStaff(staff) {
-    this.SupplierService.update(staff)
+  updatesupplier(supplier) {
+    this.SupplierService.update(supplier)
     .subscribe((data:any) => {
             this.stopLoading();
-            this.getUser();
-            this.notifierService.notify('success', 'Staff information has been successfully updated');
+            this.getSupplier();
+            this.notifierService.notify('success', 'supplier information has been successfully updated');
     }), err => {
       this.stopLoading();
     };
     }
 
-  deleteStaff() {
-      this.SupplierService.deleteStaff(this.selectedId)
+  deletesupplier() {
+      this.SupplierService.deleteSupplier(this.selectedId)
       .subscribe((data:any) => {
-              this.getUser();
-              this.notifierService.notify('success', 'A Staff has been successfully deleted');
+              this.getSupplier();
+              this.notifierService.notify('success', 'A supplier has been successfully deleted');
           });
     this.modal.dismissAll();
   }

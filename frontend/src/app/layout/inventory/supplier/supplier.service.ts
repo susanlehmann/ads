@@ -18,25 +18,25 @@ export class SupplierService {
     }
 
     getList() {
-        return this._http.post(`${this.baseUrl}/user/staff/list-user`, {id : this.currentUserId});
+        return this._http.post(`${this.baseUrl}/user/inventory/supplier/list-supplier`, {id : this.currentUserId});
     }
 
     findById(id) {
-        return this._http.post(`${this.baseUrl}/user/staff/show_user`,{id : id});
+        return this._http.post(`${this.baseUrl}/user/inventory/supplier/show-supplier`,{id : id});
     }
 
-    add(staff) {
-        staff.ownerId = this.currentUserId;
-        return this._http.post(`${this.baseUrl}/user/staff/create_user`, staff);
+    add(supplier) {
+        supplier.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/inventory/supplier/create-supplier`, supplier);
     }
 
-    update(staff) {
-        staff.ownerId = this.currentUserId;
-        return this._http.post(`${this.baseUrl}/user/staff/update_user`, staff);
+    update(supplier) {
+        supplier.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/inventory/supplier/update-supplier`, supplier);
     }
 
-    deleteStaff(id) {
-        return this._http.post(`${this.baseUrl}/user/staff/delete_user`, {'id': id});
+    deleteSupplier(id) {
+        return this._http.post(`${this.baseUrl}/user/inventory/supplier/delete-supplier`, {'id': id});
     }
 
 
