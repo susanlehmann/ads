@@ -14,6 +14,9 @@ import { AuthService } from './shared/services/auth.service';
 import { TokenService } from './shared/services/token.service';
 import { SearchComponent } from './search/search.component';
 import { UserService } from './shared/services/user.service';
+import { service_groupService } from './layout/services/service.service';
+import { BrandService } from './layout/inventory/brand/brand.service';
+import { CategoryService } from './layout/inventory/category/category.service';
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
@@ -47,6 +50,9 @@ export const createTranslateLoader = (http: HttpClient) => {
         AuthService,
         TokenService,
         UserService,
+        service_groupService,
+        CategoryService,
+        BrandService,
         DatePipe,
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
