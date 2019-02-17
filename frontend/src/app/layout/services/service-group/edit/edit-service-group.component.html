@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h4 class="modal-title">Edit Service Group : #{{idGroup}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+	<form #f="ngForm">
+		<div class="col-sm-12 mb-3">
+			<label class="control-label">Group Name <strong>*</strong></label>
+			<div class="input-group">
+				<div class="input-group-prepend">
+				<div class="input-group-text">G</div>
+				</div>
+				<input type="text" required text class="form-control input-underline input-lg" name="name_service_group" placeholder="e.g: Hair Services" [ngModelOptions]="{updateOn: 'blur'}" #name_service_group="ngModel" [(ngModel)]="form.name_service_group" #name_service_group>
+			</div>
+			<small class="form-text text-danger " *ngIf="!name_service_group.valid && (name_service_group.dirty || name_service_group.touched)">Invaild Group Name !</small>
+		</div>
+		<div class="col-sm-12 mb-3">
+			<label class="control-label">Appointment color</label>
+			<div class="input-group">
+				<div class="custom-radios">
+			  		<div *ngFor="let c of color" (change)="selectColor(c.value)">
+					    <input type="radio" id="color-{{c.id}}" name="color" value="{{c.value}}" [checked]="c.value == strColor">
+					    <label for="color-{{c.id}}"><span></span></label>
+				  	</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<label class="control-label">Group Description</label>
+			<div class="input-group">
+				<textarea type="text" class="form-control input-underline input-lg" name="description_service_group" #description_service_group="ngModel" [(ngModel)]="form.description_service_group"></textarea>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+    <span class="btn btn-success form-control" (click)="updateServiceGroup()">
+    	<i class="fa fa-save"></i>&nbsp;&nbsp;Save
+    </span>
+</div>

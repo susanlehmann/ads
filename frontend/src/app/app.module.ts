@@ -14,13 +14,14 @@ import { AuthService } from './shared/services/auth.service';
 import { TokenService } from './shared/services/token.service';
 import { SearchComponent } from './search/search.component';
 import { UserService } from './shared/services/user.service';
+import { ServicesService } from './shared/services/serv.service';
+import { StaffService } from './layout/staff/staff.service';
 import {
    SocialLoginModule,
    AuthServiceConfig,
    GoogleLoginProvider,
    FacebookLoginProvider
 } from 'angular-6-social-login';
-
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -72,6 +73,8 @@ export const createTranslateLoader = (http: HttpClient) => {
         AuthService,
         TokenService, 
         UserService,
+        ServicesService,
+        StaffService,
         DatePipe,
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
