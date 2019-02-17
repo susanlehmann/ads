@@ -14,9 +14,33 @@ import { AuthService } from './shared/services/auth.service';
 import { TokenService } from './shared/services/token.service';
 import { SearchComponent } from './search/search.component';
 import { UserService } from './shared/services/user.service';
-import { service_groupService } from './layout/services/service.service';
 import { BrandService } from './layout/inventory/brand/brand.service';
 import { CategoryService } from './layout/inventory/category/category.service';
+import { ServicesService } from './shared/services/serv.service';
+import { StaffService } from './layout/staff/staff.service';
+import {
+   SocialLoginModule,
+   AuthServiceConfig,
+   GoogleLoginProvider,
+   FacebookLoginProvider
+} from 'angular-6-social-login';
+
+export function getAuthServiceConfigs() {
+    const config = new AuthServiceConfig(
+        [
+            {
+                id: FacebookLoginProvider.PROVIDER_ID,
+                provider: new FacebookLoginProvider('Your_Facebook_Client_ID')
+            },
+            {
+                id: GoogleLoginProvider.PROVIDER_ID,
+                provider: new GoogleLoginProvider('Your_Google_Client_ID')
+            }
+        ]
+    );
+    return config;
+}
+
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
@@ -41,7 +65,8 @@ export const createTranslateLoader = (http: HttpClient) => {
                 deps: [HttpClient]
             }
         }),
-        AppRoutingModule
+        AppRoutingModule,
+        SocialLoginModule
     ],
     declarations: [AppComponent, SearchComponent],
     providers: [
@@ -50,9 +75,10 @@ export const createTranslateLoader = (http: HttpClient) => {
         AuthService,
         TokenService,
         UserService,
-        service_groupService,
         CategoryService,
         BrandService,
+        ServicesService,
+        StaffService,
         DatePipe,
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],

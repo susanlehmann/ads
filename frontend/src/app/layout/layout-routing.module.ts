@@ -20,6 +20,7 @@ const routes: Routes = [
             { path: 'services', loadChildren: './services/service.module#ServiceModule' },
             { path: 'inventory', loadChildren: './inventory/inventory.module#InventoryModule' },
             { path: 'client', loadChildren: './client/client.module#ClientModule' },
+            { path: 'services', loadChildren: './services/service.module#ServiceModule' },
             { path: 'message', loadChildren: './message/message.module#MessageModule' },
             { path: 'online_booking', loadChildren: './online-booking/online-booking.module#OnlineBookingModule' },
             { path: 'analytic', loadChildren: './analytic/analytic.module#AnalyticModule' },

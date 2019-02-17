@@ -20,6 +20,7 @@ class CreateBrandsTable extends Migration
             $table->integer('id_update');
             $table->string('name_brand');
             $table->text('description')->nullable();
+            $table->integer('status_brand');
             $table->timestamps();
         });
     }

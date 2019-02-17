@@ -1,0 +1,20 @@
+.modal-content {
+	border: none;
+	border-radius: 0;
+	.list-group {
+		.list-group-item {
+			border-radius: 0;
+			color: #000;
+			font-weight: 600;
+			&:hover {
+				background: #eee;
+			}
+
+			&:after {
+				content: "\00bb";
+			    position: absolute;
+			    right: 20px;
+			}
+		}
+	}
+}
