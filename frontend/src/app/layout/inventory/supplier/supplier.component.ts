@@ -89,6 +89,7 @@ export class SupplierComponent implements OnInit {
     }
 
   addsupplier(supplier): void {
+    console.log(supplier);
     this.SupplierService.add(supplier)
     .subscribe((data:any) => {
             this.stopLoading();

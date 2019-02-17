@@ -47,9 +47,9 @@ export class Supplier {
     return {
       id: this.id,
       name_supplier: this.name_supplier,
-      discription_supplier: this.description_supplier,
-      firstName_supplier: this.firstName,
-      lastName_supplier: this.lastName,
+      discription_suppliner: this.description_supplier,
+      firtname_supplier: this.firstName,
+      lasname_supplier: this.lastName,
       email_supplier: this.email,
       mobilenumber_supplier : this.mobileNumber,
       telephone_supplier : this.telephoneNumber,
@@ -67,9 +67,9 @@ export class Supplier {
     const {
       id,
       name_supplier,
-      description_supplier,
-      firstName_supplier,
-      lastName_supplier,
+      discription_suppliner,
+      firtname_supplier,
+      lasname_supplier,
       mobilenumber_supplier,
       telephone_supplier,
       email_supplier,
@@ -85,9 +85,9 @@ export class Supplier {
 
     this.id = id;
     this.name_supplier = name_supplier;
-    this.description_supplier = description_supplier;
-    this.firstName = firstName_supplier;
-    this.lastName = lastName_supplier;
+    this.discription_suppliner = discription_suppliner;
+    this.firstName = firtname_supplier;
+    this.lastName = lasname_supplier;
     this.mobileNumber = mobilenumber_supplier;
     this.telephoneNumber = telephone_supplier;
     this.email = email_supplier;
