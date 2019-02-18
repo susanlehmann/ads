@@ -39,9 +39,9 @@
                                     </th>
                                   </tr>
                                 </thead>
-                                <tbody *ngFor="let category of categories">
+                                <tbody *ngFor="let category of listcategories">
                                   <tr class="_1A0eEb _1zQ7jO">
-                                    <td class="N3OZB6 _1vLxYz">{{category.name}}</td>
+                                    <td class="N3OZB6 _1vLxYz" (click)="openUpdateModal(content, category.id)">{{category.categoryName}}</td>
                                     <td class="N3OZB6 _1vLxYz">
                                       <div class="PZtzwq">{{category.productassigned}}</div>
                                     </td>
@@ -58,44 +58,27 @@
 
                               <ng-template #content let-modal>
                                 <div class="modal-header">
-                                  <h4 class="modal-title text-xs-center" id="modal-basic-title">Add Category</h4>
-                                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <h4 class="modal-title text-xs-center" id="modal-basic-title">{{isCreate ? 'Add Category' : 'Edit Category'}}</h4>
+                                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
-                                <div class="modal-body">
-                                  <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
-                                  <input name="category" type="text" class="form-control" placeholder="e.g Hair Products">
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('close click')"> Cancel </button>
-                                  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-                                </div>
+                                <form #signupForm=ngForm (ngSubmit)="onSubmit()">
+                                  <div class="modal-body">
+                                    <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
+                                    <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control" placeholder="e.g Hair Products">
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteCategory()"> Delete </button>
+                                    <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+                                    <button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
+                                  </div>
+                                </form>
                               </ng-template>
                               <!----div class="row">
                                   <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Categories</button>
                               </div-->
                             </div>
-
-                            <ng-template #content let-modal>
-                              <div class="modal-header">
-                                <h4 class="modal-title text-xs-center" id="modal-basic-title">Add Category</h4>
-                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
-                                <input name="category" type="text" class="form-control" placeholder="e.g Hair Products">
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('close click')"> Cancel </button>
-                                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-                              </div>
-                            </ng-template>
-                            <!----div class="row">
-                                <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Categories</button>
-                            </div-->
                           </div>
                         </div>
                         <div class="_1nM1bd" data-qa="loader-spinner-container">
@@ -122,26 +105,8 @@
       </span>
       <span *ngIf="changeText">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z" (click)="open(content)"></path>
+          <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z" (click)="openCreateModal(content)"></path>
         </svg>
       </span>
     </button>
   </div>
-  <ng-template #content let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title offset-sm-4" id="modal-basic-title">Add Category</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
-        <input name="category" type="text" class="form-control" placeholder="e.g Hair Products">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('close click')"> Cancel </button>
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-      </div>
-    </ng-template>
-
-

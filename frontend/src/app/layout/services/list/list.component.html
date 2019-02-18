@@ -1,0 +1,128 @@
+<div class="container-fuild">
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8 col-sm-12">
+				<div class="row mb-3">
+					<div class="col-md-10 col-sm-6"></div>
+					<div class="col-md-2 col-sm-6">
+						<div ngbDropdown class="d-inline-block dropdown col-sm-12">
+		                    <button class="btn btn-info col-sm-12 mb-1" ngbDropdownToggle>
+		                    	Export&nbsp;&nbsp;&nbsp;<i class="fa fa-download"></i>
+		                    </button>
+		                    <div ngbDropdownMenu>
+		                        <button class="dropdown-item">Excel</button>
+		                        <button class="dropdown-item">CSV</button>
+		                        <button class="dropdown-item">PDF</button>
+		                    </div>
+		                </div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="panel panel-primary" *ngFor="let gr of group?.service_group">
+	                <div class="panel-heading">
+	                	<h3 class="panel-title d-inline-block">
+	                    	<i class="fa fa-list"></i>&nbsp;&nbsp;{{gr?.name_service_group}}
+	                    </h3>
+	                    <div ngbDropdown class="d-inline-block dropdown">
+		                    <span ngbDropdownToggle>
+		                    	<i class="fa fa-circle"></i>
+		                    	<i class="fa fa-circle"></i>
+		                    	<i class="fa fa-circle"></i>
+		                    </span>
+		                    <div ngbDropdownMenu>
+		                        <button class="dropdown-item" (click)="addService(gr?.id)">Add New Servive</button>
+		                        <button class="dropdown-item" (click)="openServiceGroup(edit_service_group,gr?.id)">Edit Group</button>
+		                        <button class="dropdown-item delete" (click)="openRemoveGroup(remove_service_group,gr?.id,gr?.name_service_group)">Delete Group</button>
+		                    </div>
+		                </div>
+	                </div>
+	                <ul class="list-group">
+	                    <!-- <a href="#" class="list-group-item">Bread</a>
+	                    <a href="#" class="list-group-item">Cheese</a>
+	                    <a href="#" class="list-group-item">Soda</a>
+	                    <a href="#" class="list-group-item">Meat</a>
+	                    <a href="#" class="list-group-item">Bread</a>
+	                    <a href="#" class="list-group-item">Cheese</a>
+	                    <a href="#" class="list-group-item">Soda</a>
+	                    <a href="#" class="list-group-item">Meat</a>
+	                    <a href="#" class="list-group-item">Bread</a>
+	                    <a href="#" class="list-group-item">Cheese</a>
+	                    <a href="#" class="list-group-item">Soda</a>
+	                    <a href="#" class="list-group-item">Meat</a> -->
+	                </ul>
+	            </div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<ng-template #service_group let-c="close" let-d="dismiss">
+            <add-service-group (checkAddGroup)="checkAddGroup($event)"></add-service-group>
+        </ng-template>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<ng-template #service let-c="close" let-d="dismiss">
+            <app-list-service-group [listGroup]="group"></app-list-service-group>
+        </ng-template>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<ng-template #edit_service_group let-c="close" let-d="dismiss">
+            <edit-service-group [idGroup]="idGroup" (checkEditGroup)="checkEditGroup($event)"></edit-service-group>
+        </ng-template>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<ng-template #remove_service_group let-c="close" let-d="dismiss">
+            <div class="modal-header">
+			    <h4 class="modal-title">Remove Service Group</h4>
+			    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+			        <span aria-hidden="true">&times;</span>
+			    </button>
+			</div>
+			<div class="modal-body">
+				<div class="box-mess-confirm">
+					<p>You want remove all data of Services Group <strong>{{nameGroup}}</strong>?</p>
+				</div>
+			</div>
+			<div class="modal-footer">
+			    <button type="button" class="btn btn-primary" (click)="confirmRemove(idGroup)">
+			    	<i class="fa fa-check"></i>&nbsp;Confirm
+			    </button>
+			    <button type="button" class="btn btn-secondary" (click)="d('Close click')">
+			    	<i class="fa fa-close"></i>&nbsp;Cancel
+			    </button>
+			</div>
+        </ng-template>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div id="inbox">
+			<div class="fab btn-group show-on-hover dropup">
+				<div data-toggle="tooltip" data-placement="left" title="Compose">
+					<button type="button" class="btn btn-danger btn-io dropdown-toggle" data-toggle="dropdown">
+						<span class="fa-stack fa-2x">
+							<i class="fa fa-plus fa-stack-1x fa-inverse fab-primary"></i>
+						</span>
+					</button>
+				</div>
+				<ul class="dropdown-menu dropdown-menu-right" role="menu">
+					<li>
+						<span title="Service Group" (click)="open(service_group)">
+							<i class="fa fa-cubes"></i>
+						</span>
+						<div class="tooltip_group">New Group Service</div>
+					</li>
+					<li>
+						<span title="Service" (click)="open(service)">
+							<i class="fa fa-cube"></i>
+						</span>
+						<div class="tooltip">New Service</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

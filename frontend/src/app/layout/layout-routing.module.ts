@@ -17,14 +17,15 @@ const routes: Routes = [
             { path: 'forms', loadChildren: './form/form.module#FormModule' },
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
-            { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
+            { path: 'services', loadChildren: './services/service.module#ServiceModule' },
             { path: 'inventory', loadChildren: './inventory/inventory.module#InventoryModule' },
             { path: 'client', loadChildren: './client/client.module#ClientModule' },
+            { path: 'services', loadChildren: './services/service.module#ServiceModule' },
             { path: 'message', loadChildren: './message/message.module#MessageModule' },
             { path: 'online_booking', loadChildren: './online-booking/online-booking.module#OnlineBookingModule' },
             { path: 'analytic', loadChildren: './analytic/analytic.module#AnalyticModule' },
             { path: 'setup', loadChildren: './setup/setup.module#SetupModule' },
-            { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' }
+            //{ path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' }
         ]
     }
 ];

@@ -1,0 +1,215 @@
+<form class="modal-content" style="border: none" #f="ngForm">
+  <div class="modal-header">
+    <h4 class="modal-title col-sm-4 offset-sm-4">New Service</h4>
+  </div>
+
+  <div class="modal-body row form-content">
+    <div class="col-md-5 offset-md-1 client-left-content">
+		<div class="row form-group">
+			<div class="col-sm-12">
+				<label class="control-label">Service Name <strong>*</strong></label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">S</div>
+					</div>
+				<input [(ngModel)]="form.name_service" type="text" required text class="form-control input-underline input-lg" name="name_service" placeholder="e.g: Services Name 1" [ngModelOptions]="{updateOn: 'blur'}" #name_service="ngModel" #name_service>
+				</div>
+				<small class="form-text text-danger " *ngIf="!name_service.valid && (name_service.dirty || name_service.touched)">Invaild Service Name !</small>
+			</div>
+		</div>
+
+      	<div class="row form-group">
+        	<div class="col-sm-12">
+	          	<label class="control-label">{{'Treatment type' }}</label>
+	          	<select [(ngModel)]="form.id_business" name="id_business" class="form-control" #id_business="ngModel">
+	            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
+	            	<option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+	          	</select>
+	          	<small>Choose the most relevant type, for internal reference and not currently visible to clients.</small>
+        	</div>
+      	</div>
+      	<hr/>
+      	<div class="row form-group">
+        	<div class="col-sm-12">
+        		<div class="panel panel-default">
+        			<div class="panel-body">
+        				<div class="row">
+        					<div class="col-sm-6">
+        						<div class="form-group">
+        							<label class="control-label">{{'Duration' }}</label>
+						          	<select [(ngModel)]="form.duration_service" name="duration_service" class="form-control" #duration_service="ngModel">
+						            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
+						            	<option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+						          	</select>
+        						</div>
+        					</div>
+        					<div class="col-sm-6">
+        						<div class="form-group">
+        							<label class="control-label">{{'Retail price' }}</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">&pound;</div>
+										</div>
+										<input [(ngModel)]="form.retail_price_service" type="text" required text class="form-control input-underline input-lg" name="retail_price_service" placeholder="e.g: 0.00" [ngModelOptions]="{updateOn: 'blur'}" #retail_price_service="ngModel" #retail_price_service>
+									</div>
+        						</div>
+        					</div>
+        				</div>
+        				<div class="row">
+        					<div class="col-sm-6">
+        						<div class="form-group">
+        							<label class="control-label">{{'Price name (optional)' }}</label>
+						          	<input [(ngModel)]="form.name_pricing_service" type="text" required text class="form-control input-underline input-lg" name="name_pricing_service" placeholder="e.g: Services Name 1" [ngModelOptions]="{updateOn: 'blur'}" #name_service="ngModel" #name_pricing_service>
+        						</div>
+        					</div>
+        					<div class="col-sm-6">
+        						<div class="form-group">
+        							<label class="control-label">{{'Special price (optional)' }}</label>
+						          	<div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">&pound;</div>
+										</div>
+										<input [(ngModel)]="form.special_price_service" type="text" required text class="form-control input-underline input-lg" name="special_price_service" placeholder="e.g: 0.00" [ngModelOptions]="{updateOn: 'blur'}" #special_price_service="ngModel" #special_price_service>
+									</div>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+    	</div>
+    </div>
+
+    <div class="col-md-5">
+      <ngb-tabset>
+        <ngb-tab title="Staff">
+          <ng-template ngbTabContent>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                    <label class="control-label">{{'Select staff who perform this service.' }}</label>
+                    <ul class="list-group">
+	                    <p class="list-group-item">Bread</p>
+	                    <p class="list-group-item">Cheese</p>
+	                    <p class="list-group-item">Soda</p>
+	                    <p class="list-group-item">Meat</p>
+	                    <p class="list-group-item">Bread</p>
+	                    <p class="list-group-item">Cheese</p>
+	                    <p class="list-group-item">Soda</p>
+	                    <p class="list-group-item">Meat</p>
+	                    <p class="list-group-item">Bread</p>
+	                    <p class="list-group-item">Cheese</p>
+	                    <p class="list-group-item">Soda</p>
+	                    <p class="list-group-item">Meat</p>
+	                </ul>
+                  </div>
+                </div>
+
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="online booking">
+          <ng-template ngbTabContent>
+              	<div class="row form-group">
+              		<div class="col-sm-12 mb-4">
+              			<h4>Allow clients to book this service online, switch off to hide this service from your online bookings menu.</h4>
+              		</div>
+              		<div class="col-sm-12 mb-4">
+						<div class="custom-control custom-checkbox">
+							<input [(ngModel)]="form.enable_online_bookings" name="enable_online_bookings" type="checkbox" class="custom-control-input" id="customCheck1">
+							<label class="custom-control-label" for="customCheck1">Accepts marketing notifications</label>
+						</div>
+					</div>
+                  	<div class="col-sm-12 mb-3">
+	                    <label class="control-label">Service description</label>
+	                    <div class="input-group">
+	                      <textarea type="text" class="form-control" rows="3" placeholder="Description will be displayed on your Fresha profile" [(ngModel)]="form.service_description" #service_description="ngModel" name="service_description"></textarea>
+	                    </div>
+                  	</div>
+                  	<div class="col-sm-12">
+	                    <label class="control-label">Service available for</label>
+	                    <div class="input-group">
+	                      <select name="service_available_for" class="form-control" [(ngModel)]="form.service_available_for" #service_available_for="ngModel">
+	                      	<option value="1">1</option>
+	                      	<option value="2">2</option>
+	                      	<option value="3">3</option>
+	                      </select>
+	                    </div>
+                  	</div>
+                </div>
+
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="settings">
+          <ng-template ngbTabContent>
+              	<div class="row form-group">
+              		<div class="col-sm-6">
+						<div class="form-group">
+							<label class="control-label">{{'Extra time type' }}</label>
+				          	<select [(ngModel)]="form.extra_time_type" name="extra_time_type" class="form-control" #extra_time_type="ngModel">
+				            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
+				            	<option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+				          	</select>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="control-label">{{'Duration' }}</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">&pound;</div>
+								</div>
+								<select [(ngModel)]="form.settin_duration" name="settin_duration" class="form-control" #settin_duration="ngModel">
+				            		<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
+				            		<option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+				          		</select>
+							</div>
+						</div>
+					</div>
+                </div>
+                <hr>
+              	<div class="row form-group">
+                  	<div class="col-sm-12">
+                    	<div class="form-group">
+                    		<p style="font-size: 14px;">Set tax rate for this service</p>
+							<label class="control-label">{{'Tax (included in price)' }}</label>
+				          	<select [(ngModel)]="form.set_tax_rate_for_this_service" name="set_tax_rate_for_this_service" class="form-control" #set_tax_rate_for_this_service="ngModel">
+				            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
+				            	<option *ngFor="let no of set_tax_rate_for_this_service" value="{{no.id}}">{{no.name}}</option>
+				          	</select>
+						</div>
+                  	</div>
+                </div>
+                <hr>
+              	<div class="row form-group">
+                  	<div class="col-sm-12">
+                  		<div class="custom-control custom-checkbox mb-4">
+							<input [(ngModel)]="form.enable_voucher_sales" name="enable_voucher_sales" type="checkbox" class="custom-control-input" id="customCheck1">
+							<label class="custom-control-label" for="customCheck1">Enable voucher sales</label>
+						</div>
+                    	<div class="form-group mb-4">
+							<label class="control-label">{{'Voucher expiry period' }}</label>
+				          	<select [(ngModel)]="form.set_tax_rate_for_this_service" name="set_tax_rate_for_this_service" class="form-control" #set_tax_rate_for_this_service="ngModel">
+				            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
+				            	<option *ngFor="let no of set_tax_rate_for_this_service" value="{{no.id}}">{{no.name}}</option>
+				          	</select>
+						</div>
+						<div class="custom-control custom-checkbox">
+							<input [(ngModel)]="form.enable_commission" name="enable_commission" #enable_commission="ngModel" type="checkbox" class="custom-control-input" id="customCheck2">
+							<label class="custom-control-label" for="customCheck2">
+								<p>Enable commission</p>
+								<small>Calculate staff commissions when this service is sold.</small>
+							</label>
+						</div>
+                  	</div>
+                </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
+    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"><i class="fa fa-plus"></i> Add New </button>
+  </div>
+</form>
