@@ -8,6 +8,7 @@ import { ServiceComponent } from './service.component';
 import { ListServicesComponent } from './list/list.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { AddServiceComponent } from './add/add-services.component';
+import { EditServiceComponent } from './edit/edit-service.component';
 import { AddServiceGroupComponent } from './service-group/add/add-service-group.component';
 import { ListServiceGroupComponent } from './service-group/list/list-service-group.component';
 import { EditServiceGroupComponent } from './service-group/edit/edit-service-group.component';
@@ -19,7 +20,8 @@ import { EditServiceGroupComponent } from './service-group/edit/edit-service-gro
   	AddServiceGroupComponent,
     ListServiceGroupComponent,
     EditServiceGroupComponent,
-    AddServiceComponent
+    AddServiceComponent,
+    EditServiceComponent
   ],
   imports: [
     FormsModule,

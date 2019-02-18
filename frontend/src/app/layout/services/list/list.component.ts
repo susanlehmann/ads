@@ -2,7 +2,6 @@ import { Component, OnInit, NgModule, ViewChild, ElementRef, EventEmitter  } fro
 import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
-import { Collapse } from './../model/group';
 import { NotifierService } from 'angular-notifier';
 import { ServicesService } from '../../../shared/services/serv.service';
 
@@ -24,6 +23,8 @@ export class ListServicesComponent implements OnInit {
 	public isCollapsed = false;
 	idGroup: any;
     nameGroup: any;
+    lstServices: any;
+    idS: any = {};
 
 	constructor(private modalService: NgbModal, 
 		private notifierService: NotifierService,
@@ -42,9 +43,10 @@ export class ListServicesComponent implements OnInit {
 	private loadListGroup(){
 		let userInfo = JSON.parse(localStorage.getItem('user'));
 		this.form.ownerId = userInfo.id;
-		this.services.getListService_Group(this.form).subscribe(
+		this.services.listServiceIngroup(this.form).subscribe(
 			success => {
 				this.group = success;
+                this.lstServices = success;
 			},
 			error => {}
 		);
@@ -105,5 +107,11 @@ export class ListServicesComponent implements OnInit {
 
     addService(groupId) {
     	this.route.navigate(['services/add-services'], { queryParams: { groupId: groupId } });
+    }
+
+
+    loadServiceInGroup(id){
+        return this.lstServices.service.filter(s => s.id_service_group == id);
+        //console.log(a);
     }
 }

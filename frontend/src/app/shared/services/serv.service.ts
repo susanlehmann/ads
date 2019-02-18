@@ -29,7 +29,19 @@ export class ServicesService {
 	}
 
 
+	listServiceIngroup(services: any){
+		return this.http.post<any>(this.baseUrl + '/user/service/list-service', services);
+	}
 	createService(services: any){
 		return this.http.post<any>(this.baseUrl + '/user/service/create-service', services);
+	}
+	getServiceById(services: any) {
+		return this.http.post<any>(this.baseUrl + '/user/service/show-service', services);
+	}
+	removeServiceById(serviceId: any) {
+		return this.http.post<any>(this.baseUrl + '/user/service/delete-service', {'id': serviceId});
+	}
+	updateService(services: any) {
+		return this.http.post<any>(this.baseUrl + '/user/service/update-service', services);
 	}
 }

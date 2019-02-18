@@ -1,6 +1,6 @@
 <form class="modal-content" style="border: none" #f="ngForm">
   <div class="modal-header">
-    <h4 class="modal-title col-sm-4 offset-sm-4">New Service</h4>
+    <h4 class="modal-title col-sm-4 offset-sm-4">Edit Service</h4>
   </div>
 
   <div class="modal-body row form-content">
@@ -12,7 +12,7 @@
 					<div class="input-group-prepend">
 						<div class="input-group-text">S</div>
 					</div>
-				<input [(ngModel)]="form.name_service" type="text" required text class="form-control input-underline input-lg" name="name_service" placeholder="e.g: Services Name 1" [ngModelOptions]="{updateOn: 'blur'}" #name_service="ngModel" #name_service>
+				<input [(ngModel)]="form.name_service" type="text" required text class="form-control input-underline input-lg" name="name_service" placeholder="e.g: Services Name 1" [ngModelOptions]="{updateOn: 'blur'}" (blur)="checkEmpty()" #name_service="ngModel" #name_service>
 				</div>
 				<small class="form-text text-danger " *ngIf="!name_service.valid && (name_service.dirty || name_service.touched)">Invaild Service Name !</small>
 			</div>
@@ -23,7 +23,7 @@
 	          	<label class="control-label">{{'Treatment type' }}</label>
 	          	<select [(ngModel)]="form.id_business" name="id_business" class="form-control" #id_business="ngModel">
 	            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
-	            	<option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+	            	<option *ngFor="let no of treatment_type" value="{{no.id}}">{{no.name}}</option>
 	          	</select>
 	          	<small>Choose the most relevant type, for internal reference and not currently visible to clients.</small>
         	</div>
@@ -38,8 +38,50 @@
         						<div class="form-group">
         							<label class="control-label">{{'Duration' }}</label>
 						          	<select [(ngModel)]="form.duration_service" name="duration_service" class="form-control" #duration_service="ngModel">
-						            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
-						            	<option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+						            	<option value="5">5min</option>
+						            	<option value="10">10min</option>
+						            	<option value="15">15min</option>
+						            	<option value="20">20min</option>
+						            	<option value="25">25min</option>
+						            	<option value="30">30min</option>
+						            	<option value="35">35min</option>
+						            	<option value="40">40min</option>
+						            	<option value="45">45min</option>
+						            	<option value="50">50min</option>
+						            	<option value="55">55min</option>
+						            	<option value="60">1h</option>
+						            	<option value="65">1h 5min</option>
+						            	<option value="70">1h 10min</option>
+						            	<option value="75">1h 15min</option>
+						            	<option value="80">1h 20min</option>
+						            	<option value="85">1h 25min</option>
+						            	<option value="90">1h 30min</option>
+						            	<option value="95">1h 35min</option>
+						            	<option value="100">1h 40min</option>
+						            	<option value="105">1h 45min</option>
+						            	<option value="110">1h 50min</option>
+						            	<option value="115">1h 55min</option>
+						            	<option value="120">2h</option>
+						            	<option value="135">2h 15min</option>
+						            	<option value="150">2h 30min</option>
+						            	<option value="165">2h 45min</option>
+						            	<option value="180">3h</option>
+						            	<option value="195">3h 15min</option>
+						            	<option value="210">3h 30min</option>
+						            	<option value="225">3h 45min</option>
+						            	<option value="240">4h</option>
+						            	<option value="270">4h 30min</option>
+						            	<option value="300">5h</option>
+						            	<option value="330">5h 30min</option>
+						            	<option value="360">6h</option>
+						            	<option value="390">6h 30min</option>
+						            	<option value="420">7h</option>
+						            	<option value="450">7h 30min</option>
+						            	<option value="480">8h</option>
+						            	<option value="540">9h</option>
+						            	<option value="600">10h</option>
+						            	<option value="660">11h</option>
+						            	<option value="720">12h</option>
 						          	</select>
         						</div>
         					</div>
@@ -50,8 +92,9 @@
 										<div class="input-group-prepend">
 											<div class="input-group-text">&pound;</div>
 										</div>
-										<input [(ngModel)]="form.retail_price_service" type="text" required text class="form-control input-underline input-lg" name="retail_price_service" placeholder="e.g: 0.00" [ngModelOptions]="{updateOn: 'blur'}" #retail_price_service="ngModel" #retail_price_service>
+										<input [(ngModel)]="form.retail_price_service" type="text" required text class="form-control input-underline input-lg" name="retail_price_service" placeholder="e.g: 0.00" [ngModelOptions]="{updateOn: 'blur'}" #retail_price_service="ngModel" minlength="9" pattern="^[0-9]" #retail_price_service >
 									</div>
+									<small class="form-text text-danger " *ngIf="!retail_price_service.valid && (retail_price_service.dirty || retail_price_service.touched)">Invaild Retail Price Service !</small>
         						</div>
         					</div>
         				</div>
@@ -59,7 +102,7 @@
         					<div class="col-sm-6">
         						<div class="form-group">
         							<label class="control-label">{{'Price name (optional)' }}</label>
-						          	<input [(ngModel)]="form.name_pricing_service" type="text" required text class="form-control input-underline input-lg" name="name_pricing_service" placeholder="e.g: Services Name 1" [ngModelOptions]="{updateOn: 'blur'}" #name_service="ngModel" #name_pricing_service>
+						          	<input [(ngModel)]="form.name_pricing_service" type="text" class="form-control input-underline input-lg" name="name_pricing_service" placeholder="e.g: Services Name 1" #name_service="ngModel" #name_pricing_service>
         						</div>
         					</div>
         					<div class="col-sm-6">
@@ -69,7 +112,7 @@
 										<div class="input-group-prepend">
 											<div class="input-group-text">&pound;</div>
 										</div>
-										<input [(ngModel)]="form.special_price_service" type="text" required text class="form-control input-underline input-lg" name="special_price_service" placeholder="e.g: 0.00" [ngModelOptions]="{updateOn: 'blur'}" #special_price_service="ngModel" #special_price_service>
+										<input [(ngModel)]="form.special_price_service" type="text" class="form-control input-underline input-lg" name="special_price_service" placeholder="e.g: 0.00" #special_price_service="ngModel" #special_price_service>
 									</div>
         						</div>
         					</div>
@@ -87,21 +130,24 @@
 
               <div class="row form-group">
                   <div class="col-sm-12">
-                    <label class="control-label">{{'Select staff who perform this service.' }}</label>
-                    <ul class="list-group">
-	                    <p class="list-group-item">Bread</p>
-	                    <p class="list-group-item">Cheese</p>
-	                    <p class="list-group-item">Soda</p>
-	                    <p class="list-group-item">Meat</p>
-	                    <p class="list-group-item">Bread</p>
-	                    <p class="list-group-item">Cheese</p>
-	                    <p class="list-group-item">Soda</p>
-	                    <p class="list-group-item">Meat</p>
-	                    <p class="list-group-item">Bread</p>
-	                    <p class="list-group-item">Cheese</p>
-	                    <p class="list-group-item">Soda</p>
-	                    <p class="list-group-item">Meat</p>
-	                </ul>
+                    <label class="control-label mb-4">{{'Select staff who perform this service.' }}</label>
+                    <div class="custom-radios">
+                    	<div>
+						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(listusers)">
+						    <label for="checkall">
+						    	<span></span>
+						    	Select All
+						    </label>
+					  	</div>
+				  		<div *ngFor="let us of liststafs; let u of listusers">
+						    <input type="checkbox" id="color-{{us?.id}}" name="listuser" value="{{us?.id}}" (change)="selectStaff(us)" [checked]="checkedIf(us.id)">
+						    <label for="color-{{us?.id}}">
+						    	<span></span>
+						    	{{us?.name}}
+						    </label>
+
+					  	</div>
+					</div>
                   </div>
                 </div>
 
@@ -115,23 +161,23 @@
               		</div>
               		<div class="col-sm-12 mb-4">
 						<div class="custom-control custom-checkbox">
-							<input [(ngModel)]="form.enable_online_bookings" name="enable_online_bookings" type="checkbox" class="custom-control-input" id="customCheck1">
-							<label class="custom-control-label" for="customCheck1">Accepts marketing notifications</label>
+							<input [(ngModel)]="form.enable_online_bookings" name="enable_online_bookings" type="checkbox" class="custom-control-input" id="customCheck1" (change)="enableOnline()">
+							<label class="custom-control-label" for="customCheck1">Enable online bookings</label>
 						</div>
 					</div>
                   	<div class="col-sm-12 mb-3">
 	                    <label class="control-label">Service description</label>
 	                    <div class="input-group">
-	                      <textarea type="text" class="form-control" rows="3" placeholder="Description will be displayed on your Fresha profile" [(ngModel)]="form.service_description" #service_description="ngModel" name="service_description"></textarea>
+	                      <textarea type="text" class="form-control" rows="3" placeholder="Description will be displayed on your Fresha profile" [(ngModel)]="form.service_description" #service_description="ngModel" name="service_description" #service_description></textarea>
 	                    </div>
                   	</div>
                   	<div class="col-sm-12">
 	                    <label class="control-label">Service available for</label>
 	                    <div class="input-group">
-	                      <select name="service_available_for" class="form-control" [(ngModel)]="form.service_available_for" #service_available_for="ngModel">
-	                      	<option value="1">1</option>
-	                      	<option value="2">2</option>
-	                      	<option value="3">3</option>
+	                      <select name="service_available_for" class="form-control" [(ngModel)]="form.service_available_for" #service_available_for="ngModel" #service_available_for>
+	                      	<option value="everyone">Everyone</option>
+	                      	<option value="male">Males Only</option>
+	                      	<option value="female">FeMales Only</option>
 	                      </select>
 	                    </div>
                   	</div>
@@ -145,9 +191,10 @@
               		<div class="col-sm-6">
 						<div class="form-group">
 							<label class="control-label">{{'Extra time type' }}</label>
-				          	<select [(ngModel)]="form.extra_time_type" name="extra_time_type" class="form-control" #extra_time_type="ngModel">
-				            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
-				            	<option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+				          	<select [(ngModel)]="form.extra_time_type" name="extra_time_type" class="form-control" #extra_time_type="ngModel" (change)="getExtraTime()">
+				            	<option value="notime" > No extra time </option>
+				            	<option value="process" > Processing time after </option>
+				            	<option value="blocked" > Blocked time after </option>
 				          	</select>
 						</div>
 					</div>
@@ -155,12 +202,51 @@
 						<div class="form-group">
 							<label class="control-label">{{'Duration' }}</label>
 							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">&pound;</div>
-								</div>
-								<select [(ngModel)]="form.settin_duration" name="settin_duration" class="form-control" #settin_duration="ngModel">
-				            		<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
-				            		<option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+								<select [(ngModel)]="form.settin_duration" name="settin_duration" class="form-control" #settin_duration="ngModel" #settin_duration>
+				            		<option value="5">5min</option>
+						            	<option value="10">10min</option>
+						            	<option value="15">15min</option>
+						            	<option value="20">20min</option>
+						            	<option value="25">25min</option>
+						            	<option value="30">30min</option>
+						            	<option value="35">35min</option>
+						            	<option value="40">40min</option>
+						            	<option value="45">45min</option>
+						            	<option value="50">50min</option>
+						            	<option value="55">55min</option>
+						            	<option value="60">1h</option>
+						            	<option value="65">1h 5min</option>
+						            	<option value="70">1h 10min</option>
+						            	<option value="75">1h 15min</option>
+						            	<option value="80">1h 20min</option>
+						            	<option value="85">1h 25min</option>
+						            	<option value="90">1h 30min</option>
+						            	<option value="95">1h 35min</option>
+						            	<option value="100">1h 40min</option>
+						            	<option value="105">1h 45min</option>
+						            	<option value="110">1h 50min</option>
+						            	<option value="115">1h 55min</option>
+						            	<option value="120">2h</option>
+						            	<option value="135">2h 15min</option>
+						            	<option value="150">2h 30min</option>
+						            	<option value="165">2h 45min</option>
+						            	<option value="180">3h</option>
+						            	<option value="195">3h 15min</option>
+						            	<option value="210">3h 30min</option>
+						            	<option value="225">3h 45min</option>
+						            	<option value="240">4h</option>
+						            	<option value="270">4h 30min</option>
+						            	<option value="300">5h</option>
+						            	<option value="330">5h 30min</option>
+						            	<option value="360">6h</option>
+						            	<option value="390">6h 30min</option>
+						            	<option value="420">7h</option>
+						            	<option value="450">7h 30min</option>
+						            	<option value="480">8h</option>
+						            	<option value="540">9h</option>
+						            	<option value="600">10h</option>
+						            	<option value="660">11h</option>
+						            	<option value="720">12h</option>
 				          		</select>
 							</div>
 						</div>
@@ -173,8 +259,8 @@
                     		<p style="font-size: 14px;">Set tax rate for this service</p>
 							<label class="control-label">{{'Tax (included in price)' }}</label>
 				          	<select [(ngModel)]="form.set_tax_rate_for_this_service" name="set_tax_rate_for_this_service" class="form-control" #set_tax_rate_for_this_service="ngModel">
-				            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
-				            	<option *ngFor="let no of set_tax_rate_for_this_service" value="{{no.id}}">{{no.name}}</option>
+				            	<option value="0"> No Tax </option>
+				            	<option value="1" selected="selected"> Default: No Tax </option>
 				          	</select>
 						</div>
                   	</div>
@@ -183,14 +269,19 @@
               	<div class="row form-group">
                   	<div class="col-sm-12">
                   		<div class="custom-control custom-checkbox mb-4">
-							<input [(ngModel)]="form.enable_voucher_sales" name="enable_voucher_sales" type="checkbox" class="custom-control-input" id="customCheck1">
+							<input [(ngModel)]="form.enable_voucher_sales" name="enable_voucher_sales" type="checkbox" class="custom-control-input" id="customCheck1" (change)="enableVoucher()">
 							<label class="custom-control-label" for="customCheck1">Enable voucher sales</label>
 						</div>
                     	<div class="form-group mb-4">
 							<label class="control-label">{{'Voucher expiry period' }}</label>
-				          	<select [(ngModel)]="form.set_tax_rate_for_this_service" name="set_tax_rate_for_this_service" class="form-control" #set_tax_rate_for_this_service="ngModel">
-				            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
-				            	<option *ngFor="let no of set_tax_rate_for_this_service" value="{{no.id}}">{{no.name}}</option>
+				          	<select [(ngModel)]="form.voucher_expiryperiod" name="voucher_expiryperiod" class="form-control" #voucher_expiryperiod="ngModel" #voucher_expiryperiod>
+				            	<option value="6" selected="selected"> Default (6 Months)</option>
+				            	<option value="1"> 1 Month</option>
+				            	<option value="2"> 2 Months</option>
+				            	<option value="3"> 3 Months</option>
+				            	<option value="6"> 6 Months</option>
+				            	<option value="1y"> 1 Year</option>
+				            	<option value="0"> No Expiry</option>
 				          	</select>
 						</div>
 						<div class="custom-control custom-checkbox">
@@ -209,7 +300,25 @@
 
   </div>
   <div class="modal-footer">
+    <button type="button" class="btn btn-danger pull-left" (click)="open(remove_services)"><i class="fa fa-trash"></i> Delete </button>
     <button type="button" class="btn btn-default pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
-    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"><i class="fa fa-plus"></i> Add New </button>
+    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"><i class="fa fa-save"></i> Save </button>
   </div>
 </form>
+<div class="row">
+	<ng-template #remove_services let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h5 class="modal-title">Remove Services : {{serviceId}}</h5>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>You want remove services ?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="removeServices(serviceId)">Confirm</button>
+            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+        </div>
+    </ng-template>
+</div>
