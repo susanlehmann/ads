@@ -1,0 +1,21 @@
+<section class="nav-tabs-container">
+  <ul class="nav nav-pills nav-main" id="myTab1" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/inventory/products" routerLinkActive="active">{{'products' | uppercase}}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/inventory/orders" routerLinkActive="active">{{'orders' | uppercase}}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/inventory/brands" routerLinkActive="active">{{'brands' | uppercase}}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/inventory/categories" routerLinkActive="active">{{'categories' | uppercase}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/inventory/supplier" routerLinkActive="active">{{'suppliers' | uppercase}}</a>
+    </li>
+  </ul>
+</section>
+
+<router-outlet></router-outlet>

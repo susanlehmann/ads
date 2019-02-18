@@ -14,6 +14,9 @@ import { AuthService } from './shared/services/auth.service';
 import { TokenService } from './shared/services/token.service';
 import { SearchComponent } from './search/search.component';
 import { UserService } from './shared/services/user.service';
+import { SupplierService } from './layout/inventory/supplier/supplier.service';
+import { BrandService } from './layout/inventory/brand/brand.service';
+import { CategoryService } from './layout/inventory/category/category.service';
 import { ServicesService } from './shared/services/serv.service';
 import { StaffService } from './layout/staff/staff.service';
 import {
@@ -68,14 +71,17 @@ export const createTranslateLoader = (http: HttpClient) => {
     ],
     declarations: [AppComponent, SearchComponent],
     providers: [
-        AuthGuard, 
-        HttpcallService, 
+        AuthGuard,
+        HttpcallService,
         AuthService,
-        TokenService, 
+        TokenService,
         UserService,
+        CategoryService,
+        BrandService,
         ServicesService,
         StaffService,
         DatePipe,
+        SupplierService,
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     bootstrap: [AppComponent]

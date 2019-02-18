@@ -1,0 +1,201 @@
+.control-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.form-text-area {
+  resize: none;
+}
+
+.ng-invalid:not(form){
+    border-left:5px solid red;
+}
+
+.ng-valid:not(form){
+    border-left:5px solid green;
+}
+
+.form-group {
+    padding: 8px 0;
+    input::-webkit-input-placeholder {
+        color: #656565 !important;
+    }
+
+    input:-moz-placeholder {
+        /* Firefox 18- */
+        color: #656565 !important;
+    }
+
+    input::-moz-placeholder {
+        /* Firefox 19+ */
+        color: #656565 !important;
+    }
+
+    input:-ms-input-placeholder {
+        color: #656565 !important;
+    }
+}
+.title-name{
+  text-align: center;
+  font-size: 160%;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+.rVPdig > * {
+  width: 100%;
+}
+._1_jtQh {
+  border: none;
+  padding: 8px 0;
+}
+._1_jtQh {
+  position: relative;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.dX40sN {
+}
+.dX40sN {
+  font-size: 16px;
+  line-height: 18px;
+  padding: 0;
+}
+.dX40sN {
+  display: flex;
+  text-align: initial;
+  font-weight: 400;
+  color: #24334A;
+  cursor: pointer;
+  margin: 0;
+}
+label {
+  max-width: 100%;
+}
+
+._1_jtQh ._3iSUkh {
+  pointer-events: none;
+  min-height: 16px;
+  min-width: 16px;
+  margin-right: 16px;
+  background-color: white;
+  border: 1px solid #DEE3E7;
+  border-radius: 3px;
+  transition: color 0.2s, background-color 0.2s, border 0.2s, box-shadow 0.2s;
+}
+._240vE8 {
+  display: inline-block;
+  vertical-align: middle;
+}
+._2FSeuB {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+
+._1_jtQh .-LDB_y {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+._1p62pX {
+  word-wrap: break-word;
+  max-width: 100%;
+  min-width: 0 /* Font weights (defined here to overwrite text types) */ /* Font colors */;
+}
+._2dGqEF {
+  font-weight: 400;
+}
+.tHvQyk {
+  font-size: 16px;
+}
+.tHvQyk {
+  color: #24334A;
+  line-height: 18px;
+}
+.fsSjRH {
+  margin: inherit;
+  max-width: none !important;
+}
+.fsSjRH {
+  margin-bottom: 16px !important;
+}
+.QdzXW3 {
+  padding-bottom: 0;
+}
+.QdzXW3 {
+  width: 100%;
+}
+.tSvWd9 {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.tSvWd9 {
+}
+._17C7ha {
+  padding: 16px;
+}
+.YD8xyG {
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  flex-direction: row-reverse;
+  background-color: white;
+  border-top: 1px solid #DEE3E7;
+}
+._3zG3Wy {
+  align-self: stretch;
+}
+.YD8xyG > * {
+  margin: 0 0 0 15px !important;
+}
+._3V6zo- {
+  background-color: #24334A;
+  color: white;
+  text-transform: uppercase;
+}
+._2DZ1oJ {
+  min-height: 42px;
+}
+._2DZ1oJ {
+  font-family: Roboto, sans-serif;
+  line-height: 18px;
+  padding: 8px 16px;
+  white-space: nowrap;
+  min-width: 128px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px 0 #A4ADBA;
+  border: 1px solid transparent;
+  transition: all 0.12s linear /* iOS 10 Safari fix for flex center */;
+}
+._26WQGn {
+  font-weight: 700;
+  font-size: 14px;
+}
+._1FszNF {
+  text-decoration: none;
+}
+._3ttzJg {
+  color: #24334A;
+  background: white;
+  text-transform: uppercase;
+  border: 1px solid #EEF0F2;
+  box-shadow: 0 2px 5px 0 rgba(164, 173, 186, .25);
+}
