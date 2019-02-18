@@ -57,6 +57,14 @@ Route::group([
         Route::post('delete-close-date', 'Closed_DateController@destroy'); 
     });
 
+    Route::group(['prefix' => 'user/workinghour', 'namespace' => 'API\member\user'], function(){
+        Route::post('list-workinghour', 'Working_hourController@index');
+        Route::post('create-workinghour', 'Working_hourController@store');
+        Route::post('show-workinghour', 'Working_hourController@show');
+        Route::post('update-workinghour', 'Working_hourController@update');
+        Route::post('delete-workinghour', 'Working_hourController@destroy'); 
+    });
+
     Route::group(['prefix' => 'user/customer', 'namespace' => 'API\member\user'], function(){
         Route::post('list-user', 'CustomerController@index');
         Route::post('detail_user', 'CustomerController@detail');
@@ -79,7 +87,7 @@ Route::group([
     });
     
     Route::group(['prefix' => 'admin/service', 'namespace' => 'API\admin'], function(){
-        Route::get('list-service', 'ServiceController@index');
+        Route::post('list-service', 'ServiceController@index');
         Route::post('create-service', 'ServiceController@store');
         Route::post('show-service', 'ServiceController@show');
         Route::post('update-service', 'ServiceController@update');
@@ -126,16 +134,14 @@ Route::group([
         Route::post('update-order', 'OrderCtroller@update');
         Route::post('delete-order', 'OrderCtroller@destroy'); 
     });
-<<<<<<< HEAD
-=======
     
     Route::group(['prefix' => 'user/inventory/supplier', 'namespace' => 'API\member\inventory'], function(){
-        Route::post('list-order', 'Ctroller@index');
-        Route::post('create-order', 'SupplierCtroller@store');
-        Route::post('show-order', 'SupplierCtroller@show');
-        Route::post('update-order', 'SupplierCtroller@update');
-        Route::post('delete-order', 'SupplierCtroller@destroy'); 
+        Route::post('list-supplier', 'SupplierCtroller@index');
+        Route::post('create-supplier', 'SupplierCtroller@store');
+        Route::post('show-supplier', 'SupplierCtroller@show');
+        Route::post('update-supplier', 'SupplierCtroller@update');
+        Route::post('delete-supplier', 'SupplierCtroller@destroy'); 
     });
->>>>>>> origin/develop
+
 
 });

@@ -11,7 +11,7 @@ class SupplierCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['category'] = Supplier::where('id_client_supplier',$request->ownerId)->get();
+        $data['supplier'] = Supplier::where('id_client_supplier',$request->id)->get();
         return response()->json($data);
     }
 

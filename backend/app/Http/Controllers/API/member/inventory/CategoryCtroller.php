@@ -11,7 +11,7 @@ class CategoryCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['category'] = Category::where('id_client_category',$request->ownerId)->get();
+        $data['category'] = Category::where('id_client_category',$request->id)->get();
         return response()->json($data);
     }
 
@@ -73,8 +73,8 @@ class CategoryCtroller extends Controller
     { 
         $id = $request->id;
         if ($id != null) {
-            $service = service::find($id);
-            $check = $service->delete();
+            $Category = Category::find($id);
+            $check = $Category->delete();
             if($check == true)
             {
                 $msg = ['success' => 'Delete account successfully'];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\member\service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\service;
+use App\service_group;
 use Auth;
 class ServiceCtroller extends Controller
 {
@@ -12,6 +13,7 @@ class ServiceCtroller extends Controller
     {
         // List all the products
         $data['service'] = service::where('id_client',$request->ownerId)->get();
+        $data['service_group'] = service_group::where('id_client',$request->ownerId)->get();
         return response()->json($data);
     }
 
@@ -32,7 +34,7 @@ class ServiceCtroller extends Controller
         ];
 
         $input = [
-            'id_group_service' => $request->id_group_service,
+            'id_service_group' => $request->id_service_group,
             'id_client' => $request->ownerId,
             'id_create' => $request->ownerId,
             'id_update' => $request->ownerId,
@@ -44,8 +46,8 @@ class ServiceCtroller extends Controller
             'special_price_service' => $request->special_price_service,
             'id_staff' => $request->id_staff,
             'resource_requireb_service' => $request->resource_requireb_service,
-            'online_booking_service' => $online_booking_service,
-            'setting_service' => $setting_service,
+            'online_booking_service' => serialize($online_booking_service),
+            'setting_service' => serialize($setting_service),
             'status_service' => 1,
         ];
         // $user->level = 0; // ko co column level
@@ -86,7 +88,7 @@ class ServiceCtroller extends Controller
                 'enable_voucher_sales' => $request->enable_voucher_sales,
                 'enable_commission' => $request->enable_commission,
             ];
-    
+
             $input = [
                 'id_update' => $request->ownerId,
                 'id_business' => $request->id_business,

@@ -19,7 +19,7 @@ class Service_GroupCtroller extends Controller
     {
         $input = [
             'id_client' => $request->ownerId,
-            'id_create_service_group' => request->ownerId,
+            'id_create_service_group' => $request->ownerId,
             'name_service_group' => $request->name_service_group,
             'color_service_group' => $request->color_service_group,
             'description_service_group' => $request->description_service_group,
@@ -52,8 +52,8 @@ class Service_GroupCtroller extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_client' => request->ownerId,
-                'id_create_service_group' => $request->id,
+                'id_client' => $request->ownerId,
+                'id_create_service_group' => $request->ownerId,
                 'name_service_group' => $request->name_service_group,
                 'color_service_group' => $request->color_service_group,
                 'description_service_group' => $request->description_service_group,
@@ -71,11 +71,11 @@ class Service_GroupCtroller extends Controller
             $check = $service_group->delete();
             if($check == true)
             {
-                $msg = ['success' => 'Delete account successfully'];
+                $msg = ['success' => 'Delete service group successfully'];
             }
             else
             {
-                $msg = ['error' => 'There was an error deleting the account'];
+                $msg = ['error' => 'There was an error deleting the service group'];
             }
 
             return response()->json($msg);

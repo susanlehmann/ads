@@ -1,32 +1,39 @@
 <?php
 
-namespace App\Http\Controllers\API\member\inventory;
+namespace App\Http\Controllers\API\member\user;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Brand;
+use App\WorkingHour;
 use Auth;
-class BrandCtroller extends Controller
+use DB;
+class Working_hourController extends Controller
 {
     public function index(Request $request)
     {
         // List all the products
-        $data['brand'] = Brand::where('id_client_brand',$request->id)->get();
+        $data['workinghour'] = WorkingHour::where('id_client',$request->ownerId)->get();
         return response()->json($data);
     }
 
     public function store(Request $request)
     { 
         $input = [
-            'id_client_brand' => $request->ownerId,
+            'id_client' => $request->ownerId,
+            'id_staff' => $request->id_staff,
             'id_create' => $request->ownerId,
             'id_update' => $request->ownerId,
-            'name_brand' => $request->name_category,
-            'status_brand' => 1,
+            'shift1_start' => $request->shift1_start,
+            'shift1_end' => $request->shift1_end,
+            'shift2_start' => $request->shift2_start,
+            'shift2_end' => $request->shift2_end,
+            'is_repeat' => $request->is_repeat,
+            'repeat_weekly' => $request->repeat_weekly,
+            'end_repeat' => $request->end_repeat,
+            'status_workinghour' => 1,
         ];
         // $user->level = 0; // ko co column level
-        $brand = Brand::create($input);
-        if($brand == true)
+        $workinghour = WorkingHour::create($input);
+        if($workinghour == true)
         {
             $msg = ['success' => 'Create a new service group successfully'];
         }
@@ -41,7 +48,7 @@ class BrandCtroller extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data['brand'] = Brand::find($id);
+        $data['workinghour'] = WorkingHour::find($id);
         return response()->json($data);
     }
 
@@ -51,11 +58,18 @@ class BrandCtroller extends Controller
         if ($id != null) {
     
             $input = [
+                'id_staff' => $request->id_staff,
                 'id_update' => $request->ownerId,
-                'name_brand' => $request->name_category,
+                'shift1_start' => $request->shift1_start,
+                'shift1_end' => $request->shift1_end,
+                'shift2_start' => $request->shift2_start,
+                'shift2_end' => $request->shift2_end,
+                'is_repeat' => $request->is_repeat,
+                'repeat_weekly' => $request->repeat_weekly,
+                'end_repeat' => $request->end_repeat,
             ];
-            $brand = Brand::find($id);
-            $check = $brand->update($input);
+            $workinghour = WorkingHour::find($id);
+            $check = $workinghour->update($input);
             if($check == true)
             {
                 $msg = ['success' => 'Create a new service group successfully'];
@@ -73,8 +87,8 @@ class BrandCtroller extends Controller
     {
         $id = $request->id;
         if ($id != null) {
-            $brand = Brand::find($id);
-            $check = $brand->delete();
+            $workinghour = WorkingHour::find($id);
+            $check = $workinghour->delete();
             if($check == true)
             {
                 $msg = ['success' => 'Delete account successfully'];

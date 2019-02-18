@@ -18,13 +18,13 @@ class Service_GroupCtroller extends Controller
     public function store(Request $request)
     {
         $input = [
-            'id_client' => Auth::user()->id,
-            'id_create_service_group' => Auth::user()->id,
+            'id_client' => Auth::user->id(),
+            'id_create_service_group' => Auth::user->id(),
             'name_service_group' => $request->name_service_group,
             'color_service_group' => $request->color_service_group,
             'description_service_group' => $request->description_service_group,
             'level_service_group' => 0,
-            'status_service_group' => 1,
+            'status_service_group' => 1
         ];
         // $user->level = 0; // ko co column level
         $service_group = service_group::create($input);
@@ -52,8 +52,8 @@ class Service_GroupCtroller extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_client' => $request->id,
-                'id_create_service_group' => $request->id,
+                'id_client' => Auth::user->id(),
+                'id_create_service_group' => Auth::user->id(),
                 'name_service_group' => $request->name_service_group,
                 'color_service_group' => $request->color_service_group,
                 'description_service_group' => $request->description_service_group,
@@ -71,11 +71,11 @@ class Service_GroupCtroller extends Controller
             $check = $service_group->delete();
             if($check == true)
             {
-                $msg = ['success' => 'Delete account successfully'];
+                $msg = ['success' => 'Delete service group successfully'];
             }
             else
             {
-                $msg = ['error' => 'There was an error deleting the account'];
+                $msg = ['error' => 'There was an error deleting the service group'];
             }
 
             return response()->json($msg);

@@ -2,6 +2,10 @@ import { Component, OnInit, NgModule, ViewChild, ElementRef, EventEmitter  } fro
 import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
+<<<<<<< HEAD
+=======
+// import { Collapse } from './../model/group';
+>>>>>>> 104958ad1d4f5ea4f7100fa415f7de2c05550a59
 import { NotifierService } from 'angular-notifier';
 import { ServicesService } from '../../../shared/services/serv.service';
 
