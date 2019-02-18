@@ -127,7 +127,7 @@ Route::group([
         Route::post('show-product', 'ProductCtroller@show');
         Route::post('update-product', 'ProductCtroller@update');
         Route::post('delete-product', 'ProductCtroller@destroy');
-        oute::post('search-product', 'ProductCtroller@search');
+        Route::post('search-product', 'ProductCtroller@search');
     });
 
     Route::group(['prefix' => 'user/inventory/order', 'namespace' => 'API\member\inventory'], function(){
