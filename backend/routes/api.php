@@ -57,6 +57,14 @@ Route::group([
         Route::post('delete-close-date', 'Closed_DateController@destroy'); 
     });
 
+    Route::group(['prefix' => 'user/workinghour', 'namespace' => 'API\member\user'], function(){
+        Route::post('list-workinghour', 'Working_hourController@index');
+        Route::post('create-workinghour', 'Working_hourController@store');
+        Route::post('show-workinghour', 'Working_hourController@show');
+        Route::post('update-workinghour', 'Working_hourController@update');
+        Route::post('delete-workinghour', 'Working_hourController@destroy'); 
+    });
+
     Route::group(['prefix' => 'user/customer', 'namespace' => 'API\member\user'], function(){
         Route::post('list-user', 'CustomerController@index');
         Route::post('detail_user', 'CustomerController@detail');
@@ -134,5 +142,6 @@ Route::group([
         Route::post('update-supplier', 'SupplierCtroller@update');
         Route::post('delete-supplier', 'SupplierCtroller@destroy'); 
     });
+
 
 });

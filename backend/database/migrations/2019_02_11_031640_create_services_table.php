@@ -21,7 +21,7 @@ class CreateServicesTable extends Migration
             $table->integer('id_update');
             $table->integer('id_business')->nullable();
             $table->string('name_service');
-            $table->time('duration_service')->nullable();
+            $table->integer('duration_service')->nullable();
             $table->decimal('retail_price_service',18,2)->nullable();
             $table->string('name_pricing_service')->nullable();
             $table->decimal('special_price_service',18,2)->nullable();
