@@ -18,8 +18,8 @@ class Service_GroupCtroller extends Controller
     public function store(Request $request)
     {
         $input = [
-            'id_client' => Auth::user->id(),
-            'id_create_service_group' => Auth::user->id(),
+            'id_client' => $request->ownerId,
+            'id_create_service_group' => $request->ownerId,
             'name_service_group' => $request->name_service_group,
             'color_service_group' => $request->color_service_group,
             'description_service_group' => $request->description_service_group,
@@ -52,8 +52,8 @@ class Service_GroupCtroller extends Controller
         $id = $request->id;
         if ($id != null) {
             $input = [
-                'id_client' => Auth::user->id(),
-                'id_create_service_group' => Auth::user->id(),
+                'id_client' => $request->ownerId,
+                'id_create_service_group' => $request->ownerId,
                 'name_service_group' => $request->name_service_group,
                 'color_service_group' => $request->color_service_group,
                 'description_service_group' => $request->description_service_group,

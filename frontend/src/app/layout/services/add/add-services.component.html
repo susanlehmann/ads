@@ -12,7 +12,7 @@
 					<div class="input-group-prepend">
 						<div class="input-group-text">S</div>
 					</div>
-				<input [(ngModel)]="form.name_service" type="text" required text class="form-control input-underline input-lg" name="name_service" placeholder="e.g: Services Name 1" [ngModelOptions]="{updateOn: 'blur'}" #name_service="ngModel" #name_service>
+				<input [(ngModel)]="form.name_service" type="text" required text class="form-control input-underline input-lg" name="name_service" placeholder="e.g: Services Name 1" [ngModelOptions]="{updateOn: 'blur'}" (blur)="checkEmpty()" #name_service="ngModel" #name_service>
 				</div>
 				<small class="form-text text-danger " *ngIf="!name_service.valid && (name_service.dirty || name_service.touched)">Invaild Service Name !</small>
 			</div>
@@ -132,11 +132,18 @@
                   <div class="col-sm-12">
                     <label class="control-label mb-4">{{'Select staff who perform this service.' }}</label>
                     <div class="custom-radios">
+                    	<div>
+						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(listusers)">
+						    <label for="checkall">
+						    	<span></span>
+						    	Select All
+						    </label>
+					  	</div>
 				  		<div *ngFor="let u of listusers">
-						    <input type="radio" id="color-{{u?.id}}" name="listuser" value="{{u?.id}}" (change)="selectStaff(u?.id)">
+						    <input type="checkbox" id="color-{{u?.id}}" name="listuser" value="{{u?.id}}" (change)="selectStaff(u)" [checked]="checked">
 						    <label for="color-{{u?.id}}">
 						    	<span></span>
-						    	{{u?.firstName}} {{u?.lastName}}
+						    	{{u?.name}}
 						    </label>
 
 					  	</div>
@@ -268,7 +275,7 @@
                     	<div class="form-group mb-4">
 							<label class="control-label">{{'Voucher expiry period' }}</label>
 				          	<select [(ngModel)]="form.voucher_expiryperiod" name="voucher_expiryperiod" class="form-control" #voucher_expiryperiod="ngModel" #voucher_expiryperiod>
-				            	<option value="d6" selected="selected"> Default (6 Months)</option>
+				            	<option value="6" selected="selected"> Default (6 Months)</option>
 				            	<option value="1"> 1 Month</option>
 				            	<option value="2"> 2 Months</option>
 				            	<option value="3"> 3 Months</option>

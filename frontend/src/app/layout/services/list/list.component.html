@@ -4,9 +4,9 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8 col-sm-12">
 				<div class="row mb-3">
-					<div class="col-md-10 col-sm-6"></div>
-					<div class="col-md-2 col-sm-6">
-						<div ngbDropdown class="d-inline-block dropdown col-sm-12">
+					<div class="col-lg-10 col-md-8 col-sm-6"></div>
+					<div class="col-lg-2 col-md-4 col-sm-6">
+						<div ngbDropdown class="d-inline-block dropdown">
 		                    <button class="btn btn-info col-sm-12 mb-1" ngbDropdownToggle>
 		                    	Export&nbsp;&nbsp;&nbsp;<i class="fa fa-download"></i>
 		                    </button>
@@ -38,18 +38,13 @@
 		                </div>
 	                </div>
 	                <ul class="list-group">
-	                    <!-- <a href="#" class="list-group-item">Bread</a>
-	                    <a href="#" class="list-group-item">Cheese</a>
-	                    <a href="#" class="list-group-item">Soda</a>
-	                    <a href="#" class="list-group-item">Meat</a>
-	                    <a href="#" class="list-group-item">Bread</a>
-	                    <a href="#" class="list-group-item">Cheese</a>
-	                    <a href="#" class="list-group-item">Soda</a>
-	                    <a href="#" class="list-group-item">Meat</a>
-	                    <a href="#" class="list-group-item">Bread</a>
-	                    <a href="#" class="list-group-item">Cheese</a>
-	                    <a href="#" class="list-group-item">Soda</a>
-	                    <a href="#" class="list-group-item">Meat</a> -->
+	                	<div *ngFor="let s of loadServiceInGroup(gr?.id)" >
+	                		<a 
+	                			routerLink="/services/edit-services/{{s?.id}}" 
+	                			class="list-group-item"
+	                			[ngStyle]="{'border-left-color': (gr.color_service_group), 'border-left-width': '3px', 'border-left-style': 'solid'}"
+	                		>{{s.name_service}}</a>
+	                	</div>
 	                </ul>
 	            </div>
 			</div>
