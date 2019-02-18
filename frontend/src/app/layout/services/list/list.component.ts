@@ -25,6 +25,8 @@ export class ListServicesComponent implements OnInit {
     nameGroup: any;
     lstServices: any;
     idS: any = {};
+    listService: any = true;
+    listGroupService: any = false;
 
 	constructor(private modalService: NgbModal, 
 		private notifierService: NotifierService,
@@ -113,5 +115,15 @@ export class ListServicesComponent implements OnInit {
     loadServiceInGroup(id){
         return this.lstServices.service.filter(s => s.id_service_group == id);
         //console.log(a);
+    }
+
+    showListHave() {
+        this.listService = true;
+        this.listGroupService = false;
+    }
+
+    showList() {
+        this.listService = false;
+        this.listGroupService = true;
     }
 }

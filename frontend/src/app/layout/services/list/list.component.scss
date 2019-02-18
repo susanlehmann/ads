@@ -315,5 +315,44 @@
 		}
 	}
 
+	.custom-radios div {
+	  display: inline-block;
+	}
+	.custom-radios input[type="radio"] {
+	  display: none;
+	}
+	.custom-radios input[type="radio"] + label {
+	  color: #333;
+	  font-family: Arial, sans-serif;
+	  font-size: 14px;
+	}
+	.custom-radios input[type="radio"] + label span {
+		display: inline-flex;
+		width: 35px;
+		height: 35px;
+		margin: -1px 4px 0 0;
+		vertical-align: middle;
+		cursor: pointer;
+		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+		background-repeat: no-repeat;
+		background-position: center;
+		text-align: center;
+		line-height: 44px;
+	    justify-content: center;
+	    align-items: center;
+	}
+	.custom-radios input[type="radio"] + label span img {
+	  opacity: 0;
+	  transition: all .3s ease;
+	}
+	.custom-radios input[type="radio"]:checked + label span {
+	  opacity: 1;
+	  width: 35px;
+	  height: 35px;
+	  display: inline-flex;
+	  justify-content: center;
+	  align-items: center;
+	  background: rgba(0, 0, 0, 0.21);
+	}
 }
 
