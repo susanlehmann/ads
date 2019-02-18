@@ -11,7 +11,7 @@ class BrandCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['category'] = Brand::where('id_client_brand',$request->ownerId)->get();
+        $data['brand'] = Brand::where('id_client_brand',$request->id)->get();
         return response()->json($data);
     }
 

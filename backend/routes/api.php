@@ -79,7 +79,7 @@ Route::group([
     });
     
     Route::group(['prefix' => 'admin/service', 'namespace' => 'API\admin'], function(){
-        Route::get('list-service', 'ServiceController@index');
+        Route::post('list-service', 'ServiceController@index');
         Route::post('create-service', 'ServiceController@store');
         Route::post('show-service', 'ServiceController@show');
         Route::post('update-service', 'ServiceController@update');
@@ -128,11 +128,11 @@ Route::group([
     });
     
     Route::group(['prefix' => 'user/inventory/supplier', 'namespace' => 'API\member\inventory'], function(){
-        Route::post('list-order', 'Ctroller@index');
-        Route::post('create-order', 'SupplierCtroller@store');
-        Route::post('show-order', 'SupplierCtroller@show');
-        Route::post('update-order', 'SupplierCtroller@update');
-        Route::post('delete-order', 'SupplierCtroller@destroy'); 
+        Route::post('list-supplier', 'SupplierCtroller@index');
+        Route::post('create-supplier', 'SupplierCtroller@store');
+        Route::post('show-supplier', 'SupplierCtroller@show');
+        Route::post('update-supplier', 'SupplierCtroller@update');
+        Route::post('delete-supplier', 'SupplierCtroller@destroy'); 
     });
 
 });
