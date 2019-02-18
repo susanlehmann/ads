@@ -1,7 +1,7 @@
 export class Supplier {
   id: number;
   name_supplier: string;
-  description_supplier: string;
+  discription_suppliner: string;
   firstName: string;
   lastName: string;
   mobileNumber: string;
@@ -22,7 +22,7 @@ export class Supplier {
 
   new() {
     this.name_supplier = "";
-    this.description_supplier = "";
+    this.discription_suppliner = "";
     this.firstName = "";
     this.lastName = "";
     this.mobileNumber = "";
@@ -47,7 +47,7 @@ export class Supplier {
     return {
       id: this.id,
       name_supplier: this.name_supplier,
-      discription_suppliner: this.description_supplier,
+      discription_suppliner: this.discription_suppliner,
       firtname_supplier: this.firstName,
       lasname_supplier: this.lastName,
       email_supplier: this.email,
