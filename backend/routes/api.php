@@ -108,7 +108,8 @@ Route::group([
         Route::post('create-category', 'CategoryCtroller@store');
         Route::post('show-category', 'CategoryCtroller@show');
         Route::post('update-category', 'CategoryCtroller@update');
-        Route::post('delete-category', 'CategoryCtroller@destroy'); 
+        Route::post('delete-category', 'CategoryCtroller@destroy');
+        Route::post('search-category', 'CategoryCtroller@search');
     });
 
     Route::group(['prefix' => 'user/inventory/brand', 'namespace' => 'API\member\inventory'], function(){
@@ -116,7 +117,8 @@ Route::group([
         Route::post('create-brand', 'BrandCtroller@store');
         Route::post('show-brand', 'BrandCtroller@show');
         Route::post('update-brand', 'BrandCtroller@update');
-        Route::post('delete-brand', 'BrandCtroller@destroy'); 
+        Route::post('delete-brand', 'BrandCtroller@destroy');
+        Route::post('search-brand', 'BrandCtroller@search');
     });
 
     Route::group(['prefix' => 'user/inventory/product', 'namespace' => 'API\member\inventory'], function(){
@@ -124,7 +126,8 @@ Route::group([
         Route::post('create-product', 'ProductCtroller@store');
         Route::post('show-product', 'ProductCtroller@show');
         Route::post('update-product', 'ProductCtroller@update');
-        Route::post('delete-product', 'ProductCtroller@destroy'); 
+        Route::post('delete-product', 'ProductCtroller@destroy');
+        oute::post('search-product', 'ProductCtroller@search');
     });
 
     Route::group(['prefix' => 'user/inventory/order', 'namespace' => 'API\member\inventory'], function(){
@@ -140,7 +143,8 @@ Route::group([
         Route::post('create-supplier', 'SupplierCtroller@store');
         Route::post('show-supplier', 'SupplierCtroller@show');
         Route::post('update-supplier', 'SupplierCtroller@update');
-        Route::post('delete-supplier', 'SupplierCtroller@destroy'); 
+        Route::post('delete-supplier', 'SupplierCtroller@destroy');
+        oute::post('search-supplier', 'SupplierCtroller@search'); 
     });
 
 

@@ -87,4 +87,25 @@ class CategoryCtroller extends Controller
             return response()->json($msg);
             }
     }
+
+    public function search(Request $request){
+        $search_name = $request->name_category;
+        if(strlen($search_name) == 0)
+        {
+            $data['category'] = Category::where('id_client_category',$request->ownerId)
+            ->get();
+        }
+        else
+        {
+            $data['category'] = Category::where('id_client_category',$request->ownerId)
+            ->where(function ($query) use ($search_name) {
+                if(strlen($search_name) > 0)
+                {
+                    $query->where('name_category', 'LIKE', "%$search_name%");
+                }
+            })
+            ->get(); 
+        }
+        return response()->json($data);
+    }
 }

@@ -87,25 +87,21 @@ class BrandCtroller extends Controller
             return response()->json($msg);
             }
     }
-    
+
     public function search(Request $request){
-        $search_name = $request->name_user;
+        $search_name = $request->name_brand;
         if(strlen($search_name) == 0)
         {
-            $data['user'] = User::where('level',3)
-            ->where('parent',$request->getuser->id)
+            $data['brand'] = Brand::where('id_client_brand',$request->ownerId)
             ->get();
         }
         else
         {
-            $data['user'] = User::where('level',3)
-            ->where('parent',$request->getuser->id)
+            $data['brand'] = Brand::where('id_client_brand',$request->ownerId)
             ->where(function ($query) use ($search_name) {
                 if(strlen($search_name) > 0)
                 {
-                    $query->where('firstName', 'LIKE', "%$search_name%")
-                          ->orWhere('lastName', 'LIKE', "%$search_name%")
-                          ->orWhere('email', 'LIKE', "%$search_name%");
+                    $query->where('name_brand', 'LIKE', "%$search_name%");
                 }
             })
             ->get(); 

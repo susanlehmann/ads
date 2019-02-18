@@ -18,7 +18,7 @@ class ProductCtroller extends Controller
     public function store(Request $request)
     { 
         $input = [
-            'id_client_supplier' => $request->ownerId,
+            'id_client_product' => $request->ownerId,
             'id_create' => $request->ownerId,
             'id_update' => $request->ownerId,
             'name_product' => $request->name_product,
@@ -114,5 +114,29 @@ class ProductCtroller extends Controller
 
             return response()->json($msg);
             }
+    }
+
+    public function search(Request $request){
+        $search_name = $request->name_product;
+        if(strlen($search_name) == 0)
+        {
+            $data['product'] = Product::where('id_client_product',$request->ownerId)
+            ->get();
+        }
+        else
+        {
+            $data['product'] = Product::where('id_client_product',$request->ownerId)
+            ->where(function ($query) use ($search_name) {
+                if(strlen($search_name) > 0)
+                {
+                    $query->where('name_product', 'LIKE', "%$search_name%")
+                          ->orwhere('sku_product', 'LIKE', "%$search_name%")
+                          ->orwhere('barcode_product', 'LIKE', "%$search_name%")
+                    ;
+                }
+            })
+            ->get(); 
+        }
+        return response()->json($data);
     }
 }

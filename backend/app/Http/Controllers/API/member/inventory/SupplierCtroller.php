@@ -113,4 +113,25 @@ class SupplierCtroller extends Controller
             return response()->json($msg);
             }
     }
+
+    public function search(Request $request){
+        $search_name = $request->name_supplier;
+        if(strlen($search_name) == 0)
+        {
+            $data['supplier'] = Supplier::where('id_client_supplier',$request->ownerId)
+            ->get();
+        }
+        else
+        {
+            $data['supplier'] = Supplier::where('id_client_supplier',$request->ownerId)
+            ->where(function ($query) use ($search_name) {
+                if(strlen($search_name) > 0)
+                {
+                    $query->where('name_supplier', 'LIKE', "%$search_name%");
+                }
+            })
+            ->get(); 
+        }
+        return response()->json($data);
+    }
 }
