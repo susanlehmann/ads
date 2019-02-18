@@ -144,7 +144,7 @@ Route::group([
         Route::post('show-supplier', 'SupplierCtroller@show');
         Route::post('update-supplier', 'SupplierCtroller@update');
         Route::post('delete-supplier', 'SupplierCtroller@destroy');
-        oute::post('search-supplier', 'SupplierCtroller@search'); 
+        Route::post('search-supplier', 'SupplierCtroller@search'); 
     });
 
 
