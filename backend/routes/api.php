@@ -73,7 +73,7 @@ Route::group([
         Route::post('update_user', 'CustomerController@update');
         Route::post('delete_user', 'CustomerController@destroy');
         Route::post('delete_user', 'CustomerController@destroy');
-        Route::post('search_user', 'UserController@search');
+        Route::post('search_user', 'CustomerController@search');
         Route::post('block_user', 'CustomerController@blockUser');
         Route::post('unblock_user', 'CustomerController@unblockUser');
     });
