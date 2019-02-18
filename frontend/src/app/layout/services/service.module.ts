@@ -14,7 +14,7 @@ import { EditServiceGroupComponent } from './service-group/edit/edit-service-gro
 
 @NgModule({
   declarations: [
-  	ServiceComponent, 
+  	ServiceComponent,
   	ListServicesComponent,
   	AddServiceGroupComponent,
     ListServiceGroupComponent,

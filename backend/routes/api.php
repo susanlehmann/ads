@@ -126,6 +126,8 @@ Route::group([
         Route::post('update-order', 'OrderCtroller@update');
         Route::post('delete-order', 'OrderCtroller@destroy'); 
     });
+<<<<<<< HEAD
+=======
     
     Route::group(['prefix' => 'user/inventory/supplier', 'namespace' => 'API\member\inventory'], function(){
         Route::post('list-order', 'Ctroller@index');
@@ -134,5 +136,6 @@ Route::group([
         Route::post('update-order', 'SupplierCtroller@update');
         Route::post('delete-order', 'SupplierCtroller@destroy'); 
     });
+>>>>>>> origin/develop
 
 });
