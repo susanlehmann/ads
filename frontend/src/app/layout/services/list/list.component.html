@@ -4,7 +4,26 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8 col-sm-12">
 				<div class="row mb-3">
-					<div class="col-lg-10 col-md-8 col-sm-6"></div>
+					<div class="col-lg-10 col-md-8 col-sm-6">
+						<div class="custom-radios">
+					  		<div>
+							    <input type="radio" id="color" name="color" (change)="showListHave()" [checked]="listService">
+							    <label for="color">
+							    	<span>
+							    		<i class="fa fa-list"></i>
+							    	</span>
+							    </label>
+						  	</div>
+						  	<div>
+							    <input type="radio" id="color1" name="color" (change)="showList()" [checked]="listGroupService">
+							    <label for="color1">
+							    	<span>
+							    		<i class="fa fa-bars"></i>
+							    	</span>
+							    </label>
+						  	</div>
+						</div>
+					</div>
 					<div class="col-lg-2 col-md-4 col-sm-6">
 						<div ngbDropdown class="d-inline-block dropdown">
 		                    <button class="btn btn-info col-sm-12 mb-1" ngbDropdownToggle>
@@ -37,7 +56,7 @@
 		                    </div>
 		                </div>
 	                </div>
-	                <ul class="list-group">
+	                <ul class="list-group" *ngIf="listService">
 	                	<div *ngFor="let s of loadServiceInGroup(gr?.id)" >
 	                		<a 
 	                			routerLink="/services/edit-services/{{s?.id}}" 
