@@ -86,7 +86,7 @@ class ServiceCtroller extends Controller
                 'enable_voucher_sales' => $request->enable_voucher_sales,
                 'enable_commission' => $request->enable_commission,
             ];
-    
+
             $input = [
                 'id_update' => $request->ownerId,
                 'id_business' => $request->id_business,
