@@ -16,6 +16,9 @@ export class EditServiceComponent implements OnInit {
 	@ViewChild('f') floatingLabelForm: NgForm;
     @ViewChild('vform') validationForm: FormGroup;
     regularForm: FormGroup;
+    @ViewChild('service_description') svDescp: ElementRef;
+    @ViewChild('service_available_for') svAvaiFor: ElementRef;
+    @ViewChild('voucher_expiryperiod') expiryPeriod: ElementRef;
 
 	groupId: any;
 	form: any = {};
@@ -57,10 +60,11 @@ export class EditServiceComponent implements OnInit {
 			success => {
 				this.form = success.service;
 				this.listusers = JSON.parse(success.service.id_staff);
-				this.arrStaff = JSON.parse(success.service.id_staff);
+				for(var i = 0; i < JSON.parse(success.service.id_staff).length; i++) {
+					this.arrStaff.push(JSON.parse(success.service.id_staff)[i]);
+				}
 				Object.assign(this.form, JSON.parse(success.service.online_booking_service));
 				Object.assign(this.form, JSON.parse(success.service.setting_service));
-				console.log(this.form);
 			},
 			error => {}
 		);
@@ -71,7 +75,6 @@ export class EditServiceComponent implements OnInit {
 					arrUser.push({'id': success.user[i].id, 'name': success.user[i].firstName + ' ' + success.user[i].lastName});
 				}
 	        	this.liststafs = arrUser;
-	        	console.log(this.listusers);
 			}, 
 			err => {}
 		);
@@ -130,14 +133,14 @@ export class EditServiceComponent implements OnInit {
         	error => {}
         );
 	}
-
-	selectStaff(listStaff) {
+	
+	selectStaff(listStaff, event) {
 		var index = this.arrStaff.indexOf(listStaff);
-		// this.arrStaff.push({'id': listStaff.id, 'name': listStaff.firstName +' '+listStaff.lastName});
-		if (index === -1) {
-			this.arrStaff.push(listStaff);
+		if(!event.srcElement.checked) {
+			this.arrStaff.splice(index, 1);
+			this.checked = false;
 		} else {
-			this.arrStaff.splice(index,1);
+			this.arrStaff.push(listStaff);
 		}
 		this.form.id_staff = JSON.stringify(this.arrStaff);
 	}
@@ -145,17 +148,18 @@ export class EditServiceComponent implements OnInit {
 	selectAllStaff(listStaffs, event) {
 		var index = this.staffCheckAll.indexOf(listStaffs)
 		// this.arrStaff.push({'id': listStaff.id, 'name': listStaff.firstName +' '+listStaff.lastName});
-		
-		if (index === -1) {
+		this.arrStaff = [];
+		if(event.srcElement.checked) {
 			this.staffCheckAll.push(listStaffs);
 			listStaffs.forEach(iSelect => {
-				iSelect.selected = true,
-				this.arrStaff.push(iSelect)
+				this.arrStaff.push(iSelect);
+				this.checkedIf(iSelect.id);
 			});
 		} else {
+			this.arrStaff = [];
+			this.listusers = [];
 			listStaffs.forEach(iSelect => {
-				iSelect.selected = false,
-				this.arrStaff.splice(this.arrStaff.indexOf(iSelect),1)
+				this.checkedIf(iSelect.id);
 			});
 			this.staffCheckAll.splice(index,1);
 		}
@@ -168,6 +172,29 @@ export class EditServiceComponent implements OnInit {
 			if(this.listusers[i].id == id) {
 				return true;
 			}
+		}
+		for(var i = 0; i < this.arrStaff.length; i++){
+			if(this.arrStaff[i].id == id) {
+				return true;
+			}
+		}
+	}
+	enableOnline() {
+		if(!this.form.enable_online_bookings) {
+			this.svDescp.nativeElement.setAttribute('readonly', true);
+			this.svAvaiFor.nativeElement.setAttribute('readonly', true);
+			this.form.service_description = "";
+		} else {
+			this.svDescp.nativeElement.removeAttribute('readonly');
+			this.svAvaiFor.nativeElement.removeAttribute('readonly');
+		}
+	}
+
+	enableVoucher() {
+		if(!this.form.enable_voucher_sales) {
+			this.expiryPeriod.nativeElement.setAttribute('readonly', true);
+		} else {
+			this.expiryPeriod.nativeElement.removeAttribute('readonly');
 		}
 	}
 

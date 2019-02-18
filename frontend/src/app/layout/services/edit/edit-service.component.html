@@ -133,14 +133,14 @@
                     <label class="control-label mb-4">{{'Select staff who perform this service.' }}</label>
                     <div class="custom-radios">
                     	<div>
-						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(listusers)">
+						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(liststafs, $event)" [checked]="checked">
 						    <label for="checkall">
 						    	<span></span>
 						    	Select All
 						    </label>
 					  	</div>
 				  		<div *ngFor="let us of liststafs; let u of listusers">
-						    <input type="checkbox" id="color-{{us?.id}}" name="listuser" value="{{us?.id}}" (change)="selectStaff(us)" [checked]="checkedIf(us.id)">
+						    <input type="checkbox" id="color-{{us?.id}}" name="listuser" value="{{us?.id}}" (change)="selectStaff(us, $event)" [checked]="checkedIf(us.id)">
 						    <label for="color-{{us?.id}}">
 						    	<span></span>
 						    	{{us?.name}}

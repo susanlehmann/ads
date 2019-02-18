@@ -38,8 +38,12 @@
 		                </div>
 	                </div>
 	                <ul class="list-group">
-	                	<div *ngFor="let s of loadServiceInGroup(gr?.id)">
-	                		<a routerLink="/services/edit-services/{{s?.id}}" class="list-group-item">{{s.name_service}}</a>
+	                	<div *ngFor="let s of loadServiceInGroup(gr?.id)" >
+	                		<a 
+	                			routerLink="/services/edit-services/{{s?.id}}" 
+	                			class="list-group-item"
+	                			[ngStyle]="{'border-left-color': (gr.color_service_group), 'border-left-width': '3px', 'border-left-style': 'solid'}"
+	                		>{{s.name_service}}</a>
 	                	</div>
 	                </ul>
 	            </div>
