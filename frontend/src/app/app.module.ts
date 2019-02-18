@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import {
    GoogleLoginProvider,
    FacebookLoginProvider
 } from 'angular-6-social-login';
+import { EditProductComponent } from './layout/inventory/product/edit-product/edit-product.component';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -57,6 +59,7 @@ export const createTranslateLoader = (http: HttpClient) => {
     imports: [
         CommonModule,
         BrowserModule,
+        FormsModule,
         BrowserAnimationsModule,
         HttpClientModule,
         TranslateModule.forRoot({
@@ -69,7 +72,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         AppRoutingModule,
         SocialLoginModule
     ],
-    declarations: [AppComponent, SearchComponent],
+    declarations: [AppComponent, SearchComponent, EditProductComponent],
     providers: [
         AuthGuard,
         HttpcallService,

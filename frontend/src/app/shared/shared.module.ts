@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PageHeaderModule } from './modules/page-header/page-header.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PageHeaderModule,
     NgbModule,
     NgxLoadingModule,
+    TranslateModule,
   ]
 })
 export class SharedModule { }

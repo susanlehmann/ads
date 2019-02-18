@@ -1,0 +1,197 @@
+<div class="modal-content full-screen">
+    <div class="modal-header">
+        <h4 class="modal-title col-sm-4 offset-sm-4">{{isAdd ? 'Create Product' : 'Edit Product'}}</h4>
+        <button type="button" class="col-sm-4 close" aria-label="Close">
+            <span aria-hidden="true" [routerLink]="[ '/inventory/products' ]">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class="container">
+
+            <div class="col-md-12 form-content">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Product Name</label>
+                                <input type="text" name="name" [(ngModel)]="form.productName"
+                                    class="form-control input-underline input-lg" placeholder="e.g. Large Shampoo">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Category</label>
+                                <select [(ngModel)]="form.category"
+                                name="user-permission" class="form-control">
+                                    <option selected>Select Category</option>
+                                    <option>Basic</option>
+                                    <option>Low</option>
+                                    <option>Medium</option>
+                                    <option>High</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Brand</label>
+                                <select name="user-permission" class="form-control">
+                                    <option selected>Select Brand</option>
+                                    <option>Basic</option>
+                                    <option>Low</option>
+                                    <option>Medium</option>
+                                    <option>High</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label class="control-label">Barcode <span> (ISBN, UPC, etc.)</span></label>
+                                <input [(ngModel)]="form.barCode" name="bar-code"
+                                type="text" class="form-control input-underline input-lg"
+                                    placeholder="e.g. 123ABC">
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="control-label">SKU <span> Stock Keeping Unit</span></label>
+                                <input [(ngModel)]="form.sku" name="sku"
+                                type="text"  class="form-control input-underline input-lg"
+                                    placeholder="e.g. 123ABC">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Description</label>
+                                <textarea class="form-control form-text-area" name="notes" [(ngModel)]="form.description"
+                                    placeholder="e.g. the world's most spectacular product" rows="6"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row form-group">
+                            <div class="col-sm-12 btn-switch">
+                                <label class="switch">
+                                    <input type="checkbox" [(ngModel)]="form.enableRetail" name="enableRetail">
+                                    <span class="slider round"></span>
+                                </label>
+                                <label class="control-label">Enable Retail Sales</label>
+                            </div>
+                        </div>
+
+                        <ng-container *ngIf="form.enableRetail">
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Retail Price</label>
+                                    <input type="number" class="form-control input-underline input-lg"
+                                    [(ngModel)]="form.retailPrice" name="first-name">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label class="control-label">Special Price</label>
+                                    <input [(ngModel)]="form.specialPrice"
+                                    type="number" name="last-name" class="form-control input-underline input-lg">
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label">Tax<span> Included in prices</span></label>
+                                    <select name="user-permission" class="form-control">
+                                        <option selected>Default: No tax</option>
+                                        <option>Basic</option>
+                                        <option>Low</option>
+                                        <option>Medium</option>
+                                        <option>High</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input [(ngModel)]="form.enableCommission"
+                                        type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">Enable commission</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ng-container>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row form-group">
+                            <div class="col-sm-12 btn-switch">
+                                <label class="switch">
+                                    <input type="checkbox" [(ngModel)]="form.enableStock" name="enableStock">
+                                    <span class="slider round"></span>
+                                </label>
+                                <label class="control-label">Enable Stock Control</label>
+                            </div>
+                        </div>
+
+                        <ng-container *ngIf="form.enableStock">
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label">Supply Price</label>
+                                    <input type="number" name="number" class="form-control input-underline input-lg"
+                                        placeholder="0">
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label">Supplier</label>
+                                    <select name="user-permission" class="form-control">
+                                        <option selected>Select Supplier</option>
+                                        <option>Basic</option>
+                                        <option>Low</option>
+                                        <option>Medium</option>
+                                        <option>High</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Reorder Point</label>
+                                    <input [(ngModel)]="form.reorderPoint"
+                                    type="number" class="form-control input-underline input-lg"
+                                        name="first-name">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label class="control-label">Reorder QTY.</label>
+                                    <input [(ngModel)]="form.reorderQty"
+                                    type="number" name="last-name" class="form-control input-underline input-lg">
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+            <button *ngIf="!isAdd" type="button" class="btn btn-danger" style="justify-content: flex-start"
+            (click)="deleteProduct()"> Delete </button>
+        <!-- <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button> -->
+        <button type="submit" class="btn btn-dark pull-right" (click)="save()"> Save </button>
+        </div>
+
+</div>
