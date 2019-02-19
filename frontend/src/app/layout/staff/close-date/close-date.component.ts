@@ -12,7 +12,6 @@ export class CloseDateComponent implements OnInit {
   dates: ClosedDate[];
   selectedId;
   isAdd = true;
-  loading = false;
 
   form: ClosedDate;
 
@@ -29,11 +28,9 @@ export class CloseDateComponent implements OnInit {
   }
 
   getList() {
-    this.loading = true;
     let sort = (a,b) => {return a.id - b.id};
     this.staffService.getListClosedDate().subscribe((dates: []) => {
       this.dates = dates.map(ClosedDate.toModel).sort(sort);
-      this.loading = false;
     });
   }
 
@@ -54,10 +51,8 @@ export class CloseDateComponent implements OnInit {
   openUpdateModal(content: NgbModalRef, id) {
     this.isAdd = false;
     this.selectedId = id;
-    this.loading = true;
     this.staffService.findClosedDateById(id)
     .subscribe((data:any) => {
-      this.loading = false;
             this.form.updateData(data.close_date);
             this.openModal(content);
         });

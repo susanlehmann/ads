@@ -25,7 +25,7 @@
                             <div class="col-sm-12">
                                 <label class="control-label">Category</label>
                                 <select [(ngModel)]="form.category"
-                                name="user-permission" class="form-control">
+                                name="category" class="form-control">
                                     <option selected>Select Category</option>
                                     <option>Basic</option>
                                     <option>Low</option>
@@ -38,7 +38,7 @@
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Brand</label>
-                                <select name="user-permission" class="form-control">
+                                <select name="brand" class="form-control">
                                     <option selected>Select Brand</option>
                                     <option>Basic</option>
                                     <option>Low</option>
@@ -70,7 +70,7 @@
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Description</label>
-                                <textarea class="form-control form-text-area" name="notes" [(ngModel)]="form.description"
+                                <textarea class="form-control form-text-area" name="Description" [(ngModel)]="form.description"
                                     placeholder="e.g. the world's most spectacular product" rows="6"></textarea>
                             </div>
                         </div>
@@ -96,20 +96,20 @@
                                 <div class="col-sm-6">
                                     <label class="control-label">Retail Price</label>
                                     <input type="number" class="form-control input-underline input-lg"
-                                    [(ngModel)]="form.retailPrice" name="first-name">
+                                    [(ngModel)]="form.retailPrice" name="retail">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <label class="control-label">Special Price</label>
                                     <input [(ngModel)]="form.specialPrice"
-                                    type="number" name="last-name" class="form-control input-underline input-lg">
+                                    type="number" name="special" class="form-control input-underline input-lg">
                                 </div>
                             </div>
 
                             <div class="row form-group">
                                 <div class="col-sm-12">
                                     <label class="control-label">Tax<span> Included in prices</span></label>
-                                    <select name="user-permission" class="form-control">
+                                    <select name="tax" class="form-control">
                                         <option selected>Default: No tax</option>
                                         <option>Basic</option>
                                         <option>Low</option>
@@ -146,7 +146,8 @@
                             <div class="row form-group">
                                 <div class="col-sm-12">
                                     <label class="control-label">Supply Price</label>
-                                    <input type="number" name="number" class="form-control input-underline input-lg"
+                                    <input type="number" name="supply-price" [(ngModel)]="form.supplyPrice"
+                                    class="form-control input-underline input-lg"
                                         placeholder="0">
                                 </div>
                             </div>
@@ -169,13 +170,13 @@
                                     <label class="control-label">Reorder Point</label>
                                     <input [(ngModel)]="form.reorderPoint"
                                     type="number" class="form-control input-underline input-lg"
-                                        name="first-name">
+                                        name="point">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <label class="control-label">Reorder QTY.</label>
                                     <input [(ngModel)]="form.reorderQty"
-                                    type="number" name="last-name" class="form-control input-underline input-lg">
+                                    type="number" name="qty" class="form-control input-underline input-lg">
                                 </div>
                             </div>
                         </ng-container>

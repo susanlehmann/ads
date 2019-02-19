@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
+import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from  'ngx-ui-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,8 @@ import {
    FacebookLoginProvider
 } from 'angular-6-social-login';
 import { EditProductComponent } from './layout/inventory/product/edit-product/edit-product.component';
+import { InventoryService } from './layout/inventory/inventory.service';
+import { NotifierService } from 'angular-notifier';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -61,6 +64,8 @@ export const createTranslateLoader = (http: HttpClient) => {
         BrowserModule,
         FormsModule,
         BrowserAnimationsModule,
+        NgxUiLoaderModule,
+        NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
         HttpClientModule,
         TranslateModule.forRoot({
             loader: {
@@ -84,7 +89,9 @@ export const createTranslateLoader = (http: HttpClient) => {
         ServicesService,
         StaffService,
         DatePipe,
+        InventoryService,
         SupplierService,
+        NotifierService,
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     bootstrap: [AppComponent]

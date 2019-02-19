@@ -1,32 +1,44 @@
-<div>
-  <div>Product name</div>
+<div class="product-header">
+  <div>{{product.productName}}</div>
   <div class="pull-right">
-    <button type="button" class="btn btn-light"> Stock- </button>
-    <button type="button" class="btn btn-light"> Stock+ </button>
+    <button type="button" class="btn btn-light" (click)="openModal(decreaseStock)"> Stock- </button>
+    <button type="button" class="btn btn-light" (click)="openModal(increaseStock)"> Stock+ </button>
     <button type="button" class="btn btn-light" [routerLink]="[ '/inventory/products/', product.id, 'edit' ]"> Edit </button>
   </div>
 </div>
 
+<div class="product-info">
 <table class="table no-border">
   <tr>
     <td>Barcode</td>
+    <td>{{product.barCode}}</td>
     <td>Total on hand</td>
+    <td>{{product.totalOnHand}}</td>
     <td>Brand</td>
+    <td>{{product.brandName}}</td>
   </tr>
   <tr>
     <td>SKU</td>
+    <td>{{product.sku}}</td>
     <td>Total Stock Cost</td>
+    <td>{{product.totalStockCost}}</td>
     <td>Category</td>
+    <td>{{product.categoryName}}</td>
   </tr>
   <tr>
     <td>Retail Price</td>
+    <td>{{product.retailPrice}}</td>
     <td>Avg. Stock Cost</td>
+    <td>{{product.avgStockCost}}</td>
     <td>Supplier</td>
+    <td>{{product.supplierName}}</td>
   </tr>
   <tr>
     <td>Supply Price</td>
+    <td>{{product.supplyPrice}}</td>
   </tr>
 </table>
+</div>
 
 <h3>Stock History</h3>
 
@@ -73,3 +85,116 @@
       </tr>
     </tfoot> -->
 </table>
+
+
+
+
+
+<ng-template #increaseStock let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title col-sm-6 offset-sm-3">Increase Stock</h4>
+          <button type="button" class="col-sm-3 close" aria-label="Close">
+            <span aria-hidden="true" (click)="modal.dismiss('Cross click')">&times;</span>
+          </button>
+          </div>
+          
+          
+          <div class="modal-body">
+              <div>0 units currently in stock at Hachinet.</div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <label class="control-label">INCREASE QTY.</label>
+                        <input type="text" class="form-control input-underline input-lg" name="description">
+                    
+                    </div>
+            </div>
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <label class="control-label">SUPPLY PRICE</label>
+                        <input type="text" class="form-control input-underline input-lg" name="description">
+                    
+                    </div>
+            </div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="location">
+          <label class="custom-control-label" for="location"></label>SAVE PRICE FOR NEXT TIME</div>
+                    
+                    </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-sm-12">
+                  <label class="control-label">INCREASE REASON</label>
+                  <select name="user-permission" class="form-control">
+                      <option selected>New Stock</option>
+                      <option>Basic</option>
+                      <option>Low</option>
+                      <option>Medium</option>
+                      <option>High</option>
+                  </select>
+              </div>
+          </div>
+  
+  
+            
+          </div>
+  
+          <div class="modal-footer">
+              <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+              <button type="submit" class="btn btn-dark pull-right" (click)="increaseStock()"> Save </button>
+        </div>
+  
+  </ng-template>
+
+<ng-template #decreaseStock let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title col-sm-6 offset-sm-3">Decrease Stock</h4>
+          <button type="button" class="col-sm-3 close" aria-label="Close">
+            <span aria-hidden="true" (click)="modal.dismiss('Cross click')">&times;</span>
+          </button>
+          </div>
+          
+          
+          <div class="modal-body">
+              <div>0 units currently in stock at Hachinet.</div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <label class="control-label">DECREASE QTY.</label>
+                        <input type="text" class="form-control input-underline input-lg" name="description">
+                    
+                    </div>
+            </div>
+
+
+            <div class="row form-group">
+              <div class="col-sm-12">
+                  <label class="control-label">DECREASE REASON</label>
+                  <select name="user-permission" class="form-control">
+                      <option selected>Internal Use</option>
+                      <option>Basic</option>
+                      <option>Low</option>
+                      <option>Medium</option>
+                      <option>High</option>
+                  </select>
+              </div>
+          </div>
+  
+  
+            
+          </div>
+  
+          <div class="modal-footer">
+              <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+              <button type="submit" class="btn btn-dark pull-right" (click)="increaseStock()"> Save </button>
+        </div>
+  
+  </ng-template>

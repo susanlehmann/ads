@@ -9,7 +9,6 @@ import { DetailComponent } from './detail/detail.component';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component';
-import { NgxLoadingModule } from 'ngx-loading';
 @NgModule({
   declarations: [ClientComponent, DetailComponent, ListComponent, EditComponent, AddComponent],
   imports: [
@@ -17,7 +16,6 @@ import { NgxLoadingModule } from 'ngx-loading';
     CommonModule,
     ClientRoutingModule,
     TranslateModule,
-    NgxLoadingModule,
     NgbModule.forRoot()
   ]
 })

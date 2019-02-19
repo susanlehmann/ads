@@ -11,7 +11,7 @@ class ProductCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['product'] = Product::where('id_client_supplier',$request->ownerId)->get();
+        $data['product'] = Product::where('id_client_product',$request->id)->get();
         return response()->json($data);
     }
 
@@ -42,7 +42,7 @@ class ProductCtroller extends Controller
         $product = Product::create($input);
         if($product == true)
         {
-            $msg = ['success' => 'Create a new service group successfully'];
+            $msg = ['success' => 'Create a new service group successfully', 'id' => $product->id];
         }
         else
         {

@@ -8,7 +8,6 @@ import { ViewChild } from '@angular/core'
 import { AuthService } from '../shared/services/auth.service';
 import { TokenService } from '../shared/services/token.service';
 import { HttpcallService } from '../shared/services/httpcall.service';
-import { ngxLoadingAnimationTypes, NgxLoadingComponent } from 'ngx-loading';
 // import {SnotifyService, SnotifyPosition, SnotifyToastConfig} from 'ng-snotify';
 const PrimaryWhite = '#ffffff';
 const SecondaryGrey = '#ccc';
@@ -37,18 +36,12 @@ export class LoginComponent implements OnInit {
  // public titleMaxLength = 15;
  // public bodyMaxLength = 80;
 
-  @ViewChild('ngxLoading') ngxLoadingComponent: NgxLoadingComponent;
-  public ngxLoadingAnimationTypes = ngxLoadingAnimationTypes;
-  public primaryColour = PrimaryRed;
-  public secondaryColour = SecondaryBlue;
-  public config = { animationType: ngxLoadingAnimationTypes.none, primaryColour: this.primaryColour, secondaryColour: this.secondaryColour, tertiaryColour: this.primaryColour, backdropBorderRadius: '3px' };
     public form = {
         email: null,
         password: null
     };
 
     public error = null;
-    public loading = false;
     constructor(
         private translate: TranslateService,
         public router: Router,
@@ -94,7 +87,6 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         // localStorage.setItem('isLoggedin', 'true');
         //console.log(this.form);
-        this.loading = true;
         this.httpcall.login(this.form).subscribe(
           data => {
             this.err = data;
@@ -113,17 +105,14 @@ export class LoginComponent implements OnInit {
         this.Auth.changeAuthStatus(true);
         // this.snotifyService.success(this.body, this.title, this.getConfig());
         localStorage.setItem('isLoggedin', 'true');
-        this.loading = true;
         this.router.navigateByUrl('/dashboard');
       }
 
       handleError(error) {
-        this.loading = false;
         this.error = error.error.error;
     }
 
     handleUnVeri(error) {
-        this.loading = false;
         this.error = error.error;
     }
 

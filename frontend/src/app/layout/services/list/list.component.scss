@@ -356,3 +356,26 @@
 	}
 }
 
+
+
+$breakpoint-iphone: 667px;
+//desktop
+@media (min-width: $breakpoint-iphone) {
+	
+}
+
+//mobile
+@media (max-width: $breakpoint-iphone) {
+	#inbox .show-on-hover {
+	    bottom: 20px !important;
+	    right: 20px !important;
+	}
+
+	.col-mb-9 {
+	    width: 60%;
+	}
+
+	.col-mb-3 {
+	    width: 40%;
+	}
+}

@@ -9,7 +9,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { InventoryComponent } from './inventory.component';
 import { BrandComponent } from './brand/brand.component';
-import { NgxLoadingModule } from 'ngx-loading';
 import { OrderComponent } from './order/order.component';
 import { CategoryComponent } from './category/category.component';
 import { SupplierComponent } from './supplier/supplier.component';
@@ -19,7 +18,7 @@ import { ViewProductComponent } from './product/view-product/view-product.compon
 
 
 @NgModule({
-    imports: [SharedModule, CommonModule, InventoryRoutingModule, PageHeaderModule,FormsModule, NgbModule, NgxLoadingModule.forRoot({})],
+    imports: [SharedModule, CommonModule, InventoryRoutingModule, PageHeaderModule,FormsModule, NgbModule],
     declarations: [InventoryComponent, BrandComponent, OrderComponent, CategoryComponent, SupplierComponent, NeworderComponent,
     ListProductComponent,
     ViewProductComponent,

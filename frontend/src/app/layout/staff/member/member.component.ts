@@ -10,7 +10,6 @@ import { StaffService } from '../staff.service';
   styleUrls: ['./member.component.scss']
 })
 export class MemberComponent implements OnInit {
-  loading: boolean;
   form: Staff;
 
   modalOptions: NgbModalOptions;
@@ -79,23 +78,19 @@ export class MemberComponent implements OnInit {
   }
 	
 	getUser() {
-    this.startLoading();
     this.staffService.getList()
 		.subscribe((listusers:any) => {
-        this.stopLoading();
         this.listusers = listusers.user
         .map(Staff.toModel)
         .sort((a, b) => {
           return a.id - b.id;
         });
 		}, err => {
-      this.stopLoading();
     });
 	}
 	
   onSubmit(): void {
     const dto = this.form.toDto();
-    this.startLoading();
     if (this.isCreate) {
       this.addStaff(dto);
     } else {
@@ -107,22 +102,18 @@ export class MemberComponent implements OnInit {
   addStaff(staff): void {
     this.staffService.add(staff)
     .subscribe((data:any) => {
-            this.stopLoading();
             this.getUser();
             this.notifierService.notify('success', 'A new Staff has been successfully added');
     }), err => {
-      this.stopLoading();
     };
     }
 
   updateStaff(staff) {
     this.staffService.update(staff)
     .subscribe((data:any) => {
-            this.stopLoading();
             this.getUser();
             this.notifierService.notify('success', 'Staff information has been successfully updated');
     }), err => {
-      this.stopLoading();
     };
     }
 
@@ -133,14 +124,6 @@ export class MemberComponent implements OnInit {
               this.notifierService.notify('success', 'A Staff has been successfully deleted');
           });
     this.modal.dismissAll();
-  }
-  
-  startLoading(): void {
-    this.loading = true;
-  }
-
-  stopLoading(): void {
-    this.loading = false;
   }
 
 }

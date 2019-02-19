@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../model/product';
+import { InventoryService } from '../../inventory.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-view-product',
@@ -13,6 +15,8 @@ export class ViewProductComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private inventoryService: InventoryService,
+    private modal: NgbModal,
   ) {
     this.product = new Product();
    }
@@ -20,8 +24,23 @@ export class ViewProductComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      console.log(id);
+      this.loadProduct(id);
    });
   }
+
+  loadProduct(id) {
+    this.inventoryService.findProductById(id).subscribe((pr: any) => {
+      this.product.updateData(pr.product);
+    });
+  }
+
+  openModal(content: NgbModalRef) {
+    this.modal.open(content, {
+      backdrop: 'static',
+      size: 'md'
+    });
+  }
+
+  increaseStock() {}
 
 }
