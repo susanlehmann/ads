@@ -147,5 +147,13 @@ Route::group([
         Route::post('search-supplier', 'SupplierCtroller@search'); 
     });
 
+    Route::group(['prefix' => 'user/appointment', 'namespace' => 'API\member\appoint'], function(){
+        Route::post('list-appoint', 'AppointmentContronler@index');
+        Route::post('create-appoint', 'AppointmentContronler@store');
+        Route::post('show-appoint', 'AppointmentContronler@show');
+        Route::post('update-appoint', 'AppointmentContronler@update');
+        Route::post('delete-appoint', 'AppointmentContronler@destroy');
+    });
+
 
 });
