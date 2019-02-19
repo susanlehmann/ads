@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { InventoryComponent } from './inventory.component';
-import { ProductComponent } from './product/product.component';
 import { BrandComponent } from './brand/brand.component';
 import { OrderComponent } from './order/order.component';
 import { CategoryComponent } from './category/category.component';
 import { SupplierComponent } from './supplier/supplier.component';
-import { NewComponent } from './product/new/new.component';
 import { NeworderComponent} from './order/neworder/neworder.component';
+import { ListProductComponent } from './product/list-product/list-product.component';
+import { ViewProductComponent } from './product/view-product/view-product.component';
 
 const routes: Routes = [
     {
@@ -18,11 +18,11 @@ const routes: Routes = [
         },
         {
           path: 'products',
-          component: ProductComponent
+          component: ListProductComponent
         },
         {
-          path: 'products/new',
-          component: NewComponent
+          path: 'products/:id/view',
+          component: ViewProductComponent
         },
         {
           path: 'orders',

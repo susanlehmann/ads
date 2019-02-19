@@ -1,0 +1,61 @@
+
+<div class="card card-custom mb-3">
+    <div class="card-header">
+        <!-- <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-1x fa-search" style="font-size: 1.5rem"></i>
+              </div>
+            </div>
+            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search by name, barcode or SKU" (input)="searchProduct($event)">
+          </div> -->
+          <input type="text" class="form-control" style="width: 40%;" placeholder="Search by name, barcode or SKU" 
+           (input)="searchProduct($event)">          
+      <button class="btn btn-primary pull-right" type="button" [routerLink]="[ '/inventory/products/add' ]">Add product</button>
+    </div>
+
+    <div class="card-body table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>{{'Product name'}}</th>
+            <th>{{'Barcode'}}</th>
+            <th>{{'Retail price'}}</th>
+            <th>{{'Stock on hand'}}</th>
+            <th>{{'Updated at'}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <ng-container *ngIf="true">
+            <tr style="background-color: #fff; cursor: default;">
+                            <td colspan="2" style="padding-top:40px;">
+                                <div class="text-center">
+                                        <h1><i class="fa fa-search fa-lg"></i></h1>
+                                        <h3 class="text-capitalize">No Results Found</h3>
+                                        <p>Try using different filter options to find what you're looking for</p>
+                                    </div>
+                            </td>
+                        </tr>
+          </ng-container> -->
+          <ng-container *ngIf="true">
+            <tr *ngFor="let product of products; index as i" [routerLink]="['/inventory/products/', product.id, 'view']">
+              <td>{{product.productName}}</td>
+              <td>{{product.barCode}}</td>
+              <td>{{product.retailPrice}}</td>
+              <td>Unlimited</td>
+              <td>18 Feb 2019, 10:22am</td>
+            </tr>
+          </ng-container>
+        </tbody>
+        <!-- <tfoot *ngIf="numberList > 0">
+          <tr>
+            <th colspan="3">
+              paging
+            </th>
+          </tr>
+        </tfoot> -->
+      </table>
+    </div>
+
+  </div>
+

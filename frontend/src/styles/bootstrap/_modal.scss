@@ -71,6 +71,21 @@
   @include box-shadow($modal-content-box-shadow-xs);
   // Remove focus outline from opened modal
   outline: 0;
+
+  &.full-screen {
+    border: none;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+
+    .modal-header, .modal-footer {
+      min-height: 70px;
+    }
+
+    .modal-body {
+      overflow-y: auto;
+    }
+  }
 }
 
 // Modal background
