@@ -37,5 +37,6 @@ export class StaffSchedule {
         }
 
         this.weekSchedule = sche;
+        return sche;
     }
 }

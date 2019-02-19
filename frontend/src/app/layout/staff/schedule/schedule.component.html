@@ -11,21 +11,25 @@
     <th *ngFor="let day of weekdays">{{day}}</th>
   </thead>
   <tbody>
-    <tr *ngFor="let sche of schedules">
+    <tr *ngFor="let sche of liststaff">
       <th class="head-col" style="vertical-align: middle">
-        <div style="font-weight: 700; margin-bottom: 5px;">{{sche.staffName}}</div>
-        <div>{{sche.weeklyHours}}</div>
+        <div style="font-weight: 700; margin-bottom: 5px;">{{sche.firstName}} {{sche.lastName}}</div>
+        <div>{{ 44 }}</div>
       </th>
-      <ng-container *ngFor="let w of sche.weekSchedule">
-          <ng-container *ngIf="w == null; else elseTemplate">
+      <ng-container *ngFor="let w of schedules">
+          <!-- <ng-container *ngIf="w == null; else elseTemplate">
               <td (click)="openModal(sche, content)" class="no-shift"></td>
           </ng-container>
           <ng-template #elseTemplate>
               <td class="work-hour" (click)="openModal(sche, content)">
-                  <div style="margin-bottom: 10px;">{{w.start}}</div>
-                  <div>{{w.end}}</div>
+                  <div style="margin-bottom: 10px;">{{w.shift1_start}}</div>
+                  <div>{{w.shift1_end}}</div>
               </td>
-          </ng-template>
+          </ng-template> -->
+          <td class="work-hour" (click)="openModal(sche, content)">
+            <div style="margin-bottom: 10px;">{{w.shift1_start}}</div>
+            <div>{{w.shift1_end}}</div>
+        </td>
       </ng-container>
     </tr>
   </tbody>
