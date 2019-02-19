@@ -128,6 +128,7 @@ Route::group([
         Route::post('update-product', 'ProductCtroller@update');
         Route::post('delete-product', 'ProductCtroller@destroy');
         Route::post('search-product', 'ProductCtroller@search');
+        Route::post('search-product-order', 'ProductCtroller@search_oder');
     });
 
     Route::group(['prefix' => 'user/inventory/stock', 'namespace' => 'API\member\inventory'], function(){

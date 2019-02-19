@@ -139,4 +139,42 @@ class ProductCtroller extends Controller
         }
         return response()->json($data);
     }
+
+    public function search_oder(Request $request){
+        $search_name = $request->name_product;
+        $supplier = $request->id_supplier;
+        $category = $request->id_category;
+        if(strlen($search_name) == 0 AND $supplier < 1 AND $category < 1)
+        {
+            $data['product'] = Product::where('id_client_product',$request->ownerId)
+            ->get();
+        }
+        else
+        {
+            $data['product'] = Product::where('id_client_product',$request->ownerId)
+            ->where(function ($query) use ($search_name) {
+                if(strlen($search_name) > 0)
+                {
+                    $query->where('name_product', 'LIKE', "%$search_name%");
+                }
+            })
+
+            ->where(function ($query) use ($supplier) {
+                if($supplier > 1)
+                {
+                    $query->where('id_supplier', $supplier);
+                }
+            })
+
+            ->where(function ($query) use ($category) {
+                if($category > 1)
+                {
+                    $query->where('id_category', $category);
+                }
+            })
+            ->get(); 
+        }
+        return response()->json($data);
+    }
+
 }
