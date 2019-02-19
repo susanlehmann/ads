@@ -11,7 +11,7 @@ class OrderCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['order'] = Order::where('id_client_order',$request->ownerId)->get();
+        $data['order'] = Order::where('id_client_order',$request->id)->get();
         return response()->json($data);
     }
 
