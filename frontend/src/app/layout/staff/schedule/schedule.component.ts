@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StaffSchedule } from './schedule';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import { Schedule } from '../model/schedule'
+import { StaffService } from '../staff.service';
 
 @Component({
   selector: 'app-schedule',
@@ -26,6 +27,7 @@ export class ScheduleComponent implements OnInit {
 
   constructor(
     private modal: NgbModal,
+    private staffService: StaffService,
   ) {
     this.schedules = [
       new StaffSchedule(),
@@ -35,6 +37,7 @@ export class ScheduleComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.getschedule();
   }
 
   openModal(staff, content: NgbModalRef) {
@@ -59,7 +62,7 @@ export class ScheduleComponent implements OnInit {
 	getschedule() {
     this.staffService.getListSchedule()
 		.subscribe((listusers:any) => {
-        this.listschedule = listusers.schedule;
+        this.schedules = listusers.schedule;
 		}, err => {
     });
 	}

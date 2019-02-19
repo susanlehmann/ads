@@ -65,7 +65,7 @@ export class StaffService {
 
     // schedule
     getListSchedule() {
-        return this._http.post(`${this.baseUrl}/user/closed_date/list-close-date`, {ownerId : this.currentUserId});
+        return this._http.post(`${this.baseUrl}/user/workinghour/list-workinghour`, {ownerId : this.currentUserId});
     }
 
     findScheduleById(id: string) {
