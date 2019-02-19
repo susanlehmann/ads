@@ -21,6 +21,7 @@ import { BrandService } from './layout/inventory/brand/brand.service';
 import { CategoryService } from './layout/inventory/category/category.service';
 import { ServicesService } from './shared/services/serv.service';
 import { StaffService } from './layout/staff/staff.service';
+import { OrderService } from './layout/inventory/order/order.service';
 import {
    SocialLoginModule,
    AuthServiceConfig,
@@ -88,6 +89,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         BrandService,
         ServicesService,
         StaffService,
+        OrderService,
         DatePipe,
         InventoryService,
         SupplierService,

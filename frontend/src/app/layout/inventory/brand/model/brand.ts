@@ -2,6 +2,7 @@ export class Brand {
   id: number;
   brandName: string;
   updatetime: string;
+  getbrand: any;
 
   constructor() {
     this.new();
@@ -11,6 +12,7 @@ export class Brand {
   new() {
     this.brandName = "";
     this.updatetime = "";
+    this.getbrand = null;
   }
 
   mockData() {

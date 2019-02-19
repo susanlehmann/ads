@@ -32,8 +32,8 @@ export class Product {
   new() {
     this.id = 1;
     this.productName = "";
-    this.categoryId = 1;
-    this.brandId = 1;
+    this.categoryId = 0;
+    this.brandId = 0;
     this.enableRetail = false;
     this.retailPrice = 0;
     this.specialPrice = 0;
@@ -98,13 +98,13 @@ export class Product {
   randomString() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  
+
     for (var i = 0; i < 5; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
-  
+
     return text;
   }
-  
+
   create_UUID() {
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

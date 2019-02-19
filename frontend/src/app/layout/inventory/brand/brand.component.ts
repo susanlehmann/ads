@@ -129,5 +129,21 @@ export class BrandComponent implements OnInit {
   ngOnInit() {
     this.getBrand();
   }
+  searchBrand($event){
+    const search: any = {};
+    //Object.assign(search, { 'getbrand': JSON.parse(localStorage.getItem('brand')), 'name_brand': event.target.value});
+		this.startLoading();
+		this.BrandService.searchBrand(search).subscribe(
+			success => {
+				this.stopLoading();
+				this.listbrands = success;
+			},
+			error => {
+        this.stopLoading();
+        console.log(error);
+			}
+		);
+	}
 
-}
+  }
+

@@ -38,6 +38,9 @@ export class BrandService {
     deletebrand(id) {
         return this._http.post(`${this.baseUrl}/user/inventory/brand/delete-brand`, {'id': id});
     }
+    searchBrand(content: any) {
+      return this._http.post<any>(this.baseUrl + 'user/inventory/brand/search-brand', content);
+    }
 
   //getBrands(){
   //    return this._http.get('http://task-treking/public/api/brands',{

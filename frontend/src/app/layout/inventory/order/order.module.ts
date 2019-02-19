@@ -4,7 +4,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListProductModalComponent } from './list-product/list-product.component';
-import { NgxLoadingModule } from 'ngx-loading';
 import { EditOrderComponent } from './edit-order/edit-order.component';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { EditOrderComponent } from './edit-order/edit-order.component';
     FormsModule,
     CommonModule,
     TranslateModule,
-    NgxLoadingModule,
     NgbModule.forRoot()
   ]
 })

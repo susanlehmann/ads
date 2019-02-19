@@ -60,7 +60,6 @@ export class CategoryComponent implements OnInit {
          .sort((a, b) => {
            return a.id - b.id;
          });
-         console.log(this.listcategories);
 		}, err => {
       this.stopLoading();
     });

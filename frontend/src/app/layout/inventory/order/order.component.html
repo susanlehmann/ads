@@ -134,12 +134,12 @@
             <div class="col-12" style="margin-top:10px;color: #67768C;" id="titleSupplier">
               <label>Select a supplier to order product stock from</label>
             </div>
-            <div class="col-12" id="divSupplier" *ngFor="let supplier of listsuppliers">
-              <div class="col-12 item-modal-wizard">
+            <div class="col-12" id="divSupplier" *ngFor="let supplier of listsuppliers" >
+              <div class="col-12 item-modal-wizard" (click)="openSModal(product,supplier)">
                 <div class="row">
                 <div class="col-6">
                   <div class="col-12">
-                    <strong (click)="openModal(product)">{{ supplier.name_supplier }}</strong>
+                    <strong >{{ supplier.name_supplier }}</strong>
                   </div>
                 </div>
                 <div class="col-6 text-right">
@@ -171,10 +171,10 @@
                   <div class="col-md-9">
                       <div class="card">
                           <div class="card-body" id="addOrderDetail">
-                              <div class="col-md-12" id="divNoDataProduct">
+                              <div class="col-md-12" id="divNoDataProduct" style="display: none;">
                                   <h1 style="font-size:24px; font-weight:300; text-align:center">You haven't added any product to your order yet.</h1>
                               </div>
-                              <!----div class="col-md-12" id="divTableData" style="display: none;">
+                              <div class="col-md-12" id="divTableData">
                                   <table class="table table-responsive-sm table-sm datatable no-footer" id="tableAddProduct">
                                       <thead>
                                           <tr>
@@ -185,9 +185,34 @@
                                               <th></th>
                                           </tr>
                                       </thead>
-                                      <tbody></tbody>
+                                      <tbody>
+                                          <tr *ngFor="let prod of _prod_selected; index as i">
+                                              <td style="text-align:left">{{prod.name_product}}</td>
+                                          <ng-container *ngIf="arr_info_product.length > 0; else elseTemplate">
+                                              <div *ngFor="let arr of arr_info_product">
+                                                  <ng-container *ngIf="arr.index == i && arr.id_product == prod.id; else inputerror">
+                                                    <td>
+                                                    <input type="text" [(ngModel)]="arr.qty" (change)="mathTotal(arr.qty, prod.id, prod.supplyprice_product, i)">
+                                                    </td>
+                                                    </ng-container>
+                                                    <ng-template #inputerror>
+                                                        <td>
+                                                            <input type="text" [(ngModel)]="number_prod" (change)="mathTotal(number_prod, prod.id, prod.supplyprice_product, i)">
+                                                        </td>
+                                                    </ng-template>
+                                                </div>
+                                          </ng-container>
+                                          <ng-template #elseTemplate>
+                                              <td>
+                                                  <input type="text" [(ngModel)]="number_prod" (change)="mathTotal(number_prod, prod.id, prod.supplyprice_product, i)">
+                                              </td>
+                                          </ng-template>
+
+                                            <td>{{ prod.supplyprice_product }}</td>
+                                          </tr>
+                                      </tbody>
                                   </table>
-                              </div-->
+                              </div>
                               <div class="col-md-12" style="margin-top:20px" (click)="openProduct(category)">
                                   <div class="col-md-4">
 
@@ -200,7 +225,7 @@
                                   </div>
                               </div>
                           </div>
-                          <!----div class="card-body" id="viewOrderDetail" style="display: none;">
+                          <div class="card-body" id="viewOrderDetail" style="display: none;">
                               <div class="col-md-12" id="divOrderMaster">
                                   <div class="col-md-12"><h2 id="OrderStatus" style="text-align:center"></h2></div>
                                   <div class="col-md-12" style="text-align:center"><span id="OrderRemark"></span></div>
@@ -223,54 +248,47 @@
                                       <tbody></tbody>
                                   </table>
                               </div>
-                          </div-->
+                          </div>
                       </div>
                   </div>
                   <div class="col-md-3" style="text-align:left;">
                       <div class="col-md-12" style="padding:10px 10px 10px 10px; border:1px solid #c2cfd6">
                           <div class="col-md-12" >
-                              <h5 id="SupplierName">sadsadsad</h5>
-                              <h5>hanoi</h5>
-                              <h5>cau giay</h5>
-                              <h5>cau giay</h5>
-                              <h5>cau giay</h5>
+                            <h5 id="SupplierName">{{ _supplier.name_supplier }}</h5>
                           </div>
                           <div class="col-md-12">
-                              <h4 id="Street"></h4>
+                              <h6 id="Street">{{ _supplier.street_supplier}}</h6>
                           </div>
                           <div class="col-md-12">
-                              <h4 id="Suburb"></h4>
+                              <h6 id="Suburb">{{ _supplier.suburb_supplier}}</h6>
                           </div>
                           <div class="col-md-12">
-                              <h4 id="City"></h4>
+                              <h6 id="City">{{ _supplier.city_supplier}}</h6>
                           </div>
                           <div class="col-md-12">
-                              <h4 id="State"></h4>
-                          </div>
-                          <div class="col-md-12">
-                              <h4 id="ZipCode"></h4>
+                              <h6 id="ZipCode">{{ _supplier.zipcode_supplier}},{{ _supplier.state_supplier}}</h6>
                               <hr>
                           </div>
                           <div class="col-md-12">
                               <h5>DELIVER TO</h5>
                           </div>
                           <div class="col-md-12">
-                              <h6 id="LocationName">has</h6>
+                              <h6 id="LocationName">{{ _supplier.suburb_supplier}}</h6>
                           </div>
                           <div class="col-md-12">
                               <h6 id="StreetAddress">Default Address</h6>
                           </div>
                           <div class="col-md-12">
-                              <h4 id="APT"></h4>
+                              <h6 id="APT"></h6>
                           </div>
                           <div class="col-md-12">
                               <h6 id="LCity">Default City</h6>
                           </div>
                           <div class="col-md-12">
-                              <h4 id="LState"></h4>
+                              <h6 id="LState"></h6>
                           </div>
                           <div class="col-md-12">
-                              <h4 id="LZipCode"></h4>
+                              <h6 id="LZipCode"></h6>
                               <hr>
                           </div>
                           <div class="col-md-12" style="display: -webkit-inline-box;">
@@ -323,7 +341,7 @@
           <div class="row" *ngFor="let category of listcategories">
             <div class="col-6">
               <div class="col-12">
-                <strong (click)="openProduct(product1)">{{ category.name_category }}</strong>
+                <strong (click)="openProduct1(product1, category)">{{ category.name_category }}</strong>
               </div>
             </div>
             <div class="col-6 text-right">
@@ -336,7 +354,7 @@
           <div class="row">
             <div class="col-6">
               <div class="col-12">
-                <strong (click)="openProduct(no_category)">No Category</strong>
+                <strong (click)="openModalNoCategory(no_category)">No Category</strong>
               </div>
             </div>
             <div class="col-6 text-right">
@@ -350,12 +368,83 @@
     </div>
 
 </ng-template>
-<!----ng-template #product1 let-modal>
-
+<ng-template #product1 let-modal>
+    <div class="modal-header">
+        <span class="prevModalWizard">
+          <i class="fa fa-chevron-left" (click)="modal.dismiss('Cross click')"></i>
+        </span>
+        <h4 class="modal-title offset-sm-4" id="modal-basic-title">{{ _category.name_category }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-12 p-4 search-modal-wizard">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                </span>
+                <input type="text" id="txtSearch" class="form-control" placeholder="Scan barcode or search any item">
+            </div>
+        </div>
+        <div class="col-12" id="divCategory" style="">
+          <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0">
+            <div class="row" >
+              <div class="col-6">
+                <div class="col-12">
+                  <strong>{{ _category.name_category }}</strong>
+                </div>
+              </div>
+              <div class="col-6 text-right">
+                <span><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
+                </svg></span>
+              </div>
+              <hr  width="100%" align="center" />
+            </div>
+          </div>
+        </div>
+      </div>
 </ng-template>
 <ng-template #no_category let-modal>
-
-</ng-template-->
+    <div class="modal-header">
+        <span class="prevModalWizard">
+          <i class="fa fa-chevron-left" (click)="modal.dismiss('Cross click')"></i>
+        </span>
+        <h4 class="modal-title offset-sm-4" id="modal-basic-title">No Category</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-12 p-4 search-modal-wizard">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fa fa-search"></i>
+                </span>
+                <input type="text" id="txtSearch" class="form-control" placeholder="Scan barcode or search any item">
+            </div>
+        </div>
+        <div class="col-12" id="divCategory" style="" *ngFor="let prodss of _listproducts">
+          <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0">
+            <div class="row" >
+              <div class="col-6">
+                <div class="col-12" (click)="selectedX(prodss)">
+                  <strong>{{ prodss.name_product }}</strong><br>
+                  <span class="text-muted">({{ prodss.initialstock_product }} in stock)</span>
+                </div>
+              </div>
+              <div class="col-6 text-right">
+                <span><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
+                </svg></span>
+              </div>
+              <hr  width="100%" align="center" />
+            </div>
+          </div>
+        </div>
+      </div>
+</ng-template>
 <ng-template #edit_order let-modal>
   <div class="modal-header">
       <h4  class="modal-title offset-sm-4" id="modal-basic-title">Order a</h4>
