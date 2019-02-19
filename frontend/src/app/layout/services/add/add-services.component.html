@@ -140,7 +140,7 @@
 						    </label>
 					  	</div>
 				  		<div *ngFor="let u of listusers">
-						    <input type="checkbox" id="color-{{u?.id}}" name="listuser" value="{{u?.id}}" (change)="selectStaff(u)" [checked]="checked">
+						    <input type="checkbox" id="color-{{u?.id}}" name="listuser" value="{{u?.id}}" (change)="selectStaff(u)" [checked]="checkedIf(u.id)">
 						    <label for="color-{{u?.id}}">
 						    	<span></span>
 						    	{{u?.name}}

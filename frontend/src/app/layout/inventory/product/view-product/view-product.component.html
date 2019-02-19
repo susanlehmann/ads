@@ -1,0 +1,200 @@
+<div class="product-header">
+  <div>{{product.productName}}</div>
+  <div class="pull-right">
+    <button type="button" class="btn btn-light" (click)="openModal(decreaseStock)"> Stock- </button>
+    <button type="button" class="btn btn-light" (click)="openModal(increaseStock)"> Stock+ </button>
+    <button type="button" class="btn btn-light" [routerLink]="[ '/inventory/products/', product.id, 'edit' ]"> Edit </button>
+  </div>
+</div>
+
+<div class="product-info">
+<table class="table no-border">
+  <tr>
+    <td>Barcode</td>
+    <td>{{product.barCode}}</td>
+    <td>Total on hand</td>
+    <td>{{product.totalOnHand}}</td>
+    <td>Brand</td>
+    <td>{{product.brandName}}</td>
+  </tr>
+  <tr>
+    <td>SKU</td>
+    <td>{{product.sku}}</td>
+    <td>Total Stock Cost</td>
+    <td>{{product.totalStockCost}}</td>
+    <td>Category</td>
+    <td>{{product.categoryName}}</td>
+  </tr>
+  <tr>
+    <td>Retail Price</td>
+    <td>{{product.retailPrice}}</td>
+    <td>Avg. Stock Cost</td>
+    <td>{{product.avgStockCost}}</td>
+    <td>Supplier</td>
+    <td>{{product.supplierName}}</td>
+  </tr>
+  <tr>
+    <td>Supply Price</td>
+    <td>{{product.supplyPrice}}</td>
+  </tr>
+</table>
+</div>
+
+<h3>Stock History</h3>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th colspan="2">{{'TIME & DATE' | translate}}</th>
+      <th>{{'STAFF' | translate}}</th>
+      <th>{{'LOCATION' | translate}}</th>
+      <th>{{'ACTION' | translate}}</th>
+      <th>{{'QTY. ADJUSTED' | translate}}</th>
+      <th>{{'COST PRICE' | translate}}</th>
+      <th>{{'STOCK ON HAND' | translate}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <ng-container *ngIf="true">
+        <tr style="background-color: #fff; cursor: default;">
+                        <td colspan="2" style="padding-top:40px;">
+                            <div class="text-center">
+                                    <h1><i class="fa fa-search fa-lg"></i></h1>
+                                    <h3 class="text-capitalize">No Results Found</h3>
+                                    <p>Try using different filter options to find what you're looking for</p>
+                                </div>
+                        </td>
+                    </tr>
+      </ng-container> -->
+    <ng-container *ngIf="numberList > 0">
+      <tr *ngFor="let stock of stocks; index as i" routerLink="#">
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </ng-container>
+  </tbody>
+  <!-- <tfoot *ngIf="numberList > 0">
+      <tr>
+        <th colspan="3">
+          paging
+        </th>
+      </tr>
+    </tfoot> -->
+</table>
+
+
+
+
+
+<ng-template #increaseStock let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title col-sm-6 offset-sm-3">Increase Stock</h4>
+          <button type="button" class="col-sm-3 close" aria-label="Close">
+            <span aria-hidden="true" (click)="modal.dismiss('Cross click')">&times;</span>
+          </button>
+          </div>
+          
+          
+          <div class="modal-body">
+              <div>0 units currently in stock at Hachinet.</div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <label class="control-label">INCREASE QTY.</label>
+                        <input type="text" class="form-control input-underline input-lg" name="description">
+                    
+                    </div>
+            </div>
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <label class="control-label">SUPPLY PRICE</label>
+                        <input type="text" class="form-control input-underline input-lg" name="description">
+                    
+                    </div>
+            </div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <div class="custom-control custom-checkbox">
+          <input  name="notification-type" type="checkbox" class="custom-control-input" id="location">
+          <label class="custom-control-label" for="location"></label>SAVE PRICE FOR NEXT TIME</div>
+                    
+                    </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-sm-12">
+                  <label class="control-label">INCREASE REASON</label>
+                  <select name="user-permission" class="form-control">
+                      <option selected>New Stock</option>
+                      <option>Basic</option>
+                      <option>Low</option>
+                      <option>Medium</option>
+                      <option>High</option>
+                  </select>
+              </div>
+          </div>
+  
+  
+            
+          </div>
+  
+          <div class="modal-footer">
+              <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+              <button type="submit" class="btn btn-dark pull-right" (click)="increaseStock()"> Save </button>
+        </div>
+  
+  </ng-template>
+
+<ng-template #decreaseStock let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title col-sm-6 offset-sm-3">Decrease Stock</h4>
+          <button type="button" class="col-sm-3 close" aria-label="Close">
+            <span aria-hidden="true" (click)="modal.dismiss('Cross click')">&times;</span>
+          </button>
+          </div>
+          
+          
+          <div class="modal-body">
+              <div>0 units currently in stock at Hachinet.</div>
+
+              <div class="row form-group">
+                  <div class="col-sm-12">
+                      
+                        <label class="control-label">DECREASE QTY.</label>
+                        <input type="text" class="form-control input-underline input-lg" name="description">
+                    
+                    </div>
+            </div>
+
+
+            <div class="row form-group">
+              <div class="col-sm-12">
+                  <label class="control-label">DECREASE REASON</label>
+                  <select name="user-permission" class="form-control">
+                      <option selected>Internal Use</option>
+                      <option>Basic</option>
+                      <option>Low</option>
+                      <option>Medium</option>
+                      <option>High</option>
+                  </select>
+              </div>
+          </div>
+  
+  
+            
+          </div>
+  
+          <div class="modal-footer">
+              <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+              <button type="submit" class="btn btn-dark pull-right" (click)="increaseStock()"> Save </button>
+        </div>
+  
+  </ng-template>

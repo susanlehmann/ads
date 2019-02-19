@@ -1,13 +1,47 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpcallService } from '../../shared/services/httpcall.service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class TasksService {
+export class InventoryService {
 
-    //const API_URL = environment.apiUrl;
+    baseUrl: string;
+    currentUserId = JSON.parse(localStorage.getItem('user')).id;
 
-  constructor(private _http: HttpClient) { }
+  constructor(
+      private _http: HttpClient,
+      private httpService: HttpcallService,
+    ) { 
+        this.baseUrl = this.httpService.getBaseUrl();
+    }
+
+    getList() {
+        return this._http.post(`${this.baseUrl}/user/inventory/product/list-product`, {id : this.currentUserId});
+    }
+
+    findProductById(id) {
+        return this._http.post(`${this.baseUrl}/user/inventory/product/show-product`,{id : id});
+    }
+
+    addProduct(product) {
+        product.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/inventory/product/create-product`, product);
+    }
+
+    updateProduct(product) {
+        product.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/inventory/product/update-product`, product);
+    }
+
+    deleteProduct(id) {
+        return this._http.post(`${this.baseUrl}/user/inventory/product/delete-product`, {'id': id});
+    }
+
+    searchProduct(query) {
+        query.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/inventory/product/search-product`, query);
+    }
 
   getUsers(){
       return this._http.get('http://task-treking/public/api/users',{

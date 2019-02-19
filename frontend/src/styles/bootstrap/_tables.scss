@@ -130,6 +130,12 @@
       border-color: $table-border-color;
     }
   }
+
+  &.no-border {
+    td, th {
+      border: none;
+    }
+  }
 }
 
 .table-dark {

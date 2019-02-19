@@ -58,7 +58,8 @@ body {
 
     .card-header {
         background: white;
-        display: unset;
+        display: flex;
+        justify-content: space-between;
         border: none;
     }
 }

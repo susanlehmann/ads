@@ -335,6 +335,10 @@ label {
   margin-bottom: .5rem;
   font-size: 13px;
   font-weight: bolder;
+  span {
+    color: #67768c82;
+    font-weight: normal;
+  }
 }
 
 // Remove the default `border-radius` that macOS Chrome adds.

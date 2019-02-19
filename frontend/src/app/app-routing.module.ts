@@ -3,6 +3,7 @@ import { Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { SearchComponent } from './search/search.component';
+import { EditProductComponent } from './layout/inventory/product/edit-product/edit-product.component';
 
 const routes: Routes = [
     { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard]},
@@ -14,6 +15,8 @@ const routes: Routes = [
     { path: 'access-denied', loadChildren: './access-denied/access-denied.module#AccessDeniedModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: 'search', component: SearchComponent },
+    { path: 'inventory/products/add', component: EditProductComponent },
+    { path: 'inventory/products/:id/edit', component: EditProductComponent },
     { path: '**', redirectTo: 'not-found' }
 ];
 

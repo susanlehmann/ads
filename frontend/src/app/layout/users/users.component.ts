@@ -14,7 +14,6 @@ animations: [routerTransition()]
 })
 
 export class UsersComponent implements OnInit {
-  loading: boolean;
   form: User;
 
   modalOptions: NgbModalOptions;
@@ -94,10 +93,8 @@ export class UsersComponent implements OnInit {
   }
 	
 	getUser() {
-    this.loading = true;
 		return this.http.get(`${this.httpService.getBaseUrl()}/admin/list-user`)
 		.subscribe((listusers:any) => {
-        this.loading = false;
         this.listusers = listusers.user
         .map(User.toModel)
         .sort((a, b) => {

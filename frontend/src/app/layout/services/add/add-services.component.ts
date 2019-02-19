@@ -167,6 +167,7 @@ export class AddServiceComponent implements OnInit {
 			this.arrStaff.splice(index,1);
 		}
 		this.form.id_staff = JSON.stringify(this.arrStaff);
+		console.log(this.arrStaff);
 	}
 
 	selectAllStaff(listStaffs, event) {
@@ -190,6 +191,7 @@ export class AddServiceComponent implements OnInit {
 		}
 
 		this.form.id_staff = JSON.stringify(this.arrStaff);
+		console.log(this.arrStaff);
 	}
 
 	checkEmpty() {
@@ -200,6 +202,19 @@ export class AddServiceComponent implements OnInit {
 		}
 	}
 
+	checkedIf(id) {
+		// for(var i = 0; i < this.listusers.length; i++){
+		// 	if(this.listusers[i].id == id) {
+		// 		return true;
+		// 	}
+		// }
+		for(var i = 0; i < this.arrStaff.length; i++){
+			if(this.arrStaff[i].id == id) {
+				return true;
+			}
+		}
+	}
+	
 	enableOnline() {
 		if(!this.form.enable_online_bookings) {
 			this.svDescp.nativeElement.setAttribute('readonly', true);
