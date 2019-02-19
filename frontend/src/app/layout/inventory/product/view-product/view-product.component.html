@@ -1,6 +1,7 @@
+<div class="">
 <div class="product-header">
-  <div>{{product.productName}}</div>
-  <div class="pull-right">
+  <div class="product-name-header">{{product.productName}}</div>
+  <div>
     <button type="button" class="btn btn-light" (click)="openModal(decreaseStock)"> Stock- </button>
     <button type="button" class="btn btn-light" (click)="openModal(increaseStock)"> Stock+ </button>
     <button type="button" class="btn btn-light" [routerLink]="[ '/inventory/products/', product.id, 'edit' ]"> Edit </button>
@@ -85,7 +86,7 @@
       </tr>
     </tfoot> -->
 </table>
-
+</div>
 
 
 

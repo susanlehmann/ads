@@ -19,15 +19,15 @@ export class ListProductComponent implements OnInit {
   }
 
   getListProduct(){
-    this.inventoryService.getList().subscribe((list: any) => {
+    this.inventoryService.getListProduct().subscribe((list: any) => {
       this.products = list.product.map(Product.toModel);
 
     });
   }
   searchProduct(event) {
     const query = {name_product: event.target.value};
-    this.inventoryService.searchProduct(query).subscribe(list => {
-
+    this.inventoryService.searchProduct(query).subscribe((list: any) => {
+      this.products = list.product.map(Product.toModel);
     });
   }
   addProduct() {}

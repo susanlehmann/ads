@@ -15,6 +15,7 @@ export class Product {
   supplyPrice: number
   reorderPoint: number;
   reorderQty: number;
+  supplierId: number;
 
   // view detail
   totalOnHand: number;
@@ -50,13 +51,6 @@ export class Product {
     return {year: d.getFullYear(), month: d.getMonth(), day: d.getDate() };
   }
 
-  mockData() {
-    this.productName = "Giang";
-    this.barCode = "11111";
-    this.sku = "";
-    this.enableStockControl = true;
-  }
-
   static toModel(dto: any) {
     const model = new Product();
     model.updateData(dto);
@@ -75,7 +69,7 @@ export class Product {
       sku_product : this.sku,
       discryption_product : this.description,
       supplyprice_product : this.supplyPrice,
-      initialstock_product : this.id,
+      initialstock_product : this.enableStockControl,
       reorderpoint_product: this.reorderPoint,
       reorderqty_product: this.reorderQty,
     };
@@ -85,14 +79,20 @@ export class Product {
     this.id = data.id;
     this.productName = data.name_product;
     this.categoryId = data.id_category;
-    this.specialPrice = data.id_category;
+    this.brandId = data.id_brand;
+    this.retailPrice = data.retaiprice_product;
+    this.specialPrice = data.specialprice_product;
+    this.tax = data.texid_brand;
     this.enableRetail = data.id_category;
-    this.retailPrice = data.id_category;
-    this.barCode = data.id_category;
+    this.enableCommission = data.enblecommission_id === 1 ? true : false;
+    this.barCode = data.barcode_product;
     this.sku = data.sku_product;
     this.description = data.discryption_product;
-    this.enableStockControl = data.discryption_product === 1 ? true : false;
-    this.supplyPrice = data.discryption_product;
+    this.supplyPrice = data.supplyprice_product;
+    this.enableStockControl = data.initialstock_product === 1 ? true : false;
+    this.supplierId = data.id_supplier;
+    this.reorderPoint = data.reorderpoint_product;
+    this.reorderQty = data.reorderqty_product;
   }
 
   randomString() {
