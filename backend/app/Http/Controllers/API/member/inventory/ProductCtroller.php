@@ -42,7 +42,7 @@ class ProductCtroller extends Controller
         $product = Product::create($input);
         if($product == true)
         {
-            $msg = ['success' => 'Create a new service group successfully'];
+            $msg = ['success' => 'Create a new service group successfully', 'id' => $product->id];
         }
         else
         {
