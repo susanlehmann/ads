@@ -26,11 +26,8 @@
                                 <label class="control-label">Category</label>
                                 <select [(ngModel)]="form.category"
                                 name="category" class="form-control">
-                                    <option selected>Select Category</option>
-                                    <option>Basic</option>
-                                    <option>Low</option>
-                                    <option>Medium</option>
-                                    <option>High</option>
+                                    <option value=0 selected>Select Category</option>
+                                    <option value={{category.id}} *ngFor="let category of categories" selected>{{category.name_category}}</option>
                                 </select>
                             </div>
                         </div>
@@ -40,10 +37,7 @@
                                 <label class="control-label">Brand</label>
                                 <select name="brand" class="form-control">
                                     <option selected>Select Brand</option>
-                                    <option>Basic</option>
-                                    <option>Low</option>
-                                    <option>Medium</option>
-                                    <option>High</option>
+                                    <option value={{brand.id}} *ngFor="let brand of brands" selected>{{brand.name_brand}}</option>
                                 </select>
                             </div>
                         </div>
@@ -111,10 +105,7 @@
                                     <label class="control-label">Tax<span> Included in prices</span></label>
                                     <select name="tax" class="form-control">
                                         <option selected>Default: No tax</option>
-                                        <option>Basic</option>
-                                        <option>Low</option>
-                                        <option>Medium</option>
-                                        <option>High</option>
+                                        <option *ngFor="let tax of taxs" selected>{{tax.name}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -157,10 +148,7 @@
                                     <label class="control-label">Supplier</label>
                                     <select name="user-permission" class="form-control">
                                         <option selected>Select Supplier</option>
-                                        <option>Basic</option>
-                                        <option>Low</option>
-                                        <option>Medium</option>
-                                        <option>High</option>
+                                        <option value={{supplier.id}} *ngFor="let supplier of suppliers" selected>{{supplier.name_supplier}}</option>
                                     </select>
                                 </div>
                             </div>

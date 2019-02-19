@@ -29,7 +29,8 @@ class CreateProductsTable extends Migration
             $table->string('sku_product')->nullable();
             $table->text('discryption_product')->nullable();
             $table->decimal('supplyprice_product')->nullable();
-            $table->integer('initialstock_product')->nullable();
+            $table->integer('enable_retail')->nullable();
+            $table->integer('enable_stock')->nullable();
             $table->integer('id_supplier')->nullable();
             $table->integer('reorderpoint_product')->nullable();
             $table->integer('reorderqty_product')->nullable();

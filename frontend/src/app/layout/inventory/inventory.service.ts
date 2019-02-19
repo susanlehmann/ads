@@ -16,7 +16,8 @@ export class InventoryService {
         this.baseUrl = this.httpService.getBaseUrl();
     }
 
-    getList() {
+    // Product
+    getListProduct() {
         return this._http.post(`${this.baseUrl}/user/inventory/product/list-product`, {id : this.currentUserId});
     }
 
@@ -41,6 +42,18 @@ export class InventoryService {
     searchProduct(query) {
         query.ownerId = this.currentUserId;
         return this._http.post(`${this.baseUrl}/user/inventory/product/search-product`, query);
+    }
+
+    getListCategory() {
+        return this._http.post(`${this.baseUrl}/user/inventory/category/list-category`, {id : this.currentUserId});
+    }
+
+    getListBrand() {
+        return this._http.post(`${this.baseUrl}/user/inventory/brand/list-brand`, {id : this.currentUserId});
+    }
+
+    getListSupplier() {
+        return this._http.post(`${this.baseUrl}/user/inventory/supplier/list-supplier`, {id : this.currentUserId});
     }
 
   getUsers(){
