@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../model/product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryService } from '../../inventory.service';
+import { forkJoin } from 'rxjs';
 // import { NotifierService } from 'angular-notifier';
 
 @Component({
@@ -14,6 +15,11 @@ export class EditProductComponent implements OnInit {
   enableStock = false;
   enableRetail = false;
   isAdd = true;
+
+  brands;
+  categories;
+  suppliers;
+  taxs = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,8 +43,18 @@ export class EditProductComponent implements OnInit {
   }
 
   loadProduct(id) {
+    let brand = this.inventoryService.getListBrand();
+    let cate = this.inventoryService.getListCategory();
+    let supplier = this.inventoryService.getListSupplier();
+
     this.inventoryService.findProductById(id).subscribe((pr: any) => {
       this.form.updateData(pr.product);
+    });
+
+    forkJoin([brand, cate, supplier]).subscribe((rs: any) => {
+      this.brands = rs[0].brand;
+      this.categories = rs[1].category;
+      this.suppliers = rs[2].supplier;
     });
   }
 

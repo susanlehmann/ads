@@ -1,0 +1,14 @@
+.product-header {
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    justify-content: space-between;
+
+    .product-name-header {
+        font-size: 36px;
+        color: #24334A;
+        margin-bottom: 20px;
+        margin-top: -10px;
+        font-weight: 300;
+        letter-spacing: -0.08px;
+    }
+}

@@ -1,39 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\API\member\user;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\API\member\inventory;
+
 use Illuminate\Http\Request;
-use App\WorkingHour;
-use Auth;
-use DB;
-class Working_hourController extends Controller
+use App\Http\Controllers\Controller;
+use App\Stock_product;
+class StockController extends Controller
 {
     public function index(Request $request)
     {
         // List all the products
-        $data['workinghour'] = WorkingHour::where('id_client',$request->ownerId)->get();
+        $data['stock'] = Stock_product::where('id_client_stock',$request->id)
+        ->where('id_product',$request->id_product)
+        ->get();
         return response()->json($data);
     }
 
     public function store(Request $request)
     { 
         $input = [
-            'id_client' => $request->ownerId,
-            'id_staff' => $request->id_staff,
+            'id_client_stock' => $request->ownerId,
+            'id_product'       => $request->id_product,
             'id_create' => $request->ownerId,
             'id_update' => $request->ownerId,
-            'shift1_start' => $request->shift1_start,
-            'shift1_end' => $request->shift1_end,
-            'shift2_start' => $request->shift2_start,
-            'shift2_end' => $request->shift2_end,
-            'is_repeat' => $request->is_repeat,
-            'repeat_weekly' => $request->repeat_weekly,
-            'end_repeat' => $request->end_repeat,
-            'status_workinghour' => 1,
+            'stock_qty' => $request->stock_qty,
+            'stock_price' => $request->stock_price,
+            'save_price' => $request->save_price,
+            'reason_stock' => $request->reason_stock,
+            'discription_stock' => $request->discription_stock,
+            'status_stock' => 1,
         ];
         // $user->level = 0; // ko co column level
-        $workinghour = WorkingHour::create($input);
-        if($workinghour == true)
+        $stock = Stock_product::create($input);
+        if($stock == true)
         {
             $msg = ['success' => 'Create a new service group successfully'];
         }
@@ -48,7 +47,7 @@ class Working_hourController extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data['workinghour'] = WorkingHour::find($id);
+        $data['stock'] = Stock_product::find($id);
         return response()->json($data);
     }
 
@@ -58,18 +57,15 @@ class Working_hourController extends Controller
         if ($id != null) {
     
             $input = [
-                'id_staff' => $request->id_staff,
                 'id_update' => $request->ownerId,
-                'shift1_start' => $request->shift1_start,
-                'shift1_end' => $request->shift1_end,
-                'shift2_start' => $request->shift2_start,
-                'shift2_end' => $request->shift2_end,
-                'is_repeat' => $request->is_repeat,
-                'repeat_weekly' => $request->repeat_weekly,
-                'end_repeat' => $request->end_repeat,
+                'stock_qty' => $request->stock_qty,
+                'stock_price' => $request->stock_price,
+                'save_price' => $request->save_price,
+                'reason_stock' => $request->reason_stock,
+                'discription_stock' => $request->discription_stock,
             ];
-            $workinghour = WorkingHour::find($id);
-            $check = $workinghour->update($input);
+            $stock = Stock_product::find($id);
+            $check = $stock->update($input);
             if($check == true)
             {
                 $msg = ['success' => 'Create a new service group successfully'];
@@ -87,8 +83,8 @@ class Working_hourController extends Controller
     {
         $id = $request->id;
         if ($id != null) {
-            $workinghour = WorkingHour::find($id);
-            $check = $workinghour->delete();
+            $stock = Stock_product::find($id);
+            $check = $stock->delete();
             if($check == true)
             {
                 $msg = ['success' => 'Delete account successfully'];

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class WorkingHour extends Model
+class Stock_product extends Model
 {
     protected $guarded = [];
 }

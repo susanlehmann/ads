@@ -128,6 +128,15 @@ Route::group([
         Route::post('update-product', 'ProductCtroller@update');
         Route::post('delete-product', 'ProductCtroller@destroy');
         Route::post('search-product', 'ProductCtroller@search');
+        Route::post('search-product-order', 'ProductCtroller@search_oder');
+    });
+
+    Route::group(['prefix' => 'user/inventory/stock', 'namespace' => 'API\member\inventory'], function(){
+        Route::post('list-stock', 'StockController@index');
+        Route::post('create-stock', 'StockController@store');
+        Route::post('show-stock', 'StockController@show');
+        Route::post('update-stock', 'StockController@update');
+        Route::post('delete-stock', 'StockController@destroy');
     });
 
     Route::group(['prefix' => 'user/inventory/order', 'namespace' => 'API\member\inventory'], function(){
@@ -154,6 +163,5 @@ Route::group([
         Route::post('update-appoint', 'AppointmentContronler@update');
         Route::post('delete-appoint', 'AppointmentContronler@destroy');
     });
-
 
 });
