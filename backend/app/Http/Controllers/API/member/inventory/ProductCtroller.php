@@ -11,7 +11,7 @@ class ProductCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['product'] = Product::where('id_client_supplier',$request->ownerId)->get();
+        $data['product'] = Product::where('id_client_product',$request->ownerId)->get();
         return response()->json($data);
     }
 
