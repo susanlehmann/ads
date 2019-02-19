@@ -19,7 +19,6 @@ class CreateStockProductsTable extends Migration
             $table->integer('id_client_stock');
             $table->integer('id_create')->nullable();
             $table->integer('id_update')->nullable();
-            $table->integer('id_update')->nullable();
             $table->integer('stock_qty')->nullable();
             $table->decimal('stock_price',18,2)->nullable();
             $table->integer('save_price')->nullable();
