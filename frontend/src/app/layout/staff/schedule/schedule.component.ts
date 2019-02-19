@@ -57,13 +57,9 @@ export class ScheduleComponent implements OnInit {
 
 	
 	getschedule() {
-    this.staffService.getList()
+    this.staffService.getListSchedule()
 		.subscribe((listusers:any) => {
-        this.listusers = listusers.user
-        .map(Staff.toModel)
-        .sort((a, b) => {
-          return a.id - b.id;
-        });
+        this.listschedule = listusers.schedule;
 		}, err => {
     });
 	}
