@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
+import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from  'ngx-ui-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -63,6 +64,8 @@ export const createTranslateLoader = (http: HttpClient) => {
         BrowserModule,
         FormsModule,
         BrowserAnimationsModule,
+        NgxUiLoaderModule,
+        NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
         HttpClientModule,
         TranslateModule.forRoot({
             loader: {

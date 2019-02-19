@@ -25,16 +25,13 @@ export class ListComponent implements OnInit {
 	}
 
 	getUser() {
-		this.startLoading();
 		this.client.getuser = JSON.parse(localStorage.getItem('user'));
 		this.userService.getListUser(this.client).subscribe(
 			success => {
-				this.stopLoading();
 				this.clients = success;
 				this.numberList = this.clients.user.length;
 			},
 			error => {
-				this.stopLoading();
 				console.log(error);
 			}
 		);
@@ -44,27 +41,16 @@ export class ListComponent implements OnInit {
 		this.route.navigateByUrl('client/add');
 	}
 
-	startLoading(): void {
-		this.loading = true;
-	}
-
-	stopLoading(): void {
-		this.loading = false;
-	}
-
 	searchClient(event) {
 		const search: any = {};
 		Object.assign(search, { 'getuser': JSON.parse(localStorage.getItem('user')), 'name_user': event.target.value});
-		this.startLoading();
 		this.userService.searchUser(search).subscribe(
 			success => {
-				this.stopLoading();
 				this.clients = success;
 				this.numberList = this.clients.user.length;
 				console.log(success);
 			},
 			error => {
-				this.stopLoading();
 				console.log(error);
 			}
 		);
