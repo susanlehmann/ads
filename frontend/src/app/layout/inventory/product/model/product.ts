@@ -31,14 +31,14 @@ export class Product {
 
   new() {
     this.id = 1;
-    this.productName = this.randomString();
+    this.productName = "";
     this.categoryId = 1;
     this.brandId = 1;
-    this.enableRetail = true;
+    this.enableRetail = false;
     this.retailPrice = 0;
     this.specialPrice = 0;
     this.enableCommission = false;
-    this.barCode = this.create_UUID();
+    this.barCode = "";
     this.sku = "";
     this.description = "";
     this.enableStockControl = false;
@@ -82,8 +82,7 @@ export class Product {
   }
 
   updateData(data: any) {
-
-    this.id = data.id_client_product;
+    this.id = data.id;
     this.productName = data.name_product;
     this.categoryId = data.id_category;
     this.specialPrice = data.id_category;

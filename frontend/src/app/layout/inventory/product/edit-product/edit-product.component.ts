@@ -29,16 +29,17 @@ export class EditProductComponent implements OnInit {
       const id = params.get('id');
       if (id) {
         this.isAdd = false;
-        this.findById(id);
+        this.loadProduct(id);
       } else {
         this.isAdd = true;
       }
     });
   }
 
-  findById(id: string) {
-    this.inventoryService.findProductById(id);
-    console.log(id);
+  loadProduct(id) {
+    this.inventoryService.findProductById(id).subscribe((pr: any) => {
+      this.form.updateData(pr.product);
+    });
   }
 
   save() {
@@ -47,13 +48,14 @@ export class EditProductComponent implements OnInit {
       this.inventoryService.addProduct(dto)
         .subscribe((data: any) => {
           // this.notifierService.notify('success', 'A new Staff has been successfully added');
-          this.router.navigate(['/inventory', this.form.id, '/view']);
+          this.router.navigate(['/inventory/products', data.id, 'view']);
         }), err => {
 
         };
     }
     else {
       this.inventoryService.updateProduct(dto).subscribe((data: any) => {
+        this.router.navigate(['/inventory/products', dto.id, 'view']);
         // this.notifierService.notify('success', 'A new Staff has been successfully added');
       }), err => {
 
@@ -64,6 +66,7 @@ export class EditProductComponent implements OnInit {
   deleteProduct() {
     this.inventoryService.deleteProduct(this.form.id).subscribe((data: any) => {
       // this.notifierService.notify('success', 'A new Staff has been successfully added');
+      this.router.navigate(['/inventory/products']);
     }), err => {
 
     };;
