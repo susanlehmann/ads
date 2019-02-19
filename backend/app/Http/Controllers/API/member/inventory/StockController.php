@@ -20,7 +20,7 @@ class StockController extends Controller
     { 
         $input = [
             'id_client_stock' => $request->ownerId,
-            'id_product'       => $request->id_product;
+            'id_product'       => $request->id_product,
             'id_create' => $request->ownerId,
             'id_update' => $request->ownerId,
             'stock_qty' => $request->stock_qty,
