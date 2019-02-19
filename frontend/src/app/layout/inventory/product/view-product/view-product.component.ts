@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../model/product';
 import { InventoryService } from '../../inventory.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Stock } from '../model/stock';
 
 @Component({
   selector: 'app-view-product',
@@ -11,7 +12,8 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ViewProductComponent implements OnInit {
   product: Product;
-  stocks = [1,1,1,1,1];
+  stocks: Stock[];
+  stockForm: Stock;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,12 +21,14 @@ export class ViewProductComponent implements OnInit {
     private modal: NgbModal,
   ) {
     this.product = new Product();
+    this.stockForm = new Stock();
    }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       this.loadProduct(id);
+      this.loadStockHistory(id);
    });
   }
 
@@ -41,6 +45,21 @@ export class ViewProductComponent implements OnInit {
     });
   }
 
-  increaseStock() {}
+  addStockHistory(isIncreased) {
+    const dto = this.stockForm.toDto();
+    const productId = this.product.id;
+    dto.id_product = productId;
+    dto.status_stock = isIncreased ? 1 : 0;
+    this.inventoryService.addStockHistory(dto).subscribe(v => {
+      this.modal.dismissAll();
+      this.loadStockHistory(productId);
+    });
+  }
+
+  loadStockHistory(id) {
+    this.inventoryService.getStockHistory(id).subscribe((data: any) => {
+    this.stocks = data.stock;
+    });
+  }
 
 }
