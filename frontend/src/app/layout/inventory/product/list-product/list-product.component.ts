@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../model/product';
+import { InventoryService } from '../../inventory.service';
 
 @Component({
   selector: 'app-list-product',
@@ -9,13 +10,18 @@ import { Product } from '../model/product';
 export class ListProductComponent implements OnInit {
   products: Product[];
 
-  constructor() { }
+  constructor(
+    private inventoryService: InventoryService,
+  ) { }
 
   ngOnInit() {
     this.getListProduct();
   }
 
   getListProduct(){
+    this.inventoryService.getList().subscribe(list => {
+      console.log(list);
+    });
     this.products = [
       new Product(),
       new Product(),
@@ -23,7 +29,10 @@ export class ListProductComponent implements OnInit {
       new Product(),
     ];
   }
-  searchProduct() {}
+  searchProduct(event) {
+    const query = {name_product: event.target.value};
+    this.inventoryService.searchProduct(query).subscribe(v => {});
+  }
   addProduct() {}
 
 }

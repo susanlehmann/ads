@@ -1,5 +1,5 @@
-<div>
-  <div>Product name</div>
+<div class="product-header">
+  <div>{{product.productName}}</div>
   <div class="pull-right">
     <button type="button" class="btn btn-light"> Stock- </button>
     <button type="button" class="btn btn-light"> Stock+ </button>
@@ -7,26 +7,38 @@
   </div>
 </div>
 
+<div class="product-info">
 <table class="table no-border">
   <tr>
     <td>Barcode</td>
+    <td>{{product.barCode}}</td>
     <td>Total on hand</td>
+    <td>{{product.totalOnHand}}</td>
     <td>Brand</td>
+    <td>{{product.brandName}}</td>
   </tr>
   <tr>
     <td>SKU</td>
+    <td>{{product.sku}}</td>
     <td>Total Stock Cost</td>
+    <td>{{product.totalStockCost}}</td>
     <td>Category</td>
+    <td>{{product.categoryName}}</td>
   </tr>
   <tr>
     <td>Retail Price</td>
+    <td>{{product.retailPrice}}</td>
     <td>Avg. Stock Cost</td>
+    <td>{{product.avgStockCost}}</td>
     <td>Supplier</td>
+    <td>{{product.supplierName}}</td>
   </tr>
   <tr>
     <td>Supply Price</td>
+    <td>{{product.supplyPrice}}</td>
   </tr>
 </table>
+</div>
 
 <h3>Stock History</h3>
 

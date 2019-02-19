@@ -27,6 +27,8 @@ import {
    FacebookLoginProvider
 } from 'angular-6-social-login';
 import { EditProductComponent } from './layout/inventory/product/edit-product/edit-product.component';
+import { InventoryService } from './layout/inventory/inventory.service';
+import { NotifierService } from 'angular-notifier';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -84,7 +86,9 @@ export const createTranslateLoader = (http: HttpClient) => {
         ServicesService,
         StaffService,
         DatePipe,
+        InventoryService,
         SupplierService,
+        NotifierService,
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     bootstrap: [AppComponent]
