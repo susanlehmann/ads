@@ -56,6 +56,15 @@ export class InventoryService {
         return this._http.post(`${this.baseUrl}/user/inventory/supplier/list-supplier`, {id : this.currentUserId});
     }
 
+    getStockHistory(productId) {
+        return this._http.post(`${this.baseUrl}/user/inventory/stock/list-stock`, {id : this.currentUserId, id_product: productId});
+    }
+
+    addStockHistory(stock) {
+        stock.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/inventory/stock/create-stock`, stock);
+    }
+
   getUsers(){
       return this._http.get('http://task-treking/public/api/users',{
           headers: new HttpHeaders({'Accept': 'application/json',
