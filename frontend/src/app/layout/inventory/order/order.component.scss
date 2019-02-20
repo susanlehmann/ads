@@ -494,16 +494,7 @@ b, strong {
   padding-left: 15px;
   float: left;
 }
-.col-md-9 {
-  flex: 0 0 75%;
-  max-width: 75%;
-  position: relative;
-  width: 100%;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-  float: left;
-}
+
 .card {
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
   border: none;
@@ -524,16 +515,6 @@ b, strong {
 .col-md-4 {
   flex: 0 0 33.33333%;
   max-width: 33.33333%;
-  position: relative;
-  width: 100%;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-  float: left;
-}
-.col-md-3 {
-  flex: 0 0 25%;
-  max-width: 25%;
   position: relative;
   width: 100%;
   min-height: 1px;
@@ -638,4 +619,96 @@ h5 {
   padding-top: 5px;
   fill: #A4ADBA;
   cursor: pointer;
+}
+$breakpoint-iphone: 667px;
+//desktop
+@media (min-width: $breakpoint-iphone) {
+	.box-desktop{
+    display: block;
+    .col-md-3 {
+      flex: 0 0 25%;
+      max-width: 25%;
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      float: left;
+    }
+    .col-md-9 {
+      flex: 0 0 75%;
+      max-width: 75%;
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      float: left;
+    }
+	}
+
+	.box-mobile{
+		display: none;
+	}
+}
+
+//mobile
+@media (max-width: $breakpoint-iphone) {
+	.box-desktop{
+		display: none;
+	}
+	.box-mobile{
+    .col-md-12{
+      padding-left: 5px;
+      padding-right: 5px;
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      float: left;
+    }
+    .col-md-9 .col-md-4 {
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      float: left;
+    }
+    .col-md-3 {
+      position: relative;
+      width: 100%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+    .card {
+      border: none;
+      box-shadow: 0 1px 1px rgba(0,0,0,.05);
+      height: 100%;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+    }
+    .card-body {
+      height: 100%;
+      flex: 1 1 auto;
+      padding: 1.25rem;
+    }
+    .table-responsive-sm {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+    }
+    .table {
+      max-width: 100%;
+      margin-bottom: 1rem;
+      background-color: transparent;
+      border-collapse: collapse;
+    }
+  }
 }
