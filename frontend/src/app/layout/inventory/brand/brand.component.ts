@@ -130,20 +130,24 @@ export class BrandComponent implements OnInit {
     this.getBrand();
   }
   searchBrand($event){
-    const search: any = {};
+    //const search: any = {};
     //Object.assign(search, { 'getbrand': JSON.parse(localStorage.getItem('brand')), 'name_brand': event.target.value});
-		this.startLoading();
-		this.BrandService.searchBrand(search).subscribe(
-			success => {
-				this.stopLoading();
-				this.listbrands = success;
-			},
-			error => {
-        this.stopLoading();
-        console.log(error);
-			}
-		);
-	}
+	//	this.startLoading();
+	//	this.BrandService.searchBrand(search).subscribe(
+	//		success => {
+	//			this.stopLoading();
+	//			this.listbrands = success;
+	//		},
+	//		error => {
+    //    this.stopLoading();
+    //    console.log(error);
+	//		}
+	//	);
+	//}
+	const query = {name_category: event.target.value};
+	this.BrandService.searchBrand(search).subscribe((listbrands: any) => {
+      this.brands = listbrands .map(Brand.toModel);
+    });
 
   }
 
