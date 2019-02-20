@@ -46,8 +46,8 @@ class ServiceCtroller extends Controller
             'special_price_service' => $request->special_price_service,
             'id_staff' => $request->id_staff,
             'resource_requireb_service' => $request->resource_requireb_service,
-            'online_booking_service' => serialize($online_booking_service),
-            'setting_service' => serialize($setting_service),
+            'online_booking_service' => $request->online_booking_service,
+            'setting_service' => $request->setting_service,
             'status_service' => 1,
         ];
         // $user->level = 0; // ko co column level
@@ -99,8 +99,8 @@ class ServiceCtroller extends Controller
                 'special_price_service' => $request->special_price_service,
                 'id_staff' => $request->id_staff,
                 'resource_requireb_service' => $request->resource_requireb_service,
-                'online_booking_service' => $online_booking_service,
-                'setting_service' => $setting_service,
+                'online_booking_service' => $request->online_booking_service,
+                'setting_service' => $request->setting_service,
             ];
             $service = service::find($id);
             $check = $service->update($input);

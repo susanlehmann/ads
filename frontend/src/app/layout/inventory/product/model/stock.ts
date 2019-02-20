@@ -8,6 +8,26 @@ export class Stock {
   description: string;
   isIncreased: boolean;
 
+  totalStock: number;
+  createdAt: string;
+  action: string;
+  staffName = "Giang";
+
+  decreaseReasons = [
+    {id: 1, name: 'Internal Use'},
+    {id: 2, name: 'Damaged'},
+    {id: 3, name: 'Out of date'},
+    {id: 4, name: 'Adjustment'},
+    {id: 5, name: 'Lost'},
+    {id: 6, name: 'Other'},
+  ];
+  increaseReasons = [
+    {id: 1, name: 'New Stock'},
+    {id: 2, name: 'Return'},
+    {id: 3, name: 'Adjustment'},
+    {id: 4, name: 'Other'},
+  ];
+
   constructor() {
     this.new();
     return this;
@@ -17,7 +37,7 @@ export class Stock {
     this.id = 1;
     this.supplyPrice = 1;
     this.savePrice = false;
-    this.reason = 0;
+    this.reason = 1;
     this.description = "";
     this.supplyPrice = 0;
   }
@@ -37,6 +57,7 @@ export class Stock {
       save_price : this.savePrice ? 1 : 0,
       reason_stock : this.reason,
       discription_stock: this.description,
+      total_stock: this.totalStock,
       status_stock: this.isIncreased ? 1 : 0,
     };
   }
@@ -49,6 +70,18 @@ export class Stock {
     this.savePrice = data.save_price === 1 ? true : false;
     this.description = data.discryption_product;
     this.isIncreased = data.status_stock === 1 ? true : false;
+    this.totalStock = data.total_stock;
+    this.createdAt = data.created_at;
+    this.action = this.getActionName();
+  }
+
+  getActionName() {
+    if (this.isIncreased) {
+      const v = this.increaseReasons.filter(v => this.reason === v.id)[0];
+      return v ? v.name : "";
+    }
+    const v = this.decreaseReasons.filter(v => this.reason === v.id)[0];
+    return v ? v.name : "";
   }
 
 }

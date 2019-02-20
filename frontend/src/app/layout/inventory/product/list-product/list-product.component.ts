@@ -27,7 +27,11 @@ export class ListProductComponent implements OnInit {
   searchProduct(event) {
     const query = {name_product: event.target.value};
     this.inventoryService.searchProduct(query).subscribe((list: any) => {
-      this.products = list.product.map(Product.toModel);
+      this.products = list.product
+      .map(Product.toModel)
+      .sort((a, b) => {
+        return a.id - b.id;
+      });
     });
   }
   addProduct() {}

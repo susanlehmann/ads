@@ -26,6 +26,7 @@ export class Product {
   brandName: string;
   categoryName: string;
   supplierName: string;
+  updatedAt: string;
 
   constructor() {
     this.new();
@@ -46,6 +47,7 @@ export class Product {
     this.description = "";
     this.enableStock = false;
     this.supplyPrice = 0;
+    this.totalOnHand = 0;
   }
 
   calculateStockOnHand(stockHistory: any[]) {
@@ -84,6 +86,7 @@ export class Product {
       enable_retail: this.enableRetail ? 1 : 0,
       enable_stock: this.enableStock ? 1 : 0,
       enblecommission_id: this.enableCommission ? 1 : 0,
+      total_stock: this.totalOnHand,
     };
   }
 
@@ -105,6 +108,11 @@ export class Product {
     this.supplierId = data.id_supplier;
     this.reorderPoint = data.reorderpoint_product;
     this.reorderQty = data.reorderqty_product;
+    this.brandName = data.name_brand;
+    this.categoryName = data.name_category;
+    this.supplierName = data.name_supplier;
+    this.totalOnHand = data.total_stock;
+    this.updatedAt = data.updated_at;
   }
 
   randomString() {
