@@ -2,11 +2,9 @@ export class Stock {
   id: number;
   productId: number;
   stockQty: number;
-  decreaseQty: number;
   supplyPrice: number;
   savePrice: boolean;
-  increaseReason: number;
-  decreaseReason: number;
+  reason: number;
   description: string;
   isIncreased: boolean;
 
@@ -19,7 +17,7 @@ export class Stock {
     this.id = 1;
     this.supplyPrice = 1;
     this.savePrice = false;
-    this.increaseReason = 0;
+    this.reason = 0;
     this.description = "";
     this.supplyPrice = 0;
   }
@@ -35,10 +33,11 @@ export class Stock {
       id: this.id,
       id_product: this.productId,
       stock_qty: this.stockQty,
-      stock_price : this.increaseReason,
-      save_price : this.description,
-      reason_stock : this.decreaseReason,
+      stock_price : this.supplyPrice,
+      save_price : this.savePrice ? 1 : 0,
+      reason_stock : this.reason,
       discription_stock: this.description,
+      status_stock: this.isIncreased ? 1 : 0,
     };
   }
 
@@ -46,7 +45,7 @@ export class Stock {
     this.id = data.id;
     this.stockQty = data.stock_qty;
     this.supplyPrice = data.stock_price;
-    this.increaseReason = data.reason_stock;
+    this.reason = data.reason_stock;
     this.savePrice = data.save_price === 1 ? true : false;
     this.description = data.discryption_product;
     this.isIncreased = data.status_stock === 1 ? true : false;

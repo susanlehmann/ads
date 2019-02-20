@@ -74,7 +74,7 @@
         <td>New Stock</td>
         <td>{{stock.isIncreased ? '+' : '-'}} {{stock.stockQty}}</td>
         <td>{{stock.supplyPrice}}</td>
-        <td>unlimited</td>
+        <td>{{stock.stockQty}}</td>
       </tr>
     </ng-container>
   </tbody>
@@ -101,13 +101,14 @@
           
           
           <div class="modal-body">
-              <div>0 units currently in stock at Hachinet.</div>
+              <div>{{product.totalOnHand}} units currently in stock at Hachinet.</div>
 
               <div class="row form-group">
                   <div class="col-sm-12">
                       
                         <label class="control-label">INCREASE QTY.</label>
-                        <input type="text" class="form-control input-underline input-lg" name="description">
+                        <input  [(ngModel)]="stockForm.stockQty"
+                        type="number" class="form-control input-underline input-lg" name="increase-qty">
                     
                     </div>
             </div>
@@ -115,7 +116,8 @@
                   <div class="col-sm-12">
                       
                         <label class="control-label">SUPPLY PRICE</label>
-                        <input type="text" class="form-control input-underline input-lg" name="description">
+                        <input [(ngModel)]="stockForm.supplyPrice"
+                        type="number" class="form-control input-underline input-lg" name="supply-price">
                     
                     </div>
             </div>
@@ -124,8 +126,9 @@
                   <div class="col-sm-12">
                       
                         <div class="custom-control custom-checkbox">
-          <input  name="notification-type" type="checkbox" class="custom-control-input" id="location">
-          <label class="custom-control-label" for="location"></label>SAVE PRICE FOR NEXT TIME</div>
+          <input  name="save-price" [(ngModel)]="stockForm.savePrice"
+          type="checkbox" class="custom-control-input" id="save-price">
+          <label class="custom-control-label" for="save-price"></label>SAVE PRICE FOR NEXT TIME</div>
                     
                     </div>
             </div>
@@ -133,7 +136,8 @@
             <div class="row form-group">
               <div class="col-sm-12">
                   <label class="control-label">INCREASE REASON</label>
-                  <select name="user-permission" class="form-control">
+                  <select name="increase-reason" [(ngModel)]="stockForm.reason"
+                  class="form-control">
                       <option selected>New Stock</option>
                       <option>Basic</option>
                       <option>Low</option>
@@ -164,13 +168,14 @@
           
           
           <div class="modal-body">
-              <div>0 units currently in stock at Hachinet.</div>
+              <div>{{product.totalOnHand}} units currently in stock at Hachinet.</div>
 
               <div class="row form-group">
                   <div class="col-sm-12">
                       
                         <label class="control-label">DECREASE QTY.</label>
-                        <input type="text" class="form-control input-underline input-lg" name="description">
+                        <input [(ngModel)]="stockForm.stockQty"
+                        type="number" class="form-control input-underline input-lg" name="decrease-qty">
                     
                     </div>
             </div>
@@ -179,7 +184,8 @@
             <div class="row form-group">
               <div class="col-sm-12">
                   <label class="control-label">DECREASE REASON</label>
-                  <select name="user-permission" class="form-control">
+                  <select name="decrease-reason" [(ngModel)]="stockForm.reason"
+                  class="form-control">
                       <option selected>Internal Use</option>
                       <option>Basic</option>
                       <option>Low</option>

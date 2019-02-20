@@ -1,3 +1,5 @@
+import { Stock } from "./stock";
+
 export class Product {
   id: number;
   productName: string;
@@ -46,9 +48,14 @@ export class Product {
     this.supplyPrice = 0;
   }
 
-  getCurrentDateObject() {
-    const d = new Date();
-    return {year: d.getFullYear(), month: d.getMonth(), day: d.getDate() };
+  calculateStockOnHand(stockHistory: any[]) {
+    this.totalOnHand = stockHistory.reduce((acc, cur) => {
+      const qty = cur.stock_qty ? cur.stock_qty : 0;
+      if (cur.status_stock === 1) {
+        return acc + qty;
+      }
+      return acc - qty;
+    }, 0);
   }
 
   static toModel(dto: any) {

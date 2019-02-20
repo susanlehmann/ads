@@ -39,6 +39,7 @@ export class ViewProductComponent implements OnInit {
   }
 
   openModal(content: NgbModalRef) {
+    this.stockForm = new Stock();
     this.modal.open(content, {
       backdrop: 'static',
       size: 'md'
@@ -58,7 +59,8 @@ export class ViewProductComponent implements OnInit {
 
   loadStockHistory(id) {
     this.inventoryService.getStockHistory(id).subscribe((data: any) => {
-    this.stocks = data.stock;
+    this.stocks = data.stock.map(Stock.toModel);
+    this.product.calculateStockOnHand(data.stock);
     });
   }
 
