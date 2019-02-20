@@ -38,6 +38,9 @@ export class CategoryService {
     deletecategory(id) {
         return this._http.post(`${this.baseUrl}/user/inventory/category/delete-category`, {'id': id});
     }
+    searchCategory(content: any) {
+      return this._http.post<any>(this.baseUrl + 'user/inventory/brand/search-brand', content);
+    }
 
   getUsers(){
     return this._http.get('http://task-treking/public/api/users',{

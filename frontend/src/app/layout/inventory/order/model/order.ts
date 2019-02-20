@@ -1,8 +1,7 @@
-export class Brand {
+export class Order {
   id: number;
-  brandName: string;
+  orderName: string;
   updatetime: string;
-  getbrand: any;
 
   constructor() {
     this.new();
@@ -10,17 +9,16 @@ export class Brand {
   }
 
   new() {
-    this.brandName = "";
+    this.orderName = "";
     this.updatetime = "";
-    this.getbrand = null;
   }
 
   mockData() {
-    this.brandName = "Giang";
+    this.orderName = "Giang";
   }
 
   static toModel(dto: any) {
-    const model = new Brand();
+    const model = new Order();
     model.updateData(dto);
     return model;
   }
@@ -28,7 +26,7 @@ export class Brand {
   toDto(): any {
     return {
       id: this.id,
-      name_category: this.brandName,
+      name_supplier: this.orderName,
       updated_at: this.updatetime,
     };
   }
@@ -36,12 +34,13 @@ export class Brand {
   updateData(data: any) {
     const {
       id,
-      name_brand,
-      updated_at
+      name_Order,
+      updated_at,
+      name_supplier,
    } = data;
 
     this.id = id;
-    this.brandName = name_brand;
+    this.orderName = name_supplier;
     this.updatetime = updated_at;
   }
 

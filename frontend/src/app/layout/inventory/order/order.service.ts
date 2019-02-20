@@ -4,11 +4,11 @@ import { HttpcallService } from '../../../shared/services/httpcall.service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class BrandService {
+export class OrderService {
 
     //const API_URL = environment.apiUrl;
     baseUrl: string;
-    currentBrandId = JSON.parse(localStorage.getItem('user')).id;
+    currentOrderId = JSON.parse(localStorage.getItem('user')).id;
 
   constructor(
       private _http: HttpClient,
@@ -18,32 +18,29 @@ export class BrandService {
     }
 
     getList() {
-        return this._http.post(`${this.baseUrl}/user/inventory/brand/list-brand`, {id : this.currentBrandId});
+        return this._http.post(`${this.baseUrl}/user/inventory/order/list-order`, {id : this.currentOrderId});
     }
 
     findById(id) {
-        return this._http.post(`${this.baseUrl}/user/inventory/brand/show-brand`,{id : id});
+        return this._http.post(`${this.baseUrl}/user/inventory/order/show-order`,{id : id});
     }
 
-    add(brand) {
-        brand.ownerId = this.currentBrandId;
-        return this._http.post(`${this.baseUrl}/user/inventory/brand/create-brand`, brand);
+    add(order) {
+        order.ownerId = this.currentOrderId;
+        return this._http.post(`${this.baseUrl}/user/inventory/order/create-order`, order);
     }
 
-    update(brand) {
-        brand.ownerId = this.currentBrandId;
-        return this._http.post(`${this.baseUrl}/user/inventory/brand/update-brand`, brand);
+    update(order) {
+        order.ownerId = this.currentOrderId;
+        return this._http.post(`${this.baseUrl}/user/inventory/order/update-order`, order);
     }
 
-    deletebrand(id) {
-        return this._http.post(`${this.baseUrl}/user/inventory/brand/delete-brand`, {'id': id});
-    }
-    searchBrand(content: any) {
-      return this._http.post<any>(this.baseUrl + 'user/inventory/brand/search-brand', content);
+    deleteorder(id) {
+        return this._http.post(`${this.baseUrl}/user/inventory/order/delete-order`, {'id': id});
     }
 
-  //getBrands(){
-  //    return this._http.get('http://task-treking/public/api/brands',{
+  //getorders(){
+  //    return this._http.get('http://task-treking/public/api/orders',{
   //        headers: new HttpHeaders({'Accept': 'application/json',
   //            'Authorization': 'Bearer ' + localStorage.getItem('token'),})
   //    }).map(result => result);
