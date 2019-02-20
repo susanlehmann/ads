@@ -12,7 +12,7 @@ const routes: Routes = [
             { path: 'staff', loadChildren: './staff/staff.module#StaffModule' },
             { path: 'report', loadChildren: './report/report.module#ReportModule' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-            { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarModule' },
+            { path: 'calendar', loadChildren: './calendar/calendar.module#_CalendarModule' },
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
             { path: 'forms', loadChildren: './form/form.module#FormModule' },
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },

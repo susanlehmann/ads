@@ -1,21 +1,23 @@
 <div [@routerTransition]>
-<!--     <ngx-tui-calendar #exampleCalendar id="example-calendar"
-    [defaultView]= "defaultView"
-    [taskView]="true"
-    [template]="template"
-    (tuiCalendarCreated)="onTuiCalendarCreate($event)"></ngx-tui-calendar> -->
-<!-- <p>Display event : {{displayEvent | json}}</p> -->
-<div *ngIf="calendarOptions">
-    <ng-fullcalendar #ucCalendar 
-    	[options]="calendarOptions" 
-    	(eventClick)="eventClick($event.detail)" 
-    	(eventDrop)="updateEvent($event.detail)"
-        (eventResize)="updateEvent($event.detail)" 
-        (clickButton)="clickButton($event.detail)"
-        (dayClick)="dayClick($event.detail,content)"
-        class="cal-container"
-    >
-    </ng-fullcalendar>
+<h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+<div>
+    <div [ngSwitch]="view">
+      <mwl-calendar-week-view
+        *ngSwitchCase="'week'"
+        [viewDate]="viewDate"
+        [events]="events"
+        (hourSegmentClicked)="dayClick($event.date, content)"
+        (dayHeaderClicked)="view = $event.day.date; view = 'day'"
+      >
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view
+        *ngSwitchCase="'day'"
+        [viewDate]="viewDate"
+        [events]="events"
+        (hourSegmentClicked)="dayClick($event.date, content)"
+      >
+      </mwl-calendar-day-view>
+    </div>
 </div>
 <ng-template #content let-modal>
 	<add-event [_clickEvent]="_clickEvent"></add-event>

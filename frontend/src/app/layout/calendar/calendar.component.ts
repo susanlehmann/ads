@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { routerTransition } from '../../router.animations';
-import { CalendarComponent as FullCalendarComponent } from 'ng-fullcalendar';
 import * as $ from 'jquery';
 import { EventSesrvice } from './event.service';
 import {NgbModal, NgbModalRef, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
@@ -17,8 +16,9 @@ export class CalendarComponent implements OnInit {
     _clickEvent: any;
     closeResult: any;
     modalOptions: NgbModalOptions;
-
-    @ViewChild(FullCalendarComponent) ucCalendar: FullCalendarComponent;
+    viewDate: Date = new Date();
+    view: string = 'week';
+    
     constructor(protected eventService: EventSesrvice,
       private modal: NgbModal) {}
 

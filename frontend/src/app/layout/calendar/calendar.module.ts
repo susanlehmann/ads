@@ -10,7 +10,8 @@ import { NgxTuiCalendarModule } from 'ngx-tui-calendar';
 import { FullCalendarModule } from 'ng-fullcalendar'
 import { AddEventComponent } from './add-event/add-event.component';
 import { EventSesrvice } from './event.service';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 @NgModule({
     imports: [
     	// BrowserModule,
@@ -20,10 +21,13 @@ import { EventSesrvice } from './event.service';
 	    Ng2Charts, 
 	    ChartsRoutingModule, 
 	    PageHeaderModule, 
-	    NgxTuiCalendarModule.forRoot(),
+	    CalendarModule.forRoot({
+			provide: DateAdapter,
+			useFactory: adapterFactory
+	    }),
     ],
     declarations: [CalendarComponent, AddEventComponent],
 	  bootstrap:    [ CalendarComponent ],
 	  providers: [ EventSesrvice ]
 })
-export class CalendarModule {}
+export class _CalendarModule {}

@@ -19,17 +19,17 @@ export class AddEventComponent implements OnInit
 	constructor(private modal: NgbModal){}
 
 	ngOnInit(){
-		this.loadHours();
-		this.daySelected = this._clickEvent.date._d.toDateString();
-		const h = this._clickEvent.date._d.getUTCHours();
-		const m = this._clickEvent.date._d.getUTCMinutes();
-		if(m == 0){
-			this.event_info.stTime = h+'0'+m;
-		} else {
-			this.event_info.stTime = h+''+m;
-		}
-		this.event_info.endTime = '000';
-		this.event_info.serEvent = '';
+		// this.loadHours();
+		// this.daySelected = this._clickEvent.date._d.toDateString();
+		// const h = this._clickEvent.date._d.getUTCHours();
+		// const m = this._clickEvent.date._d.getUTCMinutes();
+		// if(m == 0){
+		// 	this.event_info.stTime = h+'0'+m;
+		// } else {
+		// 	this.event_info.stTime = h+''+m;
+		// }
+		// this.event_info.endTime = '000';
+		// this.event_info.serEvent = '';
 		console.log(this._clickEvent);
 	}
 

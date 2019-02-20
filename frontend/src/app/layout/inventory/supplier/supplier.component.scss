@@ -260,9 +260,12 @@ b, strong {
   font-weight: 700;
 }
 .rTWbSm {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  float: right;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    float: right;
+    position: fixed;
+    bottom: 30px;
+    right: 35px;
 }
 ._1jAoG_ {
   cursor: pointer;
