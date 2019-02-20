@@ -304,7 +304,7 @@
                               <div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">$0.00</h5></div>
                           </div>
                           <div class="col-md-12" style="margin-top:15px" id="divbtnCreateOrder">
-                              <button type="button" id="btnCreateOrder" style="font-weight:bold" name="btnCreateOrder" class="btn btn-block btn-primary active" aria-pressed="true" disabled="">CREATE ORDER</button>
+                              <button type="button" id="btnCreateOrder" style="font-weight:bold" name="btnCreateOrder" class="btn btn-block btn-primary active" aria-pressed="true" (click)="create_oder()">CREATE ORDER</button>
                           </div>
                           <div class="col-md-12" style="margin-top: 15px; display: none;" id="divbtnReceiveStock">
                               <button type="button" id="btnReceiveStock" style="font-weight:bold" name="btnReceiveStock" class="btn btn-block btn-success active" aria-pressed="true">RECEIVE STOCK</button>
@@ -394,12 +394,13 @@
                 <input type="text" id="txtSearch" class="form-control" placeholder="Scan barcode or search any item">
             </div>
         </div>
-        <div class="col-12" id="divCategory" style="">
+        <div class="col-12" id="divCategory" style="" *ngFor="let prodss of _listproducts">
           <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0">
             <div class="row" >
               <div class="col-6">
-                <div class="col-12">
-                  <strong>{{ _category.name_category }}</strong>
+                <div class="col-12" (click)="selectedX(prodss)">
+                  <strong>{{ prodss.name_product }}</strong><br>
+                  <span class="text-muted">({{ prodss.initialstock_product }} in stock)</span>
                 </div>
               </div>
               <div class="col-6 text-right">
@@ -407,7 +408,7 @@
                   <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
                 </svg></span>
               </div>
-              <hr  width="100%" align="center" />
+              <!-- <hr  width="100%" align="center" /> -->
             </div>
           </div>
         </div>
