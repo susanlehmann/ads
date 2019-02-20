@@ -11,25 +11,21 @@
     <th *ngFor="let day of weekdays">{{day}}</th>
   </thead>
   <tbody>
-    <tr *ngFor="let sche of liststaff">
+    <tr *ngFor="let sche of schedules">
       <th class="head-col" style="vertical-align: middle">
-        <div style="font-weight: 700; margin-bottom: 5px;">{{sche.firstName}} {{sche.lastName}}</div>
-        <div>{{ 44 }}</div>
+        <div style="font-weight: 700; margin-bottom: 5px;">{{sche.staffName}}</div>
+        <div>{{sche.weeklyHours}}</div>
       </th>
-      <ng-container *ngFor="let w of schedules">
-          <!-- <ng-container *ngIf="w == null; else elseTemplate">
+      <ng-container *ngFor="let w of sche.weekSchedule">
+          <ng-container *ngIf="w == null; else elseTemplate">
               <td (click)="openModal(sche, content)" class="no-shift"></td>
           </ng-container>
           <ng-template #elseTemplate>
               <td class="work-hour" (click)="openModal(sche, content)">
-                  <div style="margin-bottom: 10px;">{{w.shift1_start}}</div>
-                  <div>{{w.shift1_end}}</div>
+                  <div style="margin-bottom: 10px;">{{w.start}}</div>
+                  <div>{{w.end}}</div>
               </td>
-          </ng-template> -->
-          <td class="work-hour" (click)="openModal(sche, content)">
-            <div style="margin-bottom: 10px;">{{w.shift1_start}}</div>
-            <div>{{w.shift1_end}}</div>
-        </td>
+          </ng-template>
       </ng-container>
     </tr>
   </tbody>
@@ -112,7 +108,7 @@
         <div class="modal-footer">
             <!-- <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteStaff()"> Delete </button> -->
             <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-            <button type="submit" class="btn btn-dark pull-right" (click)="save()"> Save </button>
+            <button type="submit" class="btn btn-dark pull-right" (click)="addSchedule()"> Save </button>
       </div>
 
 
