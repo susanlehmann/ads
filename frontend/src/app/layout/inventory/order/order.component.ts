@@ -85,6 +85,8 @@ export class OrderComponent implements OnInit {
   openProduct1(content, category) {
     this._category = category;
     this._listproducts = this.listproducts.filter(s => s.id_category == this._category.id);
+    this.modal.dismissAll();
+    this.openModal(this._prod);
     this.openProduct(content);
     console.log(this.listproducts);
     // console.log(this._listproducts);

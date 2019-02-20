@@ -43,11 +43,11 @@
             </span>Filters
           </button>
         </div>
-        <div class="_1mW557 _1DHTqT">
+        <div class="_1mW557 _1DHTqT table-responsive">
           <div class="_2hndFf">
             <div>
               <div class="nsuqUP">
-                <table class="_3rpc36">
+                <table class="_3rpc36 table table-hover">
                   <thead>
                     <tr>
                       <th class="_3jHaBz _1hEJSa">
@@ -162,20 +162,18 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div id="wrapper">
-          <div class="scrollbar" id="style-1">
-            <div class="force-overflow">
+
       <div class="modal-body">
           <div class="row" id="divOrder" style="">
-              <div class="col-md-12">
+              <div class="col-md-12 box-desktop">
                   <div class="col-md-9">
                       <div class="card">
                           <div class="card-body" id="addOrderDetail">
                               <div class="col-md-12" id="divNoDataProduct" style="display: none;">
                                   <h1 style="font-size:24px; font-weight:300; text-align:center">You haven't added any product to your order yet.</h1>
                               </div>
-                              <div class="col-md-12" id="divTableData">
-                                  <table class="table table-responsive-sm table-sm datatable no-footer" id="tableAddProduct">
+                              <div class="col-md-12 table-responsive" id="divTableData">
+                                  <table class="table table-hover" id="tableAddProduct">
                                       <thead>
                                           <tr>
                                               <th style="text-align:left">PRODUCT</th>
@@ -322,11 +320,101 @@
                       </div>
                   </div>
               </div>
+
+              <div class="col-md-12 box-mobile">
+                  <div class="col-md-9">
+                      <div class="card">
+                          <div class="card-body" id="addOrderDetail">
+                              <div class="col-md-12 table-responsive" id="divTableData">
+                                  <table class="table table-hover" id="tableAddProduct">
+                                      <thead>
+                                          <tr>
+                                              <th style="text-align:left">PRODUCT</th>
+                                              <th style="text-align:left">ORDER QTY.</th>
+                                              <th style="text-align:left">SUPPLY PRICE</th>
+                                              <th style="text-align:left">TOTAL COST</th>
+                                              <th></th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr *ngFor="let i of items">
+                                            <td>{{i.name_product}}</td>
+                                            <td><input type="number" name="qty" [(ngModel)]="i.quantity"></td>
+                                            <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product"></td>
+                                            <td>{{i.quantity * i.supplyprice_product}}</td>
+                                            <td><button (click)="deleteProd(i)">x</button></td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                              <div class="col-md-12" style="margin-top:20px" (click)="openProduct(category)">
+                                  <div class="col-md-4">
+
+                                  </div>
+                                  <div class="col-md-4">
+                                      <button type="button" class="btn btn-block btn-outline-primary" id="btnAddProduct" style="width: 160%;"><i class="fa fa-plus"></i> Add Product</button>
+                                  </div>
+                                  <div class="col-md-4">
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="col-md-12" style="padding:10px 10px 10px 10px; border:1px solid #c2cfd6">
+                          <div class="col-md-12" >
+                            <h5 id="SupplierName">{{ _supplier.name_supplier }}</h5>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="Street">{{ _supplier.street_supplier}}</h6>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="Suburb">{{ _supplier.suburb_supplier}}</h6>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="City">{{ _supplier.city_supplier}}</h6>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="ZipCode">{{ _supplier.zipcode_supplier}},{{ _supplier.state_supplier}}</h6>
+                              <hr>
+                          </div>
+                          <div class="col-md-12">
+                              <h5>DELIVER TO</h5>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="LocationName">{{ _supplier.suburb_supplier}}</h6>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="StreetAddress">Default Address</h6>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="APT"></h6>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="LCity">Default City</h6>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="LState"></h6>
+                          </div>
+                          <div class="col-md-12">
+                              <h6 id="LZipCode"></h6>
+                              <hr>
+                          </div>
+                          <div class="col-md-12" style="display: -webkit-inline-box;">
+                              <div class="col-md-5" style="display: inline;padding-left: 0;">Order Total:</div>
+                              <input type="hidden" id="OrderID" value="0">
+                              <div class="col-md-7"><h5 id="TotalAmount">$0.00</h5></div>
+                          </div>
+                          <div class="col-md-12" style="margin-top:15px" id="divbtnCreateOrder">
+                              <button type="button" id="btnCreateOrder" style="font-weight:bold" name="btnCreateOrder" class="btn btn-block btn-primary active" aria-pressed="true" (click)="create_oder()">CREATE ORDER</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+
 </ng-template>
 <ng-template #category let-modal>
     <div class="modal-header">
@@ -379,7 +467,7 @@
 <ng-template #product1 let-modal>
     <div class="modal-header">
         <span class="prevModalWizard">
-          <i class="fa fa-chevron-left" (click)="modal.dismiss('Cross click')"></i>
+          <i class="fa fa-chevron-left" (click)="openProduct(category)"></i>
         </span>
         <h4 class="modal-title offset-sm-4" id="modal-basic-title">{{ _category.name_category }}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

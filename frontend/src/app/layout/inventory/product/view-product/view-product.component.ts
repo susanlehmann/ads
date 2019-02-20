@@ -5,6 +5,7 @@ import { InventoryService } from '../../inventory.service';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Stock } from '../model/stock';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-view-product',
@@ -49,21 +50,30 @@ export class ViewProductComponent implements OnInit {
   }
 
   addStockHistory(isIncreased) {
-    const dto = this.stockForm.toDto();
-    const productId = this.product.id;
-    dto.id_product = productId;
-    dto.status_stock = isIncreased ? 1 : 0;
-    this.inventoryService.addStockHistory(dto).subscribe(v => {
+    this.product.totalOnHand = isIncreased ? this.product.totalOnHand + this.stockForm.stockQty : this.product.totalOnHand - this.stockForm.stockQty;
+    this.stockForm.totalStock = this.product.totalOnHand;
+    this.stockForm.productId = this.product.id;
+    this.stockForm.isIncreased = isIncreased;
+
+    let updateProd = this.inventoryService.updateProduct(this.product.toDto());
+    let updateStock = this.inventoryService.addStockHistory(this.stockForm.toDto());
+
+    forkJoin(updateProd, updateStock).subscribe(v => {
       this.modal.dismissAll();
       this.notifierService.notify('success', 'A new stock history has been successfully added');
-      this.loadStockHistory(productId);
+      this.loadStockHistory();
     });
   }
 
-  loadStockHistory(id) {
+  loadStockHistory(id?) {
+    if (!id) id = this.product.id;
+
     this.inventoryService.getStockHistory(id).subscribe((data: any) => {
-    this.stocks = data.stock.map(Stock.toModel);
-    this.product.calculateStockOnHand(data.stock);
+    this.stocks = data.stock
+    .map(Stock.toModel)
+    .sort((a, b) => {
+          return b.id - a.id;
+        });;
     });
   }
 

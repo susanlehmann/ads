@@ -69,12 +69,12 @@
       </ng-container> -->
     <ng-container>
       <tr *ngFor="let stock of stocks; index as i">
-        <td>19 Feb 2019, 14:58</td>
-        <td>Minh Anh Nguyen</td>
-        <td>New Stock</td>
+        <td>{{stock.createdAt}}</td>
+        <td>{{stock.staffName}}</td>
+        <td>{{stock.action}}</td>
         <td>{{stock.isIncreased ? '+' : '-'}} {{stock.stockQty}}</td>
         <td>{{stock.supplyPrice}}</td>
-        <td>{{stock.stockQty}}</td>
+        <td>{{stock.totalStock}}</td>
       </tr>
     </ng-container>
   </tbody>
@@ -140,11 +140,7 @@
                   <label class="control-label">INCREASE REASON</label>
                   <select name="increase-reason" [(ngModel)]="stockForm.reason"
                   class="form-control">
-                      <option selected>New Stock</option>
-                      <option>Basic</option>
-                      <option>Low</option>
-                      <option>Medium</option>
-                      <option>High</option>
+                      <option value={{i.id}} *ngFor="let i of stockForm.increaseReasons">{{i.name}}</option>
                   </select>
               </div>
           </div>
@@ -188,11 +184,7 @@
                   <label class="control-label">DECREASE REASON</label>
                   <select name="decrease-reason" [(ngModel)]="stockForm.reason"
                   class="form-control">
-                      <option selected>Internal Use</option>
-                      <option>Basic</option>
-                      <option>Low</option>
-                      <option>Medium</option>
-                      <option>High</option>
+                  <option value={{i.id}} *ngFor="let i of stockForm.decreaseReasons">{{i.name}}</option>
                   </select>
               </div>
           </div>
