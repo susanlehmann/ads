@@ -11,7 +11,12 @@ class ProductCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['product'] = Product::where('id_client_product',$request->id)->get();
+        $data['product'] = Product::leftjoin('categories', 'products.id_category', '=', 'categories.id')
+        ->leftjoin('brands', 'products.id_brand', '=', 'brands.id')
+        ->leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
+        ->where('id_client_product',$request->id)
+        ->select('*', 'products.id as product_id')
+        ->get();
         return response()->json($data);
     }
 
