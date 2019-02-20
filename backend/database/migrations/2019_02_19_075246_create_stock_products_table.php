@@ -24,6 +24,7 @@ class CreateStockProductsTable extends Migration
             $table->integer('save_price')->nullable();
             $table->integer('reason_stock')->nullable();
             $table->text('discription_stock')->nullable();
+            $table->integer('total_stock')->nullable();
             $table->integer('status_stock')->nullable();
             $table->timestamps();
         });
