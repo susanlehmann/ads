@@ -34,6 +34,7 @@ class CreateProductsTable extends Migration
             $table->integer('id_supplier')->nullable();
             $table->integer('reorderpoint_product')->nullable();
             $table->integer('reorderqty_product')->nullable();
+            $table->integer('total_stock')->nullable();
             $table->integer('status_product')->nullable();
             $table->timestamps();
         });
