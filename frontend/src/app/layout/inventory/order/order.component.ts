@@ -152,7 +152,7 @@ export class OrderComponent implements OnInit {
   }
 
   getProduct(){
-    this.InventoryService.getList()
+    this.InventoryService.getListProduct()
     .subscribe((prod:any) => {
       this.stopLoading();
       this.listproducts = prod.product;

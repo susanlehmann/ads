@@ -144,10 +144,11 @@ export class BrandComponent implements OnInit {
 	//		}
 	//	);
 	//}
-	const query = {name_category: event.target.value};
-	this.BrandService.searchBrand(search).subscribe((listbrands: any) => {
-      this.brands = listbrands .map(Brand.toModel);
-    });
+	// const query = {name_category: event.target.value};
+	// this.BrandService.searchBrand(search).subscribe((listbrands: any) => {
+  //     this.brands = listbrands .map(Brand.toModel);
+  //   });
 
   }
 
+}
