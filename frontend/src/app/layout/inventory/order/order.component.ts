@@ -41,6 +41,7 @@ export class OrderComponent implements OnInit {
   _prod_selected: any = [];
   _total: any;
   arr_info_product: any = [];
+  listorder : any = [];
 
   items = [];
   orderTotal;
@@ -190,6 +191,18 @@ export class OrderComponent implements OnInit {
     this.getSupplier();
     this.getCategory();
     this.getProduct();
+    this.getlist_order();
+  }
+
+  getlist_order() {
+    this.startLoading();
+    this.OrderService.getList()
+		.subscribe((listbrands:any) => {
+        this.stopLoading();
+         this.listorder = listbrands.order;
+		}, err => {
+      this.stopLoading();
+    });
   }
 
   create_oder() {
@@ -201,6 +214,9 @@ export class OrderComponent implements OnInit {
     this.OrderService.add($listitem)
     .subscribe((cate:any) => {
       this.stopLoading();
+      this.getlist_order();
+      this.modal.dismissAll();
+      this.notifierService.notify('success', 'A new order has been successfully added');
     }, err =>{
 
     });

@@ -68,12 +68,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="_1A0eEb _1zQ7jO">
+                    <tr class="_1A0eEb _1zQ7jO" *ngFor="let order of listorder">
                       <td class="N3OZB6 _1vLxYz">
-                        <div (click)="openModal(edit_order)">P1</div>
+                        <div (click)="openModal(edit_order)">{{ order.id }}</div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
-                        <div>25 Jan 2019</div>
+                        <div>{{ order.updated_at }}</div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
                         <div>asd</div>
@@ -84,7 +84,7 @@
                         </div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
-                        <span class="_2V5qqW">₫1</span>
+                        <span class="_2V5qqW">{{ order.total_price }}</span>
                       </td>
                     </tr>
                   </tbody>
