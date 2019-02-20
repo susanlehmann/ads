@@ -11,12 +11,7 @@ class ProductCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['product'] = Product::leftjoin('categories', 'products.id_category', '=', 'categories.id')
-        ->leftjoin('brands', 'products.id_brand', '=', 'brands.id')
-        ->leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
-        ->where('id_client_product',$request->id)
-        ->select('*', 'products.id as product_id')
-        ->get();
+        $data['product'] = Product::where('id_client_product',$request->id)->get();
         return response()->json($data);
     }
 
@@ -42,6 +37,7 @@ class ProductCtroller extends Controller
             'id_supplier' => $request->id_supplier,
             'reorderpoint_product' => $request->reorderpoint_product,
             'reorderqty_product' => $request->reorderqty_product,
+            'total_stock' => $request->total_stock,
             'status_product' => 1,
         ];
         // $user->level = 0; // ko co column level
@@ -61,7 +57,12 @@ class ProductCtroller extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data['product'] = Product::find($id);
+        $data['product'] = Product::leftjoin('categories', 'products.id_category', '=', 'categories.id')
+        ->leftjoin('brands', 'products.id_brand', '=', 'brands.id')
+        ->leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
+        ->where('products.id', $request->id)
+        ->select('*', 'brands.id as brands_id', 'categories.id as categories_id', 'suppliers.id as suppliers_id')
+        ->first();
         return response()->json($data);
     }
 
@@ -88,6 +89,7 @@ class ProductCtroller extends Controller
                 'id_supplier' => $request->id_supplier,
                 'reorderpoint_product' => $request->reorderpoint_product,
                 'reorderqty_product' => $request->reorderqty_product,
+                'total_stock' => $request->total_stock,
             ];
             $product = Product::find($id);
             $check = $product->update($input);

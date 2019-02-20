@@ -81,8 +81,9 @@ export class OrderComponent implements OnInit {
 
   openProduct1(content, category) {
     this._category = category;
-    this._listproducts = this.listproducts.filter(s => s.id_category == category.id);
+    this._listproducts = this.listproducts.filter(s => s.id_category == this._category.id);
     this.openProduct(content);
+    console.log(this.listproducts);
     // console.log(this._listproducts);
   }
 
@@ -92,7 +93,6 @@ export class OrderComponent implements OnInit {
     this.modal.dismissAll();
     this.openModal(this._prod);
     this.openProduct(content);
-    console.log(this.listproducts);
   }
 
   deleteProd(prod){
@@ -182,6 +182,17 @@ export class OrderComponent implements OnInit {
     this.getSupplier();
     this.getCategory();
     this.getProduct();
+  }
+
+  create_oder() {
+    var $listitem = this.items;
+    console.log($listitem);
+    this.OrderService.add($listitem)
+    .subscribe((cate:any) => {
+      this.stopLoading();
+    }, err =>{
+
+    });
   }
 
 }
