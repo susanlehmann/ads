@@ -61,7 +61,7 @@ class ProductCtroller extends Controller
         ->leftjoin('brands', 'products.id_brand', '=', 'brands.id')
         ->leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
         ->where('products.id', $request->id)
-        ->select('*', 'brands.id as brands_id', 'categories.id as categories_id', 'suppliers.id as suppliers_id')
+        ->select('*', 'products.id as id' ,'brands.id as brands_id', 'categories.id as categories_id', 'suppliers.id as suppliers_id')
         ->first();
         return response()->json($data);
     }
