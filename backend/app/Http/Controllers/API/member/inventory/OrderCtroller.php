@@ -38,7 +38,7 @@ class OrderCtroller extends Controller
             // 'id_staff' => $request->ownerId,
             // 'id_update' => $request->ownerId,
             'info_product' => $info_product,
-            'total_price' => $request->total_product,
+            'total_price' => $request->total_price,
             'status_order' => 1,
         ];
         // $user->level = 0; // ko co column level

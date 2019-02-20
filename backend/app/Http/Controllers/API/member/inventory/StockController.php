@@ -28,7 +28,8 @@ class StockController extends Controller
             'save_price' => $request->save_price,
             'reason_stock' => $request->reason_stock,
             'discription_stock' => $request->discription_stock,
-            'status_stock' => 1,
+            'total_stock' => $request->total_stock,
+            'status_stock' => $request->status_stock,
         ];
         // $user->level = 0; // ko co column level
         $stock = Stock_product::create($input);
@@ -62,6 +63,7 @@ class StockController extends Controller
                 'stock_price' => $request->stock_price,
                 'save_price' => $request->save_price,
                 'reason_stock' => $request->reason_stock,
+                'total_stock' => $request->total_stock,
                 'discription_stock' => $request->discription_stock,
             ];
             $stock = Stock_product::find($id);

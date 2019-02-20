@@ -38,8 +38,9 @@ export class BrandService {
     deletebrand(id) {
         return this._http.post(`${this.baseUrl}/user/inventory/brand/delete-brand`, {'id': id});
     }
-    searchBrand(content: any) {
-      return this._http.post<any>(this.baseUrl + 'user/inventory/brand/search-brand', content);
+    searchBrand(query) {
+      query.ownerId = this.currentBrandId;
+      return this._http.post<any>(this.baseUrl + '/user/inventory/brand/search-brand',query);
     }
 
   //getBrands(){

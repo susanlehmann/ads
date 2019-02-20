@@ -18,7 +18,6 @@ export class BrandComponent implements OnInit {
   isCreate: boolean;
   selectedId: string;
 
-  //brands = [{name: 'killua',productassigned: '1',updatetime: '25 Jan 2019, 13:52'},{name: 'kim',productassigned: '2',updatetime: '26 Jan 2019, 13:52'}]
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
     private BrandService: BrandService,
@@ -144,10 +143,10 @@ export class BrandComponent implements OnInit {
 	//		}
 	//	);
 	//}
-	// const query = {name_category: event.target.value};
-	// this.BrandService.searchBrand(search).subscribe((listbrands: any) => {
-  //     this.brands = listbrands .map(Brand.toModel);
-  //   });
+	 const query = {name_brand: event.target.value};
+	 this.BrandService.searchBrand(query).subscribe((list: any) => {
+       this.listbrands = list.brand.map(Brand.toModel);
+     });
 
   }
 
