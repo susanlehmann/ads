@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 export class ListServiceGroupComponent implements OnInit {
 
     @Input() listGroup: any;
-
+    @Input() tempServiceGroup: any;
+    number: any;
 	closeResult: string;
 	form: any = {};
 	
@@ -20,6 +21,7 @@ export class ListServiceGroupComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+        this.number = this.listGroup.service_group.length;
 	}
 
     private getDismissReason(reason: any): string {
@@ -39,5 +41,10 @@ export class ListServiceGroupComponent implements OnInit {
     addServiceToGroup(idGroup) {
         this.modalService.dismissAll();
     	this.route.navigate(['services/add-services'], { queryParams: { groupId: idGroup } });
+    }
+
+    addGroupService() {
+        this.modalService.dismissAll();
+        this.modalService.open(this.tempServiceGroup);
     }
 }

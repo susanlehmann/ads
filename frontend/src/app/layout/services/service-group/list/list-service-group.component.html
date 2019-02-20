@@ -4,7 +4,7 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="modal-content">
+<div class="modal-content" *ngIf="number > 0">
     <ul class="list-group">
         <a  href="javascript:;"
             class="list-group-item" 
@@ -13,6 +13,19 @@
         >
         	<i class="fa fa-circle" [ngStyle]="{color: (gr.color_service_group)}"></i>&nbsp;&nbsp;{{gr?.name_service_group}}
         </a>
+    </ul>
+</div>
+<div class="modal-content" *ngIf="number == 0">
+    <ul class="list-group">
+        <p>
+            <span>No Service Group</span>
+            <a  href="javascript:;"
+                class="list-item"
+                (click)="addGroupService()"
+            >
+                Click Add
+            </a>
+        </p>
     </ul>
 </div>
 <div class="modal-footer">

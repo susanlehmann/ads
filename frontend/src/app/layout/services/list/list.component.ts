@@ -16,6 +16,7 @@ export class ListServicesComponent implements OnInit {
 	@ViewChild('f') floatingLabelForm: NgForm;
     @ViewChild('vform') validationForm: FormGroup;
     regularForm: FormGroup;
+    @ViewChild('service_group') tempServiceGroup: ElementRef;
     
 	closeResult: string;
 	form: any = {};
