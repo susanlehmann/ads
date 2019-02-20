@@ -8,12 +8,12 @@ export class Product {
   enableRetail: boolean;
   retailPrice: number;
   specialPrice: number;
-  tax: number;
+  taxId: number;
   enableCommission: boolean;
   barCode: string;
   sku: string;
   description: string;
-  enableStockControl: boolean;
+  enableStock: boolean;
   supplyPrice: number
   reorderPoint: number;
   reorderQty: number;
@@ -44,7 +44,7 @@ export class Product {
     this.barCode = "";
     this.sku = "";
     this.description = "";
-    this.enableStockControl = false;
+    this.enableStock = false;
     this.supplyPrice = 0;
   }
 
@@ -67,18 +67,23 @@ export class Product {
   toDto(): any {
     return {
       id: this.id,
-      id_category: this.categoryId,
       name_product: this.productName,
+      id_category: this.categoryId,
       id_brand: this.brandId,
+      id_supplier: this.supplierId,
+      texid_brand: this.taxId,
       specialprice_product: this.specialPrice,
       retaiprice_product : this.retailPrice,
       barcode_product : this.barCode,
       sku_product : this.sku,
       discryption_product : this.description,
       supplyprice_product : this.supplyPrice,
-      initialstock_product : this.enableStockControl,
+      initialstock_product : this.enableStock,
       reorderpoint_product: this.reorderPoint,
       reorderqty_product: this.reorderQty,
+      enable_retail: this.enableRetail ? 1 : 0,
+      enable_stock: this.enableStock ? 1 : 0,
+      enblecommission_id: this.enableCommission ? 1 : 0,
     };
   }
 
@@ -89,14 +94,14 @@ export class Product {
     this.brandId = data.id_brand;
     this.retailPrice = data.retaiprice_product;
     this.specialPrice = data.specialprice_product;
-    this.tax = data.texid_brand;
-    this.enableRetail = data.id_category;
+    this.taxId = data.texid_brand;
+    this.enableRetail = data.enable_retail === 1 ? true : false;
     this.enableCommission = data.enblecommission_id === 1 ? true : false;
     this.barCode = data.barcode_product;
     this.sku = data.sku_product;
     this.description = data.discryption_product;
     this.supplyPrice = data.supplyprice_product;
-    this.enableStockControl = data.initialstock_product === 1 ? true : false;
+    this.enableStock = data.enable_stock === 1 ? true : false;
     this.supplierId = data.id_supplier;
     this.reorderPoint = data.reorderpoint_product;
     this.reorderQty = data.reorderqty_product;

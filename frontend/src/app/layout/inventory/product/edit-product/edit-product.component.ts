@@ -31,6 +31,7 @@ export class EditProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadPreData();
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
@@ -43,13 +44,15 @@ export class EditProductComponent implements OnInit {
   }
 
   loadProduct(id) {
-    let brand = this.inventoryService.getListBrand();
-    let cate = this.inventoryService.getListCategory();
-    let supplier = this.inventoryService.getListSupplier();
-
     this.inventoryService.findProductById(id).subscribe((pr: any) => {
       this.form.updateData(pr.product);
     });
+  }
+
+  loadPreData() {
+    let brand = this.inventoryService.getListBrand();
+    let cate = this.inventoryService.getListCategory();
+    let supplier = this.inventoryService.getListSupplier();
 
     forkJoin([brand, cate, supplier]).subscribe((rs: any) => {
       this.brands = rs[0].brand;

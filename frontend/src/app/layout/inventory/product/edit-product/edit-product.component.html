@@ -24,10 +24,10 @@
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Category</label>
-                                <select [(ngModel)]="form.category"
-                                name="category" class="form-control">
+                                <select [(ngModel)]="form.categoryId" name="category" class="form-control">
                                     <option value=0 selected>Select Category</option>
-                                    <option value={{category.id}} *ngFor="let category of categories" selected>{{category.name_category}}</option>
+                                    <option value={{category.id}} *ngFor="let category of categories" selected>
+                                        {{category.name_category}}</option>
                                 </select>
                             </div>
                         </div>
@@ -35,9 +35,10 @@
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Brand</label>
-                                <select name="brand" class="form-control">
-                                    <option selected>Select Brand</option>
-                                    <option value={{brand.id}} *ngFor="let brand of brands" selected>{{brand.name_brand}}</option>
+                                <select name="brand" class="form-control" [(ngModel)]="form.brandId">
+                                    <option value=0 selected>Select Brand</option>
+                                    <option value={{brand.id}} *ngFor="let brand of brands" selected>
+                                        {{brand.name_brand}}</option>
                                 </select>
                             </div>
                         </div>
@@ -48,23 +49,22 @@
                         <div class="row form-group">
                             <div class="col-sm-6">
                                 <label class="control-label">Barcode <span> (ISBN, UPC, etc.)</span></label>
-                                <input [(ngModel)]="form.barCode" name="bar-code"
-                                type="text" class="form-control input-underline input-lg"
-                                    placeholder="e.g. 123ABC">
+                                <input [(ngModel)]="form.barCode" name="bar-code" type="text"
+                                    class="form-control input-underline input-lg" placeholder="e.g. 123ABC">
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="control-label">SKU <span> Stock Keeping Unit</span></label>
-                                <input [(ngModel)]="form.sku" name="sku"
-                                type="text"  class="form-control input-underline input-lg"
-                                    placeholder="e.g. 123ABC">
+                                <input [(ngModel)]="form.sku" name="sku" type="text"
+                                    class="form-control input-underline input-lg" placeholder="e.g. 123ABC">
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Description</label>
-                                <textarea class="form-control form-text-area" name="Description" [(ngModel)]="form.description"
+                                <textarea class="form-control form-text-area" name="Description"
+                                    [(ngModel)]="form.description"
                                     placeholder="e.g. the world's most spectacular product" rows="6"></textarea>
                             </div>
                         </div>
@@ -90,22 +90,22 @@
                                 <div class="col-sm-6">
                                     <label class="control-label">Retail Price</label>
                                     <input type="number" class="form-control input-underline input-lg"
-                                    [(ngModel)]="form.retailPrice" name="retail">
+                                        [(ngModel)]="form.retailPrice" name="retail">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <label class="control-label">Special Price</label>
-                                    <input [(ngModel)]="form.specialPrice"
-                                    type="number" name="special" class="form-control input-underline input-lg">
+                                    <input [(ngModel)]="form.specialPrice" type="number" name="special"
+                                        class="form-control input-underline input-lg">
                                 </div>
                             </div>
 
                             <div class="row form-group">
                                 <div class="col-sm-12">
                                     <label class="control-label">Tax<span> Included in prices</span></label>
-                                    <select name="tax" class="form-control">
-                                        <option selected>Default: No tax</option>
-                                        <option *ngFor="let tax of taxs" selected>{{tax.name}}</option>
+                                    <select name="tax" class="form-control" [(ngModel)]="form.taxId">
+                                        <option value=0 selected>Default: No tax</option>
+                                        <option value={{tax.id}} *ngFor="let tax of taxs" selected>{{tax.name}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -113,8 +113,8 @@
                             <div class="row form-group">
                                 <div class="col-sm-12">
                                     <div class="custom-control custom-checkbox">
-                                        <input [(ngModel)]="form.enableCommission"
-                                        type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <input [(ngModel)]="form.enableCommission" type="checkbox"
+                                            class="custom-control-input" id="customCheck1">
                                         <label class="custom-control-label" for="customCheck1">Enable commission</label>
                                     </div>
                                 </div>
@@ -138,17 +138,17 @@
                                 <div class="col-sm-12">
                                     <label class="control-label">Supply Price</label>
                                     <input type="number" name="supply-price" [(ngModel)]="form.supplyPrice"
-                                    class="form-control input-underline input-lg"
-                                        placeholder="0">
+                                        class="form-control input-underline input-lg" placeholder="0">
                                 </div>
                             </div>
 
                             <div class="row form-group">
                                 <div class="col-sm-12">
                                     <label class="control-label">Supplier</label>
-                                    <select name="user-permission" class="form-control">
-                                        <option selected>Select Supplier</option>
-                                        <option value={{supplier.id}} *ngFor="let supplier of suppliers" selected>{{supplier.name_supplier}}</option>
+                                    <select name="supplier" class="form-control" [(ngModel)]="form.supplierId">
+                                        <option value=0 selected>Select Supplier</option>
+                                        <option value={{supplier.id}} *ngFor="let supplier of suppliers" selected>
+                                            {{supplier.name_supplier}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -156,15 +156,14 @@
                             <div class="row form-group">
                                 <div class="col-sm-6">
                                     <label class="control-label">Reorder Point</label>
-                                    <input [(ngModel)]="form.reorderPoint"
-                                    type="number" class="form-control input-underline input-lg"
-                                        name="point">
+                                    <input [(ngModel)]="form.reorderPoint" type="number"
+                                        class="form-control input-underline input-lg" name="point">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <label class="control-label">Reorder QTY.</label>
-                                    <input [(ngModel)]="form.reorderQty"
-                                    type="number" name="qty" class="form-control input-underline input-lg">
+                                    <input [(ngModel)]="form.reorderQty" type="number" name="qty"
+                                        class="form-control input-underline input-lg">
                                 </div>
                             </div>
                         </ng-container>
@@ -177,10 +176,10 @@
     </div>
 
     <div class="modal-footer">
-            <button *ngIf="!isAdd" type="button" class="btn btn-danger" style="justify-content: flex-start"
+        <button *ngIf="!isAdd" type="button" class="btn btn-danger" style="justify-content: flex-start"
             (click)="deleteProduct()"> Delete </button>
         <!-- <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button> -->
         <button type="submit" class="btn btn-dark pull-right" (click)="save()"> Save </button>
-        </div>
+    </div>
 
 </div>
