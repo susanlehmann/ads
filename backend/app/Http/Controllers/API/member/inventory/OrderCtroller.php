@@ -23,9 +23,9 @@ class OrderCtroller extends Controller
             $arr_product = [];
             foreach ($product as $value) {
                 $arr_product[] = [
-                    'id_product' => $value['id_product'],
-                    'price_product' => $value['price_product'] ,
-                    'qty_product' => $value['qty_product'],
+                    'id_product' => $value['id'],
+                    'price_product' => $value['supplyprice_product'] ,
+                    'qty_product' => $value['quantity'],
                 ];
             }
             $list_product = $arr_product;

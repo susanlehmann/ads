@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { OrderService } from './order.service';
@@ -18,6 +18,7 @@ import { InventoryService } from '../inventory.service';
 })
 export class OrderComponent implements OnInit {
   @ViewChild('product') _prod: NgbModalRef;
+  @ViewChild('totalAmount') _totalAmount: ElementRef;
   closeResult: string;
   isCreate: boolean;
   loading: boolean;
@@ -42,6 +43,7 @@ export class OrderComponent implements OnInit {
   arr_info_product: any = [];
 
   items = [];
+  orderTotal;
 
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
@@ -93,6 +95,12 @@ export class OrderComponent implements OnInit {
     this.modal.dismissAll();
     this.openModal(this._prod);
     this.openProduct(content);
+  }
+
+  sum(){
+    this.orderTotal = this.items.reduce((acc, cur) => {
+      return acc + cur.quantity * cur.supplyprice_product;
+    }, 0)
   }
 
   deleteProd(prod){
@@ -184,7 +192,10 @@ export class OrderComponent implements OnInit {
   }
 
   create_oder() {
-    var $listitem = this.items;
+    var $listitem = { 
+      'info_product' : this.items,
+      'total_price' : this.orderTotal
+  };
     console.log($listitem);
     this.OrderService.add($listitem)
     .subscribe((cate:any) => {
