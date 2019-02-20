@@ -3,7 +3,7 @@ import { Product } from '../model/product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryService } from '../../inventory.service';
 import { forkJoin } from 'rxjs';
-// import { NotifierService } from 'angular-notifier';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-edit-product',
@@ -25,7 +25,7 @@ export class EditProductComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private inventoryService: InventoryService,
-    // private notifierService: NotifierService,
+    private notifierService: NotifierService,
   ) {
     this.form = new Product();
   }
@@ -63,7 +63,7 @@ export class EditProductComponent implements OnInit {
     if (this.isAdd) {
       this.inventoryService.addProduct(dto)
         .subscribe((data: any) => {
-          // this.notifierService.notify('success', 'A new Staff has been successfully added');
+          this.notifierService.notify('success', 'A new product has been successfully added');
           this.router.navigate(['/inventory/products', data.id, 'view']);
         }), err => {
 
@@ -72,7 +72,7 @@ export class EditProductComponent implements OnInit {
     else {
       this.inventoryService.updateProduct(dto).subscribe((data: any) => {
         this.router.navigate(['/inventory/products', dto.id, 'view']);
-        // this.notifierService.notify('success', 'A new Staff has been successfully added');
+        this.notifierService.notify('success', 'The product has been successfully updated');
       }), err => {
 
       };;
@@ -81,7 +81,7 @@ export class EditProductComponent implements OnInit {
 
   deleteProduct() {
     this.inventoryService.deleteProduct(this.form.id).subscribe((data: any) => {
-      // this.notifierService.notify('success', 'A new Staff has been successfully added');
+      this.notifierService.notify('success', 'The product has been successfully deleted');
       this.router.navigate(['/inventory/products']);
     }), err => {
 
