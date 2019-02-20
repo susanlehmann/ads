@@ -32,7 +32,7 @@ export class ScheduleComponent implements OnInit {
     private modal: NgbModal,
     private staffService: StaffService,
   ) {
-    this.schedules = new StaffSchedule();
+    // this.schedules = new StaffSchedule();
     console.log(this.schedules)
    }
 

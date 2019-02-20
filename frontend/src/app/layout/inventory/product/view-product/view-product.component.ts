@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../model/product';
 import { InventoryService } from '../../inventory.service';
+import { NotifierService } from 'angular-notifier';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Stock } from '../model/stock';
 
@@ -18,6 +19,7 @@ export class ViewProductComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private inventoryService: InventoryService,
+    private notifierService: NotifierService,
     private modal: NgbModal,
   ) {
     this.product = new Product();
@@ -53,6 +55,7 @@ export class ViewProductComponent implements OnInit {
     dto.status_stock = isIncreased ? 1 : 0;
     this.inventoryService.addStockHistory(dto).subscribe(v => {
       this.modal.dismissAll();
+      this.notifierService.notify('success', 'A new stock history has been successfully added');
       this.loadStockHistory(productId);
     });
   }

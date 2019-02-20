@@ -7,6 +7,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from  'ngx-ui-loader';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,6 +60,27 @@ export const createTranslateLoader = (http: HttpClient) => {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 
+const customNotifierOptions: NotifierOptions = {
+    behaviour: {
+        autoHide: 5000,
+        onClick: 'hide',
+        onMouseover: 'pauseAutoHide',
+        showDismissButton: true,
+        stacking: 3
+      },
+    position: {
+          horizontal: {
+              position: 'right',
+              distance: 12
+          },
+          vertical: {
+              position: 'bottom',
+              distance: 12,
+              gap: 10
+          }
+      }
+    }
+
 @NgModule({
     imports: [
         CommonModule,
@@ -76,6 +98,7 @@ export const createTranslateLoader = (http: HttpClient) => {
             }
         }),
         AppRoutingModule,
+        NotifierModule.withConfig(customNotifierOptions),
         SocialLoginModule
     ],
     declarations: [AppComponent, SearchComponent, EditProductComponent],
