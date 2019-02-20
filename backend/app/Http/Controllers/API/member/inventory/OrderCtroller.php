@@ -23,9 +23,9 @@ class OrderCtroller extends Controller
             $arr_product = [];
             foreach ($product as $value) {
                 $arr_product[] = [
-                    'id_product' => $value['id_product'],
-                    'price_product' => $value['price_product'] ,
-                    'qty_product' => $value['qty_product'],
+                    'id_product' => $value['id'],
+                    'price_product' => $value['supplyprice_product'] ,
+                    'qty_product' => $value['quantity'],
                 ];
             }
             $list_product = $arr_product;
@@ -38,7 +38,7 @@ class OrderCtroller extends Controller
             // 'id_staff' => $request->ownerId,
             // 'id_update' => $request->ownerId,
             'info_product' => $info_product,
-            'total_price' => $request->total_product,
+            'total_price' => $request->total_price,
             'status_order' => 1,
         ];
         // $user->level = 0; // ko co column level
