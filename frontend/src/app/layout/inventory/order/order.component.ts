@@ -41,6 +41,8 @@ export class OrderComponent implements OnInit {
   _total: any;
   arr_info_product: any = [];
 
+  items = [];
+
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
     private OrderService: OrderService,
@@ -93,8 +95,15 @@ export class OrderComponent implements OnInit {
     console.log(this.listproducts);
   }
 
+  deleteProd(prod){
+    this.items = this.items.filter(i => i!=prod);
+  }
+
   selectedX(prods){
     this._prod_selected.push(prods);
+    const copy = Object.assign({}, prods)
+    this.items.push(copy);
+    console.table(this.items);
     this.modal.dismissAll();
     this.openModal(this._prod);
   }

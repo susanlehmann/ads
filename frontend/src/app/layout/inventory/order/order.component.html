@@ -186,7 +186,7 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          <tr *ngFor="let prod of _prod_selected; index as i">
+                                          <!-- <tr *ngFor="let prod of _prod_selected; index as i">
                                               <td style="text-align:left">{{prod.name_product}}</td>
                                           <ng-container *ngIf="arr_info_product.length > 0; else elseTemplate">
                                               <div *ngFor="let arr of arr_info_product">
@@ -209,6 +209,13 @@
                                           </ng-template>
 
                                             <td>{{ prod.supplyprice_product }}</td>
+                                          </tr> -->
+                                          <tr *ngFor="let i of items">
+                                            <td>{{i.name_product}}</td>
+                                            <td><input type="number" name="qty" [(ngModel)]="i.quantity"></td>
+                                            <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product"></td>
+                                            <td>{{i.quantity * i.supplyprice_product}}</td>
+                                            <td><button (click)="deleteProd(i)">x</button></td>
                                           </tr>
                                       </tbody>
                                   </table>
