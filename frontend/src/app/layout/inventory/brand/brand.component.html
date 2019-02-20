@@ -78,7 +78,7 @@
                                     </th>
                                   </tr>
                                 </thead>
-                                <tbody *ngFor="let brand of listbrands">
+                                <tbody *ngFor="let brand of listbrands,index as i">
                                   <tr class="_1A0eEb _1zQ7jO">
                                     <td class="N3OZB6 _1vLxYz" (click)="openUpdateModal(content, brand.id)">{{brand.brandName}}</td>
                                     <td class="N3OZB6 _1vLxYz">

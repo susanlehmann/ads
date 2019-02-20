@@ -108,11 +108,11 @@ export class CategoryComponent implements OnInit {
     this.modal.dismissAll();
   }
 
-  searchCategory(search) {
-    // const query = {name_category: event.target.value};
-    // this.CategoryService.searchCategory(search).subscribe((listcategories: any) => {
-    //   this.categories = listcategories .map(Category.toModel);
-    // });
+  searchCategory(event) {
+   const query = {name_category: event.target.value};
+   this.CategoryService.searchCategory(query).subscribe((list: any) => {
+     this.listcategories = list.category.map(Category.toModel);
+   });
   }
   //private getDismissReason(reason: any): string {
   //  if (reason === ModalDismissReasons.ESC) {

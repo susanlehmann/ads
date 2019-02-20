@@ -38,14 +38,15 @@ export class CategoryService {
     deletecategory(id) {
         return this._http.post(`${this.baseUrl}/user/inventory/category/delete-category`, {'id': id});
     }
-    searchCategory(content: any) {
-      return this._http.post<any>(this.baseUrl + 'user/inventory/brand/search-brand', content);
+    searchCategory(query) {
+      query.ownerId = this.currentCategoryId;
+      return this._http.post<any>(this.baseUrl + '/user/inventory/category/search-category', query);
     }
 
-  getUsers(){
-    return this._http.get('http://task-treking/public/api/users',{
-        headers: new HttpHeaders({'Accept': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token'),})
-    }).map(result => result);
-    }
+  //getUsers(){
+  //  return this._http.get('http://task-treking/public/api/users',{
+  //      headers: new HttpHeaders({'Accept': 'application/json',
+  //          'Authorization': 'Bearer ' + localStorage.getItem('token'),})
+  //  }).map(result => result);
+  //  }
 }
