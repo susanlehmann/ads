@@ -90,7 +90,7 @@ export class OrderComponent implements OnInit {
     this.modal.dismissAll();
     this.openModal(this._prod);
     this.openProduct(content);
-    // console.log(this._listproducts);
+    console.log(this.listproducts);
   }
 
   selectedX(prods){
