@@ -126,6 +126,7 @@ export class OrderComponent implements OnInit {
     });
 
     console.log(groupByName);
+    console.log(this.arr_info_product);
     this.number_prod = null;
 
   }
