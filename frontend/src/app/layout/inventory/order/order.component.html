@@ -212,9 +212,10 @@
                                           </tr> -->
                                           <tr *ngFor="let i of items">
                                             <td>{{i.name_product}}</td>
-                                            <td><input type="number" name="qty" [(ngModel)]="i.quantity"></td>
-                                            <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product"></td>
-                                            <td>{{i.quantity * i.supplyprice_product}}</td>
+                                            <td><input type="number" name="qty" [(ngModel)]="i.quantity" (change)="sum()"></td>
+                                            <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product" (change)="sum()"></td>
+                                            <td><span type="number" name="total">{{i.quantity * i.supplyprice_product}}</span></td>
+                                            <!-- <td>{{i.quantity * i.supplyprice_product}}</td> -->
                                             <td><button (click)="deleteProd(i)">x</button></td>
                                           </tr>
                                       </tbody>
@@ -301,7 +302,7 @@
                           <div class="col-md-12" style="display: -webkit-inline-box;">
                               <div class="col-md-5" style="display: inline;padding-left: 0;">Order Total:</div>
                               <input type="hidden" id="OrderID" value="0">
-                              <div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">$0.00</h5></div>
+                              <div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">{{orderTotal}}</h5></div>
                           </div>
                           <div class="col-md-12" style="margin-top:15px" id="divbtnCreateOrder">
                               <button type="button" id="btnCreateOrder" style="font-weight:bold" name="btnCreateOrder" class="btn btn-block btn-primary active" aria-pressed="true" (click)="create_oder()">CREATE ORDER</button>
