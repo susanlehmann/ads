@@ -21,6 +21,18 @@ export class StaffSchedule {
         this.getWeekSchedule();
     }
 
+    toDto() {
+        return {
+            id_staff: this.staffId,
+            shift1_start: this.shiftStart1,
+            shift1_end: this.shiftEnd1,
+            shift2_start: this.shiftStart2,
+            shift2_end: this.shiftEnd2,
+            is_repeat: this.staffId,
+            repeat_weekly: this.staffId,
+        }
+    }
+
     getWeekSchedule() {
         let sche = [];
         for (let i = 0; i < 7; i++) {
@@ -37,6 +49,5 @@ export class StaffSchedule {
         }
 
         this.weekSchedule = sche;
-        return sche;
     }
 }
