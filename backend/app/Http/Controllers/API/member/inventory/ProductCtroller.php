@@ -127,7 +127,11 @@ class ProductCtroller extends Controller
 
     public function search(Request $request){
         $search_name = $request->name_product;
-        if(strlen($search_name) == 0)
+        $brand = $request->id_brand;
+        $supplier = $request->id_supplier;
+        $category = $request->id_category;
+
+        if(strlen($search_name) == 0 AND $brand < 1 AND $supplier < 1 AND $category < 1)
         {
             $data['product'] = Product::where('id_client_product',$request->ownerId)
             ->get();
@@ -138,10 +142,28 @@ class ProductCtroller extends Controller
             ->where(function ($query) use ($search_name) {
                 if(strlen($search_name) > 0)
                 {
-                    $query->where('name_product', 'LIKE', "%$search_name%")
-                          ->orwhere('sku_product', 'LIKE', "%$search_name%")
-                          ->orwhere('barcode_product', 'LIKE', "%$search_name%")
-                    ;
+                    $query->where('name_product', 'LIKE', "%$search_name%");
+                }
+            })
+
+            ->where(function ($query) use ($supplier) {
+                if($supplier > 1)
+                {
+                    $query->where('id_supplier', $supplier);
+                }
+            })
+
+            ->where(function ($query) use ($category) {
+                if($category > 1)
+                {
+                    $query->where('id_category', $category);
+                }
+            })
+
+            ->where(function ($query) use ($brand) {
+                if($brand > 1)
+                {
+                    $query->where('id_brand', $brand);
                 }
             })
             ->get(); 
