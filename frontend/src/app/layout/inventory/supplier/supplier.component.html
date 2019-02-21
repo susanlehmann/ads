@@ -132,16 +132,11 @@
     </div>
   </section>
 </div>
-<div class="rTWbSm" (mouseover)="changeText=true" (mouseout)="changeText=false">
+<div class="rTWbSm" >
     <button class="_2N1Wwk _1K8-3O _1hszOe _1Hbk3p _1jAoG_" (click)="openCreateModal(content)">
-      <span class="_2FSeuB _240vE8 RCcMXQ" *ngIf="!changeText">
+      <span >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z"></path>
-        </svg>
-      </span>
-      <span *ngIf="changeText">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z" (click)="open(content)" triggers="mouseenter:mouseleave" ngbPopover="New Supplier" ></path>
+          <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z" triggers="mouseenter:mouseleave" ngbPopover="New Supplier" ></path>
         </svg>
       </span>
     </button>
@@ -166,7 +161,7 @@
                           <div class="row form-group">
                               <div class="col-sm-12">
                                 <label class="control-label">SUPPLIER NAME</label>
-                                <input [(ngModel)]="form.name_supplier" type="text" class="form-control input-underline input-lg" name="name_supplier" placeholder="e.g. Jane" required>
+                                <input [(ngModel)]="form.name_supplier" type="text" class="form-control input-underline input-lg" name="name_supplier" placeholder="e.g. Jane" required #name_supplier="ngModel">
                                 <div class="alert alert-danger" [hidden]="!error.name_supplier"> {{ error.name_supplier }} </div>
                             </div>
                         </div>
@@ -184,7 +179,7 @@
                         <div class="row form-group">
                             <div class="col-sm-6">
                               <label class="control-label">First Name</label>
-                              <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="firstName" placeholder="e.g. Jane" required>
+                              <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="firstName" placeholder="e.g. Jane" required #firstName="ngModel">
                               <div class="alert alert-danger" [hidden]="!error.firstName"> {{ error.firstName }} </div>
                           </div>
           
