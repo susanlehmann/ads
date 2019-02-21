@@ -12,7 +12,9 @@ class OrderCtroller extends Controller
     {
         // List all the products
         $data['order'] = Order::leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
-        ->where('id_client_order',$request->id)->get();
+        ->where('id_client_order',$request->id)
+        ->select('*', 'orders.id as id')
+        ->get();
         return response()->json($data);
     }
 
@@ -61,7 +63,9 @@ class OrderCtroller extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data['order'] = Order::leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')->find($id);
+        $data['order'] = Order::leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
+        ->select('*', 'orders.id as id')
+        ->find($id);
         return response()->json($data);
     }
 
