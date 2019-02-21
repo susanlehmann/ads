@@ -11,7 +11,8 @@ class OrderCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['order'] = Order::where('id_client_order',$request->id)->get();
+        $data['order'] = Order::leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
+        ->where('id_client_order',$request->id)->get();
         return response()->json($data);
     }
 
@@ -23,6 +24,7 @@ class OrderCtroller extends Controller
             $arr_product = [];
             foreach ($product as $value) {
                 $arr_product[] = [
+                    'name_product' => $value['name_product'],
                     'id_product' => $value['id'],
                     'price_product' => $value['supplyprice_product'] ,
                     'qty_product' => $value['quantity'],
@@ -37,6 +39,7 @@ class OrderCtroller extends Controller
             // 'id_create' => $request->ownerId,
             // 'id_staff' => $request->ownerId,
             // 'id_update' => $request->ownerId,
+            'id_supplier' => $request->id_supplier,
             'info_product' => $info_product,
             'total_price' => $request->total_price,
             'status_order' => 1,
@@ -58,7 +61,7 @@ class OrderCtroller extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data['order'] = Order::find($id);
+        $data['order'] = Order::leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')->find($id);
         return response()->json($data);
     }
 
