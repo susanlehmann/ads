@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
-import { AuthService, TokenService } from '../../../shared';
+import { _AuthService, TokenService } from '../../../shared';
 import { HttpcallService } from './../../../shared/services/httpcall.service';
 @Component({
     selector: 'app-header',
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
         private translate: TranslateService, 
         public router: Router,
         public httpcall: HttpcallService,
-        public auth: AuthService,
+        public auth: _AuthService,
         public token: TokenService
     ) {
 

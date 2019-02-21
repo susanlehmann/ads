@@ -17,7 +17,7 @@ import { ViewProductComponent } from './product/view-product/view-product.compon
 
 
 @NgModule({
-    imports: [SharedModule, CommonModule, InventoryRoutingModule, PageHeaderModule,FormsModule, NgbModule],
+    imports: [SharedModule, CommonModule, InventoryRoutingModule, PageHeaderModule,FormsModule, NgbModule.forRoot()],
     declarations: [InventoryComponent, BrandComponent, OrderComponent, CategoryComponent, SupplierComponent,
     ListProductComponent,
     ViewProductComponent,

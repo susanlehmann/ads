@@ -5,9 +5,15 @@ import { routerTransition } from '../router.animations';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core'
 
-import { AuthService } from '../shared/services/auth.service';
+import { _AuthService } from '../shared/services/auth.service';
 import { TokenService } from '../shared/services/token.service';
 import { HttpcallService } from '../shared/services/httpcall.service';
+import {
+    AuthService,
+    FacebookLoginProvider,
+    GoogleLoginProvider
+} from 'angular-6-social-login';
+
 // import {SnotifyService, SnotifyPosition, SnotifyToastConfig} from 'ng-snotify';
 const PrimaryWhite = '#ffffff';
 const SecondaryGrey = '#ccc';
@@ -47,7 +53,8 @@ export class LoginComponent implements OnInit {
         public router: Router,
         private httpcall: HttpcallService,
         private Token: TokenService,
-        private Auth: AuthService,
+        private Auth: _AuthService,
+        private socialAuthService: AuthService
         // private snotifyService: SnotifyService
         ) {
             this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
@@ -116,5 +123,61 @@ export class LoginComponent implements OnInit {
         this.error = error.error;
     }
 
+    handleResponseSocial(data) {
+        localStorage.setItem('user', JSON.stringify(data));
+        localStorage.setItem('isLoggedin', 'true');
+        this.router.navigateByUrl('/dashboard');
+      }
 
+    public socialSignIn(socialPlatform : string) {
+      let socialPlatformProvider;
+      if(socialPlatform == "facebook"){
+        socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+      }else if(socialPlatform == "google"){
+        socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+      }
+      
+      this.socialAuthService.signIn(socialPlatformProvider).then(
+        (userData: any) => {
+          var data: any = {};
+          if(socialPlatform == "facebook"){
+            let newArray = userData.name.split(" ");
+            data.email = userData.email;
+            data.avatar = userData.image;
+            data.provider = userData.provider;
+            data.provider_id = userData.id;
+            data.access_token = userData.token;
+            data.firstName = newArray[0];
+            data.lastName = newArray[1];
+            
+          }else if(socialPlatform == "google"){
+            let newArray = userData.name.split(" ");
+            data.email = userData.email;
+            data.avatar = userData.image;
+            data.provider = userData.provider;
+            data.provider_id = userData.id;
+            data.access_token = userData.idToken;
+            data.firstName = newArray[0];
+            data.lastName = newArray[1];
+          }
+
+          this.Auth.loginSocial(data).subscribe(
+                success => {
+                  this.handleResponseSocial(success);
+                },
+                error => {
+                  console.log(error);
+                }
+              );
+          
+          // var data: any = {};
+          // data.access_token = userData.token;
+          // data.user = userData.email;
+          // this.handleResponse(data);
+        },
+        error => {
+          console.log(error.error);
+        }
+      );
+    }
 }

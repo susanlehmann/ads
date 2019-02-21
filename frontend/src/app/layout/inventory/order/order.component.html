@@ -107,18 +107,13 @@
     </div>
   </div>
 </div>
-<div class="rTWbSm" (mouseover)="changeText=true" (mouseout)="changeText=false">
+<div class="rTWbSm">
   <button class="_2N1Wwk _1K8-3O _1hszOe _1Hbk3p _1jAoG_" (click)="openModal(content)">
-    <span class="_2FSeuB _240vE8 RCcMXQ" *ngIf="!changeText">
+    <span class="_2FSeuB _240vE8 RCcMXQ">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
         <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z"></path>
       </svg>
     </span>
-    <!----span *ngIf="changeText">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-        <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z"></path>
-      </svg>
-    </span-->
   </button>
 </div>
 <ng-template #content let-modal>
@@ -184,30 +179,6 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          <!-- <tr *ngFor="let prod of _prod_selected; index as i">
-                                              <td style="text-align:left">{{prod.name_product}}</td>
-                                          <ng-container *ngIf="arr_info_product.length > 0; else elseTemplate">
-                                              <div *ngFor="let arr of arr_info_product">
-                                                  <ng-container *ngIf="arr.index == i && arr.id_product == prod.id; else inputerror">
-                                                    <td>
-                                                    <input type="text" [(ngModel)]="arr.qty" (change)="mathTotal(arr.qty, prod.id, prod.supplyprice_product, i)">
-                                                    </td>
-                                                    </ng-container>
-                                                    <ng-template #inputerror>
-                                                        <td>
-                                                            <input type="text" [(ngModel)]="number_prod" (change)="mathTotal(number_prod, prod.id, prod.supplyprice_product, i)">
-                                                        </td>
-                                                    </ng-template>
-                                                </div>
-                                          </ng-container>
-                                          <ng-template #elseTemplate>
-                                              <td>
-                                                  <input type="text" [(ngModel)]="number_prod" (change)="mathTotal(number_prod, prod.id, prod.supplyprice_product, i)">
-                                              </td>
-                                          </ng-template>
-
-                                            <td>{{ prod.supplyprice_product }}</td>
-                                          </tr> -->
                                           <tr *ngFor="let i of items">
                                             <td>{{i.name_product}}</td>
                                             <td><input type="number" name="qty" [(ngModel)]="i.quantity" (change)="sum()"></td>
@@ -219,12 +190,12 @@
                                       </tbody>
                                   </table>
                               </div>
-                              <div class="col-md-12" style="margin-top:20px" (click)="openProduct(category)">
+                              <div class="col-md-12" style="margin-top:20px" >
                                   <div class="col-md-4">
 
                                   </div>
                                   <div class="col-md-4">
-                                      <button type="button" class="btn btn-block btn-outline-primary" id="btnAddProduct"><i class="fa fa-plus"></i> Add Product</button>
+                                      <button type="button" class="btn btn-block btn-outline-primary" id="btnAddProduct" (click)="openProduct(category)"><i class="fa fa-plus"></i> Add Product</button>
                                   </div>
                                   <div class="col-md-4">
 
