@@ -11,7 +11,7 @@ class OrderCtroller extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['order'] = Order::leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
+        $data['order'] = Order::leftjoin('suppliers', 'orders.id_supplier', '=', 'suppliers.id')
         ->where('id_client_order',$request->id)
         ->select('*', 'orders.id as id')
         ->get();
