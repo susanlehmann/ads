@@ -65,6 +65,7 @@ class OrderCtroller extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
+        $product = $request->list_product;
         if ($id != null) {
             if(isset($product))
             {
