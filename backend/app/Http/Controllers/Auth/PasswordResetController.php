@@ -46,14 +46,21 @@ class PasswordResetController extends Controller
     {
         $this->validate($request, [
             'email'    => 'required|email',
-            'token'    => "required|exists:password_resets,token,email,{$request->email}",
+            'token_email'    => "required|exists:password_resets,token,email,{$request->email}",
             'password' => 'required|min:8|confirmed',
         ]);
-        $user = User::whereEmail($request->email)->firstOrFail();
-        $user->password = bcrypt($request->password);
-        $user->save();
-        //delete pending resets
-        PasswordReset::whereEmail($request->email)->delete();
-        return response()->success(true);
+        $user = User::where('email', $request->email)->where('email_verification_code', $request->token_email)->first;
+        if($user == true)
+        {
+            $user->password = bcrypt($request->password);
+            $user->save();
+            //delete pending resets
+            PasswordReset::whereEmail($request->email)->delete();
+            return response()->success(true);
+        }
+        else
+        {
+            return response()->json(["error" => 'Email or token không đúng']);
+        }
     }
 }
