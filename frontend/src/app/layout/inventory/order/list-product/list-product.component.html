@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h4 class="modal-title offset-sm-4" id="modal-basic-title">Select Supplier</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="c()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -10,7 +10,7 @@
         <div class="col-12" style="margin-top:10px;color: #67768C;" id="titleSupplier">
           <label>Select a supplier to order product stock from</label>
         </div>
-        <div class="col-12" id="divSupplier" *ngFor="let product of listproducts">
+        <div class="col-12" id="divSupplier" *ngFor="let product of listproduct">
           <div class="col-12 item-modal-wizard" step="1">
             <div class="col-6">
               <div class="col-12">

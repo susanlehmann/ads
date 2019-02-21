@@ -19,6 +19,7 @@ export class EditServiceComponent implements OnInit {
     @ViewChild('service_description') svDescp: ElementRef;
     @ViewChild('service_available_for') svAvaiFor: ElementRef;
     @ViewChild('voucher_expiryperiod') expiryPeriod: ElementRef;
+    @ViewChild('name_service') _name_service: ElementRef;
 
 	groupId: any;
 	form: any = {};

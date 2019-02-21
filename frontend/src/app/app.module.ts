@@ -13,7 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { HttpcallService } from './shared/services/httpcall.service';
-import { AuthService } from './shared/services/auth.service';
+import { _AuthService } from './shared/services/auth.service';
 import { TokenService } from './shared/services/token.service';
 import { SearchComponent } from './search/search.component';
 import { UserService } from './shared/services/user.service';
@@ -38,11 +38,11 @@ export function getAuthServiceConfigs() {
         [
             {
                 id: FacebookLoginProvider.PROVIDER_ID,
-                provider: new FacebookLoginProvider('Your_Facebook_Client_ID')
+                provider: new FacebookLoginProvider('846467685684390')
             },
             {
                 id: GoogleLoginProvider.PROVIDER_ID,
-                provider: new GoogleLoginProvider('Your_Google_Client_ID')
+                provider: new GoogleLoginProvider('821751415920-17e3tnbht7vk0mo1iucc3dgmm8rv37uc.apps.googleusercontent.com')
             }
         ]
     );
@@ -105,7 +105,7 @@ const customNotifierOptions: NotifierOptions = {
     providers: [
         AuthGuard,
         HttpcallService,
-        AuthService,
+        _AuthService,
         TokenService,
         UserService,
         CategoryService,
@@ -117,7 +117,8 @@ const customNotifierOptions: NotifierOptions = {
         InventoryService,
         SupplierService,
         NotifierService,
-        {provide: LocationStrategy, useClass: HashLocationStrategy}
+        {provide: LocationStrategy, useClass: HashLocationStrategy},
+        {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     ],
     bootstrap: [AppComponent]
 })

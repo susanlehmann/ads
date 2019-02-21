@@ -49,6 +49,7 @@ class SocialLoginController extends Controller
                 'provider_id' => $request->provider_id,
                 'access_token' => $request->access_token,
                 'email_verified' => 1,
+                'status' => 1,
                 // user can use reset password to create a password
             ]);
         }

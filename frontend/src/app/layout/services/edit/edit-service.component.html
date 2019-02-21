@@ -12,7 +12,7 @@
 					<div class="input-group-prepend">
 						<div class="input-group-text">S</div>
 					</div>
-				<input [(ngModel)]="form.name_service" type="text" required text class="form-control input-underline input-lg" name="name_service" placeholder="e.g: Services Name 1" [ngModelOptions]="{updateOn: 'blur'}" (blur)="checkEmpty()" #name_service="ngModel" #name_service>
+				<input [(ngModel)]="form.name_service" type="text" required text class="form-control input-underline input-lg" name="name_service" placeholder="e.g: Services Name 1" [ngModelOptions]="{updateOn: 'blur'}" #name_service="ngModel" #name_service>
 				</div>
 				<small class="form-text text-danger " *ngIf="!name_service.valid && (name_service.dirty || name_service.touched)">Invaild Service Name !</small>
 			</div>
