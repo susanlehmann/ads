@@ -148,6 +148,7 @@ Route::group([
         Route::post('create-order', 'OrderCtroller@store');
         Route::post('show-order', 'OrderCtroller@show');
         Route::post('update-order', 'OrderCtroller@update');
+        Route::post('update-status-order', 'OrderCtroller@update_status');
         Route::post('delete-order', 'OrderCtroller@destroy'); 
     });
     

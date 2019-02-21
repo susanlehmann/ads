@@ -106,6 +106,29 @@ class OrderCtroller extends Controller
         }
     }
 
+    public function update_status(Request $request)
+    {
+        $id = $request->id;
+        if ($id != null) {
+
+            $input = [
+                'status_order' => $request->status,
+            ];
+            $order = Order::find($id);
+            $check = $order->update($input);
+            if($check == true)
+            {
+                $msg = ['success' => 'Create a new service group successfully'];
+            }
+            else
+            {
+                $msg = ['error' => 'There was an error creating the service group'];
+            }
+    
+            return response()->json($msg);
+        }
+    }
+
     public function destroy(Request $request)
     {
         $id = $request->id;
