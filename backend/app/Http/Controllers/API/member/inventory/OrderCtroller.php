@@ -118,7 +118,7 @@ class OrderCtroller extends Controller
             $check = $order->update($input);
             if($check == true)
             {
-                $msg = ['success' => 'Create a new service group successfully'];
+                $msg = ['success' => 'Create a new service group successfully', 'order' => $order];
             }
             else
             {
