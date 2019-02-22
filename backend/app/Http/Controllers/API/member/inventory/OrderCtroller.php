@@ -166,12 +166,13 @@ class OrderCtroller extends Controller
             }
     }
 
-    public function export_port(Request $request){
-        $id = $request->id;
+    public function export_port($id){
+        //$id = $request->id;
         $data = Order::leftjoin('suppliers', 'orders.id_supplier', '=', 'suppliers.id')
         ->select('*', 'orders.id as id')
         ->find($id);
-        $pdf = PDF::setOptions(['defaultFont' => 'dejavu serif'])->loadView('pdf.invoice',  compact('data'));
+        $pdf = PDF::setOptions(['defaultFont' => 'dejavu serif', 'logOutputFile' => storage_path('logs/log.htm'),'tempDir' => storage_path('logs/')]);
+        $pdf->loadView('pdf.invoice',  compact('data'));
         return $pdf->download('invoice.pdf');
     }
 }

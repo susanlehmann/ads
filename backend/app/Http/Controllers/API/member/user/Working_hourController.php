@@ -27,8 +27,13 @@ class Working_hourController extends Controller
             'shift2_start' => $request->shift2_start,
             'shift2_end' => $request->shift2_end,
             'is_repeat' => $request->is_repeat,
-            'repeat_weekly' => $request->repeat_weekly,
+            'date_working' => $request->date_working,
+            'repeat_weekly' => $request->repeat_weekly,	
             'end_repeat' => $request->end_repeat,
+            'shift1_start_test' => $request->shift1_start_test,
+            'shift1_end_test' => $request->shift1_end_test,
+            'shift2_start_test' => $request->shift2_start_test,
+            'shift2_end_test' => $request->shift2_end_test,
             'status_workinghour' => 1,
         ];
         // $user->level = 0; // ko co column level

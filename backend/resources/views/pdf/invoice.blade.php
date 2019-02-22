@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>HTML to API - Invoice</title>
-	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'> 
 	<!-- <link rel="stylesheet" href="sass/main.css" media="screen" charset="utf-8"/> -->
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta http-equiv="content-type" content="text-html; charset=utf-8">
@@ -160,6 +160,7 @@
 			min-width: 100px;
 			text-align: right;
 		}
+   
 
 		section .details {
 			margin-bottom: 55px;
@@ -202,8 +203,8 @@
 		section table thead th {
 			padding: 5px 10px;
 			background: #8BC34A;
-			border-bottom: 5px solid #FFFFFF;
-			border-right: 4px solid #FFFFFF;
+			border-bottom: 1px solid #FFFFFF;
+			border-right: 1px solid #FFFFFF;
 			text-align: right;
 			color: white;
 			font-weight: 400;
@@ -223,11 +224,12 @@
 			background: #E8F3DB;
 			color: #777777;
 			text-align: right;
-			border-bottom: 5px solid #FFFFFF;
-			border-right: 4px solid #E8F3DB;
+			border-bottom: 1px solid #FFFFFF;
+			border-right: 1px solid #fff;
 		}
 		section table tbody td:last-child {
 			border-right: none;
+      border-bottom: 2px solid #FFF;
 		}
 		section table tbody h3 {
 			margin-bottom: 5px;
@@ -326,23 +328,22 @@
 
 			<table border="0" cellspacing="0" cellpadding="0">
 				<thead>
-					<tr>
-						<th class="desc">Product</th>
-						<!-- <th class="qty">Barcode</th> -->
-						<th class="unit">UOrder Qty</th>
-                        <th class="qty">Received Qty</th>
-                        <th class="qty">Cost Price</th>
-						<th class="total">Total Cost</th>
-					</tr>
+						<tr class="width-tr">
+              <th>Product</th>
+						  <th>Order Qty</th>
+              <th>Received Qty</th>
+              <th>Cost Price</th>
+						  <th>Total Cost</th>
+            </tr>
 				</thead>
 				<tbody>
-                    @foreach($data->info_product as $value)
-					<tr>
-						<td class="desc"><{{ $data->name_product }}</td>
-						<td class="qty">{{ $data->qty_product }}<td>
-                        <td class="qty">{{ $data->qty_product }}<td>
-						<td class="unit">{{ $data->price_product }}</td>
-						<td class="total">{{ $data->price_product * $data->qty_product }}</td>
+                    @foreach(json_decode($data->info_product) as $value)
+					<tr class="width-tr">
+						<td>{{ 'product name' }}</td>
+						<td>{{ $value->qty_product }}</td>
+            <td>{{ $value->qty_product }}</td>
+						<td>{{ $value->price_product }}</td>
+						<td>{{ $value->price_product * $value->qty_product }}</td>
 					</tr>
                     @endforeach
 				</tbody>
@@ -350,12 +351,6 @@
 			<div class="no-break">
 				<table class="grand-total">
 					<tbody>
-						<!-- <tr>
-							<td class="desc"></td>
-							<td class="qty"></td>
-							<td class="unit">SUBTOTAL:</td>
-							<td class="total">$5,200.00</td>
-						</tr> -->
 						<tr>
 							<td class="desc"></td>
 							<td class="unit" colspan="2">TOTAL:</td>
@@ -372,7 +367,6 @@
 			<div class="thanks">Thank you!</div>
 		</div>
 	</footer>
-
 </body>
 
 </html>
