@@ -28,8 +28,8 @@
             </ng-container>
             <ng-template #work_hour>
               <td class="work-hour" (click)="openModal(edit_work_hour, w)">
-                <div class="mb-2">{{w.shift1_start}} - {{w.shift1_end}}</div>
-                <div *ngIf="w.hasShift2">{{w.shift2_start}} - {{w.shift2_end}}</div>
+                <div class="mb-2">{{w.shiftStart1.hour + ':' +w.shiftStart1.minute + ' - ' + w.shiftEnd1.hour + ':' + w.shiftEnd1.minute}}</div>
+                <div *ngIf="w.hasShift2">{{w.shiftStart2.hour + ':' + w.shiftStart2.minute + ' - ' + w.shiftEnd2.hour + ':' + w.shiftEnd2.minute}}</div>
               </td>
             </ng-template>
           </ng-container>
@@ -47,7 +47,7 @@
       <span aria-hidden="true" (click)="modal.dismiss('Cross click')">&times;</span>
     </button>
     <br>
-    <div class="col-sm-12 text-center">{{selectedSchedule.currentDate}}</div>
+    <div class="col-sm-12 text-center">{{selectedSchedule.currentDate.toDateString()}}</div>
   </div>
 
 
@@ -116,7 +116,7 @@
   </div>
 
   <div class="modal-footer">
-    <button *ngIf="!selectedSchedule.isNew" type="button" class="btn btn-danger" style="justify-content: flex-start"> Delete </button>
+    <button *ngIf="!selectedSchedule.isNew" type="button" class="btn btn-danger" (click)='deleteSchedule()' style="justify-content: flex-start"> Delete </button>
     <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
     <button type="submit" class="btn btn-dark pull-right" (click)="saveSchedule(confirm_override)"> Save </button>
   </div>
@@ -129,7 +129,8 @@
     </div>
   
     <div class="modal-body">
-        You have edited a shift that repeats weekly. Updating upcoming shifts will overwrite {{selectedSchedule.staffName}}'s ongoing {{selectedSchedule.currentDay}} schedule
+        You have edited a shift that repeats weekly. Updating upcoming shifts will overwrite 
+        {{selectedSchedule.staffName}}'s ongoing {{selectedSchedule.currentDay.toLocaleDateString('en-US', {weekday: 'short'}) }} schedule
     </div>
   
     <div class="modal-footer">

@@ -30,25 +30,24 @@ export class StaffSchedule {
 
         let filtered = this.allSchedules.filter(s => {
             let shiftStart = s.scheduleStartDate.getTime();
-            let shiftEnd = s.scheduleEndDate.getTime();
+            let shiftEnd = s.scheduleEndDate ? s.scheduleEndDate.getTime() : null;
             let cond1 = startWeek <= shiftStart && shiftStart <= endWeek;
             let cond2 = shiftStart < endWeek && (shiftEnd >= startWeek || s.scheduleEndDate == null);
-            return cond1 || cond2;
+            // return cond1 || cond2;
+            return true; // test
         });
 
         let totalWeeklyHours = 0;
 
         this.weekSchedule = weekRange.map(d => {
-            let currentDateString = d.date.toDateString();
-            let found = filtered.filter(s => s.scheduleStartDate.getDay === d.date.getDay())[0];
+            let found = filtered.filter(s => s.scheduleStartDate.getDay() === d.date.getDay())[0];
 
             if (found) {
-                found.currentDate = currentDateString;
-                found.currentDay = d.date.toLocaleDateString('en-US', {weekday: 'short'});;
+                found.setCurrentDate(d.date);
                 totalWeeklyHours += found.getTotalHours();
                 return found;
             }
-            return new Schedule(this.staffId, this.staffName, currentDateString);
+            return new Schedule(this.staffId, this.staffName, d.date);
         });
         this.weeklyHours = totalWeeklyHours;
 
@@ -68,12 +67,12 @@ export class Schedule {
     scheduleEndDate: Date;
     hasShift2: boolean;
     
-    currentDate: string;
-    currentDay: string;
+
+    currentDate: Date;
     breakTime: NgbTimeStruct;
     isNew: boolean;
 
-    constructor(staffId, staffName, currentDate?) {
+    constructor(staffId, staffName, currentDate?: Date) {
         this.staffId = staffId;
         this.staffName = staffName;
         this.shiftStart1 = {hour: 0, minute: 0, second: 0};
@@ -82,10 +81,15 @@ export class Schedule {
         this.shiftEnd2 = {hour: 0, minute: 0, second: 0};
         this.isRepeat = false;
         this.currentDate = currentDate;
+        this.scheduleStartDate = currentDate;
         
         this.breakTime = {hour: 0, minute: 0, second: 0};;
         this.isNew = true;
         this.hasShift2 = false;
+    }
+
+    setCurrentDate(currentDate: Date) {
+        this.currentDate = currentDate;
     }
     
     getTotalHours() {
@@ -102,13 +106,13 @@ export class Schedule {
 
     updateData(data) {
         this.isNew = false;
-        this.hasShift2 = data.has_shift_2;
-        this.shiftStart1 = data.shift1_start;
-        this.shiftEnd1 = data.shift1_end;
-        this.shiftStart2 = data.shift2_start;
-        this.shiftEnd2 = data.shift2_end;
-        this.scheduleStartDate = new Date(data.shift_start_date);
-        this.scheduleEndDate = new Date(data.shift_end_date);
+        this.hasShift2 = data.has_shift_2 === 1 ? true : false;
+        this.shiftStart1 = JSON.parse(data.shift1_start);
+        this.shiftEnd1 = JSON.parse(data.shift1_end);
+        this.shiftStart2 = JSON.parse(data.shift2_start);
+        this.shiftEnd2 = JSON.parse(data.shift2_end);
+        this.scheduleStartDate = new Date(data.schedule_start);
+        this.scheduleEndDate = new Date(data.schedule_end);
         this.isRepeat =  data.is_repeat === 1 ? true : false;
         if (this.hasShift2) {
             this.updateBreakTime();
@@ -118,14 +122,14 @@ export class Schedule {
     toDto() {
         return {
             id_staff: this.staffId,
-            shift1_start: this.shiftStart1,
-            shift1_end: this.shiftEnd1,
-            shift2_start: this.shiftStart2,
-            shift2_end: this.shiftEnd2,
+            shift1_start: JSON.stringify(this.shiftStart1),
+            shift1_end: JSON.stringify(this.shiftEnd1),
+            shift2_start: JSON.stringify(this.shiftStart2),
+            shift2_end: JSON.stringify(this.shiftEnd2),
             is_repeat: this.isRepeat ? 1 : 0,
             has_shift_2: this.hasShift2 ? 1 : 0,
-            sche_start: this.scheduleStartDate,
-            end_repeat: this.scheduleEndDate,
+            schedule_start: this.scheduleStartDate,
+            schedule_end: this.scheduleEndDate,
         }
     }
 }

@@ -68,21 +68,17 @@ export class StaffService {
         return this._http.post(`${this.baseUrl}/user/workinghour/list-workinghour`, {ownerId : this.currentUserId});
     }
 
-    findScheduleById(id: string) {
-        return this._http.post(`${this.baseUrl}/user/closed_date/show-close-date`, {id: id});
-    }
-
     deleteScheduleById(id: string) {
-        return this._http.post(`${this.baseUrl}/user/closed_date/delete-close-date`, {id: id});
+        return this._http.post(`${this.baseUrl}/user/workinghour/delete-workinghour`, {id: id});
     }
 
-    addSchedule(closedDate) {
-        closedDate.ownerId = this.currentUserId;
-        return this._http.post(`${this.baseUrl}/user/closed_date/create-close-date`, closedDate);
+    addSchedule(schedule) {
+        schedule.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/workinghour/create-workinghour`, schedule);
     }
 
-    updateCSchedule(closedDate) {
-        closedDate.ownerId = this.currentUserId;
-        return this._http.post(`${this.baseUrl}/user/closed_date/update-close-date`, closedDate);
+    updateCSchedule(schedule) {
+        schedule.ownerId = this.currentUserId;
+        return this._http.post(`${this.baseUrl}/user/workinghour/update-workinghour`, schedule);
     }
 }

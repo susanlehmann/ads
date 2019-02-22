@@ -56,9 +56,8 @@ export class ScheduleComponent implements OnInit {
 
   deleteSchedule(id?) {
     let sId = id ? id : this.selectedSchedule.staffId;
-    this.staffService.deleteScheduleById(sId).subscribe(v => {
-
-    });
+    // this.staffService.deleteScheduleById(sId).subscribe(v => {
+    // });
 
   }
 
@@ -91,7 +90,7 @@ export class ScheduleComponent implements OnInit {
     this.conflictedSchedules = this.selectedStaff.findFutureConflicts(this.selectedSchedule);
 
     // has future conflict
-    if(this.selectedSchedule.isRepeat && this.conflictedSchedules.length > 0) {
+    if(this.selectedSchedule.isRepeat) { //&& this.conflictedSchedules.length > 0
       this.modal.open(confirmOverrideModal, {
         backdrop: 'static',
         size: 'md'
@@ -99,6 +98,7 @@ export class ScheduleComponent implements OnInit {
       return;
     }
 
+    this.selectedSchedule.scheduleStartDate = this.selectedSchedule.currentDate;
     this.addSchedule();
     this.modal.dismissAll();
   }
@@ -133,7 +133,7 @@ export class ScheduleComponent implements OnInit {
       sche.staffId = e.id;
       sche.staffName = e.firstName
 
-      sche.allSchedules = schedules.filter(s => e.id === s.id).map(v => {
+      sche.allSchedules = schedules.filter(s => e.id === s.id_staff).map(v => {
         let model = new Schedule(e.id, e.firstName);
         model.updateData(v);
         return model;

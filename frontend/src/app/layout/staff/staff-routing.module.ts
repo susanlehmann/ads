@@ -11,7 +11,7 @@ const routes: Routes = [
     {
         path: '', component: StaffComponent, children: [
             {
-                path: '',   redirectTo: 'member', pathMatch: 'full',
+                path: '',   redirectTo: 'schedule', pathMatch: 'full',
             },
             {
                 path: 'schedule',
