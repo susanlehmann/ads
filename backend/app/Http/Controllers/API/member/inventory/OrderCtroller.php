@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Order;
 use Auth;
-use User;
+use app\User;
 use Mail;
 class OrderCtroller extends Controller
 {
