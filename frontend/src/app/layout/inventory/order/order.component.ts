@@ -306,6 +306,17 @@ export class OrderComponent implements OnInit {
       // this.supplier.email_supplier = sendmail.mail;
       //console.log(this.supplier.email);
     })
+
+    export_pdf_data(id:any){
+      let  $data = {
+        'id': id
+      };
+      console.log($data);
+      this.OrderService.export_pdf($data)
+      .subscribe((data: any) => {
+        // this.supplier.email_supplier = sendmail.mail;
+        //console.log(this.supplier.email);
+      })
   }
 
 }

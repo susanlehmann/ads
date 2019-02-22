@@ -543,7 +543,7 @@
                   <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;float: right;" (click)="send_email_order(_order.email_supplier)">EMAIL ORDER</button>
                 </div>
                 <div class="col-md-6" style=" align-items: flex-start;justify-content: flex-start;">
-                  <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;" (click)="loaddownload()" >DOWNLOAD PDF</button>
+                  <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;" (click)="export_pdf_data(_order.id)">DOWNLOAD PDF</button>
                 </div>
               </div>
               <div class="col-md-12" style="margin-top:20px;">
