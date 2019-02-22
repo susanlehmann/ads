@@ -1,6 +1,6 @@
 <div class="card card-custom mb-3">
   <div class="card-header">
-    <select [(ngModel)]="selectedStaff" (ngModelChange)='changeStaff($event)' class="custom-select custom-select mb-3">
+    <select [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' class="custom-select custom-select mb-3">
       <option value=0 selected>All Staff</option>
       <option value={{staff.staffId}} *ngFor="let staff of allSchedules">{{staff.staffName}}</option>
     </select>
@@ -60,14 +60,14 @@
 
       <div class="col-sm-6">
         <label class="control-label">SHIFT END</label>
-        <ngb-timepicker [(ngModel)]="selectedSchedule.shiftEnd1" [minuteStep]="5"></ngb-timepicker>
+        <ngb-timepicker [(ngModel)]="selectedSchedule.shiftEnd1" [minuteStep]="5" (ngModelChange)='selectedSchedule.updateBreakTime()'></ngb-timepicker>
       </div>
     </div>
 
     <ng-container *ngIf="selectedSchedule.hasShift2; else btn_add_shift_2">
       <div class="row form-group" style="flex-wrap: nowrap;">
         <div class="col-sm-6">
-          <ngb-timepicker [(ngModel)]="selectedSchedule.shiftStart2" [minuteStep]="5"></ngb-timepicker>
+          <ngb-timepicker [(ngModel)]="selectedSchedule.shiftStart2" [minuteStep]="5" (ngModelChange)='selectedSchedule.updateBreakTime()' ></ngb-timepicker>
         </div>
 
         <div class="col-sm-5">
@@ -79,7 +79,7 @@
                 </div> -->
       </div>
       <div class="row form-group" style="justify-content: center;">
-        1 hour break time
+        {{selectedSchedule.breakTime.hour + ' hour ' + selectedSchedule.breakTime.minute + ' minute'}} break time
       </div>
     </ng-container>
 
@@ -129,13 +129,13 @@
     </div>
   
     <div class="modal-body">
-        You have edited a shift that repeats weekly. Updating upcoming shifts will overwrite anh's ongoing Sunday schedule
+        You have edited a shift that repeats weekly. Updating upcoming shifts will overwrite {{selectedSchedule.staffName}}'s ongoing {{selectedSchedule.currentDay}} schedule
     </div>
   
     <div class="modal-footer">
       <button type="button" class="btn btn-light" (click)="modal.dismiss('Cancel click')"> Close </button>
-      <button type="button" class="btn btn-success"> Update upcoming shifts </button>
-      <button type="button" class="btn btn-info"> Update this shift only</button>
+      <button type="button" class="btn btn-success" (click)="onClickUpdateUpcoming()"> Update upcoming shifts </button>
+      <button type="button" class="btn btn-info" (click)="onClickUpdateThisShiftOnly()"> Update this shift only</button>
     </div>
   
   </ng-template>

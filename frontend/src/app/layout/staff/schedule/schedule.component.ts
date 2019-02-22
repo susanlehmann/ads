@@ -17,7 +17,10 @@ export class ScheduleComponent implements OnInit {
   allSchedules: StaffSchedule[];
   selectedSchedule: Schedule;
 
-  selectedStaff: number;
+  staffFilter: number;
+  selectedStaff: StaffSchedule;
+
+  conflictedSchedules: Schedule[];
 
   constructor(
     private modal: NgbModal,
@@ -26,14 +29,16 @@ export class ScheduleComponent implements OnInit {
   ) {
     this.today = new Date();
     this.weekdays = this.getCurrentWeek();
-    this.selectedStaff = 0; // all staff
+    this.staffFilter = 0; // show all staff
+    this.conflictedSchedules = [];
    }
 
   ngOnInit() {
     this.loadData();
   }
 
-  openModal(content: NgbModalRef, schedule) {
+  openModal(content: NgbModalRef, schedule: Schedule) {
+    this.selectedStaff = this.schedules.filter(s => s.staffId === schedule.staffId)[0];
     this.selectedSchedule = schedule;
     this.modal.open(content, {
       backdrop: 'static',
@@ -42,18 +47,51 @@ export class ScheduleComponent implements OnInit {
   }
 
   changeStaff(staffId) {
-    if (staffId == 0) {
+    if (staffId == 0) { // show all staff
       this.schedules = [...this.allSchedules];
+    } else {
+      this.schedules = this.allSchedules.filter(s => s.staffId == staffId);
     }
-    this.schedules = this.allSchedules.filter(s => s.staffId == staffId);
   }
 
-  deleteSchedule() {
+  deleteSchedule(id?) {
+    let sId = id ? id : this.selectedSchedule.staffId;
+    this.staffService.deleteScheduleById(sId).subscribe(v => {
+
+    });
+
+  }
+
+  overrideUpcoming() {
+    this.conflictedSchedules.forEach(c => {
+      this.deleteSchedule(c.staffId);
+    });
+  }
+
+  onClickUpdateUpcoming() {
+    if (this.selectedSchedule.isNew) {
+      this.addSchedule();
+      this.overrideUpcoming();
+    } else {
+      this.updateSchedule();
+    }
+
+  }
+
+  onClickUpdateThisShiftOnly() {
+    this.addSchedule();
+    
+    if(!this.selectedSchedule.isNew) {
+
+    }
 
   }
 
   saveSchedule(confirmOverrideModal) {
-    if(this.selectedSchedule.isRepeat) {
+    this.conflictedSchedules = this.selectedStaff.findFutureConflicts(this.selectedSchedule);
+
+    // has future conflict
+    if(this.selectedSchedule.isRepeat && this.conflictedSchedules.length > 0) {
       this.modal.open(confirmOverrideModal, {
         backdrop: 'static',
         size: 'md'
@@ -61,10 +99,21 @@ export class ScheduleComponent implements OnInit {
       return;
     }
 
+    this.addSchedule();
+    this.modal.dismissAll();
+  }
+
+  addSchedule() {
     const dto = this.selectedSchedule.toDto();
     this.staffService.addSchedule(dto).subscribe(v=> {
       this.notifierService.notify('success', 'A new schedule has been successfully added');
-      this.modal.dismissAll();
+    });
+  }
+
+  updateSchedule() {
+    const dto = this.selectedSchedule.toDto();
+    this.staffService.updateCSchedule(dto).subscribe(v=> {
+      this.notifierService.notify('success', 'The schedule has been successfully updated');
     });
   }
 
