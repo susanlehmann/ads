@@ -136,7 +136,7 @@ class OrderCtroller extends Controller
         $email = $request->email;
         $check = User::where('email', $email)->first();
         if($check == true){
-            Mail::send('emails.reset_link', compact('email'), function ($mail) use ($email) {
+            Mail::send('emails.send_email_order', compact('email'), function ($mail) use ($email) {
                 $mail->to($email)
                 ->from('noreply@example.com')
                 ->subject('Password reset link');
