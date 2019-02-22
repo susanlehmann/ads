@@ -2,6 +2,7 @@ export class Order {
   id: number;
   orderName: string;
   updatetime: string;
+  statusOrder: number;
 
   constructor() {
     this.new();
@@ -11,6 +12,7 @@ export class Order {
   new() {
     this.orderName = "";
     this.updatetime = "";
+    this.statusOrder = 1;
   }
 
   mockData() {
@@ -28,6 +30,7 @@ export class Order {
       id: this.id,
       name_supplier: this.orderName,
       updated_at: this.updatetime,
+      status_order: this.statusOrder,
     };
   }
 
@@ -37,11 +40,13 @@ export class Order {
       name_Order,
       updated_at,
       name_supplier,
+      status_order,
    } = data;
 
     this.id = id;
     this.orderName = name_supplier;
     this.updatetime = updated_at;
+    this.statusOrder = status_order;
   }
 
 }

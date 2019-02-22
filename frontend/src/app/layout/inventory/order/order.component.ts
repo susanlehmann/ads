@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { OrderService } from './order.service';
@@ -9,7 +9,6 @@ import { CategoryService } from '../category/category.service';
 import { Category } from '../category/model/category';
 import { Product } from '../product/model/product';
 import { InventoryService } from '../inventory.service';
-
 
 @Component({
   selector: 'app-order',
@@ -29,8 +28,8 @@ export class OrderComponent implements OnInit {
   modalOptions: NgbModalOptions;
   listsuppliers: any = [];
   //listproducts = [{name: 'deha'},{name: 'asaka'}]
-  categoriess = [{name: 'demo'},{name: 'sad'}]
-  order = [{name: 'kimkim', updatetime: '19 Feb 2019, 06:54'}]
+  //categoriess = [{name: 'demo'},{name: 'sad'}]
+  //order = [{name: 'kimkim', updatetime: '19 Feb 2019, 06:54'}]
   listcategories: any = [];
   _supplier: any;
   _category: any;
@@ -42,10 +41,18 @@ export class OrderComponent implements OnInit {
   _total: any;
   arr_info_product: any = [];
   listorder : any = [];
-
+  _order: any;
+  _listorder: any;
+  listinfoproduct: any = [];
+  _listorder1: any;
+  _updatetime: any;
+  _totals: any;
   items = [];
+  suppliers: any;
   orderTotal;
-
+  statusOrder = [{id: 1, name: "ORDERED"},{id:2, name: "CANCEL"},{id:3, name: "RECEIVED"}];
+  public datas: [];
+  //statusOrder = [{id: 1, name: "ORDERED"}];
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
     private OrderService: OrderService,
@@ -59,6 +66,13 @@ export class OrderComponent implements OnInit {
       size: 'lg'
     };
 
+  }
+
+  ngOnInit() {
+    this.getSupplier();
+    this.getCategory();
+    this.getProduct();
+    this.getlist_order();
   }
 
   openProduct(content: NgbModalRef) {
@@ -94,15 +108,40 @@ export class OrderComponent implements OnInit {
 
   openModalNoCategory(content, category){
     this._category = category;
+    //console.log(this.listproducts);
     this._listproducts = this.listproducts.filter(s => s.id_category == 0);
     this.modal.dismissAll();
     this.openModal(this._prod);
     this.openProduct(content);
   }
 
+  editOrder(content, order){
+    this._listorder1 = JSON.parse(order.info_product);
+    this._order = order;
+    this.getNameSupplier(order.id_supplier);
+    this.openModal(content);
+  }
+
+  getNameproduct(id) {
+    let product = this.listproducts.filter(s => s.id == id);
+    return product[0].name_product;
+  }
+
+  getNameSupplier(id){
+    let supplier = this.listsuppliers.filter(s => s.id == id);
+    this.suppliers = supplier[0];
+    return supplier[0].name_supplier;
+  }
+
   sum(){
     this.orderTotal = this.items.reduce((acc, cur) => {
       return acc + cur.quantity * cur.supplyprice_product;
+    }, 0)
+  }
+
+  sumEdit(){
+    this._order.total_price = this._listorder1.reduce((acc, cur) => {
+      return acc + cur.qty_product * cur.price_product;
     }, 0)
   }
 
@@ -136,8 +175,8 @@ export class OrderComponent implements OnInit {
         groupByName [a.index].push({ id_product: a.id_product, qty: a.qty, total:a.total });
     });
 
-    console.log(groupByName);
-    console.log(this.arr_info_product);
+    //console.log(groupByName);
+    //console.log(this.arr_info_product);
     this.number_prod = null;
 
   }
@@ -189,12 +228,7 @@ export class OrderComponent implements OnInit {
   stopLoading(): void {
     this.loading = false;
   }
-  ngOnInit() {
-    this.getSupplier();
-    this.getCategory();
-    this.getProduct();
-    this.getlist_order();
-  }
+
 
   getlist_order() {
     this.startLoading();
@@ -208,9 +242,10 @@ export class OrderComponent implements OnInit {
   }
 
   create_oder() {
-    var $listitem = { 
+    var $listitem = {
       'info_product' : this.items,
-      'total_price' : this.orderTotal
+      'total_price' : this.orderTotal,
+      'id_supplier' : this._supplier.id
   };
     console.log($listitem);
     this.OrderService.add($listitem)
@@ -218,10 +253,59 @@ export class OrderComponent implements OnInit {
       this.stopLoading();
       this.getlist_order();
       this.modal.dismissAll();
+      this.editOrder(cate,$listitem);
       this.notifierService.notify('success', 'A new order has been successfully added');
     }, err =>{
 
     });
+    //this.statusOrder.id = 1;
+  }
+
+  update(data:any){
+    data.total_product = this._order.total_price;
+    return this.OrderService.update(data)
+    .subscribe(
+      success => {
+        return true;
+      }
+    )
+  }
+
+  status_order(id_order, status){
+    this._order.info_product = this._listorder1;
+    if(this.update(this._order)){
+      // console.log(this._order);
+
+      let arr = {
+        'id' : id_order,
+        'status' : status
+      };
+      // console.log(arr);
+      this.OrderService.status(arr)
+      .subscribe((liststatus:any) => {
+        this._order = liststatus.order;
+        this.getlist_order();
+
+        this.notifierService.notify('success', 'button click');
+      })
+    }
+
+  }
+  send_email_order(mail:any){
+    let  $send = {
+      'email': mail
+    };
+    console.log($send);
+    this.OrderService.sent_email($send)
+    .subscribe((sendmail: any) => {
+      if(sendmail == true){
+        this.notifierService.notify('success', 'send email success');
+      }else{
+        this.notifierService.notify('error', 'send email failed, email not found');
+      }
+      // this.supplier.email_supplier = sendmail.mail;
+      //console.log(this.supplier.email);
+    })
   }
 
 }
