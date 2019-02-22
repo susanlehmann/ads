@@ -18,10 +18,14 @@ Route::group([
     Route::get('getinfo_user', 'User_infoController@index');
     Route::resource('roles','RoleController');
 
+    Route::group(['prefix' => 'login'], function(){
+        Route::post('social', 'SocialLoginController@loginsocial');
+    });
+
     Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function(){
         Route::post('password/email', 'PasswordResetController@sendResetLinkEmail');
         Route::post('password/verify', 'PasswordResetController@verify');
-        Route::post('password/reset', 'Auth\PasswordResetController@reset');
+        Route::post('password/reset', 'PasswordResetController@reset');
     });
     
     Route::group(['prefix' => 'admin', 'namespace' => 'API\admin'], function(){
@@ -144,6 +148,8 @@ Route::group([
         Route::post('create-order', 'OrderCtroller@store');
         Route::post('show-order', 'OrderCtroller@show');
         Route::post('update-order', 'OrderCtroller@update');
+        Route::post('send-email-order', 'OrderCtroller@send_email');
+        Route::post('update-status-order', 'OrderCtroller@update_status');
         Route::post('delete-order', 'OrderCtroller@destroy'); 
     });
     

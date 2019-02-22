@@ -29,4 +29,8 @@ export class HttpcallService {
     return this.http.post(this.baseUrl + '/auth/password/email', data);
   }
 
+  newpassword(data) {
+    return this.http.post(this.baseUrl + '/password/reset', data);
+  }
+
 }

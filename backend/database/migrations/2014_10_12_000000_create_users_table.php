@@ -52,7 +52,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('provider', 20)->nullable();
             $table->string('provider_id')->nullable();
-            $table->string('access_token')->nullable();
+            $table->text('access_token')->nullable();
             $table->enum('email_verified', ['1', '0'])->default('0');
             $table->string('email_verification_code', 60)->nullable();
             $table->rememberToken();

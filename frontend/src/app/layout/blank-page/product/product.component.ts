@@ -8,7 +8,7 @@ import { Staff } from '../model/staff'
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class MemberComponent implements OnInit {
+export class ProductComponent implements OnInit {
 
   loading: boolean;
 

@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Order;
 use Auth;
+use App\User;
+use Mail;
 class OrderCtroller extends Controller
 {
     public function index(Request $request)
     {
         // List all the products
-        $data['order'] = Order::where('id_client_order',$request->id)->get();
+        $data['order'] = Order::leftjoin('suppliers', 'orders.id_supplier', '=', 'suppliers.id')
+        ->where('id_client_order',$request->id)
+        ->select('*', 'orders.id as id')
+        ->get();
         return response()->json($data);
     }
 
@@ -23,6 +28,7 @@ class OrderCtroller extends Controller
             $arr_product = [];
             foreach ($product as $value) {
                 $arr_product[] = [
+                    'name_product' => $value['name_product'],
                     'id_product' => $value['id'],
                     'price_product' => $value['supplyprice_product'] ,
                     'qty_product' => $value['quantity'],
@@ -37,6 +43,7 @@ class OrderCtroller extends Controller
             // 'id_create' => $request->ownerId,
             // 'id_staff' => $request->ownerId,
             // 'id_update' => $request->ownerId,
+            'id_supplier' => $request->id_supplier,
             'info_product' => $info_product,
             'total_price' => $request->total_price,
             'status_order' => 1,
@@ -58,14 +65,16 @@ class OrderCtroller extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data['order'] = Order::find($id);
+        $data['order'] = Order::leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
+        ->select('*', 'orders.id as id')
+        ->find($id);
         return response()->json($data);
     }
 
     public function update(Request $request)
     {
         $id = $request->id;
-        $product = $request->list_product;
+        $product = $request->info_product;
         if ($id != null) {
             if(isset($product))
             {
@@ -98,6 +107,43 @@ class OrderCtroller extends Controller
     
             return response()->json($msg);
         }
+    }
+
+    public function update_status(Request $request)
+    {
+        $id = $request->id;
+        if ($id != null) {
+
+            $input = [
+                'status_order' => $request->status,
+            ];
+            $order = Order::find($id);
+            $check = $order->update($input);
+            if($check == true)
+            {
+                $msg = ['success' => 'Create a new service group successfully', 'order' => $order];
+            }
+            else
+            {
+                $msg = ['error' => 'There was an error creating the service group'];
+            }
+    
+            return response()->json($msg);
+        }
+    }
+
+    public function send_email(Request $request){
+        $email = $request->email;
+        $check = User::where('email', $email)->first();
+        if($check == true){
+            Mail::send('emails.send_email_order', compact('email'), function ($mail) use ($email) {
+                $mail->to($email)
+                ->from('noreply@example.com')
+                ->subject('Password reset link');
+            });
+            return response()->json(true);
+        }
+        return response()->json(false);
     }
 
     public function destroy(Request $request)

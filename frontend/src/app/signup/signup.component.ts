@@ -3,7 +3,7 @@ import { routerTransition } from '../router.animations';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { AuthService } from './../shared/services/auth.service';
+import { _AuthService } from './../shared/services/auth.service';
 import { TokenService } from './../shared/services/token.service';
 import { HttpcallService } from './../shared/services/httpcall.service';
 
@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
         private httpcall: HttpcallService,
         private Token: TokenService,
         private router: Router,
-        private auth: AuthService
+        private auth: _AuthService
 
     ) {}
 
