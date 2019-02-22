@@ -27,8 +27,9 @@ class Working_hourController extends Controller
             'shift2_start' => $request->shift2_start,
             'shift2_end' => $request->shift2_end,
             'is_repeat' => $request->is_repeat,
-            'repeat_weekly' => $request->repeat_weekly,
-            'end_repeat' => $request->end_repeat,
+            'has_shift_2' => $request->has_shift_2,
+            'schedule_start' => $request->schedule_start,
+            'schedule_end' => $request->schedule_end,
             'status_workinghour' => 1,
         ];
         // $user->level = 0; // ko co column level
@@ -65,8 +66,9 @@ class Working_hourController extends Controller
                 'shift2_start' => $request->shift2_start,
                 'shift2_end' => $request->shift2_end,
                 'is_repeat' => $request->is_repeat,
-                'repeat_weekly' => $request->repeat_weekly,
-                'end_repeat' => $request->end_repeat,
+                'has_shift_2' => $request->has_shift_2,
+                'schedule_start' => $request->schedule_start,
+                'schedule_end' => $request->schedule_end,
             ];
             $workinghour = WorkingHour::find($id);
             $check = $workinghour->update($input);
