@@ -150,6 +150,7 @@ Route::group([
         Route::post('update-order', 'OrderCtroller@update');
         Route::post('send-email-order', 'OrderCtroller@send_email');
         Route::post('update-status-order', 'OrderCtroller@update_status');
+        Route::post('export-pdf-order', 'OrderCtroller@export_port');
         Route::post('delete-order', 'OrderCtroller@destroy'); 
     });
     

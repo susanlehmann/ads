@@ -8,6 +8,7 @@ use App\Order;
 use Auth;
 use App\User;
 use Mail;
+use PDF;
 class OrderCtroller extends Controller
 {
     public function index(Request $request)
@@ -163,5 +164,14 @@ class OrderCtroller extends Controller
 
             return response()->json($msg);
             }
+    }
+
+    public function export_port(Request $request){
+        $id = $request->id;
+        $data = Order::leftjoin('suppliers', 'orders.id_supplier', '=', 'suppliers.id')
+        ->select('*', 'orders.id as id')
+        ->find($id);
+        $pdf = PDF::setOptions(['defaultFont' => 'dejavu serif'])->loadView('pdf.invoice',  compact('data'));
+        return $pdf->download('invoice.pdf');
     }
 }
