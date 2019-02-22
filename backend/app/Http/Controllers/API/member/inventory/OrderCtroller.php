@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Order;
 use Auth;
+use User;
+use Mail;
 class OrderCtroller extends Controller
 {
     public function index(Request $request)
@@ -128,6 +130,20 @@ class OrderCtroller extends Controller
     
             return response()->json($msg);
         }
+    }
+
+    public function send_email(Request $request){
+        $email = $request->email;
+        $check = User::where('email', $email)->first();
+        if($check == true){
+            Mail::send('emails.reset_link', compact('email'), function ($mail) use ($email) {
+                $mail->to($email)
+                ->from('noreply@example.com')
+                ->subject('Password reset link');
+            });
+            return response()->json(true);
+        }
+        return response()->json(false);
     }
 
     public function destroy(Request $request)
