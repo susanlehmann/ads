@@ -68,19 +68,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="_1A0eEb _1zQ7jO" *ngFor="let order of listorder">
+                    <tr class="_1A0eEb _1zQ7jO" *ngFor="let order of listorder" (click)="editOrder(edit_order, order)">
                       <td class="N3OZB6 _1vLxYz">
-                        <div (click)="openModal(edit_order)">{{ order.id }}</div>
+                        <div >{{ order.id }}</div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
                         <div>{{ order.updated_at }}</div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
-                        <div>asd</div>
+                        <div>{{ getNameSupplier(order.id_supplier) }}</div>
                       </td>
-                      <td class="N3OZB6 _1vLxYz">
+                      <td class="N3OZB6 _1vLxYz" >
                         <div>
-                          <span class="_1p62pX _1QLX7x _3GjCeD _2-xB9j">Received</span>
+                          <span class="_1p62pX _1QLX7x _3GjCeD _2-xB9j0" style="background-color: #F5A623;color: white;" *ngIf="order.status_order == 1 || order.status_order == 2" >ORDERED</span>
+                          <span class="_1p62pX _1QLX7x _3GjCeD _2-xB9j0" style="background-color: rgb(35, 245, 123);color: white;" *ngIf="order.status_order == 3" >RECEIVED</span>
+                          <span class="_1p62pX _1QLX7x _3GjCeD _2-xB9j0" style="background-color: rgb(245, 35, 35);color: white;" *ngIf="order.status_order == 0" >CANCELED</span>
                         </div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
@@ -514,8 +516,9 @@
       </div>
 </ng-template>
 <ng-template #edit_order let-modal>
-  <div class="modal-header">
-      <h4  class="modal-title offset-sm-4" id="modal-basic-title">Order a</h4>
+<div class="box-desktop">
+  <div class="modal-header" >
+      <h4  class="modal-title offset-sm-4" id="modal-basic-title">Order {{ _order.id }}</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -524,6 +527,7 @@
       <div class="card">
         <div class="card-body">
           <div class="col-md-12">
+            <div class="row">
             <div class="col-md-9">
               <div class="">
                 <span>
@@ -531,15 +535,15 @@
                 </span>
               </div>
               <h2 style="text-align:center;"><i class="fas fa-shipping-fast"></i>Stock Ordered</h2>
-              <div class="col-md-12" style="text-align:center;">
-                <span>Ordered {{ order.updatetime }} at has by {{ order.name }}</span>
+              <div class="col-md-12" style="text-align:center;" >
+                <span>Ordered {{ _order.update_at }} at has by Order {{ _order.id }}</span>
               </div>
               <div class="col-md-12" style="margin-top:15px;display: inline-flex;">
                 <div class="col-md-6" style=" align-items: flex-end;justify-content: flex-end;">
-                  <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;float: right;">EMAIL ORDER</button>
+                  <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;float: right;" (click)="send_email_order(_order.email_supplier)">EMAIL ORDER</button>
                 </div>
                 <div class="col-md-6" style=" align-items: flex-start;justify-content: flex-start;">
-                  <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;">DOWNLOAD PDF</button>
+                  <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;" (click)="loaddownload()" >DOWNLOAD PDF</button>
                 </div>
               </div>
               <div class="col-md-12" style="margin-top:20px;">
@@ -554,28 +558,36 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td style="width:30%">asdasd</td>
-                      <td style="width: 15%; text-align:center;">3</td>
-                      <td style="width: 20%;text-align:right">$5.00</td>
-                      <td style="width: 20%; text-align: right">$224.00</td>
-                    </tr>
+                    <ng-container *ngIf="_order.status_order == 2; else statuson">
+                        <tr *ngFor="let i of _listorder1">
+                            <td>{{i.name_product}}</td>
+                            <td><input type="number" name="qty" [(ngModel)]="i.qty_product" (input)="sumEdit()"></td>
+                            <td><input type="number" name="price" [(ngModel)]="i.price_product" (input)="sumEdit()"></td>
+                            <td>{{i.qty_product * i.price_product}}</td>
+                            <td><button (click)="deleteProd(i)">x</button></td>
+                          </tr>
+                    </ng-container>
+                    <ng-template #statuson>
+                        <tr *ngFor="let ad of _listorder1">
+                            <td style="width:30%">{{getNameproduct(ad.id_product)}}</td>
+                            <td style=" text-align:center;">{{ ad.qty_product }}</td>
+                            <td style="text-align:center">${{ ad.price_product }}</td>
+                            <td style=" text-align: right" >${{ ad.qty_product * ad.price_product }}</td>
+                          </tr>
+                    </ng-template>
+
                   </tbody>
                 </table>
               </div>
             </div>
 
             <div class="col-md-3">
-              <div class="col-md-12" style="padding: 10px 10px 10px 10px; border:1px solid #c2cfd6">
+              <div class="col-md-12" style="padding: 10px 10px 10px 10px; border:1px solid #c2cfd6;display: inline-table;">
                   <div class="col-md-12" >
-                      <h5 id="SupplierName">sadsadsad</h5>
-                      <h5 style="color:#67768C;font-size:small">hanoi</h5>
-                      <h5 style="color:#67768C;font-size:small">cau giay</h5>
-                      <h5 style="color:#67768C;font-size:small">cau giay</h5>
-                      <h5 style="color:#67768C;font-size:small">cau giay</h5>
+                      <h5 id="SupplierName">{{ _order.name_supplier }}</h5>
                   </div>
                   <div class="col-md-12">
-                      <h4 id="Street"></h4>
+                      <h4 id="Street">{{ _order.street_supplier}}</h4>
                   </div>
                   <div class="col-md-12">
                       <h4 id="Suburb"></h4>
@@ -615,26 +627,144 @@
                   <div class="col-md-12" style="display: -webkit-inline-box;">
                       <div class="col-md-5" style="display: inline;padding-left: 0;">Order Total:</div>
                       <input type="hidden" id="OrderID" value="0">
-                      <div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">$0.00</h5></div>
+                      <div class="col-md-7"><h5 style="text-align:right" >${{ _order.total_price }}</h5></div>
                   </div>
                   <div class="col-md-12" style="margin-top: 15px;" id="divbtnReceiveStock">
-                      <button type="button" id="btnReceiveStock" style="font-weight:bold" name="btnReceiveStock" class="btn btn-block btn-success active" aria-pressed="true">RECEIVE STOCK</button>
+                      <button type="button" id="btnReceiveStock" style="font-weight:bold" name="btnReceiveStock" class="btn btn-block btn-success active" aria-pressed="true" *ngIf=" _order.status_order == 1" (click)="status_order(_order.id,2)">RECEIVE STOCK </button>
                   </div>
                   <div class="col-md-12" style="margin-top: 15px;" id="divbtnCancelOrder">
-                      <button type="button" id="btnCancelOrder" style="font-weight:bold" name="btnCancelOrder" class="btn btn-block btn-danger active" aria-pressed="true">CANCEL ORDER</button>
+                      <button type="button" id="btnCancelOrder" style="font-weight:bold" name="btnCancelOrder" class="btn btn-block btn-danger active" aria-pressed="true"  *ngIf=" _order.status_order == 1" (click)="status_order(_order.id,0)">CANCEL ORDER</button>
+
                   </div>
-                  <div class="col-md-12" style="margin-top: 15px; display: none;" id="divbtnCloseOrder">
-                      <button type="button" id="btnCloseOrder" style="font-weight:bold" name="btnCloseOrder" class="btn btn-block btn-primary active" aria-pressed="true">CLOSE</button>
+                  <div class="col-md-12" style="margin-top: 15px;" id="divbtnCloseOrder">
+                      <button type="button" id="btnCloseOrder" style="font-weight:bold" name="btnCloseOrder" class="btn btn-block btn-primary active" aria-pressed="true" *ngIf="_order.status_order == 3 || _order.status_order == 0" (click)="modal.dismiss(content)">CLOSE</button>
                   </div>
-                  <div class="col-md-12" style="margin-top: 15px; display: none;" id="divbtnConfirmReceive">
-                      <button type="button" id="btnConfirmReceive" style="font-weight:bold" name="btnConfirmReceive" class="btn btn-block btn-primary active" aria-pressed="true">CONFIRM</button>
+                  <div class="col-md-12" style="margin-top: 15px;" id="divbtnConfirmReceive">
+                      <button type="button" id="btnConfirmReceive" style="font-weight:bold" name="btnConfirmReceive" class="btn btn-block btn-primary active" aria-pressed="true" *ngIf=" _order.status_order == 2" (click)="status_order(_order.id,3)">CONFIRM</button>
                   </div>
               </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- mobile -->
+<div  class="box-mobile">
+    <div class="modal-header" >
+        <h4  class="modal-title offset-sm-4" id="modal-basic-title">Order {{ _order.id }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <div class="col-md-12">
+              <div class="row">
+              <div class="col-md-9">
+                <div class="">
+                  <span>
+                    <i class="fas fa-shipping-fast"></i>
+                  </span>
+                </div>
+                <h2 style="text-align:center;"><i class="fas fa-shipping-fast"></i>Stock Ordered</h2>
+                <div class="col-md-12" style="text-align:center;" >
+                  <span>Ordered {{ _order.update_at }} at has by Order {{ _order.id }}</span>
+                </div>
+                <div class="col-md-12" style="margin-top:15px;display: inline-flex;">
+                  <div class="col-md-6" style=" align-items: flex-end;justify-content: flex-end;">
+                    <button type="button" class="btn btn-block btn-outline-secondary" style="width:230px; font-weight:bold;float: right;">EMAIL ORDER</button>
+                  </div>
+                  <div class="col-md-6" style=" align-items: flex-start;justify-content: flex-start;">
+                    <button type="button" class="btn btn-block btn-outline-secondary" style="width:230px; font-weight:bold;">DOWNLOAD PDF</button>
+                  </div>
+                </div>
+                <div class="col-md-12" style="margin-top:20px;">
+                  <table class="table table-responsive-sm table-sm no-footer" style="width:100%;">
+                    <thead>
+                      <tr>
+                        <th style="text-align:left">PRODUCT</th>
+                        <th style="text-align:left">ORDER QTY.</th>
+                        <th style="text-align:left; display: none;">RECEIVED QTY.</th>
+                        <th style="text-align:left">SUPPLY PRICE</th>
+                        <th style="text-align:left">TOTAL COST</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let ad of _listorder1">
+                        <td style="width:30%">aa</td>
+                        <td style=" text-align:center;">{{ ad.qty_product }}</td>
+                        <td style="text-align:center">${{ ad.price_product }}</td>
+                        <td style=" text-align: right" >${{ ad.qty_product * ad.price_product }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="col-md-12" style="padding: 10px 10px 10px 10px; border:1px solid #c2cfd6">
+                    <div class="col-md-12" >
+                        <h5 id="SupplierName">sadsadsad</h5>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 id="Street" style="color:#67768C;font-size:small">hanoi</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 id="Suburb"style="color:#67768C;font-size:small">cau giay</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 id="City"style="color:#67768C;font-size:small">cau giay</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 id="State"style="color:#67768C;font-size:small">cau giay</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 id="ZipCode"style="color:#67768C;font-size:small">cau giay</h4>
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <h5 style="    color: aquamarine;">DELIVER TO</h5>
+                    </div>
+                    <div class="col-md-12">
+                        <h6 id="LocationName" style="color:#67768C;font-size:small">has</h6>
+                    </div>
+                    <div class="col-md-12">
+                        <h6 id="StreetAddress" style="color:#67768C;font-size:small">Default Address</h6>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 id="APT"></h4>
+                    </div>
+                    <div class="col-md-12">
+                        <h6 id="LCity" style="color:#67768C;font-size:small">Default City</h6>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 id="LState"></h4>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 id="LZipCode"></h4>
+                        <hr>
+                    </div>
+                    <div class="col-md-12" style="display: -webkit-inline-box;">
+                        <div class="col-md-5" style="display: inline;padding-left: 0;">Order Total:</div>
+                        <input type="hidden" id="OrderID" value="0">
+                        <div class="col-md-7"><h5 >${{ _order.total_price }}</h5></div>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 15px;" id="divbtnReceiveStock">
+                        <button type="button" id="btnReceiveStock" style="font-weight:bold" name="btnReceiveStock" class="btn btn-block btn-success active" aria-pressed="true" (click)="receive_order()">RECEIVE STOCK</button>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 15px;" id="divbtnCancelOrder">
+                        <button type="button" id="btnCancelOrder" style="font-weight:bold" name="btnCancelOrder" class="btn btn-block btn-danger active" aria-pressed="true" (click)="cancel_order()">CANCEL ORDER</button>
+                    </div>
+                </div>
+              </div>
+            </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
 
 </ng-template>

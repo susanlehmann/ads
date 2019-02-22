@@ -32,6 +32,8 @@ import {
 import { EditProductComponent } from './layout/inventory/product/edit-product/edit-product.component';
 import { InventoryService } from './layout/inventory/inventory.service';
 import { NotifierService } from 'angular-notifier';
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -99,7 +101,8 @@ const customNotifierOptions: NotifierOptions = {
         }),
         AppRoutingModule,
         NotifierModule.withConfig(customNotifierOptions),
-        SocialLoginModule
+        SocialLoginModule,
+        PDFExportModule
     ],
     declarations: [AppComponent, SearchComponent, EditProductComponent],
     providers: [

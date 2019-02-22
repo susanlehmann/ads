@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListProductModalComponent } from './list-product/list-product.component';
 import { EditOrderComponent } from './edit-order/edit-order.component';
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export'
 
 @NgModule({
   declarations: [ListProductModalComponent, EditOrderComponent],
@@ -12,6 +13,7 @@ import { EditOrderComponent } from './edit-order/edit-order.component';
     FormsModule,
     CommonModule,
     TranslateModule,
+    PDFExportModule,
     NgbModule.forRoot()
   ]
 })

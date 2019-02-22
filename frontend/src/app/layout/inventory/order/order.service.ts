@@ -34,11 +34,17 @@ export class OrderService {
         order.ownerId = this.currentOrderId;
         return this._http.post(`${this.baseUrl}/user/inventory/order/update-order`, order);
     }
-
+    status(order) {
+      order.ownerId = this.currentOrderId;
+      return this._http.post(`${this.baseUrl}/user/inventory/order/update-status-order`, order);
+    }
     deleteorder(id) {
         return this._http.post(`${this.baseUrl}/user/inventory/order/delete-order`, {'id': id});
     }
 
+    sent_email(order) {
+      return this._http.post(`${this.baseUrl}/user/inventory/order/send-email-order`, order);
+    }
   //getorders(){
   //    return this._http.get('http://task-treking/public/api/orders',{
   //        headers: new HttpHeaders({'Accept': 'application/json',
