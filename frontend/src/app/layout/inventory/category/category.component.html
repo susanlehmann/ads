@@ -43,7 +43,7 @@
                                   <tr class="_1A0eEb _1zQ7jO">
                                     <td class="N3OZB6 _1vLxYz" (click)="openUpdateModal(content, category.id)">{{category.categoryName}}</td>
                                     <td class="N3OZB6 _1vLxYz">
-                                      <div class="PZtzwq">{{category.productassigned}}</div>
+                                      <div class="PZtzwq">{{getNumberproduct(category)}}</div>
                                     </td>
                                   </tr>
                                 </tbody>
@@ -52,7 +52,7 @@
                             <div class="_2f96-_">
                               <div class="_3Cd6wq">
                                 <div class="_3oGeTh">Displaying
-                                  <b class="_2P0kb0">1</b>product category
+                                  <b class="_2P0kb0">{{listcategories.length}}</b>product category
                                 </div>
                               </div>
 
@@ -68,7 +68,7 @@
                                     <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
                                     <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control" placeholder="e.g Hair Products">
                                   </div>
-                                  <div class="modal-footer">
+                                  <div class="modal-footer" style="display: inline;">
                                     <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteCategory()"> Delete </button>
                                     <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
                                     <button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>

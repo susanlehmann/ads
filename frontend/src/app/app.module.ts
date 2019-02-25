@@ -33,6 +33,7 @@ import { EditProductComponent } from './layout/inventory/product/edit-product/ed
 import { InventoryService } from './layout/inventory/inventory.service';
 import { NotifierService } from 'angular-notifier';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { OrderModule } from 'ngx-order-pipe';
 
 
 export function getAuthServiceConfigs() {
@@ -88,6 +89,7 @@ const customNotifierOptions: NotifierOptions = {
         CommonModule,
         BrowserModule,
         FormsModule,
+        OrderModule,
         BrowserAnimationsModule,
         NgxUiLoaderModule,
         NgxUiLoaderHttpModule.forRoot({ showForeground: true }),

@@ -3,13 +3,20 @@ import { NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-boot
 import { NotifierService } from 'angular-notifier';
 import { Brand } from './model/brand';
 import { BrandService } from './brand.service';
+//import { OrderPipe, OrderModule } from 'ngx-order-pipe';
+import { Product } from '../product/model/product';
+import { InventoryService } from '../inventory.service';
+import {MatSort, MatTableDataSource} from '@angular/material';
+import { OrderPipe } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-brand',
   templateUrl: './brand.component.html',
   styleUrls: ['./brand.component.scss']
 })
-export class BrandComponent implements OnInit {
+
+
+export class BrandComponent implements OnInit  {
   loading: boolean;
   form: Brand;
   public error = [];
@@ -17,12 +24,34 @@ export class BrandComponent implements OnInit {
   listbrands: Brand[];
   isCreate: boolean;
   selectedId: string;
+  order: string = 'brandName';
+  sortedCollection: any[];
+  reverse: boolean = false;
+  collection: any[] = this.listbrands;
+  _list :any;
+  listproducts: any;
+
 
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
     private BrandService: BrandService,
+    private InventoryService: InventoryService,
+    private orderPipe: OrderPipe,
+    //private orderPipe: OrderPipe,
   ) {
     this.form = new Brand();
+    //this.listbrands = [];
+    this.sortedCollection = orderPipe.transform(this.collection, 'brandName');
+    //console.log(this.orderPipe.transform(this.collection, this.order));
+    console.log(this.sortedCollection);
+  }
+
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+
+    this.order = value;
   }
 
   openModal(content: NgbModalRef) {
@@ -59,6 +88,7 @@ export class BrandComponent implements OnInit {
          .sort((a, b) => {
            return a.id - b.id;
          });
+         console.log(this.listbrands);
 		}, err => {
       this.stopLoading();
     });
@@ -125,8 +155,30 @@ export class BrandComponent implements OnInit {
     this.loading = false;
   }
 
+  getProduct(){
+    this.InventoryService.getListProduct()
+    .subscribe((prod:any) => {
+      this.stopLoading();
+      this.listproducts = prod.product;
+      //console.log(this.listproducts);
+    }, err =>{
+
+    });
+  }
+  _brand :any;
+  getNumberproduct(brand) {
+    this._brand = brand;
+    //id = this.
+    //let product = this.listproducts.filter(s => s.id_category == id);
+    this._list = this.listproducts.filter(s => s.id_brand == this._brand.id)
+    //console.log(this._list);
+    return this._list.length;
+
+  }
+
   ngOnInit() {
     this.getBrand();
+    this.getProduct();
   }
   searchBrand(event){
     //const search: any = {};
