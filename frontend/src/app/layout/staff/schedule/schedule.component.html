@@ -4,9 +4,12 @@
       <option value=0 selected>All Staff</option>
       <option value={{staff.staffId}} *ngFor="let staff of allSchedules">{{staff.staffName}}</option>
     </select>
-    <div>
-      <button class="btn btn-light ma" (click)="prevWeek()">Previous week</button>
-      <button class="btn btn-light ma mr-2" (click)="nextWeek()">Next week</button>
+    <div style="display: flex;">
+      <button class="btn btn-light ma" (click)="prevWeek()">&lt;</button>
+      <button class="btn btn-light ma" (click)="changeWeek()">Today</button>
+      <input class="form-control week-picker" (click)="week_picker.open()" readonly
+          name="week-picker" [(ngModel)]="currentWeekModel" (ngModelChange)="changeWeek($event)" ngbDatepicker #week_picker="ngbDatepicker">
+      <button class="btn btn-light ma mr-2" (click)="nextWeek()">&gt;</button>
     </div>
   </div>
 
@@ -133,7 +136,7 @@
   
     <div class="modal-body">
         You {{isConfirmDeleteRepeat ? 'are deleting' : 'have edited'}} a shift that repeats weekly. {{isConfirmDeleteRepeat ? 'Deleting' : 'Updating'}} upcoming shifts will overwrite 
-        {{selectedSchedule.staffName}}'s ongoing {{selectedSchedule.currentDate.toLocaleDateString('en-US', {weekday: 'short'}) }} schedule
+        {{selectedSchedule.staffName}}'s ongoing {{selectedSchedule.currentDate.toLocaleDateString('en-US', {weekday: 'long'}) }} schedule
     </div>
   
     <div class="modal-footer">

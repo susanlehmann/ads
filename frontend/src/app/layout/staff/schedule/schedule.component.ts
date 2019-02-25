@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffSchedule, Schedule } from './schedule';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {NgbDateAdapter, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { StaffService } from '../staff.service';
 import { forkJoin } from 'rxjs';
@@ -10,7 +10,9 @@ import { forkJoin } from 'rxjs';
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss'],
-  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
+  providers: [
+    {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter},
+  ]
 })
 export class ScheduleComponent implements OnInit {
   weekdays: any[];
@@ -19,6 +21,7 @@ export class ScheduleComponent implements OnInit {
   allSchedules: StaffSchedule[];
   selectedSchedule: Schedule;
 
+  currentWeekModel: NgbDateStruct;
   staffFilter: number;
   selectedStaff: StaffSchedule;
 
@@ -32,10 +35,11 @@ export class ScheduleComponent implements OnInit {
     this.today = new Date();
     this.weekdays = this.getCurrentWeek();
     this.staffFilter = 0; // show all staff
+    this.currentWeekModel = {day: 1, month: 1, year: 2019};
    }
 
   ngOnInit() {
-    this.loadData();
+    this.changeWeek();
   }
 
   openModal(content: NgbModalRef) {
@@ -170,13 +174,19 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  loadData() {
+  loadData(text?) {
     const schedules = this.staffService.getListSchedule();
     const staffs = this.staffService.getList();
 
     forkJoin([schedules, staffs]).subscribe((rs: any) => {
       this.allSchedules = this.mapStaffsAndSchedules(rs[1].user, rs[0].workinghour);
       this.schedules = this.allSchedules;
+
+      // fix bug khoi dong ko hien date.
+      if (text) {
+        const weekPicker = document.querySelector('.week-picker') as HTMLInputElement;
+        weekPicker.value = text;
+      }
     });
   }
 
@@ -198,15 +208,37 @@ export class ScheduleComponent implements OnInit {
   }
 
   nextWeek() {
-    this.today.setDate(this.today.getDate() + 7);
-    this.weekdays = this.getCurrentWeek();
-    this.loadData();
+    this.today.setDate(this.today.getDate() + 7)
+    this.changeWeek(this.today);
   }
 
   prevWeek() {
-    this.today.setDate(this.today.getDate() - 7);
+    this.today.setDate(this.today.getDate() - 7)
+    this.changeWeek(this.today);
+  }
+
+  changeWeek(date?) {
+    //this.currentWeekModel = {day: 1, month: 1, year: 2019}; TODO: can't set value to ngb datepicker.
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+
+    this.today = date ? date : new Date(); // get current system date if param was not passed
     this.weekdays = this.getCurrentWeek();
-    this.loadData();
+
+    const weekPicker = document.querySelector('.week-picker') as HTMLInputElement;
+    const startDate = this.weekdays[0].date;
+    const endDate = this.weekdays[6].date;
+    let displayText;
+
+    if (startDate.getMonth() === endDate.getMonth()) {
+      displayText = `${startDate.getDate()} - ${endDate.getDate()} ${monthNames[startDate.getMonth()]}, ${startDate.getFullYear()}`;
+    } else {
+      displayText = `${startDate.getDate()} ${monthNames[startDate.getMonth()].slice(0, 3)} - ${endDate.getDate()} ${monthNames[endDate.getMonth()].slice(0, 3)} , ${startDate.getFullYear()}`;
+    }
+    weekPicker.value = displayText;
+
+    this.loadData(displayText);
   }
 
   getCurrentWeek() {

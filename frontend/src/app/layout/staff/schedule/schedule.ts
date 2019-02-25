@@ -33,7 +33,7 @@ export class StaffSchedule {
 
         const filtered = this.allSchedules.filter(s => {
             const scheduleStart = s.scheduleStartDate.getTime();
-            const scheduleEnd = s.scheduleEndDate ? s.scheduleEndDate.getTime() : null;
+            const scheduleEnd = s.hasEndDate ? s.scheduleEndDate.getTime() : null;
             const scheduleStartInRange = startWeek <= scheduleStart && scheduleStart <= endWeek;
             const scheduleEndInOrAfterRange = s.isRepeat
             && scheduleStart < startWeek
@@ -87,10 +87,10 @@ export class Schedule {
     constructor(staffId, staffName, currentDate?: Date) {
         this.staffId = staffId;
         this.staffName = staffName;
-        this.shiftStart1 = {hour: 0, minute: 0, second: 0};
-        this.shiftEnd1 = {hour: 0, minute: 0, second: 0};
-        this.shiftStart2 = {hour: 0, minute: 0, second: 0};
-        this.shiftEnd2 = {hour: 0, minute: 0, second: 0};
+        this.shiftStart1 = {hour: 9, minute: 0, second: 0};
+        this.shiftEnd1 = {hour: 17, minute: 0, second: 0};
+        this.shiftStart2 = {hour: 18, minute: 0, second: 0};
+        this.shiftEnd2 = {hour: 22, minute: 0, second: 0};
         this.isRepeat = false;
 
         this.currentDate = currentDate;
@@ -118,11 +118,12 @@ export class Schedule {
     }
 
     setStartScheduleToNextWeek() {
-        this.scheduleStartDate.setDate(this.scheduleEndDate.getDate() + 7);
+        this.scheduleStartDate.setDate(this.scheduleStartDate.getDate() + 7);
     }
 
     setEndScheduleToPreviousWeek() {
-        this.scheduleEndDate.setDate(this.scheduleEndDate.getDate() - 7);
+        this.scheduleEndDate = new Date(this.currentDate);
+        this.scheduleEndDate.setDate(this.currentDate.getDate() - 7);
     }
 
     isScheduleStartOnCurrentDate() {
