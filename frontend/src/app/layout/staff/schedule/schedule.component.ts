@@ -163,8 +163,8 @@ export class ScheduleComponent implements OnInit {
   }
 
   deleteSchedule(id?) {
-    const sId = id ? id : this.selectedSchedule.staffId;
-    this.staffService.deleteScheduleById(sId).subscribe(v => {
+    id = id ? id : this.selectedSchedule.id;
+    this.staffService.deleteScheduleById(id).subscribe(v => {
       this.modal.dismissAll();
       this.loadData();
     });

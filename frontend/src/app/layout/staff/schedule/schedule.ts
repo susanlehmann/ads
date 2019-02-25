@@ -60,6 +60,7 @@ export class StaffSchedule {
 }
 
 export class Schedule {
+    id: number;
     staffId: number;
     staffName: string;
     shiftStart1: NgbTimeStruct;
@@ -155,9 +156,11 @@ export class Schedule {
     }
 
     updateData(data) {
+        this.id = data.id;
+        this.staffId = data.id_staff;
         this.isNew = false;
         this.hasShift2 = data.has_shift_2 === 1 ? true : false;
-        this.hasEndDate = data.has_end_date;
+        this.hasEndDate = data.has_end_date == null ? 0 : data.hasEndDate; // set default = 0 (onGoing)
         this.shiftStart1 = JSON.parse(data.shift1_start);
         this.shiftEnd1 = JSON.parse(data.shift1_end);
         this.shiftStart2 = JSON.parse(data.shift2_start);
@@ -172,6 +175,7 @@ export class Schedule {
 
     toDto() {
         return {
+            id: this.id,
             id_staff: this.staffId,
             shift1_start: JSON.stringify(this.shiftStart1),
             shift1_end: JSON.stringify(this.shiftEnd1),
