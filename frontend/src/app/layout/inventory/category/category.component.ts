@@ -3,6 +3,8 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { Category } from './model/category';
 import { CategoryService } from './category.service';
+import { Product } from '../product/model/product';
+import { InventoryService } from '../inventory.service';
 
 @Component({
   selector: 'app-category',
@@ -18,12 +20,16 @@ export class CategoryComponent implements OnInit {
   listcategories: Category[];
   isCreate: boolean;
   selectedId: string;
+  listproducts: any;
+  _list: any;
 
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
     private CategoryService: CategoryService,
+    private InventoryService: InventoryService,
   ) {
     this.form = new Category();
+    this.listcategories = [];
   }
 
   openModal(content: NgbModalRef) {
@@ -130,8 +136,28 @@ export class CategoryComponent implements OnInit {
   stopLoading(): void {
     this.loading = false;
   }
+  getProduct(){
+    this.InventoryService.getListProduct()
+    .subscribe((prod:any) => {
+      this.stopLoading();
+      this.listproducts = prod.product;
+      //console.log(this.listproducts);
+    }, err =>{
 
+    });
+  }
+  _category :any;
+  getNumberproduct(category) {
+    this._category = category;
+    //id = this.
+    //let product = this.listproducts.filter(s => s.id_category == id);
+    this._list = this.listproducts.filter(s => s.id_category == this._category.id)
+    //console.log(this._list);
+    return this._list.length;
+
+  }
   ngOnInit() {
     this.getCategory();
+    this.getProduct();
   }
 }
