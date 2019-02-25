@@ -29,6 +29,7 @@ class CreateWorkingHoursTable extends Migration
             $table->integer('has_shift_2')->nullable();
             $table->date('schedule_start')->nullable();
             $table->date('schedule_end')->nullable();
+            $table->integer('has_end_date')->nullable();
             $table->integer('status_workinghour')->nullable();
             $table->timestamps();
         });

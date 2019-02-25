@@ -28,6 +28,7 @@ class Working_hourController extends Controller
             'shift2_end' => $request->shift2_end,
             'is_repeat' => $request->is_repeat,
             'has_shift_2' => $request->has_shift_2,
+            'has_end_date' => $request->has_end_date,
             'schedule_start' => $request->schedule_start,
             'schedule_end' => $request->schedule_end,
             'status_workinghour' => 1,
@@ -67,6 +68,7 @@ class Working_hourController extends Controller
                 'shift2_end' => $request->shift2_end,
                 'is_repeat' => $request->is_repeat,
                 'has_shift_2' => $request->has_shift_2,
+                'has_end_date' => $request->has_end_date,
                 'schedule_start' => $request->schedule_start,
                 'schedule_end' => $request->schedule_end,
             ];
