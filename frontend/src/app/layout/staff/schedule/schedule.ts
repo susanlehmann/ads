@@ -1,4 +1,4 @@
-import { NgbTimeStruct } from "@ng-bootstrap/ng-bootstrap";
+import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
 export class StaffSchedule {
     staffId: number;
@@ -7,16 +7,19 @@ export class StaffSchedule {
 
     weekSchedule: Schedule[];
     allSchedules: Schedule[];
-  
+
+    conflictedSchedules: Schedule[];
+
     constructor() {
         this.staffName = 'Giang';
         this.weeklyHours = 48;
+        this.conflictedSchedules = [];
     }
 
     findFutureConflicts(schedule: Schedule) {
-        return this.allSchedules.filter(s => {
-            let isScheduleOnTheSameDay = s.scheduleStartDate.getDay() === schedule.scheduleStartDate.getDay();
-            let isFuture = s.scheduleStartDate.getTime() > schedule.scheduleStartDate.getTime();
+        this.conflictedSchedules = this.allSchedules.filter(s => {
+            const isScheduleOnTheSameDay = s.scheduleStartDate.getDay() === schedule.scheduleStartDate.getDay();
+            const isFuture = s.scheduleStartDate.getTime() > schedule.scheduleStartDate.getTime();
             if (isScheduleOnTheSameDay && isFuture) {
                 return s;
             }
@@ -25,26 +28,28 @@ export class StaffSchedule {
 
     // for showing current week's working hours
     getWeekSchedule(weekRange) {
-        let startWeek = weekRange[0].date.getTime();
-        let endWeek = weekRange[6].date.getTime();
+        const startWeek = weekRange[0].date.setHours(0, 0, 0, 0);
+        const endWeek = weekRange[6].date.setHours(0, 0, 0, 0);
 
-        let filtered = this.allSchedules.filter(s => {
-            let shiftStart = s.scheduleStartDate.getTime();
-            let shiftEnd = s.scheduleEndDate ? s.scheduleEndDate.getTime() : null;
-            let cond1 = startWeek <= shiftStart && shiftStart <= endWeek;
-            let cond2 = shiftStart < endWeek && (shiftEnd >= startWeek || s.scheduleEndDate == null);
-            // return cond1 || cond2;
-            return true; // test
+        const filtered = this.allSchedules.filter(s => {
+            const scheduleStart = s.scheduleStartDate.getTime();
+            const scheduleEnd = s.scheduleEndDate ? s.scheduleEndDate.getTime() : null;
+            const scheduleStartInRange = startWeek <= scheduleStart && scheduleStart <= endWeek;
+            const scheduleEndInOrAfterRange = s.isRepeat
+            && scheduleStart < startWeek
+            && (scheduleEnd >= startWeek || s.scheduleEndDate == null);
+
+            return scheduleStartInRange || scheduleEndInOrAfterRange;
         });
 
         let totalWeeklyHours = 0;
 
         this.weekSchedule = weekRange.map(d => {
-            let found = filtered.filter(s => s.scheduleStartDate.getDay() === d.date.getDay())[0];
+            const found = filtered.filter(s => s.scheduleStartDate.getDay() === d.date.getDay())[0];
 
             if (found) {
                 found.setCurrentDate(d.date);
-                totalWeeklyHours += found.getTotalHours();
+                totalWeeklyHours += found.getTotalHoursOfTheDay();
                 return found;
             }
             return new Schedule(this.staffId, this.staffName, d.date);
@@ -62,14 +67,20 @@ export class Schedule {
     shiftStart2: NgbTimeStruct;
     shiftEnd2: NgbTimeStruct;
     isRepeat: boolean;
-    
+
     scheduleStartDate: Date;
     scheduleEndDate: Date;
     hasShift2: boolean;
-    
+    hasEndDate: number;
+    isValidShift: boolean;
+
 
     currentDate: Date;
     breakTime: NgbTimeStruct;
+
+    /**
+     * determine if the schedule is new or not
+     */
     isNew: boolean;
 
     constructor(staffId, staffName, currentDate?: Date) {
@@ -80,39 +91,79 @@ export class Schedule {
         this.shiftStart2 = {hour: 0, minute: 0, second: 0};
         this.shiftEnd2 = {hour: 0, minute: 0, second: 0};
         this.isRepeat = false;
+
         this.currentDate = currentDate;
-        this.scheduleStartDate = currentDate;
-        
-        this.breakTime = {hour: 0, minute: 0, second: 0};;
+        this.scheduleStartDate = currentDate; // when create new schedule
+
+        this.breakTime = {hour: 0, minute: 0, second: 0};
         this.isNew = true;
         this.hasShift2 = false;
+        this.isValidShift = true;
+        this.hasEndDate = 0;
+    }
+
+    clone() {
+        const cloned = Object.assign({}, this);
+        cloned.scheduleEndDate = cloned.scheduleEndDate ? new Date(cloned.scheduleEndDate.getTime()) : null;
+        cloned.scheduleStartDate = new Date(cloned.scheduleStartDate.getTime());
+        cloned.currentDate = new Date(cloned.currentDate.getTime());
+
+        return cloned;
+    }
+
+    setToNoRepeat() {
+        this.isRepeat = false;
+        this.scheduleEndDate = null;
+    }
+
+    setStartScheduleToNextWeek() {
+        this.scheduleStartDate.setDate(this.scheduleEndDate.getDate() + 7);
+    }
+
+    setEndScheduleToPreviousWeek() {
+        this.scheduleEndDate.setDate(this.scheduleEndDate.getDate() - 7);
+    }
+
+    isScheduleStartOnCurrentDate() {
+        return this.scheduleStartDate.getTime() === this.currentDate.getTime();
     }
 
     setCurrentDate(currentDate: Date) {
         this.currentDate = currentDate;
     }
-    
-    getTotalHours() {
-        return this.shiftEnd2.hour - this.shiftStart1.hour + this.shiftEnd2.hour - this.shiftStart2.hour;
+
+    getTotalHoursOfTheDay() {
+        return this.shiftEnd1.hour - this.shiftStart1.hour + this.shiftEnd2.hour - this.shiftStart2.hour;
     }
 
     toggleShift2() {
         this.hasShift2 = !this.hasShift2;
     }
 
+    validateShift() {
+        const validShift1 = this.shiftEnd1.hour - this.shiftStart1.hour > 0 ;
+        const validShift2 = this.hasShift2 ? (this.shiftEnd2.hour - this.shiftStart2.hour > 0 ? true : false) : true;
+        this.isValidShift = validShift1 && validShift2;
+        this.updateBreakTime();
+    }
+
     updateBreakTime() {
-        this.breakTime = {hour: this.shiftStart2.hour - this.shiftEnd1.hour, minute: this.shiftStart2.minute - this.shiftEnd1.minute, second: 0}
+        if (this.hasShift2) {
+            this.breakTime = {hour: this.shiftStart2.hour - this.shiftEnd1.hour, minute: this.shiftStart2.minute - this.shiftEnd1.minute, second: 0};
+            this.isValidShift =  this.isValidShift && this.breakTime.hour > 0 ? true : false;
+        }
     }
 
     updateData(data) {
         this.isNew = false;
         this.hasShift2 = data.has_shift_2 === 1 ? true : false;
+        this.hasEndDate = data.has_end_date;
         this.shiftStart1 = JSON.parse(data.shift1_start);
         this.shiftEnd1 = JSON.parse(data.shift1_end);
         this.shiftStart2 = JSON.parse(data.shift2_start);
         this.shiftEnd2 = JSON.parse(data.shift2_end);
         this.scheduleStartDate = new Date(data.schedule_start);
-        this.scheduleEndDate = new Date(data.schedule_end);
+        this.scheduleEndDate = data.schedule_end ? new Date(data.schedule_end) : null;
         this.isRepeat =  data.is_repeat === 1 ? true : false;
         if (this.hasShift2) {
             this.updateBreakTime();
@@ -128,8 +179,9 @@ export class Schedule {
             shift2_end: JSON.stringify(this.shiftEnd2),
             is_repeat: this.isRepeat ? 1 : 0,
             has_shift_2: this.hasShift2 ? 1 : 0,
+            has_end_date: this.hasEndDate,
             schedule_start: this.scheduleStartDate,
             schedule_end: this.scheduleEndDate,
-        }
+        };
     }
 }

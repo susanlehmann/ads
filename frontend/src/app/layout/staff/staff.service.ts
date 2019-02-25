@@ -77,7 +77,7 @@ export class StaffService {
         return this._http.post(`${this.baseUrl}/user/workinghour/create-workinghour`, schedule);
     }
 
-    updateCSchedule(schedule) {
+    updateSchedule(schedule) {
         schedule.ownerId = this.currentUserId;
         return this._http.post(`${this.baseUrl}/user/workinghour/update-workinghour`, schedule);
     }

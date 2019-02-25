@@ -65,6 +65,9 @@
   }
 
   thead {
+    th {
+      text-align: center;
+    }
     th,
     td {
       border-bottom-width: ($table-border-width);
