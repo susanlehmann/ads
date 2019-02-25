@@ -149,6 +149,10 @@ option {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
   flex-direction: row-reverse;
+  &:hover {
+    -webkit-transform: translateY(-1px);
+    transform: translateY(-1px);
+  }
 }
 ._3_Zd_x > * {
   margin-top: 10px;
@@ -233,7 +237,7 @@ thead {
   position: relative;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-family: Roboto;
+  font-family: 'Roboto-Bold';
   padding: 18px 16px;
   vertical-align: middle;
   border-bottom: 2px solid rgba(222, 227, 231, .75);
@@ -359,7 +363,10 @@ b, strong {
   background-color: #24334A;
   border-color: #24334A;
   border-radius: 50%;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
+
+  &:hover {
+    background-color: #24334a99;
+  }
 }
 ._1hszOe {
   color: #ffffff;
@@ -390,8 +397,8 @@ b, strong {
   transition: color 0.1s linear 0s, background-color 0.1s linear 0s, opacity 0.2s linear 0s, border-color 0.2s linear !important;
 }
 ._1jAoG_ span {
-  height: 24px;
-  width: 24px;
+  height: 26px;
+  width: 28px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -711,4 +718,19 @@ $breakpoint-iphone: 767px;
       border-collapse: collapse;
     }
   }
+}
+
+._1jAoG_ {
+  span {
+    i {
+      &:hover {
+        &:before {
+          content: "\f16b";
+        }
+      }
+    }
+  }
+}
+.fa-1-75x{
+  font-size: 1.75em;
 }

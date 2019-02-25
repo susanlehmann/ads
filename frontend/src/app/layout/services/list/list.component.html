@@ -26,7 +26,7 @@
 					</div>
 					<div class="col-lg-2 col-md-4 col-sm-6 col-mb-3">
 						<div ngbDropdown class="d-inline-block dropdown">
-		                    <button class="btn btn-info col-sm-12 mb-1" ngbDropdownToggle>
+		                    <button class="btn btn-white col-sm-12 mb-1" ngbDropdownToggle>
 		                    	Export&nbsp;&nbsp;&nbsp;<i class="fa fa-download"></i>
 		                    </button>
 		                    <div ngbDropdownMenu>
@@ -91,22 +91,19 @@
 	<div class="row">
 		<ng-template #remove_service_group let-c="close" let-d="dismiss">
             <div class="modal-header">
-			    <h4 class="modal-title">Remove Service Group</h4>
+			    <h4 class="modal-title">Delete Service Group</h4>
 			    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
 			        <span aria-hidden="true">&times;</span>
 			    </button>
 			</div>
 			<div class="modal-body">
 				<div class="box-mess-confirm">
-					<p>You want remove all data of Services Group <strong>{{nameGroup}}</strong>?</p>
+					<p>Are you sure you want to delete this group?</p>
 				</div>
 			</div>
 			<div class="modal-footer">
-			    <button type="button" class="btn btn-primary" (click)="confirmRemove(idGroup)">
-			    	<i class="fa fa-check"></i>&nbsp;Confirm
-			    </button>
-			    <button type="button" class="btn btn-secondary" (click)="d('Close click')">
-			    	<i class="fa fa-close"></i>&nbsp;Cancel
+			    <button type="button" class="btn btn-danger" (click)="confirmRemove(idGroup)">
+			    	Delete
 			    </button>
 			</div>
         </ng-template>
@@ -116,7 +113,7 @@
 		<div id="inbox">
 			<div class="fab btn-group show-on-hover dropup">
 				<div data-toggle="tooltip" data-placement="left" title="Compose">
-					<button type="button" class="btn btn-danger btn-io dropdown-toggle" data-toggle="dropdown">
+					<button type="button" class="btn btn-black btn-io dropdown-toggle" data-toggle="dropdown">
 						<span class="fa-stack fa-2x">
 							<i class="fa fa-plus fa-stack-1x fa-inverse fab-primary"></i>
 						</span>

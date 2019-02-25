@@ -26,6 +26,7 @@
               },
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/angular-calendar/scss/angular-calendar.scss",
+              "src/assets/fonts-family.css",
               "src/styles/app.scss"
             ],
             "scripts": [

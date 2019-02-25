@@ -95,7 +95,6 @@
                   <div class="col-sm-6">
                     <label class="control-label">{{'Gender' }}</label>
                     <select [(ngModel)]="form.gender" name="gender" class="form-control" #gender="ngModel" >
-                      <option value="3" disabled selected="selected" hidden> -= Select Gender =-</option>
                       <option *ngFor="let gen of genders" value="{{gen.id}}">{{gen.name}}</option>
                     </select>
                   </div>
@@ -214,7 +213,7 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
-    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"><i class="fa fa-plus"></i> Add New </button>
+    <button type="button" class="btn btn-white pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
+    <button type="submit" class="btn btn-black pull-right" (click)="onSubmit()"><i class="fa fa-plus"></i> Save </button>
   </div>
 </form>
