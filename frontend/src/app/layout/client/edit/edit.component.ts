@@ -4,6 +4,7 @@ import { Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { HttpcallService } from '../../../shared/services/httpcall.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from '../../../shared/services/user.service';
 import { NotifierService } from 'angular-notifier';
@@ -32,6 +33,7 @@ export class EditComponent implements OnInit {
 	genders = [
 		{ id: 1, name: "Male" },
 		{ id: 2, name: "Femail" },
+		{ id: 3, name: "Unknown" },
 	];
 
 	referralSources = [
@@ -40,6 +42,7 @@ export class EditComponent implements OnInit {
 
 	userId: any;
 	user: any = {};
+	closeResult: string;
 
 	constructor(
 		private http: HttpClient,
@@ -48,7 +51,8 @@ export class EditComponent implements OnInit {
 		private route: Router,
 		private userService: UserService,
 		private notifierService: NotifierService,
-		private datePipe: DatePipe
+		private datePipe: DatePipe,
+		private modalService: NgbModal,
 	) { }
 
 	ngOnInit() {
@@ -118,6 +122,7 @@ export class EditComponent implements OnInit {
 
 		this.userService.updateUserById(client).subscribe(
 			success => {
+				this.route.navigateByUrl('client/detail/' + this.userId);
 				this.notifierService.notify('success', 'Update has been successfully updated');
 			},
 			error => {
@@ -127,10 +132,7 @@ export class EditComponent implements OnInit {
 	}
 
 	goBack() {
-		const confirm = window.confirm('Are you sure you want to cancel?');
-		if (confirm === true) {
-			this.route.navigate(['client']);
-		}
+		this.route.navigateByUrl('client/detail/' + this.userId);
 	}
 
 	loadDate(dayxx){
@@ -143,5 +145,34 @@ export class EditComponent implements OnInit {
 
 	selectDate(event) {
 		this.birthday = event;
+	}
+
+	open(content) {
+        this.modalService.open(content).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    }
+
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return  `with: ${reason}`;
+        }
+    }
+
+	removeUser(userId) {
+		this.userService.removeUserById(userId).subscribe(
+    		success => {
+    			this.notifierService.notify('success', 'Delete successfully !!');
+    			this.modalService.dismissAll();
+    			this.route.navigateByUrl('client');
+    		},
+    		error => {}
+    	);
 	}
 }

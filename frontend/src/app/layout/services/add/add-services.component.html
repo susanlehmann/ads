@@ -202,7 +202,7 @@
 						<div class="form-group">
 							<label class="control-label">{{'Duration' }}</label>
 							<div class="input-group">
-								<select [(ngModel)]="form.settin_duration" name="settin_duration" class="form-control" #settin_duration="ngModel" #settin_duration>
+								<select [(ngModel)]="form.settin_duration" name="settin_duration" class="form-control" #settin_duration="ngModel" #settin_duration disabled="true">
 				            		<option value="5">5min</option>
 						            	<option value="10">10min</option>
 						            	<option value="15">15min</option>
@@ -300,7 +300,7 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
-    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"><i class="fa fa-plus"></i> Add New </button>
+    <button type="button" class="btn btn-white pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
+    <button type="submit" class="btn btn-black pull-right" (click)="onSubmit()"><i class="fa fa-plus"></i> Save </button>
   </div>
 </form>

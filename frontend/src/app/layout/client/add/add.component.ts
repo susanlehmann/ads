@@ -42,6 +42,7 @@ export class AddComponent implements OnInit {
 	genders = [
 		{ id: 1, name: "Male" },
 		{ id: 2, name: "Femail" },
+		{ id: 3, name: "Unknown" },
 	];
 
 	referralSources = [
@@ -66,9 +67,10 @@ export class AddComponent implements OnInit {
           'email': new FormControl(null, [Validators.required, Validators.email]),
           'text': new FormControl(null, [Validators.required])
         }, {updateOn: 'blur'});
-		this.form.notificationType = "0";
+		this.form.notificationType = "4";
 		this.form.gender = "3";
 		this.form.referral = "1";
+		this.form.acceptNotification = true;
 	}
 
 
@@ -155,10 +157,7 @@ export class AddComponent implements OnInit {
 	}
 
 	goBack() {
-		const confirm = window.confirm('Are you sure you want to cancel?');
-		if (confirm === true) {
-			this.router.navigate(['client']);
-		}
+		this.router.navigateByUrl('client');
 	}
 
 	selectDate(event) {

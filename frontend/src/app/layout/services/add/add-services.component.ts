@@ -18,6 +18,8 @@ export class AddServiceComponent implements OnInit {
     @ViewChild('service_available_for') svAvaiFor: ElementRef;
     @ViewChild('voucher_expiryperiod') expiryPeriod: ElementRef;
     @ViewChild('name_service') name_service: ElementRef;
+    @ViewChild('settin_duration') settin_durations: ElementRef;
+    @ViewChild('checkall') checkallBox: ElementRef;
 
 	groupId: any;
 	form: any = {};
@@ -65,11 +67,10 @@ export class AddServiceComponent implements OnInit {
 	}
 
 	goBack() {
-		const confirm = window.confirm('Are you sure you want to cancel?');
-		if (confirm === true) {
-			this.route.navigate(['services']);
-		}
+		this.route.navigateByUrl('services');
 	}
+
+
 
 	private reloadForm() {
 		let userInfo = JSON.parse(localStorage.getItem('user'));
@@ -214,29 +215,35 @@ export class AddServiceComponent implements OnInit {
 			}
 		}
 	}
+
+	checkedAll() {
+		console.log('abc');
+	}
 	
 	enableOnline() {
 		if(!this.form.enable_online_bookings) {
 			this.svDescp.nativeElement.setAttribute('readonly', true);
-			this.svAvaiFor.nativeElement.setAttribute('readonly', true);
+			this.svAvaiFor.nativeElement.setAttribute('disabled', true);
 			this.form.service_description = "";
 		} else {
 			this.svDescp.nativeElement.removeAttribute('readonly');
-			this.svAvaiFor.nativeElement.removeAttribute('readonly');
+			this.svAvaiFor.nativeElement.removeAttribute('disabled');
 		}
 	}
 
 	enableVoucher() {
 		if(!this.form.enable_voucher_sales) {
-			this.expiryPeriod.nativeElement.setAttribute('readonly', true);
+			this.expiryPeriod.nativeElement.setAttribute('disabled', true);
 		} else {
-			this.expiryPeriod.nativeElement.removeAttribute('readonly');
+			this.expiryPeriod.nativeElement.removeAttribute('disabled');
 		}
 	}
 
 	getExtraTime() {
-		// if(this.form.extra_time_type !== "notime") {
-		// 	this.stDuration.nativeElement.removeAttribute('readonly');
-		// }
+		if(this.form.extra_time_type !== "notime") {
+			this.settin_durations.nativeElement.removeAttribute('disabled');
+		} else {
+			this.settin_durations.nativeElement.setAttribute('disabled', true);
+		}
 	}
 }

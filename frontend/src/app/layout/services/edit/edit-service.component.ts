@@ -20,6 +20,7 @@ export class EditServiceComponent implements OnInit {
     @ViewChild('service_available_for') svAvaiFor: ElementRef;
     @ViewChild('voucher_expiryperiod') expiryPeriod: ElementRef;
     @ViewChild('name_service') _name_service: ElementRef;
+    @ViewChild('settin_duration') settin_durations: ElementRef;
 
 	groupId: any;
 	form: any = {};
@@ -129,6 +130,7 @@ export class EditServiceComponent implements OnInit {
 
         this.services.updateService(this.form).subscribe(
         	success => {
+        		this.route.navigateByUrl('services');
         		this.notify.notify('success', 'Update service successfully !')
         	},
         	error => {}
@@ -183,22 +185,52 @@ export class EditServiceComponent implements OnInit {
 	enableOnline() {
 		if(!this.form.enable_online_bookings) {
 			this.svDescp.nativeElement.setAttribute('readonly', true);
-			this.svAvaiFor.nativeElement.setAttribute('readonly', true);
+			this.svAvaiFor.nativeElement.setAttribute('disabled', true);
 			this.form.service_description = "";
 		} else {
 			this.svDescp.nativeElement.removeAttribute('readonly');
-			this.svAvaiFor.nativeElement.removeAttribute('readonly');
+			this.svAvaiFor.nativeElement.removeAttribute('disabled');
+		}
+	}
+
+	checkOnline() {
+		if(!this.form.enable_online_bookings) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
 	enableVoucher() {
 		if(!this.form.enable_voucher_sales) {
-			this.expiryPeriod.nativeElement.setAttribute('readonly', true);
+			this.expiryPeriod.nativeElement.setAttribute('disabled', true);
 		} else {
-			this.expiryPeriod.nativeElement.removeAttribute('readonly');
+			this.expiryPeriod.nativeElement.removeAttribute('disabled');
 		}
 	}
 
+	checkVoucher() {
+		if(!this.form.enable_voucher_sales) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	getExtraTime() {
+		if(this.form.extra_time_type !== "notime") {
+			this.settin_durations.nativeElement.removeAttribute('disabled');
+		} else {
+			this.settin_durations.nativeElement.setAttribute('disabled', true);
+		}
+	}
+	checkExtra() {
+		if(this.form.extra_time_type !== "notime") {
+			return false;
+		} else {
+			return true;
+		}
+	}
 	goBack() {
 		const confirm = window.confirm('Are you sure you want to cancel?');
 		if (confirm === true) {

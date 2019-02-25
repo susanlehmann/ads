@@ -58,7 +58,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text">@</div>
             </div>
-            <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="Email" required email #email="ngModel" [ngModelOptions]="{updateOn: 'blur'}" readonly="true">
+            <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="Email" required email #email="ngModel" [ngModelOptions]="{updateOn: 'blur'}">
           </div>
           <small class="form-text text-danger " *ngIf="!email.valid && (email.dirty || email.touched)">Invaild Email !</small> 
         </div>
@@ -94,7 +94,6 @@
                   <div class="col-sm-6">
                     <label class="control-label">{{'Gender' }}</label>
                     <select [(ngModel)]="form.gender" name="gender" class="form-control" #gender="ngModel">
-                      <option value="3" disabled selected="selected" hidden> -= Select Gender =-</option>
                       <option *ngFor="let gen of genders" value="{{gen.id}}">{{gen.name}}</option>
                     </select>
                   </div>
@@ -213,7 +212,22 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
-    <button type="submit" class="btn btn-success pull-right" (click)="onSubmit()" [disabled]="!f.valid"><i class="fa fa-save"></i> Save </button>
+    <button type="button" class="btn btn-delete pull-left" (click)="open(content)"><i class="fa fa-trash"></i> Delete </button>
+    <button type="submit" class="btn btn-black pull-right" (click)="onSubmit()" [disabled]="!f.valid"><i class="fa fa-save"></i> Save </button>
+    <button type="button" class="btn btn-white pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
   </div>
 </form>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h5 class="modal-title">Delete Client</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <p>Are you sure? This action cannot be undone.</p>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-danger pull-right" (click)="removeUser(userId)">Delete</button>
+  </div>
+</ng-template>

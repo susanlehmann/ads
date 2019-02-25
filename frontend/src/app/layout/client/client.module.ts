@@ -9,14 +9,23 @@ import { DetailComponent } from './detail/detail.component';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component';
+import { CallingCodeComponent } from '../components/calling_code/calling-code.component';
+
 @NgModule({
-  declarations: [ClientComponent, DetailComponent, ListComponent, EditComponent, AddComponent],
-  imports: [
-    FormsModule,
-    CommonModule,
-    ClientRoutingModule,
-    TranslateModule,
-    NgbModule.forRoot()
-  ]
+	declarations: [
+		ClientComponent, 
+		DetailComponent, 
+		ListComponent, 
+		EditComponent, 
+		AddComponent,
+		CallingCodeComponent
+	],
+	imports: [
+		FormsModule,
+		CommonModule,
+		ClientRoutingModule,
+		TranslateModule,
+		NgbModule.forRoot()
+	]
 })
 export class ClientModule { }

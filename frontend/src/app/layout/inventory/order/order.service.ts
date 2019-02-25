@@ -47,7 +47,7 @@ export class OrderService {
     }
 
     export_pdf(data) {
-        return this._http.post(`${this.baseUrl}/user/inventory/order/export-pdf-order`, data);
+        return this.baseUrl + '/user/inventory/order/export-pdf-order/' + data;
       }
   //getorders(){
   //    return this._http.get('http://task-treking/public/api/orders',{

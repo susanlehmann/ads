@@ -1,20 +1,50 @@
-.fc{
-	.fc-view-container{
-					background: #f00;
-		.fc-view{
-			table {
-				tbody {
-					.fc-slats{
-						background: #f00;
-						tr{
-							&:hover{
-								cursor: cell;
-							}
-						}
-					}
-				}
+.row {
+	.box-button {
+		display: flex;
+		flex-direction: row;
+		float: right;
+		span {
+			color: #24334A;
+		    background: #fff;
+		    text-transform: uppercase;
+		    border: 1px solid #EEF0F2;
+		    box-shadow: 0 2px 5px 0 rgba(164, 173, 186, .25);
+		    border-radius: 0;
+	        font-weight: 600;
+		    i {
+		    	margin-right: 5px;
+		    }
+
+		    &.active {
+		    	border-color: #DEE3E7;
+    			background: #DEE3E7;
+		    }
+		}
+	}
+
+	.box-title {
+		.box-button {
+			display: flex;
+			flex-direction: row;
+			span {
+				color: #24334A;
+			    background: #fff;
+			    text-transform: uppercase;
+			    border: 1px solid #EEF0F2;
+			    box-shadow: 0 2px 5px 0 rgba(164, 173, 186, .25);
+			    border-radius: 0;
+		        font-weight: 600;
+			    i {
+			    	margin-right: 5px;    
+			    	font-size: 1.4rem;
+    				font-weight: 600;
+			    }
+
+			    &.active {
+			    	border-color: #DEE3E7;
+	    			background: #DEE3E7;
+			    }
 			}
 		}
 	}
 }
-

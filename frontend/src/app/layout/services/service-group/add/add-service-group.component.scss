@@ -73,3 +73,12 @@
     vertical-align: middle;
   }
 }
+.btn-black {
+  background-color: #24334A;
+  color: #fff;
+
+  &:hover{
+    -webkit-transform: translateY(-1px);
+    transform: translateY(-1px);
+  }
+}

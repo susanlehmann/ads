@@ -168,13 +168,13 @@
                   	<div class="col-sm-12 mb-3">
 	                    <label class="control-label">Service description</label>
 	                    <div class="input-group">
-	                      <textarea type="text" class="form-control" rows="3" placeholder="Description will be displayed on your Fresha profile" [(ngModel)]="form.service_description" #service_description="ngModel" name="service_description" #service_description></textarea>
+	                      <textarea type="text" class="form-control" rows="3" placeholder="Description will be displayed on your Fresha profile" [(ngModel)]="form.service_description" #service_description="ngModel" name="service_description" #service_description [readonly]="checkOnline()"></textarea>
 	                    </div>
                   	</div>
                   	<div class="col-sm-12">
 	                    <label class="control-label">Service available for</label>
 	                    <div class="input-group">
-	                      <select name="service_available_for" class="form-control" [(ngModel)]="form.service_available_for" #service_available_for="ngModel" #service_available_for>
+	                      <select name="service_available_for" class="form-control" [(ngModel)]="form.service_available_for" #service_available_for="ngModel" #service_available_for [disabled]="checkOnline()">
 	                      	<option value="everyone">Everyone</option>
 	                      	<option value="male">Males Only</option>
 	                      	<option value="female">FeMales Only</option>
@@ -202,7 +202,7 @@
 						<div class="form-group">
 							<label class="control-label">{{'Duration' }}</label>
 							<div class="input-group">
-								<select [(ngModel)]="form.settin_duration" name="settin_duration" class="form-control" #settin_duration="ngModel" #settin_duration>
+								<select [(ngModel)]="form.settin_duration" name="settin_duration" class="form-control" #settin_duration="ngModel" #settin_duration [disabled]="checkExtra()">
 				            		<option value="5">5min</option>
 						            	<option value="10">10min</option>
 						            	<option value="15">15min</option>
@@ -274,7 +274,7 @@
 						</div>
                     	<div class="form-group mb-4">
 							<label class="control-label">{{'Voucher expiry period' }}</label>
-				          	<select [(ngModel)]="form.voucher_expiryperiod" name="voucher_expiryperiod" class="form-control" #voucher_expiryperiod="ngModel" #voucher_expiryperiod>
+				          	<select [(ngModel)]="form.voucher_expiryperiod" name="voucher_expiryperiod" class="form-control" #voucher_expiryperiod="ngModel" #voucher_expiryperiod [disabled]="checkVoucher()">
 				            	<option value="6" selected="selected"> Default (6 Months)</option>
 				            	<option value="1"> 1 Month</option>
 				            	<option value="2"> 2 Months</option>
@@ -300,9 +300,9 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-danger pull-left" (click)="open(remove_services)"><i class="fa fa-trash"></i> Delete </button>
-    <button type="button" class="btn btn-default pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
-    <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"><i class="fa fa-save"></i> Save </button>
+    <button type="button" class="btn btn-delete" (click)="open(remove_services)"><i class="fa fa-trash"></i> Delete </button>
+    <button type="submit" class="btn btn-black pull-right" (click)="onSubmit()"><i class="fa fa-save"></i> Save </button>
+    <button type="button" class="btn btn-white pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
   </div>
 </form>
 <div class="row">
@@ -314,11 +314,10 @@
             </button>
         </div>
         <div class="modal-body">
-            <p>You want remove services ?</p>
+            <p>Are you sure you want to delete this service ?</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="removeServices(serviceId)">Confirm</button>
-            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+            <button type="button" class="btn btn-delete pull-right" (click)="removeServices(serviceId)">Delete</button>
         </div>
     </ng-template>
 </div>
