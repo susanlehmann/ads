@@ -32,7 +32,7 @@ export class EditComponent implements OnInit {
 
 	genders = [
 		{ id: 1, name: "Male" },
-		{ id: 2, name: "Femail" },
+		{ id: 2, name: "Female" },
 		{ id: 3, name: "Unknown" },
 	];
 
@@ -43,6 +43,12 @@ export class EditComponent implements OnInit {
 	userId: any;
 	user: any = {};
 	closeResult: string;
+	month: any = [];
+	day: any = [];
+	year: any = [];
+	setYear: boolean = false;
+	mobile: any;
+	telephone: any;
 
 	constructor(
 		private http: HttpClient,
@@ -58,15 +64,15 @@ export class EditComponent implements OnInit {
 	ngOnInit() {
 		this.router.params.subscribe(params => {this.userId = params.id;});
 		this.loadInfo(this.userId);
+		this.loadMonth();
 	}
 
 	private loadInfo(id) {
 		this.userService.getUserById(id).subscribe(
-			async (success) => {
+			(success) => {
 				this.form = success;
-				this.form.mobile = this.form.phone;
-				this.form.telephone = this.form.tele_phone;
-				this.form.birthdayYear = this.datePipe.transform(this.form.birthday, 'yyyy');
+				this.mobile = this.form.phone;
+				this.telephone = this.form.tele_phone;
 				this.form.notificationType = this.form.appointment_notifications;
 				if(this.form.accepts_notifications == 1) {
 					this.form.acceptNotification = true;
@@ -79,11 +85,15 @@ export class EditComponent implements OnInit {
 					this.form.display_bookings = true;
 				}
 				this.form.referral = this.form.referral_source;
-				await Object.assign(this, this.model12, {
-					year: Number(this.datePipe.transform(this.form.birthday, 'yyyy')), 
-					month: Number(this.datePipe.transform(this.form.birthday, 'M')), 
-					day: Number(this.datePipe.transform(this.form.birthday, 'dd'))
-				});
+				if(Number(this.datePipe.transform(this.form.birthday, 'yyyy')) > 0){
+					this.setYear = true;
+					this.birthday.year = Number(this.datePipe.transform(this.form.birthday, 'yyyy'));
+				}
+				if(Number(this.datePipe.transform(this.form.birthday, 'yyyy')) >= 2019) {
+					this.setYear = false;
+				}
+				this.birthday.month = Number(this.datePipe.transform(this.form.birthday, 'M'));
+				this.birthday.day = Number(this.datePipe.transform(this.form.birthday, 'dd'));
 			},
 			error => {}
 		);
@@ -116,6 +126,16 @@ export class EditComponent implements OnInit {
 		} else {
 			client.display_bookings = 0;
 		}
+		if(this.telephone == "null" || this.telephone == null){ 
+			client.telephone = "";
+		} else {
+			client.telephone = this.telephone.internationalNumber;
+		}
+		if(this.mobile == "null" || this.mobile == null){
+			client.mobile = "";
+		} else {
+			client.mobile = this.mobile.internationalNumber;
+		}
 		client.password = "";
 		client.birthday = this.datePipe.transform(this.form.birthday, 'yyyy-MM-dd');
 		this.form.birthday = new Date(client.birthday);
@@ -135,13 +155,6 @@ export class EditComponent implements OnInit {
 		this.route.navigateByUrl('client/detail/' + this.userId);
 	}
 
-	loadDate(dayxx){
-		Object.assign(this, this.model12, {
-			year: Number(this.datePipe.transform(dayxx, 'yyyy')), 
-			month: Number(this.datePipe.transform(dayxx, 'M')), 
-			day: Number(this.datePipe.transform(dayxx, 'dd'))
-		});
-	}
 
 	selectDate(event) {
 		this.birthday = event;
@@ -174,5 +187,43 @@ export class EditComponent implements OnInit {
     		},
     		error => {}
     	);
+	}
+
+	selectMonth() {
+		this.birthday.month = Number(this.birthday.month);
+	}
+	selectDay() {
+		this.birthday.day = Number(this.birthday.day);
+	}
+	selectYear() {
+		this.birthday.year = Number(this.birthday.year);
+	}
+
+	showYear() {
+		this.setYear = true;
+	}
+
+	loadMonth(){
+		this.birthday.month = "";
+		this.birthday.day = "";
+		this.birthday.year = "";
+		this.month.push({'id': 1, 'name': 'January'});
+		this.month.push({'id': 2, 'name': 'February'});
+		this.month.push({'id': 3, 'name': 'March'});
+		this.month.push({'id': 4, 'name': 'April'});
+		this.month.push({'id': 5, 'name': 'May'});
+		this.month.push({'id': 6, 'name': 'June'});
+		this.month.push({'id': 7, 'name': 'July'});
+		this.month.push({'id': 8, 'name': 'August'});
+		this.month.push({'id': 9, 'name': 'September'});
+		this.month.push({'id': 10, 'name': 'October'});
+		this.month.push({'id': 11, 'name': 'November'});
+		this.month.push({'id': 12, 'name': 'December'});
+		for (var i = 1; i <= 31; i++) {
+			this.day.push({'id': i, 'name': i});
+		}
+		for (var i = 2018; i >= 1900; i--) {
+			this.year.push({'id': i, 'name': i});
+		}
 	}
 }

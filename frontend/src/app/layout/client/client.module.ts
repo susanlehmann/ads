@@ -10,7 +10,8 @@ import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component';
 import { CallingCodeComponent } from '../components/calling_code/calling-code.component';
-
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { BsDropdownModule } from 'ngx-bootstrap';
 @NgModule({
 	declarations: [
 		ClientComponent, 
@@ -25,7 +26,9 @@ import { CallingCodeComponent } from '../components/calling_code/calling-code.co
 		CommonModule,
 		ClientRoutingModule,
 		TranslateModule,
-		NgbModule.forRoot()
+		NgbModule.forRoot(),
+		BsDropdownModule.forRoot(),
+		NgxIntlTelInputModule
 	]
 })
 export class ClientModule { }
