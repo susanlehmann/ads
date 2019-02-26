@@ -127,7 +127,7 @@ export class Schedule {
     }
 
     isScheduleStartOnCurrentDate() {
-        return this.scheduleStartDate.getTime() === this.currentDate.getTime();
+        return this.scheduleStartDate.setHours(0, 0, 0, 0) === this.currentDate.setHours(0, 0, 0, 0);
     }
 
     setCurrentDate(currentDate: Date) {
@@ -185,8 +185,8 @@ export class Schedule {
             is_repeat: this.isRepeat ? 1 : 0,
             has_shift_2: this.hasShift2 ? 1 : 0,
             has_end_date: this.hasEndDate,
-            schedule_start: this.scheduleStartDate,
-            schedule_end: this.scheduleEndDate,
+            schedule_start: this.scheduleStartDate.toLocaleDateString(),
+            schedule_end: this.scheduleEndDate ? this.scheduleEndDate.toLocaleDateString() : null,
         };
     }
 }
