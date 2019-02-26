@@ -302,3 +302,17 @@ svg:not(:root) {
 ._1jAoG_ svg path {
   fill: white;
 }
+._1jAoG_ {
+  span {
+    i {
+      &:hover {
+        &:before {
+          content: "\f16b";
+        }
+      }
+    }
+  }
+}
+.fa-1-75x{
+  font-size: 1.75em;
+}
