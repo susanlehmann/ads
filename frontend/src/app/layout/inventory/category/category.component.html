@@ -69,7 +69,7 @@
                                     <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control" placeholder="e.g Hair Products">
                                   </div>
                                   <div class="modal-footer" style="display: inline;">
-                                    <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteCategory()"> Delete </button>
+                                    <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteCategory(category.name_category)"> Delete </button>
                                     <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
                                     <button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
                                   </div>

@@ -105,13 +105,15 @@ export class CategoryComponent implements OnInit {
     };
     }
 
-  deleteCategory() {
+  deleteCategory(name) {
+    if(confirm("Are you sure to delete "+ name)){
       this.CategoryService.deletecategory(this.selectedId)
       .subscribe((data:any) => {
               this.getCategory();
               this.notifierService.notify('success', 'A Category has been successfully deleted');
           });
-    this.modal.dismissAll();
+      this.modal.dismissAll();
+    }
   }
 
   searchCategory(event) {

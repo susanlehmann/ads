@@ -128,13 +128,15 @@ export class BrandComponent implements OnInit  {
     };
     }
 
-  deleteBrand() {
+  deleteBrand(name) {
+    if(confirm("Are you sure to delete "+ name)){
       this.BrandService.deletebrand(this.selectedId)
       .subscribe((data:any) => {
               this.getBrand();
               this.notifierService.notify('success', 'A Brand has been successfully deleted');
           });
-    this.modal.dismissAll();
+      this.modal.dismissAll();
+    }
   }
 
 

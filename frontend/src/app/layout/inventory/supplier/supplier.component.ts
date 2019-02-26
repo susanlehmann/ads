@@ -15,13 +15,13 @@ export class SupplierComponent implements OnInit {
 
   modalOptions: NgbModalOptions;
   public error = [];
-  
+
 	closeResult: string;
   listsupplier: Supplier[];
   isCreate: boolean;
   colors: string[];
   selectedId: string;
-  
+
 	constructor(
   private notifierService: NotifierService,
   private modal: NgbModal,
@@ -37,7 +37,7 @@ export class SupplierComponent implements OnInit {
 	ngOnInit() {
     this.getSupplier();
   }
-  
+
   openModal(content: NgbModalRef) {
     this.modal.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -61,7 +61,7 @@ export class SupplierComponent implements OnInit {
             this.openModal(content);
         });
   }
-	
+
 	getSupplier() {
     this.startLoading();
     this.SupplierService.getList()
@@ -76,7 +76,7 @@ export class SupplierComponent implements OnInit {
       this.stopLoading();
     });
 	}
-	
+
   onSubmit(): void {
     const dto = this.form.toDto();
     this.startLoading();
@@ -112,14 +112,16 @@ export class SupplierComponent implements OnInit {
     }
 
   deletesupplier() {
+    if(confirm("Are you sure to delete "+ name)){
       this.SupplierService.deleteSupplier(this.selectedId)
       .subscribe((data:any) => {
               this.getSupplier();
               this.notifierService.notify('success', 'A supplier has been successfully deleted');
           });
-    this.modal.dismissAll();
+      this.modal.dismissAll();
+    }
   }
-  
+
   startLoading(): void {
     this.loading = true;
   }
