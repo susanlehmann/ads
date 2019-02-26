@@ -161,7 +161,7 @@ export class Schedule {
         this.staffId = data.id_staff;
         this.isNew = false;
         this.hasShift2 = data.has_shift_2 === 1 ? true : false;
-        this.hasEndDate = data.has_end_date == null ? 0 : data.hasEndDate; // set default = 0 (onGoing)
+        this.hasEndDate = data.has_end_date == null ? 0 : data.has_end_date; // set default = 0 (onGoing)
         this.shiftStart1 = JSON.parse(data.shift1_start);
         this.shiftEnd1 = JSON.parse(data.shift1_end);
         this.shiftStart2 = JSON.parse(data.shift2_start);
