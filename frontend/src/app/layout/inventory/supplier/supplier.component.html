@@ -246,7 +246,7 @@
                                         <label class="control-label">COUNTRY</label>
                                         <select [(ngModel)]="form.country" name="notificationType" class="form-control">
                                           <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
-                                          <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                          <option *ngFor="let no of countries" value="{{no.id}}">{{no.name}}</option>
                                         </select>
                                       </div>
                                     </div>
@@ -294,7 +294,7 @@
                                     <label class="control-label">COUNTRY</label>
                                     <select [(ngModel)]="form.country" name="notificationType" class="form-control">
                                       <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
-                                      <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                      <option *ngFor="let no of countries" value="{{no.id}}">{{no.name}}</option>
                                     </select>
                                   </div>
                                 </div>
@@ -343,7 +343,7 @@
                                     <label class="control-label">COUNTRY</label>
                                     <select [(ngModel)]="form.country" name="notificationType" class="form-control">
                                       <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
-                                      <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                      <option *ngFor="let no of countries" value="{{no.id}}">{{no.name}}</option>
                                     </select>
                                   </div>
                                 </div>
@@ -475,7 +475,7 @@
                                   <label class="control-label">COUNTRY</label>
                                   <select [(ngModel)]="form.country" name="notificationType" class="form-control">
                                     <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
-                                    <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                    <option *ngFor="let no of countries" value="{{no.id}}">{{no.name}}</option>
                                   </select>
                                 </div>
                               </div>
@@ -523,7 +523,7 @@
                               <label class="control-label">COUNTRY</label>
                               <select [(ngModel)]="form.country" name="notificationType" class="form-control">
                                 <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
-                                <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                <option *ngFor="let no of countries" value="{{no.id}}">{{no.name}}</option>
                               </select>
                             </div>
                           </div>
@@ -572,7 +572,7 @@
                               <label class="control-label">COUNTRY</label>
                               <select [(ngModel)]="form.country" name="notificationType" class="form-control">
                                 <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
-                                <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                <option *ngFor="let no of countries" value="{{no.id}}">{{no.name}}</option>
                               </select>
                             </div>
                           </div>
@@ -594,7 +594,6 @@
             </div>
           </div>
 
-      </div>
     </div>
     <div class="modal-footer">
     <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="openModal(delete)"> Delete </button>
