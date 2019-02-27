@@ -193,6 +193,7 @@ export class Schedule {
     }
 
     toDto() {
+        const options = {month: 'numeric', day: 'numeric', year: 'numeric' };
         return {
             id: this.id,
             id_staff: this.staffId,
@@ -203,8 +204,8 @@ export class Schedule {
             is_repeat: this.isRepeat ? 1 : 0,
             has_shift_2: this.hasShift2 ? 1 : 0,
             has_end_date: this.hasEndDate,
-            schedule_start: this.scheduleStartDate.toLocaleDateString(),
-            schedule_end: this.hasEndDate === 1 ? this.scheduleEndDate.toLocaleDateString() : null,
+            schedule_start: this.scheduleStartDate.toLocaleDateString('en-US', options),
+            schedule_end: this.hasEndDate === 1 ? this.scheduleEndDate.toLocaleDateString('en-US', options) : null,
         };
     }
 }
