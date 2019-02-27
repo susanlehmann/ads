@@ -6,6 +6,7 @@ import { InventoryRoutingModule } from './inventory-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DataTableModule } from "angular-6-datatable";
 
 import { InventoryComponent } from './inventory.component';
 import { BrandComponent } from './brand/brand.component';
@@ -19,7 +20,16 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
-    imports: [SharedModule, CommonModule, InventoryRoutingModule, PageHeaderModule,FormsModule, NgbModule.forRoot(),NgxIntlTelInputModule,BsDropdownModule.forRoot()],
+    imports: [
+    SharedModule,
+    CommonModule,
+    InventoryRoutingModule,
+    PageHeaderModule,
+    FormsModule,
+    NgbModule.forRoot(),
+    NgxIntlTelInputModule,BsDropdownModule.forRoot(),
+    DataTableModule
+    ],
     declarations: [InventoryComponent, BrandComponent, OrderComponent, CategoryComponent, SupplierComponent,
     ListProductComponent,
     ViewProductComponent,

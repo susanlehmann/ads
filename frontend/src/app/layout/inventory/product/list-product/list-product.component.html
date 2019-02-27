@@ -12,7 +12,7 @@
 
 <ng-template #listdata>
   <div class="card card-custom mb-3">
-      <div class="card-header">
+      <div class="card-header card-filter">
         <div style="display: flex">
           <select name="brand" class="form-control du" [(ngModel)]="brandId">
               <option value=0>All brands</option>
@@ -32,13 +32,13 @@
           <button class="btn btn-light ma mr-2" (click)="searchProduct()">View</button>
           <button class="btn btn-light ma" (click)="clearFilters()">Clear filters</button>
         </div>
-        <div>
+        <!-- <div>
             <button class="btn btn-primary pull-right" type="button" [routerLink]="[ '/inventory/products/add' ]">Add
               product</button>
-        </div>
+        </div> -->
       </div>
 
-    <div class="card-header">
+    <div class="card-header mbx">
       <!-- <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text">
@@ -80,8 +80,31 @@
           </tr>
         </tfoot> -->
       </table>
-
     </div>
-
+    
+    <div class="on-show-display">
+      <span>Displaying all {{number_display}} products</span>
+    </div>
   </div>
 </ng-template>
+<div class="row">
+  <div id="inbox" class="product">
+    <div class="fab btn-group show-on-hover dropup">
+      <div data-toggle="tooltip" data-placement="left" title="Compose">
+        <button type="button" class="btn btn-black btn-io" data-toggle="dropdown">
+          <span class="fa-stack fa-1-75-x">
+            <i class="fa fa-plus fa-stack-1x fa-inverse fab-primary"></i>
+          </span>
+        </button>
+      </div>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li>
+          <span title="Add New Product" [routerLink]="[ '/inventory/products/add' ]">
+            <i class="fa fa-archive"></i>
+          </span>
+          <div class="tooltip_group">New Product</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

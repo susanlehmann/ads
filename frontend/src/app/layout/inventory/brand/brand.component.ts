@@ -30,7 +30,7 @@ export class BrandComponent implements OnInit  {
   collection: any[] = this.listbrands;
   _list :any;
   listproducts: any;
-
+  number_display: number;
 
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
@@ -88,7 +88,7 @@ export class BrandComponent implements OnInit  {
          .sort((a, b) => {
            return a.id - b.id;
          });
-         console.log(this.listbrands);
+         this.number_display = listbrands.brand.length;
 		}, err => {
       this.stopLoading();
     });
@@ -169,6 +169,7 @@ export class BrandComponent implements OnInit  {
   }
   _brand :any;
   getNumberproduct(brand) {
+
     this._brand = brand;
     //id = this.
     //let product = this.listproducts.filter(s => s.id_category == id);

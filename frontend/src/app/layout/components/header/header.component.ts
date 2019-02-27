@@ -11,6 +11,7 @@ import { HttpcallService } from './../../../shared/services/httpcall.service';
 })
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
+    title: string;
 
     constructor(
         private translate: TranslateService, 
@@ -26,12 +27,8 @@ export class HeaderComponent implements OnInit {
         this.translate.use(browserLang.match(/en|vi|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');
 
         this.router.events.subscribe(val => {
-            if (
-                val instanceof NavigationEnd &&
-                window.innerWidth <= 992 &&
-                this.isToggled()
-            ) {
-                this.toggleSidebar();
+            if (val instanceof NavigationEnd) {
+                this.title = val.url.split('/')[1];
             }
         });
     }

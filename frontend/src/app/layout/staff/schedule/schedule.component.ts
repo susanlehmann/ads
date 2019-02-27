@@ -11,7 +11,7 @@ import { forkJoin } from 'rxjs';
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss'],
   providers: [
-    {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter},
+    { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter },
   ]
 })
 export class ScheduleComponent implements OnInit {
@@ -35,8 +35,8 @@ export class ScheduleComponent implements OnInit {
     this.today = new Date();
     this.weekdays = this.getCurrentWeek();
     this.staffFilter = 0; // show all staff
-    this.currentWeekModel = {day: 1, month: 1, year: 2019};
-   }
+    this.currentWeekModel = { day: 1, month: 1, year: 2019 };
+  }
 
   ngOnInit() {
     this.changeWeek();
@@ -84,46 +84,48 @@ export class ScheduleComponent implements OnInit {
   }
 
   onClickDeleteThisShiftOnly() {
-    this.selectedSchedule.setEndScheduleToPreviousWeek(); // TODO: check thieu case?
-    this.updateSchedule();
-  }
+    this.selectedSchedule.setStartScheduleToNextWeek();
+    let add = this.addSchedule(this.selectedSchedule.toDto());
 
-  overrideUpcoming() {
-    this.selectedStaff.conflictedSchedules.forEach(c => {
-      this.deleteSchedule(c.staffId);
+    this.selectedSchedule.resetStartDate();
+    this.selectedSchedule.setEndScheduleToPreviousWeek();
+    let update = this.updateSchedule(this.selectedSchedule.toDto());
+
+    forkJoin([add, update]).subscribe(v => {
+      this.loadData();
+      this.modal.dismissAll();
+      this.notifierService.notify('success', 'The schedule has been successfully deleted');
     });
   }
 
-  onClickUpdateUpcoming() {
+  overrideUpcoming(): any[] {
+    return this.selectedStaff.conflictedSchedules.map(c => this.deleteSchedule(c.id));
+  }
+
+  onClickUpdateUpcoming(): void {
+    let f;
     if (this.selectedSchedule.isNew) { // new schedule
-      this.addSchedule();
+      f = this.addSchedule(this.selectedSchedule.toDto());
     } else {
-      this.updateSchedule();
+      f = this.updateSchedule(this.selectedSchedule.toDto());
     }
-    this.overrideUpcoming();
+
+    forkJoin([f, ...this.overrideUpcoming()]).subscribe(v => {
+      this.loadData();
+      this.modal.dismissAll();
+      this.notifierService.notify('success', 'The schedule has been successfully updated');
+    });
+
 
   }
 
-  onClickUpdateThisShiftOnly() {
-    const clone = this.selectedSchedule.clone();
-        this.selectedSchedule.setEndScheduleToPreviousWeek();
-    if (this.selectedSchedule.isNew) { // new mode
-      this.selectedSchedule.setToNoRepeat();
-      this.addSchedule();
-    } else { // update mode
-      if (this.selectedSchedule.isScheduleStartOnCurrentDate()) {
-        this.selectedSchedule.setStartScheduleToNextWeek();
-        this.updateSchedule();
-      } else {
-        const clone = this.selectedSchedule.clone();
-        this.selectedSchedule.setEndScheduleToPreviousWeek();
-        this.updateSchedule();
-      }
-
-    }
+  onClickUpdateThisShiftOnly(): any {
+    this.selectedSchedule.setStartScheduleToToday();
+    this.selectedSchedule.setToNoRepeat();
+    this.addSchedule();
   }
 
-  onClickSaveSchedule(confirmOverrideModal) {
+  onClickSaveSchedule(confirmOverrideModal): any {
     this.isConfirmDeleteRepeat = false;
 
     if (this.selectedSchedule.isRepeat) {
@@ -148,33 +150,42 @@ export class ScheduleComponent implements OnInit {
     this.modal.dismissAll();
   }
 
-  addSchedule() {
-    const dto = this.selectedSchedule.toDto();
-    this.staffService.addSchedule(dto).subscribe(v => {
+  addSchedule(dto?): any {
+    if (dto) {
+      return this.staffService.addSchedule(dto);
+    }
+
+    this.staffService.addSchedule(this.selectedSchedule.toDto()).subscribe(v => {
       this.loadData();
       this.modal.dismissAll();
       this.notifierService.notify('success', 'A new schedule has been successfully added');
     });
   }
 
-  updateSchedule() {
-    const dto = this.selectedSchedule.toDto();
-    this.staffService.updateSchedule(dto).subscribe(v => {
+  updateSchedule(dto?): any {
+    if (dto) {
+      return this.staffService.updateSchedule(dto);
+    }
+
+    this.staffService.updateSchedule(this.selectedSchedule.toDto()).subscribe(v => {
       this.loadData();
       this.modal.dismissAll();
       this.notifierService.notify('success', 'The schedule has been successfully updated');
     });
   }
 
-  deleteSchedule(id?) {
-    id = id ? id : this.selectedSchedule.id;
-    this.staffService.deleteScheduleById(id).subscribe(v => {
+  deleteSchedule(id?): any {
+    if (id) {
+      return this.staffService.deleteScheduleById(id);
+    }
+
+    this.staffService.deleteScheduleById(this.selectedSchedule.id).subscribe(v => {
       this.modal.dismissAll();
       this.loadData();
     });
   }
 
-  loadData(text?) {
+  loadData(text?): void {
     const schedules = this.staffService.getListSchedule();
     const staffs = this.staffService.getList();
 
@@ -184,13 +195,13 @@ export class ScheduleComponent implements OnInit {
 
       // fix bug khoi dong ko hien date.
       if (text) {
-        const weekPicker = document.querySelector('.week-picker') as HTMLInputElement;
+        const weekPicker = document.querySelector('.week-picker input') as HTMLInputElement;
         weekPicker.value = text;
       }
     });
   }
 
-  mapStaffsAndSchedules(staffs, schedules) {
+  mapStaffsAndSchedules(staffs, schedules): StaffSchedule[] {
     return staffs.map(e => {
       const sche = new StaffSchedule();
       sche.staffId = e.id;
@@ -207,26 +218,27 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  nextWeek() {
+  nextWeek(): void {
     this.today.setDate(this.today.getDate() + 7)
     this.changeWeek(this.today);
   }
 
-  prevWeek() {
+  prevWeek(): void {
     this.today.setDate(this.today.getDate() - 7)
     this.changeWeek(this.today);
   }
 
-  changeWeek(date?) {
-    //this.currentWeekModel = {day: 1, month: 1, year: 2019}; TODO: can't set value to ngb datepicker.
+  changeWeek(date?): void {
+    //this.currentWeekModel = {day: 1, month: 1, year: 2019}; // can't set value to ngb datepicker => set manually
     const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-        ];
+      "July", "August", "September", "October", "November", "December"
+    ];
 
     this.today = date ? date : new Date(); // get current system date if param was not passed
+
     this.weekdays = this.getCurrentWeek();
 
-    const weekPicker = document.querySelector('.week-picker') as HTMLInputElement;
+    const weekPicker = document.querySelector('.week-picker input') as HTMLInputElement;
     const startDate = this.weekdays[0].date;
     const endDate = this.weekdays[6].date;
     let displayText;
@@ -241,17 +253,17 @@ export class ScheduleComponent implements OnInit {
     this.loadData(displayText);
   }
 
-  getCurrentWeek() {
+  getCurrentWeek(): any[] {
     const options = { day: 'numeric', weekday: 'short', month: 'short' };
     const currDay = new Date(this.today.getTime());
     const week = [];
 
-  for (let i = 1; i <= 7; i++) {
-    const first = currDay.getDate() - currDay.getDay() + i;
-    const date = new Date(currDay.setDate(first));
-    week.push({date: date, dateString: date.toLocaleDateString('en-US', options)});
-  }
-  return week;
+    for (let i = 1; i <= 7; i++) {
+      const first = currDay.getDate() - currDay.getDay() + i;
+      const date = new Date(currDay.setDate(first));
+      week.push({ date: date, dateString: date.toLocaleDateString('en-US', options) });
+    }
+    return week;
   }
 
 }

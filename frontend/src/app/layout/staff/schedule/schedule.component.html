@@ -1,13 +1,14 @@
 <div class="card card-custom mb-3">
-  <div class="card-header">
-    <select [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' class="custom-select custom-select mb-3">
+  <div class="card-header row">
+    <select [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' class="custom-select col-lg-2 col-md-3 col-sm-12">
       <option value=0 selected>All Staff</option>
       <option value={{staff.staffId}} *ngFor="let staff of allSchedules">{{staff.staffName}}</option>
     </select>
-    <div style="display: flex;">
+    <div class="col-md-1 col-sm-12"><p></p></div>
+    <div class="week-picker col-md-6 col-sm-12 justify-content-end" style="display: flex;">
       <button class="btn btn-light ma" (click)="prevWeek()">&lt;</button>
       <button class="btn btn-light ma" (click)="changeWeek()">Today</button>
-      <input class="form-control week-picker" (click)="week_picker.open()" readonly
+      <input class="form-control" (click)="week_picker.open()" readonly
           name="week-picker" [(ngModel)]="currentWeekModel" (ngModelChange)="changeWeek($event)" ngbDatepicker #week_picker="ngbDatepicker">
       <button class="btn btn-light ma mr-2" (click)="nextWeek()">&gt;</button>
     </div>
@@ -74,13 +75,13 @@
           <ngb-timepicker [(ngModel)]="selectedSchedule.shiftStart2" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()' ></ngb-timepicker>
         </div>
 
-        <div class="col-sm-5">
+        <div class="col-sm-6">
           <ngb-timepicker [(ngModel)]="selectedSchedule.shiftEnd2" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()'></ngb-timepicker>
         </div>
 
-        <!-- <div class="col-sm-1" style="align-self: center;">
-                    <button (click)="toggleShift2()" style="background-color: white; border: none; color:red;cursor: pointer;">x</button>
-                </div> -->
+        <div class="col-sm-1 closeShift" style="align-self: center;">
+          <button (click)="toggleShift2()" style="background-color: white; border: none; color:red;cursor: pointer;">x</button>
+        </div>
       </div>
       <div *ngIf="selectedSchedule.isValidShift" class="row form-group" style="justify-content: center;">
         {{selectedSchedule.breakTime.hour + ' hour ' + selectedSchedule.breakTime.minute + ' minute'}} break time
@@ -136,7 +137,9 @@
   
     <div class="modal-body">
         You {{isConfirmDeleteRepeat ? 'are deleting' : 'have edited'}} a shift that repeats weekly. {{isConfirmDeleteRepeat ? 'Deleting' : 'Updating'}} upcoming shifts will overwrite 
-        {{selectedSchedule.staffName}}'s ongoing {{selectedSchedule.currentDate.toLocaleDateString('en-US', {weekday: 'long'}) }} schedule
+        {{selectedSchedule.staffName}}'s
+        {{selectedSchedule.hasEndDate === 1 ? '' : 'ongoing'}} {{selectedSchedule.currentDate.toLocaleDateString('en-US', {weekday: 'long'}) }} schedule
+        {{selectedSchedule.hasEndDate === 1 ? 'up to ' + selectedSchedule.scheduleEndDate.toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric'}) : '' }}
     </div>
   
     <div class="modal-footer">

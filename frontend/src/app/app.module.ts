@@ -34,7 +34,7 @@ import { InventoryService } from './layout/inventory/inventory.service';
 import { NotifierService } from 'angular-notifier';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { OrderModule } from 'ngx-order-pipe';
-
+import { DataTableModule } from "angular-6-datatable";
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -105,7 +105,8 @@ const customNotifierOptions: NotifierOptions = {
         NotifierModule.withConfig(customNotifierOptions),
         SocialLoginModule,
         PDFExportModule,
-        NgxIntlTelInputModule
+        NgxIntlTelInputModule,
+        DataTableModule
     ],
     declarations: [AppComponent, SearchComponent, EditProductComponent],
     providers: [
