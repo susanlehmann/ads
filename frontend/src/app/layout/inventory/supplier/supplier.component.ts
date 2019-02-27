@@ -21,24 +21,26 @@ export class SupplierComponent implements OnInit {
 
 	closeResult: string;
   listsupplier: Supplier[];
+  _listSup: any = [];
   isCreate: boolean;
   colors: string[];
   selectedId: string;
   listproducts: any;
   _list: any;
+  display: number;
 
 	constructor(
   private notifierService: NotifierService,
   private modal: NgbModal,
   private SupplierService: SupplierService,
-  private InventoryService: InventoryService,
+  private InventoryService: InventoryService
 	) {
     this.form = new Supplier();
     this.modalOptions = {
       backdrop: 'static',
       size: 'lg'
     };
-    this.listsupplier = [];
+    // this.listsupplier = [];
 	}
 
 	ngOnInit() {
@@ -94,13 +96,10 @@ export class SupplierComponent implements OnInit {
 	getSupplier() {
     this.startLoading();
     this.SupplierService.getList()
-		.subscribe((listusers:any) => {
+		.subscribe(listusers => {
         this.stopLoading();
-        this.listsupplier = listusers.supplier
-        .map(Supplier.toModel)
-        .sort((a, b) => {
-          return a.id - b.id;
-        });
+        this._listSup = listusers;
+        this.display = this._listSup.supplier.length;
 		}, err => {
       this.stopLoading();
     });

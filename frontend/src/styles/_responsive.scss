@@ -33,3 +33,86 @@
     }
 }
 
+
+
+$breakpoint-iphone: 667px;
+//desktop
+@media (min-width: $breakpoint-iphone) {
+    
+    .block-mb {
+        max-width: 140px;
+        flex: 0 0 140px;
+    }
+    .box-button {
+        .dropdown-menu {
+            &.show {
+                width: -webkit-fill-available;
+            }
+        }
+    }
+
+    .table {
+        tbody {
+            tr {
+                &:last-child {
+                    border-bottom: 1px solid #eee;
+                }
+            }
+        }
+    }
+    
+}
+
+//mobile
+@media (max-width: $breakpoint-iphone) {
+  
+    label {
+        &.control-label{
+            margin-bottom: 0 !important;
+            margin-top: .5rem;
+        }
+        
+    }
+
+    .table {
+        tbody {
+            tr {
+                &:last-child {
+                    border-bottom: 1px solid #eee;
+                }
+            }
+        }
+    }
+
+    .box-birthday > div {
+        margin-bottom: .3rem;
+    }
+
+    .box-button {
+        .dropdown-menu {
+            &.show {
+                width: -webkit-fill-available;
+            }
+        }
+    }
+
+    
+    .card {
+        .mbx {
+            input {
+                width: 100% !important;
+            }
+        }
+        .card-filter {
+
+            div {
+                 display: block !important;
+                * {
+                    width: 100%;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+
+}

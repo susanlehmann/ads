@@ -55,10 +55,5 @@ $breakpoint-iphone: 667px;
 //mobile
 @media (max-width: $breakpoint-iphone) {
 
-  .modal-footer {
-      position: fixed;
-      bottom: 0;
-      background: #fff;
-      width: 100%;
-  }
+  
 }

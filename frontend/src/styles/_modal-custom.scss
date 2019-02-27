@@ -8,3 +8,93 @@
   margin: -1rem 0rem -1rem auto;
   outline: none;
 }
+
+$breakpoint-iphone: 667px;
+//desktop
+@media (min-width: $breakpoint-iphone) {
+  
+}
+
+//mobile
+
+@media (max-width: 375px) { 
+	.box-add-product {
+		.modal-body {
+		    padding: 25% 0 0 0 !important;
+		}
+	}
+
+}
+@media (max-width: $breakpoint-iphone) {
+  	
+  	.box-add-product {
+  		height: auto !important;
+  		.modal-header {
+		    position: fixed;
+		    width: 100%;
+		    background: #fff;
+		    z-index: 99;
+
+		    .close {
+			    position: absolute;
+			    right: 10px;
+			    font-size: 2em;
+			}
+		}
+
+		.modal-body {
+		    padding: 70px 0 0 0 !important;
+		}
+  		.modal-footer {
+  			position: sticky;
+
+  			.btn-dark {
+  				    width: -webkit-fill-available;
+  			}
+  		}
+  	}
+	.box-add {
+		.modal-footer { 
+			.btn-white {
+				display: block;
+			}
+		}
+	}
+
+	.box-delete {
+		.modal-footer { 
+			position: static;
+		}
+	}
+
+	.box-un-block {
+		.modal-footer { 
+			position: static;
+		}
+	}
+
+	.box-block {
+		.modal-footer { 
+			position: static;
+		}
+	}
+
+	.group-service {
+		.modal-footer { 
+			position: static;
+		}
+	}
+	.modal-footer {
+		position: fixed;
+		bottom: 0;
+		background: #fff;
+		width: auto;
+		padding: 1em 2em;
+
+		.btn-white {
+			display: none;
+		}
+	}
+
+
+}

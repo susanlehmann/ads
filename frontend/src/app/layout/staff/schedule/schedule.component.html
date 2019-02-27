@@ -75,13 +75,13 @@
           <ngb-timepicker [(ngModel)]="selectedSchedule.shiftStart2" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()' ></ngb-timepicker>
         </div>
 
-        <div class="col-sm-5">
+        <div class="col-sm-6">
           <ngb-timepicker [(ngModel)]="selectedSchedule.shiftEnd2" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()'></ngb-timepicker>
         </div>
 
-        <!-- <div class="col-sm-1" style="align-self: center;">
-                    <button (click)="toggleShift2()" style="background-color: white; border: none; color:red;cursor: pointer;">x</button>
-                </div> -->
+        <div class="col-sm-1 closeShift" style="align-self: center;">
+          <button (click)="toggleShift2()" style="background-color: white; border: none; color:red;cursor: pointer;">x</button>
+        </div>
       </div>
       <div *ngIf="selectedSchedule.isValidShift" class="row form-group" style="justify-content: center;">
         {{selectedSchedule.breakTime.hour + ' hour ' + selectedSchedule.breakTime.minute + ' minute'}} break time

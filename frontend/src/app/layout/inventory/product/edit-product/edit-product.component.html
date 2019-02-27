@@ -1,4 +1,4 @@
-<div class="modal-content full-screen">
+<div class="modal-content full-screen" [ngClass]="isAdd ? 'box-add-product' : 'box-edit-product'">
     <div class="modal-header">
         <h4 class="modal-title col-sm-4 offset-sm-4">{{isAdd ? 'Create Product' : 'Edit Product'}}</h4>
         <button type="button" class="col-sm-4 close" aria-label="Close">

@@ -1,4 +1,5 @@
 import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+declare var Date: any;
 
 export class StaffSchedule {
     staffId: number;

@@ -21,6 +21,7 @@ export class ListProductComponent implements OnInit {
   supplierId = 0;
   keyword: string;
   keyWordChanged: Subject<string>;
+  number_display: number; 
 
   constructor(
     private inventoryService: InventoryService,
@@ -46,6 +47,7 @@ export class ListProductComponent implements OnInit {
     this.inventoryService.getListProduct().subscribe((list: any) => {
       this.products = list.product.map(Product.toModel);
       this.hasProduct = this.products.length === 0 ? false : true;
+      this.number_display = this.products.length;
     });
   }
 

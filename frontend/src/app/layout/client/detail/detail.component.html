@@ -134,50 +134,56 @@
 			</div>
 		</div>
 		<ng-template #content let-c="close" let-d="dismiss">
-	        <div class="modal-header">
-	            <h5 class="modal-title">Delete Client</h5>
-	            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-	                <span aria-hidden="true">&times;</span>
-	            </button>
-	        </div>
-	        <div class="modal-body">
-	            <p>Are you sure? This action cannot be undone.</p>
-	        </div>
-	        <div class="modal-footer">
-	            <button type="button" class="btn btn-danger" (click)="removeUser(client_info?.id)">Delete</button>
+	        <div class="box-delete">
+	        	<div class="modal-header">
+		            <h5 class="modal-title">Delete Client</h5>
+		            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>
+		        <div class="modal-body">
+		            <p>Are you sure? This action cannot be undone.</p>
+		        </div>
+		        <div class="modal-footer">
+		            <button type="button" class="btn btn-danger" (click)="removeUser(client_info?.id)">Delete</button>
+		        </div>
 	        </div>
 	    </ng-template>
 		<ng-template #content_block let-c="close" let-d="dismiss">
-	        <div class="modal-header">
-	            <h5 class="modal-title">Block Client</h5>
-	            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-	                <span aria-hidden="true">&times;</span>
-	            </button>
-	        </div>
-	        <div class="modal-body">
-	            <p>Are you sure you want to block this client?</p>
-				<p>Blocking prevents this client from booking online appointments with you, they will find no available time slots.</p>
-				<p>Blocked clients are also automatically excluded from any marketing messages.
-				</p>
-	        </div>
-	        <div class="modal-footer">
-	            <button type="button" style="width: 50%" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
-	            <button type="button" style="width: 50%" class="btn btn-primary" (click)="blockUser(client_info)">Block</button>
+	        <div class="box-block">
+	        	<div class="modal-header">
+		            <h5 class="modal-title">Block Client</h5>
+		            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>
+		        <div class="modal-body">
+		            <p>Are you sure you want to block this client?</p>
+					<p>Blocking prevents this client from booking online appointments with you, they will find no available time slots.</p>
+					<p>Blocked clients are also automatically excluded from any marketing messages.
+					</p>
+		        </div>
+		        <div class="modal-footer">
+		            <button type="button" style="width: 50%" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+		            <button type="button" style="width: 50%" class="btn btn-primary" (click)="blockUser(client_info)">Block</button>
+		        </div>
 	        </div>
 	    </ng-template>
 		<ng-template #content_unblock let-c="close" let-d="dismiss">
-	        <div class="modal-header">
-	            <h5 class="modal-title">Mở khóa nhân viên : {{client_info?.firstName}} {{client_info?.lastName}}</h5>
-	            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-	                <span aria-hidden="true">&times;</span>
-	            </button>
-	        </div>
-	        <div class="modal-body">
-	            <p>Bạn có đồng ý mở khóa nhân viên {{client_info?.firstName}} {{client_info?.lastName}} ?</p>
-	        </div>
-	        <div class="modal-footer">
-	            <button type="button" class="btn btn-primary" (click)="unblockUser(client_info)">Confirm</button>
-	            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+	        <div class="box-un-block">
+	        	<div class="modal-header">
+		            <h5 class="modal-title">Un-Block Client</h5>
+		            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>
+		        <div class="modal-body">
+		            <p>Are you sure you want to un-block this client?</p>
+		        </div>
+		        <div class="modal-footer">
+		            <button type="button" class="btn btn-primary" (click)="unblockUser(client_info)">Confirm</button>
+		            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+		        </div>
 	        </div>
 	    </ng-template>
 	</div>
