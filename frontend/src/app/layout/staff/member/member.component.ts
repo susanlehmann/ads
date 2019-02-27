@@ -3,6 +3,7 @@ import {NgbModal, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap
 import { Staff } from '../model/staff'
 import { NotifierService } from 'angular-notifier';
 import { StaffService } from '../staff.service';
+import { ServicesService } from 'src/app/shared/services/serv.service';
 
 @Component({
   selector: 'app-member',
@@ -20,11 +21,15 @@ export class MemberComponent implements OnInit {
   isCreate: boolean;
   colors: string[];
   selectedId: string;
+
+  services: any[];
+  selectAll = true;
   
 	constructor(
   private notifierService: NotifierService,
   private modal: NgbModal,
   private staffService: StaffService,
+  private svService: ServicesService,
 	) {
     this.form = new Staff();
     this.colors = [
@@ -39,6 +44,7 @@ export class MemberComponent implements OnInit {
 	ngOnInit() {
     this.test();
     this.getUser();
+    this.getServices();
   }
 
   test() {
@@ -75,6 +81,15 @@ export class MemberComponent implements OnInit {
             this.form.updateData(data.user);
             this.openModal(content);
         });
+  }
+
+  getServices() {
+    const req = {ownerId: JSON.parse(localStorage.getItem('user')).id};
+    this.svService.listServiceIngroup(req).subscribe(v => {
+      this.services = v.service.map(s => {
+        return {id: s.id, name_service: s.name_service, selected: true};
+      });
+    });
   }
 	
 	getUser() {
