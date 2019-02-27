@@ -136,7 +136,9 @@
   
     <div class="modal-body">
         You {{isConfirmDeleteRepeat ? 'are deleting' : 'have edited'}} a shift that repeats weekly. {{isConfirmDeleteRepeat ? 'Deleting' : 'Updating'}} upcoming shifts will overwrite 
-        {{selectedSchedule.staffName}}'s ongoing {{selectedSchedule.currentDate.toLocaleDateString('en-US', {weekday: 'long'}) }} schedule
+        {{selectedSchedule.staffName}}'s
+        {{selectedSchedule.hasEndDate === 1 ? '' : 'ongoing'}} {{selectedSchedule.currentDate.toLocaleDateString('en-US', {weekday: 'long'}) }} schedule
+        {{selectedSchedule.hasEndDate === 1 ? 'up to ' + selectedSchedule.scheduleEndDate.toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric'}) : '' }}
     </div>
   
     <div class="modal-footer">

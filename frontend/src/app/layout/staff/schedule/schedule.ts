@@ -45,7 +45,10 @@ export class StaffSchedule {
         let totalWeeklyHours = 0;
 
         this.weekSchedule = weekRange.map(d => {
-            const found = filtered.filter(s => s.scheduleStartDate.getDay() === d.date.getDay())[0];
+            const found = filtered
+            .filter(s => s.scheduleStartDate.getDay() === d.date.getDay())
+            .sort((a, b) => b.scheduleStartDate.getTime() - a.scheduleStartDate.getTime())
+            [0];
 
             if (found) {
                 found.setCurrentDate(d.date);
@@ -79,6 +82,8 @@ export class Schedule {
     currentDate: Date;
     breakTime: NgbTimeStruct;
 
+    backupStartDate;
+
     /**
      * determine if the schedule is new or not
      */
@@ -103,7 +108,7 @@ export class Schedule {
         this.hasEndDate = 0;
     }
 
-    clone() {
+    clone() { // not cloning function, unusable
         const cloned = Object.assign({}, this);
         cloned.scheduleEndDate = cloned.scheduleEndDate ? new Date(cloned.scheduleEndDate.getTime()) : null;
         cloned.scheduleStartDate = new Date(cloned.scheduleStartDate.getTime());
@@ -114,14 +119,26 @@ export class Schedule {
 
     setToNoRepeat() {
         this.isRepeat = false;
+        this.hasEndDate = 0;
         this.scheduleEndDate = null;
     }
 
     setStartScheduleToNextWeek() {
+        this.setStartScheduleToToday();
         this.scheduleStartDate.setDate(this.scheduleStartDate.getDate() + 7);
     }
 
+    setStartScheduleToToday() {
+        this.backupStartDate =  new Date(this.scheduleStartDate);
+        this.scheduleStartDate = new Date(this.currentDate);
+    }
+
+    resetStartDate() {
+        this.scheduleStartDate = new Date(this.backupStartDate);
+    }
+
     setEndScheduleToPreviousWeek() {
+        this.hasEndDate = 1;
         this.scheduleEndDate = new Date(this.currentDate);
         this.scheduleEndDate.setDate(this.currentDate.getDate() - 7);
     }
@@ -135,7 +152,8 @@ export class Schedule {
     }
 
     getTotalHoursOfTheDay() {
-        return this.shiftEnd1.hour - this.shiftStart1.hour + this.shiftEnd2.hour - this.shiftStart2.hour;
+        return this.shiftEnd1.hour - this.shiftStart1.hour
+        + (this.hasShift2 ? this.shiftEnd2.hour - this.shiftStart2.hour : 0);
     }
 
     toggleShift2() {
@@ -186,7 +204,7 @@ export class Schedule {
             has_shift_2: this.hasShift2 ? 1 : 0,
             has_end_date: this.hasEndDate,
             schedule_start: this.scheduleStartDate.toLocaleDateString(),
-            schedule_end: this.scheduleEndDate ? this.scheduleEndDate.toLocaleDateString() : null,
+            schedule_end: this.hasEndDate === 1 ? this.scheduleEndDate.toLocaleDateString() : null,
         };
     }
 }
