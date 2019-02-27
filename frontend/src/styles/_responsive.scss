@@ -5,10 +5,10 @@
         }
     }
     
-    .navbar-toggler.mobile {
+    .mobile {
         display: block;
     }
-    .navbar-toggler.desktop {
+    .desktop {
         display: none;
     }
 }
@@ -22,10 +22,10 @@
             left: 0px !important;
         }
     }
-    .navbar-toggler.mobile {
+    .mobile {
         display: none;
     }
-    .navbar-toggler.desktop {
+    .desktop {
         display: block;
     }
     .sidebar.sidebar-mobile-menu {
