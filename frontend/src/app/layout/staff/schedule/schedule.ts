@@ -34,7 +34,7 @@ export class StaffSchedule {
 
         const filtered = this.allSchedules.filter(s => {
             const scheduleStart = s.scheduleStartDate.getTime();
-            const scheduleEnd = s.hasEndDate ? s.scheduleEndDate.getTime() : null;
+            const scheduleEnd = s.hasEndDate == 1 ? s.scheduleEndDate.getTime() : null;
             const scheduleStartInRange = startWeek <= scheduleStart && scheduleStart <= endWeek;
             const scheduleEndInOrAfterRange = s.isRepeat
             && scheduleStart < startWeek
@@ -206,7 +206,7 @@ export class Schedule {
             has_shift_2: this.hasShift2 ? 1 : 0,
             has_end_date: this.hasEndDate,
             schedule_start: this.scheduleStartDate.toLocaleDateString('en-US', options),
-            schedule_end: this.hasEndDate === 1 ? this.scheduleEndDate.toLocaleDateString('en-US', options) : null,
+            schedule_end: this.hasEndDate == 1 ? this.scheduleEndDate.toLocaleDateString('en-US', options) : null,
         };
     }
 }

@@ -84,6 +84,12 @@ export class ScheduleComponent implements OnInit {
   }
 
   onClickDeleteThisShiftOnly() {
+    if (this.selectedSchedule.isScheduleStartOnCurrentDate()) {
+      this.selectedSchedule.setStartScheduleToNextWeek();
+      this.addSchedule();
+      return;
+    }
+
     this.selectedSchedule.setStartScheduleToNextWeek();
     let add = this.addSchedule(this.selectedSchedule.toDto());
 
