@@ -177,7 +177,7 @@ th {
   text-align: left;
 }
 ._3uGQFE {
-  text-align: right;
+  text-align: left;
 }
 ._1QKGAB {
   position: absolute;
@@ -225,7 +225,7 @@ svg:not(:root) {
   font-size: 14px;
 }
 ._3uGQFE {
-  text-align: right;
+  text-align: left;
 }
 .PQsoKY {
   display: flex;
@@ -329,4 +329,36 @@ svg:not(:root) {
 }
 ._1jAoG_ svg path {
   fill: white;
+}
+$breakpoint-iphone: 767px;
+//desktop
+@media (min-width: $breakpoint-iphone){
+  .desktop{
+    display: block;
+  }
+  .mobile{
+    display: none;
+  }
+}
+@media (max-width: $breakpoint-iphone){
+  .desktop{
+    display: none;
+  }
+  .mobile{
+    display: block;
+  }
+}
+._1jAoG_ {
+  span {
+    i {
+      &:hover {
+        &:before {
+          content: "\f16b";
+        }
+      }
+    }
+  }
+}
+.fa-1-75x{
+  font-size: 1.75em;
 }

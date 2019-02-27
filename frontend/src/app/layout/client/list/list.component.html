@@ -1,5 +1,5 @@
 <div class="row justify-content-between">
-	<div class="col-md-5 col-ms-12">
+	<div class="col-md-4 col-sm-9 width-mb">
 		<div class="input-group mb-2">
 			<div class="input-group-prepend">
 				<div class="input-group-text">
@@ -9,15 +9,32 @@
 			<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search by name, e-mail or mobile number" (input)="searchClient($event)">
 		</div>
 	</div>
-	<!-- <div class="col-md-2 col-sm-12"> -->
-		<!-- <button class="btn btn-primary" ><i class="fa fa-plus"></i> Add client</button> -->
-		<!-- <select class="custom-select custom-select mb-3 form-control">
-			<option selected>Options</option>
-			<option value="1">One</option>
-			<option value="2">Two</option>
-			<option value="3">Three</option>
-		</select> -->
-	<!-- </div> -->
+	<div class="col-lg-1 col-md-2 block-mb">
+		<div ngbDropdown>
+            <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                <span class="desktop">Options</span>
+                <span class="mobile">
+                	<i class="fa fa-circle"></i>
+                	<i class="fa fa-circle"></i>
+                	<i class="fa fa-circle"></i>
+                </span>
+            </a>
+            <div ngbDropdownMenu>
+                <a href="javascript:void(0)" class="dropdown-item">
+                    Download Excel
+                </a>
+                <a href="javascript:void(0)" class="dropdown-item">
+                    Download CSV
+                </a>
+                <a href="javascript:void(0)" class="dropdown-item">
+                    Import Clients
+                </a>
+                <a href="javascript:void(0)" class="dropdown-item">
+                    Merge Clients
+                </a>
+            </div>
+        </div>
+	</div>
 </div>
 <div class="clearfix"></div>
 <div class="container-fuild">
@@ -59,13 +76,13 @@
 								</tr>
 							</ng-container>
 						</tbody>
-						<tfoot *ngIf="numberList > 0">
+						<!-- <tfoot *ngIf="numberList > 0">
 							<tr>
 								<th colspan="3">
 									paging
 								</th>
 							</tr>
-						</tfoot>
+						</tfoot> -->
 					</table>
 				</div>
 				<div class="box-desktop">
@@ -99,20 +116,20 @@
 									</td>
 									<td>{{client?.phone}}</td>
 									<td>{{client?.email}}</td>
-									<td>{{client?.gender == '1' ? 'Male' : 'FeMale'}}</td>
+									<td>{{client?.gender == '1' ? 'Male' : client?.gender == '2' ? 'FeMale' : 'Unknown'}}</td>
 									<td>
 										<i class="fa fa-2x" [ngClass]="client?.status == '1' ? 'fa-check-circle active' : 'fa-times-circle block'"></i>
 									</td>
 								</tr>
 							</ng-container>
 						</tbody>
-						<tfoot *ngIf="numberList > 0">
+						<!-- <tfoot *ngIf="numberList > 0">
 							<tr>
 								<th colspan="5">
 									paging
 								</th>
 							</tr>
-						</tfoot>
+						</tfoot> -->
 					</table>
 				</div>
 			</div>

@@ -8,7 +8,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from  'ngx-ui-loader';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
-
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
@@ -104,7 +104,8 @@ const customNotifierOptions: NotifierOptions = {
         AppRoutingModule,
         NotifierModule.withConfig(customNotifierOptions),
         SocialLoginModule,
-        PDFExportModule
+        PDFExportModule,
+        NgxIntlTelInputModule
     ],
     declarations: [AppComponent, SearchComponent, EditProductComponent],
     providers: [

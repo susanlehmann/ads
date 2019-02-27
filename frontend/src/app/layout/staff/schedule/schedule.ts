@@ -127,7 +127,7 @@ export class Schedule {
     }
 
     isScheduleStartOnCurrentDate() {
-        return this.scheduleStartDate.getTime() === this.currentDate.getTime();
+        return this.scheduleStartDate.setHours(0, 0, 0, 0) === this.currentDate.setHours(0, 0, 0, 0);
     }
 
     setCurrentDate(currentDate: Date) {
@@ -161,7 +161,7 @@ export class Schedule {
         this.staffId = data.id_staff;
         this.isNew = false;
         this.hasShift2 = data.has_shift_2 === 1 ? true : false;
-        this.hasEndDate = data.has_end_date == null ? 0 : data.hasEndDate; // set default = 0 (onGoing)
+        this.hasEndDate = data.has_end_date == null ? 0 : data.has_end_date; // set default = 0 (onGoing)
         this.shiftStart1 = JSON.parse(data.shift1_start);
         this.shiftEnd1 = JSON.parse(data.shift1_end);
         this.shiftStart2 = JSON.parse(data.shift2_start);
@@ -185,8 +185,8 @@ export class Schedule {
             is_repeat: this.isRepeat ? 1 : 0,
             has_shift_2: this.hasShift2 ? 1 : 0,
             has_end_date: this.hasEndDate,
-            schedule_start: this.scheduleStartDate,
-            schedule_end: this.scheduleEndDate,
+            schedule_start: this.scheduleStartDate.toLocaleDateString(),
+            schedule_end: this.scheduleEndDate ? this.scheduleEndDate.toLocaleDateString() : null,
         };
     }
 }

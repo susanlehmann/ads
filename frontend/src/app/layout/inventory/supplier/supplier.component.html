@@ -14,11 +14,9 @@
                           <div class="iy4yLz">
                             <div class="_1XOh8M _1jFEEZ" placeholder="Search by supplier name" value="">
                               <div class="H9L5q0 col-md-12">
-                                <input class="JOAm_M _1FszNF col-sm-12" placeholder="Search by supplier name" value="">
+                                <input class="JOAm_M _1FszNF col-sm-12" placeholder="Search by supplier name" value="" (input)="searchSupplier($event)">
                                 <span class="_2FSeuB _240vE8 RCcMXQ _1bHTmd">
-                                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
-                                    <path d="M21.285 19.399c1.285-1.682 2.049-3.785 2.049-6.065 0-5.523-4.477-10-10-10s-10 4.477-10 10c0 5.523 4.477 10 9.999 10 0.006 0 0.011 0 0.017 0 2.286 0 4.392-0.77 6.049-2.049l7.239 7.238c0.24 0.24 0.572 0.388 0.939 0.388 0.368 0 0.702-0.15 0.943-0.392 0.243-0.24 0.393-0.574 0.393-0.943 0-0.367-0.149-0.699-0.389-0.939l-7.238-7.239zM13.333 20.667c-4.050 0-7.333-3.283-7.333-7.333s3.283-7.333 7.333-7.333 7.333 3.283 7.333 7.333-3.283 7.333-7.333 7.333z"></path>
-                                  </svg>
+                                  <i class="fa fa-search" style="margin-left:-10px;"></i>
                                 </span>
                               </div>
                             </div>
@@ -34,18 +32,14 @@
                                     <tr>
                                       <th class="_3jHaBz _1hEJSa _1DaKSp">
                                         <div>Supplier name</div>
-                                        <span>
-                                          <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1QKGAB">
-                                            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                              <path d="M13.762 11.316l-.48.458c-.168.15-.362.226-.585.226-.227 0-.42-.075-.578-.226L9 8.804l-3.12 2.97c-.158.15-.35.226-.577.226-.223 0-.417-.075-.584-.226l-.478-.458C4.08 11.16 4 10.976 4 10.76c0-.22.08-.404.244-.55l4.178-3.978C8.576 6.077 8.77 6 9 6c.227 0 .422.077.584.232l4.178 3.978c.16.15.238.334.238.55 0 .21-.08.397-.238.556z"></path>
-                                            </svg>
-                                          </span>
-                                          <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe">
-                                            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                              <path d="M13.762 6.684l-.48-.458c-.168-.15-.362-.226-.585-.226-.227 0-.42.075-.578.226L9 9.196l-3.12-2.97C5.723 6.076 5.53 6 5.304 6c-.223 0-.417.075-.584.226l-.476.458C4.08 6.84 4 7.024 4 7.24c0 .22.08.404.244.55l4.178 3.978c.154.155.347.232.578.232.227 0 .422-.077.584-.232l4.178-3.978c.16-.15.238-.334.238-.55 0-.21-.08-.397-.238-.556z"></path>
-                                            </svg>
-                                          </span>
-                                        </span>
+
+                                            <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe" style="margin-top:-10px;margin-left:10px">
+                                                <i class="fa fa-angle-up"></i>
+                                              </span>
+                                              <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe" style="margin-left:10px">
+                                                  <i class="fa fa-angle-down"></i>
+                                              </span>
+
                                       </th>
                                       <th class="_3jHaBz _1hEJSa">
                                         <div>Phone</div>
@@ -55,33 +49,22 @@
                                       </th>
                                       <th class="_3jHaBz _1hEJSa _3uGQFE _1DaKSp">
                                         <div>Products Assigned</div>
-                                        <span>
-                                          <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1QKGAB">
-                                            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                              <path d="M13.762 11.316l-.48.458c-.168.15-.362.226-.585.226-.227 0-.42-.075-.578-.226L9 8.804l-3.12 2.97c-.158.15-.35.226-.577.226-.223 0-.417-.075-.584-.226l-.478-.458C4.08 11.16 4 10.976 4 10.76c0-.22.08-.404.244-.55l4.178-3.978C8.576 6.077 8.77 6 9 6c.227 0 .422.077.584.232l4.178 3.978c.16.15.238.334.238.55 0 .21-.08.397-.238.556z"></path>
-                                            </svg>
-                                          </span>
-                                          <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe">
-                                            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                              <path d="M13.762 6.684l-.48-.458c-.168-.15-.362-.226-.585-.226-.227 0-.42.075-.578.226L9 9.196l-3.12-2.97C5.723 6.076 5.53 6 5.304 6c-.223 0-.417.075-.584.226l-.476.458C4.08 6.84 4 7.024 4 7.24c0 .22.08.404.244.55l4.178 3.978c.154.155.347.232.578.232.227 0 .422-.077.584-.232l4.178-3.978c.16-.15.238-.334.238-.55 0-.21-.08-.397-.238-.556z"></path>
-                                            </svg>
-                                          </span>
-                                        </span>
+
+                                            <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe" style="margin-top:-10px;margin-left:10px">
+                                                <i class="fa fa-angle-up"></i>
+                                              </span>
+                                              <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe" style="margin-left:10px">
+                                                  <i class="fa fa-angle-down"></i>
+                                              </span>
                                       </th>
                                       <th class="_3jHaBz _1hEJSa _327eWA _1DaKSp">
                                         <div>Updated at</div>
-                                        <span>
-                                          <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1QKGAB">
-                                            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                              <path d="M13.762 11.316l-.48.458c-.168.15-.362.226-.585.226-.227 0-.42-.075-.578-.226L9 8.804l-3.12 2.97c-.158.15-.35.226-.577.226-.223 0-.417-.075-.584-.226l-.478-.458C4.08 11.16 4 10.976 4 10.76c0-.22.08-.404.244-.55l4.178-3.978C8.576 6.077 8.77 6 9 6c.227 0 .422.077.584.232l4.178 3.978c.16.15.238.334.238.55 0 .21-.08.397-.238.556z"></path>
-                                            </svg>
+                                          <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe" style="margin-top:-10px;margin-left:10px">
+                                            <i class="fa fa-angle-up"></i>
                                           </span>
-                                          <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe">
-                                            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                              <path d="M13.762 6.684l-.48-.458c-.168-.15-.362-.226-.585-.226-.227 0-.42.075-.578.226L9 9.196l-3.12-2.97C5.723 6.076 5.53 6 5.304 6c-.223 0-.417.075-.584.226l-.476.458C4.08 6.84 4 7.024 4 7.24c0 .22.08.404.244.55l4.178 3.978c.154.155.347.232.578.232.227 0 .422-.077.584-.232l4.178-3.978c.16-.15.238-.334.238-.55 0-.21-.08-.397-.238-.556z"></path>
-                                            </svg>
+                                          <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe" style="margin-left:10px">
+                                              <i class="fa fa-angle-down"></i>
                                           </span>
-                                        </span>
                                       </th>
                                     </tr>
                                   </thead>
@@ -97,7 +80,7 @@
                                         <div>{{supplier.email}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div class="_3uGQFE">{{supplier.productassigned}}</div>
+                                        <div class="_3uGQFE">{{getNumberproduct(supplier)}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
                                         <div>{{supplier.timeupdate}}</div>
@@ -109,7 +92,7 @@
                               <div class="PQsoKY">
                                 <div class="_3Cd6wq">
                                   <div class="_3oGeTh">Displaying
-                                    <b class="_2P0kb0">1</b>product supplier
+                                    <b class="_2P0kb0">{{listsupplier.length}}</b>product supplier
                                   </div>
                                 </div>
                               </div>
@@ -132,15 +115,13 @@
     </div>
   </section>
 </div>
-<div class="rTWbSm" >
+<div class="rTWbSm">
     <button class="_2N1Wwk _1K8-3O _1hszOe _1Hbk3p _1jAoG_" (click)="openCreateModal(content)">
-      <span >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-          <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z" triggers="mouseenter:mouseleave" ngbPopover="New Supplier" ></path>
-        </svg>
+      <span class="_2FSeuB _240vE8 RCcMXQ">
+          <i class="fa fa-plus fa-1-75x"></i>
       </span>
     </button>
-  </div>
+</div>
 
 
   <ng-template #content let-modal>
@@ -153,132 +134,467 @@
 
     <form #signupForm=ngForm (ngSubmit)="onSubmit()">
     <div class="modal-body">
-
+      <div class="desktop">
 
                     <div class="col-md-12 form-content">
                     <div class="row">
                       <div class="col-md-6">
-                          <div class="row form-group">
-                              <div class="col-sm-12">
-                                <label class="control-label">SUPPLIER NAME</label>
-                                <input [(ngModel)]="form.name_supplier" type="text" class="form-control input-underline input-lg" name="name_supplier" placeholder="e.g. Jane" required #name_supplier="ngModel">
-                                <div class="alert alert-danger" [hidden]="!error.name_supplier"> {{ error.name_supplier }} </div>
-                            </div>
+                        <label>Supplier Details</label><br>
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                              <label class="control-label">SUPPLIER NAME</label>
+                              <input [(ngModel)]="form.name_supplier" type="text" class="form-control input-underline input-lg" name="name_supplier" placeholder="e.g. Jane" required #name_supplier="ngModel">
+                              <div class="alert alert-danger" [hidden]="!error.name_supplier"> {{ error.name_supplier }} </div>
+                          </div>
                         </div>
 
                         <div class="row form-group">
-                            <div class="col-sm-12">
-                              <label class="control-label">SUPPLIER DESCRIPTION</label>
-                              <textarea class="form-control form-text-area" [(ngModel)]="form.description_supplier" name="description_supplier"
-                              placeholder="Add private notes viewable in staff settings only (optional)" rows="4"></textarea>
-                              <div class="alert alert-danger" [hidden]="!error.description_supplier"> {{ error.description_supplier }} </div>
+                          <div class="col-sm-12">
+                            <label class="control-label">SUPPLIER DESCRIPTION</label>
+                            <textarea class="form-control form-text-area" [(ngModel)]="form.description_supplier" name="description_supplier"
+                            placeholder="Add private notes viewable in staff settings only (optional)" rows="4"></textarea>
+                            <div class="alert alert-danger" [hidden]="!error.description_supplier"> {{ error.description_supplier }} </div>
                           </div>
-
-                      </div>
-
-                        <div class="row form-group">
+                        </div>
+                        <label>Contact Information</label><br>
+                        <div class="col-sm-12">
+                          <div class="row form-group">
                             <div class="col-sm-6">
                               <label class="control-label">First Name</label>
                               <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="firstName" placeholder="e.g. Jane" required #firstName="ngModel">
                               <div class="alert alert-danger" [hidden]="!error.firstName"> {{ error.firstName }} </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="control-label">Last Name</label>
+                                <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="e.g. Doe">
+                                <div class="alert alert-danger" [hidden]="!error.lastName"> {{ error.lastName }} </div>
+                            </div>
                           </div>
+                          <div class="row form-group">
+                              <div class="col-sm-6">
+                                <label class="control-label">Mobile Number</label>
+                                <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78">
+                                <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                            </div>
 
-                          <div class="col-sm-6">
-                              <label class="control-label">Last Name</label>
-                              <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="e.g. Doe">
-                              <div class="alert alert-danger" [hidden]="!error.lastName"> {{ error.lastName }} </div>
+                            <div class="col-sm-6">
+                              <label class="control-label">Email</label>
+                              <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="mail@example.com">
+                              <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                            </div>
                           </div>
-                      </div>
-
-                      <div class="row form-group">
-                          <div class="col-sm-6">
-                            <label class="control-label">Mobile Number</label>
-                            <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78">
-                            <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                          <label class="control-label">Email</label>
-                          <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="mail@example.com">
-                          <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
-                        </div>
-                    </div>
-
-                        <div class="row form-group">
+                          <div class="row form-group">
                             <div class="col-sm-6">
                                 <label class="control-label">TELEPHONE</label>
                                 <input [(ngModel)]="form.telephoneNumber" type="number" name="telephoneNumber" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78">
                                 <div class="alert alert-danger" [hidden]="!error.telephoneNumber"> {{ error.telephoneNumber }} </div>
                             </div>
-
                             <div class="col-sm-6">
                               <label class="control-label">WEBSITE</label>
                               <input [(ngModel)]="form.website" type="text" name="website" class="form-control input-underline input-lg" placeholder="example.com">
                               <div class="alert alert-danger" [hidden]="!error.website"> {{ error.website }} </div>
                             </div>
+                          </div>
                         </div>
 
                       </div>
 
                       <div class="col-md-6">
-                        <div class="row form-group">
-                            <div class="col-sm-12">
-                              <label class="control-label">STREET</label>
-                              <textarea class="form-control form-text-area" [(ngModel)]="form.street" name="street"
-                              placeholder="" rows="4"></textarea>
-                              <div class="alert alert-danger" [hidden]="!error.street"> {{ error.street }} </div>
+                          <div class="col-sm-12">
+                              <div class="row" *ngIf="!postal_address">
+                                <div class="col-sm-6">
+                                    <label>Physical Address</label><br>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                          <label class="control-label">STREET</label>
+                                          <textarea class="form-control form-text-area" [(ngModel)]="form.street" name="street"
+                                          placeholder="" rows="4"></textarea>
+                                          <div class="alert alert-danger" [hidden]="!error.street"> {{ error.street }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                      <div class="col-sm-12">
+                                          <label class="control-label">SUBURB</label>
+                                          <input [(ngModel)]="form.suburb" type="text" name="suburb" class="form-control input-underline input-lg" placeholder="">
+                                          <div class="alert alert-danger" [hidden]="!error.suburb"> {{ error.suburb }} </div>
+                                      </div>
+                                    </div>
+                                    <div class="row form-group">
+                                      <div class="col-sm-12">
+                                          <label class="control-label">CITY</label>
+                                          <input [(ngModel)]="form.city" type="text" name="city" class="form-control input-underline input-lg" placeholder="">
+                                          <div class="alert alert-danger" [hidden]="!error.city"> {{ error.city }} </div>
+                                      </div>
+                                    </div>
+                                    <div class="row form-group">
+                                      <div class="col-sm-12">
+                                          <label class="control-label">SATE</label>
+                                          <input [(ngModel)]="form.sate" type="text" name="sate" class="form-control input-underline input-lg" placeholder="">
+                                          <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
+                                      </div>
+                                    </div>
+                                    <div class="row form-group">
+                                      <div class="col-sm-12">
+                                          <label class="control-label">ZIP / POST CODE</label>
+                                          <input [(ngModel)]="form.postCode" type="number" name="postCode" class="form-control input-underline input-lg" placeholder="">
+                                          <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
+                                      </div>
+                                    </div>
+                                    <div class="row form-group">
+                                      <div class="col-sm-12">
+                                        <label class="control-label">COUNTRY</label>
+                                        <select [(ngModel)]="form.country" name="notificationType" class="form-control">
+                                          <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
+                                          <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <label>Postal Address</label><br>
+                                <div class="row form-group">
+                                    <div class="col-sm-12">
+                                      <label class="control-label">STREET</label>
+                                      <textarea class="form-control form-text-area" [(ngModel)]="form.street" name="street"
+                                      placeholder="" rows="4"></textarea>
+                                      <div class="alert alert-danger" [hidden]="!error.street"> {{ error.street }} </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                      <label class="control-label">SUBURB</label>
+                                      <input [(ngModel)]="form.suburb" type="text" name="suburb" class="form-control input-underline input-lg" placeholder="">
+                                      <div class="alert alert-danger" [hidden]="!error.suburb"> {{ error.suburb }} </div>
+                                  </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                      <label class="control-label">CITY</label>
+                                      <input [(ngModel)]="form.city" type="text" name="city" class="form-control input-underline input-lg" placeholder="">
+                                      <div class="alert alert-danger" [hidden]="!error.city"> {{ error.city }} </div>
+                                  </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                      <label class="control-label">SATE</label>
+                                      <input [(ngModel)]="form.sate" type="text" name="sate" class="form-control input-underline input-lg" placeholder="">
+                                      <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
+                                  </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                      <label class="control-label">ZIP / POST CODE</label>
+                                      <input [(ngModel)]="form.postCode" type="number" name="postCode" class="form-control input-underline input-lg" placeholder="">
+                                      <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
+                                  </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                    <label class="control-label">COUNTRY</label>
+                                    <select [(ngModel)]="form.country" name="notificationType" class="form-control">
+                                      <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
+                                      <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                </div>
+                              </div><br>
+                              <div *ngIf="postal_address" style="margin-top: -23px;">
+                                <label>Physical Address</label><br>
+                                <div class="row form-group">
+                                    <div class="col-sm-12">
+                                      <label class="control-label">STREET</label>
+                                      <textarea class="form-control form-text-area" [(ngModel)]="form.street" name="street"
+                                      placeholder="" rows="4"></textarea>
+                                      <div class="alert alert-danger" [hidden]="!error.street"> {{ error.street }} </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                      <label class="control-label">SUBURB</label>
+                                      <input [(ngModel)]="form.suburb" type="text" name="suburb" class="form-control input-underline input-lg" placeholder="">
+                                      <div class="alert alert-danger" [hidden]="!error.suburb"> {{ error.suburb }} </div>
+                                  </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                      <label class="control-label">CITY</label>
+                                      <input [(ngModel)]="form.city" type="text" name="city" class="form-control input-underline input-lg" placeholder="">
+                                      <div class="alert alert-danger" [hidden]="!error.city"> {{ error.city }} </div>
+                                  </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                      <label class="control-label">SATE</label>
+                                      <input [(ngModel)]="form.sate" type="text" name="sate" class="form-control input-underline input-lg" placeholder="">
+                                      <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
+                                  </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                      <label class="control-label">ZIP / POST CODE</label>
+                                      <input [(ngModel)]="form.postCode" type="number" name="postCode" class="form-control input-underline input-lg" placeholder="">
+                                      <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
+                                  </div>
+                                </div>
+                                <div class="row form-group">
+                                  <div class="col-sm-12">
+                                    <label class="control-label">COUNTRY</label>
+                                    <select [(ngModel)]="form.country" name="notificationType" class="form-control">
+                                      <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
+                                      <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div><br>
+                            <div class="row form-group">
+                              <div class="col-sm-12 btn-switch">
+                                <label class="control-label">SAME AS POSTAL ADDRESS </label>
+                                <label class="switch" style="margin-left:120px;">
+                                  <input type="checkbox" name="postal_address" [(ngModel)]="postal_address">
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
                             </div>
-                        </div>
+                      </div>
 
-                        <div class="row form-group">
-                          <div class="col-sm-12">
-                              <label class="control-label">SUBURB</label>
-                              <input [(ngModel)]="form.suburb" type="text" name="suburb" class="form-control input-underline input-lg" placeholder="">
-                              <div class="alert alert-danger" [hidden]="!error.suburb"> {{ error.suburb }} </div>
+                  </div>
+                </div>
+      </div>
+      <div class="mobile">
+
+          <div class="col-md-12 form-content">
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Supplier Details</label><br>
+                  <div class="row form-group">
+                      <div class="col-sm-12">
+                        <label class="control-label">SUPPLIER NAME</label>
+                        <input [(ngModel)]="form.name_supplier" type="text" class="form-control input-underline input-lg" name="name_supplier" placeholder="e.g. Jane" required #name_supplier="ngModel">
+                        <div class="alert alert-danger" [hidden]="!error.name_supplier"> {{ error.name_supplier }} </div>
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <div class="col-sm-12">
+                      <label class="control-label">SUPPLIER DESCRIPTION</label>
+                      <textarea class="form-control form-text-area" [(ngModel)]="form.description_supplier" name="description_supplier"
+                      placeholder="Add private notes viewable in staff settings only (optional)" rows="4"></textarea>
+                      <div class="alert alert-danger" [hidden]="!error.description_supplier"> {{ error.description_supplier }} </div>
+                    </div>
+                  </div>
+                  <label>Contact Information</label><br>
+                  <div class="col-sm-12">
+                    <div class="row form-group">
+                      <div class="col-sm-6">
+                        <label class="control-label">First Name</label>
+                        <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="firstName" placeholder="e.g. Jane" required #firstName="ngModel">
+                        <div class="alert alert-danger" [hidden]="!error.firstName"> {{ error.firstName }} </div>
+                      </div>
+
+                      <div class="col-sm-6">
+                          <label class="control-label">Last Name</label>
+                          <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="e.g. Doe">
+                          <div class="alert alert-danger" [hidden]="!error.lastName"> {{ error.lastName }} </div>
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                          <label class="control-label">Mobile Number</label>
+                          <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78">
+                          <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                      </div>
+
+                      <div class="col-sm-6">
+                        <label class="control-label">Email</label>
+                        <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="mail@example.com">
+                        <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <div class="col-sm-6">
+                          <label class="control-label">TELEPHONE</label>
+                          <input [(ngModel)]="form.telephoneNumber" type="number" name="telephoneNumber" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78">
+                          <div class="alert alert-danger" [hidden]="!error.telephoneNumber"> {{ error.telephoneNumber }} </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <label class="control-label">WEBSITE</label>
+                        <input [(ngModel)]="form.website" type="text" name="website" class="form-control input-underline input-lg" placeholder="example.com">
+                        <div class="alert alert-danger" [hidden]="!error.website"> {{ error.website }} </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-sm-12">
+                        <div class="row" *ngIf="!postal_address">
+                          <div class="col-sm-6">
+                              <label>Physical Address</label><br>
+                              <div class="row form-group">
+                                  <div class="col-sm-12">
+                                    <label class="control-label">STREET</label>
+                                    <textarea class="form-control form-text-area" [(ngModel)]="form.street" name="street"
+                                    placeholder="" rows="4"></textarea>
+                                    <div class="alert alert-danger" [hidden]="!error.street"> {{ error.street }} </div>
+                                  </div>
+                              </div>
+                              <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label">SUBURB</label>
+                                    <input [(ngModel)]="form.suburb" type="text" name="suburb" class="form-control input-underline input-lg" placeholder="">
+                                    <div class="alert alert-danger" [hidden]="!error.suburb"> {{ error.suburb }} </div>
+                                </div>
+                              </div>
+                              <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label">CITY</label>
+                                    <input [(ngModel)]="form.city" type="text" name="city" class="form-control input-underline input-lg" placeholder="">
+                                    <div class="alert alert-danger" [hidden]="!error.city"> {{ error.city }} </div>
+                                </div>
+                              </div>
+                              <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label">SATE</label>
+                                    <input [(ngModel)]="form.sate" type="text" name="sate" class="form-control input-underline input-lg" placeholder="">
+                                    <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
+                                </div>
+                              </div>
+                              <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label class="control-label">ZIP / POST CODE</label>
+                                    <input [(ngModel)]="form.postCode" type="number" name="postCode" class="form-control input-underline input-lg" placeholder="">
+                                    <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
+                                </div>
+                              </div>
+                              <div class="row form-group">
+                                <div class="col-sm-12">
+                                  <label class="control-label">COUNTRY</label>
+                                  <select [(ngModel)]="form.country" name="notificationType" class="form-control">
+                                    <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
+                                    <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                                  </select>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <label>Postal Address</label><br>
+                          <div class="row form-group">
+                              <div class="col-sm-12">
+                                <label class="control-label">STREET</label>
+                                <textarea class="form-control form-text-area" [(ngModel)]="form.street" name="street"
+                                placeholder="" rows="4"></textarea>
+                                <div class="alert alert-danger" [hidden]="!error.street"> {{ error.street }} </div>
+                              </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">SUBURB</label>
+                                <input [(ngModel)]="form.suburb" type="text" name="suburb" class="form-control input-underline input-lg" placeholder="">
+                                <div class="alert alert-danger" [hidden]="!error.suburb"> {{ error.suburb }} </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">CITY</label>
+                                <input [(ngModel)]="form.city" type="text" name="city" class="form-control input-underline input-lg" placeholder="">
+                                <div class="alert alert-danger" [hidden]="!error.city"> {{ error.city }} </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">SATE</label>
+                                <input [(ngModel)]="form.sate" type="text" name="sate" class="form-control input-underline input-lg" placeholder="">
+                                <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">ZIP / POST CODE</label>
+                                <input [(ngModel)]="form.postCode" type="number" name="postCode" class="form-control input-underline input-lg" placeholder="">
+                                <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                              <label class="control-label">COUNTRY</label>
+                              <select [(ngModel)]="form.country" name="notificationType" class="form-control">
+                                <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
+                                <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          </div>
+                        </div><br>
+                        <div *ngIf="postal_address" style="margin-top: -23px;">
+                          <label>Physical Address</label><br>
+                          <div class="row form-group">
+                              <div class="col-sm-12">
+                                <label class="control-label">STREET</label>
+                                <textarea class="form-control form-text-area" [(ngModel)]="form.street" name="street"
+                                placeholder="" rows="4"></textarea>
+                                <div class="alert alert-danger" [hidden]="!error.street"> {{ error.street }} </div>
+                              </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">SUBURB</label>
+                                <input [(ngModel)]="form.suburb" type="text" name="suburb" class="form-control input-underline input-lg" placeholder="">
+                                <div class="alert alert-danger" [hidden]="!error.suburb"> {{ error.suburb }} </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">CITY</label>
+                                <input [(ngModel)]="form.city" type="text" name="city" class="form-control input-underline input-lg" placeholder="">
+                                <div class="alert alert-danger" [hidden]="!error.city"> {{ error.city }} </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">SATE</label>
+                                <input [(ngModel)]="form.sate" type="text" name="sate" class="form-control input-underline input-lg" placeholder="">
+                                <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">ZIP / POST CODE</label>
+                                <input [(ngModel)]="form.postCode" type="number" name="postCode" class="form-control input-underline input-lg" placeholder="">
+                                <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="col-sm-12">
+                              <label class="control-label">COUNTRY</label>
+                              <select [(ngModel)]="form.country" name="notificationType" class="form-control">
+                                <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
+                                <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
-
-                        <div class="row form-group">
-                          <div class="col-sm-12">
-                              <label class="control-label">CITY</label>
-                              <input [(ngModel)]="form.city" type="text" name="city" class="form-control input-underline input-lg" placeholder="">
-                              <div class="alert alert-danger" [hidden]="!error.city"> {{ error.city }} </div>
-                          </div>
-
+                      </div><br>
+                      <div class="row form-group">
+                        <div class="col-sm-12 btn-switch">
+                          <label class="control-label">SAME AS POSTAL ADDRESS </label>
+                          <label class="switch" style="margin-left:120px;">
+                            <input type="checkbox" name="postal_address" [(ngModel)]="postal_address">
+                            <span class="slider round"></span>
+                          </label>
                         </div>
-
-                        <div class="row form-group">
-                          <div class="col-sm-12">
-                              <label class="control-label">SATE</label>
-                              <input [(ngModel)]="form.sate" type="text" name="sate" class="form-control input-underline input-lg" placeholder="">
-                              <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
-                          </div>
-
-                        </div>
-
-                        <div class="row form-group">
-                          <div class="col-sm-12">
-                              <label class="control-label">ZIP / POST CODE</label>
-                              <input [(ngModel)]="form.postCode" type="number" name="postCode" class="form-control input-underline input-lg" placeholder="">
-                              <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
-                          </div>
-                        </div>
-
-                        <div class="row form-group">
-                          <div class="col-sm-12">
-                            <label class="control-label">COUNTRY</label>
-                            <select [(ngModel)]="form.country" name="notificationType" class="form-control">
-                              <option value="0" disabled selected="selected" hidden> -= Select notifications =-</option>
-                              <option *ngFor="let no of notificationTypes" value="{{no.id}}">{{no.name}}</option>
-                            </select>
-                          </div>
-                        </div>
-
                       </div>
 
                   </div>
                 </div>
 
+            </div>
+          </div>
+
+      </div>
     </div>
     <div class="modal-footer">
     <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="openModal(delete)"> Delete </button>

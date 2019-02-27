@@ -3,6 +3,8 @@ import {NgbModal, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap
 import { Supplier } from './model/supplier'
 import { NotifierService } from 'angular-notifier';
 import { SupplierService } from './supplier.service';
+import { Product } from '../product/model/product';
+import { InventoryService } from '../inventory.service';
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
@@ -12,6 +14,7 @@ import { SupplierService } from './supplier.service';
 export class SupplierComponent implements OnInit {
   loading: boolean;
   form: Supplier;
+  postal_address = true;
 
   modalOptions: NgbModalOptions;
   public error = [];
@@ -21,21 +24,47 @@ export class SupplierComponent implements OnInit {
   isCreate: boolean;
   colors: string[];
   selectedId: string;
+  listproducts: any;
+  _list: any;
 
 	constructor(
   private notifierService: NotifierService,
   private modal: NgbModal,
   private SupplierService: SupplierService,
+  private InventoryService: InventoryService,
 	) {
     this.form = new Supplier();
     this.modalOptions = {
       backdrop: 'static',
       size: 'lg'
     };
+    this.listsupplier = [];
 	}
 
 	ngOnInit() {
     this.getSupplier();
+    this.getProduct();
+  }
+
+  getProduct(){
+    this.InventoryService.getListProduct()
+    .subscribe((prod:any) => {
+      this.stopLoading();
+      this.listproducts = prod.product;
+      //console.log(this.listproducts);
+    }, err =>{
+
+    });
+  }
+  _supplier :any;
+  getNumberproduct(supplier) {
+    this._supplier = supplier;
+    //id = this.
+    //let product = this.listproducts.filter(s => s.id_category == id);
+    this._list = this.listproducts.filter(s => s.id_supplier == this._supplier.id)
+    //console.log(this._list);
+    return this._list.length;
+
   }
 
   openModal(content: NgbModalRef) {
@@ -120,6 +149,13 @@ export class SupplierComponent implements OnInit {
           });
       this.modal.dismissAll();
     }
+  }
+
+  searchSupplier(event) {
+    const query = {name_supplier: event.target.value};
+    this.SupplierService.searchSupplier(query).subscribe((list: any) => {
+      this.listsupplier = list.supplier.map(Supplier.toModel);
+    });
   }
 
   startLoading(): void {
