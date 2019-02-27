@@ -8,20 +8,6 @@ body {
     position: relative; min-height: 50%
 }
 
-// table
-.table thead tr th {
-    background-color: #f7f7f8;
-    font-size: 14px;
-    color: #00000088;
-    white-space: nowrap;
-}
-.table tr td {
-    font-size: 14px;
-}
-.table.table-hover tbody tr {
-    cursor: pointer;
-}
-
 .cal-container {
 
     .fc-scroller.fc-time-grid-container{

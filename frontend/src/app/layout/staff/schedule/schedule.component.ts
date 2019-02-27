@@ -11,7 +11,7 @@ import { forkJoin } from 'rxjs';
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss'],
   providers: [
-    {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter},
+    { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter },
   ]
 })
 export class ScheduleComponent implements OnInit {
@@ -35,8 +35,8 @@ export class ScheduleComponent implements OnInit {
     this.today = new Date();
     this.weekdays = this.getCurrentWeek();
     this.staffFilter = 0; // show all staff
-    this.currentWeekModel = {day: 1, month: 1, year: 2019};
-   }
+    this.currentWeekModel = { day: 1, month: 1, year: 2019 };
+  }
 
   ngOnInit() {
     this.changeWeek();
@@ -195,7 +195,7 @@ export class ScheduleComponent implements OnInit {
 
       // fix bug khoi dong ko hien date.
       if (text) {
-        const weekPicker = document.querySelector('.week-picker') as HTMLInputElement;
+        const weekPicker = document.querySelector('.week-picker input') as HTMLInputElement;
         weekPicker.value = text;
       }
     });
@@ -229,15 +229,16 @@ export class ScheduleComponent implements OnInit {
   }
 
   changeWeek(date?): void {
-    //this.currentWeekModel = {day: 1, month: 1, year: 2019}; TODO: can't set value to ngb datepicker.
+    //this.currentWeekModel = {day: 1, month: 1, year: 2019}; // can't set value to ngb datepicker => set manually
     const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-        ];
+      "July", "August", "September", "October", "November", "December"
+    ];
 
     this.today = date ? date : new Date(); // get current system date if param was not passed
+
     this.weekdays = this.getCurrentWeek();
 
-    const weekPicker = document.querySelector('.week-picker') as HTMLInputElement;
+    const weekPicker = document.querySelector('.week-picker input') as HTMLInputElement;
     const startDate = this.weekdays[0].date;
     const endDate = this.weekdays[6].date;
     let displayText;
@@ -257,12 +258,12 @@ export class ScheduleComponent implements OnInit {
     const currDay = new Date(this.today.getTime());
     const week = [];
 
-  for (let i = 1; i <= 7; i++) {
-    const first = currDay.getDate() - currDay.getDay() + i;
-    const date = new Date(currDay.setDate(first));
-    week.push({date: date, dateString: date.toLocaleDateString('en-US', options)});
-  }
-  return week;
+    for (let i = 1; i <= 7; i++) {
+      const first = currDay.getDate() - currDay.getDay() + i;
+      const date = new Date(currDay.setDate(first));
+      week.push({ date: date, dateString: date.toLocaleDateString('en-US', options) });
+    }
+    return week;
   }
 
 }

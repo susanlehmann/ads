@@ -10,14 +10,18 @@
 
   th,
   td {
+    font-size: 13px;
     padding: $table-cell-padding;
     vertical-align: top;
     border-top: $table-border-width solid $table-border-color;
   }
 
   thead th {
+    background-color: #f7f7f8;
+    color: #00000088;
+    white-space: nowrap;
     vertical-align: bottom;
-    border-bottom: (2 * $table-border-width) solid $table-border-color;
+    border-bottom: ($table-border-width) solid $table-border-color;
   }
 
   tbody + tbody {
@@ -93,6 +97,7 @@
 
 .table-hover {
   tbody tr {
+    cursor: pointer;
     @include hover {
       background-color: $table-hover-bg;
     }

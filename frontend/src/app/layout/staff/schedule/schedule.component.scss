@@ -31,7 +31,14 @@
 }
 
 .week-picker {
-    cursor: pointer;
+    .btn {
+        border: 1px solid #ced4da;
+    }
+
+    input {
+        cursor: pointer;
     text-align: center;
     background-color: white;
+    max-width: 200px;
+    }
 }

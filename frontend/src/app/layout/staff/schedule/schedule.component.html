@@ -1,13 +1,14 @@
 <div class="card card-custom mb-3">
-  <div class="card-header">
-    <select [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' class="custom-select custom-select mb-3">
+  <div class="card-header row">
+    <select [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' class="custom-select col-lg-2 col-md-3 col-sm-12">
       <option value=0 selected>All Staff</option>
       <option value={{staff.staffId}} *ngFor="let staff of allSchedules">{{staff.staffName}}</option>
     </select>
-    <div style="display: flex;">
+    <div class="col-md-1 col-sm-12"><p></p></div>
+    <div class="week-picker col-md-6 col-sm-12 justify-content-end" style="display: flex;">
       <button class="btn btn-light ma" (click)="prevWeek()">&lt;</button>
       <button class="btn btn-light ma" (click)="changeWeek()">Today</button>
-      <input class="form-control week-picker" (click)="week_picker.open()" readonly
+      <input class="form-control" (click)="week_picker.open()" readonly
           name="week-picker" [(ngModel)]="currentWeekModel" (ngModelChange)="changeWeek($event)" ngbDatepicker #week_picker="ngbDatepicker">
       <button class="btn btn-light ma mr-2" (click)="nextWeek()">&gt;</button>
     </div>
