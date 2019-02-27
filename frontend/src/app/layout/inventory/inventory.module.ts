@@ -15,9 +15,11 @@ import { SupplierComponent } from './supplier/supplier.component';
 import { ListProductComponent } from './product/list-product/list-product.component';
 import { ViewProductComponent } from './product/view-product/view-product.component';
 
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
-    imports: [SharedModule, CommonModule, InventoryRoutingModule, PageHeaderModule,FormsModule, NgbModule.forRoot()],
+    imports: [SharedModule, CommonModule, InventoryRoutingModule, PageHeaderModule,FormsModule, NgbModule.forRoot(),NgxIntlTelInputModule,BsDropdownModule.forRoot()],
     declarations: [InventoryComponent, BrandComponent, OrderComponent, CategoryComponent, SupplierComponent,
     ListProductComponent,
     ViewProductComponent,
