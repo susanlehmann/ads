@@ -131,10 +131,13 @@
 
   </div>
 
-  <div class="modal-footer">
-    <button *ngIf="!selectedSchedule.isNew" type="button" class="btn btn-danger" (click)='onClickDeleteSchedule(confirm_override)' style="justify-content: flex-start"> Delete </button>
-    <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-    <button type="submit" class="btn btn-dark pull-right" (click)="onClickSaveSchedule(confirm_override)"> Save </button>
+  <div class="modal-footer" style="justify-content: space-between">
+    <button *ngIf="!selectedSchedule.isNew" type="button" class="btn btn-danger" (click)='onClickDeleteSchedule(confirm_override)'> Delete </button>
+    <div></div>
+    <div>
+    <button type="button" class="btn btn-light mr-2" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+    <button type="submit" class="btn btn-dark" (click)="onClickSaveSchedule(confirm_override)"> Save </button>
+  </div>
   </div>
 
 </ng-template>
