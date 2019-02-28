@@ -48,7 +48,7 @@
   background-image: none;
   border: 1px solid #DEE3E7;
   border-radius: 2px;
-  font-family: Roboto, sans-serif;
+  font-family: "Roboto-Bold";
   -webkit-appearance: none;
   color: #24334A;
   outline: 0;
@@ -132,7 +132,7 @@ table {
   position: relative;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-family: Roboto;
+  font-family: "Roboto-Bold";
   padding: 18px 16px;
   vertical-align: middle;
   border-bottom: 2px solid rgba(222, 227, 231, .75);
@@ -320,6 +320,17 @@ $breakpoint-iphone: 667px;
 @media (max-width: $breakpoint-iphone){
   .box-desktop{
     display: none;
+  }
+  ._1DaKSp {
+    padding-right: 0px !important;
+  }
+
+  .table thead th {
+    white-space: unset !important;
+  }
+
+  ._2jGgaE {
+      padding: 24px 0px !important;
   }
   .box-mobile{
     .custommodal{

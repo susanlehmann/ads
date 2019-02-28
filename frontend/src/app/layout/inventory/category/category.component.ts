@@ -33,7 +33,7 @@ export class CategoryComponent implements OnInit {
     this.form = new Category();
     this.modalOptions = {
       backdrop: 'static',
-      size: 'lg',
+      size: 'md',
       windowClass: 'custom-modal',
       backdropClass: 'custom-modal',
     };
@@ -68,12 +68,12 @@ export class CategoryComponent implements OnInit {
     this.CategoryService.getList()
 		.subscribe((listcategories:any) => {
         this.stopLoading();
+         this.number_display = listcategories.category.length;
          this.listcategories = listcategories.category
          .map(Category.toModel)
          .sort((a, b) => {
            return a.id - b.id;
          });
-         this.number_display = listcategories.category.length;
 		}, err => {
       this.stopLoading();
     });

@@ -47,7 +47,7 @@ export class BrandComponent implements OnInit  {
     console.log(this.sortedCollection);
     this.modalOptions = {
       backdrop: 'static',
-      size: 'lg',
+      size: 'md',
       windowClass: 'custom-modal',
       backdropClass: 'custom-modal',
     };
@@ -90,12 +90,12 @@ export class BrandComponent implements OnInit  {
     this.BrandService.getList()
 		.subscribe((listbrands:any) => {
         this.stopLoading();
+         this.number_display = listbrands.brand.length;
          this.listbrands = listbrands.brand
          .map(Brand.toModel)
          .sort((a, b) => {
            return a.id - b.id;
          });
-         this.number_display = listbrands.brand.length;
 		}, err => {
       this.stopLoading();
     });

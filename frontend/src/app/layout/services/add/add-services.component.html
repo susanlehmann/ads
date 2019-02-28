@@ -133,7 +133,7 @@
                     <label class="control-label mb-4">{{'Select staff who perform this service.' }}</label>
                     <div class="custom-radios">
                     	<div>
-						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(listusers)">
+						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(listusers, $event)">
 						    <label for="checkall">
 						    	<span></span>
 						    	Select All

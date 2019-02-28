@@ -172,24 +172,46 @@ export class AddServiceComponent implements OnInit {
 	}
 
 	selectAllStaff(listStaffs, event) {
-		var index = this.staffCheckAll.indexOf(listStaffs)
+		var index = this.staffCheckAll.indexOf(listStaffs);
+
+		if(event.srcElement.checked) {
+			this.arrStaff = [];
+			if (index === -1) {
+				this.staffCheckAll.push(listStaffs);
+				listStaffs.forEach(iSelect => {
+					// iSelect.selected = true,
+					this.arrStaff.push(iSelect)
+				});
+				this.checked = true;
+			} else {
+				listStaffs.forEach(iSelect => {
+					// iSelect.selected = false,
+					this.arrStaff.splice(this.arrStaff.indexOf(iSelect),1)
+				});
+				this.staffCheckAll.splice(index,1);
+				this.checked = false;
+			}
+		} else {
+			this.arrStaff = [];
+			this.staffCheckAll = [];
+		}
 		// this.arrStaff.push({'id': listStaff.id, 'name': listStaff.firstName +' '+listStaff.lastName});
 		
-		if (index === -1) {
-			this.staffCheckAll.push(listStaffs);
-			listStaffs.forEach(iSelect => {
-				iSelect.selected = true,
-				this.arrStaff.push(iSelect)
-			});
-			this.checked = true;
-		} else {
-			listStaffs.forEach(iSelect => {
-				iSelect.selected = false,
-				this.arrStaff.splice(this.arrStaff.indexOf(iSelect),1)
-			});
-			this.staffCheckAll.splice(index,1);
-			this.checked = false;
-		}
+		// if (index === -1) {
+		// 	this.staffCheckAll.push(listStaffs);
+		// 	listStaffs.forEach(iSelect => {
+		// 		// iSelect.selected = true,
+		// 		this.arrStaff.push(iSelect)
+		// 	});
+		// 	this.checked = true;
+		// } else {
+		// 	listStaffs.forEach(iSelect => {
+		// 		// iSelect.selected = false,
+		// 		this.arrStaff.splice(this.arrStaff.indexOf(iSelect),1)
+		// 	});
+		// 	this.staffCheckAll.splice(index,1);
+		// 	this.checked = false;
+		// }
 
 		this.form.id_staff = JSON.stringify(this.arrStaff);
 		console.log(this.arrStaff);

@@ -50,6 +50,7 @@ export class OrderComponent implements OnInit {
   items = [];
   suppliers: any;
   orderTotal;
+  number_order: number;
   statusOrder = [{id: 1, name: "ORDERED"},{id:2, name: "CANCEL"},{id:3, name: "RECEIVED"}];
   public datas: [];
   //statusOrder = [{id: 1, name: "ORDERED"}];
@@ -235,6 +236,7 @@ export class OrderComponent implements OnInit {
     this.OrderService.getList()
 		.subscribe((listbrands:any) => {
         this.stopLoading();
+        this.number_order = listbrands.order.length;
          this.listorder = listbrands.order;
 		}, err => {
       this.stopLoading();
