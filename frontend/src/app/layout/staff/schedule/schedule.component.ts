@@ -37,6 +37,7 @@ export class ScheduleComponent implements OnInit {
     this.weekdays = [];
     this.staffFilter = 0; // show all staff
     this.currentWeekModel = { day: 1, month: 1, year: 2019 };
+    this.schedules = [];
   }
 
   ngOnInit() {
@@ -201,7 +202,8 @@ export class ScheduleComponent implements OnInit {
 
     forkJoin([schedules, staffs]).subscribe((rs: any) => {
       this.allSchedules = this.mapStaffsAndSchedules(rs[1].user, rs[0].workinghour);
-      this.schedules = this.allSchedules;
+
+      this.changeStaff(this.staffFilter);
 
       // fix bug khoi dong ko hien date.
       if (text) {
