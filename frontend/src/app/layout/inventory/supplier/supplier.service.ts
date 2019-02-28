@@ -42,5 +42,4 @@ export class SupplierService {
       query.ownerId = this.currentUserId;
       return this._http.post(`${this.baseUrl}/user/inventory/supplier/search-supplier`, query);
     }
-
 }
