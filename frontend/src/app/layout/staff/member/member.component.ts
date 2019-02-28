@@ -14,6 +14,7 @@ export class MemberComponent implements OnInit {
   form: Staff;
 
   modalOptions: NgbModalOptions;
+  modalOptions1: NgbModalOptions;
   public error = [];
 
 	closeResult: string;
@@ -38,6 +39,10 @@ export class MemberComponent implements OnInit {
     this.modalOptions = {
       backdrop: 'static',
       size: 'lg'
+    };
+    this.modalOptions1 = {
+      backdrop: 'static',
+      size: 'md'
     };
 	}
 
@@ -67,10 +72,22 @@ export class MemberComponent implements OnInit {
     });
   }
 
+  openDelete(content: NgbModalRef) {
+    this.modal.open(content, this.modalOptions1).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
+  }
+
   openCreateModal(content: NgbModalRef) {
     this.isCreate = true;
     this.form.new();
     this.openModal(content);
+  }
+
+  openModalDelete(content: NgbModalRef){
+    this.openDelete(content);
   }
 
   openUpdateModal(content: NgbModalRef, userId) {

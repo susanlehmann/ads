@@ -90,6 +90,12 @@ export class CloseDateComponent implements OnInit {
     });
   }
 
+  
+
+  openModalDelete(content: NgbModalRef){
+    this.openModal(content);
+  }
+
 }
 
 class ClosedDate  {
@@ -145,4 +151,7 @@ class ClosedDate  {
     d.updateData(data);
     return d;
   }
+
+
+
 }

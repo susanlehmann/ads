@@ -240,10 +240,27 @@
     </ngb-tab>
 </ngb-tabset>
 </div>
-<div class="modal-footer">
-<button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteStaff()"> Delete </button>
+<div class="modal-footer" style="position: unset;">
+<button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
 <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
 <button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
 </div>
 </form>
+</ng-template>
+<ng-template #content_delete let-c="close" let-d="dismiss">
+    <div class="box-delete">
+        <div class="modal-header">
+            <h5 class="modal-title">Delete Employee</h5>
+            <button type="button" class="close" aria-label="Close" (click)="c('Cancel click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete this employee?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light pull-right" (click)="d('Cancel click')"> Cancel </button>
+            <button type="button" class="btn btn-danger" (click)="deleteStaff()">Delete</button>
+        </div>
+    </div>
 </ng-template>
