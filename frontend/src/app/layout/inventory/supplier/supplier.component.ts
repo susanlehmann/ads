@@ -96,7 +96,7 @@ export class SupplierComponent implements OnInit {
             this.form.updateData(data.supplier);
             //this.mobile.internationalNumber = this.form.mobileNumber;
             //this.telephone.internationalNumber = this.form.telephoneNumber;
-            console.log(this.mobile);
+
             this.openModal(content);
         });
   }

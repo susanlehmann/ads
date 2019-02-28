@@ -37,9 +37,9 @@
                                     </th>
                                   </tr>
                                 </thead>
-                                <tbody *ngFor="let category of listcategories">
-                                  <tr class="_1A0eEb _1zQ7jO">
-                                    <td class="N3OZB6 _1vLxYz" (click)="openUpdateModal(content, category.id)">{{category.categoryName}}</td>
+                                <tbody *ngFor="let category of listcategories" (click)="openUpdateModal(content, category.id)">
+                                  <tr class="_1A0eEb _1zQ7jO" >
+                                    <td class="N3OZB6 _1vLxYz">{{category.categoryName}}</td>
                                     <td class="N3OZB6 _1vLxYz">
                                       <div class="PZtzwq">{{getNumberproduct(category)}}</div>
                                     </td>
@@ -50,28 +50,60 @@
                             <div class="_2f96-_">
                               <div class="_3Cd6wq">
                                 <div class="_3oGeTh">Displaying
-                                  <b class="_2P0kb0">{{listcategories.length}}</b>product category
+                                  <b class="_2P0kb0">{{number_display}}</b>product category
                                 </div>
                               </div>
 
                               <ng-template #content let-modal>
-                                <div class="modal-header">
-                                  <h4 class="modal-title text-xs-center" id="modal-basic-title">{{isCreate ? 'Add Category' : 'Edit Category'}}</h4>
-                                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
+                                <div class="box-desktop">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title offset-sm-4" id="modal-basic-title">{{isCreate ? 'Add Category' : 'Edit Category'}}</h4>
+                                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <form #signupForm=ngForm (ngSubmit)="onSubmit()">
+                                    <div class="modal-body">
+                                      <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
+                                      <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control" placeholder="e.g Hair Products" required text #categoryName="ngModel">
+                                    </div>
+                                    <div class="modal-footer" style="display: list-item;position: sticky;">
+                                      <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="openModal(delete)"> Delete </button>
+                                      <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+                                      <button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
+                                    </div>
+                                  </form>
                                 </div>
-                                <form #signupForm=ngForm (ngSubmit)="onSubmit()">
+                                <div class="box-mobile" style="height: -webkit-fill-available;">
                                   <div class="modal-body">
-                                    <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
-                                    <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control" placeholder="e.g Hair Products" required text #categoryName="ngModel">
+                                    <div class="custommodal">
+                                      <div class="custom1">
+                                        <div class="title" style="flex-direction: column; flex-shrink: 1; flex-grow: 1;">
+                                          <div class=" modal-header title1">
+                                            <h4 class="titlecusom modal-title">{{isCreate ? 'Add Category' : 'Edit Category'}}</h4>
+                                            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="margin-top: 18px;">
+                                              <span aria-hidden="true" class="bt">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body bodys" style="display: flex; flex-direction: column;">
+                                            <div class="main-body" style="margin-left:10px;width: 100%;">
+                                              <label class="labelname">Category name</label>
+                                              <div class="inputs">
+                                                <div class="inputs1">
+                                                    <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control typeinput" placeholder="e.g Hair Products" required text #categoryName="ngModel">
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer" style="width:100%;">
+                                            <button *ngIf="!isCreate" type="button" class="btn btn-1" (click)="openModal(delete)" style="background-color: #F74969;width: 100%"> Delete </button>
+                                            <button type="submit" class="btn btn-1 pull-right" [disabled]="!signupForm.valid" style="background-color: #24334A;width: 100%"> Save </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
-                                  <div class="modal-footer" style="display: inline;">
-                                    <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="openModal(delete)"> Delete </button>
-                                    <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-                                    <button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
-                                  </div>
-                                </form>
+                                </div>
                               </ng-template>
                               <ng-template #delete let-modal>
                                 <div class="modal-header">
@@ -93,9 +125,6 @@
                               </div-->
                             </div>
                           </div>
-                        </div>
-                        <div class="_1nM1bd" data-qa="loader-spinner-container">
-                          <div class="_2Nn7vB QZeBYP" data-qa="loader-spinner"></div>
                         </div>
                       </div>
                     </div>

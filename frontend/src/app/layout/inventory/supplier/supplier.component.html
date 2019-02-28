@@ -31,7 +31,15 @@
                                   <thead>
                                     <tr>
                                       <th class="_3jHaBz _1hEJSa _1DaKSp">
-                                        Supplier name
+                                        <div>Supplier name</div>
+
+                                            <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe" style="margin-top:-10px;margin-left:10px">
+                                                <i class="fa fa-angle-up"></i>
+                                              </span>
+                                              <span class="_2FSeuB _240vE8 RCcMXQ _15CJet _1cBzQe" style="margin-left:10px">
+                                                  <i class="fa fa-angle-down"></i>
+                                              </span>
+
                                       </th>
                                       <th class="_3jHaBz _1hEJSa">
                                         <div>Phone</div>
@@ -60,22 +68,22 @@
                                       </th>
                                     </tr>
                                   </thead>
-                                  <tbody *ngFor="let supplier of _listSup?.supplier">
+                                  <tbody *ngFor="let supplier of listsupplier">
                                     <tr class="_1A0eEb _1zQ7jO" (click)="openUpdateModal(content, supplier.id)">
                                       <td class="N3OZB6 _1vLxYz">
                                         <div>{{supplier.name_supplier}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div>{{supplier.mobilenumber_supplier}}</div>
+                                        <div>{{supplier.mobileNumber}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div>{{supplier.email_supplier}}</div>
+                                        <div>{{supplier.email}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
                                         <div class="_3uGQFE">{{getNumberproduct(supplier)}}</div>
                                       </td>
                                       <td class="N3OZB6 _1vLxYz">
-                                        <div>{{supplier.updated_at}}</div>
+                                        <div>{{supplier.timeupdate}}</div>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -595,7 +603,7 @@
     <div class="modal-footer">
     <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="openModal(delete)"> Delete </button>
     <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-    <button type="submit" class="btn btn-dark pull-right" > Save </button>
+    <button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
     </div>
     </form>
     </ng-template>
