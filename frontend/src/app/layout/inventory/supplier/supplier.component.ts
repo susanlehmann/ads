@@ -5,6 +5,7 @@ import { NotifierService } from 'angular-notifier';
 import { SupplierService } from './supplier.service';
 import { Product } from '../product/model/product';
 import { InventoryService } from '../inventory.service';
+import { empty } from 'rxjs';
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
@@ -15,6 +16,8 @@ export class SupplierComponent implements OnInit {
   loading: boolean;
   form: Supplier;
   postal_address = true;
+  mobile: any;
+  telephone: any;
 
   modalOptions: NgbModalOptions;
   public error = [];
@@ -75,6 +78,7 @@ export class SupplierComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed`;
     });
+
   }
 
   openCreateModal(content: NgbModalRef) {
@@ -84,11 +88,15 @@ export class SupplierComponent implements OnInit {
   }
 
   openUpdateModal(content: NgbModalRef, id_supplier) {
+
     this.isCreate = false;
     this.selectedId = id_supplier;
     this.SupplierService.findById(id_supplier)
     .subscribe((data:any) => {
             this.form.updateData(data.supplier);
+            //this.mobile.internationalNumber = this.form.mobileNumber;
+            //this.telephone.internationalNumber = this.form.telephoneNumber;
+
             this.openModal(content);
         });
   }
@@ -140,12 +148,14 @@ export class SupplierComponent implements OnInit {
     }
 
   deletesupplier() {
+    if(confirm("Are you sure to delete "+ name)){
       this.SupplierService.deleteSupplier(this.selectedId)
       .subscribe((data:any) => {
               this.getSupplier();
               this.notifierService.notify('success', 'A supplier has been successfully deleted');
           });
-    this.modal.dismissAll();
+      this.modal.dismissAll();
+    }
   }
 
   searchSupplier(event) {

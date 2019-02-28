@@ -13,7 +13,7 @@ export class Supplier {
   city: string;
   sate: string;
   postCode: string;
-  country: any;
+  country: string;
   timeupdate: any;
   constructor() {
     this.new();
@@ -34,7 +34,7 @@ export class Supplier {
     this.city = "";
     this.sate = "";
     this.postCode = "";
-    this.country = "";
+    this.country = "empty";
   }
 
   static toModel(dto: any) {

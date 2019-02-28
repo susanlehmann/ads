@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { Category } from './model/category';
 import { CategoryService } from './category.service';
@@ -22,6 +22,8 @@ export class CategoryComponent implements OnInit {
   selectedId: string;
   listproducts: any;
   _list: any;
+  number_display: number;
+  modalOptions: NgbModalOptions;
 
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
@@ -29,11 +31,16 @@ export class CategoryComponent implements OnInit {
     private InventoryService: InventoryService,
   ) {
     this.form = new Category();
-    this.listcategories = [];
+    this.modalOptions = {
+      backdrop: 'static',
+      size: 'lg',
+      windowClass: 'custom-modal',
+      backdropClass: 'custom-modal',
+    };
   }
 
   openModal(content: NgbModalRef) {
-    this.modal.open(content).result.then((result) => {
+    this.modal.open(content,this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed`;
@@ -66,6 +73,7 @@ export class CategoryComponent implements OnInit {
          .sort((a, b) => {
            return a.id - b.id;
          });
+         this.number_display = listcategories.category.length;
 		}, err => {
       this.stopLoading();
     });
@@ -111,7 +119,7 @@ export class CategoryComponent implements OnInit {
               this.getCategory();
               this.notifierService.notify('success', 'A Category has been successfully deleted');
           });
-    this.modal.dismissAll();
+      this.modal.dismissAll();
   }
 
   searchCategory(event) {

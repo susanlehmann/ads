@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { Brand } from './model/brand';
 import { BrandService } from './brand.service';
@@ -31,6 +31,7 @@ export class BrandComponent implements OnInit  {
   _list :any;
   listproducts: any;
   number_display: number;
+  modalOptions: NgbModalOptions;
 
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
@@ -44,6 +45,12 @@ export class BrandComponent implements OnInit  {
     this.sortedCollection = orderPipe.transform(this.collection, 'brandName');
     //console.log(this.orderPipe.transform(this.collection, this.order));
     console.log(this.sortedCollection);
+    this.modalOptions = {
+      backdrop: 'static',
+      size: 'lg',
+      windowClass: 'custom-modal',
+      backdropClass: 'custom-modal',
+    };
   }
 
   setOrder(value: string) {
@@ -55,7 +62,7 @@ export class BrandComponent implements OnInit  {
   }
 
   openModal(content: NgbModalRef) {
-    this.modal.open(content).result.then((result) => {
+    this.modal.open(content,this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed`;
@@ -128,13 +135,15 @@ export class BrandComponent implements OnInit  {
     };
     }
 
-  deleteBrand() {
+  deleteBrand(name) {
+    if(confirm("Are you sure to delete "+ name)){
       this.BrandService.deletebrand(this.selectedId)
       .subscribe((data:any) => {
               this.getBrand();
               this.notifierService.notify('success', 'A Brand has been successfully deleted');
           });
-    this.modal.dismissAll();
+      this.modal.dismissAll();
+    }
   }
 
 
