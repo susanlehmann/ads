@@ -17,8 +17,16 @@
   <div class="card-body table-responsive">
     <table class="table table-bordered">
       <thead>
+        <tr>
+          <th class="header-closed"></th>
+          <th *ngFor="let cd of weekdays" [ngClass]="{'closed': cd.isClosed, 'header-closed': true}">
+            <div placement="top" ngbTooltip={{cd.closedReason}}>{{cd.isClosed ? 'CLOSED' : ''}}</div>
+          </th>
+        </tr>
+        <tr>
         <th class="head-col">Staff</th>
         <th *ngFor="let day of weekdays">{{day.dateString}}</th>
+        </tr>
       </thead>
       <tbody>
         <tr *ngFor="let sche of schedules">
@@ -28,12 +36,13 @@
           </th>
           <ng-container *ngFor="let w of sche.weekSchedule">
             <ng-container *ngIf="w.isNew; else work_hour">
-              <td (click)="openScheduleModal(edit_work_hour, w)" class="no-shift"></td>
+              <td (click)="w.isClosed || openScheduleModal(edit_work_hour, w)"
+                [ngClass]="{'no-shift': true, 'closed': w.isClosed}"></td>
             </ng-container>
             <ng-template #work_hour>
-              <td class="work-hour" (click)="openScheduleModal(edit_work_hour, w)">
-                <div class="mb-2">{{w.shiftStart1.hour | number: '2.0-0'}}:{{w.shiftStart1.minute | number: '2.0-0'}} - {{w.shiftEnd1.hour | number: '2.0-0'}}:{{w.shiftEnd1.minute | number: '2.0-0'}}</div>
-                <div *ngIf="w.hasShift2">{{w.shiftStart2.hour | number: '2.0-0'}}:{{w.shiftStart2.minute | number: '2.0-0'}} - {{w.shiftEnd2.hour | number: '2.0-0'}}:{{w.shiftEnd2.minute | number: '2.0-0'}}</div>
+              <td [ngClass]="{'work-hour': true, 'closed': w.isClosed}" (click)="w.isClosed || openScheduleModal(edit_work_hour, w)">
+                <div placement="top" ngbTooltip={{w.closedReason}} class="mb-2" >{{w.shiftStart1.hour | number: '2.0-0'}}:{{w.shiftStart1.minute | number: '2.0-0'}} - {{w.shiftEnd1.hour | number: '2.0-0'}}:{{w.shiftEnd1.minute | number: '2.0-0'}}</div>
+                <div placement="top" ngbTooltip={{w.closedReason}} *ngIf="w.hasShift2">{{w.shiftStart2.hour | number: '2.0-0'}}:{{w.shiftStart2.minute | number: '2.0-0'}} - {{w.shiftEnd2.hour | number: '2.0-0'}}:{{w.shiftEnd2.minute | number: '2.0-0'}}</div>
               </td>
             </ng-template>
           </ng-container>

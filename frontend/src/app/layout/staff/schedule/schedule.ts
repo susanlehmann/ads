@@ -1,5 +1,4 @@
 import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-declare var Date: any;
 
 export class StaffSchedule {
     staffId: number;
@@ -33,8 +32,8 @@ export class StaffSchedule {
         const endWeek = weekRange[6].date.setHours(0, 0, 0, 0);
 
         const filtered = this.allSchedules.filter(s => {
-            const scheduleStart = s.scheduleStartDate.getTime();
-            const scheduleEnd = s.hasEndDate == 1 ? s.scheduleEndDate.getTime() : null;
+            const scheduleStart = s.scheduleStartDate.setHours(0, 0, 0, 0);
+            const scheduleEnd = s.hasEndDate == 1 ? s.scheduleEndDate.setHours(0, 0, 0, 0) : null;
             const scheduleStartInRange = startWeek <= scheduleStart && scheduleStart <= endWeek;
             const scheduleEndInOrAfterRange = s.isRepeat
             && scheduleStart < startWeek
@@ -51,12 +50,17 @@ export class StaffSchedule {
             .sort((a, b) => b.scheduleStartDate.getTime() - a.scheduleStartDate.getTime())
             [0];
 
+            let sche = new Schedule(this.staffId, this.staffName, d.date);
             if (found) {
-                found.setCurrentDate(d.date);
+                sche = found;
                 totalWeeklyHours += found.getTotalHoursOfTheDay();
-                return found;
             }
-            return new Schedule(this.staffId, this.staffName, d.date);
+            
+            sche.currentDate = d.date;
+            sche.isClosed = d.isClosed;
+            sche.closedReason = d.closedReason;
+
+            return sche;
         });
         this.weeklyHours = totalWeeklyHours;
 
@@ -89,6 +93,8 @@ export class Schedule {
      * determine if the schedule is new or not
      */
     isNew: boolean;
+    isClosed: boolean;
+    closedReason: string;
 
     constructor(staffId, staffName, currentDate?: Date) {
         this.staffId = staffId;
@@ -146,10 +152,6 @@ export class Schedule {
 
     isScheduleStartOnCurrentDate() {
         return this.scheduleStartDate.setHours(0, 0, 0, 0) === this.currentDate.setHours(0, 0, 0, 0);
-    }
-
-    setCurrentDate(currentDate: Date) {
-        this.currentDate = currentDate;
     }
 
     getTotalHoursOfTheDay() {

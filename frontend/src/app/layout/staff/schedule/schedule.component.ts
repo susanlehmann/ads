@@ -16,6 +16,7 @@ import { forkJoin } from 'rxjs';
 })
 export class ScheduleComponent implements OnInit {
   weekdays: any[];
+  closedDates: any[];
   today: Date;
   schedules: StaffSchedule[];
   allSchedules: StaffSchedule[];
@@ -33,13 +34,16 @@ export class ScheduleComponent implements OnInit {
     private staffService: StaffService,
   ) {
     this.today = new Date();
-    this.weekdays = this.getCurrentWeek();
+    this.weekdays = [];
     this.staffFilter = 0; // show all staff
     this.currentWeekModel = { day: 1, month: 1, year: 2019 };
   }
 
   ngOnInit() {
-    this.changeWeek();
+    this.staffService.getListClosedDate().subscribe((dates: any[]) => {
+      this.closedDates = dates;
+      this.changeWeek();
+    });
   }
 
   openModal(content: NgbModalRef) {
@@ -252,7 +256,7 @@ export class ScheduleComponent implements OnInit {
     if (startDate.getMonth() === endDate.getMonth()) {
       displayText = `${startDate.getDate()} - ${endDate.getDate()} ${monthNames[startDate.getMonth()]}, ${startDate.getFullYear()}`;
     } else {
-      displayText = `${startDate.getDate()} ${monthNames[startDate.getMonth()].slice(0, 3)} - ${endDate.getDate()} ${monthNames[endDate.getMonth()].slice(0, 3)} , ${startDate.getFullYear()}`;
+      displayText = `${startDate.getDate()} ${monthNames[startDate.getMonth()].slice(0, 3)} - ${endDate.getDate()} ${monthNames[endDate.getMonth()].slice(0, 3)}, ${startDate.getFullYear()}`;
     }
     weekPicker.value = displayText;
 
@@ -267,7 +271,20 @@ export class ScheduleComponent implements OnInit {
     for (let i = 1; i <= 7; i++) {
       const first = currDay.getDate() - currDay.getDay() + i;
       const date = new Date(currDay.setDate(first));
-      week.push({ date: date, dateString: date.toLocaleDateString('en-US', options) });
+      const dateMidnight = date.setHours(0, 0, 0, 0);
+
+      const closed = this.closedDates.filter(cd => {
+        const closeStart = new Date(cd.start_date).setHours(0, 0, 0, 0);
+        const closeEnd = new Date(cd.end_date).setHours(0, 0, 0, 0);
+        return closeStart <= dateMidnight && dateMidnight <= closeEnd;
+      });
+
+      week.push({
+        date: date,
+        isClosed: closed.length > 0 ? true: false,
+        closedReason: closed.length > 0 ? closed[0].description : '',
+        dateString: date.toLocaleDateString('en-GB', options).replace(',', ''),
+      });
     }
     return week;
   }
