@@ -107,10 +107,21 @@ $breakpoint-iphone: 667px;
 		}
 	}
 
+	.stock-modal {
+		.modal-footer {
+			position: sticky;
+			    margin: 0;
+		}
+	}
+
 	.custom-modal {
 		.sticky {
 			position: sticky;
 			    margin: 0;
+		}
+
+		.display {
+			display: block;
 		}
 	}
 

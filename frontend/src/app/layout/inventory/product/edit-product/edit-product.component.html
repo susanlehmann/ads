@@ -175,11 +175,11 @@
 
     </div>
 
-    <div class="modal-footer">
-        <button *ngIf="!isAdd" type="button" class="btn btn-danger" style="justify-content: flex-start"
+    <div class="modal-footer" [ngClass]="isAdd ? '' : 'sticky'">
+        <button *ngIf="!isAdd" type="button" class="btn btn-delete" style="justify-content: flex-start"
             (click)="deleteProduct()"> Delete </button>
         <!-- <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button> -->
-        <button type="submit" class="btn btn-dark pull-right" (click)="save()"> Save </button>
+        <button type="submit" class="btn btn-black pull-right" (click)="save()"> Save </button>
     </div>
 
 </div>

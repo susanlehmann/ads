@@ -45,7 +45,9 @@ export class ViewProductComponent implements OnInit {
     this.stockForm = new Stock();
     this.modal.open(content, {
       backdrop: 'static',
-      size: 'md'
+      size: 'md',
+      windowClass: 'stock-modal',
+      backdropClass: 'stock-modal',
     });
   }
 

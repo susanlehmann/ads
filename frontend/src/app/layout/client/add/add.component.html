@@ -108,6 +108,7 @@
                   <div class="col-sm-6">
                     <label class="control-label">{{'Referral source' }}</label>
                     <select [(ngModel)]="form.referral" name="referral" class="form-control">
+                      <option value="1" selected="selected" disabled hidden>Referral source</option>
                       <option *ngFor="let re of referralSources" value="{{re.id}}">{{re.name}}</option>
                     </select>
                   </div>

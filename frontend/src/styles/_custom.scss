@@ -247,4 +247,53 @@ textarea::-webkit-input-placeholder {
     color: #fff;
     text-align:center;
 }
+
+.btn-black {
+    color: #fff;
+    background-color: #24334A;
+    border: 1px solid #eee;
+    box-shadow: 1px 2px 10px #ddd;
+    cursor: pointer;
+    padding: 0.5em 2em;
+    &:hover {
+        -webkit-transform: translateY(-1px);
+        transform: translateY(-1px);
+    }
+}
+
+.btn-light {
+    &:hover {
+        -webkit-transform: translateY(-1px);
+        transform: translateY(-1px);
+    }
+}
+.btn-white {
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 1px 2px 10px #ddd;
+    cursor: pointer;
+    padding: 0.5em 2em;
+    &:hover {
+        -webkit-transform: translateY(-1px);
+        transform: translateY(-1px);
+    }
+}
+.btn-danger {
+    &:hover {
+        -webkit-transform: translateY(-1px);
+        transform: translateY(-1px);
+    }
+}
+.btn-delete {
+  background: #F74969;
+  color: #fff;
+  border: 1px solid #eee;
+  box-shadow: 1px 2px 10px #ddd;
+  cursor: pointer;
+  padding: 0.5em 2em;
+  &:hover {
+    -webkit-transform: translateY(-1px);
+    transform: translateY(-1px);
+  }
+}
 //end button

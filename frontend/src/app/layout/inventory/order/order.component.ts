@@ -238,9 +238,9 @@ export class OrderComponent implements OnInit {
         this.stopLoading();
         this.number_order = listbrands.order.length;
          this.listorder = listbrands.order;
-		}, err => {
+		}), err => {
       this.stopLoading();
-    });
+    };
   }
 
   create_oder() {
