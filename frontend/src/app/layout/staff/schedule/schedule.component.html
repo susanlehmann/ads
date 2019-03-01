@@ -140,7 +140,7 @@
           <option value=1>Specific date</option>
         </select>
         <input *ngIf="selectedSchedule.hasEndDate == 1" class="form-control" placeholder="yyyy-mm-dd" (click)="d.open()"
-          name="schedule-end" [(ngModel)]="selectedSchedule.scheduleEndDate" ngbDatepicker #d="ngbDatepicker">
+          name="schedule-end" [markDisabled]="isDisabled" [(ngModel)]="selectedSchedule.scheduleEndDate" ngbDatepicker #d="ngbDatepicker">
       </div>
     </div>
 

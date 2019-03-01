@@ -30,6 +30,11 @@ export class ScheduleComponent implements OnInit {
 
   times: any[];
 
+  isDisabled = (date: NgbDateStruct, current: {month: number}) => {
+    const day = new Date(date.year, date.month - 1, date.day).getDay();
+    return this.selectedSchedule.currentDate.getDay() != day;
+}
+
   constructor(
     private modal: NgbModal,
     private notifierService: NotifierService,
