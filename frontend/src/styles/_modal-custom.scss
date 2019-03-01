@@ -9,6 +9,17 @@
   outline: none;
 }
 
+.container-modal {
+	.modal-dialog {
+    	margin: 0 auto;
+
+    	.modal-content{
+    		border: none;
+    		border-radius: 0;
+    	}
+    }
+}
+
 $breakpoint-iphone: 667px;
 //desktop
 @media (min-width: $breakpoint-iphone) {
@@ -96,5 +107,11 @@ $breakpoint-iphone: 667px;
 		}
 	}
 
+	.custom-modal {
+		.sticky {
+			position: sticky;
+			    margin: 0;
+		}
+	}
 
 }

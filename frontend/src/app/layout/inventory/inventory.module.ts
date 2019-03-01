@@ -15,7 +15,7 @@ import { CategoryComponent } from './category/category.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { ListProductComponent } from './product/list-product/list-product.component';
 import { ViewProductComponent } from './product/view-product/view-product.component';
-
+import { AddSupplierComponent } from './supplier/add/add-supplier.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
@@ -30,9 +30,15 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     NgxIntlTelInputModule,BsDropdownModule.forRoot(),
     DataTableModule
     ],
-    declarations: [InventoryComponent, BrandComponent, OrderComponent, CategoryComponent, SupplierComponent,
-    ListProductComponent,
-    ViewProductComponent,
-]
+    declarations: [
+        InventoryComponent, 
+        BrandComponent, 
+        OrderComponent, 
+        CategoryComponent, 
+        SupplierComponent,
+        ListProductComponent,
+        ViewProductComponent,
+        AddSupplierComponent
+    ]
 })
 export class InventoryModule { }

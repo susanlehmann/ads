@@ -1,0 +1,204 @@
+<div class="box-desktop">
+    <div class="modal-header">
+        <h4 class="modal-title col-sm-4 offset-sm-4">{{isCreate ? 'Add Supplier' : 'Edit Supplier'}}</h4>
+        <button type="button" class="col-sm-4 close" aria-label="Close">
+      <span aria-hidden="true" (click)="dismiss()">&times;</span>
+    </button>
+    </div>
+    <form #signupForm=ngForm (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+            <div class="col-md-12 form-content">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-6">
+                        <label>Supplier Details</label><br>
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">SUPPLIER NAME</label>
+                                <input [(ngModel)]="form.name_supplier" type="text" class="form-control input-underline input-lg" name="name_supplier" placeholder="e.g. Jane" required #name_supplier="ngModel">
+                                <div class="alert alert-danger" [hidden]="!error.name_supplier"> {{ error.name_supplier }} </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">SUPPLIER DESCRIPTION</label>
+                                <textarea class="form-control form-text-area" [(ngModel)]="form.discription_suppliner" name="description_supplier" placeholder="Add private notes viewable in staff settings only (optional)" rows="4"></textarea>
+                                <div class="alert alert-danger" [hidden]="!error.description_supplier"> {{ error.description_supplier }} </div>
+                            </div>
+                        </div>
+                        <div class="title-info">
+                          <label>Contact Information</label>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row form-group">
+                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                <label class="control-label">First Name</label>
+                                <input [(ngModel)]="form.firtname_supplier" type="text" class="form-control input-underline input-lg" name="firstName" placeholder="e.g. Jane" required #firstName="ngModel">
+                                <div class="alert alert-danger" [hidden]="!error.firstName"> {{ error.firstName }} </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                <label class="control-label">Last Name</label>
+                                <input [(ngModel)]="form.lasname_supplier" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="e.g. Doe">
+                                <div class="alert alert-danger" [hidden]="!error.lastName"> {{ error.lastName }} </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-6 col-md-12 col-lg-6 mbx-mobile">
+                                <label class="control-label">Mobile Number</label>
+                                <ngx-intl-tel-input [enablePlaceholder]="true" [enableAutoCountrySelect]="true" name="mobile" [cssClass]="'custom-css'" [(ngModel)]="mobile"></ngx-intl-tel-input>
+                            </div>
+
+                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                <label class="control-label">Email</label>
+                                <input [(ngModel)]="form.email_supplier" type="email" name="email" class="form-control input-underline input-lg" placeholder="mail@example.com">
+                                <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-6 col-md-12 col-lg-6 mbx-mobile">
+                                <label class="control-label">TELEPHONE</label>
+                                <ngx-intl-tel-input [enablePlaceholder]="true" [enableAutoCountrySelect]="true" name="telephone" [cssClass]="'custom-css'" [(ngModel)]="telephone"></ngx-intl-tel-input>
+                            </div>
+                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                <label class="control-label">WEBSITE</label>
+                                <input [(ngModel)]="form.website_supplier" type="text" name="website" class="form-control input-underline input-lg" placeholder="example.com">
+                                <div class="alert alert-danger" [hidden]="!error.website"> {{ error.website }} </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div [ngClass]="postal_address ? 'col-sm-12' : 'col-sm-6'">
+                                    <label>Physical Address</label><br>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">STREET</label>
+                                            <textarea class="form-control form-text-area" [(ngModel)]="form.street_supplier" name="street" placeholder="" rows="4"></textarea>
+                                            <div class="alert alert-danger" [hidden]="!error.street"> {{ error.street }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">SUBURB</label>
+                                            <input [(ngModel)]="form.suburb_supplier" type="text" name="suburb" class="form-control input-underline input-lg" placeholder="">
+                                            <div class="alert alert-danger" [hidden]="!error.suburb"> {{ error.suburb }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">CITY</label>
+                                            <input [(ngModel)]="form.city_supplier" type="text" name="city" class="form-control input-underline input-lg" placeholder="">
+                                            <div class="alert alert-danger" [hidden]="!error.city"> {{ error.city }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">SATE</label>
+                                            <input [(ngModel)]="form.state_supplier" type="text" name="sate" class="form-control input-underline input-lg" placeholder="">
+                                            <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">ZIP / POST CODE</label>
+                                            <input [(ngModel)]="form.zipcode_supplier" type="number" name="postCode" class="form-control input-underline input-lg" placeholder="">
+                                            <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">COUNTRY</label>
+                                            <select [(ngModel)]="form.countryid_supplier" name="countryid_supplier" class="form-control">
+                                          <option value="empty" disabled="" selected >Choose country</option>
+                                          <option *ngFor="let c of country?.default" value="{{c.code}}">{{c.name}}</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6" *ngIf="!postal_address">
+                                    <label>Postal Address</label><br>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">STREET</label>
+                                            <textarea class="form-control form-text-area" [(ngModel)]="second_address.street" name="street1" placeholder="" rows="4"></textarea>
+                                            <div class="alert alert-danger" [hidden]="!error.street"> {{ error.street }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">SUBURB</label>
+                                            <input [(ngModel)]="second_address.suburb" type="text" name="suburb1" class="form-control input-underline input-lg" placeholder="">
+                                            <div class="alert alert-danger" [hidden]="!error.suburb"> {{ error.suburb }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">CITY</label>
+                                            <input [(ngModel)]="second_address.city" type="text" name="city1" class="form-control input-underline input-lg" placeholder="">
+                                            <div class="alert alert-danger" [hidden]="!error.city"> {{ error.city }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">SATE</label>
+                                            <input [(ngModel)]="second_address.sate" type="text" name="sate1" class="form-control input-underline input-lg" placeholder="">
+                                            <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">ZIP / POST CODE</label>
+                                            <input [(ngModel)]="second_address.postCode" type="number" name="postCode1" class="form-control input-underline input-lg" placeholder="">
+                                            <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">COUNTRY</label>
+                                            <select [(ngModel)]="second_address.country" name="country1" class="form-control">
+                                              <option value="empty" disabled="" selected >Choose country</option>
+                                              <option *ngFor="let c of country?.default" value="{{c.code}}">{{c.name}}</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-12 btn-switch">
+                                <label class="control-label">SAME AS POSTAL ADDRESS </label>
+                                <label class="switch" style="margin-left:120px;">
+                                  <input type="checkbox" name="postal_address" [(ngModel)]="postal_address">
+                                  <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button *ngIf="!isCreate" type="button" class="btn btn-danger" (click)="openModal(delete)"> Delete </button>
+        <button type="submit" class="btn btn-dark pull-right" (click)="save()"> Save </button>
+        <button type="button" [ngClass]="isCreate ? '' : 'btn-none'" class="btn btn-light pull-right" (click)="dismiss()"> Cancel </button>
+    </div>
+</div>
+
+<ng-template #delete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title offset-sm-4 offset-sm-4" id="modal-basic-title">Delete Supplier</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div style="font-size:16px;line-height: 22px;color: #67768C;">Are you sure you want to delete this supplier?</div>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!isCreate" type="button" class="btn btn-danger pull-right" (click)="deletesupplier()"> Delete </button>
+  </div>
+</ng-template>

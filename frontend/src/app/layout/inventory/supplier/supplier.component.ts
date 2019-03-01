@@ -30,19 +30,20 @@ export class SupplierComponent implements OnInit {
   listproducts: any;
   _list: any;
   display: number;
+  _eSupplier: any;
 
 	constructor(
-  private notifierService: NotifierService,
-  private modal: NgbModal,
-  private SupplierService: SupplierService,
-  private InventoryService: InventoryService
+    private notifierService: NotifierService,
+    private modal: NgbModal,
+    private SupplierService: SupplierService,
+    private InventoryService: InventoryService
 	) {
     this.form = new Supplier();
     this.modalOptions = {
       backdrop: 'static',
       size: 'lg',
-      windowClass: 'custom-modal',
-      backdropClass: 'custom-modal',
+      windowClass: 'container-modal',
+      backdropClass: 'container-modal',
     };
     // this.listsupplier = [];
 	}
@@ -89,9 +90,10 @@ export class SupplierComponent implements OnInit {
     this.openModal(content);
   }
 
-  openUpdateModal(content: NgbModalRef, id_supplier) {
+  openUpdateModal(content: NgbModalRef, id_supplier, _eSupplier) {
 
     this.isCreate = false;
+    this._eSupplier = _eSupplier;
     this.selectedId = id_supplier;
     // this.form = id_supplier
     // this.openModal(content);
@@ -182,6 +184,12 @@ export class SupplierComponent implements OnInit {
     this.SupplierService.searchSupplier(query).subscribe((list: any) => {
       this.listsupplier = list.supplier.map(Supplier.toModel);
     });
+  }
+
+  reloadList(event) {
+    if(event){
+      this.getSupplier();
+    }
   }
 
   startLoading(): void {

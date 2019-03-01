@@ -1,3 +1,4 @@
+<div *ngIf="number_display > 0">
 <div class="shedul-app">
   <section class="main-content">
     <div class="react">
@@ -47,76 +48,6 @@
                                 </tbody>
                               </table>
                             </div>
-                            <div class="_2f96-_">
-
-                              <ng-template #content let-modal>
-                                <div class="box-desktop">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title offset-sm-4" id="modal-basic-title">{{isCreate ? 'Add Category' : 'Edit Category'}}</h4>
-                                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <form #signupForm=ngForm (ngSubmit)="onSubmit()">
-                                    <div class="modal-body">
-                                      <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
-                                      <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control" placeholder="e.g Hair Products" required text #categoryName="ngModel">
-                                    </div>
-                                    <div class="modal-footer" style="display: list-item;position: sticky;">
-                                      <button *ngIf="!isCreate" type="button" class="btn btn-danger pull-left" style="justify-content: flex-start" (click)="openModal(delete)"> Delete </button>
-                                      <button type="submit" class="btn btn-dark pull-right"> Save </button> 
-                                      <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>&nbsp;
-                                    </div>
-                                  </form>
-                                </div>
-                                <div class="box-mobile" style="height: -webkit-fill-available;">
-                                  <div class="custommodal">
-                                    <div class="custom1">
-                                      <div class="title" style="flex-direction: column; flex-shrink: 1; flex-grow: 1;">
-                                        <div class=" modal-header title1">
-                                          <h4 class="titlecusom modal-title">{{isCreate ? 'Add Category' : 'Edit Category'}}</h4>
-                                          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="margin-top: 18px;">
-                                            <span aria-hidden="true" class="bt">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body bodys" style="display: flex; flex-direction: column;">
-                                          <div class="main-body" style="margin-left:10px;width: 100%;">
-                                            <label class="labelname">Category name</label>
-                                            <div class="inputs">
-                                              <div class="inputs1">
-                                                  <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control typeinput" placeholder="e.g Hair Products" required text #categoryName="ngModel">
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="modal-footer" style="width:100%;">
-                                          <button *ngIf="!isCreate" type="button" class="btn btn-1" (click)="openModal(delete)" style="background-color: #F74969;width: 100%"> Delete </button>
-                                          <button type="submit" class="btn btn-1 pull-right" [disabled]="!signupForm.valid" style="background-color: #24334A;width: 100%"> Save </button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </ng-template>
-                              <ng-template #delete let-modal>
-                                <div class="modal-header">
-                                  <h4 class="modal-title text-xs-center offset-sm-4" id="modal-basic-title" style="font-size: 24px;font-weight: 300;color: #24334A;">Delete Category</h4>
-                                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <div style="font-size:16px;line-height: 22px;color: #67768C;">Are you sure you want to delete this category?</div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button *ngIf="!isCreate" type="button" class="btn" style="justify-content: flex-start;background-color: #F74969;color: white;text-transform: uppercase;" (click)="deleteCategory()"> Delete </button>
-                                </div>
-                              </ng-template>
-
-                              <!----div class="row">
-                                  <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Categories</button>
-                              </div-->
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -144,6 +75,79 @@
 				</span>
       </button>
 </div>
-
+</div>
+<div class="_2f96-_">
+  <ng-template #content let-modal>
+    <div class="box-desktop">
+      <div class="modal-header">
+        <h4 class="modal-title offset-sm-4" id="modal-basic-title">{{isCreate ? 'Add Category' : 'Edit Category'}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #signupForm=ngForm (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <label class="font-weight-bold" style="font-size: 13px;">{{ 'category name' | uppercase }}</label>
+          <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control" placeholder="e.g Hair Products" required text #categoryName="ngModel">
+        </div>
+        <div class="modal-footer" style="display: list-item;position: sticky;">
+          <button *ngIf="!isCreate" type="button" class="btn btn-danger pull-left" style="justify-content: flex-start" (click)="openModal(delete)"> Delete </button>
+          <button type="submit" class="btn btn-dark pull-right"> Save </button> 
+          <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>&nbsp;
+        </div>
+      </form>
+    </div>
+    <div class="box-mobile" style="height: -webkit-fill-available;">
+      <div class="custommodal">
+        <div class="custom1">
+          <div class="title" style="flex-direction: column; flex-shrink: 1; flex-grow: 1;">
+            <div class=" modal-header title1">
+              <h4 class="titlecusom modal-title">{{isCreate ? 'Add Category' : 'Edit Category'}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="margin-top: 18px;">
+                <span aria-hidden="true" class="bt">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body bodys" style="display: flex; flex-direction: column;">
+              <div class="main-body" style="margin-left:10px;width: 100%;">
+                <label class="labelname">Category name</label>
+                <div class="inputs">
+                  <div class="inputs1">
+                      <input [(ngModel)]="form.categoryName" name="category" type="text" class="form-control typeinput" placeholder="e.g Hair Products" required text #categoryName="ngModel">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer" style="width:100%;">
+              <button *ngIf="!isCreate" type="button" class="btn btn-1" (click)="openModal(delete)" style="background-color: #F74969;width: 100%"> Delete </button>
+              <button type="submit" class="btn btn-1 pull-right" [disabled]="!signupForm.valid" style="background-color: #24334A;width: 100%"> Save </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #delete let-modal>
+    <div class="modal-header" [ngClass]="isCreate ? '' : 'sticky'">
+      <h4 class="modal-title text-xs-center offset-sm-4" id="modal-basic-title" style="font-size: 24px;font-weight: 300;color: #24334A;">Delete Category</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:16px;line-height: 22px;color: #67768C;">Are you sure you want to delete this category?</div>
+    </div>
+    <div class="modal-footer" [ngClass]="isCreate ? '' : 'sticky'">
+      <button *ngIf="!isCreate" type="button" class="btn" style="justify-content: flex-start;background-color: #F74969;color: white;text-transform: uppercase;" (click)="deleteCategory()"> Delete </button>
+    </div>
+  </ng-template>
+</div>
+<div *ngIf="number_display == 0">
+  <div class="text-center" style="margin-top: 30px;">
+    <h1><i class="fa fa-product-hunt"></i></h1>
+    <h3 class="text-capitalize">Add Product Category</h3>
+    <button class="btn btn-black" type="button" (click)="openCreateModal(content)">NEW
+      CATEGORY</button>
+  </div>
+</div>
 
 

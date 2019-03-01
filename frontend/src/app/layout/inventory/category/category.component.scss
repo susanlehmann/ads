@@ -7,7 +7,7 @@
   overflow-x: hidden;
 }
 ._2jGgaE {
-  padding: 24px;
+  padding: 0;
 }
 ._3ggHzc {
   display: flex;
@@ -527,5 +527,14 @@ $breakpoint-iphone: 667px;
   }
   .box-mobile{
     display: none;
+  }
+  .modal-footer { 
+    position: sticky;
+  }
+}
+
+.modal-footer {
+  .btn {
+    margin-right: 5px;
   }
 }

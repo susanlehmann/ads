@@ -1,0 +1,48 @@
+.modal-footer {
+	display: flow-root;
+
+	.btn {
+		margin-right: 5px;
+	}
+}
+.mbx-mobile {
+	label {
+		display:block;
+	}
+}
+
+.form-group {
+	label {
+		margin-top: .5rem;
+	}
+}
+
+@media (max-width: 667px) {
+	.modal-footer {
+	    position: sticky !important;
+	    margin: 0;
+	    .btn-none {
+	    	display: none;
+	    }
+	}
+
+	.btn-switch {
+		display: inline-block !important;
+
+		.control-label {
+			float: left;
+			margin-right: 10px;
+		}
+		.switch {
+			margin-left: 0 !important;
+		}
+
+
+	}
+	.modal-header {
+		.close {
+		    position: fixed;
+		    right: 10px;
+		}
+	}
+}
