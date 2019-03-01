@@ -149,11 +149,11 @@
   </div>
 
   <div class="modal-footer" style="justify-content: space-between">
-    <button *ngIf="!selectedSchedule.isNew" type="button" class="btn btn-danger" (click)='onClickDeleteSchedule(confirm_override)'> Delete </button>
+    <button *ngIf="!selectedSchedule.isNew" type="button" class="btn btn-delete" (click)='onClickDeleteSchedule(confirm_override)'> Delete </button>
     <div></div>
     <div>
-    <button type="button" class="btn btn-light mr-2" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-    <button type="submit" class="btn btn-dark" (click)="onClickSaveSchedule(confirm_override)"> Save </button>
+    <button type="button" class="btn btn-white mr-2" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+    <button type="submit" class="btn btn-black" (click)="onClickSaveSchedule(confirm_override)"> Save </button>
   </div>
   </div>
 
@@ -172,7 +172,7 @@
     </div>
   
     <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.dismiss('Cancel click')"> Close </button>
+      <button type="button" class="btn btn-white" (click)="modal.dismiss('Cancel click')"> Close </button>
       
       <ng-container *ngIf="isConfirmDeleteRepeat; else update_repeat">
       
