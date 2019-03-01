@@ -331,7 +331,7 @@ svg:not(:root) {
   fill: white;
 }
 //Response mobile
-$breakpoint-iphone: 667px;
+$breakpoint-iphone: 992px;
 @media (max-width: $breakpoint-iphone){
   .box-desktop{
     display: none;
