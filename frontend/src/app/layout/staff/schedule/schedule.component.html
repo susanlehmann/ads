@@ -171,19 +171,19 @@
         {{selectedSchedule.hasEndDate === 1 ? 'up to ' + selectedSchedule.scheduleEndDate.toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric'}) : '' }}
     </div>
   
-    <div class="modal-footer">
-      <button type="button" class="btn btn-white" (click)="modal.dismiss('Cancel click')"> Close </button>
-      
-      <ng-container *ngIf="isConfirmDeleteRepeat; else update_repeat">
-      
-      <button type="button" class="btn btn-success" (click)="onClickDeleteUpcoming()"> Delete upcoming shifts </button>
-      <button type="button" class="btn btn-info" (click)="onClickDeleteThisShiftOnly()"> Delete this shift only</button>
-    </ng-container>
+    <div class="modal-footer" style="display: unset;">
+        
+        <ng-container *ngIf="isConfirmDeleteRepeat; else update_repeat">
+          
+          <button type="button" class="btn btn-success col-sm-12 mb-2" (click)="onClickDeleteUpcoming()"> Delete upcoming shifts </button>
+          <button type="button" class="btn btn-info col-sm-12 mb-2" (click)="onClickDeleteThisShiftOnly()"> Delete this shift only</button>
+        </ng-container>
+        
+        <ng-template #update_repeat>
+          <button type="button" class="btn btn-success col-sm-12 mb-2" (click)="onClickUpdateUpcoming()"> Update upcoming shifts </button>
+          <button type="button" class="btn btn-info col-sm-12 mb-2" (click)="onClickUpdateThisShiftOnly()"> Update this shift only</button>
+        </ng-template>
 
-    <ng-template #update_repeat>
-      <button type="button" class="btn btn-success" (click)="onClickUpdateUpcoming()"> Update upcoming shifts </button>
-      <button type="button" class="btn btn-info" (click)="onClickUpdateThisShiftOnly()"> Update this shift only</button>
-    </ng-template>
-
+        <button type="button" class="btn btn-white col-sm-12" (click)="modal.dismiss('Cancel click')"> Close </button>
     </div>
   </ng-template>
