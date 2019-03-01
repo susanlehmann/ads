@@ -23,7 +23,7 @@
 $breakpoint-iphone: 667px;
 @media (max-width: $breakpoint-iphone){
   .custom-modal div {
-    max-width: 667px;
+    max-width: 100%;
     margin: -0.25rem auto;
   }
 }

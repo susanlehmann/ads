@@ -5,7 +5,6 @@ import { NotifierService } from 'angular-notifier';
 import { SupplierService } from './supplier.service';
 import { Product } from '../product/model/product';
 import { InventoryService } from '../inventory.service';
-import { empty } from 'rxjs';
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
@@ -16,9 +15,9 @@ export class SupplierComponent implements OnInit {
   loading: boolean;
   form: Supplier;
   postal_address = true;
-  mobile: any;
-  telephone: any;
-
+  mobile: any = {};
+  telephone: any = {};
+  second_address: any = {};
   modalOptions: NgbModalOptions;
   public error = [];
 
@@ -41,7 +40,9 @@ export class SupplierComponent implements OnInit {
     this.form = new Supplier();
     this.modalOptions = {
       backdrop: 'static',
-      size: 'lg'
+      size: 'lg',
+      windowClass: 'custom-modal',
+      backdropClass: 'custom-modal',
     };
     // this.listsupplier = [];
 	}
@@ -49,6 +50,7 @@ export class SupplierComponent implements OnInit {
 	ngOnInit() {
     this.getSupplier();
     this.getProduct();
+    this.second_address.country = "empty";
   }
 
   getProduct(){
@@ -91,12 +93,14 @@ export class SupplierComponent implements OnInit {
 
     this.isCreate = false;
     this.selectedId = id_supplier;
+    // this.form = id_supplier
+    // this.openModal(content);
     this.SupplierService.findById(id_supplier)
     .subscribe((data:any) => {
+      console.log(data);
             this.form.updateData(data.supplier);
-            //this.mobile.internationalNumber = this.form.mobileNumber;
-            //this.telephone.internationalNumber = this.form.telephoneNumber;
-
+            this.mobile = data.supplier.mobilenumber_supplier;
+            this.telephone = data.supplier.telephone_supplier;
             this.openModal(content);
         });
   }
@@ -106,8 +110,12 @@ export class SupplierComponent implements OnInit {
     this.SupplierService.getList()
 		.subscribe(listusers => {
         this.stopLoading();
+
+        //this.mobile = this.form.mobileNumber;
+        //this.telephone = this.form.telephoneNumber;
         this._listSup = listusers;
         this.display = this._listSup.supplier.length;
+        this.listsupplier = this._listSup.supplier;
 		}, err => {
       this.stopLoading();
     });
@@ -125,18 +133,29 @@ export class SupplierComponent implements OnInit {
     }
 
   addsupplier(supplier): void {
+    if(this.postal_address){
+      supplier.second_address = "";
+    } else {
+      supplier.second_address = JSON.stringify(this.second_address);
+    }
+    supplier.mobilenumber_supplier = this.mobile.internationalNumber;
+    supplier.telephone_supplier = this.telephone.internationalNumber;
     console.log(supplier);
     this.SupplierService.add(supplier)
     .subscribe((data:any) => {
-            this.stopLoading();
-            this.getSupplier();
-            this.notifierService.notify('success', 'A new supplier has been successfully added');
+
+      //this.apps = this.form.second_address;
+      this.stopLoading();
+      this.getSupplier();
+      this.notifierService.notify('success', 'A new supplier has been successfully added');
     }), err => {
       this.stopLoading();
     };
     }
 
   updatesupplier(supplier) {
+    supplier.mobilenumber_supplier = this.mobile.internationalNumber;
+    supplier.telephone_supplier = this.telephone.internationalNumber;
     this.SupplierService.update(supplier)
     .subscribe((data:any) => {
             this.stopLoading();
