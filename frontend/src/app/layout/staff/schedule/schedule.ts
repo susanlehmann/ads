@@ -71,10 +71,10 @@ export class Schedule {
     id: number;
     staffId: number;
     staffName: string;
-    shiftStart1: NgbTimeStruct;
-    shiftEnd1: NgbTimeStruct;
-    shiftStart2: NgbTimeStruct;
-    shiftEnd2: NgbTimeStruct;
+    shiftStart1: TimeModel;
+    shiftEnd1: TimeModel;
+    shiftStart2: TimeModel;
+    shiftEnd2: TimeModel;
     isRepeat: boolean;
 
     scheduleStartDate: Date;
@@ -99,10 +99,10 @@ export class Schedule {
     constructor(staffId, staffName, currentDate?: Date) {
         this.staffId = staffId;
         this.staffName = staffName;
-        this.shiftStart1 = {hour: 9, minute: 0, second: 0};
-        this.shiftEnd1 = {hour: 17, minute: 0, second: 0};
-        this.shiftStart2 = {hour: 18, minute: 0, second: 0};
-        this.shiftEnd2 = {hour: 22, minute: 0, second: 0};
+        this.shiftStart1 = {hour: 9, minute: 0, text: '9:00am'};
+        this.shiftEnd1 = {hour: 17, minute: 0, text: '5:00pm'};
+        this.shiftStart2 = {hour: 18, minute: 0, text: '6:00pm'};
+        this.shiftEnd2 = {hour: 22, minute: 0, text: '10:00pm'};
         this.isRepeat = false;
 
         this.currentDate = currentDate;
@@ -164,16 +164,16 @@ export class Schedule {
     }
 
     validateShift() {
-        const validShift1 = this.shiftEnd1.hour - this.shiftStart1.hour > 0 ;
-        const validShift2 = this.hasShift2 ? (this.shiftEnd2.hour - this.shiftStart2.hour > 0 ? true : false) : true;
+        const validShift1 = this.shiftEnd1.hour - this.shiftStart1.hour >= 0 ;
+        const validShift2 = this.hasShift2 ? (this.shiftEnd2.hour - this.shiftStart2.hour >= 0 ? true : false) : true;
         this.isValidShift = validShift1 && validShift2;
         this.updateBreakTime();
     }
 
     updateBreakTime() {
         if (this.hasShift2) {
-            this.breakTime = {hour: this.shiftStart2.hour - this.shiftEnd1.hour, minute: this.shiftStart2.minute - this.shiftEnd1.minute, second: 0};
-            this.isValidShift =  this.isValidShift && this.breakTime.hour > 0 ? true : false;
+            this.breakTime = {hour: this.shiftStart2.hour - this.shiftEnd1.hour, minute: Math.abs(this.shiftStart2.minute - this.shiftEnd1.minute), second: 0};
+            this.isValidShift =  this.isValidShift && this.breakTime.hour >= 0 ? true : false;
         }
     }
 
@@ -211,4 +211,10 @@ export class Schedule {
             schedule_end: this.hasEndDate == 1 ? this.scheduleEndDate.toLocaleDateString('en-US', options) : null,
         };
     }
+}
+
+export interface TimeModel {
+    hour: number;
+    minute: number;
+    text: string;
 }

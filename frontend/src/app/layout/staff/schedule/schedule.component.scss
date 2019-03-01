@@ -62,3 +62,20 @@ $blue: #007FC9;
     border: none;
     background: none;
 }
+
+.custom-select {
+    width: 100%;
+}
+
+.close-shift-2 {
+    position: absolute;
+    width: 28px;
+    right: 20px;
+    top: 15%;
+    background-color: white;
+    color:black;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

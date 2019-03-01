@@ -68,28 +68,45 @@
   <div class="modal-body">
     <div class="row form-group" style="flex-wrap: nowrap;">
       <div class="col-sm-6">
-        <label class="control-label">SHIFT START</label>
-        <ngb-timepicker [(ngModel)]="selectedSchedule.shiftStart1" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()'></ngb-timepicker>
+        <label class="control-label">SHIFT START</label><br>
+        <select class="custom-select"
+        [(ngModel)]="selectedSchedule.shiftStart1"
+        [compareWith]="compareTimeModel"
+        (ngModelChange)="selectedSchedule.validateShift()">
+            <option *ngFor="let t of times" [ngValue]="t">{{t.text}}</option>
+          </select>
       </div>
 
       <div class="col-sm-6">
-        <label class="control-label">SHIFT END</label>
-        <ngb-timepicker [(ngModel)]="selectedSchedule.shiftEnd1" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()'></ngb-timepicker>
+        <label class="control-label">SHIFT END</label><br>
+        <select class="custom-select"
+        [(ngModel)]="selectedSchedule.shiftEnd1"
+        [compareWith]="compareTimeModel"
+        (ngModelChange)="selectedSchedule.validateShift()">
+            <option *ngFor="let t of times" [ngValue]="t">{{t.text}}</option>
+          </select>
       </div>
     </div>
 
     <ng-container *ngIf="selectedSchedule.hasShift2; else btn_add_shift_2">
       <div class="row form-group" style="flex-wrap: nowrap;">
         <div class="col-sm-6">
-          <ngb-timepicker [(ngModel)]="selectedSchedule.shiftStart2" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()' ></ngb-timepicker>
+            <select class="custom-select"
+            [(ngModel)]="selectedSchedule.shiftStart2"
+            [compareWith]="compareTimeModel"
+            (ngModelChange)="selectedSchedule.validateShift()">
+                <option *ngFor="let t of times" [ngValue]="t">{{t.text}}</option>
+              </select>
         </div>
 
         <div class="col-sm-6">
-          <ngb-timepicker [(ngModel)]="selectedSchedule.shiftEnd2" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()'></ngb-timepicker>
-        </div>
-
-        <div class="col-sm-1 closeShift" style="align-self: center;">
-          <button (click)="toggleShift2()" style="background-color: white; border: none; color:red;cursor: pointer;">x</button>
+            <select class="custom-select"
+            [(ngModel)]="selectedSchedule.shiftEnd2"
+            [compareWith]="compareTimeModel"
+            (ngModelChange)="selectedSchedule.validateShift()">
+                <option *ngFor="let t of times" [ngValue]="t">{{t.text}}</option>
+              </select>
+              <button class="close-shift-2" (click)="selectedSchedule.toggleShift2()">x</button>
         </div>
       </div>
       <div *ngIf="selectedSchedule.isValidShift" class="row form-group" style="justify-content: center;">
@@ -107,7 +124,7 @@
 
     <div class="row form-group">
       <div class="col-sm-12 btn-switch">
-        <label class="control-label">Repeat weekly </label>
+        <label class="control-label mr-2">Repeat weekly</label>
         <label class="switch">
           <input type="checkbox" [(ngModel)]="selectedSchedule.isRepeat" name="repeat">
           <span class="slider round"></span>
@@ -118,7 +135,7 @@
     <div *ngIf="selectedSchedule.isRepeat" class="row form-group">
       <div class="col-sm-12">
         <label class="control-label">END REPEAT</label>
-        <select [(ngModel)]="selectedSchedule.hasEndDate" class="custom-select custom-select mb-3" style="width: 100%">
+        <select [(ngModel)]="selectedSchedule.hasEndDate" class="custom-select mb-3">
           <option value=0>Ongoing</option>
           <option value=1>Specific date</option>
         </select>
