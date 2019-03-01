@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../model/product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryService } from '../../inventory.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NgbModal, NgbModalRef, NgbModalOptions, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
 
@@ -20,14 +22,21 @@ export class EditProductComponent implements OnInit {
   categories;
   suppliers;
   taxs = [];
+  modalOptions: NgbModalOptions;
+  closeResult: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private inventoryService: InventoryService,
     private notifierService: NotifierService,
+    private modal: BsModalService,
   ) {
     this.form = new Product();
+    this.modalOptions = {
+        backdrop: 'static',
+        size: 'md',
+    };
   }
 
   ngOnInit() {
@@ -84,11 +93,21 @@ export class EditProductComponent implements OnInit {
 
   deleteProduct() {
     this.inventoryService.deleteProduct(this.form.id).subscribe((data: any) => {
+      this.modal.hide(1);
       this.notifierService.notify('success', 'The product has been successfully deleted');
       this.router.navigate(['/inventory/products']);
     }), err => {
 
-    };;
+    };
    }
+
+     openModal(content: BsModalRef) {
+      this.modal.show(content);
+
+    }
+
+    close() {
+      this.modal.hide(1);
+    }
 
 }

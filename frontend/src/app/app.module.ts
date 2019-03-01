@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from  'ngx-ui-loader';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { BsModalService, ModalModule } from 'ngx-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
@@ -106,6 +107,7 @@ const customNotifierOptions: NotifierOptions = {
         SocialLoginModule,
         PDFExportModule,
         NgxIntlTelInputModule,
+        ModalModule.forRoot(),
         DataTableModule
     ],
     declarations: [AppComponent, SearchComponent, EditProductComponent],
@@ -124,6 +126,7 @@ const customNotifierOptions: NotifierOptions = {
         InventoryService,
         SupplierService,
         NotifierService,
+        BsModalService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     ],

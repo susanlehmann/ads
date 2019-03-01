@@ -1,0 +1,9 @@
+.card-custom .card-header {
+  display: inline-block;
+}
+
+.modal-footer {
+	&.display {
+		display: block;
+	}
+}
