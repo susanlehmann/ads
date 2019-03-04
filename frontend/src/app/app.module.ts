@@ -8,7 +8,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from  'ngx-ui-loader';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
-
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { BsModalService, ModalModule } from 'ngx-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
@@ -34,7 +35,7 @@ import { InventoryService } from './layout/inventory/inventory.service';
 import { NotifierService } from 'angular-notifier';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { OrderModule } from 'ngx-order-pipe';
-
+import { DataTableModule } from "angular-6-datatable";
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -104,7 +105,10 @@ const customNotifierOptions: NotifierOptions = {
         AppRoutingModule,
         NotifierModule.withConfig(customNotifierOptions),
         SocialLoginModule,
-        PDFExportModule
+        PDFExportModule,
+        NgxIntlTelInputModule,
+        ModalModule.forRoot(),
+        DataTableModule
     ],
     declarations: [AppComponent, SearchComponent, EditProductComponent],
     providers: [
@@ -122,6 +126,7 @@ const customNotifierOptions: NotifierOptions = {
         InventoryService,
         SupplierService,
         NotifierService,
+        BsModalService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     ],

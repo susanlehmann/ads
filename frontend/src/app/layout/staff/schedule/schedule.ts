@@ -32,8 +32,8 @@ export class StaffSchedule {
         const endWeek = weekRange[6].date.setHours(0, 0, 0, 0);
 
         const filtered = this.allSchedules.filter(s => {
-            const scheduleStart = s.scheduleStartDate.getTime();
-            const scheduleEnd = s.hasEndDate ? s.scheduleEndDate.getTime() : null;
+            const scheduleStart = s.scheduleStartDate.setHours(0, 0, 0, 0);
+            const scheduleEnd = s.hasEndDate == 1 ? s.scheduleEndDate.setHours(0, 0, 0, 0) : null;
             const scheduleStartInRange = startWeek <= scheduleStart && scheduleStart <= endWeek;
             const scheduleEndInOrAfterRange = s.isRepeat
             && scheduleStart < startWeek
@@ -45,14 +45,22 @@ export class StaffSchedule {
         let totalWeeklyHours = 0;
 
         this.weekSchedule = weekRange.map(d => {
-            const found = filtered.filter(s => s.scheduleStartDate.getDay() === d.date.getDay())[0];
+            const found = filtered
+            .filter(s => s.scheduleStartDate.getDay() === d.date.getDay())
+            .sort((a, b) => b.scheduleStartDate.getTime() - a.scheduleStartDate.getTime())
+            [0];
 
+            let sche = new Schedule(this.staffId, this.staffName, d.date);
             if (found) {
-                found.setCurrentDate(d.date);
+                sche = found;
                 totalWeeklyHours += found.getTotalHoursOfTheDay();
-                return found;
             }
-            return new Schedule(this.staffId, this.staffName, d.date);
+            
+            sche.currentDate = d.date;
+            sche.isClosed = d.isClosed;
+            sche.closedReason = d.closedReason;
+
+            return sche;
         });
         this.weeklyHours = totalWeeklyHours;
 
@@ -63,10 +71,10 @@ export class Schedule {
     id: number;
     staffId: number;
     staffName: string;
-    shiftStart1: NgbTimeStruct;
-    shiftEnd1: NgbTimeStruct;
-    shiftStart2: NgbTimeStruct;
-    shiftEnd2: NgbTimeStruct;
+    shiftStart1: TimeModel;
+    shiftEnd1: TimeModel;
+    shiftStart2: TimeModel;
+    shiftEnd2: TimeModel;
     isRepeat: boolean;
 
     scheduleStartDate: Date;
@@ -79,18 +87,22 @@ export class Schedule {
     currentDate: Date;
     breakTime: NgbTimeStruct;
 
+    backupStartDate;
+
     /**
      * determine if the schedule is new or not
      */
     isNew: boolean;
+    isClosed: boolean;
+    closedReason: string;
 
     constructor(staffId, staffName, currentDate?: Date) {
         this.staffId = staffId;
         this.staffName = staffName;
-        this.shiftStart1 = {hour: 9, minute: 0, second: 0};
-        this.shiftEnd1 = {hour: 17, minute: 0, second: 0};
-        this.shiftStart2 = {hour: 18, minute: 0, second: 0};
-        this.shiftEnd2 = {hour: 22, minute: 0, second: 0};
+        this.shiftStart1 = {hour: 9, minute: 0, text: '9:00am'};
+        this.shiftEnd1 = {hour: 17, minute: 0, text: '5:00pm'};
+        this.shiftStart2 = {hour: 18, minute: 0, text: '6:00pm'};
+        this.shiftEnd2 = {hour: 22, minute: 0, text: '10:00pm'};
         this.isRepeat = false;
 
         this.currentDate = currentDate;
@@ -103,7 +115,7 @@ export class Schedule {
         this.hasEndDate = 0;
     }
 
-    clone() {
+    clone() { // not cloning function, unusable
         const cloned = Object.assign({}, this);
         cloned.scheduleEndDate = cloned.scheduleEndDate ? new Date(cloned.scheduleEndDate.getTime()) : null;
         cloned.scheduleStartDate = new Date(cloned.scheduleStartDate.getTime());
@@ -114,28 +126,37 @@ export class Schedule {
 
     setToNoRepeat() {
         this.isRepeat = false;
+        this.hasEndDate = 0;
         this.scheduleEndDate = null;
     }
 
     setStartScheduleToNextWeek() {
+        this.setStartScheduleToToday();
         this.scheduleStartDate.setDate(this.scheduleStartDate.getDate() + 7);
     }
 
+    setStartScheduleToToday() {
+        this.backupStartDate =  new Date(this.scheduleStartDate);
+        this.scheduleStartDate = new Date(this.currentDate);
+    }
+
+    resetStartDate() {
+        this.scheduleStartDate = new Date(this.backupStartDate);
+    }
+
     setEndScheduleToPreviousWeek() {
+        this.hasEndDate = 1;
         this.scheduleEndDate = new Date(this.currentDate);
         this.scheduleEndDate.setDate(this.currentDate.getDate() - 7);
     }
 
     isScheduleStartOnCurrentDate() {
-        return this.scheduleStartDate.getTime() === this.currentDate.getTime();
-    }
-
-    setCurrentDate(currentDate: Date) {
-        this.currentDate = currentDate;
+        return this.scheduleStartDate.setHours(0, 0, 0, 0) === this.currentDate.setHours(0, 0, 0, 0);
     }
 
     getTotalHoursOfTheDay() {
-        return this.shiftEnd1.hour - this.shiftStart1.hour + this.shiftEnd2.hour - this.shiftStart2.hour;
+        return this.shiftEnd1.hour - this.shiftStart1.hour
+        + (this.hasShift2 ? this.shiftEnd2.hour - this.shiftStart2.hour : 0);
     }
 
     toggleShift2() {
@@ -143,16 +164,16 @@ export class Schedule {
     }
 
     validateShift() {
-        const validShift1 = this.shiftEnd1.hour - this.shiftStart1.hour > 0 ;
-        const validShift2 = this.hasShift2 ? (this.shiftEnd2.hour - this.shiftStart2.hour > 0 ? true : false) : true;
+        const validShift1 = this.shiftEnd1.hour - this.shiftStart1.hour >= 0 ;
+        const validShift2 = this.hasShift2 ? (this.shiftEnd2.hour - this.shiftStart2.hour >= 0 ? true : false) : true;
         this.isValidShift = validShift1 && validShift2;
         this.updateBreakTime();
     }
 
     updateBreakTime() {
         if (this.hasShift2) {
-            this.breakTime = {hour: this.shiftStart2.hour - this.shiftEnd1.hour, minute: this.shiftStart2.minute - this.shiftEnd1.minute, second: 0};
-            this.isValidShift =  this.isValidShift && this.breakTime.hour > 0 ? true : false;
+            this.breakTime = {hour: this.shiftStart2.hour - this.shiftEnd1.hour, minute: Math.abs(this.shiftStart2.minute - this.shiftEnd1.minute), second: 0};
+            this.isValidShift =  this.isValidShift && this.breakTime.hour >= 0 ? true : false;
         }
     }
 
@@ -161,7 +182,7 @@ export class Schedule {
         this.staffId = data.id_staff;
         this.isNew = false;
         this.hasShift2 = data.has_shift_2 === 1 ? true : false;
-        this.hasEndDate = data.has_end_date == null ? 0 : data.hasEndDate; // set default = 0 (onGoing)
+        this.hasEndDate = data.has_end_date == null ? 0 : data.has_end_date; // set default = 0 (onGoing)
         this.shiftStart1 = JSON.parse(data.shift1_start);
         this.shiftEnd1 = JSON.parse(data.shift1_end);
         this.shiftStart2 = JSON.parse(data.shift2_start);
@@ -175,6 +196,7 @@ export class Schedule {
     }
 
     toDto() {
+        const options = {month: 'numeric', day: 'numeric', year: 'numeric' };
         return {
             id: this.id,
             id_staff: this.staffId,
@@ -185,8 +207,14 @@ export class Schedule {
             is_repeat: this.isRepeat ? 1 : 0,
             has_shift_2: this.hasShift2 ? 1 : 0,
             has_end_date: this.hasEndDate,
-            schedule_start: this.scheduleStartDate,
-            schedule_end: this.scheduleEndDate,
+            schedule_start: this.scheduleStartDate.toLocaleDateString('en-US', options),
+            schedule_end: this.hasEndDate == 1 ? this.scheduleEndDate.toLocaleDateString('en-US', options) : null,
         };
     }
+}
+
+export interface TimeModel {
+    hour: number;
+    minute: number;
+    text: string;
 }

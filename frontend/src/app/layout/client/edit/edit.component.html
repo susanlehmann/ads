@@ -17,50 +17,58 @@
           <small class="form-text text-danger " *ngIf="!firstName.valid && (firstName.dirty || firstName.touched)">Invaild firstName !</small>
         </div>
         <div class="col-sm-6">
-          <label class="control-label">Last Name <strong>*</strong></label>
+          <label class="control-label">Last Name </label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text">L</div>
             </div>
-            <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="Last Name" required text #lastName="ngModel" [ngModelOptions]="{updateOn: 'blur'}">
+            <input [(ngModel)]="form.lastName" type="text" name="lastName" class="form-control input-underline input-lg" placeholder="Last Name" #lastName="ngModel">
           </div>
-          <small class="form-text text-danger " *ngIf="!lastName.valid && (lastName.dirty || lastName.touched)">Invaild lastName !</small>
         </div>
       </div>
 
       <div class="row form-group">
         <div class="col-sm-6">
-          <label class="control-label">Mobile <strong>*</strong></label>
+          <label class="control-label">Mobile </label>
           <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">M</div>
-            </div>
-            <input [(ngModel)]="form.mobile" type="text" name="mobile" class="form-control input-underline input-lg" placeholder="Mobile" required text #mobile="ngModel" [ngModelOptions]="{updateOn: 'blur'}" minlength="9" maxlength="12" pattern="^[0-9]{9,12}$">
+            <ngx-intl-tel-input 
+              [enablePlaceholder]="true" 
+              [enableAutoCountrySelect]="true"
+              name="mobile"
+              [cssClass]="'custom-css'"
+              [(ngModel)]="mobile"></ngx-intl-tel-input>
+            <!-- <input [(ngModel)]="form.mobile" type="text" name="mobile" class="form-control input-underline input-lg" placeholder="Mobile" #mobile="ngModel" minlength="9" maxlength="12" pattern="^[0-9]{9,12}$" #mobileChild> -->
           </div>
-          <small class="form-text text-danger" *ngIf="!mobile.valid && (mobile.dirty || mobile.touched || mobile.pattern)">Mobile number length must be between 9 and 11 (Number Only)!</small>
+          <!-- <small class="form-text text-danger" *ngIf="!mobile.valid">Number Only!</small> -->
         </div>
 
         <div class="col-sm-6">
           <label class="control-label">Telephone</label>
           <div class="input-group">
-            <div class="input-group-prepend">
+            <!-- <div class="input-group-prepend">
               <div class="input-group-text">T</div>
             </div>
-            <input [(ngModel)]="form.telephone" type="text" name="telephone" class="form-control input-underline input-lg" placeholder="Telephone" #telephone="ngModel" minlength="1" maxlength="12" pattern="^[0-9]{1,12}$">
+            <input [(ngModel)]="form.telephone" type="text" name="telephone" class="form-control input-underline input-lg" placeholder="Telephone" #telephone="ngModel" minlength="1" maxlength="12" pattern="^[0-9]{1,12}$"> -->
+            <ngx-intl-tel-input 
+              [enablePlaceholder]="true" 
+              [enableAutoCountrySelect]="true"
+              name="telephone"
+              [cssClass]="'custom-css'"
+              [(ngModel)]="telephone"></ngx-intl-tel-input>
           </div>
+          <!-- <small class="form-text text-danger" *ngIf="!telephone.valid">Number Only!</small> -->
         </div>
       </div>
 
       <div class="row form-group">
         <div class="col-sm-12">
-          <label class="control-label">Email <strong>*</strong></label>
+          <label class="control-label">Email </label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text">@</div>
             </div>
-            <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="Email" required email #email="ngModel" [ngModelOptions]="{updateOn: 'blur'}">
+            <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="Email" #email="ngModel">
           </div>
-          <small class="form-text text-danger " *ngIf="!email.valid && (email.dirty || email.touched)">Invaild Email !</small> 
         </div>
       </div>
 
@@ -100,28 +108,35 @@
                   <div class="col-sm-6">
                     <label class="control-label">{{'Referral source' }}</label>
                     <select [(ngModel)]="form.referral" name="referral" class="form-control">
+                      <option value="1" selected="selected" disabled hidden>Referral source</option>
                       <option *ngFor="let re of referralSources" value="{{re.id}}">{{re.name}}</option>
                     </select>
                   </div>
                 </div>
 
               <div class="row form-group">
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-12 col-sm-12">
                   <label class="control-label">Birthday</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">B</div>
+                  <div class="row box-birthday">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                      <select [(ngModel)]="birthday.month" name="month" class="form-control"(change)="selectMonth()">
+                        <option value="" selected="selected" disabled="disabled" hidden>Select Month</option>
+                        <option *ngFor="let m of month" value="{{m.id}}">{{m.name}}</option>
+                      </select>
                     </div>
-                    <input type="text" placeholder="MM-dd" class="form-control" name="birthday" [(ngModel)]="model12" #birthday="ngModel" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" (ngModelChange)="selectDate($event)" [navigation]="navigation">
-                  </div>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                  <label class="control-label">Year</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">Y</div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                      <select [(ngModel)]="birthday.day" name="day" class="form-control" (change)="selectDay()">
+                        <option value="" selected="selected" disabled="disabled" hidden>Select Day</option>
+                        <option *ngFor="let d of day" value="{{d.id}}">{{d.name}}</option>
+                      </select>
                     </div>
-                    <input [(ngModel)]="form.birthdayYear" type="text" placeholder="yyyy" class="form-control" name="birthdayYear" #birthdayYear="ngModel">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                      <a href="javascript:void(0);" *ngIf="!setYear" (click)="showYear()">Set Year</a>
+                      <select [(ngModel)]="birthday.year" name="year" class="form-control" *ngIf="setYear" (change)="selectYear()">
+                        <option value="" selected="selected" disabled="disabled" hidden>Select Year</option>
+                        <option *ngFor="let y of year" value="{{y.id}}">{{y.name}}</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -213,7 +228,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-delete pull-left" (click)="open(content)"><i class="fa fa-trash"></i> Delete </button>
-    <button type="submit" class="btn btn-black pull-right" (click)="onSubmit()" [disabled]="!f.valid"><i class="fa fa-save"></i> Save </button>
+    <button type="submit" class="btn btn-black pull-right" (click)="onSubmit()"><i class="fa fa-save"></i> Save </button>
     <button type="button" class="btn btn-white pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
   </div>
 </form>

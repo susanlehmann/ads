@@ -13,8 +13,9 @@ export class Supplier {
   city: string;
   sate: string;
   postCode: string;
-  country: any;
+  country: string;
   timeupdate: any;
+  second_address: any;
   constructor() {
     this.new();
     return this;
@@ -34,7 +35,8 @@ export class Supplier {
     this.city = "";
     this.sate = "";
     this.postCode = "";
-    this.country = "";
+    this.country = "empty";
+    this.second_address = "";
   }
 
   static toModel(dto: any) {
@@ -60,6 +62,7 @@ export class Supplier {
       state_supplier : this.sate,
       zipcode_supplier : this.postCode,
       countryid_supplier : this.country,
+      second_address: this.second_address,
     };
   }
 
@@ -81,6 +84,7 @@ export class Supplier {
       zipcode_supplier,
       countryid_supplier,
       updated_at,
+      second_address,
    } = data;
 
     this.id = id;
@@ -99,6 +103,7 @@ export class Supplier {
     this.postCode = zipcode_supplier;
     this.country = countryid_supplier;
     this.timeupdate = updated_at;
+    this.second_address = second_address;
   }
 
   create_UUID() {
@@ -109,30 +114,6 @@ export class Supplier {
         return (c=='x' ? r :(r&0x3|0x8)).toString(16);
     });
     return uuid;
-}
-
-}
-
-export class Commission {
-service: number;
-product: number;
-voucherSale: number;
-
-constructor() {
-  this.new();
-  return this;
-}
-
-new() {
-  this.service = null;
-  this.product = null;
-  this.voucherSale = null;
-}
-
-updateData(service_commission, product_commission, voucher_sales_commission) {
-  this.service = service_commission;
-  this.product = product_commission;
-  this.voucherSale = voucher_sales_commission;
 }
 
 }

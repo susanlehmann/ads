@@ -1,4 +1,4 @@
-<form class="modal-content" style="border: none" #f="ngForm">
+<form class="modal-content box-add" style="border: none" #f="ngForm">
   <div class="modal-header">
     <h4 class="modal-title col-sm-4 offset-sm-4">New Service</h4>
   </div>
@@ -133,7 +133,7 @@
                     <label class="control-label mb-4">{{'Select staff who perform this service.' }}</label>
                     <div class="custom-radios">
                     	<div>
-						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(listusers)">
+						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(listusers, $event)">
 						    <label for="checkall">
 						    	<span></span>
 						    	Select All

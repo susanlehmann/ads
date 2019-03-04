@@ -44,3 +44,28 @@
         padding-right: 50px;
     }
 }
+
+
+$breakpoint-iphone: 667px;
+//desktop
+@media (min-width: $breakpoint-iphone) {
+  
+}
+
+//mobile
+@media (max-width: $breakpoint-iphone) {
+
+  .modal-footer {
+    width: 100%;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #fff;
+      z-index: 99;
+  }
+}

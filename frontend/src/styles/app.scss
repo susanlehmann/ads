@@ -20,3 +20,10 @@
 .margin-bottom-5px {
     margin-bottom: 5px;
 }
+$breakpoint-iphone: 667px;
+@media (max-width: $breakpoint-iphone){
+  .custom-modal div {
+    max-width: 100%;
+    margin: -0.25rem auto;
+  }
+}

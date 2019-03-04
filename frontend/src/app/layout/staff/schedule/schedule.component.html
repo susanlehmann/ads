@@ -1,13 +1,14 @@
 <div class="card card-custom mb-3">
-  <div class="card-header">
-    <select [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' class="custom-select custom-select mb-3">
+  <div class="card-header row">
+    <select [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' class="custom-select col-lg-2 col-md-3 col-sm-12">
       <option value=0 selected>All Staff</option>
       <option value={{staff.staffId}} *ngFor="let staff of allSchedules">{{staff.staffName}}</option>
     </select>
-    <div style="display: flex;">
+    <div class="col-md-1 col-sm-12"><p></p></div>
+    <div class="week-picker col-md-6 col-sm-12 justify-content-end" style="display: flex;">
       <button class="btn btn-light ma" (click)="prevWeek()">&lt;</button>
       <button class="btn btn-light ma" (click)="changeWeek()">Today</button>
-      <input class="form-control week-picker" (click)="week_picker.open()" readonly
+      <input class="form-control" (click)="week_picker.open()" readonly
           name="week-picker" [(ngModel)]="currentWeekModel" (ngModelChange)="changeWeek($event)" ngbDatepicker #week_picker="ngbDatepicker">
       <button class="btn btn-light ma mr-2" (click)="nextWeek()">&gt;</button>
     </div>
@@ -16,8 +17,16 @@
   <div class="card-body table-responsive">
     <table class="table table-bordered">
       <thead>
+        <tr>
+          <th class="header-closed"></th>
+          <th *ngFor="let cd of weekdays" [ngClass]="{'closed': cd.isClosed, 'header-closed': true}">
+            <div placement="top" ngbTooltip={{cd.closedReason}}>{{cd.isClosed ? 'CLOSED' : ''}}</div>
+          </th>
+        </tr>
+        <tr>
         <th class="head-col">Staff</th>
         <th *ngFor="let day of weekdays">{{day.dateString}}</th>
+        </tr>
       </thead>
       <tbody>
         <tr *ngFor="let sche of schedules">
@@ -27,12 +36,13 @@
           </th>
           <ng-container *ngFor="let w of sche.weekSchedule">
             <ng-container *ngIf="w.isNew; else work_hour">
-              <td (click)="openScheduleModal(edit_work_hour, w)" class="no-shift"></td>
+              <td (click)="w.isClosed || openScheduleModal(edit_work_hour, w)"
+                [ngClass]="{'no-shift': true, 'closed': w.isClosed}"></td>
             </ng-container>
             <ng-template #work_hour>
-              <td class="work-hour" (click)="openScheduleModal(edit_work_hour, w)">
-                <div class="mb-2">{{w.shiftStart1.hour | number: '2.0-0'}}:{{w.shiftStart1.minute | number: '2.0-0'}} - {{w.shiftEnd1.hour | number: '2.0-0'}}:{{w.shiftEnd1.minute | number: '2.0-0'}}</div>
-                <div *ngIf="w.hasShift2">{{w.shiftStart2.hour | number: '2.0-0'}}:{{w.shiftStart2.minute | number: '2.0-0'}} - {{w.shiftEnd2.hour | number: '2.0-0'}}:{{w.shiftEnd2.minute | number: '2.0-0'}}</div>
+              <td [ngClass]="{'work-hour': true, 'closed': w.isClosed}" (click)="w.isClosed || openScheduleModal(edit_work_hour, w)">
+                <div placement="top" ngbTooltip={{w.closedReason}} class="mb-2" >{{w.shiftStart1.hour | number: '2.0-0'}}:{{w.shiftStart1.minute | number: '2.0-0'}} - {{w.shiftEnd1.hour | number: '2.0-0'}}:{{w.shiftEnd1.minute | number: '2.0-0'}}</div>
+                <div placement="top" ngbTooltip={{w.closedReason}} *ngIf="w.hasShift2">{{w.shiftStart2.hour | number: '2.0-0'}}:{{w.shiftStart2.minute | number: '2.0-0'}} - {{w.shiftEnd2.hour | number: '2.0-0'}}:{{w.shiftEnd2.minute | number: '2.0-0'}}</div>
               </td>
             </ng-template>
           </ng-container>
@@ -58,29 +68,46 @@
   <div class="modal-body">
     <div class="row form-group" style="flex-wrap: nowrap;">
       <div class="col-sm-6">
-        <label class="control-label">SHIFT START</label>
-        <ngb-timepicker [(ngModel)]="selectedSchedule.shiftStart1" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()'></ngb-timepicker>
+        <label class="control-label">SHIFT START</label><br>
+        <select class="custom-select"
+        [(ngModel)]="selectedSchedule.shiftStart1"
+        [compareWith]="compareTimeModel"
+        (ngModelChange)="selectedSchedule.validateShift()">
+            <option *ngFor="let t of times" [ngValue]="t">{{t.text}}</option>
+          </select>
       </div>
 
       <div class="col-sm-6">
-        <label class="control-label">SHIFT END</label>
-        <ngb-timepicker [(ngModel)]="selectedSchedule.shiftEnd1" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()'></ngb-timepicker>
+        <label class="control-label">SHIFT END</label><br>
+        <select class="custom-select"
+        [(ngModel)]="selectedSchedule.shiftEnd1"
+        [compareWith]="compareTimeModel"
+        (ngModelChange)="selectedSchedule.validateShift()">
+            <option *ngFor="let t of times" [ngValue]="t">{{t.text}}</option>
+          </select>
       </div>
     </div>
 
     <ng-container *ngIf="selectedSchedule.hasShift2; else btn_add_shift_2">
       <div class="row form-group" style="flex-wrap: nowrap;">
         <div class="col-sm-6">
-          <ngb-timepicker [(ngModel)]="selectedSchedule.shiftStart2" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()' ></ngb-timepicker>
+            <select class="custom-select"
+            [(ngModel)]="selectedSchedule.shiftStart2"
+            [compareWith]="compareTimeModel"
+            (ngModelChange)="selectedSchedule.validateShift()">
+                <option *ngFor="let t of times" [ngValue]="t">{{t.text}}</option>
+              </select>
         </div>
 
-        <div class="col-sm-5">
-          <ngb-timepicker [(ngModel)]="selectedSchedule.shiftEnd2" [minuteStep]="5" (ngModelChange)='selectedSchedule.validateShift()'></ngb-timepicker>
+        <div class="col-sm-6">
+            <select class="custom-select"
+            [(ngModel)]="selectedSchedule.shiftEnd2"
+            [compareWith]="compareTimeModel"
+            (ngModelChange)="selectedSchedule.validateShift()">
+                <option *ngFor="let t of times" [ngValue]="t">{{t.text}}</option>
+              </select>
+              <button class="close-shift-2" (click)="selectedSchedule.toggleShift2()">x</button>
         </div>
-
-        <!-- <div class="col-sm-1" style="align-self: center;">
-                    <button (click)="toggleShift2()" style="background-color: white; border: none; color:red;cursor: pointer;">x</button>
-                </div> -->
       </div>
       <div *ngIf="selectedSchedule.isValidShift" class="row form-group" style="justify-content: center;">
         {{selectedSchedule.breakTime.hour + ' hour ' + selectedSchedule.breakTime.minute + ' minute'}} break time
@@ -97,7 +124,7 @@
 
     <div class="row form-group">
       <div class="col-sm-12 btn-switch">
-        <label class="control-label">Repeat weekly </label>
+        <label class="control-label mr-2">Repeat weekly</label>
         <label class="switch">
           <input type="checkbox" [(ngModel)]="selectedSchedule.isRepeat" name="repeat">
           <span class="slider round"></span>
@@ -108,12 +135,12 @@
     <div *ngIf="selectedSchedule.isRepeat" class="row form-group">
       <div class="col-sm-12">
         <label class="control-label">END REPEAT</label>
-        <select [(ngModel)]="selectedSchedule.hasEndDate" class="custom-select custom-select mb-3" style="width: 100%">
+        <select [(ngModel)]="selectedSchedule.hasEndDate" class="custom-select mb-3">
           <option value=0>Ongoing</option>
           <option value=1>Specific date</option>
         </select>
         <input *ngIf="selectedSchedule.hasEndDate == 1" class="form-control" placeholder="yyyy-mm-dd" (click)="d.open()"
-          name="schedule-end" [(ngModel)]="selectedSchedule.scheduleEndDate" ngbDatepicker #d="ngbDatepicker">
+          name="schedule-end" [markDisabled]="isDisabled" [(ngModel)]="selectedSchedule.scheduleEndDate" ngbDatepicker #d="ngbDatepicker">
       </div>
     </div>
 
@@ -121,10 +148,13 @@
 
   </div>
 
-  <div class="modal-footer">
-    <button *ngIf="!selectedSchedule.isNew" type="button" class="btn btn-danger" (click)='onClickDeleteSchedule(confirm_override)' style="justify-content: flex-start"> Delete </button>
-    <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-    <button type="submit" class="btn btn-dark pull-right" (click)="onClickSaveSchedule(confirm_override)"> Save </button>
+  <div class="modal-footer" style="justify-content: space-between">
+    <button *ngIf="!selectedSchedule.isNew" type="button" class="btn btn-delete" (click)='onClickDeleteSchedule(confirm_override)'> Delete </button>
+    <div></div>
+    <div>
+    <button type="button" class="btn btn-white mr-2" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+    <button type="submit" class="btn btn-black" (click)="onClickSaveSchedule(confirm_override)"> Save </button>
+  </div>
   </div>
 
 </ng-template>
@@ -136,22 +166,24 @@
   
     <div class="modal-body">
         You {{isConfirmDeleteRepeat ? 'are deleting' : 'have edited'}} a shift that repeats weekly. {{isConfirmDeleteRepeat ? 'Deleting' : 'Updating'}} upcoming shifts will overwrite 
-        {{selectedSchedule.staffName}}'s ongoing {{selectedSchedule.currentDate.toLocaleDateString('en-US', {weekday: 'long'}) }} schedule
+        {{selectedSchedule.staffName}}'s
+        {{selectedSchedule.hasEndDate === 1 ? '' : 'ongoing'}} {{selectedSchedule.currentDate.toLocaleDateString('en-US', {weekday: 'long'}) }} schedule
+        {{selectedSchedule.hasEndDate === 1 ? 'up to ' + selectedSchedule.scheduleEndDate.toLocaleDateString('en-US', {day: 'numeric', month: 'long', year: 'numeric'}) : '' }}
     </div>
   
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.dismiss('Cancel click')"> Close </button>
-      
-      <ng-container *ngIf="isConfirmDeleteRepeat; else update_repeat">
-      
-      <button type="button" class="btn btn-success" (click)="onClickDeleteUpcoming()"> Delete upcoming shifts </button>
-      <button type="button" class="btn btn-info" (click)="onClickDeleteThisShiftOnly()"> Delete this shift only</button>
-    </ng-container>
+    <div class="modal-footer" style="display: unset;">
+        
+        <ng-container *ngIf="isConfirmDeleteRepeat; else update_repeat">
+          
+          <button type="button" class="btn btn-success col-sm-12 mb-2" (click)="onClickDeleteUpcoming()"> Delete upcoming shifts </button>
+          <button type="button" class="btn btn-info col-sm-12 mb-2" (click)="onClickDeleteThisShiftOnly()"> Delete this shift only</button>
+        </ng-container>
+        
+        <ng-template #update_repeat>
+          <button type="button" class="btn btn-success col-sm-12 mb-2" (click)="onClickUpdateUpcoming()"> Update upcoming shifts </button>
+          <button type="button" class="btn btn-info col-sm-12 mb-2" (click)="onClickUpdateThisShiftOnly()"> Update this shift only</button>
+        </ng-template>
 
-    <ng-template #update_repeat>
-      <button type="button" class="btn btn-success" (click)="onClickUpdateUpcoming()"> Update upcoming shifts </button>
-      <button type="button" class="btn btn-info" (click)="onClickUpdateThisShiftOnly()"> Update this shift only</button>
-    </ng-template>
-
+        <button type="button" class="btn btn-white col-sm-12" (click)="modal.dismiss('Cancel click')"> Close </button>
     </div>
   </ng-template>

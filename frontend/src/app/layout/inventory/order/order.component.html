@@ -1,3 +1,4 @@
+<div *ngIf="number_order > 0">
 <div class="_2jGgaE">
   <div>
     <div>
@@ -90,22 +91,24 @@
                   </tbody>
                 </table>
               </div>
-              <div class="wADsrH">
-                <div class="_3Cd6wq">
-                  <div class="_3oGeTh">Displaying all
-                    <b class="_2P0kb0">1</b>orders
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
-          <div class="_1nM1bd" data-qa="loader-spinner-container">
-            <div class="_2Nn7vB QZeBYP" data-qa="loader-spinner"></div>
+        </div>
+        
+        <div class="wADsrH">
+          <div class="_3Cd6wq">
+            <div class="_3oGeTh">Displaying all
+              <b class="_2P0kb0">{{number_order}}</b>orders
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="_1nM1bd" data-qa="loader-spinner-container">
+  <div class="_2Nn7vB QZeBYP" data-qa="loader-spinner"></div>
 </div>
 <div class="rTWbSm">
   <button class="_2N1Wwk _1K8-3O _1hszOe _1Hbk3p _1jAoG_" (click)="openModal(content)">
@@ -113,6 +116,15 @@
       <i class="fa fa-plus fa-1-75x"></i>
     </span>
   </button>
+</div>
+</div>
+<div *ngIf="number_order == 0">
+  <div class="text-center" style="margin-top: 30px;">
+    <h1><i class="fa fa-product-hunt"></i></h1>
+    <h3 class="text-capitalize">Add Orders</h3>
+    <button class="btn btn-black" type="button" (click)="openModal(content)">NEW
+      ORDER</button>
+  </div>
 </div>
 <ng-template #content let-modal>
     <div class="modal-header">

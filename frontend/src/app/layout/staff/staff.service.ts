@@ -68,7 +68,7 @@ export class StaffService {
         return this._http.post(`${this.baseUrl}/user/workinghour/list-workinghour`, {ownerId : this.currentUserId});
     }
 
-    deleteScheduleById(id: string) {
+    deleteScheduleById(id) {
         return this._http.post(`${this.baseUrl}/user/workinghour/delete-workinghour`, {id: id});
     }
 

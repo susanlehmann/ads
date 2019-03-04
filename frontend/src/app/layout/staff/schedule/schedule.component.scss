@@ -1,4 +1,6 @@
-.no-shift {
+$blue: #007FC9;
+
+.no-shift:not(.closed) {
     vertical-align: middle;
     cursor: pointer;
 
@@ -20,18 +22,80 @@
 .work-hour {
     cursor: pointer;
 
-    &:hover div {
-        background: #d9f3ff;
+    &:not(.closed):hover div {
+        background: lighten($blue, 10%);
     }
     
     div {
-        background-color: #c3e5f4;
-        padding: 5px;
+        color: #FFF;
+        background-color: $blue;
+        padding: 10px;
+        text-align: center;
     }
 }
 
 .week-picker {
-    cursor: pointer;
+    .btn {
+        border: 1px solid #ced4da;
+    }
+
+    input {
+        cursor: pointer;
     text-align: center;
     background-color: white;
+    max-width: 200px;
+    }
+}
+
+
+.closed {
+    cursor: default;
+
+    div {
+        background-color: #24334A;
+        color: #FFF;
+        padding: 10px;
+    }
+}
+
+.header-closed{
+    border: none;
+    background: none;
+}
+
+.custom-select {
+    width: 100%;
+}
+
+.close-shift-2 {
+    position: absolute;
+    width: 28px;
+    right: 20px;
+    top: 15%;
+    background-color: white;
+    color:black;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+$breakpoint-iphone: 667px;
+//desktop
+@media (min-width: $breakpoint-iphone) {
+  
+}
+
+//mobile
+@media (max-width: $breakpoint-iphone) {
+  
+  .modal-footer {
+        position: sticky;
+        width: 100%;
+    }
+}
+
+
+.modal-footer .btn {
+    margin-left: 0px;
 }

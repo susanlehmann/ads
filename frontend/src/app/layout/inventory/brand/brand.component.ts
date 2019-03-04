@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { Brand } from './model/brand';
 import { BrandService } from './brand.service';
@@ -30,7 +30,8 @@ export class BrandComponent implements OnInit  {
   collection: any[] = this.listbrands;
   _list :any;
   listproducts: any;
-
+  number_display: number;
+  modalOptions: NgbModalOptions;
 
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
@@ -44,6 +45,12 @@ export class BrandComponent implements OnInit  {
     this.sortedCollection = orderPipe.transform(this.collection, 'brandName');
     //console.log(this.orderPipe.transform(this.collection, this.order));
     console.log(this.sortedCollection);
+    this.modalOptions = {
+      backdrop: 'static',
+      size: 'md',
+      windowClass: 'custom-modal',
+      backdropClass: 'custom-modal',
+    };
   }
 
   setOrder(value: string) {
@@ -55,7 +62,7 @@ export class BrandComponent implements OnInit  {
   }
 
   openModal(content: NgbModalRef) {
-    this.modal.open(content).result.then((result) => {
+    this.modal.open(content,this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed`;
@@ -83,12 +90,12 @@ export class BrandComponent implements OnInit  {
     this.BrandService.getList()
 		.subscribe((listbrands:any) => {
         this.stopLoading();
+         this.number_display = listbrands.brand.length;
          this.listbrands = listbrands.brand
          .map(Brand.toModel)
          .sort((a, b) => {
            return a.id - b.id;
          });
-         console.log(this.listbrands);
 		}, err => {
       this.stopLoading();
     });
@@ -128,13 +135,13 @@ export class BrandComponent implements OnInit  {
     };
     }
 
-  deleteBrand() {
-      this.BrandService.deletebrand(this.selectedId)
+  deleteBrand(name) {
+    this.BrandService.deletebrand(this.selectedId)
       .subscribe((data:any) => {
-              this.getBrand();
-              this.notifierService.notify('success', 'A Brand has been successfully deleted');
-          });
-    this.modal.dismissAll();
+          this.modal.dismissAll();
+          this.getBrand();
+          this.notifierService.notify('success', 'A Brand has been successfully deleted');
+      });
   }
 
 
@@ -167,6 +174,7 @@ export class BrandComponent implements OnInit  {
   }
   _brand :any;
   getNumberproduct(brand) {
+
     this._brand = brand;
     //id = this.
     //let product = this.listproducts.filter(s => s.id_category == id);

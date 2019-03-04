@@ -13,7 +13,7 @@ export class SupplierService {
   constructor(
       private _http: HttpClient,
       private httpService: HttpcallService,
-    ) { 
+    ) {
         this.baseUrl = this.httpService.getBaseUrl();
     }
 
@@ -38,6 +38,8 @@ export class SupplierService {
     deleteSupplier(id) {
         return this._http.post(`${this.baseUrl}/user/inventory/supplier/delete-supplier`, {'id': id});
     }
-
-
+    searchSupplier(query){
+      query.ownerId = this.currentUserId;
+      return this._http.post(`${this.baseUrl}/user/inventory/supplier/search-supplier`, query);
+    }
 }
