@@ -9,7 +9,9 @@ export class LayoutComponent implements OnInit {
 
     collapedSideBar: boolean;
 
-    constructor() {}
+    constructor() {
+        this.collapedSideBar = true;
+    }
 
     ngOnInit() {}
 

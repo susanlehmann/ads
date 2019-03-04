@@ -1,4 +1,4 @@
-<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+<nav class="sidebar collapsed" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group">
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item"
             placement="right" ngbTooltip="{{collapsed ? 'Home' : ''}}" container="body">
@@ -54,7 +54,7 @@
             <span>{{ 'Administrator' | translate }}</span>
         </a> -->
     </div>
-    <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+    <div class="toggle-button collapsed" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
         <i class="fa fa-fw fa-angle-left"></i>&nbsp;
     </div>
 </nav>
