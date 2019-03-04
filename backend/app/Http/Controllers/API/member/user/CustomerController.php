@@ -198,7 +198,7 @@ class CustomerController extends Controller
 
     public function search(Request $dataRequest){
         $request = (object)json_decode($dataRequest->getContent(), true);
-        $search_name = $request->name_user;
+        $search_name = strtolower($request->name_user);
         if(strlen($search_name) == 0)
         {
             $data['user'] = User::where('level',4)
