@@ -214,6 +214,7 @@ class CustomerController extends Controller
                 {
                     $query->where('firstName', 'LIKE', "%$search_name%")
                           ->orWhere('lastName', 'LIKE', "%$search_name%")
+                          ->orWhere('phone', 'LIKE', "%$search_name%")
                           ->orWhere('email', 'LIKE', "%$search_name%");
                 }
             })

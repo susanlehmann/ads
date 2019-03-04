@@ -35,6 +35,7 @@ class SupplierCtroller extends Controller
             'state_supplier' => $request->state_supplier,
             'zipcode_supplier' => $request->zipcode_supplier,
             'countryid_supplier' => $request->countryid_supplier,
+            'second_address' => $request->second_address,
             'status_supplier' => 1,
         ];
         // $user->level = 0; // ko co column level
@@ -79,6 +80,7 @@ class SupplierCtroller extends Controller
                 'state_supplier' => $request->state_supplier,
                 'zipcode_supplier' => $request->zipcode_supplier,
                 'countryid_supplier' => $request->countryid_supplier,
+                'second_address' => $request->second_address,
             ];
             $supplier = Supplier::find($id);
             $check = $supplier->update($input);
