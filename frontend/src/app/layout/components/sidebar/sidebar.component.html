@@ -1,6 +1,7 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group">
-        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item"
+            placement="right" ngbTooltip="{{collapsed ? 'Home' : ''}}" container="body">
             <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;
             <span>{{ 'Home' | translate }}</span>
         </a>
@@ -12,7 +13,8 @@
             <i class="fa fa-fw fa-address-book"></i>&nbsp;
             <span>{{ 'Sales' | translate }}</span>
         </a> -->
-        <a [routerLink]="['/client']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/client']" [routerLinkActive]="['router-link-active']" class="list-group-item" 
+            placement="right" ngbTooltip="{{collapsed ? 'Clients' : ''}}" container="body">
             <i class="fa fa-fw fa-wechat"></i>&nbsp;
             <span>{{ 'Clients' | translate }}</span>
         </a>
@@ -20,15 +22,18 @@
             <i class="fa fa-fw fa-envelope"></i>&nbsp;
             <span>{{ 'Messages' | translate }}</span>
         </a> -->
-        <a [routerLink]="['/staff']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/staff']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+            placement="right" ngbTooltip="{{collapsed ? 'Staff' : ''}}" container="body">
             <i class="fa fa-fw fa-user"></i>&nbsp;
             <span>{{ 'Staff' | translate }}</span>
         </a>
-        <a [routerLink]="['/services']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/services']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+            placement="right" ngbTooltip="{{collapsed ? 'Services' : ''}}" container="body">
             <i class="fa fa-fw fa-calculator"></i>&nbsp;
             <span>{{ 'Services' | translate }}</span>
         </a>
-        <a [routerLink]="['/inventory']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/inventory']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+            placement="right" ngbTooltip="{{collapsed ? 'Inventory' : ''}}" container="body">
             <i class="fa fa-fw fa-briefcase"></i>&nbsp;
             <span>{{ 'Inventory' | translate }}</span>
         </a>

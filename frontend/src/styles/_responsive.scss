@@ -17,7 +17,12 @@
         transition: margin 0.2s ease-in-out;
     }
     .push-right {
-        margin-left: -235px !important;
+        &.cls {
+            margin-left: -50px !important;
+        }
+        &:not(.cls) {
+            margin-left: -235px !important;
+        }
         .sidebar {
             left: 0px !important;
         }
