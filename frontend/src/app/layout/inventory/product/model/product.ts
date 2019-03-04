@@ -18,6 +18,7 @@ export class Product {
   reorderPoint: number;
   reorderQty: number;
   supplierId: number;
+  initialStock: number;
 
   // view detail
   totalOnHand: number;
@@ -38,16 +39,19 @@ export class Product {
     this.productName = "";
     this.categoryId = 0;
     this.brandId = 0;
-    this.enableRetail = false;
-    this.retailPrice = 0;
-    this.specialPrice = 0;
-    this.enableCommission = false;
+    this.enableRetail = true;
+    this.retailPrice = null;
+    this.initialStock = 0;
+    this.specialPrice = null;
+    this.enableCommission = true;
     this.barCode = "";
     this.sku = "";
     this.description = "";
-    this.enableStock = false;
-    this.supplyPrice = 0;
+    this.enableStock = true;
+    this.supplyPrice = null;
     this.totalOnHand = 0;
+    this.taxId = 0;
+    this.supplierId = 0;
   }
 
   calculateStockOnHand(stockHistory: any[]) {
@@ -80,7 +84,7 @@ export class Product {
       sku_product : this.sku,
       discryption_product : this.description,
       supplyprice_product : this.supplyPrice,
-      initialstock_product : this.enableStock,
+      initialstock_product : this.initialStock,
       reorderpoint_product: this.reorderPoint,
       reorderqty_product: this.reorderQty,
       enable_retail: this.enableRetail ? 1 : 0,
@@ -104,6 +108,7 @@ export class Product {
     this.sku = data.sku_product;
     this.description = data.discryption_product;
     this.supplyPrice = data.supplyprice_product;
+    this.initialStock = data.initialstock_product;
     this.enableStock = data.enable_stock === 1 ? true : false;
     this.supplierId = data.id_supplier;
     this.reorderPoint = data.reorderpoint_product;

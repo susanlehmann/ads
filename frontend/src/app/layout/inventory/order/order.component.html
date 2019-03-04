@@ -94,7 +94,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="wADsrH">
           <div class="_3Cd6wq">
             <div class="_3oGeTh">Displaying all
@@ -127,37 +127,67 @@
   </div>
 </div>
 <ng-template #content let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title offset-sm-4" id="modal-basic-title">Select Supplier</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <div class="row" id="divSelectSupplier">
-            <div class="col-12" style="margin-top:10px;color: #67768C;" id="titleSupplier">
-              <label>Select a supplier to order product stock from</label>
-            </div>
-            <div class="col-12" id="divSupplier" *ngFor="let supplier of listsuppliers" >
-              <div class="col-12 item-modal-wizard" (click)="openSModal(product,supplier)">
-                <div class="row">
-                <div class="col-6">
-                  <div class="col-12">
-                    <strong >{{ supplier.name_supplier }}</strong>
-                  </div>
-                </div>
-                <div class="col-6 text-right">
-                  <span><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
-                  </svg></span>
-                </div>
+<div class="box-desktop">
+  <div class="modal-header">
+    <h4 class="modal-title offset-sm-4" id="modal-basic-title">Select Supplier</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card-body">
+      <div class="row" id="divSelectSupplier">
+        <div class="col-12" style="margin-top:10px;color: #67768C;" id="titleSupplier">
+          <label>Select a supplier to order product stock from</label>
+        </div>
+        <div class="col-12" id="divSupplier" *ngFor="let supplier of listsuppliers" >
+          <div class="col-12 item-modal-wizard" (click)="openSModal(product,supplier)">
+            <div class="row">
+            <div class="col-6">
+              <div class="col-12">
+                <strong >{{ supplier.name_supplier }}</strong>
               </div>
+            </div>
+            <div class="col-6 text-right">
+              <span><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
+              </svg></span>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="box-mobile" style="height: -webkit-fill-available;">
+  <div class="custommodal">
+    <div class="custom1">
+      <div class="title" style="flex-direction: column; flex-shrink: 1; flex-grow: 1;">
+        <div class=" modal-header title1">
+          <h4 class="titlecusom modal-title offset-sm-4">Select Supplier</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="font-size: 2.5rem;margin-top: 18px;">
+            <span aria-hidden="true" class="bt">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body bodys" style="display: flex; flex-direction: column;">
+          <div class="main-body" style="margin-left:10px;width: 100%;">
+            <label class="labelname" style="color: #67768C;text-transform: none;font-size: 14px;">Select a supplier to order product stock from</label>
+            <hr>
+            <div class="inputs" *ngFor="let supplier of listsuppliers" style="border-bottom: 1px solid #676786;margin-top: 10px;">
+              <div class="inputs1 btn" (click)="openSModal(product,supplier)">
+                <strong class="pull-left">{{ supplier.name_supplier }}</strong>
+                <div class="col-6 text-right pull-right" style="margin-top: -20px;">
+                  <i class="fa fa-chevron-right"></i>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 </ng-template>
 <ng-template #product let-modal>
 
@@ -302,7 +332,7 @@
                   </div>
               </div>
 
-              <div class="col-md-12 box-mobile">
+              <div class="col-md-12 box-mobile" style="height: -webkit-fill-available;">
                   <div class="col-md-9">
                       <div class="card">
                           <div class="card-body" id="addOrderDetail">
@@ -329,14 +359,8 @@
                                   </table>
                               </div>
                               <div class="col-md-12" style="margin-top:20px" (click)="openProduct(category)">
-                                  <div class="col-md-4">
-
-                                  </div>
-                                  <div class="col-md-4">
-                                      <button type="button" class="btn btn-block btn-outline-primary" id="btnAddProduct" style="width: 160%;"><i class="fa fa-plus"></i> Add Product</button>
-                                  </div>
-                                  <div class="col-md-4">
-
+                                  <div>
+                                      <button type="button" class="btn btn-block btn-outline-primary" id="btnAddProduct" ><i class="fa fa-plus"></i> Add Product</button>
                                   </div>
                               </div>
                           </div>
@@ -546,7 +570,7 @@
               <div class="col-md-12" style="text-align:center;" >
                 <span>Ordered {{ _order.update_at }} at has by Order {{ _order.id }}</span>
               </div>
-              <div class="col-md-12" style="margin-top:15px;display: inline-flex;">
+              <div class="col-md-12" style="margin-top:15px;">
                 <div class="col-md-6" style=" align-items: flex-end;justify-content: flex-end;">
                   <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;float: right;" (click)="send_email_order(_order.email_supplier)">EMAIL ORDER</button>
                 </div>
@@ -663,7 +687,7 @@
     <div class="modal-header" >
         <h4  class="modal-title offset-sm-4" id="modal-basic-title">Order {{ _order.id }}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" style="margin-top: 20px;margin-right: 15px;">&times;</span>
         </button>
       </div>
       <div class="modal-body">
@@ -681,12 +705,12 @@
                 <div class="col-md-12" style="text-align:center;" >
                   <span>Ordered {{ _order.update_at }} at has by Order {{ _order.id }}</span>
                 </div>
-                <div class="col-md-12" style="margin-top:15px;display: inline-flex;">
-                  <div class="col-md-6" style=" align-items: flex-end;justify-content: flex-end;">
-                    <button type="button" class="btn btn-block btn-outline-secondary" style="width:230px; font-weight:bold;float: right;">EMAIL ORDER</button>
+                <div class="col-md-12" style="margin-top:15px;">
+                  <div class="col-md-6 col-sm-12 mb-2" style=" align-items: flex-end;justify-content: flex-end;">
+                    <button type="button" class="btn btn-block btn-outline-secondary col-sm-12" style=" font-weight:bold;float: right;">EMAIL ORDER</button>
                   </div>
-                  <div class="col-md-6" style=" align-items: flex-start;justify-content: flex-start;">
-                    <button type="button" class="btn btn-block btn-outline-secondary" style="width:230px; font-weight:bold;">DOWNLOAD PDF</button>
+                  <div class="col-md-6 col-sm-12 mb-2" style=" align-items: flex-start;justify-content: flex-start;">
+                    <button type="button" class="btn btn-block btn-outline-secondary col-sm-12" style="font-weight:bold;">DOWNLOAD PDF</button>
                   </div>
                 </div>
                 <div class="col-md-12" style="margin-top:20px;">
