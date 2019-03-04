@@ -2,7 +2,7 @@
     <div class="modal-header">
         <h4 class="modal-title col-sm-4 offset-sm-4">{{isAdd ? 'Create Product' : 'Edit Product'}}</h4>
         <button type="button" class="col-sm-4 close" aria-label="Close">
-            <span aria-hidden="true" [routerLink]="[ '/inventory/products' ]">&times;</span>
+            <span aria-hidden="true" [routerLink]="[ '/inventory/products' ]" style="font-size: 40px;">&times;</span>
         </button>
     </div>
 
@@ -25,7 +25,7 @@
                             <div class="col-sm-12">
                                 <label class="control-label">Category</label>
                                 <select [(ngModel)]="form.categoryId" name="category" class="form-control">
-                                    <option value=0 selected>Select Category</option>
+                                    <option value=0 selected style="color:#A4ADBA">Select category</option>
                                     <option value={{category.id}} *ngFor="let category of categories" selected>
                                         {{category.name_category}}</option>
                                 </select>
@@ -36,7 +36,7 @@
                             <div class="col-sm-12">
                                 <label class="control-label">Brand</label>
                                 <select name="brand" class="form-control" [(ngModel)]="form.brandId">
-                                    <option value=0 selected>Select Brand</option>
+                                    <option value=0 selected>Select brand</option>
                                     <option value={{brand.id}} *ngFor="let brand of brands" selected>
                                         {{brand.name_brand}}</option>
                                 </select>
@@ -89,14 +89,14 @@
                             <div class="row form-group">
                                 <div class="col-sm-6">
                                     <label class="control-label">Retail Price</label>
-                                    <input type="number" class="form-control input-underline input-lg"
-                                        [(ngModel)]="form.retailPrice" name="retail">
+                                    <input type="decimal" class="form-control input-underline input-lg"
+                                        [ngModel]="form.retailPrice | number:'1.2-2'" (ngModelChange)="form.supplyPrice=$event" name="retail" placeholder="0.00">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <label class="control-label">Special Price</label>
-                                    <input [(ngModel)]="form.specialPrice" type="number" name="special"
-                                        class="form-control input-underline input-lg">
+                                    <input [ngModel]="form.specialPrice | number:'1.2-2'" (ngModelChange)="form.supplyPrice=$event" type="number" name="special"
+                                        class="form-control input-underline input-lg" placeholder="0.00">
                                 </div>
                             </div>
 
@@ -104,7 +104,7 @@
                                 <div class="col-sm-12">
                                     <label class="control-label">Tax<span> Included in prices</span></label>
                                     <select name="tax" class="form-control" [(ngModel)]="form.taxId">
-                                        <option value=0 selected>Default: No tax</option>
+                                        <option value=0>Default: No tax</option>
                                         <option value={{tax.id}} *ngFor="let tax of taxs" selected>{{tax.name}}</option>
                                     </select>
                                 </div>
@@ -112,10 +112,11 @@
 
                             <div class="row form-group">
                                 <div class="col-sm-12">
-                                    <div class="custom-control custom-checkbox">
+                                    <div class="custom-control custom-checkbox" style="line-height: 16px;">
                                         <input [(ngModel)]="form.enableCommission" type="checkbox"
                                             class="custom-control-input" id="customCheck1">
                                         <label class="custom-control-label" for="customCheck1">Enable commission</label>
+                                        <p style="color: #67768C;font-size: 12px;">Calculate staff commissions when this product is sold</p>
                                     </div>
                                 </div>
                             </div>
@@ -135,11 +136,16 @@
 
                         <ng-container *ngIf="form.enableStock">
                             <div class="row form-group">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <label class="control-label">Supply Price</label>
-                                    <input type="number" name="supply-price" [(ngModel)]="form.supplyPrice"
+                                    <input type="number" name="supply-price" [ngModel]="form.supplyPrice | number:'1.2-2'" (ngModelChange)="form.supplyPrice=$event"
+                                        class="form-control input-underline input-lg" placeholder="0.00">
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <label class="control-label">Initial Stock</label>
+                                    <input type="number" name="initial-stock" [(ngModel)]="form.initialStock"
                                         class="form-control input-underline input-lg" placeholder="0">
-                                </div>
+                                  </div>
                             </div>
 
                             <div class="row form-group">
@@ -157,13 +163,13 @@
                                 <div class="col-sm-6">
                                     <label class="control-label">Reorder Point</label>
                                     <input [(ngModel)]="form.reorderPoint" type="number"
-                                        class="form-control input-underline input-lg" name="point">
+                                        class="form-control input-underline input-lg" name="point" placeholder="0">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <label class="control-label">Reorder QTY.</label>
                                     <input [(ngModel)]="form.reorderQty" type="number" name="qty"
-                                        class="form-control input-underline input-lg">
+                                        class="form-control input-underline input-lg" placeholder="0">
                                 </div>
                             </div>
                         </ng-container>
@@ -178,8 +184,8 @@
     <div class="modal-footer" [ngClass]="isAdd ? '' : 'sticky'">
         <button *ngIf="!isAdd" type="button" class="btn btn-delete" style="justify-content: flex-start"
             (click)="openModal(delete)"> Delete </button>
-        <!-- <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button> -->
-        <button type="submit" class="btn btn-black pull-right" (click)="save()"> Save </button>
+        <button type="button" class="btn btn-light pull-right" [routerLink]="[ '/inventory/products' ]"> CANCEL </button>
+        <button type="submit" class="btn btn-black pull-right" (click)="save()"> SAVE </button>
     </div>
 
 </div>
