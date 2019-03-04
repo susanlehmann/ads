@@ -43,10 +43,10 @@ export class HeaderComponent implements OnInit {
     }
 
     toggleSidebar() {
-        if (document.querySelector('.sidebar.collapsed')) {
-            return;
-        }
         const dom: any = document.querySelector('body');
+        if (document.querySelector('.sidebar.collapsed')) {
+            dom.classList.toggle('cls');
+        }
         dom.classList.toggle(this.pushRightClass);
 
     }
