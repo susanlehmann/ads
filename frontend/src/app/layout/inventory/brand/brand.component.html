@@ -112,9 +112,9 @@
         <input [(ngModel)]="form.brandName" name="category" type="text" class="form-control" placeholder="e.g L'Oreal">
       </div>
       <div class="modal-footer" style="display: list-item;">
-        <button *ngIf="!isCreate" type="button" class="btn btn-danger pull-left"(click)="openModal(delete)"> Delete </button>
-        <button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
-        <button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+        <button *ngIf="!isCreate" type="button" class="btn btn-delete pull-left"(click)="openModal(delete)"> Delete </button>
+        <button type="submit" class="btn btn-black pull-right" [disabled]="!signupForm.valid" > Save </button>
+        <button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
       </div>
     </form>
   </div>
@@ -139,9 +139,9 @@
                   </div>
                 </div>
               </div>
-              <div class="modal-footer" style="width:100%;">
-                <button *ngIf="!isCreate" type="button" class="btn btn-1" (click)="openModal(delete)" style="background-color: #F74969;width: 100%"> Delete </button>
-                <button type="submit" class="btn btn-1 pull-right" [disabled]="!signupForm.valid" style="background-color: #24334A;width: 100%"> Save </button>
+              <div class="modal-footer" [ngClass]="isCreate ? '' : 'display'" style="width:100%;">
+                <button *ngIf="!isCreate"  type="button" class="btn btn-delete" (click)="openModal(delete)"> Delete </button>
+                <button type="submit" class="btn btn-black pull-right" [disabled]="!signupForm.valid"> Save </button>
               </div>
             </div>
           </div>
@@ -160,7 +160,7 @@
     <div style="font-size:16px;line-height: 22px;color: #67768C;">Are you sure you want to delete this brand?</div>
   </div>
   <div class="modal-footer" [ngClass]="isCreate ? '' : 'sticky'"> 
-    <button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="deleteBrand()"> Delete </button>
+    <button *ngIf="!isCreate" type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="deleteBrand()"> Delete </button>
   </div>
 </ng-template>
 

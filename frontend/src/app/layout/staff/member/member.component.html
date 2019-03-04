@@ -2,7 +2,7 @@
     <div class="col-sm-12">
         <div class="card card-custom mb-3">
             <div class="card-header">
-              <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
+              <button class="btn btn-black pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
             </div>
             <div class="card-body table-responsive">
                 <table class="table table-hover">
@@ -240,10 +240,10 @@
     </ngb-tab>
 </ngb-tabset>
 </div>
-<div class="modal-footer" style="position: unset;">
-<button *ngIf="!isCreate" type="button" class="btn btn-danger" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
-<button type="button" class="btn btn-light pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-<button type="submit" class="btn btn-dark pull-right" [disabled]="!signupForm.valid" > Save </button>
+<div class="modal-footer" style="position: unset;" [ngClass]="isCreate ? '' : 'display'">
+<button *ngIf="!isCreate" type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
+<button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+<button type="submit" class="btn btn-black pull-right" [disabled]="!signupForm.valid" > Save </button>
 </div>
 </form>
 </ng-template>
@@ -259,8 +259,8 @@
             <p>Are you sure you want to delete this employee?</p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-light pull-right" (click)="d('Cancel click')"> Cancel </button>
-            <button type="button" class="btn btn-danger" (click)="deleteStaff()">Delete</button>
+            <button type="button" class="btn btn-white pull-right" (click)="d('Cancel click')"> Cancel </button>
+            <button type="button" class="btn btn-delete" (click)="deleteStaff()">Delete</button>
         </div>
     </div>
 </ng-template>

@@ -5,52 +5,40 @@
     <p>Have you got stuff you want to sell? No sweat -</p>
     <p>you can add your retail products here and sell them</p>
     <p>with an existing appointment or as one-off items. Too easy!</p>
-    <button class="btn btn-primary" type="button" [routerLink]="[ '/inventory/products/add' ]">Add
+    <button class="btn btn-black" type="button" [routerLink]="[ '/inventory/products/add' ]">Add
       product</button>
   </div>
 </ng-container>
 
 <ng-template #listdata>
   <div class="card card-custom mb-3">
-      <div class="card-header card-filter">
-        <div style="display: flex">
-          <select name="brand" class="form-control du" [(ngModel)]="brandId">
+      <div class="container-fluid" style="padding-left: 2rem; padding-right: 2rem;">
+        <div class="row">
+          <select name="brand" class="form-control col-sm-12 col-md-2 mr-2 mb-2" [(ngModel)]="brandId">
               <option value=0>All brands</option>
               <option value={{brand.id}} *ngFor="let brand of brands" selected>
                   {{brand.name_brand}}</option>
           </select>
-          <select name="category" class="form-control du" [(ngModel)]="categoryId">
+          <select name="category" class="form-control col-sm-12 col-md-2 mr-2 mb-2" [(ngModel)]="categoryId">
               <option value=0>All categories</option>
               <option value={{category.id}} *ngFor="let category of categories" selected>
                   {{category.name_category}}</option>
           </select>
-          <select name="supplier" class="form-control du" [(ngModel)]="supplierId">
+          <select name="supplier" class="form-control col-sm-12 col-md-2 mr-2 mb-2" [(ngModel)]="supplierId">
               <option value=0>All suppliers</option>
               <option value={{supplier.id}} *ngFor="let supplier of suppliers" selected>
                   {{supplier.name_supplier}}</option>
           </select>
-          <button class="btn btn-light ma mr-2" (click)="searchProduct()">View</button>
-          <button class="btn btn-light ma" (click)="clearFilters()">Clear filters</button>
+          <div class="filter-action col-sm-12 col-md-3 mb-2">
+          <button class="btn btn-light mr-2" (click)="searchProduct()">View</button>
+          <button class="btn btn-light" (click)="clearFilters()">Clear filters</button>
         </div>
-        <!-- <div>
-            <button class="btn btn-primary pull-right" type="button" [routerLink]="[ '/inventory/products/add' ]">Add
-              product</button>
-        </div> -->
-      </div>
-
-    <div class="card-header mbx">
-      <!-- <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="fa fa-1x fa-search" style="font-size: 1.5rem"></i>
-              </div>
-            </div>
-            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search by name, barcode or SKU" (input)="searchProduct($event)">
-          </div> -->
-      <input type="text" class="form-control" style="width: 40%;" placeholder="Search by name, barcode or SKU"
+        </div>
+        <div class="row">
+          <input type="text" class="form-control col-sm-12 col-md-4" placeholder="Search by name, barcode or SKU"
         [ngModel]='keyword' (ngModelChange)='changed($event)'>
-      
-    </div>
+        </div>
+      </div>
 
     <div class="card-body table-responsive">
       <table class="table table-hover">

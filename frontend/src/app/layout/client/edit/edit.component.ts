@@ -37,7 +37,7 @@ export class EditComponent implements OnInit {
 	];
 
 	referralSources = [
-		{ id: 1, name: "Walk-In" },
+		{ id: 2, name: "Walk-In" },
 	];
 
 	userId: any;

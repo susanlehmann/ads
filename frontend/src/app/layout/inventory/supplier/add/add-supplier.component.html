@@ -5,7 +5,7 @@
       <span aria-hidden="true" (click)="dismiss()">&times;</span>
     </button>
     </div>
-    <form #signupForm=ngForm (ngSubmit)="onSubmit()">
+    <form>
         <div class="modal-body">
             <div class="col-md-12 form-content">
                 <div class="row">
@@ -181,10 +181,10 @@
             </div>
         </div>
     </form>
-    <div class="modal-footer">
-        <button *ngIf="!isCreate" type="button" class="btn btn-danger" (click)="openModal(delete)"> Delete </button>
-        <button type="submit" class="btn btn-dark pull-right" (click)="save()"> Save </button>
-        <button type="button" [ngClass]="isCreate ? '' : 'btn-none'" class="btn btn-light pull-right" (click)="dismiss()"> Cancel </button>
+    <div class="modal-footer" [ngClass]="isCreate ? '' : 'display'">
+        <button *ngIf="!isCreate" type="button" class="btn btn-delete" (click)="openModal(delete)"> Delete </button>
+        <button type="submit" class="btn btn-black pull-right" (click)="save()"> Save </button>
+        <button type="button" [ngClass]="isCreate ? '' : 'btn-none'" class="btn btn-white pull-right" (click)="dismiss()"> Cancel </button>
     </div>
 </div>
 
@@ -199,6 +199,6 @@
     <div style="font-size:16px;line-height: 22px;color: #67768C;">Are you sure you want to delete this supplier?</div>
   </div>
   <div class="modal-footer">
-    <button *ngIf="!isCreate" type="button" class="btn btn-danger pull-right" (click)="deletesupplier()"> Delete </button>
+    <button *ngIf="!isCreate" type="button" class="btn btn-delete pull-right" (click)="deletesupplier()"> Delete </button>
   </div>
 </ng-template>

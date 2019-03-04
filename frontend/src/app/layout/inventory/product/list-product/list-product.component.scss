@@ -1,8 +1,7 @@
-.du {
-    margin-right: 10px;
-    max-width: 170px;
-}
-
-.ma {
-    width: 200px;
+.filter-action {
+    .btn {
+        min-width: 110px;
+    }
+    display: flex;
+    padding-left: 0px;
 }
