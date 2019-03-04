@@ -36,6 +36,13 @@
   }
 }
 
+.setYear {
+  a {
+    display: block;
+    padding-top: 8px;
+  }
+}
+
 @media screen and (min-width: 768px) {
     .client-left-content {
         padding-top: 73px;
@@ -60,7 +67,7 @@ $breakpoint-iphone: 667px;
   }
 }
 
-@media (min-width: 576px) {
+@media (max-width: 576px) {
   .modal-footer {
       position: fixed;
       bottom: 0;

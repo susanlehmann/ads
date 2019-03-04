@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../shared/services/user.service';
@@ -15,12 +16,15 @@ export class DetailComponent implements OnInit {
 	client_id: any;
 	client_info: any = {};
 	closeResult: string;
+  blockReason: any = "";
+  textBlock: any = "";
 
   	constructor(private route: Router,
   		private router: ActivatedRoute,
   		private modalService: NgbModal,
   		private userService: UserService,
-    	private notifierService: NotifierService) { }
+    	private notifierService: NotifierService,
+      private datePipe: DatePipe) { }
 
 	ngOnInit() {
 		this.router.params.subscribe(params => {this.client_id = params.id;});
@@ -40,8 +44,9 @@ export class DetailComponent implements OnInit {
 	}
 
 	goBack() {
-		this.route.navigate(['client']);
+		this.route.navigate(['clients']);
 	}
+
 
 
 	open(content) {
@@ -67,7 +72,7 @@ export class DetailComponent implements OnInit {
     		success => {
     			this.notifierService.notify('success', 'Delete successfully !!');
     			this.modalService.dismissAll();
-    			this.route.navigateByUrl('client');
+    			this.route.navigateByUrl('clients');
     		},
     		error => {}
     	);
@@ -75,6 +80,11 @@ export class DetailComponent implements OnInit {
 
     blockUser(userInfo: any) {
       userInfo.getuser = JSON.parse(localStorage.getItem('user'));
+      if(this.blockReason == "0" || this.blockReason == 0) {
+        userInfo.block_reason = this.textBlock;
+      } else {
+        userInfo.block_reason = this.blockReason;
+      }
       this.userService.blockUser(userInfo).subscribe(
         success => {
           this.notifierService.notify('success', 'Block successfully !!');
@@ -97,4 +107,8 @@ export class DetailComponent implements OnInit {
       );
     }
 
+
+    getDateofBirth(value) {
+      return this.datePipe.transform(value, 'dd MMMM yyyy');
+    }
 }
