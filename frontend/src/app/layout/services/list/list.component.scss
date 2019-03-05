@@ -5,7 +5,17 @@
 	    margin: 5px 0;
 	}	
 
-	
+	.box-list-group {
+		border-top: 1px solid #eee;
+		&:hover {
+			cursor: pointer;
+			background: #eee;
+		}
+		td {
+	    	width: 50%;
+	    	padding: 10px;
+	    }
+	}
 
 	/* Tooltips */
 	.tooltip_group {
@@ -88,8 +98,8 @@
 	}
 	#inbox .show-on-hover {
 	    position: fixed;
-	    bottom: 80px;
-	    right: 80px;
+	    bottom: 20px;
+	    right: 20px;
 	}
 	#inbox .btn-io{
 	    border-radius: 50%;
@@ -277,7 +287,6 @@
 		    font-size: 16px;
 		    color: inherit;
 		    font-weight: 700;
-		    text-transform: uppercase;
 		}
 
 		.list-group {

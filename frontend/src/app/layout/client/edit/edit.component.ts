@@ -103,13 +103,13 @@ export class EditComponent implements OnInit {
 		if(this.birthday.year){
 			if(typeof(this.form.birthdayYear) == "undefined" || typeof(this.form.birthdayYear) == undefined){
 				let dayNotYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
-				this.form.birthday = this.datePipe.transform(dayNotYear, 'yyyy-MM-dd');
+				this.form.birthday = this.datePipe.transform(dayNotYear, 'MM-dd');
 			} else {
 				let dayYear = this.form.birthdayYear + "-" + this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayYear, 'yyyy-MM-dd');
 			}
 		} else {
-			this.form.birthday = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+			this.form.birthday = "";
 		}
 		this.update(this.form);
 	}
@@ -143,7 +143,7 @@ export class EditComponent implements OnInit {
 		this.userService.updateUserById(client).subscribe(
 			success => {
 				this.route.navigateByUrl('clients/detail/' + this.userId);
-				this.notifierService.notify('success', 'Update has been successfully updated');
+				this.notifierService.notify('success', 'Client information has been successfully updated');
 			},
 			error => {
 				console.log(error);

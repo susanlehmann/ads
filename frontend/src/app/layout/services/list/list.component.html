@@ -30,9 +30,9 @@
 		                    	Export&nbsp;&nbsp;&nbsp;<i class="fa fa-download"></i>
 		                    </button>
 		                    <div ngbDropdownMenu>
-		                        <button class="dropdown-item">Excel</button>
-		                        <button class="dropdown-item">CSV</button>
-		                        <button class="dropdown-item">PDF</button>
+		                        <button class="dropdown-item" (click)="exported()">Excel</button>
+		                        <button class="dropdown-item" (click)="exported()">CSV</button>
+		                        <button class="dropdown-item" (click)="exported()">PDF</button>
 		                    </div>
 		                </div>
 					</div>
@@ -57,13 +57,18 @@
 		                </div>
 	                </div>
 	                <ul class="list-group" *ngIf="listService">
-	                	<div *ngFor="let s of loadServiceInGroup(gr?.id)" >
-	                		<a 
-	                			routerLink="/services/edit-services/{{s?.id}}" 
-	                			class="list-group-item"
+	                	<table>
+	                		<tbody>
+	                			<tr *ngFor="let s of loadServiceInGroup(gr?.id)"
+	                			routerLink="/services/edit-services/{{s?.id}}"
 	                			[ngStyle]="{'border-left-color': (gr.color_service_group), 'border-left-width': '3px', 'border-left-style': 'solid'}"
-	                		>{{s.name_service}}</a>
-	                	</div>
+	                			class="box-list-group">
+	                				<td><i class="fa fa-bars"></i>&nbsp;{{s.name_service}}</td>
+	                				<td>{{convertTime(s.duration_service)}}</td>
+	                				<td>{{s.retail_price_service}}</td>
+	                			</tr>
+	                		</tbody>
+	                	</table>
 	                </ul>
 	            </div>
 			</div>
@@ -103,7 +108,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-				    <button type="button" class="btn btn-danger" (click)="confirmRemove(idGroup)">
+				    <button type="button" class="btn btn-delete" (click)="confirmRemove(idGroup)">
 				    	Delete
 				    </button>
 				</div>
