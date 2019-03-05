@@ -77,7 +77,7 @@ export class Staff {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
-      phone : this.mobileNumber.number,
+      phone : this.mobileNumber.internationalNumber,
       ennable_appointment_booking : this.appointmentBooking ? 1 : 0,
       notes : this.notes,
       start_date : '',
