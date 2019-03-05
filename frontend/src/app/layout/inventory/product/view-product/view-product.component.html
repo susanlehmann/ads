@@ -44,12 +44,16 @@
 <div>
   <h3 class="pull-left">Stock History</h3>
   <div class="pull-right">
-    <select style="height:40px;">
-      <option name="export">Export</option>
-      <option name="excel">Excel</option>
-      <option name="csv">CSV</option>
-      <option name="pdf">PDF</option>
-    </select>
+      <div ngbDropdown class="d-inline-block dropdown">
+          <button class="btn btn-white col-sm-12 mb-1" ngbDropdownToggle>
+            Export&nbsp;&nbsp;&nbsp;<i class="fa fa-download"></i>
+          </button>
+          <div ngbDropdownMenu>
+              <button class="dropdown-item" (click)="exported()">Excel</button>
+              <button class="dropdown-item" (click)="exported()">CSV</button>
+              <button class="dropdown-item" (click)="exported()">PDF</button>
+          </div>
+      </div>
   </div>
 </div>
 <br>
