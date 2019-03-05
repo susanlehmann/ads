@@ -130,7 +130,7 @@
                         <option *ngFor="let d of day" value="{{d.id}}">{{d.name}}</option>
                       </select>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="col-lg-4 col-md-4 col-sm-12 setyear">
                       <a href="javascript:void(0);" *ngIf="!setYear" (click)="showYear()">Set Year</a>
                       <select [(ngModel)]="birthday.year" name="year" class="form-control" *ngIf="setYear" (change)="selectYear()">
                         <option value="" selected="selected" disabled="disabled" hidden>Select Year</option>
@@ -227,9 +227,9 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-delete pull-left" (click)="open(content)"><i class="fa fa-trash"></i> Delete </button>
-    <button type="submit" class="btn btn-black pull-right" (click)="onSubmit()"><i class="fa fa-save"></i> Save </button>
-    <button type="button" class="btn btn-white pull-right" (click)="goBack()"><i class="fa fa-close"></i> Cancel </button>
+    <button type="button" class="btn btn-delete pull-left" (click)="open(content)"> Delete </button>
+    <button type="submit" class="btn btn-black pull-right" (click)="onSubmit()"> Save </button>
+    <button type="button" class="btn btn-white pull-right" (click)="goBack()"> Cancel </button>
   </div>
 </form>
 <ng-template #content let-c="close" let-d="dismiss">

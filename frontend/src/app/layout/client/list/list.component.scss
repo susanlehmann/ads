@@ -66,11 +66,21 @@
 
 .box-desktop{
 	table {
+		thead {
+			th {
+				width: 20%;
+
+				&.pd-avatar {
+				    padding-left: 50px;
+				}
+			}
+		}
 		tbody {
 			td {
 			    align-items: center;
     			justify-content: center;
     			vertical-align: middle;
+    			width: 20%;
 				.avatar {
 					border: 1px solid #ddd;
 				    margin-right: 10px;
@@ -100,9 +110,6 @@
 		tfoot {
 			tr {
 				th {
-					border-top: 2px solid #dee2e6;
-				    border-bottom: 1px solid #dee2e6;
-				    background: #f7f7f8;
 				    text-align: center;
 				}
 			}
@@ -147,8 +154,8 @@
 }
 #inbox .show-on-hover {
     position: fixed;
-    bottom: 80px;
-    right: 80px;
+    bottom: 20px;
+    right: 20px;
 }
 #inbox .btn-io{
     border-radius: 50%;

@@ -30,7 +30,7 @@ export class HttpcallService {
   }
 
   newpassword(data) {
-    return this.http.post(this.baseUrl + '/password/reset', data);
+    return this.http.post(this.baseUrl + '/auth/password/reset', data);
   }
 
 }

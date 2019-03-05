@@ -66,7 +66,7 @@ export class ViewProductComponent implements OnInit {
       this.loadStockHistory();
     });
   }
-
+  documo: any;
   loadStockHistory(id?) {
     if (!id) id = this.product.id;
 
@@ -76,6 +76,7 @@ export class ViewProductComponent implements OnInit {
     .sort((a, b) => {
           return b.id - a.id;
         });;
+        this.documo = this.stocks.length;
     });
   }
 

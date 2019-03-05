@@ -1,4 +1,5 @@
-<div class="row justify-content-between">
+<div class="col-lg-12">
+	<div class="row justify-content-between">
 	<div class="col-md-4 col-sm-9 width-mb">
 		<div class="input-group mb-2">
 			<div class="input-group-prepend">
@@ -83,7 +84,7 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>{{'Name' | translate}}</th>
+								<th class="pd-avatar">{{'Name' | translate}}</th>
 								<th>{{'Mobile number' | translate}}</th>
 								<th>{{'Email' | translate}}</th>
 								<th>{{'Gender' | translate}}</th>
@@ -103,27 +104,27 @@
 		                        </tr>
 		                    </ng-container>
 		                    <ng-container *ngIf="numberList > 0">
-								<tr *ngFor="let client of clients?.user; index as i" routerLink="/client/detail/{{client.id}}">
+								<tr *ngFor="let client of clients?.user; index as i" routerLink="/clients/detail/{{client.id}}">
 									<td class="ba">
 										<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
 										<span>{{client?.firstName}} {{client?.lastName}}</span>
 									</td>
 									<td>{{client?.phone}}</td>
 									<td>{{client?.email}}</td>
-									<td>{{client?.gender == '1' ? 'Male' : client?.gender == '2' ? 'FeMale' : 'Unknown'}}</td>
+									<td>{{client?.gender == '1' ? 'Male' : client?.gender == '2' ? 'Female' : 'Unknown'}}</td>
 									<td>
 										<i class="fa fa-2x" [ngClass]="client?.status == '1' ? 'fa-check-circle active' : 'fa-times-circle block'"></i>
 									</td>
 								</tr>
 							</ng-container>
 						</tbody>
-						<!-- <tfoot *ngIf="numberList > 0">
+						<tfoot *ngIf="numberList > 0">
 							<tr>
 								<th colspan="5">
-									paging
+									Showing {{numberList}} of {{numberList}} results
 								</th>
 							</tr>
-						</tfoot> -->
+						</tfoot>
 					</table>
 				</div>
 			</div>
@@ -142,29 +143,14 @@
 				</div>
 				<ul class="dropdown-menu dropdown-menu-right" role="menu">
 					<li>
-						<span title="Add New Client" (click)="addNewClient()">
+						<span title="New Client" (click)="addNewClient()">
 							<i class="fa fa-user"></i>
 						</span>
-						<div class="tooltip_group">Add New Client</div>
+						<div class="tooltip_group">New Client</div>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	<!-- <div class="row">
-		<div id="inbox">
-			<div class="fab btn-group show-on-hover dropup">
-				<div data-toggle="tooltip" data-placement="left" title="Compose">
-					<button type="button" class="btn btn-black btn-io" (click)="addNewClient()">
-						<span class="fa-stack">
-							<i class="fa fa-plus fa-stack-1x fa-inverse fab-primary"></i>
-						</span>
-					</button>
-					<ul class="dropdown-menu">
-						<li>Add New</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div> -->
+</div>
 </div>

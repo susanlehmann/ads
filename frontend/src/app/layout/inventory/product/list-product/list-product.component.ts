@@ -45,6 +45,7 @@ export class ListProductComponent implements OnInit {
 
   getListProduct() {
     this.inventoryService.getListProduct().subscribe((list: any) => {
+      console.log(list);
       this.products = list.product.map(Product.toModel);
       this.hasProduct = this.products.length === 0 ? false : true;
       this.number_display = this.products.length;

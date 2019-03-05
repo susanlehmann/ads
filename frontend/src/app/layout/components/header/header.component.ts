@@ -28,7 +28,19 @@ export class HeaderComponent implements OnInit {
 
         this.router.events.subscribe(val => {
             if (val instanceof NavigationEnd) {
-                this.title = val.url.split('/')[1];
+                if(val.url.split('/')[2] == undefined || val.url.split('/')[2] == "undefined") {
+                    this.title = val.url.split('/')[1];
+                } else {
+                    if(val.url.split('/')[1] == "clients") {
+                        if(val.url.split('/')[2] == "detail") {
+                            this.title = val.url.split('/')[1] + " / Profile";
+                        } else {
+                            this.title = val.url.split('/')[1];
+                        }
+                    } else {
+                        this.title = val.url.split('/')[1];
+                    }
+                }
             }
         });
     }
@@ -43,10 +55,10 @@ export class HeaderComponent implements OnInit {
     }
 
     toggleSidebar() {
-        if (document.querySelector('.sidebar.collapsed')) {
-            return;
-        }
         const dom: any = document.querySelector('body');
+        if (document.querySelector('.sidebar.collapsed')) {
+            dom.classList.toggle('cls');
+        }
         dom.classList.toggle(this.pushRightClass);
 
     }
@@ -62,9 +74,10 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('token');
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
         localStorage.removeItem('isLoggedin');
+        this.router.navigate(['/login']);
     }
 
     changeLang(language: string) {
