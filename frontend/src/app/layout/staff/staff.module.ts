@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { StaffRoutingModule } from './staff-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 import { StaffComponent } from './staff.component';
 import { MemberComponent } from './member/member.component';
@@ -10,7 +11,7 @@ import { CloseDateComponent } from './close-date/close-date.component';
 import { StaffService } from './staff.service';
 
 @NgModule({
-    imports: [StaffRoutingModule, SharedModule],
+    imports: [StaffRoutingModule, SharedModule, NgxIntlTelInputModule],
     declarations: [StaffComponent, MemberComponent, PermissionComponent, ScheduleComponent, CloseDateComponent],
     providers: [StaffService]
 })
