@@ -53,6 +53,13 @@
   display: inline-block;
 }
 
+.setyear {
+  a {
+    display: block;
+    padding-top: 8px;
+  }
+}
+
 @media screen and (min-width: 768px) {
     .client-left-content {
         padding-top: 73px;

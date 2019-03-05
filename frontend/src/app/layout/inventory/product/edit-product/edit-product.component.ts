@@ -14,8 +14,6 @@ import { NotifierService } from 'angular-notifier';
 })
 export class EditProductComponent implements OnInit {
   form: Product;
-  enableStock = false;
-  enableRetail = false;
   isAdd = true;
 
   brands;

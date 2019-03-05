@@ -38,7 +38,7 @@ export class ListComponent implements OnInit {
 	}
 
 	addNewClient() {
-		this.route.navigateByUrl('client/add');
+		this.route.navigateByUrl('clients/add');
 	}
 
 	searchClient(event) {

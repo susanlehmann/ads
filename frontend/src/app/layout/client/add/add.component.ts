@@ -152,7 +152,7 @@ export class AddComponent implements OnInit {
 		this.userService.createUser(client).subscribe(
 			success => {
 				this.notifierService.notify('success', 'A new has been successfully added');
-				this.router.navigateByUrl('client');
+				this.router.navigateByUrl('clients');
 			},
 			error => {
 				let message = error.error.message;
@@ -178,7 +178,7 @@ export class AddComponent implements OnInit {
 	}
 
 	goBack() {
-		this.router.navigateByUrl('client');
+		this.router.navigateByUrl('clients');
 	}
 
 	selectMonth() {
@@ -219,4 +219,8 @@ export class AddComponent implements OnInit {
 		}
 	}
 
+
+	onInputKeyPress(event) {
+		console.log(event);
+	}
 }

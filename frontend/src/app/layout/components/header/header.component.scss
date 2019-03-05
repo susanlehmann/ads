@@ -1,6 +1,7 @@
 $topnav-background-color: #fff;
 :host {
     .navbar {
+        font-size: 19px;
         background-color: $topnav-background-color;
         border-bottom: 1px solid #c2cfd6;
         .navbar-brand {

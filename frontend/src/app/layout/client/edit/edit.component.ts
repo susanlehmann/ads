@@ -142,7 +142,7 @@ export class EditComponent implements OnInit {
 
 		this.userService.updateUserById(client).subscribe(
 			success => {
-				this.route.navigateByUrl('client/detail/' + this.userId);
+				this.route.navigateByUrl('clients/detail/' + this.userId);
 				this.notifierService.notify('success', 'Update has been successfully updated');
 			},
 			error => {
@@ -152,7 +152,7 @@ export class EditComponent implements OnInit {
 	}
 
 	goBack() {
-		this.route.navigateByUrl('client/detail/' + this.userId);
+		this.route.navigateByUrl('clients/detail/' + this.userId);
 	}
 
 
@@ -183,7 +183,7 @@ export class EditComponent implements OnInit {
     		success => {
     			this.notifierService.notify('success', 'Delete successfully !!');
     			this.modalService.dismissAll();
-    			this.route.navigateByUrl('client');
+    			this.route.navigateByUrl('clients');
     		},
     		error => {}
     	);

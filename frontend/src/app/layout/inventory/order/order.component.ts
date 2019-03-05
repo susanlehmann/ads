@@ -64,7 +64,9 @@ export class OrderComponent implements OnInit {
     this.form = new Order();
     this.modalOptions = {
       backdrop: 'static',
-      size: 'lg'
+      size: 'lg',
+      windowClass: 'custom-modal',
+      backdropClass: 'custom-modal',
     };
 
   }

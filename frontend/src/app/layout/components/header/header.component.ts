@@ -28,7 +28,19 @@ export class HeaderComponent implements OnInit {
 
         this.router.events.subscribe(val => {
             if (val instanceof NavigationEnd) {
-                this.title = val.url.split('/')[1];
+                if(val.url.split('/')[2] == undefined || val.url.split('/')[2] == "undefined") {
+                    this.title = val.url.split('/')[1];
+                } else {
+                    if(val.url.split('/')[1] == "clients") {
+                        if(val.url.split('/')[2] == "detail") {
+                            this.title = val.url.split('/')[1] + " / Profile";
+                        } else {
+                            this.title = val.url.split('/')[1];
+                        }
+                    } else {
+                        this.title = val.url.split('/')[1];
+                    }
+                }
             }
         });
     }
@@ -62,9 +74,10 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('token');
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
         localStorage.removeItem('isLoggedin');
+        this.router.navigate(['/login']);
     }
 
     changeLang(language: string) {

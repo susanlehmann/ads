@@ -53,7 +53,7 @@ export class AddSupplierComponent implements OnInit {
             }
 		}
 		this.reloadList.emit(false);
-		
+
 	}
 
 	openModal(content: NgbModalRef) {
@@ -120,7 +120,7 @@ export class AddSupplierComponent implements OnInit {
 	    		this.reloadList.emit(true);
 				this.modal.dismissAll();
 	            this.notifierService.notify('success', 'Supplier information has been successfully updated');
-	    	}, 
+	    	},
 	    	err => {}
 	    );
     }
