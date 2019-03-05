@@ -20,7 +20,7 @@
         <tr>
           <th class="header-closed"></th>
           <th *ngFor="let cd of weekdays" [ngClass]="{'closed': cd.isClosed, 'header-closed': true}">
-            <div placement="top" ngbTooltip={{cd.closedReason}}>{{cd.isClosed ? 'CLOSED' : ''}}</div>
+            <div placement="top" ngbTooltip={{cd.closedReason}} container="body">{{cd.isClosed ? 'CLOSED' : ''}}</div>
           </th>
         </tr>
         <tr>
