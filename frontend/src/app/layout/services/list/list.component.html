@@ -61,11 +61,14 @@
 	                		<tbody>
 	                			<tr *ngFor="let s of loadServiceInGroup(gr?.id)"
 	                			routerLink="/services/edit-services/{{s?.id}}"
-	                			[ngStyle]="{'border-left-color': (gr.color_service_group), 'border-left-width': '3px', 'border-left-style': 'solid'}"
+	                			[ngStyle]="{'border-left-color': (gr?.color_service_group), 'border-left-width': '3px', 'border-left-style': 'solid'}"
 	                			class="box-list-group">
-	                				<td><i class="fa fa-bars"></i>&nbsp;{{s.name_service}}</td>
-	                				<td>{{convertTime(s.duration_service)}}</td>
-	                				<td>{{s.retail_price_service}}</td>
+	                				<td>
+	                					<i class="fa fa-bars"></i>&nbsp;{{s?.name_service}}
+	                				</td>
+	                				<td>{{convertTime(s?.duration_service)}}</td>
+	                				<td [ngClass]="s?.special_price_service ? 'ds-block' : 'ds-none'">{{s?.retail_price_service}}</td>
+	                				<td>{{s?.special_price_service ? s?.special_price_service : s?.retail_price_service}}</td>
 	                			</tr>
 	                		</tbody>
 	                	</table>
@@ -97,8 +100,8 @@
 		<ng-template #remove_service_group let-c="close" let-d="dismiss">
             <div class="group-service">
             	<div class="modal-header">
-				    <h4 class="modal-title">Delete Service Group</h4>
-				    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+				    <h4 class="modal-title" style="width:90%;display: block;">Delete Service Group</h4>
+				    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')" style=" font-size: 3em; padding: 0px 0px 0px 0px; ">
 				        <span aria-hidden="true">&times;</span>
 				    </button>
 				</div>

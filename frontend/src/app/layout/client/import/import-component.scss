@@ -1,0 +1,74 @@
+.box-import {
+
+	.bs-step {
+		span {
+			display: block;
+			position: relative;
+			padding-left: 30px;
+		    margin-bottom: 30px;
+		    &:after {
+				content: "";
+				width: 2px;
+				height: 25px;
+				position: absolute;
+				border: 2px dashed;
+				color: #dee3e7;
+				left: 10px;
+				top: 25px;
+			}
+			&.one {
+				&:before {
+					content: "1";
+				    position: absolute;
+				    width: 25px;
+				    height: 25px;
+				    border: 2px solid #4091d7;
+				    border-radius: 50%;
+				    display: inline-block;
+				    text-align: center;
+				    left: 0;
+				    color: #4091d7;
+				    font-weight: 700;
+				}
+				
+			}
+
+			&.two {
+				&:before {
+					content: "2";
+				    position: absolute;
+				    width: 25px;
+				    height: 25px;
+				    border: 2px solid #4091d7;
+				    border-radius: 50%;
+				    display: inline-block;
+				    text-align: center;
+				    left: 0;
+				    color: #4091d7;
+				    font-weight: 700;
+				}
+			}
+
+			&.three {
+
+		    	margin-bottom: 10px;
+				&:before {
+					content: "3";
+			        position: absolute;
+				    width: 25px;
+				    height: 25px;
+				    border: 2px solid #4091d7;
+				    border-radius: 50%;
+				    display: inline-block;
+				    text-align: center;
+				    left: 0;
+				    color: #4091d7;
+				    font-weight: 700;
+				}
+				&:after { 
+					content: none;
+				}
+			}
+		}
+	}
+}
