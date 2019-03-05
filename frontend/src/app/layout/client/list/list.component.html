@@ -35,7 +35,7 @@
                 <a href="javascript:void(0)" class="dropdown-item" (click)="exportExcel('csv')">
                     Download CSV
                 </a>
-                <a href="javascript:void(0)" class="dropdown-item">
+                <a href="javascript:void(0)" class="dropdown-item" (click)="openImport(content_import)">
                     Import Clients
                 </a>
                 <a href="javascript:void(0)" class="dropdown-item">
@@ -162,3 +162,6 @@
 	</div>
 </div>
 </div>
+<ng-template #content_import let-c="close" let-d="dismiss">
+    <import-client></import-client>
+</ng-template>

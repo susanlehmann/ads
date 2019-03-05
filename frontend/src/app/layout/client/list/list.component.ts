@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../shared/services/user.service';
 import { ExcelService } from '../../../shared/services/export.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-list',
@@ -15,12 +16,14 @@ export class ListComponent implements OnInit {
 	client: any = {};
 	numberList: number;
 	download: boolean = false;
+	closeResult: string;
 
 	constructor(
 		private http: HttpClient,
 		private userService: UserService,
 		private route: Router,
-		private excel: ExcelService
+		private excel: ExcelService,
+		private modalService: NgbModal
 	) { }
 
 	ngOnInit() {
@@ -39,6 +42,24 @@ export class ListComponent implements OnInit {
 			}
 		);
 	}
+
+	openImport(content) {
+		this.modalService.open(content).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+	}
+
+	private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return  `with: ${reason}`;
+        }
+    }
 
 	addNewClient() {
 		this.route.navigateByUrl('clients/add');

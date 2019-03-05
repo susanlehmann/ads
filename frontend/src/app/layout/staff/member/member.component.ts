@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, NgbModalRef, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef, NgbModalOptions, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import { Staff } from '../model/staff'
 import { NotifierService } from 'angular-notifier';
 import { StaffService } from '../staff.service';
 import { ServicesService } from 'src/app/shared/services/serv.service';
+import { NgbDateEnGbParserFormatter } from '../close-date/NgbDateEnGbParserFormatter';
 
 @Component({
+  providers: [{provide: NgbDateParserFormatter, useClass: NgbDateEnGbParserFormatter}],
   selector: 'app-member',
   templateUrl: './member.component.html',
   styleUrls: ['./member.component.scss']
@@ -24,6 +26,7 @@ export class MemberComponent implements OnInit {
   selectedId: string;
 
   services: any[];
+  permissions: any[];
   selectAll = true;
   
 	constructor(
@@ -44,6 +47,13 @@ export class MemberComponent implements OnInit {
       backdrop: 'static',
       size: 'md'
     };
+    this.permissions = [
+      'No Access',
+      'Basic',
+      'Low',
+      'Medium',
+      'High',
+    ];
 	}
 
 	ngOnInit() {

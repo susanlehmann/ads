@@ -48,6 +48,7 @@ export class ListServicesComponent implements OnInit {
 		this.form.ownerId = userInfo.id;
 		this.services.listServiceIngroup(this.form).subscribe(
 			success => {
+                console.log(success);
 				this.group = success;
                 this.lstServices = success;
 			},

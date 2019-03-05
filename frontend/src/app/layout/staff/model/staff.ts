@@ -3,8 +3,7 @@ export class Staff {
   firstName: string;
   lastName: string;
   staffTitle: string;
-  dialCode: string;
-  mobileNumber: string;
+  mobileNumber: any;
   email: string;
   password: string;
   userPermission: string;
@@ -25,14 +24,13 @@ export class Staff {
     this.firstName = "";
     this.lastName = "";
     this.staffTitle = "";
-    this.dialCode = "";
     this.mobileNumber = "";
     this.email = "";
-    this.userPermission = "";
+    this.userPermission = "No Access";
     this.notes = "";
     this.employmentStartDate = this.getCurrentDateObject();
     this.employmentEndDate = "";
-    this.appointmentBooking = false;
+    this.appointmentBooking = true;
     this.appointmentColor = "";
     this.services = [];
     if (this.commissions === undefined) {
@@ -51,8 +49,7 @@ export class Staff {
     this.firstName = "Giang";
     this.lastName = "Mai";
     this.staffTitle = "Admin";
-    this.dialCode = "84";
-    this.mobileNumber = "9123456789";
+    this.mobileNumber = "+84 123456789";
     this.email = "giang@mai.com";
     this.userPermission = "Basic";
     this.notes = "11111";
@@ -80,13 +77,13 @@ export class Staff {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
-      phone : this.mobileNumber,
+      phone : this.mobileNumber.internationalNumber,
       ennable_appointment_booking : this.appointmentBooking ? 1 : 0,
       notes : this.notes,
       start_date : '',
       end_date : '',
       appointment_color: this.appointmentColor,
-      dial_code : this.dialCode,
+      dial_code : this.mobileNumber.countryCode,
       service_commission : service,
       product_commission : product,
       voucher_sales_commission : voucherSale,
@@ -115,7 +112,6 @@ export class Staff {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.dialCode = dial_code;
     this.mobileNumber = phone;
     this.notes = notes;
     this.employmentStartDate = start_date;

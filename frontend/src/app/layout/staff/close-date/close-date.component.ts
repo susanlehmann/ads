@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {NgbModal, NgbModalRef, NgbDate} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Injectable } from '@angular/core';
+import {NgbModal, NgbModalRef, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import { StaffService } from '../staff.service';
 import { NotifierService } from 'angular-notifier';
+import { NgbDateEnGbParserFormatter } from './NgbDateEnGbParserFormatter';
 
 @Component({
+  providers: [{provide: NgbDateParserFormatter, useClass: NgbDateEnGbParserFormatter}],
   selector: 'app-close-date',
   templateUrl: './close-date.component.html',
   styleUrls: ['./close-date.component.scss']
@@ -117,9 +119,9 @@ class ClosedDate  {
   }
 
   getOutputDate(data) {
-    const options = {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'};
-    const startDate = new Date(data.start_date).toLocaleDateString('en-US', options);
-    const endDate = new Date(data.end_date).toLocaleDateString('en-US', options);
+    const options = {weekday: 'short', day: '2-digit', month: 'short', year: 'numeric'};
+    const startDate = new Date(data.start_date).toLocaleDateString('en-GB', options);
+    const endDate = new Date(data.end_date).toLocaleDateString('en-GB', options);
     this.outputDate = `${startDate} - ${endDate}`;
   }
 
@@ -131,7 +133,8 @@ class ClosedDate  {
     const end = new Date(data.end_date);
     this.startDate = new NgbDate(str.getUTCFullYear(), str.getUTCMonth()+1, str.getUTCDate());
     this.endDate = new NgbDate(end.getUTCFullYear(), end.getUTCMonth()+1, end.getUTCDate());
-    this.noOfDays = `${ Math.round((end.getTime() - str.getTime() ) / one_day)} days`;
+    const noOfDays = Math.round((end.getTime() - str.getTime() ) / one_day) + 1;
+    this.noOfDays = noOfDays <= 1 ? 1 + ' Day' : noOfDays + ' Days';
     this.description = data.description;
     this.getOutputDate(data);
   }

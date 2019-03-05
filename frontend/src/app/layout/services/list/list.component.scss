@@ -12,8 +12,24 @@
 			background: #eee;
 		}
 		td {
-	    	width: 50%;
+			&:nth-child(1) {
+				width: 50%;
+			}
+			&:nth-child(2) {
+				width: 25%;
+			}
+			color: #000;
+			width: 25%;
 	    	padding: 10px;
+	    	&.ds-block {
+	    		text-decoration: line-through;
+	    		color: #949393;
+	    	}
+
+	    	&.ds-none {
+	    		// width: 25%;
+	    		opacity: 0;
+    		}
 	    }
 	}
 

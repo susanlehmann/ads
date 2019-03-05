@@ -232,10 +232,7 @@ export class EditServiceComponent implements OnInit {
 		}
 	}
 	goBack() {
-		const confirm = window.confirm('Are you sure you want to cancel?');
-		if (confirm === true) {
-			this.route.navigate(['services']);
-		}
+		this.route.navigate(['services']);
 	}
 
 }
