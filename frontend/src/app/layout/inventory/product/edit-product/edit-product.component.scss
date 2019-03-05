@@ -4,3 +4,26 @@
 	    display: inline-block;
 	}
 }
+.cs1{
+  display: block;
+  color: #A4ADBA;
+  border: 1px solid #DEE3E7;
+  border-right: none;
+  border-radius: 2px;
+  padding: 7px 12px;
+  margin-right: -1px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: border-color 0.2s linear !important;
+}
+.cs2{
+  position: relative;
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+}
+.ad{
+  display: flex;
+  position: relative;
+  height: 38px;
+  width: 100%;
+}
