@@ -31,7 +31,7 @@ class CreateSuppliersTable extends Migration
             $table->string('city_supplier')->nullable();
             $table->string('state_supplier')->nullable();
             $table->string('zipcode_supplier')->nullable();
-            $table->integer('countryid_supplier')->nullable();
+            $table->string('countryid_supplier')->nullable();
             $table->integer('status_supplier')->nullable();
             $table->timestamps();
         });
