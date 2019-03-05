@@ -88,15 +88,29 @@
                         <ng-container *ngIf="form.enableRetail">
                             <div class="row form-group">
                                 <div class="col-sm-6">
-                                    <label class="control-label">Retail Price</label>
-                                    <input type="decimal" class="form-control input-underline input-lg"
-                                        [ngModel]="form.retailPrice | number:'1.2-2'" (ngModelChange)="form.supplyPrice=$event" name="retail" placeholder="0.00">
+                                  <label class="control-label">Retail Price</label>
+                                  <ng-container>
+                                    <div class="form-group input-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text cs1" id="basic-addon1">đ</span>
+                                      </div>
+                                      <input type="number" class="form-control input-underline input-lg"
+                                      [ngModel]="form.retailPrice | number:'1.2-2'" (ngModelChange)="form.retailPrice=$event" name="retail" placeholder="0.00">
+                                    </div>
+                                  </ng-container>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label class="control-label">Special Price</label>
-                                    <input [ngModel]="form.specialPrice | number:'1.2-2'" (ngModelChange)="form.supplyPrice=$event" type="number" name="special"
+                                  <label class="control-label">Special Price</label>
+                                  <ng-container>
+                                    <div class="form-group input-group">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text cs1" id="basic-addon1">đ</span>
+                                      </div>
+                                      <input [ngModel]="form.specialPrice | number:'1.2-2'" (ngModelChange)="form.specialPrice=$event" type="number" name="special"
                                         class="form-control input-underline input-lg" placeholder="0.00">
+                                    </div>
+                                  </ng-container>
                                 </div>
                             </div>
 
@@ -115,7 +129,7 @@
                                     <div class="custom-control custom-checkbox" style="line-height: 16px;">
                                         <input [(ngModel)]="form.enableCommission" type="checkbox"
                                             class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">Enable commission</label>
+                                        <label class="custom-control-label" for="customCheck1" style="font-size:16px;">Enable commission</label>
                                         <p style="color: #67768C;font-size: 12px;">Calculate staff commissions when this product is sold</p>
                                     </div>
                                 </div>
@@ -138,8 +152,16 @@
                             <div class="row form-group">
                                 <div class="col-sm-6">
                                     <label class="control-label">Supply Price</label>
-                                    <input type="number" name="supply-price" [ngModel]="form.supplyPrice | number:'1.2-2'" (ngModelChange)="form.supplyPrice=$event"
+                                    <ng-container>
+                                      <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text cs1" id="basic-addon1">đ</span>
+                                        </div>
+                                        <input type="number" name="supply-price" [ngModel]="form.supplyPrice | number:'1.2-2'" (ngModelChange)="form.supplyPrice=$event"
                                         class="form-control input-underline input-lg" placeholder="0.00">
+                                      </div>
+                                    </ng-container>
+
                                   </div>
                                   <div class="col-sm-6">
                                     <label class="control-label">Initial Stock</label>

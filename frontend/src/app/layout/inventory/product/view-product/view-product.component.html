@@ -41,58 +41,75 @@
 </table>
 </div>
 
-<h3>Stock History</h3>
-<div class="table-responsive">
-<table class="table">
-  <thead>
-    <tr>
-      <th>{{'TIME & DATE' | translate}}</th>
-      <th>{{'STAFF' | translate}}</th>
-      <!-- <th>{{'LOCATION' | translate}}</th> -->
-      <th>{{'ACTION' | translate}}</th>
-      <th>{{'QTY. ADJUSTED' | translate}}</th>
-      <th>{{'COST PRICE' | translate}}</th>
-      <th>{{'STOCK ON HAND' | translate}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- <ng-container *ngIf="true">
-        <tr style="background-color: #fff; cursor: default;">
-                        <td colspan="2" style="padding-top:40px;">
-                            <div class="text-center">
-                                    <h1><i class="fa fa-search fa-lg"></i></h1>
-                                    <h3 class="text-capitalize">No Results Found</h3>
-                                    <p>Try using different filter options to find what you're looking for</p>
-                                </div>
-                        </td>
-                    </tr>
-      </ng-container> -->
-    <ng-container>
-      <tr *ngFor="let stock of stocks; index as i">
-        <td>{{stock.createdAt}}</td>
-        <td>{{stock.staffName}}</td>
-        <td>{{stock.action}}</td>
-        <td>{{stock.isIncreased ? '+' : '-'}} {{stock.stockQty}}</td>
-        <td>{{stock.supplyPrice}}</td>
-        <td>{{stock.totalStock}}</td>
-      </tr>
-    </ng-container>
-  </tbody>
-  <!-- <tfoot *ngIf="numberList > 0">
-      <tr>
-        <th colspan="3">
-          paging
-        </th>
-      </tr>
-    </tfoot> -->
-</table>
+<div>
+  <h3 class="pull-left">Stock History</h3>
+  <div class="pull-right">
+    <select style="height:40px;">
+      <option name="export">Export</option>
+      <option name="excel">Excel</option>
+      <option name="csv">CSV</option>
+      <option name="pdf">PDF</option>
+    </select>
+  </div>
 </div>
+<br>
+<ng-container *ngIf="documo != 0">
+    <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{{'TIME & DATE' | translate}}</th>
+              <th>{{'STAFF' | translate}}</th>
+              <!-- <th>{{'LOCATION' | translate}}</th> -->
+              <th>{{'ACTION' | translate}}</th>
+              <th>{{'QTY. ADJUSTED' | translate}}</th>
+              <th>{{'COST PRICE' | translate}}</th>
+              <th>{{'STOCK ON HAND' | translate}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <ng-container *ngIf="true">
+                <tr style="background-color: #fff; cursor: default;">
+                                <td colspan="2" style="padding-top:40px;">
+                                    <div class="text-center">
+                                            <h1><i class="fa fa-search fa-lg"></i></h1>
+                                            <h3 class="text-capitalize">No Results Found</h3>
+                                            <p>Try using different filter options to find what you're looking for</p>
+                                        </div>
+                                </td>
+                            </tr>
+              </ng-container> -->
+            <ng-container>
+              <tr *ngFor="let stock of stocks; index as i">
+                <td>{{stock.createdAt}}</td>
+                <td>{{stock.staffName}}</td>
+                <td>{{stock.action}}</td>
+                <td>{{stock.isIncreased ? '+' : '-'}} {{stock.stockQty}}</td>
+                <td>{{stock.supplyPrice}}</td>
+                <td>{{stock.totalStock}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+          <!-- <tfoot *ngIf="numberList > 0">
+              <tr>
+                <th colspan="3">
+                  paging
+                </th>
+              </tr>
+            </tfoot> -->
+        </table>
+        </div>
+</ng-container>
+<ng-container *ngIf="documo == 0">
+    <div class="text-center" style="margin-top: 30px;">
+      <h1><i class="fa fa-btc"></i></h1>
+      <h3 class="text-capitalize" style="color:#24334A">No History Yet</h3>
+      <p>Any sales or adjustments to this product's stock <br>
+        will show here.</p>
+    </div>
+</ng-container>
 
 </div>
-
-
-
-
 <ng-template #increaseStock let-modal>
       <div class="modal-header">
           <h4 class="modal-title col-sm-6 offset-sm-3">Increase Stock</h4>
@@ -100,38 +117,38 @@
             <span aria-hidden="true" (click)="modal.dismiss('Cross click')">&times;</span>
           </button>
           </div>
-          
-          
+
+
           <div class="modal-body">
               <div>{{product.totalOnHand}} units currently in stock at Hachinet.</div>
 
               <div class="row form-group">
                   <div class="col-sm-12">
-                      
+
                         <label class="control-label">INCREASE QTY.</label>
                         <input  [(ngModel)]="stockForm.stockQty"
                         type="number" class="form-control input-underline input-lg" name="increase-qty">
-                    
+
                     </div>
             </div>
               <div class="row form-group">
                   <div class="col-sm-12">
-                      
+
                         <label class="control-label">SUPPLY PRICE</label>
                         <input [(ngModel)]="stockForm.supplyPrice"
                         type="number" class="form-control input-underline input-lg" name="supply-price">
-                    
+
                     </div>
             </div>
 
               <div class="row form-group">
                   <div class="col-sm-12">
-                      
+
                         <div class="custom-control custom-checkbox">
           <input  name="save-price" [(ngModel)]="stockForm.savePrice"
           type="checkbox" class="custom-control-input" id="save-price">
           <label class="custom-control-label" for="save-price"></label>SAVE PRICE FOR NEXT TIME</div>
-                    
+
                     </div>
             </div>
 
@@ -144,16 +161,16 @@
                   </select>
               </div>
           </div>
-  
-  
-            
+
+
+
           </div>
-  
+
           <div class="modal-footer">
               <button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
               <button type="submit" class="btn btn-black pull-right" (click)="addStockHistory(true)"> Save </button>
         </div>
-  
+
   </ng-template>
 
 <ng-template #decreaseStock let-modal>
@@ -163,18 +180,18 @@
             <span aria-hidden="true" (click)="modal.dismiss('Cross click')">&times;</span>
           </button>
           </div>
-          
-          
+
+
           <div class="modal-body">
               <div>{{product.totalOnHand}} units currently in stock at Hachinet.</div>
 
               <div class="row form-group">
                   <div class="col-sm-12">
-                      
+
                         <label class="control-label">DECREASE QTY.</label>
                         <input [(ngModel)]="stockForm.stockQty"
                         type="number" class="form-control input-underline input-lg" name="decrease-qty">
-                    
+
                     </div>
             </div>
 
@@ -188,14 +205,14 @@
                   </select>
               </div>
           </div>
-  
-  
-            
+
+
+
           </div>
-  
+
           <div class="modal-footer">
               <button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
               <button type="submit" class="btn btn-black pull-right" (click)="addStockHistory(false)"> Save </button>
         </div>
-  
+
   </ng-template>
