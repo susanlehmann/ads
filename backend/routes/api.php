@@ -171,4 +171,13 @@ Route::group([
         Route::post('delete-appoint', 'AppointmentContronler@destroy');
     });
 
+    Route::group(['prefix' => 'user/setup/location', 'namespace' => 'API\member\setup'], function(){
+        Route::post('list-location', 'LocationController@index');
+        Route::post('create-location', 'LocationController@store');
+        Route::post('show-location', 'LocationController@show');
+        Route::post('update-location', 'LocationController@update');
+        Route::post('delete-location', 'LocationController@destroy');
+        Route::post('search-location', 'LocationController@search'); 
+    });
+
 });
