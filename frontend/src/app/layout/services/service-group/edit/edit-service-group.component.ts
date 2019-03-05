@@ -92,4 +92,20 @@ export class EditServiceGroupComponent implements OnInit {
             );
         }
     }
+
+    confirmRemove() {
+        let group: any = {id: this.form.id};
+        this.servicesService.removeService_GroupById(group).subscribe(
+            success => {
+                this.checkEditGroup.emit(true);
+                this.notifierService.notify('success', 'Service Group Deleted !');
+                this.modalService.dismissAll();
+            },
+            error => {}
+        );
+    }
+
+    openRemoveGroup(content) {
+        this.modalService.open(content);
+    }
 }

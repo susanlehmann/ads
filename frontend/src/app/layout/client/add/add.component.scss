@@ -11,6 +11,15 @@
 	}
 }
 
+.modal-header {
+    padding-top: 0;
+
+    .modal-title {
+      font-size: 2.5em;
+      font-family: "Roboto-Light";
+    }
+}
+
 .btn-black {
   color: #fff;
   background-color: #24334A;

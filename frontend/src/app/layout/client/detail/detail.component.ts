@@ -87,7 +87,7 @@ export class DetailComponent implements OnInit {
       }
       this.userService.blockUser(userInfo).subscribe(
         success => {
-          this.notifierService.notify('success', 'Block successfully !!');
+          this.notifierService.notify('success', 'Client blocked !!');
           this.modalService.dismissAll();
           this.loadDetails(this.client_id);
         },
@@ -99,7 +99,7 @@ export class DetailComponent implements OnInit {
       userInfo.getuser = JSON.parse(localStorage.getItem('user'));
       this.userService.unblockUser(userInfo).subscribe(
         success => {
-          this.notifierService.notify('success', 'UnBlock successfully !!');
+          this.notifierService.notify('success', 'Client unblocked !!');
           this.modalService.dismissAll();
           this.loadDetails(this.client_id);
         },
