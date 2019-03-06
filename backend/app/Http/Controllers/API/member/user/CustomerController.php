@@ -50,7 +50,7 @@ class CustomerController extends Controller
             'address' => $request->address,
             'suburb' => $request->suburb,
             'city' => $request->city,
-            'sate' => $request->sate,
+            'state' => $request->state,
             'zip_postcode' => $request->zip_postcode,
             'sort_order' => 1,
             'level' => 4,
@@ -107,7 +107,7 @@ class CustomerController extends Controller
                 'address' => $request->address,
                 'suburb' => $request->suburb,
                 'city' => $request->city,
-                'sate' => $request->sate,
+                'state' => $request->state,
                 'zip_postcode' => $request->zip_postcode,
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
