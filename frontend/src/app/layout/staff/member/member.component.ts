@@ -164,14 +164,16 @@ export class MemberComponent implements OnInit {
       isNotTakenEmail = false;
     }
 
-    if (!isValidForm || !isValidEmail || !isNotTakenEmail) {
-      document.querySelector('input[name="first-name"]').classList.remove('is-invalid');
+    if (!isValidForm) {
       return;
+    } else {
+      document.querySelector('input[name="first-name"]').classList.remove('is-invalid');
     }
 
     if (!isValidEmail || !isNotTakenEmail) {
-      document.querySelector('input[name="email"]').classList.remove('is-invalid');
       return;
+    } else {
+      document.querySelector('input[name="email"]').classList.remove('is-invalid');
     }
 
     const dto = this.form.toDto();
