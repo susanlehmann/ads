@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, NgbModalRef, NgbModalOptions, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
-import { Staff } from '../model/staff'
+import { NgbDateParserFormatter, NgbModal, NgbModalOptions, NgbModalRef, NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
-import { StaffService } from '../staff.service';
 import { ServicesService } from 'src/app/shared/services/serv.service';
 import { NgbDateEnGbParserFormatter } from '../close-date/NgbDateEnGbParserFormatter';
+import { Staff } from '../model/staff';
+import { StaffService } from '../staff.service';
 
 @Component({
-  providers: [{provide: NgbDateParserFormatter, useClass: NgbDateEnGbParserFormatter}],
+  providers: [
+    { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter },
+    { provide: NgbDateParserFormatter, useClass: NgbDateEnGbParserFormatter },
+  ],
   selector: 'app-member',
   templateUrl: './member.component.html',
   styleUrls: ['./member.component.scss']
