@@ -89,7 +89,7 @@ class AuthController extends Controller
     public function send_verifyEmail(Request $request){
         $verificationCode = str_random(40);
 
-        $user = User::where('email', $request->email)->count();
+        $user = User::where('email', $request->email)->first();
         if($user > 0){
             $input = [
                 'email_verification_code' => $verificationCode,
