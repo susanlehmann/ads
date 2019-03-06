@@ -90,7 +90,7 @@ class AuthController extends Controller
         $verificationCode = str_random(40);
 
         $user = User::where('email', $request->email)->first();
-        if($user > 0){
+        if($user){
             $input = [
                 'email_verification_code' => $verificationCode,
                 ];
