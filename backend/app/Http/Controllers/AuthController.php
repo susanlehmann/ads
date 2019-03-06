@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
+use Illuminate\Http\Request;
 use App\User;
 use Mail;
 use JWTAuth;
@@ -83,6 +84,22 @@ class AuthController extends Controller
         });
         return $this->login($request);
 
+    }
+
+    public function send_verifyEmail(Request $request){
+        $user = User::where('email', $request->email)->count();
+        if($user > 0){
+            Mail::send('emails.userverification', ['verificationCode' => $verificationCode], function ($m) use ($request) {
+                $m->to($request->email, 'test')->subject('Email Confirmation');
+            });
+            $msg = ['success' => 'send email success'];
+        }
+        else
+        {
+            $msg = ['error' => 'not email'];
+        }
+
+        return response()->json($msg);
     }
 
     public function verifyUserEmail($verificationCode)

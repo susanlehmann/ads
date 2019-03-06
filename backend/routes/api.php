@@ -14,6 +14,7 @@ Route::group([
     Route::post('signup', 'AuthController@signup');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
+    Route::post('send-verify', 'AuthController@send_verifyEmail');
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
     Route::get('getinfo_user', 'User_infoController@index');
     Route::resource('roles','RoleController');
