@@ -70,6 +70,9 @@
                             <label class="control-label">First Name</label>
                             <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="first-name" placeholder="e.g. Jane" required>
                             <div class="alert alert-danger" [hidden]="!error.name"> {{ error.name }} </div>
+                            <div class="invalid-feedback">
+                                    is required
+                            </div>
                         </div>
         
                         <div class="col-sm-6">
@@ -99,6 +102,9 @@
                             <label class="control-label">Email</label>
                             <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="mail@example.com">
                             <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                            <div class="invalid-feedback">
+                                    is invalid
+                            </div>
                         </div>
                     </div>
 
@@ -245,9 +251,13 @@
 </ngb-tabset>
 </div>
 <div class="modal-footer" style="position: unset;" [ngClass]="isCreate ? '' : 'display'">
-<button *ngIf="!isCreate" type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
-<button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+    <ng-container *ngIf="!isCreate">
+        <button  type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
+        <button type="button" class="btn btn-white" (click)="resetPassword()"> Send reset password email </button>
+    </ng-container>
+    
 <button type="submit" class="btn btn-black pull-right"> Save </button>
+<button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
 </div>
 </form>
 </ng-template>

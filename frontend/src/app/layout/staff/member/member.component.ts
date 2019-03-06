@@ -76,6 +76,12 @@ export class MemberComponent implements OnInit {
     }
     });
   }
+
+  resetPassword(): void {
+    this.staffService.resetPassword(this.form.email).subscribe(v => {
+      this.notifierService.notify('success', `Password setup email was sent to ${this.form.firstName}`);
+    });
+  }
   
   openModal(content: NgbModalRef) {
     this.modal.open(content, this.modalOptions).result.then((result) => {
@@ -132,9 +138,42 @@ export class MemberComponent implements OnInit {
         });
 		}, err => {
     });
-	}
-	
+  }
+
   onSubmit(): void {
+    let isValidForm = true;
+    let isValidEmail = true;
+    let isNotTakenEmail = true;
+    
+    if (!this.form.firstName) {
+      this.notifierService.notify('error', 'First name is required');
+      document.querySelector('input[name="first-name"]').classList.add('is-invalid');
+      isValidForm = false;
+    }
+
+    if (this.form.email.length > 0 && !this.form.email.match(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/)) {
+        this.notifierService.notify('error', `${this.form.email} is not a valid email`);
+        document.querySelector('input[name="email"]').classList.add('is-invalid');
+        isValidEmail = false;
+    }
+
+    const found = this.listusers.filter(u => u.email === this.form.email)[0];
+    if (this.isCreate && found) {
+      this.notifierService.notify('error', `${this.form.email} has already been taken`);
+      document.querySelector('input[name="email"]').classList.add('is-invalid');
+      isNotTakenEmail = false;
+    }
+
+    if (!isValidForm || !isValidEmail || !isNotTakenEmail) {
+      document.querySelector('input[name="first-name"]').classList.remove('is-invalid');
+      return;
+    }
+
+    if (!isValidEmail || !isNotTakenEmail) {
+      document.querySelector('input[name="email"]').classList.remove('is-invalid');
+      return;
+    }
+
     const dto = this.form.toDto();
     if (this.isCreate) {
       this.addStaff(dto);
@@ -148,6 +187,8 @@ export class MemberComponent implements OnInit {
     this.staffService.add(staff)
     .subscribe((data:any) => {
             this.getUser();
+            this.staffService.verifyEmail(this.form.email).subscribe(v => {}); // send mail to staff for verifing & creating password
+            this.staffService.resetPassword(this.form.email).subscribe(v => {});
             this.notifierService.notify('success', 'A new Staff has been successfully added');
     }), err => {
     };

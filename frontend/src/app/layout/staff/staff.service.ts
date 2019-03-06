@@ -39,6 +39,14 @@ export class StaffService {
         return this._http.post(`${this.baseUrl}/user/staff/delete_user`, {'id': id});
     }
 
+    resetPassword(email) {
+        return this._http.post(`${this.baseUrl}/auth/password/email`, {'email': email});
+    }
+
+    verifyEmail(email) {
+        return this._http.post(`${this.baseUrl}/send-verify`, {'email': email});
+    }
+
 
     // closed date
     getListClosedDate() {
