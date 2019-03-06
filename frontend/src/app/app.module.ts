@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { HttpcallService } from './shared/services/httpcall.service';
 import { _AuthService } from './shared/services/auth.service';
+import { ExcelService } from './shared/services/export.service';
 import { TokenService } from './shared/services/token.service';
 import { SearchComponent } from './search/search.component';
 import { UserService } from './shared/services/user.service';
@@ -127,6 +128,7 @@ const customNotifierOptions: NotifierOptions = {
         SupplierService,
         NotifierService,
         BsModalService,
+        ExcelService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     ],

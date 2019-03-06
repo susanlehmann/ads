@@ -922,3 +922,61 @@ $breakpoint-iphone: 767px;
 .fa-1-75x{
   font-size: 1.75em;
 }
+.cus{
+  background-color: #24334A;
+  color: white;
+  text-transform: uppercase;
+  width: 100%;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+  line-height: 18px;
+  padding: 8px 16px;
+  white-space: nowrap;
+  min-width: 128px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px 0 #A4ADBA;
+  border: 1px solid transparent;
+  transition: all 0.12s linear;
+  text-decoration: none;
+  min-height: 42px;
+}
+.dv1{
+  padding: 8px;
+  margin-bottom: 0;
+}
+.aa{
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 48px 0;
+  text-align: center;
+}
+.p1{
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #67768C;
+  font-size: 16px;
+  line-height: 22px;
+  word-wrap: break-word;
+  max-width: 100%;
+  min-width: 0;
+  font-weight: 400;
+}
+.p2{
+  font-weight: 700;
+  font-size: 22px;
+  color: #24334A;
+  line-height: 60px;
+}

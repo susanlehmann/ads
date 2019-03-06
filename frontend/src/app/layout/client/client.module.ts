@@ -9,6 +9,7 @@ import { DetailComponent } from './detail/detail.component';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component';
+import { ImportComponent } from './import/import-component';
 import { CallingCodeComponent } from '../components/calling_code/calling-code.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
@@ -19,7 +20,8 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 		ListComponent, 
 		EditComponent, 
 		AddComponent,
-		CallingCodeComponent
+		CallingCodeComponent,
+		ImportComponent
 	],
 	imports: [
 		FormsModule,

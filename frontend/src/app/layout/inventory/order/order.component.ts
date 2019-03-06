@@ -53,6 +53,7 @@ export class OrderComponent implements OnInit {
   number_order: number;
   statusOrder = [{id: 1, name: "ORDERED"},{id:2, name: "CANCEL"},{id:3, name: "RECEIVED"}];
   public datas: [];
+  add :any;
   //statusOrder = [{id: 1, name: "ORDERED"}];
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
@@ -95,6 +96,8 @@ export class OrderComponent implements OnInit {
   }
   openSModal(content, supplier) {
     this._supplier = supplier;
+    this.add = this.items.length;
+    console.log(this.add)
     this.modal.dismissAll();
     this.openModal(content);
   }
@@ -251,7 +254,6 @@ export class OrderComponent implements OnInit {
       'total_price' : this.orderTotal,
       'id_supplier' : this._supplier.id
   };
-    console.log($listitem);
     this.OrderService.add($listitem)
     .subscribe((cate:any) => {
       this.stopLoading();

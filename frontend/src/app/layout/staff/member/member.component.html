@@ -33,7 +33,7 @@
                                     <td>
                                         <span class="appoinment-color" [ngStyle]="{'background': user.appointmentColor}"></span>
                                     </td>
-                                    <td>{{user.firstName}}</td>
+                                    <td>{{user.firstName}} {{user.lastName}}</td>
                                     <td>{{user.mobileNumber}}</td>
                                     <td>{{user.email}}</td>
                                     <td>{{user.appointmentBooking ? 'Calendar bookings enabled' : 'Calendar disabled'}}</td>
@@ -81,8 +81,15 @@
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                        <label class="control-label">Mobile Number</label>
-                        <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78">
+                        <label class="control-label">Mobile Number</label><br>
+                        <!-- <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78"> -->
+                        <ngx-intl-tel-input
+                            [preferredCountries]="['gb','us']"
+                            [enablePlaceholder]="true" 
+                            [enableAutoCountrySelect]="true"
+                            name="mobile"
+                            [cssClass]="'form-control'"
+                            [(ngModel)]="form.mobileNumber"></ngx-intl-tel-input>
                         <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
                         </div>
                     </div>
@@ -97,13 +104,9 @@
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            <label class="control-label">User Permission</label>
+                            <label class="control-label">User Permission</label><i class="fa fa-fw fa-question-circle mb-2" placement="bottom" ngbTooltip="When saved, this staff member will receive email instructions to setup their own login password"></i>
                             <select [(ngModel)]="form.userPermission" name="user-permission" class="form-control">
-                                <option selected>No Access</option>
-                                <option>Basic</option>
-                                <option>Low</option>
-                                <option>Medium</option>
-                                <option>High</option>
+                                <option *ngFor="let p of permissions" value={{p}} selected>{{p}}</option>
                             </select>
                         </div>
                     </div>
@@ -115,13 +118,14 @@
                                 <span class="slider round"></span>
                             </label>
                             <label class="control-label">Enable Appointment Bookings</label>
+                            <i class="fa fa-fw fa-question-circle mb-2" placement="bottom" ngbTooltip="Allows this staff member to perform client bookings on the calendar, switch off for admin staff such as receptionist"></i>
                         </div>
                     </div>
 
                     <div class="row form-group">
                             <div class="col-sm-12 btn-switch">
                                     <div class="color-picker" *ngIf="form.appointmentBooking">
-                                            <label class="control-label">Appointment Color</label> <br>
+                                            <label class="control-label">Appointment Color</label><i class="fa fa-fw fa-question-circle mb-2" placement="bottom" ngbTooltip="See your Calendar Settings page under Setup to set how colors are displayed on the calendar"></i> <br>
                                             <ng-container *ngFor="let color of colors; index as i">
                                                 <input [(ngModel)]="form.appointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
                                                 <label for="{{color}}"><span class="{{color}}"></span></label>
@@ -153,7 +157,7 @@
                     <div class="row form-group">
                         <div class="col-sm-6">
                             <label class="control-label">Employment Start Date</label>
-                            <input class="form-control" placeholder="yyyy-mm-dd" (click)="dst.open()"
+                            <input class="form-control" placeholder="Select date" (click)="dst.open()" readonly
                                 name="start-date" [(ngModel)]="form.employmentStartDate" ngbDatepicker #dst="ngbDatepicker">
                             <!-- <div class="input-group-append">
                                 <button class="btn btn-outline-secondary calendar" (click)="dst.toggle()" type="button"></button>
@@ -161,7 +165,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label class="control-label">Employment End Date</label>
-                            <input class="form-control" placeholder="yyyy-mm-dd" (click)="de.open()"
+                            <input class="form-control" placeholder="Select date" (click)="de.open()" readonly
                                 name="end-date" [(ngModel)]="form.employmentEndDate" ngbDatepicker #de="ngbDatepicker">
                             <!-- <div class="input-group-append">
                                 <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"></button>
@@ -243,7 +247,7 @@
 <div class="modal-footer" style="position: unset;" [ngClass]="isCreate ? '' : 'display'">
 <button *ngIf="!isCreate" type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
 <button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-<button type="submit" class="btn btn-black pull-right" [disabled]="!signupForm.valid" > Save </button>
+<button type="submit" class="btn btn-black pull-right"> Save </button>
 </div>
 </form>
 </ng-template>

@@ -87,13 +87,13 @@ export class AddComponent implements OnInit {
 		if(this.birthday.year){
 			if(typeof(this.form.birthdayYear) == "undefined" || typeof(this.form.birthdayYear) == undefined){
 				let dayNotYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
-				this.form.birthday = this.datePipe.transform(dayNotYear, 'yyyy-MM-dd');
+				this.form.birthday = this.datePipe.transform(dayNotYear, 'MM-dd');
 			} else {
 				let dayYear = this.form.birthdayYear + "-" + this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayYear, 'yyyy-MM-dd');
 			}
 		} else {
-			this.form.birthday = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+			this.form.birthday = "";
 		}
 		this.addUser(this.form);
 	}
@@ -114,8 +114,8 @@ export class AddComponent implements OnInit {
 		client.address = "";
 		client.suburb = "";
 		client.city = "";
-		client.sate = "";
-		client.zip_postcode = 0;
+		client.state = "";
+		client.zip_postcode = "";
 		client.birthday = this.form.birthday;
 		client.gender = this.form.gender;
 		if(this.telephone == "null" || this.telephone == null){ 

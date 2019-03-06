@@ -12,22 +12,30 @@
 	</div>
 	<div class="col-lg-1 col-md-2 block-mb">
 		<div ngbDropdown>
-            <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                <span class="desktop">Options</span>
-                <span class="mobile">
+            <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle [ngClass]="download ? 'nobefore' : ''">
+                <span class="desktop" *ngIf="!download">Options</span>
+                <span class="mobile" *ngIf="!download">
                 	<i class="fa fa-circle"></i>
                 	<i class="fa fa-circle"></i>
                 	<i class="fa fa-circle"></i>
                 </span>
+                <span class="download" *ngIf="download">
+                	<div class="lds-ellipsis">
+                		<div></div>
+                		<div></div>
+                		<div></div>
+                		<div></div>
+                	</div>
+                </span>
             </a>
             <div ngbDropdownMenu>
-                <a href="javascript:void(0)" class="dropdown-item">
+                <a href="javascript:void(0)" class="dropdown-item" (click)="exportExcel('excel')">
                     Download Excel
                 </a>
-                <a href="javascript:void(0)" class="dropdown-item">
+                <a href="javascript:void(0)" class="dropdown-item" (click)="exportExcel('csv')">
                     Download CSV
                 </a>
-                <a href="javascript:void(0)" class="dropdown-item">
+                <a href="javascript:void(0)" class="dropdown-item" (click)="openImport(content_import)">
                     Import Clients
                 </a>
                 <a href="javascript:void(0)" class="dropdown-item">
@@ -154,3 +162,6 @@
 	</div>
 </div>
 </div>
+<ng-template #content_import let-c="close" let-d="dismiss">
+    <import-client></import-client>
+</ng-template>

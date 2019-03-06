@@ -48,6 +48,7 @@ export class ListServicesComponent implements OnInit {
 		this.form.ownerId = userInfo.id;
 		this.services.listServiceIngroup(this.form).subscribe(
 			success => {
+                console.log(success);
 				this.group = success;
                 this.lstServices = success;
 			},
@@ -114,8 +115,19 @@ export class ListServicesComponent implements OnInit {
 
 
     loadServiceInGroup(id){
-        return this.lstServices.service.filter(s => s.id_service_group == id);
+        return this.lstServices.service.filter(s => s.id_service_group == id );
         //console.log(a);
+    }
+
+    convertTime(time) {
+        var strTime = "";
+        if(Math.floor(time/60) > 0) {
+            strTime += Math.floor(time/60)+'h ';
+        }
+        if(Math.ceil(time%60) > 0) {
+            strTime += Math.ceil(time%60)+'min';
+        }
+        return strTime;
     }
 
     showListHave() {
@@ -126,5 +138,9 @@ export class ListServicesComponent implements OnInit {
     showList() {
         this.listService = false;
         this.listGroupService = true;
+    }
+
+    exported(){
+        this.notifierService.notify('warning', "Export couldn't be generated, try again later");
     }
 }

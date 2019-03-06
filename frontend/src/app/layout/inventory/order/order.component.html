@@ -69,7 +69,7 @@
                   <tbody>
                     <tr class="_1A0eEb _1zQ7jO" *ngFor="let order of listorder" (click)="editOrder(edit_order, order)">
                       <td class="N3OZB6 _1vLxYz">
-                        <div >{{ order.id }}</div>
+                        <div >P {{ order.id }}</div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
                         <div>{{ order.updated_at }}</div>
@@ -97,9 +97,18 @@
 
         <div class="wADsrH">
           <div class="_3Cd6wq">
-            <div class="_3oGeTh">Displaying all
-              <b class="_2P0kb0">{{number_order}}</b>orders
-            </div>
+            <ng-container *ngIf="number_order == 1; else elseTemplate">
+                <div class="_3oGeTh">Displaying
+                    <b class="_2P0kb0">{{number_order}}</b>orders
+                  </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <div class="_3oGeTh">Displaying all
+                    <b class="_2P0kb0">{{number_order}}</b>orders
+                  </div>
+            </ng-template>
+
+
           </div>
         </div>
       </div>
@@ -118,12 +127,16 @@
   </button>
 </div>
 </div>
-<div *ngIf="number_order == 0">
+<div *ngIf="number_order == 0" class="aa">
   <div class="text-center" style="margin-top: 30px;">
-    <h1><i class="fa fa-product-hunt"></i></h1>
-    <h3 class="text-capitalize">Add Orders</h3>
-    <button class="btn btn-black" type="button" (click)="openModal(content)">NEW
-      ORDER</button>
+    <h1><i class="fa fa-first-order"></i></h1>
+    <h3 class="text-capitalize p2">Manage Stock Orders</h3>
+    <p class="p1">Send purchase orders directly to your suppliers <br>
+      and effortlessly receive new stock deliveries</p>
+    <div class="dv1" style="display: flex; flex-direction: row; flex-grow: 1;">
+      <button class="btn btn-black cus" type="button" (click)="openModal(content)">NEW
+            ORDER</button>
+    </div>
   </div>
 </div>
 <ng-template #content let-modal>
@@ -131,7 +144,7 @@
   <div class="modal-header">
     <h4 class="modal-title offset-sm-4" id="modal-basic-title">Select Supplier</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true" style="font-size:2em; margin-left:-50px;">&times;</span>
     </button>
   </div>
   <div class="modal-body">
@@ -204,32 +217,56 @@
                   <div class="col-md-9">
                       <div class="card">
                           <div class="card-body" id="addOrderDetail">
-                              <div class="col-md-12" id="divNoDataProduct" style="display: none;">
-                                  <h1 style="font-size:24px; font-weight:300; text-align:center">You haven't added any product to your order yet.</h1>
-                              </div>
-                              <div class="col-md-12 table-responsive" id="divTableData">
-                                  <table class="table table-hover" id="tableAddProduct">
-                                      <thead>
-                                          <tr>
-                                              <th style="text-align:left">PRODUCT</th>
-                                              <th style="text-align:left">ORDER QTY.</th>
-                                              <th style="text-align:left">SUPPLY PRICE</th>
-                                              <th style="text-align:left">TOTAL COST</th>
-                                              <th></th>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                          <tr *ngFor="let i of items">
-                                            <td>{{i.name_product}}</td>
-                                            <td><input type="number" name="qty" [(ngModel)]="i.quantity" (change)="sum()"></td>
-                                            <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product" (change)="sum()"></td>
-                                            <td><span type="number" name="total">{{i.quantity * i.supplyprice_product}}</span></td>
-                                            <!-- <td>{{i.quantity * i.supplyprice_product}}</td> -->
-                                            <td><button (click)="deleteProd(i)">x</button></td>
-                                          </tr>
-                                      </tbody>
-                                  </table>
-                              </div>
+                              <ng-container *ngIf="add == 0; else elseTemplate">
+                                  <div class="col-md-12 table-responsive" id="divTableData">
+                                      <table class="table table-hover" id="tableAddProduct">
+                                          <thead>
+                                              <tr>
+                                                  <th style="text-align:left">PRODUCT</th>
+                                                  <th style="text-align:left">ORDER QTY.</th>
+                                                  <th style="text-align:left">SUPPLY PRICE</th>
+                                                  <th style="text-align:left">TOTAL COST</th>
+                                                  <th></th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr *ngFor="let i of items">
+                                                <td>{{i.name_product}}</td>
+                                                <td><input type="number" name="qty" [(ngModel)]="i.quantity" (change)="sum()" placeholder="0"></td>
+                                                <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product" (change)="sum()"></td>
+                                                <td><span type="number" name="total">{{i.quantity * i.supplyprice_product}}</span></td>
+                                                <!-- <td>{{i.quantity * i.supplyprice_product}}</td> -->
+                                                <td><button (click)="deleteProd(i)">x</button></td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </ng-container>
+                              <ng-template #elseTemplate>
+                                <div class="col-md-12 table-responsive" id="divTableData">
+                                    <table class="table table-hover" id="tableAddProduct">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:left">PRODUCT</th>
+                                                <th style="text-align:left">ORDER QTY.</th>
+                                                <th style="text-align:left">SUPPLY PRICE</th>
+                                                <th style="text-align:left">TOTAL COST</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let i of items">
+                                              <td>{{i.name_product}}</td>
+                                              <td><input type="number" name="qty" [(ngModel)]="i.quantity" (change)="sum()"></td>
+                                              <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product" (change)="sum()"></td>
+                                              <td><span type="number" name="total">{{i.quantity * i.supplyprice_product}}</span></td>
+                                              <!-- <td>{{i.quantity * i.supplyprice_product}}</td> -->
+                                              <td><button (click)="deleteProd(i)">x</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                              </ng-template>
                               <div class="col-md-12" style="margin-top:20px" >
                                   <div class="col-md-4">
 
@@ -283,7 +320,7 @@
                               <h6 id="City">{{ _supplier.city_supplier}}</h6>
                           </div>
                           <div class="col-md-12">
-                              <h6 id="ZipCode">{{ _supplier.zipcode_supplier}},{{ _supplier.state_supplier}}</h6>
+                              <h6 id="ZipCode">{{ _supplier.zipcode_supplier}} {{ _supplier.state_supplier}}</h6>
                               <hr>
                           </div>
                           <div class="col-md-12">
@@ -439,10 +476,10 @@
       </div>
       <div class="col-12" id="divCategory" style="">
         <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0">
-          <div class="row" *ngFor="let category of listcategories">
+          <div class="row" *ngFor="let category of listcategories" (click)="openProduct1(product1, category)">
             <div class="col-6">
               <div class="col-12">
-                <strong (click)="openProduct1(product1, category)">{{ category.name_category }}</strong>
+                <strong>{{ category.name_category }}</strong>
               </div>
             </div>
             <div class="col-6 text-right">
@@ -550,7 +587,8 @@
 <ng-template #edit_order let-modal>
 <div class="box-desktop">
   <div class="modal-header" >
-      <h4  class="modal-title offset-sm-4" id="modal-basic-title">Order {{ _order.id }}</h4>
+      <h4 class="modal-title offset-sm-4" id="modal-basic-title" *ngIf=" _order.status_order != 2">Order P{{ _order.id }}</h4>
+      <h4 class="modal-title offset-sm-4" id="modal-basic-title" *ngIf=" _order.status_order == 2">Receive Order P{{ _order.id }}</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -570,12 +608,12 @@
               <div class="col-md-12" style="text-align:center;" >
                 <span>Ordered {{ _order.update_at }} at has by Order {{ _order.id }}</span>
               </div>
-              <div class="col-md-12" style="margin-top:15px;">
+              <div class=" row col-md-12" style="margin-top:15px;max-width: 500px;">
                 <div class="col-md-6" style=" align-items: flex-end;justify-content: flex-end;">
-                  <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;float: right;" (click)="send_email_order(_order.email_supplier)">EMAIL ORDER</button>
+                  <button type="button" class="btn btn-block btn-outline-secondary" style="font-weight:bold;" (click)="send_email_order(_order.email_supplier)">EMAIL ORDER</button>
                 </div>
                 <div class="col-md-6" style=" align-items: flex-start;justify-content: flex-start;">
-                  <button type="button" class="btn btn-block btn-outline-secondary" style="width:150px; font-weight:bold;" (click)="export_pdf_data(_order.id)">DOWNLOAD PDF</button>
+                  <button type="button" class="btn btn-block btn-outline-secondary" style="font-weight:bold;" (click)="export_pdf_data(_order.id)">DOWNLOAD PDF</button>
                 </div>
               </div>
               <div class="col-md-12" style="margin-top:20px;">

@@ -3,7 +3,7 @@
     <button class="btn btn-black pull-right" type="button" (click)="openAddModal(content)">New Closed Date</button>
   </div>
   <div class="card-body table-responsive">
-      <table class="table table-hover">
+      <table class="table even-col table-hover">
           <thead>
           <tr>
               <th>{{'Date Range' | uppercase}}</th>
@@ -61,14 +61,14 @@
                   <div class="col-sm-6">
                       
                         <label class="control-label">START DATE</label>
-                        <input class="form-control" placeholder="yyyy-mm-dd"
+                        <input class="form-control" placeholder="Select start date" readonly
              name="str" [(ngModel)]="form.startDate" ngbDatepicker #str="ngbDatepicker" (click)="str.toggle()">
                     
                     </div>
                   <div class="col-sm-6">
                       
                         <label class="control-label">END DATE</label>
-                        <input class="form-control" placeholder="yyyy-mm-dd"
+                        <input class="form-control" placeholder="Select end date" readonly
              name="end" [(ngModel)]="form.endDate" ngbDatepicker #end="ngbDatepicker" (click)="end.toggle()">
                     
                     </div>
@@ -78,7 +78,7 @@
                   <div class="col-sm-12">
                       
                         <label class="control-label">DESCRIPTION</label>
-                        <input [(ngModel)]="form.description" type="text" class="form-control input-underline input-lg" name="description">
+                        <input placeholder="e.g. public holiday" [(ngModel)]="form.description" type="text" class="form-control input-underline input-lg" name="description">
                     
                     </div>
             </div>
@@ -86,9 +86,9 @@
               <div class="row form-group">
                   <div class="col-sm-12">
                       
-                        <div class="custom-control custom-checkbox">
+                        <!-- <div class="custom-control custom-checkbox">
           <input  name="notification-type" type="checkbox" class="custom-control-input" id="location">
-          <label class="custom-control-label" for="location"></label>All Locations</div>
+          <label class="custom-control-label" for="location"></label>All Locations</div> -->
                     
                     </div>
             </div>

@@ -53,7 +53,7 @@ export class StaffSchedule {
             let sche = new Schedule(this.staffId, this.staffName, d.date);
             if (found) {
                 sche = found;
-                totalWeeklyHours += found.getTotalHoursOfTheDay();
+                totalWeeklyHours += d.isClosed ? 0 : found.getTotalHoursOfTheDay();
             }
             
             sche.currentDate = d.date;
@@ -148,6 +148,15 @@ export class Schedule {
         this.hasEndDate = 1;
         this.scheduleEndDate = new Date(this.currentDate);
         this.scheduleEndDate.setDate(this.currentDate.getDate() - 7);
+    }
+
+    setEndScheduleToNextWeek(evt) {
+        if (evt == 1) {
+            this.scheduleEndDate = new Date(this.currentDate);
+            this.scheduleEndDate.setDate(this.currentDate.getDate() + 7);
+        } else {
+            this.scheduleEndDate = null;
+        }
     }
 
     isScheduleStartOnCurrentDate() {
