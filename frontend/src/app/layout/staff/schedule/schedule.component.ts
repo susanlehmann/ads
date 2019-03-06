@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StaffSchedule, Schedule } from './schedule';
-import { NgbModal, NgbModalRef, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, NgbDateStruct, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { StaffService } from '../staff.service';
 import { forkJoin } from 'rxjs';
+import { NgbDateEnGbParserFormatter } from '../close-date/NgbDateEnGbParserFormatter';
 
 @Component({
   selector: 'app-schedule',
@@ -12,6 +13,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./schedule.component.scss'],
   providers: [
     { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter },
+    { provide: NgbDateParserFormatter, useClass: NgbDateEnGbParserFormatter }
   ]
 })
 export class ScheduleComponent implements OnInit {

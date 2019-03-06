@@ -150,6 +150,15 @@ export class Schedule {
         this.scheduleEndDate.setDate(this.currentDate.getDate() - 7);
     }
 
+    setEndScheduleToNextWeek(evt) {
+        if (evt == 1) {
+            this.scheduleEndDate = new Date(this.currentDate);
+            this.scheduleEndDate.setDate(this.currentDate.getDate() + 7);
+        } else {
+            this.scheduleEndDate = null;
+        }
+    }
+
     isScheduleStartOnCurrentDate() {
         return this.scheduleStartDate.setHours(0, 0, 0, 0) === this.currentDate.setHours(0, 0, 0, 0);
     }
