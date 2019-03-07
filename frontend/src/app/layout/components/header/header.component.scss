@@ -42,4 +42,18 @@ $topnav-background-color: #fff;
             }
         }
     }
+
+    .title-breacrumb {
+        span {
+            color: #000;
+            a {
+                color: #969494;
+
+                &:hover{
+                    text-decoration: none;
+                    color: #000;
+                }
+            }
+        }
+    }
 }

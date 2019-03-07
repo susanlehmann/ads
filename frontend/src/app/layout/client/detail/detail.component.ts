@@ -18,6 +18,7 @@ export class DetailComponent implements OnInit {
 	closeResult: string;
   blockReason: any = "";
   textBlock: any = "";
+  reload: boolean = false;
 
   	constructor(private route: Router,
   		private router: ActivatedRoute,
@@ -35,7 +36,7 @@ export class DetailComponent implements OnInit {
 		this.userService.getUserById(id).subscribe(
 			success => {
 				this.client_info = success;
-				console.log(success);
+        this.reload = true;
 			},
 			error => {}
 		);

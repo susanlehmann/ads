@@ -1,0 +1,28 @@
+#box-setup {
+    border: 1px solid #eee;
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+
+    .title {
+    	p {
+    		font-weight: 600;
+		    font-size: 1.2em;
+		    font-family: "Roboto-Regular";
+		}
+	}
+
+	.list-group {
+		margin-top: 15px;
+		li {
+			list-style: none;
+		    line-height: 25px;
+		    border-bottom: 1px solid #ddd;
+		    padding: 5px 0px;
+
+		    &:last-child {
+		    	border-bottom: none;
+	    	}
+		}
+	}
+}

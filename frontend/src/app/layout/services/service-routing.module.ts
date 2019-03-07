@@ -9,18 +9,22 @@ const routes: Routes = [
 	{
 		path: '', 
 		component: ServiceComponent, 
+        data: { title: 'Services'},
 		children: [
 			{
 				path: '',
-				component: ListServicesComponent
+				component: ListServicesComponent, 
+        		data: { title: 'Services'}
 			},
 			{
 				path: 'add-services',
-				component: AddServiceComponent
+				component: AddServiceComponent, 
+        		data: { title: 'Services'}
 			},
 			{
 				path: 'edit-services/:id',
-				component: EditServiceComponent
+				component: EditServiceComponent, 
+        		data: { title: 'Services'}
 			}
 		]
 	}

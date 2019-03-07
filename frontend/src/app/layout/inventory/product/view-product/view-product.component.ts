@@ -80,4 +80,8 @@ export class ViewProductComponent implements OnInit {
     });
   }
 
+  exported(){
+      this.notifierService.notify('warning', "Export couldn't be generated, try again later");
+  }
+
 }

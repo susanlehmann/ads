@@ -244,10 +244,10 @@
     </ngb-tab>
 </ngb-tabset>
 </div>
-<div class="modal-footer" style="position: unset;" [ngClass]="isCreate ? '' : 'display'">
+<div class="modal-footer" style="position: unset;" [ngClass]="isCreate ? 'display' : 'display'">
 <button *ngIf="!isCreate" type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
-<button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
 <button type="submit" class="btn btn-black pull-right"> Save </button>
+<button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
 </div>
 </form>
 </ng-template>

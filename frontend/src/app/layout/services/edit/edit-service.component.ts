@@ -235,4 +235,7 @@ export class EditServiceComponent implements OnInit {
 		this.route.navigate(['services']);
 	}
 
+	close(value) {
+		this.modalService.dismissAll();
+	}
 }

@@ -1,0 +1,115 @@
+.title-header {
+    width: 90%;
+    display: block;
+    text-align: center;
+    font-size: 1.75em;
+}
+.form-control {
+	color: #000;
+}
+.close {
+	span {
+		font-size: 1.25em;
+	}
+}
+
+.modal-body {
+	.form-group {
+		label {
+			text-transform: uppercase;
+			margin-bottom: 0.2rem;
+		}
+
+		.required {
+		    border: 1px solid #f00;
+		    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.13);
+		}
+	}
+}
+
+$breakpoint-iphone: 667px;
+//desktop
+@media (min-width: $breakpoint-iphone) {
+	
+}
+
+//mobile
+@media (max-width: $breakpoint-iphone) {
+
+	
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+	.modal-header {
+		.close{
+			margin: -1rem -1rem -1rem auto;
+		}
+	}
+	.modal-footer {
+	    width: 100%;
+	    position: sticky;
+	}
+
+	.modal-footer {
+		.btn-white {
+			display: block;
+		}
+	}
+  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  	.modal-header {
+	    position: sticky;
+	    top: 0;
+	    z-index: 9;
+	    background: #Fff;
+
+		.close{
+			margin: -1rem -1rem -1rem auto;
+		}
+	}
+	.modal-footer {
+	    width: 100%;
+	    position: sticky;
+
+	    .btn-black {
+	    	width: 100%;
+    	}
+	}
+  
+}
