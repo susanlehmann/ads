@@ -174,7 +174,7 @@ export class MemberComponent implements OnInit {
     }
 
     const found = this.listusers.filter(u => u.email === this.form.email)[0];
-    if (this.isCreate && found) {
+    if (found && this.form.id != found.id) {
       this.notifierService.notify('error', `${this.form.email} has already been taken`);
       document.querySelector('input[name="email"]').classList.add('is-invalid');
       isNotTakenEmail = false;
