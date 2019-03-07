@@ -26,6 +26,11 @@ export class SidebarComponent implements OnInit {
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
         this.translate.use(browserLang.match(/en|fr|ur|es|it|fa|de/) ? browserLang : 'en');
+        
+        this.isActive = false;
+        this.collapsed = true;
+        this.showMenu = '';
+        this.pushRightClass = 'push-right';
 
         this.router.events.subscribe(val => {
             if (
@@ -33,6 +38,9 @@ export class SidebarComponent implements OnInit {
                 window.innerWidth <= 992 &&
                 this.isToggled()
             ) {
+                if (this.collapsed) {
+                    this.toggleCollapsed();
+                }
                 this.toggleSidebar();
             }
         });
@@ -40,12 +48,10 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.getUser();
-        this.isActive = false;
-        this.collapsed = true;
-        this.showMenu = '';
-        this.pushRightClass = 'push-right';
-
         document.addEventListener("mousedown", this.handleClick, false);
+        if (localStorage.getItem('sidebar-status') === 'expanded') {
+            this.toggleCollapsed();
+        }
     }
 
     getUser() {
@@ -70,6 +76,12 @@ export class SidebarComponent implements OnInit {
     toggleCollapsed() {
         this.collapsed = !this.collapsed;
         this.collapsedEvent.emit(this.collapsed);
+
+        if (this.collapsed) {
+            localStorage.setItem('sidebar-status', 'collapsed');
+        } else {
+            localStorage.setItem('sidebar-status', 'expanded');
+        }
     }
 
     isToggled(): boolean {

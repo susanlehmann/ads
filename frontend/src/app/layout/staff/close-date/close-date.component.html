@@ -98,9 +98,11 @@
           </div>
   
           <div class="modal-footer" [ngClass]="isAdd ? '' : 'display'">
-              <button *ngIf="!isAdd" type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
-              <button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-              <button type="submit" class="btn btn-black pull-right" (click)="save()"> Save </button>
+              <button *ngIf="!isAdd" type="button" class="btn btn-delete" (click)="openModalDelete(content_delete)"> Delete </button>
+              <div class="pull-right">
+                <button type="button" class="btn btn-white mr-2" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+                <button type="submit" class="btn btn-black" (click)="save()"> Save </button>
+              </div>
         </div>
   
   
