@@ -9,10 +9,10 @@ import { AddComponent } from './add/add.component';
 const routes: Routes = [{
  path: '', component: ClientComponent, children: [
   { path: '', component: ListComponent },
-  { path: 'detail/:id', component: DetailComponent },
-  { path: 'edit/:id', component: EditComponent },
-  { path: 'add', component: AddComponent }
- ]
+  { path: 'detail/:id', component: DetailComponent, data: {title: 'Clients > Profile'}},
+  { path: 'edit/:id', component: EditComponent,data: {title: 'Clients'} },
+  { path: 'add', component: AddComponent,data: {title: 'Clients'} }
+ ],data: {title: 'Clients'}
 }];
 
 @NgModule({

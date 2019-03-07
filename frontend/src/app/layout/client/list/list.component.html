@@ -65,7 +65,7 @@
 		                        </tr>
 							</ng-container>
 							<ng-container *ngIf="numberList > 0">
-								<tr *ngFor="let client of clients?.user; index as i" routerLink="/client/detail/{{client.id}}">
+								<tr *ngFor="let client of clients?.user; index as i" routerLink="/clients/detail/{{client.id}}">
 									<td>
 										<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
 									</td>
@@ -79,13 +79,13 @@
 								</tr>
 							</ng-container>
 						</tbody>
-						<!-- <tfoot *ngIf="numberList > 0">
+						<tfoot *ngIf="numberList > 0">
 							<tr>
 								<th colspan="3">
-									paging
+									Showing {{numberList}} of {{numberList}} results
 								</th>
 							</tr>
-						</tfoot> -->
+						</tfoot>
 					</table>
 				</div>
 				<div class="box-desktop">

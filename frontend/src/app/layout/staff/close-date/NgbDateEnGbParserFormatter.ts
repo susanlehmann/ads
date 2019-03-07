@@ -11,6 +11,6 @@ export class NgbDateEnGbParserFormatter extends NgbDateParserFormatter {
     if (!date) return '';
     
     const options = {weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'};
-    return new Date(date.year, date.month, date.day).toLocaleDateString('en-GB', options);
+    return new Date(date.year, date.month - 1, date.day).toLocaleDateString('en-GB', options);
   }
 }

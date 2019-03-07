@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal, NgbModalRef, NgbModalOptions, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
-import { Staff } from '../model/staff'
+import { NgbDateParserFormatter, NgbModal, NgbModalOptions, NgbModalRef, NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
-import { StaffService } from '../staff.service';
 import { ServicesService } from 'src/app/shared/services/serv.service';
 import { NgbDateEnGbParserFormatter } from '../close-date/NgbDateEnGbParserFormatter';
+import { Staff } from '../model/staff';
+import { StaffService } from '../staff.service';
+import { ExcelService } from 'src/app/shared/services/export.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
-  providers: [{provide: NgbDateParserFormatter, useClass: NgbDateEnGbParserFormatter}],
+  providers: [
+    { provide: NgbDateAdapter, useClass: NgbDateNativeAdapter },
+    { provide: NgbDateParserFormatter, useClass: NgbDateEnGbParserFormatter },
+  ],
   selector: 'app-member',
   templateUrl: './member.component.html',
   styleUrls: ['./member.component.scss']
@@ -34,6 +39,7 @@ export class MemberComponent implements OnInit {
   private modal: NgbModal,
   private staffService: StaffService,
   private svService: ServicesService,
+  private exportService: ExcelService,
 	) {
     this.form = new Staff();
     this.colors = [
@@ -54,7 +60,19 @@ export class MemberComponent implements OnInit {
       'Medium',
       'High',
     ];
-	}
+  }
+ 
+  onDrop(event: CdkDragDrop<string[]>) {
+    //TODO: wait for sort api
+    moveItemInArray(this.listusers, event.previousIndex, event.currentIndex); 
+    // const updatedStaff = this.listusers[event.previousIndex];
+    // this.staffService.sortStaff(updatedStaff.id, event.currentIndex)
+    // .subscribe((data:any) => {
+    //         this.getUser();
+    //         this.notifierService.notify('success', 'Staff information has been successfully updated');
+    // }), err => {
+    // };
+  }
 
 	ngOnInit() {
     this.test();
@@ -71,6 +89,12 @@ export class MemberComponent implements OnInit {
     if (pressed.join('').includes(secret)) {
       this.form.mockData();
     }
+    });
+  }
+
+  resetPassword(): void {
+    this.staffService.resetPassword(this.form.email).subscribe(v => {
+      this.notifierService.notify('success', `Password setup email was sent to ${this.form.firstName}`);
     });
   }
   
@@ -126,12 +150,48 @@ export class MemberComponent implements OnInit {
         .map(Staff.toModel)
         .sort((a, b) => {
           return a.id - b.id;
+          // return a.sortOrder - b.sortOrder;
         });
 		}, err => {
     });
-	}
-	
+  }
+
   onSubmit(): void {
+    let isValidForm = true;
+    let isValidEmail = true;
+    let isNotTakenEmail = true;
+    
+    if (!this.form.firstName) {
+      this.notifierService.notify('error', 'First name is required');
+      document.querySelector('input[name="first-name"]').classList.add('is-invalid');
+      isValidForm = false;
+    }
+
+    if (this.form.email.length > 0 && !this.form.email.match(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/)) {
+        this.notifierService.notify('error', `${this.form.email} is not a valid email`);
+        document.querySelector('input[name="email"]').classList.add('is-invalid');
+        isValidEmail = false;
+    }
+
+    const found = this.listusers.filter(u => u.email === this.form.email)[0];
+    if (found && this.form.id != found.id) {
+      this.notifierService.notify('error', `${this.form.email} has already been taken`);
+      document.querySelector('input[name="email"]').classList.add('is-invalid');
+      isNotTakenEmail = false;
+    }
+
+    if (!isValidForm) {
+      return;
+    } else {
+      document.querySelector('input[name="first-name"]').classList.remove('is-invalid');
+    }
+
+    if (!isValidEmail || !isNotTakenEmail) {
+      return;
+    } else {
+      document.querySelector('input[name="email"]').classList.remove('is-invalid');
+    }
+
     const dto = this.form.toDto();
     if (this.isCreate) {
       this.addStaff(dto);
@@ -141,10 +201,13 @@ export class MemberComponent implements OnInit {
     this.modal.dismissAll();
     }
 
-  addStaff(staff): void {
+  addStaff(staff: Staff): void {
+    staff.setOrderToLast(this.listusers);
     this.staffService.add(staff)
     .subscribe((data:any) => {
             this.getUser();
+            this.staffService.verifyEmail(this.form.email).subscribe(v => {}); // send mail to staff for verifing & creating password
+            this.staffService.resetPassword(this.form.email).subscribe(v => {});
             this.notifierService.notify('success', 'A new Staff has been successfully added');
     }), err => {
     };
@@ -166,6 +229,30 @@ export class MemberComponent implements OnInit {
               this.notifierService.notify('success', 'A Staff has been successfully deleted');
           });
     this.modal.dismissAll();
+  }
+
+  export(type: string): void {
+    let data = this.listusers.map(s => {
+      return {
+        'First Name': s.firstName,
+        'Last Name': s.lastName,
+        'Mobile Number': s.mobileNumber,
+        'Email': s.email,
+        'Appointments': s.appointmentBooking ? 'Enabled' : 'Disabled',
+        'User Permission': s.userPermission,
+        'Start Date': s.employmentStartDate,
+        'End Date': s.employmentEndDate,
+        'Notes': s.notes,
+        'Service Commission': s.commissions.service,
+        'Product Commission': s.commissions.product,
+        'Voucher Commission': s.commissions.voucherSale,
+      };
+    });
+		if(type == 'excel') {
+			this.exportService.exportAsExcelFile(data, 'staff');
+		} else if (type == 'csv') {
+			this.exportService.exportAsCSVFile(data, 'staff');
+		}
   }
 
 }

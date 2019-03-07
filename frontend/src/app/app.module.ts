@@ -25,6 +25,8 @@ import { CategoryService } from './layout/inventory/category/category.service';
 import { ServicesService } from './shared/services/serv.service';
 import { StaffService } from './layout/staff/staff.service';
 import { OrderService } from './layout/inventory/order/order.service';
+import { LocationsService } from './shared/services/location.service';
+import { TitleService } from './shared/services/title.service';
 import {
    SocialLoginModule,
    AuthServiceConfig,
@@ -75,11 +77,11 @@ const customNotifierOptions: NotifierOptions = {
       },
     position: {
           horizontal: {
-              position: 'right',
+              position: 'middle',
               distance: 12
           },
           vertical: {
-              position: 'bottom',
+              position: 'top',
               distance: 12,
               gap: 10
           }
@@ -129,6 +131,8 @@ const customNotifierOptions: NotifierOptions = {
         NotifierService,
         BsModalService,
         ExcelService,
+        LocationsService,
+        TitleService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     ],

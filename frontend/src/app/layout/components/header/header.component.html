@@ -10,7 +10,14 @@
             <i class="fa fa-bars text-muted" aria-hidden="true"></i>
     </button>
     
-    <div style="font-size: larger">{{title | titlecase}}</div>
+    <div style="font-size: larger" class="title-breacrumb">
+        <span *ngIf="showPath">
+            <a href="javascript:void(0);" (click)="routerBack(_path)">{{ title | titlecase }}</a>{{ title_path ? ' / '+ title_path : '' }}
+        </span>
+        <span *ngIf="!showPath">
+            {{ title | titlecase }}
+        </span>
+    </div>
 
     <div style="display: flex">
     <button class="navbar-toggler mobile" type="button" [routerLink]="[ '/search' ]">

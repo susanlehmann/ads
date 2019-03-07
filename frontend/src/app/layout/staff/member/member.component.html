@@ -2,9 +2,19 @@
     <div class="col-sm-12">
         <div class="card card-custom mb-3">
             <div class="card-header">
-              <button class="btn btn-black pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
+                <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
+                <div ngbDropdown class="d-inline-block pull-right mr-2">
+                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Options</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button class="dropdown-item" ngbDropdownItem (click)="export('excel')">Download Excel</button>
+                        <button class="dropdown-item" ngbDropdownItem (click)="export('csv')">Download CSV</button>
+                    </div>
+                </div>
             </div>
             <div class="card-body table-responsive">
+                    <!-- <div cdkDropList (cdkDropListDropped)="onDrop($event)">
+                            <div class="box" *ngFor="let item of items" cdkDrag>{{item}}</div>
+                          </div> -->
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -16,7 +26,7 @@
                         <th>{{'USER PERMISSION' | uppercase}}</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody cdkDropList (cdkDropListDropped)="onDrop($event)">
                     <ng-container *ngIf="!listusers">
                             <tr style="background-color: #fff; cursor: default;">
                                     <td colspan="6" style="padding-top:40px;">
@@ -29,7 +39,8 @@
                                 </tr>
                     </ng-container>
                     <ng-container *ngIf="listusers">
-                            <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)">
+                        <!-- TODO: wait for sort api cdkDrag -->
+                            <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)"> 
                                     <td>
                                         <span class="appoinment-color" [ngStyle]="{'background': user.appointmentColor}"></span>
                                     </td>
@@ -70,6 +81,9 @@
                             <label class="control-label">First Name</label>
                             <input [(ngModel)]="form.firstName" type="text" class="form-control input-underline input-lg" name="first-name" placeholder="e.g. Jane" required>
                             <div class="alert alert-danger" [hidden]="!error.name"> {{ error.name }} </div>
+                            <div class="invalid-feedback">
+                                    is required
+                            </div>
                         </div>
         
                         <div class="col-sm-6">
@@ -99,6 +113,9 @@
                             <label class="control-label">Email</label>
                             <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="mail@example.com">
                             <div class="alert alert-danger" [hidden]="!error.email"> {{ error.email }} </div>
+                            <div class="invalid-feedback">
+                                    is invalid
+                            </div>
                         </div>
                     </div>
 
@@ -126,10 +143,12 @@
                             <div class="col-sm-12 btn-switch">
                                     <div class="color-picker" *ngIf="form.appointmentBooking">
                                             <label class="control-label">Appointment Color</label><i class="fa fa-fw fa-question-circle mb-2" placement="bottom" ngbTooltip="See your Calendar Settings page under Setup to set how colors are displayed on the calendar"></i> <br>
-                                            <ng-container *ngFor="let color of colors; index as i">
-                                                <input [(ngModel)]="form.appointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
-                                                <label for="{{color}}"><span class="{{color}}"></span></label>
-                                            </ng-container>
+                                            <div class="ml-2">
+                                                <ng-container *ngFor="let color of colors; index as i">
+                                                    <input [(ngModel)]="form.appointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
+                                                    <label for="{{color}}"><span class="{{color}}"></span></label>
+                                                </ng-container>
+                                            </div>
                                         </div>
                             </div>
                         </div>
@@ -245,9 +264,14 @@
 </ngb-tabset>
 </div>
 <div class="modal-footer" style="position: unset;" [ngClass]="isCreate ? '' : 'display'">
-<button *ngIf="!isCreate" type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
-<button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
-<button type="submit" class="btn btn-black pull-right"> Save </button>
+    <ng-container *ngIf="!isCreate">
+        <button  type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
+        <button type="button" class="btn btn-white" (click)="resetPassword()"> Send reset password email </button>
+    </ng-container>
+    <div class="pull-right">
+        <button type="button" class="btn btn-white mr-2" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+        <button type="submit" class="btn btn-black"> Save </button>
+    </div>
 </div>
 </form>
 </ng-template>

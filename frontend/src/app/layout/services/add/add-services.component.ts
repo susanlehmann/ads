@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { ServicesService } from '../../../shared/services/serv.service';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
+import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { StaffService } from '../../staff/staff.service';
 import { NotifierService } from 'angular-notifier';
 @Component({
@@ -35,7 +36,8 @@ export class AddServiceComponent implements OnInit {
 		private route: Router,
 		private services: ServicesService,
 		private staff: StaffService,
-		private noti: NotifierService
+		private noti: NotifierService,
+		private modalService: NgbModal
 		) 
 	{ 
 		this.activatedRoute.queryParams.subscribe((params: Params) => {
@@ -267,5 +269,9 @@ export class AddServiceComponent implements OnInit {
 		} else {
 			this.settin_durations.nativeElement.setAttribute('disabled', true);
 		}
+	}
+
+	close(value) {
+		this.modalService.dismissAll();
 	}
 }

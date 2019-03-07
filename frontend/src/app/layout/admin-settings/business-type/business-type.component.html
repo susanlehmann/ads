@@ -1,0 +1,75 @@
+<div class="container-fuild">
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th class="pd-name">{{'Location name' | translate}}</th>
+							<th>{{'Address' | translate}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ng-container *ngIf="!loading && numberList == 0">
+	                        <tr style="background-color: #fff; cursor: default;">
+	                            <td colspan="4" style="padding-top:40px;">
+	                                <div class="text-center">
+                                        <h1><i class="fa fa-search fa-lg"></i></h1>
+                                        <h3 class="text-capitalize">No Results Found</h3>
+                                        <p>Try using different filter options to find what you're looking for</p>
+                                    </div>
+	                            </td>
+	                        </tr>
+	                    </ng-container>
+	                    <ng-container *ngIf="numberList > 0">
+							<tr *ngFor="let local of location?.location" (click)="editLocation(edit_location, local)">
+								<td class="ba">
+									<span class="avatar">
+										<i class="fa fa-bars"></i>
+									</span>
+									<span>{{local?.name_location}}</span>
+								</td>
+								<td>
+									{{local?.street_address ? local?.street_address + ',' : ''}}
+									{{local?.city_location ? local?.city_location + ',' : ''}}
+									{{local?.state_location ? local?.state_location + ',' : ''}}
+									{{local?.zip_code_location ? local?.zip_code_location : ''}}
+								</td>
+							</tr>
+						</ng-container>
+					</tbody>
+					<!-- <tfoot *ngIf="numberList > 0">
+						<tr>
+							<th colspan="5">
+								Showing {{numberList}} of {{numberList}} results
+							</th>
+						</tr>
+					</tfoot> -->
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div id="inbox">
+			<div class="fab">
+				<div class="btn-fixed" (click)="addLocation(add_location)">
+					<span></span>
+					<div class="tooltip_group">New Location</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<ng-template #add_location let-c="close" let-d="dismiss">
+            <add-service-type (checkAddLocation)="checkAddLocation($event)"></add-service-type>
+        </ng-template>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<ng-template #edit_location let-c="close" let-d="dismiss">
+            <edit-service-type (checkEditLocation)="checkEditLocation($event)" [inputLocation]="inputLocation"></edit-service-type>
+        </ng-template>
+	</div>
+</div>

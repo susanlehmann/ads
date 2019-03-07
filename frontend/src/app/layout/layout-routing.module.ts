@@ -25,6 +25,7 @@ const routes: Routes = [
             { path: 'online_booking', loadChildren: './online-booking/online-booking.module#OnlineBookingModule' },
             { path: 'analytic', loadChildren: './analytic/analytic.module#AnalyticModule' },
             { path: 'setup', loadChildren: './setup/setup.module#SetupModule' },
+            { path: 'admin-settings', loadChildren: './admin-settings/admin-settings.module#AdminSettingsModule' },
             //{ path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' }
         ]
     }

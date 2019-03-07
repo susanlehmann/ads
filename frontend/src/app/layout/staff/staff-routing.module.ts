@@ -11,25 +11,25 @@ const routes: Routes = [
     {
         path: '', component: StaffComponent, children: [
             {
-                path: '',   redirectTo: 'schedule', pathMatch: 'full',
+                path: '',   redirectTo: 'schedule', pathMatch: 'full',data : { title: 'Staff' }
             },
             {
                 path: 'schedule',
-                component: ScheduleComponent
+                component: ScheduleComponent,data : { title: 'Staff' }
             },
             {
                 path: 'closed_dates',
-                component: CloseDateComponent
+                component: CloseDateComponent,data : { title: 'Staff' }
             },
             {
                 path: 'member',
-                component: MemberComponent
+                component: MemberComponent,data : { title: 'Staff' }
             },
             {
                 path: 'permissions',
-                component: PermissionComponent
+                component: PermissionComponent,data : { title: 'Staff' }
             },
-          ]
+          ],data : { title: 'Staff' }
     }
 ];
 

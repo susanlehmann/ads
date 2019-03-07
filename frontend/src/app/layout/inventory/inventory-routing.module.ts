@@ -11,33 +11,42 @@ import { ViewProductComponent } from './product/view-product/view-product.compon
 
 const routes: Routes = [
     {
-      path: '', component: InventoryComponent, children: [
+      path: '', component: InventoryComponent, 
+      data: {title : 'Inventory'},
+      children: [
         {
           path: '',   redirectTo: 'products', pathMatch: 'full',
+          data: {title : 'Inventory'}
         },
         {
           path: 'products',
-          component: ListProductComponent
+          component: ListProductComponent, 
+          data: {title : 'Inventory'}
         },
         {
           path: 'products/:id/view',
-          component: ViewProductComponent
+          component: ViewProductComponent, 
+          data: {title : 'Inventory'}
         },
         {
           path: 'orders',
-          component: OrderComponent
+          component: OrderComponent, 
+          data: {title : 'Inventory'}
         },
         {
           path: 'brands',
-          component: BrandComponent
+          component: BrandComponent, 
+          data: {title : 'Inventory'}
         },
         {
           path: 'categories',
-          component: CategoryComponent
+          component: CategoryComponent, 
+          data: {title : 'Inventory'}
         },
         {
           path: 'supplier',
-          component: SupplierComponent
+          component: SupplierComponent, 
+          data: {title : 'Inventory'}
         },
       ]
     }

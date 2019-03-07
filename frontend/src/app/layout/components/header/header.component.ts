@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-
-import { _AuthService, TokenService } from '../../../shared';
+import { _AuthService, TokenService, TitleService } from '../../../shared';
 import { HttpcallService } from './../../../shared/services/httpcall.service';
+import { Title } from '@angular/platform-browser';
+
+const APP_TITLE = 'Kyrio';
+const SEPARATOR = ' > ';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -12,37 +15,47 @@ import { HttpcallService } from './../../../shared/services/httpcall.service';
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
     title: string;
+    title_path: string;
+    showPath: boolean = false;
+    _path: any;
 
     constructor(
         private translate: TranslateService, 
         public router: Router,
+        public route: ActivatedRoute,
+        public titleService: TitleService,
         public httpcall: HttpcallService,
         public auth: _AuthService,
-        public token: TokenService
+        public token: TokenService,
+        private _title: Title
     ) {
-
         this.translate.addLangs(['en', 'vi', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
         this.translate.use(browserLang.match(/en|vi|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');
-
-        this.router.events.subscribe(val => {
-            if (val instanceof NavigationEnd) {
-                if(val.url.split('/')[2] == undefined || val.url.split('/')[2] == "undefined") {
-                    this.title = val.url.split('/')[1];
+        this.titleService.init().subscribe(
+            event => { 
+                this._title.setTitle(APP_TITLE + ' | ' + event);
+                if(event.search(SEPARATOR) > 0){
+                    var str = event.split(SEPARATOR);
+                    this.title = str[0];
+                    this.title_path = str[1];
+                    this.showPath = true;
                 } else {
-                    if(val.url.split('/')[1] == "clients") {
-                        if(val.url.split('/')[2] == "detail") {
-                            this.title = val.url.split('/')[1] + " / Profile";
-                        } else {
-                            this.title = val.url.split('/')[1];
-                        }
-                    } else {
-                        this.title = val.url.split('/')[1];
-                    }
+                    this.title = event;
+                    this.showPath = false;
                 }
             }
+        );
+        this.router.events.subscribe(val => {
+            if (val instanceof NavigationEnd) {
+                this._path = val.url.split('/')[1];
+            }
         });
+    }
+
+    routerBack(event) {
+        this.router.navigateByUrl(event);
     }
 
     ngOnInit() {

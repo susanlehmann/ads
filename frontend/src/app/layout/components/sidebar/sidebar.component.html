@@ -29,12 +29,12 @@
         </a>
         <a [routerLink]="['/services']" [routerLinkActive]="['router-link-active']" class="list-group-item"
             placement="right" ngbTooltip="{{collapsed ? 'Services' : ''}}" container="body">
-            <i class="fa fa-fw fa-calculator"></i>&nbsp;
+            <i class="fa fa-fw fa-list-alt"></i>&nbsp;
             <span>{{ 'Services' | translate }}</span>
         </a>
         <a [routerLink]="['/inventory']" [routerLinkActive]="['router-link-active']" class="list-group-item"
             placement="right" ngbTooltip="{{collapsed ? 'Inventory' : ''}}" container="body">
-            <i class="fa fa-fw fa-briefcase"></i>&nbsp;
+            <i class="fa fa-fw fa-cubes"></i>&nbsp;
             <span>{{ 'Inventory' | translate }}</span>
         </a>
         <!-- <a [routerLink]="['/analytic']" [routerLinkActive]="['router-link-active']" class="list-group-item">
@@ -44,11 +44,16 @@
         <a [routerLink]="['/online_booking']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-cloud"></i>&nbsp;
             <span>{{ 'Online Booking' | translate }}</span>
-        </a>
-        <a [routerLink]="['/setup']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        </a>-->
+        <a [routerLink]="['/setup']" [routerLinkActive]="['router-link-active']" class="list-group-item" placement="right" ngbTooltip="{{collapsed ? 'Setup' : ''}}" container="body">
             <i class="fa fa-fw fa-gear"></i>&nbsp;
             <span>{{ 'Setup' | translate }}</span>
-        </a> -->
+        </a> 
+        <li class="dropdown-divider"></li>
+        <a [routerLink]="['/admin-settings']" [routerLinkActive]="['router-link-active']" class="list-group-item" placement="right" ngbTooltip="{{collapsed ? 'Administrator Settings' : ''}}" container="body">
+            <i class="fa fa-fw fa-gears"></i>&nbsp;
+            <span>{{ 'Administrator Settings' | translate }}</span>
+        </a>
         <!-- <a [routerLink]="['/users']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-calendar"></i>&nbsp;
             <span>{{ 'Administrator' | translate }}</span>

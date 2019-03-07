@@ -24,7 +24,7 @@ class CreateLocationsTable extends Migration
             $table->string('street_address')->nullable();
             $table->string('optional')->nullable();
             $table->string('city_location')->nullable();
-            $table->string('sate_location')->nullable();
+            $table->string('state_location')->nullable();
             $table->string('zip_code_location')->nullable();
             $table->integer('status_location')->nullable();
             $table->timestamps();

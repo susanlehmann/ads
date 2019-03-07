@@ -89,3 +89,17 @@
   display: inline-block;
 }
 
+$breakpoint-iphone: 667px;
+//desktop
+@media (min-width: $breakpoint-iphone) {
+  
+}
+
+//mobile
+@media (max-width: $breakpoint-iphone) {
+  
+  .modal-footer {
+    width: 100%;
+    border-top: none;
+  }
+}
