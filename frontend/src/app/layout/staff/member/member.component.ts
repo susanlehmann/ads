@@ -6,6 +6,7 @@ import { NgbDateEnGbParserFormatter } from '../close-date/NgbDateEnGbParserForma
 import { Staff } from '../model/staff';
 import { StaffService } from '../staff.service';
 import { ExcelService } from 'src/app/shared/services/export.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   providers: [
@@ -59,7 +60,19 @@ export class MemberComponent implements OnInit {
       'Medium',
       'High',
     ];
-	}
+  }
+ 
+  onDrop(event: CdkDragDrop<string[]>) {
+    //TODO: wait for sort api
+    moveItemInArray(this.listusers, event.previousIndex, event.currentIndex); 
+    // const updatedStaff = this.listusers[event.previousIndex];
+    // this.staffService.sortStaff(updatedStaff.id, event.currentIndex)
+    // .subscribe((data:any) => {
+    //         this.getUser();
+    //         this.notifierService.notify('success', 'Staff information has been successfully updated');
+    // }), err => {
+    // };
+  }
 
 	ngOnInit() {
     this.test();
@@ -137,6 +150,7 @@ export class MemberComponent implements OnInit {
         .map(Staff.toModel)
         .sort((a, b) => {
           return a.id - b.id;
+          // return a.sortOrder - b.sortOrder;
         });
 		}, err => {
     });
@@ -187,7 +201,8 @@ export class MemberComponent implements OnInit {
     this.modal.dismissAll();
     }
 
-  addStaff(staff): void {
+  addStaff(staff: Staff): void {
+    staff.setOrderToLast(this.listusers);
     this.staffService.add(staff)
     .subscribe((data:any) => {
             this.getUser();

@@ -12,6 +12,9 @@
                 </div>
             </div>
             <div class="card-body table-responsive">
+                    <!-- <div cdkDropList (cdkDropListDropped)="onDrop($event)">
+                            <div class="box" *ngFor="let item of items" cdkDrag>{{item}}</div>
+                          </div> -->
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -23,7 +26,7 @@
                         <th>{{'USER PERMISSION' | uppercase}}</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody cdkDropList (cdkDropListDropped)="onDrop($event)">
                     <ng-container *ngIf="!listusers">
                             <tr style="background-color: #fff; cursor: default;">
                                     <td colspan="6" style="padding-top:40px;">
@@ -36,7 +39,8 @@
                                 </tr>
                     </ng-container>
                     <ng-container *ngIf="listusers">
-                            <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)">
+                        <!-- TODO: wait for sort api cdkDrag -->
+                            <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)"> 
                                     <td>
                                         <span class="appoinment-color" [ngStyle]="{'background': user.appointmentColor}"></span>
                                     </td>
