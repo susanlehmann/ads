@@ -9,9 +9,10 @@ import { PermissionComponent } from './permission/permission.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { CloseDateComponent } from './close-date/close-date.component';
 import { StaffService } from './staff.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
-    imports: [StaffRoutingModule, SharedModule, NgxIntlTelInputModule],
+    imports: [StaffRoutingModule, SharedModule, NgxIntlTelInputModule, DragDropModule],
     declarations: [StaffComponent, MemberComponent, PermissionComponent, ScheduleComponent, CloseDateComponent],
     providers: [StaffService]
 })

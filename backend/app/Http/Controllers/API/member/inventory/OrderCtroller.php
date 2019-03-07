@@ -33,6 +33,7 @@ class OrderCtroller extends Controller
                     'id_product' => $value['id'],
                     'price_product' => $value['supplyprice_product'] ,
                     'qty_product' => $value['quantity'],
+                    'qty_product_receive' => $value['qty_product_receive']
                 ];
             }
             $list_product = $arr_product;

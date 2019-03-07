@@ -45,7 +45,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('suburb')->nullable();
             $table->string('city')->nullable();
-            $table->string('sate')->nullable();
+            $table->string('state')->nullable();
             $table->integer('zip_postcode')->nullable();
             $table->integer('level')->nullable();
             $table->integer('parent')->nullable();

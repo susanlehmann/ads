@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
+use Illuminate\Http\Request;
 use App\User;
 use Mail;
 use JWTAuth;
@@ -18,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup','verifyUserEmail','me']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup','verifyUserEmail','me','send_verifyEmail']]);
     }
 
     /**
@@ -83,6 +84,29 @@ class AuthController extends Controller
         });
         return $this->login($request);
 
+    }
+
+    public function send_verifyEmail(Request $request){
+        $verificationCode = str_random(40);
+
+        $user = User::where('email', $request->email)->first();
+        if($user){
+            $input = [
+                'email_verification_code' => $verificationCode,
+                ];
+                $users = User::find($user->id);
+                $users->update($input);
+            Mail::send('emails.userverification', ['verificationCode' => $verificationCode], function ($m) use ($request) {
+                $m->to($request->email, 'test')->subject('Email Confirmation');
+            });
+            $msg = ['success' => 'send email success'];
+        }
+        else
+        {
+            $msg = ['error' => 'not email'];
+        }
+
+        return response()->json($msg);
     }
 
     public function verifyUserEmail($verificationCode)

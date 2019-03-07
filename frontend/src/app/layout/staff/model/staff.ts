@@ -1,5 +1,6 @@
 export class Staff {
   id: number;
+  sortOrder: number;
   firstName: string;
   lastName: string;
   staffTitle: string;
@@ -8,8 +9,8 @@ export class Staff {
   password: string;
   userPermission: string;
   notes: string;
-  employmentStartDate: any;
-  employmentEndDate: any;
+  employmentStartDate: Date;
+  employmentEndDate: Date;
   appointmentBooking: boolean;
   appointmentColor: string
   services: [];
@@ -21,6 +22,7 @@ export class Staff {
   }
 
   new() {
+    this.sortOrder = 0;
     this.firstName = "";
     this.lastName = "";
     this.staffTitle = "";
@@ -28,8 +30,8 @@ export class Staff {
     this.email = "";
     this.userPermission = "No Access";
     this.notes = "";
-    this.employmentStartDate = this.getCurrentDateObject();
-    this.employmentEndDate = "";
+    this.employmentStartDate = new Date();
+    this.employmentEndDate = null;
     this.appointmentBooking = true;
     this.appointmentColor = "";
     this.services = [];
@@ -45,7 +47,15 @@ export class Staff {
     return {year: d.getFullYear(), month: d.getMonth(), day: d.getDate() };
   }
 
+  setOrderToLast(list: Staff[]) {
+    const lastItem = list[list.length - 1];
+    if (lastItem) {
+      this.sortOrder = lastItem.sortOrder + 1;
+    }
+  }
+
   mockData() {
+    this.sortOrder = 0;
     this.firstName = "Giang";
     this.lastName = "Mai";
     this.staffTitle = "Admin";
@@ -53,8 +63,8 @@ export class Staff {
     this.email = "giang@mai.com";
     this.userPermission = "Basic";
     this.notes = "11111";
-    this.employmentStartDate = this.getCurrentDateObject();
-    this.employmentEndDate = this.getCurrentDateObject();
+    this.employmentStartDate = new Date();
+    this.employmentEndDate = null;
     this.appointmentBooking = true;
     this.appointmentColor = "red";
     this.services = [];
@@ -72,18 +82,19 @@ export class Staff {
 
   toDto(): any {
     const {service, product, voucherSale} = this.commissions;
+    const options = {month: 'numeric', day: 'numeric', year: 'numeric' };
     return {
       id: this.id,
+      sort_order: this.sortOrder,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
-      phone : this.mobileNumber.internationalNumber,
+      phone : this.mobileNumber ? this.mobileNumber.internationalNumber : null,
       ennable_appointment_booking : this.appointmentBooking ? 1 : 0,
       notes : this.notes,
-      start_date : '',
-      end_date : '',
+      start_date : this.employmentEndDate ? this.employmentStartDate.toLocaleDateString('en-US', options) : new Date().toLocaleDateString('en-US', options),
+      end_date : this.employmentEndDate ? this.employmentEndDate.toLocaleDateString('en-US', options) : null,
       appointment_color: this.appointmentColor,
-      dial_code : this.mobileNumber.countryCode,
       service_commission : service,
       product_commission : product,
       voucher_sales_commission : voucherSale,
@@ -93,6 +104,7 @@ export class Staff {
   updateData(data: any) {
     const {
       id,
+      sort_order,
       firstName,
       lastName,
       email,
@@ -109,13 +121,14 @@ export class Staff {
    } = data;
 
     this.id = id;
+    this.sortOrder = sort_order,
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.mobileNumber = phone;
     this.notes = notes;
-    this.employmentStartDate = start_date;
-    this.employmentEndDate = end_date;
+    this.employmentStartDate = start_date ? new Date(start_date) : null;
+    this.employmentEndDate = end_date ? new Date(end_date) : null;
     this.appointmentBooking = ennable_appointment_booking === 1 ? true : false;
     this.appointmentColor = appointment_color;
     this.commissions.updateData(service_commission, product_commission, voucher_sales_commission);

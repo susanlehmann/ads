@@ -14,6 +14,7 @@ Route::group([
     Route::post('signup', 'AuthController@signup');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
+    Route::post('send-verify', 'AuthController@send_verifyEmail');
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
     Route::get('getinfo_user', 'User_infoController@index');
     Route::resource('roles','RoleController');
@@ -35,7 +36,25 @@ Route::group([
         Route::post('update_user', 'AdminController@update');
         Route::post('delete_user', 'AdminController@destroy'); 
     });
+
+    Route::group(['prefix' => 'admin/setting/business', 'namespace' => 'API\admin\setting'], function(){
+        Route::post('list-business', 'BusinessTypeController@index');
+        Route::post('create-business', 'BusinessTypeController@store');
+        Route::post('show-business', 'BusinessTypeController@show');
+        Route::post('update-business', 'BusinessTypeController@update');
+        Route::post('delete-business', 'BusinessTypeController@destroy');
+        Route::post('search-business', 'BusinessTypeController@search');
+    });
     
+    Route::group(['prefix' => 'admin/setting/servive', 'namespace' => 'API\admin\setting'], function(){
+        Route::post('list-servive', 'ServiceTypeController@index');
+        Route::post('create-servive', 'ServiceTypeController@store');
+        Route::post('show-servive', 'ServiceTypeController@show');
+        Route::post('update-servive', 'ServiceTypeController@update');
+        Route::post('delete-servive', 'ServiceTypeController@destroy');
+        Route::post('search-servive', 'ServiceTypeController@search');
+    });
+
     Route::group(['prefix' => 'user', 'namespace' => 'API\member\user'], function(){
         Route::get('list-user', 'AdminController@index');
         Route::post('create_user', 'AdminController@store');

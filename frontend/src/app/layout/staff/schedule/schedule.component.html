@@ -135,11 +135,11 @@
     <div *ngIf="selectedSchedule.isRepeat" class="row form-group">
       <div class="col-sm-12">
         <label class="control-label">END REPEAT</label>
-        <select [(ngModel)]="selectedSchedule.hasEndDate" class="custom-select mb-3">
+        <select [(ngModel)]="selectedSchedule.hasEndDate" class="custom-select mb-3" (ngModelChange)="selectedSchedule.setEndScheduleToNextWeek($event)">
           <option value=0>Ongoing</option>
-          <option value=1>Specific date</option>
+          <option value=1>Specific date</option>{{selectedSchedule.scheduleEndDate | json}}
         </select>
-        <input *ngIf="selectedSchedule.hasEndDate == 1" class="form-control" placeholder="yyyy-mm-dd" (click)="d.open()"
+        <input *ngIf="selectedSchedule.hasEndDate == 1" class="form-control" (click)="d.open()" readonly
           name="schedule-end" [markDisabled]="isDisabled" [(ngModel)]="selectedSchedule.scheduleEndDate" ngbDatepicker #d="ngbDatepicker">
       </div>
     </div>
