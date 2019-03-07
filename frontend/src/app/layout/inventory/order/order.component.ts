@@ -4,11 +4,12 @@ import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstr
 import { OrderService } from './order.service';
 import { Order } from './model/order';
 import { Supplier } from '../supplier/model/supplier';
-import { SupplierService} from '../supplier/supplier.service';
+import { SupplierService } from '../supplier/supplier.service';
 import { CategoryService } from '../category/category.service';
 import { Category } from '../category/model/category';
 import { Product } from '../product/model/product';
 import { InventoryService } from '../inventory.service';
+import * as data from './../../../../assets/country.json';
 
 @Component({
   selector: 'app-order',
@@ -40,10 +41,11 @@ export class OrderComponent implements OnInit {
   _prod_selected: any = [];
   _total: any;
   arr_info_product: any = [];
-  listorder : any = [];
+  listorder: any = [];
   _order: any;
   _listorder: any;
   listinfoproduct: any = [];
+  country: any;
   _listorder1: any;
   _updatetime: any;
   _totals: any;
@@ -51,9 +53,9 @@ export class OrderComponent implements OnInit {
   suppliers: any;
   orderTotal;
   number_order: number;
-  statusOrder = [{id: 1, name: "ORDERED"},{id:2, name: "CANCEL"},{id:3, name: "RECEIVED"}];
+  statusOrder = [{ id: 1, name: "ORDERED" }, { id: 2, name: "CANCEL" }, { id: 3, name: "RECEIVED" }];
   public datas: [];
-  add :any;
+  add: any;
   //statusOrder = [{id: 1, name: "ORDERED"}];
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
@@ -72,23 +74,29 @@ export class OrderComponent implements OnInit {
 
   }
 
+  getnamecountry(as){
+    let country = data.filter(s => s.code == as);
+    return country[0].name;
+  }
+
   ngOnInit() {
     this.getSupplier();
     this.getCategory();
     this.getProduct();
     this.getlist_order();
+    this.assignCopy();
   }
 
   openProduct(content: NgbModalRef) {
     this.modal.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    },(reason) => {
+    }, (reason) => {
       this.closeResult = `Dismissed`;
     });
   }
 
   openModal(content: NgbModalRef) {
-    this.modal.open(content,this.modalOptions).result.then((result) => {
+    this.modal.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed`;
@@ -97,22 +105,23 @@ export class OrderComponent implements OnInit {
   openSModal(content, supplier) {
     this._supplier = supplier;
     this.add = this.items.length;
-    console.log(this.add)
     this.modal.dismissAll();
     this.openModal(content);
   }
-
+  listpro: any;
   openProduct1(content, category) {
     this._category = category;
     this._listproducts = this.listproducts.filter(s => s.id_category == this._category.id);
+    this.listpro = this._listproducts.length;
     this.modal.dismissAll();
     this.openModal(this._prod);
     this.openProduct(content);
-    console.log(this.listproducts);
+    // console.log(this.items.length)
+    //console.log(this.listproducts);
     // console.log(this._listproducts);
   }
 
-  openModalNoCategory(content, category){
+  openModalNoCategory(content, category) {
     this._category = category;
     //console.log(this.listproducts);
     this._listproducts = this.listproducts.filter(s => s.id_category == 0);
@@ -121,9 +130,10 @@ export class OrderComponent implements OnInit {
     this.openProduct(content);
   }
 
-  editOrder(content, order){
+  editOrder(content: NgbModalRef, order) {
     this._listorder1 = JSON.parse(order.info_product);
     this._order = order;
+    console.log(this._listorder1);
     this.getNameSupplier(order.id_supplier);
     this.openModal(content);
   }
@@ -133,29 +143,29 @@ export class OrderComponent implements OnInit {
     return product[0].name_product;
   }
 
-  getNameSupplier(id){
+  getNameSupplier(id) {
     let supplier = this.listsuppliers.filter(s => s.id == id);
     this.suppliers = supplier[0];
     return supplier[0].name_supplier;
   }
 
-  sum(){
+  sum() {
     this.orderTotal = this.items.reduce((acc, cur) => {
       return acc + cur.quantity * cur.supplyprice_product;
     }, 0)
   }
 
-  sumEdit(){
+  sumEdit() {
     this._order.total_price = this._listorder1.reduce((acc, cur) => {
-      return acc + cur.qty_product * cur.price_product;
+      return acc + cur.qty_product_receive * cur.price_product;
     }, 0)
   }
 
-  deleteProd(prod){
-    this.items = this.items.filter(i => i!=prod);
+  deleteProd(prod) {
+    this.items = this.items.filter(i => i != prod);
   }
 
-  selectedX(prods){
+  selectedX(prods) {
     this._prod_selected.push(prods);
     const copy = Object.assign({}, prods)
     this.items.push(copy);
@@ -164,11 +174,11 @@ export class OrderComponent implements OnInit {
     this.openModal(this._prod);
   }
 
-  mathTotal(qty, id_product, supplyprice_product, index){
+  mathTotal(qty, id_product, supplyprice_product, index) {
     let _total = Math.ceil(qty * supplyprice_product);
     let arr = {
-      'index' : index,
-      'id_product' : id_product,
+      'index': index,
+      'id_product': id_product,
       'qty': qty,
       'total': _total,
 
@@ -177,8 +187,8 @@ export class OrderComponent implements OnInit {
     var groupByName = {};
 
     this.arr_info_product.forEach(function (a) {
-        groupByName [a.index] = groupByName [a.index] || [];
-        groupByName [a.index].push({ id_product: a.id_product, qty: a.qty, total:a.total });
+      groupByName[a.index] = groupByName[a.index] || [];
+      groupByName[a.index].push({ id_product: a.id_product, qty: a.qty, total: a.total });
     });
 
     //console.log(groupByName);
@@ -200,31 +210,31 @@ export class OrderComponent implements OnInit {
 
   getSupplier() {
     this.SupplierService.getList()
-		.subscribe((reponse:any) => {
+      .subscribe((reponse: any) => {
         this.stopLoading();
-         this.listsuppliers = reponse.supplier
-		}, err => {
-    });
+        this.listsuppliers = reponse.supplier
+      }, err => {
+      });
   }
 
-  getCategory(){
+  getCategory() {
     this.CategoryService.getList()
-    .subscribe((cate:any) => {
-      this.stopLoading();
-      this.listcategories = cate.category
-    }, err =>{
+      .subscribe((cate: any) => {
+        this.stopLoading();
+        this.listcategories = cate.category
+      }, err => {
 
-    });
+      });
   }
 
-  getProduct(){
+  getProduct() {
     this.InventoryService.getListProduct()
-    .subscribe((prod:any) => {
-      this.stopLoading();
-      this.listproducts = prod.product;
-    }, err =>{
+      .subscribe((prod: any) => {
+        this.stopLoading();
+        this.listproducts = prod.product;
+      }, err => {
 
-    });
+      });
   }
 
   startLoading(): void {
@@ -237,87 +247,119 @@ export class OrderComponent implements OnInit {
 
 
   getlist_order() {
-    this.startLoading();
     this.OrderService.getList()
-		.subscribe((listbrands:any) => {
+      .subscribe((listbrands: any) => {
         this.stopLoading();
         this.number_order = listbrands.order.length;
-         this.listorder = listbrands.order;
-		}), err => {
-      this.stopLoading();
-    };
+        this.listorder = listbrands.order;
+      }), err => {
+        this.stopLoading();
+      };
   }
 
-  create_oder() {
+  create_oder(c) {
     var $listitem = {
-      'info_product' : this.items,
-      'total_price' : this.orderTotal,
-      'id_supplier' : this._supplier.id
-  };
+      'info_product': this.items,
+      'total_price': this.orderTotal,
+      'id_supplier': this._supplier.id
+    };
     this.OrderService.add($listitem)
-    .subscribe((cate:any) => {
-      this.stopLoading();
-      this.getlist_order();
-      this.modal.dismissAll();
-      this.editOrder(cate,$listitem);
-      this.notifierService.notify('success', 'A new order has been successfully added');
-    }, err =>{
+      .subscribe((cate: any) => {
+        this.modal.dismissAll();
 
-    });
+        this.OrderService.getList()
+          .subscribe((listbrands: any) => {
+            this.number_order = listbrands.order.length;
+            this.listorder = listbrands.order.map( v =>{
+              v.info_product =JSON.parse(v.info_product);
+              v.info_product.qty_product_receive = v.info_product.quantity;
+            });
+            this.editOrder(c, this.listorder[this.listorder.length - 1]);
+          });
+
+        this.notifierService.notify('success', 'A new order has been successfully added');
+      }, err => {
+
+      });
     //this.statusOrder.id = 1;
   }
 
-  update(data:any){
+  update(data: any) {
     data.total_product = this._order.total_price;
     return this.OrderService.update(data)
-    .subscribe(
-      success => {
-        return true;
-      }
-    )
+      .subscribe(
+        success => {
+          return true;
+        }
+      )
   }
 
-  status_order(id_order, status){
+  status_order(id_order, status) {
     this._order.info_product = this._listorder1;
-    if(this.update(this._order)){
+    if (this.update(this._order)) {
       // console.log(this._order);
 
       let arr = {
-        'id' : id_order,
-        'status' : status
+        'id': id_order,
+        'status': status
       };
       // console.log(arr);
       this.OrderService.status(arr)
-      .subscribe((liststatus:any) => {
-        this._order = liststatus.order;
-        this.getlist_order();
+        .subscribe((liststatus: any) => {
+          this._order = liststatus.order;
+          this.getlist_order();
 
-        this.notifierService.notify('success', 'button click');
-      })
+          this.notifierService.notify('success', 'button click');
+        })
     }
 
   }
-  send_email_order(mail:any){
-    let  $send = {
+  send_email_order(mail: any) {
+    let $send = {
       'email': mail
     };
     console.log($send);
     this.OrderService.sent_email($send)
-    .subscribe((sendmail: any) => {
-      if(sendmail == true){
-        this.notifierService.notify('success', 'send email success');
-      }else{
-        this.notifierService.notify('error', 'send email failed, email not found');
-      }
-      // this.supplier.email_supplier = sendmail.mail;
-      //console.log(this.supplier.email);
-    });
+      .subscribe((sendmail: any) => {
+        if (sendmail == true) {
+          this.notifierService.notify('success', 'send email success');
+        } else {
+          this.notifierService.notify('error', 'send email failed, email not found');
+        }
+        // this.supplier.email_supplier = sendmail.mail;
+        //console.log(this.supplier.email);
+      });
   }
-  export_pdf_data(id:any){
-      let link = this.OrderService.export_pdf(id);
-      var a = document.createElement('a');
-      a.href = link;
-      a.click();
+  export_pdf_data(id: any) {
+    let link = this.OrderService.export_pdf(id);
+    var a = document.createElement('a');
+    a.href = link;
+    a.click();
   }
 
+  // searchOrder(event) {
+  //   const query = {id_order: event.target.value};
+  //   this.OrderService.searchOrder(query).subscribe((list: any) => {
+  //     this.listorders = list.order.map(Order.toModel);
+  //   });
+  //  }
+  assignCopy(){
+    this.listorders = Object.assign([], this.items);
+  }
+  filterItem(value){
+    if(!value){
+        this.assignCopy();
+    } // when nothing has typed
+    this.listorders = Object.assign([], this.items).filter(
+       item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
+    )
+  }
+
+  //  searchProduct(event) {
+  //   const query = {name_product: event.target.value };
+  //   this.InventoryService.searchProduct(query).subscribe((list: any) => {
+  //     this.listproducts = list.product
+  //     .map(Product.toModel);
+  //     });
+  //   };
 }

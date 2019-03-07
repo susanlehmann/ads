@@ -7,7 +7,7 @@
           <div class="_3mFAWf">
             <div class="_1XOh8M _1jFEEZ" placeholder="Search product or order" value="">
               <div class="H9L5q0">
-                <input class="JOAm_M _1FszNF" placeholder="Search product or order" value="">
+                <input class="JOAm_M _1FszNF" placeholder="Search product or order" value="" (input)="filterItem(myInput.value)">
                 <span class="_2FSeuB _240vE8 RCcMXQ _1bHTmd">
                   <i class="fa fa-search"></i>
                 </span>
@@ -72,7 +72,7 @@
                         <div >P {{ order.id }}</div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
-                        <div>{{ order.updated_at }}</div>
+                        <div>{{ order.updated_at | date: 'dd MMM yyyy'}}</div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
                         <div>{{ getNameSupplier(order.id_supplier) }}</div>
@@ -85,7 +85,7 @@
                         </div>
                       </td>
                       <td class="N3OZB6 _1vLxYz">
-                        <span class="_2V5qqW">{{ order.total_price }}</span>
+                        <span class="_2V5qqW" >${{ order.total_price }}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -120,7 +120,7 @@
   <div class="_2Nn7vB QZeBYP" data-qa="loader-spinner"></div>
 </div>
 <div class="rTWbSm">
-  <button class="_2N1Wwk _1K8-3O _1hszOe _1Hbk3p _1jAoG_" (click)="openModal(content)">
+  <button class="_2N1Wwk _1K8-3O _1hszOe _1Hbk3p _1jAoG_" (click)="openModal(content)" ngbTooltip="New Order" placement="left">
     <span class="_2FSeuB _240vE8 RCcMXQ">
       <i class="fa fa-plus fa-1-75x"></i>
     </span>
@@ -234,7 +234,7 @@
                                                 <td>{{i.name_product}}</td>
                                                 <td><input type="number" name="qty" [(ngModel)]="i.quantity" (change)="sum()" placeholder="0"></td>
                                                 <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product" (change)="sum()"></td>
-                                                <td><span type="number" name="total">{{i.quantity * i.supplyprice_product}}</span></td>
+                                                <td><span type="number" name="total">{{i.quantity * i.supplyprice_product || 0.00}}</span></td>
                                                 <!-- <td>{{i.quantity * i.supplyprice_product}}</td> -->
                                                 <td><button (click)="deleteProd(i)">x</button></td>
                                               </tr>
@@ -259,7 +259,7 @@
                                               <td>{{i.name_product}}</td>
                                               <td><input type="number" name="qty" [(ngModel)]="i.quantity" (change)="sum()"></td>
                                               <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product" (change)="sum()"></td>
-                                              <td><span type="number" name="total">{{i.quantity * i.supplyprice_product}}</span></td>
+                                              <td><span type="number" name="total">{{(i.quantity) * i.supplyprice_product || 0.00}}</span></td>
                                               <!-- <td>{{i.quantity * i.supplyprice_product}}</td> -->
                                               <td><button (click)="deleteProd(i)">x</button></td>
                                             </tr>
@@ -311,19 +311,6 @@
                             <h5 id="SupplierName">{{ _supplier.name_supplier }}</h5>
                           </div>
                           <div class="col-md-12">
-                              <h6 id="Street">{{ _supplier.street_supplier}}</h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="Suburb">{{ _supplier.suburb_supplier}}</h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="City">{{ _supplier.city_supplier}}</h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="ZipCode">{{ _supplier.zipcode_supplier}} {{ _supplier.state_supplier}}</h6>
-                              <hr>
-                          </div>
-                          <div class="col-md-12">
                               <h5>DELIVER TO</h5>
                           </div>
                           <div class="col-md-12">
@@ -333,25 +320,23 @@
                               <h6 id="StreetAddress">Default Address</h6>
                           </div>
                           <div class="col-md-12">
-                              <h6 id="APT"></h6>
-                          </div>
-                          <div class="col-md-12">
                               <h6 id="LCity">Default City</h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="LState"></h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="LZipCode"></h6>
                               <hr>
                           </div>
                           <div class="col-md-12" style="display: -webkit-inline-box;">
                               <div class="col-md-5" style="display: inline;padding-left: 0;">Order Total:</div>
                               <input type="hidden" id="OrderID" value="0">
+                              <ng-container *ngIf="orderTotal == undefined; else elseTemplate">
+                                  <div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">$0</h5></div>
+                              </ng-container>
+                              <ng-template #elseTemplate>
+                                  <div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">{{orderTotal}}</h5></div>
+                              </ng-template>
+
                               <div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">{{orderTotal}}</h5></div>
                           </div>
                           <div class="col-md-12" style="margin-top:15px" id="divbtnCreateOrder">
-                              <button type="button" id="btnCreateOrder" style="font-weight:bold" name="btnCreateOrder" class="btn btn-block btn-primary active" aria-pressed="true" (click)="create_oder()">CREATE ORDER</button>
+                              <button type="button" id="btnCreateOrder" style="font-weight:bold" name="btnCreateOrder" class="btn btn-block btn-primary active" aria-pressed="true" (click)="create_oder(edit_order)">CREATE ORDER</button>
                           </div>
                           <div class="col-md-12" style="margin-top: 15px; display: none;" id="divbtnReceiveStock">
                               <button type="button" id="btnReceiveStock" style="font-weight:bold" name="btnReceiveStock" class="btn btn-block btn-success active" aria-pressed="true">RECEIVE STOCK</button>
@@ -389,7 +374,7 @@
                                             <td>{{i.name_product}}</td>
                                             <td><input type="number" name="qty" [(ngModel)]="i.quantity"></td>
                                             <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product"></td>
-                                            <td>{{i.quantity * i.supplyprice_product}}</td>
+                                            <td>{{i.quantity * i.supplyprice_product || 0}}</td>
                                             <td><button (click)="deleteProd(i)">x</button></td>
                                           </tr>
                                       </tbody>
@@ -407,19 +392,7 @@
                       <div class="col-md-12" style="padding:10px 10px 10px 10px; border:1px solid #c2cfd6">
                           <div class="col-md-12" >
                             <h5 id="SupplierName">{{ _supplier.name_supplier }}</h5>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="Street">{{ _supplier.street_supplier}}</h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="Suburb">{{ _supplier.suburb_supplier}}</h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="City">{{ _supplier.city_supplier}}</h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="ZipCode">{{ _supplier.zipcode_supplier}},{{ _supplier.state_supplier}}</h6>
-                              <hr>
+                            <hr>
                           </div>
                           <div class="col-md-12">
                               <h5>DELIVER TO</h5>
@@ -431,16 +404,7 @@
                               <h6 id="StreetAddress">Default Address</h6>
                           </div>
                           <div class="col-md-12">
-                              <h6 id="APT"></h6>
-                          </div>
-                          <div class="col-md-12">
                               <h6 id="LCity">Default City</h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="LState"></h6>
-                          </div>
-                          <div class="col-md-12">
-                              <h6 id="LZipCode"></h6>
                               <hr>
                           </div>
                           <div class="col-md-12" style="display: -webkit-inline-box;">
@@ -471,11 +435,11 @@
               <span class="input-group-text">
                   <i class="fa fa-search"></i>
               </span>
-              <input type="text" id="txtSearch" class="form-control" placeholder="Scan barcode or search any item">
+              <input type="text" id="txtSearch" class="form-control" placeholder="Scan barcode or search any item" value="">
           </div>
       </div>
       <div class="col-12" id="divCategory" style="">
-        <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0">
+        <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0" *ngIf="listpro != 0">
           <div class="row" *ngFor="let category of listcategories" (click)="openProduct1(product1, category)">
             <div class="col-6">
               <div class="col-12">
@@ -502,6 +466,24 @@
             </div>
           </div>
         </div>
+        <!-- <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0" *ngIf="listpro != 0">
+            <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0">
+                <div class="row" >
+                  <div class="col-6">
+                    <div class="col-12" (click)="selectedX(prodss)">
+                      <strong>{{ prodss.name_product }}</strong><br>
+                      <span class="text-muted">({{ prodss.initialstock_product }} in stock)</span>
+                    </div>
+                  </div>
+                  <div class="col-6 text-right">
+                    <span><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
+                    </svg></span>
+                  </div>
+                 <hr  width="100%" align="center" />
+                </div>
+              </div>
+        </div> -->
       </div>
     </div>
 
@@ -599,20 +581,35 @@
           <div class="col-md-12">
             <div class="row">
             <div class="col-md-9">
-              <div class="">
-                <span>
-                  <i class="fas fa-shipping-fast"></i>
-                </span>
+              <div style="text-align:center;" *ngIf="_order.status_order == 1"><i class="IhToKE LqKsYE _10B3mn" style="margin-left:-120px;" >
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+                    <g id="Frame_-_24px">
+                      <rect style="fill:none;" width="24" height="24"></rect>
+                    </g>
+                    <g id="Line_Icons">
+                      <g>
+                        <path style="fill:#767676;" d="M2,8h16v4h2V7c0-0.007-0.004-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.039-0.08c-0.019-0.038-0.031-0.08-0.057-0.117l-4-6C15.646,0.167,15.334,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.143,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.447,1,1,1h7v-2H2V8z M17.131,6H11V2h3.465L17.131,6z M5.535,2H9v4H2.869L5.535,2z"></path>
+                        <path style="fill:#767676;" d="M23.707,18.293l-2-2C21.52,16.106,21.266,16,21,16h-1v-1c0-0.552-0.447-1-1-1h-8 c-0.553,0-1,0.448-1,1v7c0,0.552,0.447,1,1,1h1.277c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1h2.555 c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1H23c0.553,0,1-0.448,1-1v-3C24,18.735,23.895,18.48,23.707,18.293z M12,16h6v5 h-2.277c-0.346-0.596-0.984-1-1.723-1s-1.377,0.404-1.723,1H12V16z M22,21h-0.277c-0.346-0.596-0.984-1-1.723-1v-2h0.586 L22,19.414V21z"></path>
+                      </g>
+                    </g>
+                  </svg>
+                </i>
+                <span style="line-height: 1.143;font-size: 22px;font-weight: 400;">Stock Ordered</span><br>
+                <span>Ordered {{ _order.created_at }} at has by Order P{{ _order.id }}</span>
               </div>
-              <h2 style="text-align:center;"><i class="fas fa-shipping-fast"></i>Stock Ordered</h2>
+              <div style="text-align:center;" *ngIf="_order.status_order == 3">
+                <i class="IhToKE LqKsYE _2YR97g"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v7h2V7c0-0.007-0.003-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.038-0.08c-0.02-0.038-0.032-0.08-0.058-0.117l-4-6C15.646,0.167,15.335,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.144,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.448,1,1,1h12v-2H2V8z M17.132,6H11V2h3.465L17.132,6z M5.535,2H9v4H2.869L5.535,2z"></path><polygon style="fill:#767676;" points="22.293,16.287 18,20.58 15.707,18.287 14.293,19.701 18,23.408 23.707,17.701 "></polygon></g></g></svg></i>
+                <span style="line-height: 1.143;font-size: 22px;font-weight: 400;">Stock REceived</span><br>
+                <span>Received {{ _order.updated_at }} at has by Order P{{ _order.id }}</span>
+              </div>
               <div class="col-md-12" style="text-align:center;" >
-                <span>Ordered {{ _order.update_at }} at has by Order {{ _order.id }}</span>
+
               </div>
-              <div class=" row col-md-12" style="margin-top:15px;max-width: 500px;">
-                <div class="col-md-6" style=" align-items: flex-end;justify-content: flex-end;">
+              <div class=" row col-md-12" style="margin-top:15px;max-width: 500px;margin-left: 160px;">
+                <div class="col-md-6" style=" align-items: flex-end;justify-content: flex-end;"  *ngIf=" _order.status_order == 1">
                   <button type="button" class="btn btn-block btn-outline-secondary" style="font-weight:bold;" (click)="send_email_order(_order.email_supplier)">EMAIL ORDER</button>
                 </div>
-                <div class="col-md-6" style=" align-items: flex-start;justify-content: flex-start;">
+                <div [ngClass]="_order.status_order == 3 ? 'col-sm-12' : 'col-sm-6'" style=" align-items: flex-start;justify-content: flex-start;"  *ngIf=" _order.status_order != 2">
                   <button type="button" class="btn btn-block btn-outline-secondary" style="font-weight:bold;" (click)="export_pdf_data(_order.id)">DOWNLOAD PDF</button>
                 </div>
               </div>
@@ -622,7 +619,7 @@
                     <tr>
                       <th style="text-align:left">PRODUCT</th>
                       <th style="text-align:left">ORDER QTY.</th>
-                      <th style="text-align:left; display: none;">RECEIVED QTY.</th>
+                      <th style="text-align:left;" *ngIf=" _order.status_order != 1">RECEIVED QTY.</th>
                       <th style="text-align:left">SUPPLY PRICE</th>
                       <th style="text-align:left">TOTAL COST</th>
                     </tr>
@@ -630,19 +627,21 @@
                   <tbody>
                     <ng-container *ngIf="_order.status_order == 2; else statuson">
                         <tr *ngFor="let i of _listorder1">
-                            <td>{{i.name_product}}</td>
-                            <td><input type="number" name="qty" [(ngModel)]="i.qty_product" (input)="sumEdit()"></td>
+                            <td>{{getNameproduct(i.id_product)}}</td>
+                            <td>{{ i.qty_product }}</td>
+                            <td><input type="number" name="qty_re" [(ngModel)]="i.qty_product_receive" (input)="sumEdit()" value="{{i.qty_product}}"></td>
                             <td><input type="number" name="price" [(ngModel)]="i.price_product" (input)="sumEdit()"></td>
-                            <td>{{i.qty_product * i.price_product}}</td>
-                            <td><button (click)="deleteProd(i)">x</button></td>
+                            <td>{{i.qty_product_receive * i.price_product || i.qty_product * i.price_product }}</td>
                           </tr>
                     </ng-container>
                     <ng-template #statuson>
                         <tr *ngFor="let ad of _listorder1">
                             <td style="width:30%">{{getNameproduct(ad.id_product)}}</td>
                             <td style=" text-align:center;">{{ ad.qty_product }}</td>
+                            <td style=" text-align:center;" *ngIf=" _order.status_order != 1">{{ ad.qty_product_receive }}</td>
                             <td style="text-align:center">${{ ad.price_product }}</td>
-                            <td style=" text-align: right" >${{ ad.qty_product * ad.price_product }}</td>
+                            <td style=" text-align: right" *ngIf=" _order.status_order != 1">${{ ad.qty_product_receive * ad.price_product || 0.00}}</td>
+                            <td style=" text-align: right" *ngIf=" _order.status_order == 1">${{ ad.qty_product * ad.price_product }}</td>
                           </tr>
                     </ng-template>
 
@@ -653,27 +652,13 @@
 
             <div class="col-md-3">
               <div class="col-md-12" style="padding: 10px 10px 10px 10px; border:1px solid #c2cfd6;display: inline-table;">
-                  <div class="col-md-12" >
-                      <h5 id="SupplierName">{{ _order.name_supplier }}</h5>
-                  </div>
                   <div class="col-md-12">
-                      <h4 id="Street">{{ _order.street_supplier}}</h4>
-                  </div>
-                  <div class="col-md-12">
-                      <h4 id="Suburb"></h4>
-                  </div>
-                  <div class="col-md-12">
-                      <h4 id="City"></h4>
-                  </div>
-                  <div class="col-md-12">
-                      <h4 id="State"></h4>
-                  </div>
-                  <div class="col-md-12">
-                      <h4 id="ZipCode"></h4>
+                      <h5 id="SupplierName" style="font-size:1.7rem;">{{ getnamecountry(_order.countryid_supplier) }}</h5>
                       <hr>
                   </div>
+                  <!-- <hr style="margin-top: 30px;"> -->
                   <div class="col-md-12">
-                      <h5 style="    color: aquamarine;">DELIVER TO</h5>
+                      <h5 style="    font-size: 14px;text-transform: uppercase;font-weight: 700;line-height: 14px;color: #24334A;">DELIVER TO</h5>
                   </div>
                   <div class="col-md-12">
                       <h6 id="LocationName" style="color:#67768C;font-size:small">has</h6>
@@ -682,16 +667,7 @@
                       <h6 id="StreetAddress" style="color:#67768C;font-size:small">Default Address</h6>
                   </div>
                   <div class="col-md-12">
-                      <h4 id="APT"></h4>
-                  </div>
-                  <div class="col-md-12">
                       <h6 id="LCity" style="color:#67768C;font-size:small">Default City</h6>
-                  </div>
-                  <div class="col-md-12">
-                      <h4 id="LState"></h4>
-                  </div>
-                  <div class="col-md-12">
-                      <h4 id="LZipCode"></h4>
                       <hr>
                   </div>
                   <div class="col-md-12" style="display: -webkit-inline-box;">
@@ -703,7 +679,7 @@
                       <button type="button" id="btnReceiveStock" style="font-weight:bold" name="btnReceiveStock" class="btn btn-block btn-success active" aria-pressed="true" *ngIf=" _order.status_order == 1" (click)="status_order(_order.id,2)">RECEIVE STOCK </button>
                   </div>
                   <div class="col-md-12" style="margin-top: 15px;" id="divbtnCancelOrder">
-                      <button type="button" id="btnCancelOrder" style="font-weight:bold" name="btnCancelOrder" class="btn btn-block btn-danger active" aria-pressed="true"  *ngIf=" _order.status_order == 1" (click)="status_order(_order.id,0)">CANCEL ORDER</button>
+                      <button type="button" id="btnCancelOrder" style="font-weight:bold" name="btnCancelOrder" class="btn btn-block btn-danger active" aria-pressed="true"  *ngIf=" _order.status_order == 1" (click)="openModal(cancel)">CANCEL ORDER</button>
 
                   </div>
                   <div class="col-md-12" style="margin-top: 15px;" id="divbtnCloseOrder">
@@ -780,22 +756,6 @@
                         <h5 id="SupplierName">sadsadsad</h5>
                     </div>
                     <div class="col-md-12">
-                        <h4 id="Street" style="color:#67768C;font-size:small">hanoi</h4>
-                    </div>
-                    <div class="col-md-12">
-                        <h4 id="Suburb"style="color:#67768C;font-size:small">cau giay</h4>
-                    </div>
-                    <div class="col-md-12">
-                        <h4 id="City"style="color:#67768C;font-size:small">cau giay</h4>
-                    </div>
-                    <div class="col-md-12">
-                        <h4 id="State"style="color:#67768C;font-size:small">cau giay</h4>
-                    </div>
-                    <div class="col-md-12">
-                        <h4 id="ZipCode"style="color:#67768C;font-size:small">cau giay</h4>
-                        <hr>
-                    </div>
-                    <div class="col-md-12">
                         <h5 style="    color: aquamarine;">DELIVER TO</h5>
                     </div>
                     <div class="col-md-12">
@@ -838,3 +798,17 @@
     </div>
 
 </ng-template>
+<ng-template #cancel let-modal>
+    <div class="modal-header" [ngClass]="isCreate ? '' : 'sticky'">
+      <h4 class="modal-title text-xs-center offset-sm-4" id="modal-basic-title" style="font-size: 24px;font-weight: 300;color: #24334A;">Cancel Order</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:16px;line-height: 22px;color: #67768C;">Are you sure you want to cancel this order? This action is permanent and cannot be undone.</div>
+    </div>
+    <div class="modal-footer" [ngClass]="isCreate ? '' : 'sticky'">
+      <button *ngIf="!isCreate" type="button" class="btn btn-delete" (click)="status_order(_order.id,0)"> CANCEL ORDER</button>
+    </div>
+  </ng-template>
