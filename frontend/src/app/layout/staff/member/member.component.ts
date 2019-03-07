@@ -5,6 +5,8 @@ import { ServicesService } from 'src/app/shared/services/serv.service';
 import { NgbDateEnGbParserFormatter } from '../close-date/NgbDateEnGbParserFormatter';
 import { Staff } from '../model/staff';
 import { StaffService } from '../staff.service';
+import { ExcelService } from 'src/app/shared/services/export.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   providers: [
@@ -37,6 +39,7 @@ export class MemberComponent implements OnInit {
   private modal: NgbModal,
   private staffService: StaffService,
   private svService: ServicesService,
+  private exportService: ExcelService,
 	) {
     this.form = new Staff();
     this.colors = [
@@ -57,7 +60,19 @@ export class MemberComponent implements OnInit {
       'Medium',
       'High',
     ];
-	}
+  }
+ 
+  onDrop(event: CdkDragDrop<string[]>) {
+    //TODO: wait for sort api
+    moveItemInArray(this.listusers, event.previousIndex, event.currentIndex); 
+    // const updatedStaff = this.listusers[event.previousIndex];
+    // this.staffService.sortStaff(updatedStaff.id, event.currentIndex)
+    // .subscribe((data:any) => {
+    //         this.getUser();
+    //         this.notifierService.notify('success', 'Staff information has been successfully updated');
+    // }), err => {
+    // };
+  }
 
 	ngOnInit() {
     this.test();
@@ -135,6 +150,7 @@ export class MemberComponent implements OnInit {
         .map(Staff.toModel)
         .sort((a, b) => {
           return a.id - b.id;
+          // return a.sortOrder - b.sortOrder;
         });
 		}, err => {
     });
@@ -164,14 +180,16 @@ export class MemberComponent implements OnInit {
       isNotTakenEmail = false;
     }
 
-    if (!isValidForm || !isValidEmail || !isNotTakenEmail) {
-      document.querySelector('input[name="first-name"]').classList.remove('is-invalid');
+    if (!isValidForm) {
       return;
+    } else {
+      document.querySelector('input[name="first-name"]').classList.remove('is-invalid');
     }
 
     if (!isValidEmail || !isNotTakenEmail) {
-      document.querySelector('input[name="email"]').classList.remove('is-invalid');
       return;
+    } else {
+      document.querySelector('input[name="email"]').classList.remove('is-invalid');
     }
 
     const dto = this.form.toDto();
@@ -183,7 +201,8 @@ export class MemberComponent implements OnInit {
     this.modal.dismissAll();
     }
 
-  addStaff(staff): void {
+  addStaff(staff: Staff): void {
+    staff.setOrderToLast(this.listusers);
     this.staffService.add(staff)
     .subscribe((data:any) => {
             this.getUser();
@@ -210,6 +229,30 @@ export class MemberComponent implements OnInit {
               this.notifierService.notify('success', 'A Staff has been successfully deleted');
           });
     this.modal.dismissAll();
+  }
+
+  export(type: string): void {
+    let data = this.listusers.map(s => {
+      return {
+        'First Name': s.firstName,
+        'Last Name': s.lastName,
+        'Mobile Number': s.mobileNumber,
+        'Email': s.email,
+        'Appointments': s.appointmentBooking ? 'Enabled' : 'Disabled',
+        'User Permission': s.userPermission,
+        'Start Date': s.employmentStartDate,
+        'End Date': s.employmentEndDate,
+        'Notes': s.notes,
+        'Service Commission': s.commissions.service,
+        'Product Commission': s.commissions.product,
+        'Voucher Commission': s.commissions.voucherSale,
+      };
+    });
+		if(type == 'excel') {
+			this.exportService.exportAsExcelFile(data, 'staff');
+		} else if (type == 'csv') {
+			this.exportService.exportAsCSVFile(data, 'staff');
+		}
   }
 
 }
