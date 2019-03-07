@@ -255,9 +255,10 @@
         <button  type="button" class="btn btn-delete" style="justify-content: flex-start" (click)="openModalDelete(content_delete)"> Delete </button>
         <button type="button" class="btn btn-white" (click)="resetPassword()"> Send reset password email </button>
     </ng-container>
-    
-<button type="submit" class="btn btn-black pull-right"> Save </button>
-<button type="button" class="btn btn-white pull-right" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+    <div class="pull-right">
+        <button type="button" class="btn btn-white mr-2" (click)="modal.dismiss('Cancel click')"> Cancel </button>
+        <button type="submit" class="btn btn-black"> Save </button>
+    </div>
 </div>
 </form>
 </ng-template>
