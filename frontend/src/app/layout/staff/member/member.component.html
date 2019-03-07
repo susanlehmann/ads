@@ -2,7 +2,14 @@
     <div class="col-sm-12">
         <div class="card card-custom mb-3">
             <div class="card-header">
-              <button class="btn btn-black pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
+                <button class="btn btn-black pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
+                <div ngbDropdown class="d-inline-block pull-right mr-2">
+                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Options</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button class="dropdown-item" ngbDropdownItem (click)="export('excel')">Download Excel</button>
+                        <button class="dropdown-item" ngbDropdownItem (click)="export('csv')">Download CSV</button>
+                    </div>
+                </div>
             </div>
             <div class="card-body table-responsive">
                 <table class="table table-hover">
@@ -132,10 +139,12 @@
                             <div class="col-sm-12 btn-switch">
                                     <div class="color-picker" *ngIf="form.appointmentBooking">
                                             <label class="control-label">Appointment Color</label><i class="fa fa-fw fa-question-circle mb-2" placement="bottom" ngbTooltip="See your Calendar Settings page under Setup to set how colors are displayed on the calendar"></i> <br>
-                                            <ng-container *ngFor="let color of colors; index as i">
-                                                <input [(ngModel)]="form.appointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
-                                                <label for="{{color}}"><span class="{{color}}"></span></label>
-                                            </ng-container>
+                                            <div class="ml-2">
+                                                <ng-container *ngFor="let color of colors; index as i">
+                                                    <input [(ngModel)]="form.appointmentColor" type="radio" name="color-appointment" id="{{color}}" value="{{color}}" />
+                                                    <label for="{{color}}"><span class="{{color}}"></span></label>
+                                                </ng-container>
+                                            </div>
                                         </div>
                             </div>
                         </div>

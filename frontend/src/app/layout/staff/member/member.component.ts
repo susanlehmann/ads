@@ -5,6 +5,7 @@ import { ServicesService } from 'src/app/shared/services/serv.service';
 import { NgbDateEnGbParserFormatter } from '../close-date/NgbDateEnGbParserFormatter';
 import { Staff } from '../model/staff';
 import { StaffService } from '../staff.service';
+import { ExcelService } from 'src/app/shared/services/export.service';
 
 @Component({
   providers: [
@@ -37,6 +38,7 @@ export class MemberComponent implements OnInit {
   private modal: NgbModal,
   private staffService: StaffService,
   private svService: ServicesService,
+  private exportService: ExcelService,
 	) {
     this.form = new Staff();
     this.colors = [
@@ -212,6 +214,30 @@ export class MemberComponent implements OnInit {
               this.notifierService.notify('success', 'A Staff has been successfully deleted');
           });
     this.modal.dismissAll();
+  }
+
+  export(type: string): void {
+    let data = this.listusers.map(s => {
+      return {
+        'First Name': s.firstName,
+        'Last Name': s.lastName,
+        'Mobile Number': s.mobileNumber,
+        'Email': s.email,
+        'Appointments': s.appointmentBooking ? 'Enabled' : 'Disabled',
+        'User Permission': s.userPermission,
+        'Start Date': s.employmentStartDate,
+        'End Date': s.employmentEndDate,
+        'Notes': s.notes,
+        'Service Commission': s.commissions.service,
+        'Product Commission': s.commissions.product,
+        'Voucher Commission': s.commissions.voucherSale,
+      };
+    });
+		if(type == 'excel') {
+			this.exportService.exportAsExcelFile(data, 'staff');
+		} else if (type == 'csv') {
+			this.exportService.exportAsCSVFile(data, 'staff');
+		}
   }
 
 }
