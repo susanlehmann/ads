@@ -26,7 +26,7 @@ class LocationController extends Controller
             'street_address' => $request->street_address,
             'optional' => $request->optional,
             'city_location' => $request->city_location,
-            'sate_location' => $request->sate_location,
+            'state_location' => $request->state_location,
             'zip_code_location' => $request->zip_code_location,
             'status_location' => 1,
         ];
@@ -64,14 +64,14 @@ class LocationController extends Controller
                 'street_address' => $request->street_address,
                 'optional' => $request->optional,
                 'city_location' => $request->city_location,
-                'sate_location' => $request->sate_location,
+                'state_location' => $request->state_location,
                 'zip_code_location' => $request->zip_code_location,
             ];
             $location = Location::find($id);
             $check = $location->update($input);
             if($check == true)
             {
-                $msg = ['success' => 'Create a new location group successfully'];
+                $msg = ['success' => true];
             }
             else
             {
@@ -90,7 +90,7 @@ class LocationController extends Controller
             $check = $location->delete();
             if($check == true)
             {
-                $msg = ['success' => 'Delete location successfully'];
+                $msg = ['success' => true];
             }
             else
             {

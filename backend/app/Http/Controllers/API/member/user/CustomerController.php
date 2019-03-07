@@ -134,6 +134,7 @@ class CustomerController extends Controller
             $input = [
                 'id_user_update' => $request->getuser['id'],
                 'status' => 2,
+                'block_reason' => $request->block_reason,
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
             $user = User::find($id);
@@ -159,6 +160,7 @@ class CustomerController extends Controller
             $input = [
                 'id_user_update' => $request->getuser['id'],
                 'status' => 1,
+                'block_reason' => '',
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
             $user = User::find($id);
