@@ -30,33 +30,22 @@
       <div class="row form-group">
         <div class="col-sm-6">
           <label class="control-label">Mobile </label>
-          <div class="input-group">
-            <ngx-intl-tel-input 
-              [enablePlaceholder]="true" 
-              [enableAutoCountrySelect]="true"
-              name="mobile"
-              [cssClass]="'custom-css'"
-              [(ngModel)]="mobile"></ngx-intl-tel-input>
-            <!-- <input [(ngModel)]="form.mobile" type="text" name="mobile" class="form-control input-underline input-lg" placeholder="Mobile" #mobile="ngModel" minlength="9" maxlength="12" pattern="^[0-9]{9,12}$" #mobileChild> -->
-          </div>
-          <!-- <small class="form-text text-danger" *ngIf="!mobile.valid">Number Only!</small> -->
+          <ngx-intl-tel-input 
+            [enablePlaceholder]="true" 
+            [enableAutoCountrySelect]="true"
+            name="mobile"
+            [cssClass]="'form-control'"
+            [(ngModel)]="mobile"></ngx-intl-tel-input>
         </div>
 
         <div class="col-sm-6">
           <label class="control-label">Telephone</label>
-          <div class="input-group">
-            <!-- <div class="input-group-prepend">
-              <div class="input-group-text">T</div>
-            </div>
-            <input [(ngModel)]="form.telephone" type="text" name="telephone" class="form-control input-underline input-lg" placeholder="Telephone" #telephone="ngModel" minlength="1" maxlength="12" pattern="^[0-9]{1,12}$"> -->
             <ngx-intl-tel-input 
               [enablePlaceholder]="true" 
               [enableAutoCountrySelect]="true"
               name="telephone"
-              [cssClass]="'custom-css'"
+              [cssClass]="'form-control'"
               [(ngModel)]="telephone"></ngx-intl-tel-input>
-          </div>
-          <!-- <small class="form-text text-danger" *ngIf="!telephone.valid">Number Only!</small> -->
         </div>
       </div>
 
