@@ -136,6 +136,7 @@ class UserController extends Controller
                 {
                     $query->where('firstName', 'ILIKE', "%$search_name%")
                           ->orWhere('lastName', 'ILIKE', "%$search_name%")
+                          ->orWhere('phone', 'ILIKE', "%$search_name%")
                           ->orWhere('email', 'ILIKE', "%$search_name%");
                 }
             })
