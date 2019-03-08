@@ -92,6 +92,29 @@ export class MemberComponent implements OnInit {
     });
   }
 
+  onSelectAllService(value: boolean): void {
+    if (value) {
+      this.services = this.services.map(v => {
+        v.selected = true;
+        return v;
+      });
+    } else {
+      this.services = this.services.map(v => {
+        v.selected = false;
+        return v;
+      });
+    }
+  }
+  
+  onSelectService(value: boolean, serviceId): void {
+    const hasNotSelectAll = this.services.filter(v => !v.selected)[0];
+    if (hasNotSelectAll) {
+      this.selectAll = false;
+    } else {
+      this.selectAll = true;
+    }
+  }
+
   resetPassword(): void {
     this.staffService.resetPassword(this.form.email).subscribe(v => {
       this.notifierService.notify('success', `Password setup email was sent to ${this.form.firstName}`);

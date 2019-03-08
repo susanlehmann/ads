@@ -205,13 +205,13 @@
                 <p style="font-size: 12px; color: rgba(98,98,98,.55);">Assign services this staff member can perform.</p>
 
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="select-all" [(ngModel)]="selectAll">
-                <label class="custom-control-label" for="customCheck1">Select All</label>
+                    <input type="checkbox" class="custom-control-input" id="select-all-service" name="select-all" [(ngModel)]="selectAll" (ngModelChange)="onSelectAllService($event)">
+                <label class="custom-control-label" for="select-all-service">Select All</label>
                 </div>
                 <hr>
                 <div class="container row">
                 <div *ngFor="let sv of services" class="col-sm-6 custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" name={{sv.id}} [(ngModel)]="sv.selected" id={{sv.id}}>
+                        <input type="checkbox" class="custom-control-input" name={{sv.id}} [(ngModel)]="sv.selected" (ngModelChange)="onSelectService($event, sv.id)" id={{sv.id}}>
                         <label class="custom-control-label" for={{sv.id}}>{{sv.name_service}}</label>
                 </div>
             </div>
