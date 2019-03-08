@@ -98,7 +98,7 @@ export class EditComponent implements OnInit {
 					this.form.display_bookings = true;
 				}
 				this.form.referral = this.form.referral_source;
-				if(this.form.birthday.length > 5){
+				if(this.form.birthday && this.form.birthday.length > 5){
 					this.setYear = true;
 					this.birthday.year = Number(this.datePipe.transform(this.form.birthday, 'yyyy'));
 				} else {
