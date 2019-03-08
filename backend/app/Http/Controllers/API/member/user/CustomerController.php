@@ -28,67 +28,20 @@ class CustomerController extends Controller
     public function store(Request $data)
     {
         $request = (object)json_decode($data->getContent(),true);
-        $input = [
-            'business_id' => 0,
-            'role_id' => 0,
-            'id_user_create' => $request->getuser['id'],
-            'id_user_update' => $request->getuser['id'],
-            'firstName' => $request->firstName,
-            'lastName' => $request->lastName,
-            'email' => $request->email,
-            'password' => $request->password,
-            'phone' => $request->mobile,
-            'tele_phone' => $request->telephone,
-            'appointment_notifications' => $request->notificationType,
-            'accepts_notifications' => $request->acceptNotification,
-            'gender' => $request->gender,
-            'referral_source' => $request->referral,
-            'birthday' => $request->birthday,
-            'display_bookings' => $request->display_bookings,
-            'first_login' => 0,
-            'notes' => $request->notes,
-            'address' => $request->address,
-            'suburb' => $request->suburb,
-            'city' => $request->city,
-            'state' => $request->state,
-            'zip_postcode' => $request->zip_postcode,
-            'sort_order' => 1,
-            'level' => 4,
-            'status' => 1,
-            'parent' => $request->getuser['id'],
-        ];
-        // $user->level = 0; // ko co column level
-        $user = User::create($input);
-        //$user->assignRole($request->user_permission);
-        if($user == true)
-        {
-            $msg = ['success' => 'Create a new account successfully'];
-        }
-        else
-        {
-            $msg = ['error' => 'There was an error creating the account'];
-        }
 
-        return response()->json($msg);
-    }
+        $users = User::where('level',4)
+        ->where('parent',$userId->getuser['id'])
+        ->where('email', $request->email)
+        ->orwhere('phone', $request->mobile)
+        ->count();
 
-    public function show(Request $request)
-    {
-        $id = $request->id;
-        $user = User::find($id);
-        $roles = Role::pluck('name','name')->all();
-        $data['role'] = Role::get();
-        $data['userRole'] = $user->roles->pluck('name','name')->all();
-        $data['user'] = $user;
-        // $data['roles'] = $roles;
-        return response()->json($data);
-    }
-     
-    public function update(Request $request)
-    {    
-        $id = $request->id;
-        if ($id != null) {
+        if ($users > 0) {
+            $msg = ['existed' => 'client has already existed'];
+        } else {
             $input = [
+                'business_id' => 0,
+                'role_id' => 0,
+                'id_user_create' => $request->getuser['id'],
                 'id_user_update' => $request->getuser['id'],
                 'firstName' => $request->firstName,
                 'lastName' => $request->lastName,
@@ -109,19 +62,86 @@ class CustomerController extends Controller
                 'city' => $request->city,
                 'state' => $request->state,
                 'zip_postcode' => $request->zip_postcode,
-                'updated_at' => date('Y-m-d H:i:s'),
+                'sort_order' => 1,
+                'level' => 4,
+                'status' => 1,
+                'parent' => $request->getuser['id'],
             ];
-            $user = User::find($id);
-            $user->update($input);
+            // $user->level = 0; // ko co column level
+            $user = User::create($input);
+            //$user->assignRole($request->user_permission);
             if($user == true)
             {
-                $msg = ['success' => 'Update account successfully'];
+                $msg = ['success' => 'Create a new account successfully'];
             }
             else
             {
-                $msg = ['error' => 'There was an error updating the account'];
+                $msg = ['error' => 'There was an error creating the account'];
             }
+        }
+        return response()->json($msg);
+    }
 
+    public function show(Request $request)
+    {
+        $id = $request->id;
+        $user = User::find($id);
+        $roles = Role::pluck('name','name')->all();
+        $data['role'] = Role::get();
+        $data['userRole'] = $user->roles->pluck('name','name')->all();
+        $data['user'] = $user;
+        // $data['roles'] = $roles;
+        return response()->json($data);
+    }
+     
+    public function update(Request $request)
+    {    
+        $id = $request->id;
+        if ($id != null) {
+            $users = User::where('level',4)
+            ->where('parent',$userId->getuser['id'])
+            ->where('email', $request->email)
+            ->orwhere('phone', $request->mobile)
+            ->count();
+
+            
+            if ($users > 0) {
+                $msg = ['existed' => 'client has already existed'];
+            } else {
+                $input = [
+                    'id_user_update' => $request->getuser['id'],
+                    'firstName' => $request->firstName,
+                    'lastName' => $request->lastName,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'phone' => $request->mobile,
+                    'tele_phone' => $request->telephone,
+                    'appointment_notifications' => $request->notificationType,
+                    'accepts_notifications' => $request->acceptNotification,
+                    'gender' => $request->gender,
+                    'referral_source' => $request->referral,
+                    'birthday' => $request->birthday,
+                    'display_bookings' => $request->display_bookings,
+                    'first_login' => 0,
+                    'notes' => $request->notes,
+                    'address' => $request->address,
+                    'suburb' => $request->suburb,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'zip_postcode' => $request->zip_postcode,
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ];
+                $user = User::find($id);
+                $user->update($input);
+                if($user == true)
+                {
+                    $msg = ['success' => 'Update account successfully'];
+                }
+                else
+                {
+                    $msg = ['error' => 'There was an error updating the account'];
+                }
+            }
             return response()->json($msg);
         }
         
