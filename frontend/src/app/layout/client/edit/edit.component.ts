@@ -67,6 +67,19 @@ export class EditComponent implements OnInit {
 		this.loadMonth();
 	}
 
+	resetMonth(): void {
+		this.birthday.month = "";
+	}
+
+	resetDay(): void {
+		this.birthday.day = "";
+	}
+
+	resetYear(): void {
+		this.setYear = !this.setYear;
+		this.birthday.year = "";
+	}
+
 	private loadInfo(id) {
 		this.userService.getUserById(id).subscribe(
 			(success) => {
@@ -91,14 +104,17 @@ export class EditComponent implements OnInit {
 				} else {
 					this.setYear = false;
 				}
-				this.birthday.month = Number(this.datePipe.transform(this.form.birthday, 'M'));
-				this.birthday.day = Number(this.datePipe.transform(this.form.birthday, 'dd'));
+				if (this.form.birthday) {
+					this.birthday.month = Number(this.datePipe.transform(this.form.birthday, 'M'));
+					this.birthday.day = Number(this.datePipe.transform(this.form.birthday, 'dd'));
+				}
 			},
 			error => {}
 		);
 	}
 
 	onSubmit(): void {
+		if (this.birthday.month && this.birthday.day) {
 			if(!this.birthday.year){
 				let dayNotYear = this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayNotYear, 'MM-dd');
@@ -106,6 +122,9 @@ export class EditComponent implements OnInit {
 				let dayYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayYear, 'yyyy-MM-dd');
 			}
+		} else {
+			this.form.birthday = "";
+		}
 		this.update(this.form);
 	}
 

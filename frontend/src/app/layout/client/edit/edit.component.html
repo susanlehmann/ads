@@ -123,19 +123,22 @@
                         <option value="" selected="selected" disabled="disabled" hidden>Select Month</option>
                         <option *ngFor="let m of month" value="{{m.id}}">{{m.name}}</option>
                       </select>
+                      <button class="btn-x-absolute" (click)="resetMonth()" *ngIf="birthday.month">x</button>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12">
                       <select [(ngModel)]="birthday.day" name="day" class="form-control" (change)="selectDay()">
                         <option value="" selected="selected" disabled="disabled" hidden>Select Day</option>
                         <option *ngFor="let d of day" value="{{d.id}}">{{d.name}}</option>
                       </select>
+                      <button class="btn-x-absolute" (click)="resetDay()" *ngIf="birthday.day">x</button>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 setyear">
+                    <div class="col-lg-4 col-md-4 col-sm-12 setYear">
                       <a href="javascript:void(0);" *ngIf="!setYear" (click)="showYear()">Set Year</a>
                       <select [(ngModel)]="birthday.year" name="year" class="form-control" *ngIf="setYear" (change)="selectYear()">
                         <option value="" selected="selected" disabled="disabled" hidden>Select Year</option>
                         <option *ngFor="let y of year" value="{{y.id}}">{{y.name}}</option>
                       </select>
+                      <button class="btn-x-absolute" (click)="resetYear()" *ngIf="setYear">x</button>
                     </div>
                   </div>
                 </div>

@@ -308,3 +308,16 @@ textarea::-webkit-input-placeholder {
 .intl-tel-input.allow-dropdown {
 	width: 100%;
 }
+
+.btn-x-absolute {
+    position: absolute;
+    width: 28px;
+    right: 20px;
+    top: 15%;
+    background-color: white;
+    color: black;
+    font-weight: bolder;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

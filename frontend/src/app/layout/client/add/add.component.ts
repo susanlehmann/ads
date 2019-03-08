@@ -82,8 +82,21 @@ export class AddComponent implements OnInit {
 		this.loadMonth();
 	}
 
+	resetMonth(): void {
+		this.birthday.month = "";
+	}
+
+	resetDay(): void {
+		this.birthday.day = "";
+	}
+
+	resetYear(): void {
+		this.setYear = !this.setYear;
+		this.birthday.year = "";
+	}
 
 	onSubmit(): void {
+		if (this.birthday.month && this.birthday.day) {
 			if(!this.birthday.year){
 				let dayNotYear = this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayNotYear, 'MM-dd');
@@ -91,6 +104,9 @@ export class AddComponent implements OnInit {
 				let dayYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayYear, 'yyyy-MM-dd');
 			}
+		} else {
+			this.form.birthday = "";
+		}
 		this.addUser(this.form);
 	}
 
