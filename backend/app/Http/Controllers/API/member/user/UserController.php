@@ -124,13 +124,13 @@ class UserController extends Controller
         if(strlen($search_name) == 0)
         {
             $data['user'] = User::where('level',3)
-            ->where('parent',$request->getuser->id)
+            ->where('parent',$request->id)
             ->get();
         }
         else
         {
             $data['user'] = User::where('level',3)
-            ->where('parent',$request->getuser->id)
+            ->where('parent',$request->id)
             ->where(function ($query) use ($search_name) {
                 if(strlen($search_name) > 0)
                 {
