@@ -24,7 +24,7 @@
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Category</label>
-                                <select [(ngModel)]="form.categoryId" name="category" class="form-control">
+                                <select [(ngModel)]="form.categoryId" name="category" class="form-control" style="color:#67768C;">
                                     <option value=0 selected style="color:#A4ADBA">Select category</option>
                                     <option value={{category.id}} *ngFor="let category of categories" selected>
                                         {{category.name_category}}</option>
@@ -35,7 +35,7 @@
                         <div class="row form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Brand</label>
-                                <select name="brand" class="form-control" [(ngModel)]="form.brandId">
+                                <select name="brand" class="form-control" [(ngModel)]="form.brandId" style="color:#67768C;">
                                     <option value=0 selected>Select brand</option>
                                     <option value={{brand.id}} *ngFor="let brand of brands" selected>
                                         {{brand.name_brand}}</option>
@@ -117,7 +117,7 @@
                             <div class="row form-group">
                                 <div class="col-sm-12">
                                     <label class="control-label">Tax<span> Included in prices</span></label>
-                                    <select name="tax" class="form-control" [(ngModel)]="form.taxId">
+                                    <select name="tax" class="form-control" [(ngModel)]="form.taxId" style="color:#67768C;">
                                         <option value=0>Default: No tax</option>
                                         <option value={{tax.id}} *ngFor="let tax of taxs" selected>{{tax.name}}</option>
                                     </select>
@@ -173,7 +173,7 @@
                             <div class="row form-group">
                                 <div class="col-sm-12">
                                     <label class="control-label">Supplier</label>
-                                    <select name="supplier" class="form-control" [(ngModel)]="form.supplierId">
+                                    <select name="supplier" class="form-control" [(ngModel)]="form.supplierId" style="color:#67768C;">
                                         <option value=0 selected>Select Supplier</option>
                                         <option value={{supplier.id}} *ngFor="let supplier of suppliers" selected>
                                             {{supplier.name_supplier}}</option>

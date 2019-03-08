@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-12">
-                                            <label class="control-label">SATE</label>
+                                            <label class="control-label">STATE</label>
                                             <input [(ngModel)]="form.state_supplier" type="text" name="sate" class="form-control input-underline input-lg" placeholder="">
                                             <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
                                         </div>
@@ -103,7 +103,7 @@
                                     <div class="row form-group">
                                         <div class="col-sm-12">
                                             <label class="control-label">ZIP / POST CODE</label>
-                                            <input [(ngModel)]="form.zipcode_supplier" type="number" name="postCode" class="form-control input-underline input-lg" placeholder="">
+                                            <input [(ngModel)]="form.zipcode_supplier" type="text" name="postCode" class="form-control input-underline input-lg" placeholder="">
                                             <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
                                         </div>
                                     </div>
@@ -142,7 +142,7 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-12">
-                                            <label class="control-label">SATE</label>
+                                            <label class="control-label">STATE</label>
                                             <input [(ngModel)]="second_address.sate" type="text" name="sate1" class="form-control input-underline input-lg" placeholder="">
                                             <div class="alert alert-danger" [hidden]="!error.sate"> {{ error.sate }} </div>
                                         </div>
@@ -150,7 +150,7 @@
                                     <div class="row form-group">
                                         <div class="col-sm-12">
                                             <label class="control-label">ZIP / POST CODE</label>
-                                            <input [(ngModel)]="second_address.postCode" type="number" name="postCode1" class="form-control input-underline input-lg" placeholder="">
+                                            <input [(ngModel)]="second_address.postCode" type="text" name="postCode1" class="form-control input-underline input-lg" placeholder="">
                                             <div class="alert alert-danger" [hidden]="!error.postCode"> {{ error.postCode }} </div>
                                         </div>
                                     </div>

@@ -5,3 +5,20 @@
     display: flex;
     padding-left: 0px;
 }
+svg:not(:root) {
+  overflow: hidden;
+}
+.dd{
+  max-width: 100px;
+  margin: 0 auto;
+  padding: 20px 0;
+  text-align: center;
+}
+.da{
+  width: 68px;
+  height: 68px;
+  margin-bottom: 21px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
