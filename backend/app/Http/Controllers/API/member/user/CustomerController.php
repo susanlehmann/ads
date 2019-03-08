@@ -30,7 +30,7 @@ class CustomerController extends Controller
         $request = (object)json_decode($data->getContent(),true);
 
         $users = User::where('level',4)
-        ->where('parent',$userId->getuser['id'])
+        ->where('parent',$request->getuser['id'])
         ->where('email', $request->email)
         ->orwhere('phone', $request->mobile)
         ->count();
@@ -99,7 +99,7 @@ class CustomerController extends Controller
         $id = $request->id;
         if ($id != null) {
             $users = User::where('level',4)
-            ->where('parent',$userId->getuser['id'])
+            ->where('parent',$request->getuser['id'])
             ->where('email', $request->email)
             ->orwhere('phone', $request->mobile)
             ->count();
