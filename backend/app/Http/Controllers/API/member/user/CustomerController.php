@@ -28,14 +28,25 @@ class CustomerController extends Controller
     public function store(Request $data)
     {
         $request = (object)json_decode($data->getContent(),true);
+		$users1 = 0;
+		$users2 = 0;
+		if(strlen($request->email) > 0) {
+			$users1 = User::where('level',4)
+			->where('parent',$request->getuser['id'])
+			->where('email', $request->email)
+			->count();
+		}
+		
+		if(strlen($request->mobile) > 0) {
+			$users2 = User::where('level',4)
+			->where('parent',$request->getuser['id'])
+			->where('phone', $request->mobile)
+			->count();
+		}
 
-        $users = User::where('level',4)
-        ->where('parent',$request->getuser['id'])
-        ->where('email', $request->email)
-        ->orwhere('phone', $request->mobile)
-        ->count();
+        
 
-        if ($users > 0) {
+        if ($users1 > 0 || $users2 >0) {
             $msg = ['existed' => 'client has already existed'];
         } else {
             $input = [
@@ -98,15 +109,26 @@ class CustomerController extends Controller
     {    
         $id = $request->id;
         if ($id != null) {
-            $users = User::where('level',4)
-            ->where('parent',$request->getuser['id'])
-            ->where('email', $request->email)
-            ->orwhere('phone', $request->mobile)
-            ->count();
+			$users1 = 0;
+			$users2 = 0;
+			if(strlen($request->email) > 0) {
+				$users1 = User::where('level',4)
+				->where('parent',$request->getuser['id'])
+				->where('email', $request->email)
+				->count();
+			}
+			
+			if(strlen($request->mobile) > 0) {
+				$users2 = User::where('level',4)
+				->where('parent',$request->getuser['id'])
+				->where('phone', $request->mobile)
+				->count();
+			}
 
-            
-            if ($users > 0) {
-                $msg = ['existed' => 'client has already existed'];
+			
+
+			if ($users1 > 0 || $users2 >0) {
+					$msg = ['existed' => 'client has already existed'];
             } else {
                 $input = [
                     'id_user_update' => $request->getuser['id'],
