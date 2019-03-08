@@ -114,6 +114,12 @@ export class EditComponent implements OnInit {
 	}
 
 	onSubmit(): void {
+		if (this.form.email && this.form.email.length > 0 && !this.form.email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+			this.notifierService.notify('error', `${this.form.email} is not a valid email`);
+			document.querySelector('input[name="email"]').classList.add('is-invalid');
+			return;
+		}
+
 		if (this.birthday.month && this.birthday.day) {
 			if(!this.birthday.year){
 				let dayNotYear = this.birthday.month + "-" + this.birthday.day;
@@ -154,6 +160,10 @@ export class EditComponent implements OnInit {
 
 		this.userService.updateUserById(client).subscribe(
 			success => {
+				if(success.existed){
+					this.notifierService.notify('warning', success.existed);
+					return;
+				}
 				this.route.navigateByUrl('clients/detail/' + this.userId);
 				this.notifierService.notify('success', 'Client information has been successfully updated');
 			},

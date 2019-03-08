@@ -57,6 +57,9 @@
               <div class="input-group-text">@</div>
             </div>
             <input [(ngModel)]="form.email" type="email" name="email" class="form-control input-underline input-lg" placeholder="Email" email #email="ngModel" >
+            <div class="invalid-feedback">
+                is invalid
+          </div>
           </div>
         </div>
       </div>
