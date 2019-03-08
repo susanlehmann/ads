@@ -110,7 +110,7 @@ export class EditLocationComponent implements OnInit {
 	}
 
 	deleteModal(content) {
-		this.modal.open(content, { windowClass: 'container-modal' });
+		this.modal.open(content, { windowClass: 'container-modal delete-modal' });
 	}
 	
 	confirmRemove(){

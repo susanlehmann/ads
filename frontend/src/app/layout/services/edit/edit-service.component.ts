@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { ServicesService } from '../../../shared/services/serv.service';
+import { ServiceTypeService } from '../../../shared/services/services.service';
 import { StaffService } from '../../staff/staff.service';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +22,7 @@ export class EditServiceComponent implements OnInit {
     @ViewChild('voucher_expiryperiod') expiryPeriod: ElementRef;
     @ViewChild('name_service') _name_service: ElementRef;
     @ViewChild('settin_duration') settin_durations: ElementRef;
+    @ViewChild('checkall') checkallBox: ElementRef;
 
 	groupId: any;
 	form: any = {};
@@ -38,7 +40,8 @@ export class EditServiceComponent implements OnInit {
 		private services: ServicesService,
 		private modalService: NgbModal, 
 		private notify: NotifierService,
-		private staff: StaffService
+		private staff: StaffService,
+		private serviceType: ServiceTypeService
 		) 
 	{ 
 		
@@ -54,13 +57,17 @@ export class EditServiceComponent implements OnInit {
 	}
 
 	private loadServicesById(id) {
-		for (var i = 1; i < 10; i++) {
-			this.treatment_type.push({id: i, name: 'Treatment type ' + i});
-		}
+		let userInfo = JSON.parse(localStorage.getItem('user'));
+		this.serviceType.listServiceType(userInfo.id).subscribe(
+			response => {
+				this.treatment_type = response.service;
+			}
+		);
 		let services: any = {'id': id};
 		this.services.getServiceById(services).subscribe(
 			success => {
 				this.form = success.service;
+				this.form.id_business = success.service.id_service_type;
 				this.listusers = JSON.parse(success.service.id_staff);
 				for(var i = 0; i < JSON.parse(success.service.id_staff).length; i++) {
 					this.arrStaff.push(JSON.parse(success.service.id_staff)[i]);
@@ -77,6 +84,12 @@ export class EditServiceComponent implements OnInit {
 					arrUser.push({'id': success.user[i].id, 'name': success.user[i].firstName + ' ' + success.user[i].lastName});
 				}
 	        	this.liststafs = arrUser;
+
+	        	if(this.liststafs.length == this.arrStaff.length) {
+	        		this.checkallBox.nativeElement.setAttribute('checked', true);
+        		} else {
+        			this.checkallBox.nativeElement.removeAttribute('checked');
+    			}
 			}, 
 			err => {}
 		);

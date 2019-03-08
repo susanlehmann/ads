@@ -1,6 +1,6 @@
 <div class="modal-header">
 	<div class="title-header">
-		<span>Add Location</span>
+		<span>Add Busines Type</span>
 	</div>
 	<div class="close">
 		<span (click)="close()">x</span>
@@ -8,39 +8,8 @@
 </div>
 <div class="modal-body">
 	<div class="form-group">
-		<label for="name_location">Location Name</label>
-		<input type="text" name="name_location" class="form-control" placeholder="e.g. Downtown Branch" [(ngModel)]="form.name_location" #name_location="ngModel" #name_location>
-	</div>
-	<div class="form-group">
-		<label for="contact_member">Contact Number</label>
-		<input type="text" name="contact_member" class="form-control" [(ngModel)]="form.contact_member" #contact_member="ngModel">
-	</div>
-	<div class="form-group">
-		<label for="contact_email">contact Email</label>
-		<input type="text" name="contact_email" class="form-control" placeholder="e.g. Downtown Branch" [(ngModel)]="form.contact_email" #contact_email="ngModel">
-		<small>Replies to client appointment notifications will go to this email.</small>
-	</div>
-	<div class="form-group">
-		<label for="street_address">Street Address</label>
-		<input type="text" name="street_address" class="form-control" placeholder="e.g. 120 Queen Street" [(ngModel)]="form.street_address" #street_address="ngModel" #street_address>
-	</div>
-	<div class="form-group">
-		<label for="optional">Apt, Suite, BLDG. (Optional)</label>
-		<input type="text" name="optional" class="form-control" [(ngModel)]="form.optional" #optional="ngModel">
-	</div>
-	<div class="form-group row">
-		<div class="col-md-4 col-sm-4">
-			<label for="city_location">City</label>
-			<input type="text" name="city_location" class="form-control" [(ngModel)]="form.city_location" #city_location="ngModel" #city_location>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<label for="state_location">State</label>
-			<input type="text" name="state_location" class="form-control" [(ngModel)]="form.state_location" #state_location="ngModel">
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<label for="zip_code_location">Zip Code</label>
-			<input type="text" name="zip_code_location" class="form-control" [(ngModel)]="form.zip_code_location" #zip_code_location="ngModel">
-		</div>
+		<label for="type_name">Name Business Type</label>
+		<input type="text" name="type_name" class="form-control" placeholder="e.g. Tatto" [(ngModel)]="form.type_name" #type_name="ngModel" #type_name>
 	</div>
 </div>
 <div class="modal-footer">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { LocationsService } from './../../../shared/services/location.service';
+import { ServiceTypeService } from './../../../shared/services/services.service';
 
 @Component({
 	selector: 'service-type',
@@ -10,24 +10,26 @@ import { LocationsService } from './../../../shared/services/location.service';
 
 export class ServiceTypeComponent implements OnInit {
 	
-	location: any;
-	inputLocation: any;
+	service: any;
+	inputService: any;
 	numberList: number;
+	
 	constructor(
 		private modalService: NgbModal,
-		private locationService: LocationsService
+		private serviceType: ServiceTypeService
 	) {}
 
 	ngOnInit(){
-		this.loadLocation();
+		this.loadServiceType();
 	}
 
-	loadLocation() {
+	loadServiceType() {
 		var user = JSON.parse(localStorage.getItem('user'));
-		this.locationService.listLocation(user.id).subscribe(
+		this.serviceType.listServiceType(user.id).subscribe(
 			success => { 
-				this.location = success;
-				this.numberList = success.location.length;
+				console.log(success);
+				this.service = success;
+				this.numberList = success.service.length;
 			},
 			error => {
 				console.log(error);
@@ -35,15 +37,15 @@ export class ServiceTypeComponent implements OnInit {
 		);
 	}
 
-	checkAddLocation(event) {
+	checkAddService(event) {
 		if(event) {
-			this.loadLocation();
+			this.loadServiceType();
 		}
 	}
 
-	checkEditLocation(event) {
+	checkEditService(event) {
 		if(event) {
-			this.loadLocation();
+			this.loadServiceType();
 		}
 	}
 
@@ -57,12 +59,12 @@ export class ServiceTypeComponent implements OnInit {
         }
     }
 
-	addLocation(content) {
+	addService(content) {
 		this.modalService.open(content, { windowClass: 'container-modal' });
 	}
 
-	editLocation(content, data) {
-		this.inputLocation = data;
+	editService(content, data) {
+		this.inputService = data;
 		this.modalService.open(content, { windowClass: 'container-modal' });
 	}
 }

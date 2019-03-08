@@ -5,8 +5,8 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th class="pd-name">{{'Location name' | translate}}</th>
-							<th>{{'Address' | translate}}</th>
+							<th class="pd-name">{{'Name Service Type' | translate}}</th>
+							<th>{{'Create At' | translate}}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -22,19 +22,14 @@
 	                        </tr>
 	                    </ng-container>
 	                    <ng-container *ngIf="numberList > 0">
-							<tr *ngFor="let local of location?.location" (click)="editLocation(edit_location, local)">
+							<tr *ngFor="let sv of service?.service" (click)="editService(edit_service, sv)">
 								<td class="ba">
 									<span class="avatar">
 										<i class="fa fa-bars"></i>
 									</span>
-									<span>{{local?.name_location}}</span>
+									<span>{{sv?.name_service_type}}</span>
 								</td>
-								<td>
-									{{local?.street_address ? local?.street_address + ',' : ''}}
-									{{local?.city_location ? local?.city_location + ',' : ''}}
-									{{local?.state_location ? local?.state_location + ',' : ''}}
-									{{local?.zip_code_location ? local?.zip_code_location : ''}}
-								</td>
+								<td>{{ sv?.created_at}}</td>
 							</tr>
 						</ng-container>
 					</tbody>
@@ -53,23 +48,23 @@
 	<div class="row">
 		<div id="inbox">
 			<div class="fab">
-				<div class="btn-fixed" (click)="addLocation(add_location)">
+				<div class="btn-fixed" (click)="addService(add_service)">
 					<span></span>
-					<div class="tooltip_group">New Location</div>
+					<div class="tooltip_group">New Service Type</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="clearfix"></div>
 	<div class="row">
-		<ng-template #add_location let-c="close" let-d="dismiss">
-            <add-service-type (checkAddLocation)="checkAddLocation($event)"></add-service-type>
+		<ng-template #add_service let-c="close" let-d="dismiss">
+            <add-service-type (checkAddService)="checkAddService($event)"></add-service-type>
         </ng-template>
 	</div>
 	<div class="clearfix"></div>
 	<div class="row">
-		<ng-template #edit_location let-c="close" let-d="dismiss">
-            <edit-service-type (checkEditLocation)="checkEditLocation($event)" [inputLocation]="inputLocation"></edit-service-type>
+		<ng-template #edit_service let-c="close" let-d="dismiss">
+            <edit-service-type (checkEditService)="checkEditService($event)" [inputService]="inputService"></edit-service-type>
         </ng-template>
 	</div>
 </div>

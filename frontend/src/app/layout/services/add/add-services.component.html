@@ -24,9 +24,9 @@
       	<div class="row form-group">
         	<div class="col-sm-12">
 	          	<label class="control-label">{{'Treatment type' }}</label>
-	          	<select [(ngModel)]="form.id_business" name="id_business" class="form-control" #id_business="ngModel">
+	          	<select [(ngModel)]="form.id_business" name="id_business" class="form-control" #id_business="ngModel" #id_business>
 	            	<option value="0" disabled selected="selected" hidden> -= Select Treatment type =-</option>
-	            	<option *ngFor="let no of treatment_type" value="{{no.id}}">{{no.name}}</option>
+	            	<option *ngFor="let no of treatment_type" value="{{no.id}}">{{no.name_service_type}}</option>
 	          	</select>
 	          	<small>Choose the most relevant type, for internal reference and not currently visible to clients.</small>
         	</div>
@@ -136,7 +136,7 @@
                     <label class="control-label mb-4">{{'Select staff who perform this service.' }}</label>
                     <div class="custom-radios">
                     	<div>
-						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(listusers, $event)">
+						    <input type="checkbox" id="checkall" name="checkall" (change)="selectAllStaff(listusers, $event)" #checkall>
 						    <label for="checkall">
 						    	<span></span>
 						    	Select All
