@@ -33,6 +33,7 @@ export class AddServiceComponent implements OnInit {
 	staffCheckAll: any = [];
 	listusers: any = [];
 	checked: any;
+	priceOptions: any[];
 
 	constructor(private activatedRoute: ActivatedRoute,
 		private route: Router,
@@ -42,7 +43,14 @@ export class AddServiceComponent implements OnInit {
 		private modalService: NgbModal,
 		private serviceType: ServiceTypeService
 		) 
-	{ 
+	{
+		this.priceOptions = [{
+			id: Math.random().toString(),
+			duration_service: 60,
+			retail_price_service: '',
+			name_pricing_service: '',
+			special_price_service: '',
+		}]; 
 		this.activatedRoute.queryParams.subscribe((params: Params) => {
 			if(params.groupId == "" || typeof(params.groupId) == "undefined" || typeof(params.groupId) == undefined){
 				this.route.navigateByUrl('services');
@@ -75,7 +83,19 @@ export class AddServiceComponent implements OnInit {
 		this.route.navigateByUrl('services');
 	}
 
+	addPriceOption(): void {
+		this.priceOptions.push({
+			id: Math.random().toString(),
+			duration_service: 60,
+			retail_price_service: '',
+			name_pricing_service: '',
+			special_price_service: '',
+		});
+	}
 
+	removePriceOption(o): void {
+		this.priceOptions = this.priceOptions.filter(v => v!=o);
+	}
 
 	private reloadForm() {
 		let userInfo = JSON.parse(localStorage.getItem('user'));
@@ -138,6 +158,11 @@ export class AddServiceComponent implements OnInit {
 	}
 
 	onSubmit(): void {
+		this.form.duration_service = this.priceOptions[0].duration_service;
+		this.form.retail_price_service = this.priceOptions[0].retail_price_service;
+		this.form.name_pricing_service = this.priceOptions[0].name_pricing_service;
+		this.form.special_price_service = this.priceOptions[0].special_price_service;
+
 		if(this.checkEmpty()){
 			if(this.form.enable_online_bookings) {
 				this.form.enable_online_bookings = 1;
