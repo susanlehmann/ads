@@ -51,8 +51,8 @@ export class EditServiceGroupComponent implements OnInit {
 		let groupId: any = {id: id};
 		this.servicesService.getService_GroupById(groupId).subscribe(
 			success => {
+                this.strColor = success.service_group.color_service_group;
 				this.form = success.service_group;
-				this.strColor = success.service_group.color_service_group;
 			},
 			error => {}
 		);
