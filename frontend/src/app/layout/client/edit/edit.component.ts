@@ -85,11 +85,10 @@ export class EditComponent implements OnInit {
 					this.form.display_bookings = true;
 				}
 				this.form.referral = this.form.referral_source;
-				if(Number(this.datePipe.transform(this.form.birthday, 'yyyy')) > 0){
+				if(this.form.birthday.length > 5){
 					this.setYear = true;
 					this.birthday.year = Number(this.datePipe.transform(this.form.birthday, 'yyyy'));
-				}
-				if(Number(this.datePipe.transform(this.form.birthday, 'yyyy')) >= 2019) {
+				} else {
 					this.setYear = false;
 				}
 				this.birthday.month = Number(this.datePipe.transform(this.form.birthday, 'M'));
@@ -100,17 +99,13 @@ export class EditComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		if(this.birthday.year){
-			if(typeof(this.form.birthdayYear) == "undefined" || typeof(this.form.birthdayYear) == undefined){
-				let dayNotYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
+			if(!this.birthday.year){
+				let dayNotYear = this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayNotYear, 'MM-dd');
 			} else {
-				let dayYear = this.form.birthdayYear + "-" + this.birthday.month + "-" + this.birthday.day;
+				let dayYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayYear, 'yyyy-MM-dd');
 			}
-		} else {
-			this.form.birthday = "";
-		}
 		this.update(this.form);
 	}
 
@@ -137,8 +132,6 @@ export class EditComponent implements OnInit {
 			client.mobile = this.mobile.internationalNumber;
 		}
 		client.password = "";
-		client.birthday = this.datePipe.transform(this.form.birthday, 'yyyy-MM-dd');
-		this.form.birthday = new Date(client.birthday);
 
 		this.userService.updateUserById(client).subscribe(
 			success => {

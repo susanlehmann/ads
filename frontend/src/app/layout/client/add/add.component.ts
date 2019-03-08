@@ -84,17 +84,13 @@ export class AddComponent implements OnInit {
 
 
 	onSubmit(): void {
-		if(this.birthday.year){
-			if(typeof(this.form.birthdayYear) == "undefined" || typeof(this.form.birthdayYear) == undefined){
-				let dayNotYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
+			if(!this.birthday.year){
+				let dayNotYear = this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayNotYear, 'MM-dd');
 			} else {
-				let dayYear = this.form.birthdayYear + "-" + this.birthday.month + "-" + this.birthday.day;
+				let dayYear = this.birthday.year + "-" + this.birthday.month + "-" + this.birthday.day;
 				this.form.birthday = this.datePipe.transform(dayYear, 'yyyy-MM-dd');
 			}
-		} else {
-			this.form.birthday = "";
-		}
 		this.addUser(this.form);
 	}
 

@@ -110,6 +110,6 @@ export class DetailComponent implements OnInit {
 
 
     getDateofBirth(value) {
-      return this.datePipe.transform(value, 'dd MMMM yyyy');
+      return this.datePipe.transform(value, value.length > 5 ? 'dd MMMM yyyy' : 'dd MMMM');
     }
 }
