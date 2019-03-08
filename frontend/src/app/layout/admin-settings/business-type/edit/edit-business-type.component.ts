@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { LocationsService } from './../../../../shared/services/location.service';
+import { BusinessTypeService } from './../../../../shared/services/services.service';
 import { NotifierService } from 'angular-notifier'; 
 
 @Component({
@@ -11,55 +11,41 @@ import { NotifierService } from 'angular-notifier';
 
 export class EditBusinessTypeComponent implements OnInit {
 	
-	@Input() inputLocation: any;
-	@Output() checkEditLocation: EventEmitter<any> = new EventEmitter<any>();
-	@ViewChild('namelocation') namelocation: ElementRef;
-	@ViewChild('streetaddress') streetaddress: ElementRef;
-	@ViewChild('citylocation') citylocation: ElementRef;
+	@Input() inputBusiness: any;
+	@Output() checkEditBusiness: EventEmitter<any> = new EventEmitter<any>();
+	@ViewChild('type_name') type_name: ElementRef;
 
 	formUpdate: any = {};
 	user: any;
 
 	constructor(
 		private modal: NgbModal,
-		private localtionService: LocationsService,
+		private businessType: BusinessTypeService,
 		private notify: NotifierService
 	) {}
 
 	ngOnInit() {
 		this.user = JSON.parse(localStorage.getItem('user'));
-		this.checkEditLocation.emit(false);
+		this.checkEditBusiness.emit(false);
 		this.reloadData();
 	}
 
 	reloadData()
 	{
-		this.formUpdate.id = this.inputLocation.id;
-		this.formUpdate.namelocation = this.inputLocation.name_location;
-		this.formUpdate.streetaddress = this.inputLocation.street_address;
-		this.formUpdate.statelocation = this.inputLocation.state_location;
-		this.formUpdate.citylocation = this.inputLocation.city_location;
-		this.formUpdate.contactemail = this.inputLocation.contact_email;
-		this.formUpdate.contactmember = this.inputLocation.contact_member;
-		this.formUpdate.zip_code = this.inputLocation.zip_code_location;
+		this.formUpdate.id = this.inputBusiness.id;
+		this.formUpdate.type_name = this.inputBusiness.name_business_type;
 	}
 
-	updateLocation(location: any) {
+	updateBusinessType(business: any) {
 		var data : any = {};
-		data.id = location.id;
+		data.id = business.id;
 		data.ownerId = this.user.id;
-		data.name_location = location.namelocation;
-		data.street_address = location.streetaddress;
-		data.state_location = location.statelocation;
-		data.city_location = location.citylocation;
-		data.contact_email = location.contactemail;
-		data.contact_member = location.contactmember;
-		data.zip_code_location = location.zip_code;
-		this.localtionService.updateLocation(data).subscribe(
+		data.name_business_type = business.type_name;
+		this.businessType.updateBusinessType(data).subscribe(
 			result => { 
 				if(result.success){
-					this.checkEditLocation.emit(true);
-					this.notify.notify('success', 'Location Updated !');
+					this.checkEditBusiness.emit(true);
+					this.notify.notify('success', 'Business Type Updated !');
 					this.modal.dismissAll();
 				}
 			},
@@ -70,38 +56,23 @@ export class EditBusinessTypeComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		if(this.checkRequired()) {
-			this.updateLocation(this.formUpdate);
-		}
+		this.notify.notify('warning', 'Business Type name is not empty !');
+		// if(this.checkRequired()) {
+		// 	this.updateBusinessType(this.formUpdate);
+		// }
 		// this.addLocation(this.form);
 	}
 
 
 	checkRequired() {
-		if(this.formUpdate.namelocation == "" || this.formUpdate.namelocation == null) {
-			this.notify.notify('warning', 'Location name is not empty !');
-			this.namelocation.nativeElement.focus();
-			this.namelocation.nativeElement.classList.add('required');
+		if(this.formUpdate.type_name == "" || this.formUpdate.type_name == null) {
+			this.notify.notify('warning', 'Business Type name is not empty !');
+			this.type_name.nativeElement.focus();
+			this.type_name.nativeElement.classList.add('required');
 			return false;
 		} else {
-			this.namelocation.nativeElement.classList.remove('required');
-			if(this.formUpdate.streetaddress == "" || this.formUpdate.streetaddress == null) {
-				this.notify.notify('warning', 'Street address is not empty !');
-				this.streetaddress.nativeElement.focus();
-				this.streetaddress.nativeElement.classList.add('required');
-				return false;
-			} else {
-				this.streetaddress.nativeElement.classList.remove('required');
-				if(this.formUpdate.citylocation == "" || this.formUpdate.citylocation == null) {
-					this.notify.notify('warning', 'City is not empty !');
-					this.citylocation.nativeElement.focus();
-					this.citylocation.nativeElement.classList.add('required');
-					return false;
-				} else {
-					this.citylocation.nativeElement.classList.remove('required');
-					return true;
-				}
-			}
+			this.type_name.nativeElement.classList.remove('required');
+			return true;
 		}
 	}
 
@@ -110,15 +81,15 @@ export class EditBusinessTypeComponent implements OnInit {
 	}
 
 	deleteModal(content) {
-		this.modal.open(content, { windowClass: 'container-modal' });
+		this.modal.open(content, { windowClass: 'container-modal delete-modal' });
 	}
 	
 	confirmRemove(){
-		this.localtionService.removeLocation(this.inputLocation.id).subscribe(
+		this.businessType.removeBusinessType(this.inputBusiness.id).subscribe(
 			result => { 
 				if(result.success) {
-					this.checkEditLocation.emit(true);
-					this.notify.notify('success', 'Location Deleted !');
+					this.checkEditBusiness.emit(true);
+					this.notify.notify('success', 'Business Type Deleted !');
 					this.modal.dismissAll();
 				} else {
 					this.notify.notify('warning', 'Delete Error !');

@@ -20,14 +20,14 @@ const routes: Routes = [
 				path: 'service-type',
 				component: ServiceTypeComponent,
 				data: {
-					title: 'Administrator > Service Type'
+					title: 'Service Type'
 				}
 			},
 			{
 				path: 'business-type',
 				component: BusinessTypeComponent,
 				data: {
-					title: 'Administrator > Business Type'
+					title: 'Business Type'
 				}
 			}
 		]

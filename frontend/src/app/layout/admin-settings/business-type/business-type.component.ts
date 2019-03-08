@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { LocationsService } from './../../../shared/services/location.service';
+import { BusinessTypeService } from './../../../shared/services/services.service';
 
 @Component({
 	selector: 'business-type',
@@ -10,24 +10,24 @@ import { LocationsService } from './../../../shared/services/location.service';
 
 export class BusinessTypeComponent implements OnInit {
 	
-	location: any;
-	inputLocation: any;
+	business: any;
+	inputBusiness: any;
 	numberList: number;
 	constructor(
 		private modalService: NgbModal,
-		private locationService: LocationsService
+		private businessType: BusinessTypeService
 	) {}
 
 	ngOnInit(){
-		this.loadLocation();
+		this.loadBusinessType();
 	}
 
-	loadLocation() {
+	loadBusinessType() {
 		var user = JSON.parse(localStorage.getItem('user'));
-		this.locationService.listLocation(user.id).subscribe(
+		this.businessType.listBusinessType(user.id).subscribe(
 			success => { 
-				this.location = success;
-				this.numberList = success.location.length;
+				this.business = success;
+				this.numberList = success.business.length;
 			},
 			error => {
 				console.log(error);
@@ -35,15 +35,15 @@ export class BusinessTypeComponent implements OnInit {
 		);
 	}
 
-	checkAddLocation(event) {
+	checkAddBusiness(event) {
 		if(event) {
-			this.loadLocation();
+			this.loadBusinessType();
 		}
 	}
 
-	checkEditLocation(event) {
+	checkEditBusiness(event) {
 		if(event) {
-			this.loadLocation();
+			this.loadBusinessType();
 		}
 	}
 
@@ -57,12 +57,12 @@ export class BusinessTypeComponent implements OnInit {
         }
     }
 
-	addLocation(content) {
+	addBusiness(content) {
 		this.modalService.open(content, { windowClass: 'container-modal' });
 	}
 
-	editLocation(content, data) {
-		this.inputLocation = data;
+	editBusinessType(content, data) {
+		this.inputBusiness = data;
 		this.modalService.open(content, { windowClass: 'container-modal' });
 	}
 }

@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { LocationsService } from './../../../../shared/services/location.service';
+import { BusinessTypeService } from './../../../../shared/services/services.service';
 import { NotifierService } from 'angular-notifier'; 
 @Component({
 	selector: 'add-business-type',
@@ -10,32 +10,31 @@ import { NotifierService } from 'angular-notifier';
 
 export class AddBusinessTypeComponent implements OnInit {
 	
-	@Output() checkAddLocation: EventEmitter<any> = new EventEmitter<any>();
-	@ViewChild('name_location') name_location: ElementRef;
-	@ViewChild('street_address') street_address: ElementRef;
-	@ViewChild('city_location') city_location: ElementRef;
+	@Output() checkAddBusiness: EventEmitter<any> = new EventEmitter<any>();
+	@ViewChild('type_name') type_name: ElementRef;
 
 	form: any = {};
 	user: any;
 
 	constructor(
 		private modal: NgbModal,
-		private localtionService: LocationsService,
+		private businessType: BusinessTypeService,
 		private notify: NotifierService
 	) {}
 
 	ngOnInit() {
 		this.user = JSON.parse(localStorage.getItem('user'));
-		this.form.contact_email = this.user.email;
-		this.checkAddLocation.emit(false);
+		this.checkAddBusiness.emit(false);
 	}
 
-	addLocation(location: any) {
-		location.ownerId = this.user.id;
-		this.localtionService.createLocation(location).subscribe(
+	addBusinessType(business: any) {
+		var data : any = {};
+		data.ownerId = this.user.id;
+		data.name_business_type = business.type_name;
+		this.businessType.createBusinessType(data).subscribe(
 			success => { 
-				this.checkAddLocation.emit(true);
-				this.notify.notify('success', 'Location Added !');
+				this.checkAddBusiness.emit(true);
+				this.notify.notify('success', 'Business Type Added !');
 				this.modal.dismissAll();
 			},
 			error => { 
@@ -46,37 +45,21 @@ export class AddBusinessTypeComponent implements OnInit {
 
 	onSubmit(): void {
 		if(this.checkRequired()) {
-			this.addLocation(this.form);
+			this.addBusinessType(this.form);
 		}
 		// this.addLocation(this.form);
 	}
 
 
 	checkRequired() {
-		if(this.form.name_location == "" || this.form.name_location == null) {
-			this.notify.notify('warning', 'Location name is not empty !');
-			this.name_location.nativeElement.focus();
-			this.name_location.nativeElement.classList.add('required');
+		if(this.form.type_name == "" || this.form.type_name == null) {
+			this.notify.notify('warning', 'Business type name is not empty !');
+			this.type_name.nativeElement.focus();
+			this.type_name.nativeElement.classList.add('required');
 			return false;
 		} else {
-			this.name_location.nativeElement.classList.remove('required');
-			if(this.form.street_address == "" || this.form.street_address == null) {
-				this.notify.notify('warning', 'Street address is not empty !');
-				this.street_address.nativeElement.focus();
-				this.street_address.nativeElement.classList.add('required');
-				return false;
-			} else {
-				this.street_address.nativeElement.classList.remove('required');
-				if(this.form.city_location == "" || this.form.city_location == null) {
-					this.notify.notify('warning', 'City is not empty !');
-					this.city_location.nativeElement.focus();
-					this.city_location.nativeElement.classList.add('required');
-					return false;
-				} else {
-					this.city_location.nativeElement.classList.remove('required');
-					return true;
-				}
-			}
+			this.type_name.nativeElement.classList.remove('required');
+			return true;
 		}
 	}
 

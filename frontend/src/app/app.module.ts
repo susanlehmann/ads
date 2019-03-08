@@ -19,6 +19,7 @@ import { ExcelService } from './shared/services/export.service';
 import { TokenService } from './shared/services/token.service';
 import { SearchComponent } from './search/search.component';
 import { UserService } from './shared/services/user.service';
+import { ServiceTypeService, BusinessTypeService } from './shared/services/services.service';
 import { SupplierService } from './layout/inventory/supplier/supplier.service';
 import { BrandService } from './layout/inventory/brand/brand.service';
 import { CategoryService } from './layout/inventory/category/category.service';
@@ -133,6 +134,8 @@ const customNotifierOptions: NotifierOptions = {
         ExcelService,
         LocationsService,
         TitleService,
+        ServiceTypeService,
+        BusinessTypeService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     ],

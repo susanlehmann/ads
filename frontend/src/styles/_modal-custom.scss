@@ -20,6 +20,12 @@
     }
 }
 
+.delete-modal {
+	.modal-body {
+		height: auto !important;
+	}
+}
+
 $breakpoint-iphone: 667px;
 //desktop
 @media (min-width: $breakpoint-iphone) {

@@ -8,6 +8,8 @@ import { ServiceTypeComponent } from './service-type/service-type.component';
 import { BusinessTypeComponent } from './business-type/business-type.component';
 import { AddServiceTypeComponent } from './service-type/add/add-service-type.component';
 import { EditServiceTypeComponent } from './service-type/edit/edit-service-type.component';
+import { AddBusinessTypeComponent } from './business-type/add/add-business-type.component';
+import { EditBusinessTypeComponent } from './business-type/edit/edit-business-type.component';
 import { PageComponent } from './page/page.component';
 
 @NgModule({
@@ -17,7 +19,9 @@ import { PageComponent } from './page/page.component';
   	PageComponent,
   	AddServiceTypeComponent,
     EditServiceTypeComponent,
-    BusinessTypeComponent
+    BusinessTypeComponent,
+    AddBusinessTypeComponent,
+    EditBusinessTypeComponent
   ],
   imports: [
     CommonModule,

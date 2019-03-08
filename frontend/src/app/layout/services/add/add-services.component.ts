@@ -4,6 +4,7 @@ import { ServicesService } from '../../../shared/services/serv.service';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { StaffService } from '../../staff/staff.service';
+import { ServiceTypeService } from '../../../shared/services/services.service';
 import { NotifierService } from 'angular-notifier';
 @Component({
   selector: 'add-service',
@@ -21,6 +22,7 @@ export class AddServiceComponent implements OnInit {
     @ViewChild('name_service') name_service: ElementRef;
     @ViewChild('settin_duration') settin_durations: ElementRef;
     @ViewChild('checkall') checkallBox: ElementRef;
+    @ViewChild('id_business') id_business: ElementRef;
 
 	groupId: any;
 	form: any = {};
@@ -37,7 +39,8 @@ export class AddServiceComponent implements OnInit {
 		private services: ServicesService,
 		private staff: StaffService,
 		private noti: NotifierService,
-		private modalService: NgbModal
+		private modalService: NgbModal,
+		private serviceType: ServiceTypeService
 		) 
 	{ 
 		this.activatedRoute.queryParams.subscribe((params: Params) => {
@@ -78,9 +81,14 @@ export class AddServiceComponent implements OnInit {
 		let userInfo = JSON.parse(localStorage.getItem('user'));
 		this.form.ownerId = userInfo.id;
 		this.form.id_business = 0;
-		for (var i = 1; i < 10; i++) {
-			this.treatment_type.push({id: i, name: 'Treatment type ' + i});
-		}
+		this.serviceType.listServiceType(userInfo.id).subscribe(
+			response => {
+				this.treatment_type = response.service;
+			}
+		);
+		// for (var i = 1; i < 10; i++) {
+		// 	this.treatment_type.push({id: i, name: 'Treatment type ' + i});
+		// }
 		this.form.duration_service = 60;
 		// this.form.id_service_group = this.groupId;
 		this.form.settin_duration = 15;
@@ -123,17 +131,14 @@ export class AddServiceComponent implements OnInit {
 					arrUser.push({'id': success.user[i].id, 'name': success.user[i].firstName + ' ' + success.user[i].lastName});
 				}
 	        	this.listusers = arrUser;
-	        	// console.log(this.listusers);
+	        	this.defaultSelectAllStaff(this.listusers, true);
 			}, 
 			err => {}
 		);
 	}
 
 	onSubmit(): void {
-		if(!this.checkEmpty()){
-			this.noti.notify('warning', 'Service Name is not Empty !');
-			this.name_service.nativeElement.focus();
-		} else {
+		if(this.checkEmpty()){
 			if(this.form.enable_online_bookings) {
 				this.form.enable_online_bookings = 1;
 			} else {
@@ -167,6 +172,7 @@ export class AddServiceComponent implements OnInit {
 		if (index === -1) {
 			this.arrStaff.push(listStaff);
 		} else {
+			this.checkallBox.nativeElement.removeAttribute('checked');
 			this.arrStaff.splice(index,1);
 		}
 		this.form.id_staff = JSON.stringify(this.arrStaff);
@@ -176,44 +182,29 @@ export class AddServiceComponent implements OnInit {
 	selectAllStaff(listStaffs, event) {
 		var index = this.staffCheckAll.indexOf(listStaffs);
 
-		if(event.srcElement.checked) {
+		if(event.srcElement.checked || this.checkallBox.nativeElement.getAttribute('checked')) {
 			this.arrStaff = [];
-			if (index === -1) {
+			this.checkallBox.nativeElement.setAttribute('checked','checked');
+			// if (index === -1) {
 				this.staffCheckAll.push(listStaffs);
 				listStaffs.forEach(iSelect => {
 					// iSelect.selected = true,
 					this.arrStaff.push(iSelect)
 				});
 				this.checked = true;
-			} else {
-				listStaffs.forEach(iSelect => {
-					// iSelect.selected = false,
-					this.arrStaff.splice(this.arrStaff.indexOf(iSelect),1)
-				});
-				this.staffCheckAll.splice(index,1);
-				this.checked = false;
-			}
+			// } else {
+			// 	listStaffs.forEach(iSelect => {
+			// 		// iSelect.selected = false,
+			// 		this.arrStaff.splice(this.arrStaff.indexOf(iSelect),1)
+			// 	});
+			// 	this.staffCheckAll.splice(index,1);
+			// 	this.checked = false;
+			// }
 		} else {
+			this.checkallBox.nativeElement.removeAttribute('checked');
 			this.arrStaff = [];
 			this.staffCheckAll = [];
 		}
-		// this.arrStaff.push({'id': listStaff.id, 'name': listStaff.firstName +' '+listStaff.lastName});
-		
-		// if (index === -1) {
-		// 	this.staffCheckAll.push(listStaffs);
-		// 	listStaffs.forEach(iSelect => {
-		// 		// iSelect.selected = true,
-		// 		this.arrStaff.push(iSelect)
-		// 	});
-		// 	this.checked = true;
-		// } else {
-		// 	listStaffs.forEach(iSelect => {
-		// 		// iSelect.selected = false,
-		// 		this.arrStaff.splice(this.arrStaff.indexOf(iSelect),1)
-		// 	});
-		// 	this.staffCheckAll.splice(index,1);
-		// 	this.checked = false;
-		// }
 
 		this.form.id_staff = JSON.stringify(this.arrStaff);
 		console.log(this.arrStaff);
@@ -221,9 +212,17 @@ export class AddServiceComponent implements OnInit {
 
 	checkEmpty() {
 		if(typeof(this.form.name_service) == "undefined" || typeof(this.form.name_service) == undefined || this.form.name_service == "") {
+			this.noti.notify('warning', 'Service Name is not Empty !');
+			this.name_service.nativeElement.focus();
 			return false;
 		} else {
-			return true;
+			if(this.form.id_business == 0 || this.form.id_business === 0) {
+				this.noti.notify('warning', 'Service Type is not Empty !');
+				this.id_business.nativeElement.focus();
+				return false;
+			} else {
+				return true;
+			}
 		}
 	}
 
@@ -273,5 +272,36 @@ export class AddServiceComponent implements OnInit {
 
 	close(value) {
 		this.modalService.dismissAll();
+	}
+
+
+	defaultSelectAllStaff(listStaffs, event) {
+		var index = this.staffCheckAll.indexOf(listStaffs);
+
+		if(event) {
+			this.arrStaff = [];
+			this.checkallBox.nativeElement.setAttribute('checked', 'checked');
+			// if (index === -1) {
+				this.staffCheckAll.push(listStaffs);
+				listStaffs.forEach(iSelect => {
+					// iSelect.selected = true,
+					this.arrStaff.push(iSelect)
+				});
+				this.checked = true;
+			// } else {
+			// 	listStaffs.forEach(iSelect => {
+			// 		// iSelect.selected = false,
+			// 		this.arrStaff.splice(this.arrStaff.indexOf(iSelect),1)
+			// 	});
+			// 	this.staffCheckAll.splice(index,1);
+			// 	this.checked = false;
+			// }
+		} else {
+			this.arrStaff = [];
+			this.staffCheckAll = [];
+		}
+
+		this.form.id_staff = JSON.stringify(this.arrStaff);
+		console.log(this.arrStaff);
 	}
 }
