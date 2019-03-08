@@ -43,6 +43,10 @@ export class StaffService {
         // return this._http.post(`${this.baseUrl}/user/staff/delete_user`, {'staffId': staffId, 'sortOrder': sortOrder});
     }
 
+    searchStaff(query: string) {
+        return this._http.post(`${this.baseUrl}/user/staff/search_user`, {name_user : query, id:this.currentUserId});
+    }
+
     resetPassword(email) {
         return this._http.post(`${this.baseUrl}/auth/password/email`, {'email': email});
     }

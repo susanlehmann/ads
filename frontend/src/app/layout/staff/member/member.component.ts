@@ -7,6 +7,8 @@ import { Staff } from '../model/staff';
 import { StaffService } from '../staff.service';
 import { ExcelService } from 'src/app/shared/services/export.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   providers: [
@@ -33,6 +35,8 @@ export class MemberComponent implements OnInit {
   services: any[];
   permissions: any[];
   selectAll = true;
+  keyWordChanged = new Subject<string>();
+  keyword: string;
   
 	constructor(
   private notifierService: NotifierService,
@@ -78,6 +82,12 @@ export class MemberComponent implements OnInit {
     this.test();
     this.getUser();
     this.getServices();
+    this.keyWordChanged.pipe(
+      debounceTime(500))
+      .subscribe(text => {
+        this.keyword = text;
+        this.searchProduct();
+    });
   }
 
   test() {
@@ -89,6 +99,20 @@ export class MemberComponent implements OnInit {
     if (pressed.join('').includes(secret)) {
       this.form.mockData();
     }
+    });
+  }
+
+  changed(text) {
+    this.keyWordChanged.next(text);
+  }
+
+  searchProduct() {
+    this.staffService.searchStaff(this.keyword).subscribe((list: any) => {
+      this.listusers = list.user
+      .map(Staff.toModel)
+      .sort((a, b) => {
+        return a.id - b.id;
+      });
     });
   }
 

@@ -2,6 +2,8 @@
     <div class="col-sm-12">
         <div class="card card-custom mb-3">
             <div class="card-header">
+                <input type="text" class="form-control col-sm-12 col-md-4" placeholder="Search by name, mobile number or email"
+                    [ngModel]='keyword' (ngModelChange)='changed($event)'>
                 <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
                 <div ngbDropdown class="d-inline-block pull-right mr-2">
                     <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Options</button>
