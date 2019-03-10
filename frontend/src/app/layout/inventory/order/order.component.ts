@@ -94,13 +94,14 @@ export class OrderComponent implements OnInit {
       this.closeResult = `Dismissed`;
     });
   }
-
+  check: any;
   openModal(content: NgbModalRef) {
     this.modal.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed`;
     });
+    this.check = this.listsuppliers.length;
   }
   openSModal(content, supplier) {
     this._supplier = supplier;

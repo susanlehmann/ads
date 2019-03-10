@@ -538,17 +538,123 @@ $breakpoint-iphone: 667px;
     margin-right: 5px;
   }
 }
-.ad{
-  margin-bottom: 16px;
-  margin-top: 0;
+// .ad{
+//   margin-bottom: 16px;
+//   margin-top: 0;
+//   font-weight: 700;
+//   color: #23434A;
+//   line-height: 25px;
+// }
+// .as{
+//   font-size: 16px;
+//   font-weight: 400;
+//   line-height: 22px;
+// }
+// svg:not(:root) {
+//   overflow: hidden;
+// }
+// .dd{
+//   max-width: 100px;
+//   margin: 0 auto;
+//   padding: 20px 0;
+//   text-align: center;
+// }
+// .da{
+//   width: 68px;
+//   height: 68px;
+//   margin-bottom: 21px;
+//   position: relative;
+//   top: 0;
+//   left: 0;
+// }
+
+.cus{
+  background-color: #24334A;
+  color: white;
+  text-transform: uppercase;
+  width: 100%;
   font-weight: 700;
-  color: #23434A;
-  line-height: 25px;
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+  line-height: 18px;
+  padding: 8px 16px;
+  white-space: nowrap;
+  min-width: 128px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px 0 #A4ADBA;
+  border: 1px solid transparent;
+  transition: all 0.12s linear;
+  text-decoration: none;
+  min-height: 42px;
 }
-.as{
+.dv1{
+  padding: 8px;
+  margin-bottom: 0;
+}
+.aa{
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 48px 0;
+  text-align: center;
+}
+.p1{
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #67768C;
   font-size: 16px;
-  font-weight: 400;
   line-height: 22px;
+  word-wrap: break-word;
+  max-width: 100%;
+  min-width: 0;
+  font-weight: 400;
+}
+.p2{
+  font-weight: 700;
+  font-size: 22px;
+  color: #24334A;
+  line-height: 60px;
+}
+.xP1JRl{
+  align-items: center;
+  -webkit-box-align: center;
+  display: flex;
+  flex-shrink: 0;
+  padding: 0;
+}
+.LqKsYE {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  margin-right: 15px;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+._10B3mn svg path, ._10B3mn svg polygon {
+  fill: #F5A623 !important;
+}
+.BJziWW {
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+}
+._1HzH5b {
+  line-height: 1.143;
+  font-size: 22px;
+  font-weight: 400;
 }
 svg:not(:root) {
   overflow: hidden;

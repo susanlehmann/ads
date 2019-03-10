@@ -85,7 +85,7 @@
               </ng-container> -->
             <ng-container>
               <tr *ngFor="let stock of stocks; index as i">
-                <td>{{stock.createdAt}}</td>
+                <td>{{stock.createdAt | date: 'dd MMM yyyy, hh:mm'}}</td>
                 <td>{{stock.staffName}}</td>
                 <td>{{stock.action}}</td>
                 <td>{{stock.isIncreased ? '+' : '-'}} {{stock.stockQty}}</td>
