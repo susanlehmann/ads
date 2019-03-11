@@ -19,14 +19,14 @@ class ServiceTypeController extends Controller
         $input = [
             'id_create' => $request->ownerId,
             'id_update' => $request->ownerId,
-            'name_service_type' => $request->name_business_type,
+            'name_service_type' => $request->name_service_type,
             'status_service_type' => 1,
         ];
         // $user->level = 0; // ko co column level
         $service = ServiceType::create($input);
         if($service == true)
         {
-            $msg = ['success' => 'Create a new service successfully'];
+            $msg = ['success' => $service];
         }
         else
         {
@@ -50,13 +50,13 @@ class ServiceTypeController extends Controller
     
             $input = [
                 'id_update' => $request->ownerId,
-                'name_service_type' => $request->name_business_type,
+                'name_service_type' => $request->name_service_type,
             ];
             $service = ServiceType::find($id);
             $check = $service->update($input);
             if($check == true)
             {
-                $msg = ['success' => 'Create a new service group successfully'];
+                $msg = ['success' => $service];
             }
             else
             {
@@ -75,7 +75,7 @@ class ServiceTypeController extends Controller
             $check = $service->delete();
             if($check == true)
             {
-                $msg = ['success' => 'Delete account successfully'];
+                $msg = ['success' => $check];
             }
             else
             {

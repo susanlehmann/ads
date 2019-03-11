@@ -31,7 +31,7 @@
         	</div>
       	</div>
       	<hr/>
-      	<div class="row form-group" *ngFor="let po of priceOptions">
+      	<div class="row form-group" *ngFor="let po of priceOptions;let i = index">
         	<div class="col-sm-12">
         		<div class="panel panel-default">
 							<button class="remove-price-option" *ngIf="priceOptions.length > 1" (click)="removePriceOption(po)">x</button>
@@ -40,7 +40,7 @@
         					<div class="col-sm-6">
         						<div class="form-group">
         							<label class="control-label">{{'Duration' }}</label>
-						          	<select [(ngModel)]="po.duration_service" name="duration_service" class="form-control">
+						          	<select [(ngModel)]="po.duration_service" name="duration_service{{i}}" class="form-control">
 						            	<option value="5">5min</option>
 						            	<option value="10">10min</option>
 						            	<option value="15">15min</option>
@@ -95,7 +95,7 @@
 										<div class="input-group-prepend">
 											<div class="input-group-text">&pound;</div>
 										</div>
-										<input [(ngModel)]="po.retail_price_service" type="text" required text class="form-control input-underline input-lg" name="retail{{po.id}}" placeholder="e.g: 0.00">
+										<input [(ngModel)]="po.retail_price_service" type="text" required text class="form-control input-underline input-lg" name="retail{{i}}" placeholder="e.g: 0.00">
 									</div>
         						</div>
         					</div>
@@ -104,7 +104,7 @@
         					<div class="col-sm-6">
         						<div class="form-group">
         							<label class="control-label">{{'Price name (optional)' }}</label>
-						          	<input [(ngModel)]="po.name_pricing_service" type="text" class="form-control input-underline input-lg" name="name{{po.id}}" placeholder="e.g: Services Name 1">
+						          	<input [(ngModel)]="po.name_pricing_service" type="text" class="form-control input-underline input-lg" name="name{{i}}" placeholder="e.g: Services Name {{i+1}}">
         						</div>
         					</div>
         					<div class="col-sm-6">
@@ -114,7 +114,7 @@
 										<div class="input-group-prepend">
 											<div class="input-group-text">&pound;</div>
 										</div>
-										<input [(ngModel)]="po.special_price_service" type="text" class="form-control input-underline input-lg" name="special{{po.id}}" placeholder="e.g: 0.00">
+										<input [(ngModel)]="po.special_price_service" type="text" class="form-control input-underline input-lg" name="special{{i}}" placeholder="e.g: 0.00">
 									</div>
         						</div>
         					</div>

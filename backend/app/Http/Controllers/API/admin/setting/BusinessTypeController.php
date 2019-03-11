@@ -26,7 +26,7 @@ class BusinessTypeController extends Controller
         $business = BusinessType::create($input);
         if($business == true)
         {
-            $msg = ['success' => 'Create a new Business successfully'];
+            $msg = ['success' => $business];
         }
         else
         {
@@ -56,7 +56,7 @@ class BusinessTypeController extends Controller
             $check = $business->update($input);
             if($check == true)
             {
-                $msg = ['success' => 'Create a new service group successfully'];
+                $msg = ['success' => $business];
             }
             else
             {
@@ -75,7 +75,7 @@ class BusinessTypeController extends Controller
             $check = $business->delete();
             if($check == true)
             {
-                $msg = ['success' => 'Delete account successfully'];
+                $msg = ['success' => $check];
             }
             else
             {

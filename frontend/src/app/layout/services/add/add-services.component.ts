@@ -45,7 +45,6 @@ export class AddServiceComponent implements OnInit {
 		) 
 	{
 		this.priceOptions = [{
-			id: Math.random().toString(),
 			duration_service: 60,
 			retail_price_service: '',
 			name_pricing_service: '',
@@ -85,7 +84,6 @@ export class AddServiceComponent implements OnInit {
 
 	addPriceOption(): void {
 		this.priceOptions.push({
-			id: Math.random().toString(),
 			duration_service: 60,
 			retail_price_service: '',
 			name_pricing_service: '',
@@ -158,12 +156,9 @@ export class AddServiceComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		this.form.duration_service = this.priceOptions[0].duration_service;
-		this.form.retail_price_service = this.priceOptions[0].retail_price_service;
-		this.form.name_pricing_service = this.priceOptions[0].name_pricing_service;
-		this.form.special_price_service = this.priceOptions[0].special_price_service;
-
 		if(this.checkEmpty()){
+			this.form.price_options = JSON.stringify(this.priceOptions);
+
 			if(this.form.enable_online_bookings) {
 				this.form.enable_online_bookings = 1;
 			} else {
@@ -179,7 +174,7 @@ export class AddServiceComponent implements OnInit {
 			} else {
 				this.form.enable_commission = 0;
 			}
-			// console.log(this.form);
+			
 			this.services.createService(this.form).subscribe(
 				success => {
 					this.noti.notify('success', success.success);

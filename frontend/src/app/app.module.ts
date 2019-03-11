@@ -40,6 +40,7 @@ import { NotifierService } from 'angular-notifier';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { OrderModule } from 'ngx-order-pipe';
 import { DataTableModule } from "angular-6-datatable";
+import { environment } from './../environments/environment.prod';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -88,6 +89,21 @@ const customNotifierOptions: NotifierOptions = {
           }
       }
     }
+    
+const baseUrl = environment.baseUrl;
+
+const ngxUiLoaderConfigs = {
+    showForeground: true,
+    exclude: [
+        baseUrl + '/user/staff/search_user',
+        baseUrl + '/user/customer/search_user',
+        baseUrl + '/user/inventory/product/search-product',
+        baseUrl + '/user/inventory/category/search-category',
+        baseUrl + '/user/inventory/supplier/search-supplier',
+        baseUrl + '/user/inventory/brand/search-brand',
+    ]
+}
+
 
 @NgModule({
     imports: [
@@ -97,7 +113,7 @@ const customNotifierOptions: NotifierOptions = {
         OrderModule,
         BrowserAnimationsModule,
         NgxUiLoaderModule,
-        NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
+        NgxUiLoaderHttpModule.forRoot(ngxUiLoaderConfigs),
         HttpClientModule,
         TranslateModule.forRoot({
             loader: {
