@@ -12,7 +12,10 @@
 
 
 }
-
+.disabled-class {
+  pointer-events: none;
+  opacity: .5;
+}
 .modal-header {
     padding-top: 0;
 

@@ -146,9 +146,9 @@
                 </div>
 
               <div class="row form-group">
-                  <div class="col-sm-12">
+                  <div class="col-sm-12" [ngClass]="form?.notes ? '' : 'disabled-class'">
                       <div class="custom-control custom-checkbox">
-                          <input [(ngModel)]="form.displayAllBooking" name="display-all" type="checkbox" class="custom-control-input" id="customCheck2">
+                          <input [(ngModel)]="form.displayAllBooking" name="display-all" type="checkbox" class="custom-control-input" id="customCheck2" [checked]="form?.notes">
                           <label class="custom-control-label" for="customCheck2">Display on all bookings</label>
                         </div>
                   </div>

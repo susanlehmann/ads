@@ -78,8 +78,7 @@ export class AddComponent implements OnInit {
 		this.form.notificationType = "4";
 		this.form.gender = "3";
 		this.form.referral = "1";
-    this.form.acceptNotification = true;
-    this.form.displayAllBooking = true;
+    	this.form.acceptNotification = true;
 		this.loadMonth();
 	}
 
@@ -114,7 +113,7 @@ export class AddComponent implements OnInit {
 		} else {
 			this.form.birthday = "";
     }
-    this.form.display_bookings = this.form.displayAllBooking ? 1 : 0;
+    // this.form.display_bookings = this.form.displayAllBooking ? 1 : 0;
 		this.addUser(this.form);
 	}
 
