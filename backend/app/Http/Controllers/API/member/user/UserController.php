@@ -151,7 +151,7 @@ class UserController extends Controller
             $input = [
                 'sort_order' => $value['sort_order']
             ];
-            $user = User::find($value->id);
+            $user = User::find($value['id']);
             $user->update($input);
         }
     }
