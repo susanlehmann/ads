@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         // List all the products
-        $data['user'] = User::where('level',3)->where('parent',$request->id)->get();
+        $data['user'] = User::where('level',3)->where('parent',$request->id)->orderby('sort_order', 'ASC')->get();
         $data['role'] = Role::get();
         return response()->json($data);
     }
@@ -143,5 +143,16 @@ class UserController extends Controller
             ->get(); 
         }
         return response()->json($data);
+    }
+
+    public function sort(Request $request) {
+        $listStaff = $request->listStaff;
+        foreach ($listStaff as $value) {
+            $input = [
+                'sort_order' => $value->sort_order;
+            ];
+            $user = User::find($value->id);
+            $user->update($input);
+        }
     }
 }
