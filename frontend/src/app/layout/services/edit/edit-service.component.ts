@@ -34,6 +34,7 @@ export class EditServiceComponent implements OnInit {
 	arrStaff: any = [];
 	staffCheckAll: any = [];
 	checked: any;
+	priceOptions: any[];
 
 	constructor(private activatedRoute: ActivatedRoute,
 		private route: Router,
@@ -44,7 +45,12 @@ export class EditServiceComponent implements OnInit {
 		private serviceType: ServiceTypeService
 		) 
 	{ 
-		
+		this.priceOptions = [{
+			duration_service: 60,
+			retail_price_service: '',
+			name_pricing_service: '',
+			special_price_service: '',
+		}]; 
 	}
 
 	ngOnInit() {
@@ -54,6 +60,19 @@ export class EditServiceComponent implements OnInit {
         }, {updateOn: 'blur'});
 		this.activatedRoute.params.subscribe(params => {this.serviceId = params.id;});
 		this.loadServicesById(this.serviceId);
+	}
+
+	addPriceOption(): void {
+		this.priceOptions.push({
+			duration_service: 60,
+			retail_price_service: '',
+			name_pricing_service: '',
+			special_price_service: '',
+		});
+	}
+ 
+	removePriceOption(o): void {
+		this.priceOptions = this.priceOptions.filter(v => v!=o);
 	}
 
 	private loadServicesById(id) {
@@ -68,6 +87,12 @@ export class EditServiceComponent implements OnInit {
 			success => {
 				this.form = success.service;
 				this.form.id_business = success.service.id_service_type;
+
+				const priceOptions = JSON.parse(success.service.price_options);
+				if (priceOptions && priceOptions.length > 0) {
+					this.priceOptions = priceOptions;
+				}
+
 				this.listusers = JSON.parse(success.service.id_staff);
 				for(var i = 0; i < JSON.parse(success.service.id_staff).length; i++) {
 					this.arrStaff.push(JSON.parse(success.service.id_staff)[i]);
@@ -139,7 +164,13 @@ export class EditServiceComponent implements OnInit {
             'enable_voucher_sales': this.form.enable_voucher_sales,
             'enable_commission': this.form.enable_commission,
             'voucher_expiryperiod': this.form.voucher_expiryperiod,
-        });
+		});
+		
+		this.form.duration_service = this.priceOptions[0].duration_service;
+		this.form.retail_price_service = this.priceOptions[0].retail_price_service;
+		this.form.name_pricing_service = this.priceOptions[0].name_pricing_service;
+		this.form.special_price_service = this.priceOptions[0].special_price_service;
+		this.form.price_options = JSON.stringify(this.priceOptions);
 
         this.services.updateService(this.form).subscribe(
         	success => {

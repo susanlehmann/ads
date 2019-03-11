@@ -103,3 +103,24 @@ $breakpoint-iphone: 667px;
     border-top: none;
   }
 }
+
+.remove-price-option {
+  position: absolute;
+  right: 20px;
+  background: none;
+  border: none;
+  outline: none;
+  color: red;
+  cursor: pointer;
+  font-size: 1.25rem;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.panel-body {
+  padding: 20px;
+  background: #f3f2f2;
+  border-radius: 4px;
+}
