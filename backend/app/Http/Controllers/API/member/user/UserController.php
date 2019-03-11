@@ -149,7 +149,7 @@ class UserController extends Controller
         $listStaff = $request->listStaff;
         foreach ($listStaff as $value) {
             $input = [
-                'sort_order' => $value->sort_order
+                'sort_order' => $value['sort_order']
             ];
             $user = User::find($value->id);
             $user->update($input);
