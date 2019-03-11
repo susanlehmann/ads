@@ -19,7 +19,7 @@ class CreateServicesTable extends Migration
             $table->integer('id_client');
             $table->integer('id_create');
             $table->integer('id_update');
-            $table->integer('id_business')->nullable();
+            $table->integer('id_service_type')->nullable();
             $table->string('name_service');
             $table->text('price_options')->nullable();
             $table->text('id_staff')->nullable();

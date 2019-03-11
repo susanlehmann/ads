@@ -38,7 +38,7 @@ class ServiceCtroller extends Controller
             'id_client' => $request->ownerId,
             'id_create' => $request->ownerId,
             'id_update' => $request->ownerId,
-            'id_business' => $request->id_business,
+            'id_service_type' => $request->id_business,
             'name_service' => $request->name_service,
             'price_options' => $request->price_options,
             'id_staff' => $request->id_staff,
@@ -88,7 +88,7 @@ class ServiceCtroller extends Controller
 
             $input = [
                 'id_update' => $request->ownerId,
-                'id_business' => $request->id_business,
+                'id_service_type' => $request->id_business,
                 'name_service' => $request->name_service,
                 'price_options' => $request->price_options,
                 'id_staff' => $request->id_staff,
