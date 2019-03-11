@@ -1,13 +1,26 @@
 <ng-container *ngIf="!hasProduct; else listdata">
   <div class="text-center" style="margin-top: 30px;">
-    <h1><i class="fa fa-product-hunt"></i></h1>
+      <div class="dd"><span class="da"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M23 47H7c-1.7 0-3-1.3-3-3V13v-.2l2-7.9V3c0-1.7 1.3-3 3-3h12c1.7 0 3 1.3 3 3v1.9l2 7.9V44c0 1.7-1.3 3-3 3zM6 13.1V44c0 .6.4 1 1 1h16c.6 0 1-.4 1-1V13.1l-2-7.9V3c0-.6-.4-1-1-1H9c-.6 0-1 .4-1 1v2.2l-2 7.9z"></path><path d="M5 12h20v2H5zM7 4h16v2H7zM41 47H23v-2h18c.6 0 1-.4 1-1V32.2l-1.9-5.8c0-.1-.1-.2-.1-.3v-2c0-.6-.4-1-1-1H26v-2h13c1.7 0 3 1.3 3 3v1.8l1.9 5.8c0 .1.1.2.1.3v12c0 1.7-1.3 3-3 3z"></path><path d="M26 25h15v2H26zM26 31h17v2H26zM25 36H15c-.6 0-1-.4-1-1V20c0-.6.4-1 1-1h9v2h-8v13h9v2zM38 41h-9c-.6 0-1-.4-1-1v-4c0-.6.4-1 1-1h9c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1zm-8-2h7v-2h-7v2z"></path></svg></span></div>
     <h3 class="text-capitalize">Add New Products</h3>
     <p>Have you got stuff you want to sell? No sweat -<br>
     you can add your retail products here and sell them<br>
     with an existing appointment or as one-off items. Too easy!</p>
-    <button class="btn btn-black" type="button" [routerLink]="[ '/inventory/products/add' ]">New
+    <button class="btn btn-black" type="button" [routerLink]="[ '/inventory/products/add' ]" style="width:20%;">New
       product</button>
   </div>
+  <!-- <div class="aa">
+      <div class="text-center" style="margin-top: 30px;">
+          <div class="dd"><span class="da"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path d="M23 47H7c-1.7 0-3-1.3-3-3V13v-.2l2-7.9V3c0-1.7 1.3-3 3-3h12c1.7 0 3 1.3 3 3v1.9l2 7.9V44c0 1.7-1.3 3-3 3zM6 13.1V44c0 .6.4 1 1 1h16c.6 0 1-.4 1-1V13.1l-2-7.9V3c0-.6-.4-1-1-1H9c-.6 0-1 .4-1 1v2.2l-2 7.9z"></path><path d="M5 12h20v2H5zM7 4h16v2H7zM41 47H23v-2h18c.6 0 1-.4 1-1V32.2l-1.9-5.8c0-.1-.1-.2-.1-.3v-2c0-.6-.4-1-1-1H26v-2h13c1.7 0 3 1.3 3 3v1.8l1.9 5.8c0 .1.1.2.1.3v12c0 1.7-1.3 3-3 3z"></path><path d="M26 25h15v2H26zM26 31h17v2H26zM25 36H15c-.6 0-1-.4-1-1V20c0-.6.4-1 1-1h9v2h-8v13h9v2zM38 41h-9c-.6 0-1-.4-1-1v-4c0-.6.4-1 1-1h9c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1zm-8-2h7v-2h-7v2z"></path></svg></span></div>
+        <h3 class="text-capitalize p2">Add New Products</h3>
+        <p class="p1">Have you got stuff you want to sell? No sweat -<br>
+          you can add your retail products here and sell them<br>
+          with an existing appointment or as one-off items. Too easy!</p>
+        <div class="dv1" style="display: flex; flex-direction: row; flex-grow: 1;">
+            <button class="btn btn-black" type="button" [routerLink]="[ '/inventory/products/add' ]">NEW
+              PRODUCT</button>
+        </div>
+      </div>
+    </div> -->
 </ng-container>
 
 <ng-template #listdata>
@@ -57,7 +70,7 @@
             <td>{{product.barCode}}</td>
             <td>{{product.retailPrice}}</td>
             <td>{{product.totalOnHand}}</td>
-            <td>{{product.updatedAt}}</td>
+            <td>{{product.updatedAt | date: 'dd MMM yyyy'}}</td>
           </tr>
         </tbody>
         <!-- <tfoot *ngIf="numberList > 0">

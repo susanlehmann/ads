@@ -78,7 +78,8 @@ export class AddComponent implements OnInit {
 		this.form.notificationType = "4";
 		this.form.gender = "3";
 		this.form.referral = "1";
-		this.form.acceptNotification = true;
+    this.form.acceptNotification = true;
+    this.form.displayAllBooking = true;
 		this.loadMonth();
 	}
 
@@ -112,7 +113,8 @@ export class AddComponent implements OnInit {
 			}
 		} else {
 			this.form.birthday = "";
-		}
+    }
+    this.form.display_bookings = this.form.displayAllBooking ? 1 : 0;
 		this.addUser(this.form);
 	}
 
@@ -136,7 +138,7 @@ export class AddComponent implements OnInit {
 		client.zip_postcode = "";
 		client.birthday = this.form.birthday;
 		client.gender = this.form.gender;
-		if(this.telephone == "null" || this.telephone == null){ 
+		if(this.telephone == "null" || this.telephone == null){
 			client.telephone = "";
 		} else {
 			client.telephone = this.telephone.internationalNumber;
@@ -181,7 +183,7 @@ export class AddComponent implements OnInit {
 				let message = error.error.message;
 				this.alertError(message);
 			}
-		)      
+		)
 	}
 
 	alertError(message: string) {

@@ -11,7 +11,7 @@
 
 .container-modal {
 	.modal-dialog {
-    	margin: 0 auto;
+    	//margin: 0 auto;
 
     	.modal-content{
     		border: none;
@@ -29,12 +29,12 @@
 $breakpoint-iphone: 667px;
 //desktop
 @media (min-width: $breakpoint-iphone) {
-  
+
 }
 
 //mobile
 
-@media (max-width: 375px) { 
+@media (max-width: 375px) {
 	.box-add-product {
 		.modal-body {
 		    padding: 25% 0 0 0 !important;
@@ -43,7 +43,7 @@ $breakpoint-iphone: 667px;
 
 }
 @media (max-width: $breakpoint-iphone) {
-  	
+
   	.box-add-product {
   		height: auto !important;
   		.modal-header {
@@ -71,7 +71,7 @@ $breakpoint-iphone: 667px;
   		}
   	}
 	.box-add {
-		.modal-footer { 
+		.modal-footer {
 			.btn-white {
 				display: block;
 			}
@@ -79,25 +79,25 @@ $breakpoint-iphone: 667px;
 	}
 
 	.box-delete {
-		.modal-footer { 
+		.modal-footer {
 			position: static;
 		}
 	}
 
 	.box-un-block {
-		.modal-footer { 
+		.modal-footer {
 			position: static;
 		}
 	}
 
 	.box-block {
-		.modal-footer { 
+		.modal-footer {
 			position: static;
 		}
 	}
 
 	.group-service {
-		.modal-footer { 
+		.modal-footer {
 			position: static;
 		}
 	}

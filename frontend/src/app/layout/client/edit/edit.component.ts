@@ -21,7 +21,7 @@ export class EditComponent implements OnInit {
 
 	form: any = {};
 	birthday: any = {};
-	model12: any = {}; 
+	model12: any = {};
 
 	notificationTypes = [
 		{ id: 1, name: "Don't send notifications" },
@@ -93,9 +93,9 @@ export class EditComponent implements OnInit {
 					this.form.acceptNotification = false;
 				}
 				if(this.form.display_bookings == 0 ){
-					this.form.display_bookings = false;
+					this.form.displayAllBooking = false;
 				} else {
-					this.form.display_bookings = true;
+					this.form.displayAllBooking = true;
 				}
 				this.form.referral = this.form.referral_source;
 				if(this.form.birthday && this.form.birthday.length > 5){
@@ -146,7 +146,7 @@ export class EditComponent implements OnInit {
 		} else {
 			client.display_bookings = 0;
 		}
-		if(this.telephone == "null" || this.telephone == null){ 
+		if(this.telephone == "null" || this.telephone == null){
 			client.telephone = "";
 		} else {
 			client.telephone = this.telephone.internationalNumber;

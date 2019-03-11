@@ -23,7 +23,7 @@ export class Client {
       this.new();
       return this;
     }
-  
+
     new() {
       this.firstName = "";
       this.lastName = "";
@@ -31,6 +31,7 @@ export class Client {
       this.mobile = "";
       this.email = "";
       this.notificationType = 1;
+      this.displayAllBooking = true;
       this.notes = "";
       this.gender = 1;
       this.referral = 1;
@@ -41,8 +42,8 @@ export class Client {
       this.zip = "";
       this.getuser = null;
     }
-  
-  
+
+
     mockData() {
       this.firstName = "Giang";
       this.lastName = "Mai";
@@ -58,8 +59,9 @@ export class Client {
       this.state = "Hanoi";
       this.zip = "100000";
       this.suburb = "Green star";
+      this.displayAllBooking = true;
     }
-  
+
     static toModel(dto: any) {
       const model = new Client();
       model.updateData(dto);
@@ -85,9 +87,10 @@ export class Client {
         password: this.password,
         notificationType: this.notificationType,
         acceptNotification: this.acceptNotification,
+        displayAllBooking: this.displayAllBooking,
       };
     }
-  
+
     toDto(): any {
       return {
         id: this.id,
@@ -106,7 +109,7 @@ export class Client {
         zip: this.zip,
       };
     }
-  
+
     updateData(data: any) {
       const {
         id,
@@ -121,7 +124,7 @@ export class Client {
         dial_code,
         address,
      } = data;
-  
+
       this.id = id;
       this.firstName = firstName;
       this.lastName = lastName;
@@ -134,7 +137,7 @@ export class Client {
       this.address = address;
       this.suburb = appointment_color;
     }
-  
+
     create_UUID() {
       var dt = new Date().getTime();
       var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -144,6 +147,5 @@ export class Client {
       });
       return uuid;
   }
-  
+
   }
-  
