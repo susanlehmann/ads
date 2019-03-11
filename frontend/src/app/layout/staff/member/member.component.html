@@ -42,7 +42,7 @@
                     </ng-container>
                     <ng-container *ngIf="listusers">
                         <!-- TODO: wait for sort api cdkDrag -->
-                            <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)"> 
+                            <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)" cdkDrag> 
                                     <td>
                                         <span class="appoinment-color" [ngStyle]="{'background': user.appointmentColor}"></span>
                                     </td>

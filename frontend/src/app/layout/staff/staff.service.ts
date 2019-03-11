@@ -39,8 +39,8 @@ export class StaffService {
         return this._http.post(`${this.baseUrl}/user/staff/delete_user`, {'id': id});
     }
 
-    sortStaff(staffId: number, sortOrder: number) {
-        // return this._http.post(`${this.baseUrl}/user/staff/delete_user`, {'staffId': staffId, 'sortOrder': sortOrder});
+    sortStaff(sortedList: any[]) {
+        return this._http.post(`${this.baseUrl}/user/staff/sort_user`, {listStaff: sortedList});
     }
 
     searchStaff(query: string) {
