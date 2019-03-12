@@ -26,6 +26,7 @@ const routes: Routes = [
             { path: 'analytic', loadChildren: './analytic/analytic.module#AnalyticModule' },
             { path: 'setup', loadChildren: './setup/setup.module#SetupModule' },
             { path: 'admin-settings', loadChildren: './admin-settings/admin-settings.module#AdminSettingsModule' },
+            { path: 'sales', loadChildren: './sales/sales.module#SalesModule' },
             //{ path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' }
         ]
     }

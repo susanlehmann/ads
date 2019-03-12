@@ -1,0 +1,74 @@
+<section class="page-wrapper sales-reports" data-update-history="true" id="daily-sales">
+	<div class="filters-container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="box-filter-location">
+					<div class="row">
+						<div class="col-lg-3 col-md-6 col-sm-12">
+							<select name="lstDateTime" class="form-control" [(ngModel)]="form.dateTime" (change)="selectedDate()">
+								<option *ngFor="let dt of listDateTime" value="{{dt?.value}}">{{dt?.name}}</option>
+							</select>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12">
+							<select name="lstLocation" class="form-control" [(ngModel)]="form.location">
+								<option value="">All Locations</option>
+								<option *ngFor="let lct of listLocation?.location" value="{{lct?.id}}">{{lct?.name_location}}</option>
+							</select>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12">
+							<select name="lstStaff" class="form-control" [(ngModel)]="form.staff">
+								<option value="">All Staffs</option>
+								<option *ngFor="let u of listStaff?.user" value="{{u?.id}}">{{u?.firstName}}&nbsp;{{u?.lastName ? u?.lastName : ''}}</option>
+							</select>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-12">
+							<span class="btn btn-dark line-height" (click)="filterConf()">View</span>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="row" *ngIf="form.dateTime == 'custom'">
+						<div class="col-lg-5 col-md-6 col-sm-12 col-xl-12">
+							<div class="week-picker">
+						      	<input class="form-control" (click)="dateStart.open()" readonly name="dateStart" [(ngModel)]="form.dateStart" ngbDatepicker #dateStart="ngbDatepicker">
+						      	<span>to</span>
+						      	<input class="form-control" (click)="dateEnd.open()" readonly name="dateEnd" [(ngModel)]="form.dateEnd" ngbDatepicker #dateEnd="ngbDatepicker">
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="box-filter-export offset-lg-6 offset-md-0 offset-sm-0">
+					<div class="row">
+						<div class="col-lg-8 col-md-6 col-sm-12">
+							<div class="input-group">
+								<input [(ngModel)]="form.searchText" type="text" class="form-control input-underline input-lg" name="searchText" placeholder="Reference or Client" #searchText="ngModel" #searchText>
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-search"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<select name="lstExport" class="form-control fix-width" (change)="exportEvent($event)">
+								<option value="0">Export</option>
+								<option value="excel">Excel</option>
+								<option value="pdf">PDF</option>
+								<option value="csv">CSV</option>
+							</select>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box-title">
+		<span>{{dateSelected}}, {{staff}}, {{location}}, generated {{currentWeekModel}}</span>
+	</div>
+
+	<div class="box-table">
+		abc
+	</div>
+</section>

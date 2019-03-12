@@ -69,9 +69,15 @@
 		thead {
 			th {
 				width: 20%;
-
+				cursor: pointer;
+				padding: 0;
 				&.pd-avatar {
 				    padding-left: 50px;
+				}
+				span {
+					cursor: pointer;
+					display: block;
+					padding: 0.75rem;
 				}
 			}
 		}

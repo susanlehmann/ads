@@ -5,7 +5,10 @@ import { CalendarComponent } from './calendar.component';
 const routes: Routes = [
     {
         path: '',
-        component: CalendarComponent
+        component: CalendarComponent,
+        data: {
+        	title: 'Calendar'
+        }
     }
 ];
 

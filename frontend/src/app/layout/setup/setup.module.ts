@@ -9,6 +9,8 @@ import { AddLocationComponent } from './locations/add/add-location.component';
 import { EditLocationComponent } from './locations/edit/edit-location.component';
 import { PageComponent } from './page/page.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { CalendarSettingsComponent } from './calendar/calendar-settings.component';
+import { TaxesComponent } from './taxes/taxes.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
   	PageComponent,
   	AddLocationComponent,
     EditLocationComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    CalendarSettingsComponent,
+    TaxesComponent
   ],
   imports: [
     CommonModule,

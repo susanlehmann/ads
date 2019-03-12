@@ -202,7 +202,7 @@ export class AddServiceComponent implements OnInit {
 	selectAllStaff(listStaffs, event) {
 		var index = this.staffCheckAll.indexOf(listStaffs);
 
-		if(event.srcElement.checked || this.checkallBox.nativeElement.getAttribute('checked')) {
+		if(event.srcElement.checked) {
 			this.arrStaff = [];
 			this.checkallBox.nativeElement.setAttribute('checked','checked');
 			// if (index === -1) {
@@ -221,9 +221,9 @@ export class AddServiceComponent implements OnInit {
 			// 	this.checked = false;
 			// }
 		} else {
-			this.checkallBox.nativeElement.removeAttribute('checked');
 			this.arrStaff = [];
 			this.staffCheckAll = [];
+			this.checkallBox.nativeElement.removeAttribute('checked');
 		}
 
 		this.form.id_staff = JSON.stringify(this.arrStaff);
