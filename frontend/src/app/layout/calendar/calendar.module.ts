@@ -6,8 +6,6 @@ import { ChartsModule as Ng2Charts } from 'ng2-charts';
 import { ChartsRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './calendar.component';
 import { PageHeaderModule } from '../../shared';
-import { NgxTuiCalendarModule } from 'ngx-tui-calendar';
-import { FullCalendarModule } from 'ng-fullcalendar'
 import { AddEventComponent } from './add-event/add-event.component';
 import { EventSesrvice } from './event.service';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -20,7 +18,6 @@ import { DynamicComponent } from './box/dynamic/dynamic-component';
     imports: [
     	// BrowserModule,
     	FormsModule,
-    	FullCalendarModule,
 	    CommonModule, 
 	    Ng2Charts, 
 	    ChartsRoutingModule, 
