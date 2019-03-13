@@ -200,4 +200,8 @@ Route::group([
         Route::post('search-location', 'LocationController@search'); 
     });
 
+    Route::group(['prefix' => 'user/setup/companydetail', 'namespace' => 'API\member\setup'], function(){
+        Route::post('list-companydetail', 'CompanydetailController@index');
+        Route::post('update-companydetail', 'CompanydetailController@update');
+    });
 });
