@@ -1,0 +1,27 @@
+<div class="modal-header" style="border: none">
+	<div class="title-header">
+		<span>New Referral Source</span>
+	</div>
+	<div class="close">
+		<span (click)="close()">x</span>
+	</div>
+</div>
+<div class="modal-body">
+	<div class="form-group">
+		<label for="type_name">NAME</label>
+		<input type="text" name="type_name" class="form-control" placeholder="e.g. Local promotion" [(ngModel)]="form.type_name" #type_name="ngModel" #type_name>
+	</div>
+  <div class="row form-group">
+    <div class="col-sm-12 btn-switch">
+      <label class="switch">
+        <input type="checkbox" name="appointmentBooking">
+        <span class="slider round"></span>
+      </label>
+      <label class="control-label">ACTIVE</label>
+    </div>
+  </div>
+</div>
+<div class="modal-footer" style="border: none">
+	<span class="btn btn-white" (click)="close()">Cancel</span>
+	<span class="btn btn-black" (click)="onSubmit()">Save</span>
+</div>
