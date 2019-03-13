@@ -16,7 +16,7 @@ class CreateCompanyDetailsTable extends Migration
         Schema::create('company_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_client');
-            $table->intager('id_create')->nullable();
+            $table->integer('id_create')->nullable();
             $table->integer('id_update')->nullable();
             $table->integer('id_business_type')->nullable();
             $table->string('company_name')->nullable();
