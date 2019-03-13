@@ -1,0 +1,57 @@
+<section class="page-wrapper sales-reports" data-update-history="true" id="daily-sales">
+	<div class="filters-container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="box-filter-location">
+					<div class="row">
+						<div class="col-lg-3 col-md-6 col-sm-12">
+							<select name="lstStatus" class="form-control" [(ngModel)]="form.status">
+								<option value="">All statuses</option>
+								<option value="unpaid">Unpaid</option>
+								<option value="active">Valid</option>
+								<option value="expired">Expired</option>
+								<option value="redeemed">Redeemed</option>
+								<option value="refunded_sale">Refunded Invoice</option>
+							</select>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-12">
+							<span class="btn btn-dark line-height" (click)="filterConf()">View</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="box-filter-export offset-lg-6 offset-md-0 offset-sm-0">
+					<div class="row">
+						<div class="col-lg-8 col-md-6 col-sm-12">
+							<div class="input-group">
+								<input [(ngModel)]="form.searchText" type="text" class="form-control input-underline input-lg" name="searchText" placeholder="Search code or Client" #searchText="ngModel" #searchText>
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-search"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<select name="lstExport" class="form-control fix-width" (change)="exportEvent($event)">
+								<option value="0">Export</option>
+								<option value="excel">Excel</option>
+								<option value="pdf">PDF</option>
+								<option value="csv">CSV</option>
+							</select>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box-title">
+		<span>{{ statusSelected | titlecase }}, generated {{currentWeekModel}}</span>
+	</div>
+
+	<div class="box-table">
+		abc
+	</div>
+</section>

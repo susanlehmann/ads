@@ -92,15 +92,25 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th class="pd-avatar">{{'Name' | translate}}</th>
-								<th>{{'Mobile number' | translate}}</th>
-								<th>{{'Email' | translate}}</th>
-								<th>{{'Gender' | translate}}</th>
-								<th>{{'Status' | translate}}</th>
+								<th class="pd-avatar">
+									<span (click)="sortBy('firstName','asc')" #spanName>{{'Name' | translate}}</span>
+								</th>
+								<th>
+									<span>{{'Mobile number' | translate}}</span>
+								</th>
+								<th>
+									<span>{{'Email' | translate}}</span>
+								</th>
+								<th>
+									<span>{{'Gender' | translate}}</span>
+								</th>
+								<th>
+									<span>{{'Status' | translate}}</span>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<ng-container *ngIf="!loading && numberList == 0">
+							<ng-container *ngIf="numberList == 0">
 		                        <tr style="background-color: #fff; cursor: default;">
 		                            <td colspan="4" style="padding-top:40px;">
 		                                <div class="text-center">

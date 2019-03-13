@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../shared/services/user.service';
@@ -11,6 +11,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 	styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+
+	@ViewChild('spanName') spanName: ElementRef;
+
 	loading: boolean;
 	clients: any;
 	client: any = {};
@@ -147,5 +150,10 @@ export class ListComponent implements OnInit {
 			this.excel.exportAsCSVFile(arr, 'client_list');
 		}
 		this.download = false;
+	}
+
+	sortBy(value, type) {
+		console.log(value + type);
+		this.spanName.nativeElement.classList.add('sortBy');
 	}
 }

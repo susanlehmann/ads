@@ -17,12 +17,12 @@ import {PaymentTypesComponent} from "./payment-types/payment-types.component";
 import {AddPaymentTypesComponent} from "./payment-types/add/add-payment-types.component";
 import {EditPaymentTypesComponent} from "./payment-types/edit/edit-payment-types.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { CalendarSettingsComponent } from './calendar/calendar-settings.component';
+import { TaxesComponent } from './taxes/taxes.component';
 
 @NgModule({
   declarations: [
   	SetupComponent,
-
-
   	LocationComponent,
   	PageComponent,
   	AddLocationComponent,
@@ -33,7 +33,9 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     EditReferralSourceComponent,
     PaymentTypesComponent,
     AddPaymentTypesComponent,
-    EditPaymentTypesComponent
+    EditPaymentTypesComponent,
+    CalendarSettingsComponent,
+    TaxesComponent
   ],
   imports: [
     CommonModule,

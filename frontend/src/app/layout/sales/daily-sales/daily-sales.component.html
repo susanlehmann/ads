@@ -1,0 +1,190 @@
+<section class="page-wrapper sales-reports" data-update-history="true" id="daily-sales">
+	<div class="filters-container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="box-filter-location">
+					<div class="row">
+						<div class="col-lg-3 col-md-6 col-sm-12">
+							<select name="lstLocation" class="form-control" [(ngModel)]="form.location">
+								<option value="">All Locations</option>
+								<option *ngFor="let lct of listLocation?.location" value="{{lct?.id}}">{{lct?.name_location}}</option>
+							</select>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-12">
+							<span class="btn btn-dark line-height" (click)="filterConf()">View</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="box-filter-export offset-lg-6 offset-md-0 offset-sm-0">
+					<div class="row">
+						<div class="col-lg-4 col-md-6 col-sm-12">
+							<select name="lstExport" class="form-control fix-width" (change)="exportEvent($event)">
+								<option value="0">Export</option>
+								<option value="excel">Excel</option>
+								<option value="pdf">PDF</option>
+								<option value="csv">CSV</option>
+							</select>
+						</div>
+						<div class="col-lg-8 col-md-6 col-sm-12">
+							<div class="week-picker">
+						      	<button class="btn prev" (click)="prevDate()">&lt;</button>
+						      	<button class="btn" (click)="getToday()">Today</button>
+						      	<div class="input-append">
+							      	<input class="form-control" (click)="week_picker.open()" readonly
+							          name="week-picker" [(ngModel)]="currentWeekModel" (ngModelChange)="changeDate($event)" ngbDatepicker #week_picker="ngbDatepicker">
+						          	<i class="fa fa-calendar"></i>
+					          	</div>
+						      	<button class="btn next" (click)="nextDate()">&gt;</button>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box-title">
+		<p>Daily Sales: {{currentWeekModel}}</p>
+		<span>{{location}}, generated {{currentWeekModel}}</span>
+	</div>
+
+
+
+<div class="summary"><div class="row">
+<div class="sale-totals col-sm-6">
+<h5>Transaction Summary</h5>
+<div class="table-responsive">
+<table class="table table-condensed table-reports">
+<thead>
+<tr>
+<th>Item Type</th>
+<th class="text-right">Sales Qty</th>
+<th class="text-right">Refund Qty</th>
+<th class="text-right">Gross Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Services</td>
+<td class="text-right">0</td>
+<td class="text-right">0</td>
+<td class="text-right">£0.00</td>
+</tr>
+<tr>
+<td>Products</td>
+<td class="text-right">0</td>
+<td class="text-right">0</td>
+<td class="text-right">£0.00</td>
+</tr>
+<tr>
+<td>Vouchers</td>
+<td class="text-right">0</td>
+<td class="text-right">0</td>
+<td class="text-right">£0.00</td>
+</tr>
+<tr>
+<td>Late cancellation fees</td>
+<td class="text-right">0</td>
+<td class="text-right">0</td>
+<td class="text-right">£0.00</td>
+</tr>
+<tr>
+<td>No show fees</td>
+<td class="text-right">0</td>
+<td class="text-right">0</td>
+<td class="text-right">£0.00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td>Total Sales</td>
+<td class="text-right">
+0
+</td>
+<td class="text-right">
+0
+</td>
+<td class="text-right">
+£0.00
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+</div>
+<div class="payment-totals col-sm-6">
+<h5>Cash Movement Summary</h5>
+<div class="table-responsive">
+<table class="table table-condensed table-reports">
+<thead>
+<tr>
+<th>Payment Type</th>
+<th class="text-right">Payments collected</th>
+<th class="text-right">Refunds paid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cash</td>
+<td class="text-right">£0.00</td>
+<td class="text-right">£0.00</td>
+</tr>
+<tr>
+<td>Other</td>
+<td class="text-right">£0.00</td>
+<td class="text-right">£0.00</td>
+</tr>
+<tr>
+<td>Card</td>
+<td class="text-right">£0.00</td>
+<td class="text-right">£0.00</td>
+</tr>
+<tr>
+<td>Vouchers</td>
+<td class="text-right">£0.00</td>
+<td class="text-right">£0.00</td>
+</tr>
+<tr>
+<td>Voucher Redemptions</td>
+<td class="text-right">£0.00</td>
+<td class="text-right">£0.00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td>Payments collected</td>
+<td class="text-right">
+£0.00
+</td>
+<td class="text-right">
+£0.00
+</td>
+</tr>
+<tr class="regular-row">
+<td>Of which tips</td>
+<td class="text-right">
+£0.00
+</td>
+<td class="text-right">
+£0.00
+</td>
+</tr>
+<tr class="regular-row">
+<td>Outstanding</td>
+<td class="text-right">
+£0.00
+</td>
+<td class="text-right">
+&nbsp;
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+</div>
+</div>
+</div>
+</section>

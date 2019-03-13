@@ -6,6 +6,9 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
 import { PageComponent } from './page/page.component';
 import {ReferralSourcesComponent} from "./referral-sources/referral-sources.component";
 import {PaymentTypesComponent} from "./payment-types/payment-types.component";
+import { CalendarSettingsComponent } from './calendar/calendar-settings.component';
+import { TaxesComponent } from './taxes/taxes.component';
+
 const routes: Routes = [
 	{
 		path: '',
@@ -36,7 +39,17 @@ const routes: Routes = [
         path: 'payment_methods',
         component: PaymentTypesComponent,
         data : { title: 'Setup > Payment Types' }
-      }
+      },
+			{
+				path: 'calendar_settings',
+				component: CalendarSettingsComponent,
+				data : { title: 'Setup > Calendar Settings' }
+			},
+			{
+				path: 'taxes',
+				component: TaxesComponent,
+				data : { title: 'Setup > Taxes' }
+			}
 		]
 	}
 ];
