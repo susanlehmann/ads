@@ -32,7 +32,7 @@ export class AddLocationComponent implements OnInit {
 
 	addLocation(location: any) {
 		location.ownerId = this.user.id;
-		this.localtionService.createLocation(location).subscribe(
+      this.localtionService.createLocation(location).subscribe(
 			success => { 
 				this.checkAddLocation.emit(true);
 				this.notify.notify('success', 'Location Added !');

@@ -1,0 +1,46 @@
+[
+	{
+		"code": "Pacific/Pago_Pago",
+		"name": "(GMT -11:00) Pago Pago"
+	},
+	{
+		"code": "Pacific/Niue",
+		"name": "(GMT -11:00) Niue"
+	},
+	{
+		"code": "Pacific/Midway",
+		"name": "(GMT -11:00) Midway"
+	},
+	{
+		"code": "Pacific/Apia",
+		"name": "(GMT -11:00) Apia"
+	},
+	{
+		"code": "Pacific/Rarotonga",
+		"name": "(GMT -10:00) Rarotonga"
+	},
+	{
+		"code": "Pacific/Tahiti",
+		"name": "(GMT -10:00) Tahiti"
+	},
+	{
+		"code": "America/Adak",
+		"name": "(GMT -10:00) Adak"
+	},
+	{
+		"code": "Pacific/Honolulu",
+		"name": "(GMT -10:00) Honolulu"
+	},
+	{
+		"code": "Pacific/Marquesas",
+		"name": "(GMT -09:30) Marquesas"
+	},
+	{
+		"code": "Pacific/Gambier",
+		"name": "(GMT -09:00) Gambier"
+	},
+	{
+		"code": "America/Anchorage",
+		"name": "(GMT -09:00) Anchorage"
+	}
+]

@@ -4,6 +4,8 @@ import { SetupComponent } from './setup.component';
 import { LocationComponent } from './locations/locations.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { PageComponent } from './page/page.component';
+import {ReferralSourcesComponent} from "./referral-sources/referral-sources.component";
+import {PaymentTypesComponent} from "./payment-types/payment-types.component";
 import { CalendarSettingsComponent } from './calendar/calendar-settings.component';
 import { TaxesComponent } from './taxes/taxes.component';
 
@@ -28,6 +30,16 @@ const routes: Routes = [
 				component: CompanyDetailsComponent,
 				data : { title: 'Setup > Company Details' }
 			},
+      {
+        path: 'referral_sources',
+        component: ReferralSourcesComponent,
+        data : { title: 'Setup > Referral Sources' }
+      },
+      {
+        path: 'payment_methods',
+        component: PaymentTypesComponent,
+        data : { title: 'Setup > Payment Types' }
+      },
 			{
 				path: 'calendar_settings',
 				component: CalendarSettingsComponent,

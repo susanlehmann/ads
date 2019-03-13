@@ -8,6 +8,21 @@
 .main-container {
   padding: 25px !important;
 }
+#btnactive {
+  background-color: #10cfbd;
+  color: #fff;
+  border: none;
+  padding: 3px 9px;
+  font-size: 11px;
+  text-shadow: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  min-width: 90px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
 .ul-table{
   &.ul-header{
     display: inline-flex;

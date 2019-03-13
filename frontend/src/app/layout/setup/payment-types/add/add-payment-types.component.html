@@ -1,0 +1,20 @@
+<div class="modal-header" style="border: none">
+	<div class="title-header">
+    <h4 class="text-center">
+      New Payment Type
+    </h4>
+	</div>
+	<div class="close">
+		<span (click)="close()">x</span>
+	</div>
+</div>
+<div class="modal-body">
+	<div class="form-group">
+		<label for="type_name">PAYMENT TYPE NAME</label>
+		<input type="text" name="type_name" class="form-control" placeholder="e.g. Mastercard" [(ngModel)]="form.type_name" #type_name="ngModel" #type_name>
+	</div>
+</div>
+<div class="modal-footer" style="border: none">
+	<span class="btn btn-white" (click)="close()">Cancel</span>
+	<span class="btn btn-black" (click)="onSubmit()">Save</span>
+</div>
