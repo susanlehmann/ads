@@ -13,6 +13,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { WeekComponents } from './box/week-components/week-components';
 import { DayComponents } from './box/day-components/day-components';
 import { DynamicComponent } from './box/dynamic/dynamic-component';
+import { DayViewSchedulerComponent } from './box/week-components/day-view-scheduler.component';
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import { DynamicComponent } from './box/dynamic/dynamic-component';
     	CalendarComponent, 
     	AddEventComponent,
     	DynamicComponent,
-    	WeekComponents,
+			WeekComponents,
+			DayViewSchedulerComponent,
     	DayComponents
     ],
 	bootstrap:    [ CalendarComponent ],
