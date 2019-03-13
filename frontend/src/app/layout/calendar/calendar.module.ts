@@ -10,10 +10,7 @@ import { AddEventComponent } from './add-event/add-event.component';
 import { EventSesrvice } from './event.service';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { WeekComponents } from './box/week-components/week-components';
-import { DayComponents } from './box/day-components/day-components';
-import { DynamicComponent } from './box/dynamic/dynamic-component';
-import { DayViewSchedulerComponent } from './box/week-components/day-view-scheduler.component';
+import { DayViewSchedulerComponent } from './day-view-scheduler/day-view-scheduler.component';
 
 @NgModule({
     imports: [
@@ -31,10 +28,7 @@ import { DayViewSchedulerComponent } from './box/week-components/day-view-schedu
     declarations: [
     	CalendarComponent, 
     	AddEventComponent,
-    	DynamicComponent,
-			WeekComponents,
 			DayViewSchedulerComponent,
-    	DayComponents
     ],
 	bootstrap:    [ CalendarComponent ],
 	providers: [ EventSesrvice ]
