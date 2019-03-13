@@ -9,13 +9,10 @@ use App\BusinessType;
 class CompanydetailController extends Controller
 {
     public function index(Request $request){
-        $data['caompanydetail'] = CompanyDetail::leftjoin('users','users.id','=','company_details.id_client')
-                                        ->where('users.id', $request->id)
-                                        ->select('*','company_details.id as id')
-                                        ->first();
+        $data['caompanydetail'] = CompanyDetail::where('id_client', $request->id)->first();
 
         $data['business'] = BusinessType::get();
-        
+
         return response()->json($data);         
     }
 
