@@ -66,6 +66,7 @@ export class CalendarComponent implements OnInit {
 			{
 				id: 1,
 				meta: {
+					staffs: this.allStaff,
 					user: this.currentStaffList[1]
 				  },
 				title: 'test event',
@@ -81,24 +82,34 @@ export class CalendarComponent implements OnInit {
 			{
 				id: 2,
 				meta: {
+					staffs: this.allStaff,
 					user: this.currentStaffList[0]
 				  },
 				title: 'test event 2',
 				color: this.currentStaffList[0].color,
 				start: addHours(new Date(), 1),
+				end: addHours(new Date(), 2),
+				resizable: {
+					beforeStart: true,
+					afterEnd: true
+				},
 				draggable: true,
-				end: addHours(new Date(), 2)
 			},
 			{
 				id: 3,
 				meta: {
+					staffs: this.allStaff,
 					user: this.currentStaffList[1]
 				  },
 				title: 'test event 3',
 				color: this.currentStaffList[1].color,
 				start: addHours(new Date(), 2),
+				end: addHours(new Date(), 3),
+				resizable: {
+					beforeStart: true,
+					afterEnd: true
+				},
 				draggable: true,
-				end: addHours(new Date(), 3)
 			},
 		];
 	}
@@ -119,13 +130,15 @@ export class CalendarComponent implements OnInit {
 	}: CalendarEventTimesChangedEvent): void {
 		event.start = newStart;
 		event.end = newEnd;
-		this.refresh.next();
+		// this.refresh.next();
+		this.events = [...this.events];
 		console.log(event);
 	}
 
 	userChanged({ event, newUser }) {
 		event.color = newUser.color;
 		event.meta.user = newUser;
+		// this.refresh.next();
 		this.events = [...this.events];
 	  }
 

@@ -1,6 +1,6 @@
 <div class="cal-day-view" #dayViewContainer>
     <div class="day-view-column-headers">
-      <div class="day-view-column-header" *ngFor="let s of staffs" (click)="viewWeekScheduleOf(s.id)">
+      <div class="day-view-column-header" *ngFor="let s of view?.staffs" (click)="viewWeekScheduleOf(s.id)">
         {{ s.name }}
       </div>
     </div>

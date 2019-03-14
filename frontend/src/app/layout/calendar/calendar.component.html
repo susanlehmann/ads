@@ -44,6 +44,7 @@
     [dayStartHour]="dayStartHour" [dayEndHour]="dayEndHour"
     [hourSegments]="hourSegments"
     (hourSegmentClicked)="dayHourSegmentClicked($event)"
+    (userChanged)="userChanged($event)"
     (eventClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-day-view-scheduler>
 
