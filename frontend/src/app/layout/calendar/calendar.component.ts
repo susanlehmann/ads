@@ -22,6 +22,7 @@ export class CalendarComponent implements OnInit {
 	CalendarView = CalendarView;
 	hourSegments = 6;
 	weekStartsOn = 1;
+	selectedStaffId;
 	
 	viewDate: Date = new Date();
 	dayStartHour = "8";
@@ -29,12 +30,12 @@ export class CalendarComponent implements OnInit {
 	refresh: Subject<any> = new Subject();
 	events: CalendarEvent[];
 
-	staffs: any[];
+	currentStaffList: any[];
+	allStaff: any[];
 
 	constructor(
 		private staffService: StaffService,
 	) {
-		this.staffs = [];
 	}
 
 	ngOnInit() {
@@ -44,7 +45,7 @@ export class CalendarComponent implements OnInit {
 	getListStaff() {
 		this.staffService.getList()
 			.subscribe((data: any) => {
-				this.staffs = data.user
+				this.allStaff = data.user
 					.map(s => {
 						return {
 							id: s.id,
@@ -55,6 +56,7 @@ export class CalendarComponent implements OnInit {
 					})
 					.sort((a, b) => a.sortOrder - b.sortOrder);
 				// TODO: move to oninit later
+				this.changeStaff(this.selectedStaffId);
 				this.getListAppointments();
 			}, err => {});
 	}
@@ -62,12 +64,12 @@ export class CalendarComponent implements OnInit {
 	getListAppointments(): void {
 		this.events = [
 			{
-				id: Math.random.toString(),
+				id: 1,
 				meta: {
-					user: this.staffs[1]
+					user: this.currentStaffList[1]
 				  },
 				title: 'test event',
-				color: this.staffs[1].color,
+				color: this.currentStaffList[1].color,
 				start: new Date(),
 				end: addHours(new Date(), 1), // an end date is always required for resizable events to work
 				resizable: {
@@ -77,28 +79,37 @@ export class CalendarComponent implements OnInit {
 				draggable: true,
 			},
 			{
-				id: Math.random.toString(),
+				id: 2,
 				meta: {
-					user: this.staffs[0]
+					user: this.currentStaffList[0]
 				  },
 				title: 'test event 2',
-				color: this.staffs[0].color,
+				color: this.currentStaffList[0].color,
 				start: addHours(new Date(), 1),
 				draggable: true,
 				end: addHours(new Date(), 2)
 			},
 			{
-				id: Math.random.toString(),
+				id: 3,
 				meta: {
-					user: this.staffs[1]
+					user: this.currentStaffList[1]
 				  },
 				title: 'test event 3',
-				color: this.staffs[1].color,
+				color: this.currentStaffList[1].color,
 				start: addHours(new Date(), 2),
 				draggable: true,
 				end: addHours(new Date(), 3)
 			},
 		];
+	}
+
+	changeStaff(staffId) {
+		if (!staffId) { // show all staff
+		  this.currentStaffList = this.allStaff;
+		} else {
+		  staffId = parseInt(staffId, 10);
+		  this.currentStaffList = this.allStaff.filter(s => s.staffId === staffId);
+		}
 	}
 
 	eventTimesChanged({
@@ -141,7 +152,7 @@ export class CalendarComponent implements OnInit {
 	dayHourSegmentClicked(evt): void {
 		this.setStaffCoordinate();
 
-		let found = this.staffs.filter(s => {
+		let found = this.currentStaffList.filter(s => {
 			return evt.event.screenX >= s.xStart && evt.event.screenX <= s.xEnd;
 		})[0];
 
@@ -156,7 +167,7 @@ export class CalendarComponent implements OnInit {
 		let xStart = firstStaffCoordinate.x;
 		const width = firstStaffCoordinate.width;
 
-		this.staffs.forEach(s => {
+		this.currentStaffList.forEach(s => {
 			s.xStart = xStart;
 			s.xEnd = xStart += width;
 		});

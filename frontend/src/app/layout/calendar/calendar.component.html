@@ -5,10 +5,8 @@
         <div class="row">
           <div class="col-md-6">
             <select name="lstStaff" class="form-control">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+                <option value=0 selected>All Staff</option>
+                <option value={{staff.staffId}} *ngFor="let staff of currentStaffList">{{staff.name}}</option>
             </select>
           </div>
           <div class="col-md-6"></div>
@@ -41,13 +39,29 @@
   <mwl-day-view-scheduler *ngSwitchCase="'day'"
     [viewDate]="viewDate"
     [events]="events"
-    [staffs]="staffs"
+    [staffs]="currentStaffList"
     [refresh]="refresh"
     [dayStartHour]="dayStartHour" [dayEndHour]="dayEndHour"
     [hourSegments]="hourSegments"
     (hourSegmentClicked)="dayHourSegmentClicked($event)"
     (eventClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-day-view-scheduler>
+
+  <!-- custom calendar day-view base on week-view -->
+  <!-- <app-custom-calendar-day-view *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [staffs]="staffs"
+    [refresh]="refresh"
+    [dayStartHour]="dayStartHour" [dayEndHour]="dayEndHour"
+    [hourSegments]="hourSegments" [hourSegmentTemplate]="hourSegmentTemplate"
+    [headerTemplate]="headerTemplate"
+    
+    [eventTitleTemplate]="eventTitleTemplate"
+    [weekStartsOn]="weekStartsOn"
+    (userChanged)="userChanged($event)"
+    (eventTimesChanged)="eventTimesChanged($event)" (dayHeaderClicked)="dayHeaderClicked($event)"
+    (eventClicked)="eventClicked($event)" (hourSegmentClicked)="hourSegmentClicked($event)"></app-custom-calendar-day-view> -->
 
   <mwl-calendar-week-view *ngSwitchCase="'week'"
     [viewDate]="viewDate"

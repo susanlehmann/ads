@@ -58,6 +58,8 @@ export class DayViewSchedulerComponent extends CalendarDayViewComponent {
   }
 
   eventDragged(dayEvent: DayViewEvent, xPixels: number, yPixels: number): void {
+    // super.dragEnded(dayEvent, { y: yPixels, x: 0 } as any); // original behaviour
+
     if (yPixels !== 0) {
       super.dragEnded(dayEvent, { y: yPixels, x: 0 } as any); // original behaviour
     }
