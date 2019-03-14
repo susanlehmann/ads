@@ -1,0 +1,72 @@
+<div class="card card-custom mb-3">
+  <div class="row sm-m-t-20">
+    <div class="col-sm-6"></div>
+    <div class="col-sm-6 text-right">
+      <div class="header">
+        <button style="text-transform: none;" class="btn btn-black" type="button"  (click)="addReferral(add_referral)">New Referral Source</button>
+      </div>
+    </div>
+  </div>
+<div class="container-fuild" style="margin-top: 20px">
+  <div class="col-lg-12">
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th class="pd-name">{{'NAME' | translate}}</th>
+            <th>{{'DATE ADDED' | translate}}</th>
+            <th>{{'STATUS' | translate}}</th>
+            <th>{{'' | translate}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!--<ng-container *ngIf="numberList == 0">-->
+            <!--<tr style="background-color: #fff; cursor: default;">-->
+              <!--<td colspan="4" style="padding-top:40px;">-->
+                <!--<div class="text-center">-->
+                  <!--<h1><i class="fa fa-search fa-lg"></i></h1>-->
+                  <!--<h3 class="text-capitalize">No Results Found</h3>-->
+                  <!--<p>Try using different filter options to find what you're looking for</p>-->
+                <!--</div>-->
+              <!--</td>-->
+            <!--</tr>-->
+          <!--</ng-container>-->
+          <ng-container >
+            <tr (click)="editReferral(edit_referral, 3)">
+              <td class="ba">
+									<span class="avatar">
+										<i class="fa fa-bars"></i>
+									</span>
+                <span></span>
+              </td>
+              <td><span>Tuesday, 12 Mar 2019</span></td>
+              <td><span class="label label-info" id="btnactive">Active</span></td>
+              <td><i class="fa fa-lock" placement="bottom" ngbTooltip="This item can not be deleted"></i></td>
+            </tr>
+          </ng-container>
+          </tbody>
+          <!-- <tfoot *ngIf="numberList > 0">
+                        <tr>
+                            <th colspan="5">
+                                Showing {{numberList}} of {{numberList}} results
+                            </th>
+                        </tr>
+                    </tfoot> -->
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="row">
+    <ng-template #add_referral let-c="close" let-d="dismiss">
+      <add-referral-source ></add-referral-source>
+    </ng-template>
+  </div>
+  <div class="row">
+    <ng-template #edit_referral let-c="close" let-d="dismiss">
+      <edit-referral-source [inputRef]="inputReferral" ></edit-referral-source>
+    </ng-template>
+  </div>
+</div>
+</div>

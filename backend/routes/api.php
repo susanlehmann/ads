@@ -70,6 +70,7 @@ Route::group([
         Route::post('update_user', 'UserController@update');
         Route::post('delete_user', 'UserController@destroy');
         Route::post('search_user', 'UserController@search');
+        Route::post('sort_user', 'UserController@sort');
     });
 
     Route::group(['prefix' => 'user/closed_date', 'namespace' => 'API\member\user'], function(){
@@ -199,4 +200,8 @@ Route::group([
         Route::post('search-location', 'LocationController@search'); 
     });
 
+    Route::group(['prefix' => 'user/setup/companydetail', 'namespace' => 'API\member\setup'], function(){
+        Route::post('list-companydetail', 'CompanydetailController@index');
+        Route::post('update-companydetail', 'CompanydetailController@update');
+    });
 });

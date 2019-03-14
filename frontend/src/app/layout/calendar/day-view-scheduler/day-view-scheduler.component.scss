@@ -1,0 +1,19 @@
+
+.day-view-column-headers {
+    display: flex;
+    margin-left: 70px;
+    margin-top: 15px;
+
+    .day-view-column-header {
+        font-weight: bold;
+        width: 150px;
+        text-align: center;
+        cursor: pointer;
+        padding: 10px;
+
+        &:hover {
+            background: white;
+            box-shadow: 0 3px 5px 0 rgba(164, 173, 186, .25)
+        }
+    }
+}

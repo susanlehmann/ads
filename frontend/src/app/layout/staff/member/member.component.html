@@ -42,7 +42,7 @@
                     </ng-container>
                     <ng-container *ngIf="listusers">
                         <!-- TODO: wait for sort api cdkDrag -->
-                            <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)"> 
+                            <tr *ngFor="let user of listusers; index as i" (click)="openUpdateModal(content, user.id)" cdkDrag> 
                                     <td>
                                         <span class="appoinment-color" [ngStyle]="{'background': user.appointmentColor}"></span>
                                     </td>
@@ -98,7 +98,7 @@
                     <div class="row form-group">
                         <div class="col-sm-12">
                         <label class="control-label">Mobile Number</label><br>
-                        <!-- <input [(ngModel)]="form.mobileNumber" type="number" name="number" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78"> -->
+                        <!-- <input [(ngModel)]="form.mobileNumbe r" type="number" name="number" class="form-control input-underline input-lg" placeholder="+84 91 234 56 78"> -->
                         <ngx-intl-tel-input
                             [preferredCountries]="['gb','us']"
                             [enablePlaceholder]="true" 

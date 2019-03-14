@@ -68,14 +68,19 @@ export class MemberComponent implements OnInit {
  
   onDrop(event: CdkDragDrop<string[]>) {
     //TODO: wait for sort api
-    moveItemInArray(this.listusers, event.previousIndex, event.currentIndex); 
-    // const updatedStaff = this.listusers[event.previousIndex];
-    // this.staffService.sortStaff(updatedStaff.id, event.currentIndex)
-    // .subscribe((data:any) => {
-    //         this.getUser();
-    //         this.notifierService.notify('success', 'Staff information has been successfully updated');
-    // }), err => {
-    // };
+    moveItemInArray(this.listusers, event.previousIndex, event.currentIndex);
+    const sortedList = [];
+    this.listusers.forEach((v, index) => {
+      sortedList.push({
+        id: v.id,
+        sort_order: index,
+      });
+    });
+    this.staffService.sortStaff(sortedList)
+    .subscribe((data:any) => {
+            this.notifierService.notify('success', 'Staff order has been updated');
+    }), err => {
+    };
   }
 
 	ngOnInit() {
@@ -111,7 +116,7 @@ export class MemberComponent implements OnInit {
       this.listusers = list.user
       .map(Staff.toModel)
       .sort((a, b) => {
-        return a.id - b.id;
+        return a.sortOrder - b.sortOrder;
       });
     });
   }
@@ -193,12 +198,7 @@ export class MemberComponent implements OnInit {
 	getUser() {
     this.staffService.getList()
 		.subscribe((listusers:any) => {
-        this.listusers = listusers.user
-        .map(Staff.toModel)
-        .sort((a, b) => {
-          return a.id - b.id;
-          // return a.sortOrder - b.sortOrder;
-        });
+        this.listusers = listusers.user.map(Staff.toModel);
 		}, err => {
     });
   }

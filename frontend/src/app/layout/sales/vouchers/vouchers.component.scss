@@ -1,0 +1,162 @@
+#daily-sales {
+    min-height: 100%;
+}
+.filters-container {
+
+	.clearfix {
+		clear: both;
+		margin: 5px 0;
+	}
+	.box-filter-location {
+
+		.line-height{
+			line-height: 1.25;
+		}
+
+		.week-picker {
+			width: 100%;
+			display: inline-block;
+			* {
+				width: 	percentage((100-20)/2)/100;
+				display: inline-block;
+				border-radius: 0;
+				text-align:center;
+				margin: 0 auto;
+			}
+			span {
+				width: 35px;
+				display: inline-block;
+				line-height: 32px;
+				border-top: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+				background: #ddd;
+				color: #000;
+				font-size: 16px;
+			}
+			
+		}
+	}
+
+	.box-filter-export {
+
+		.input-group {
+			input {
+				border-radius: 4px;
+			}
+		}
+
+		.input-group-text{
+			background: none;
+		    border: none;
+		    position: absolute;
+		    right: 0;
+		    z-index: 9;
+    		.fa {
+    			line-height: 1.5;
+			}
+		}
+
+		
+	}
+}
+
+.box-title {
+
+	padding: 0.55rem 0;
+	p {
+		font-size: 2em;
+    	line-height: 1.5;
+	}
+
+	span {
+		display: block;
+		margin-bottom: 1.5em;
+		font-size: 16px;
+	}
+}
+
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  	
+  	.col-sm-12 {
+	    flex: 0 0 50% !important;
+	    max-width: 50%  !important;
+	}
+	
+	.box-filter-location {
+  		div {
+  			div {
+  				margin-bottom: 5px;
+
+  				.btn {
+  					width: 100%;
+				}
+			}
+		}
+	}
+
+	.box-filter-export {
+		div {
+			div {
+				margin-bottom: 5px;
+			}
+		}
+	}
+  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  	.box-filter-location {
+  		div {
+  			div {
+  				margin-bottom: 5px;
+
+  				.btn {
+  					width: 100%;
+				}
+			}
+		}
+	}
+
+	.box-filter-export {
+		div {
+			div {
+				margin-bottom: 5px;
+			}
+		}
+	}
+  
+}

@@ -13,6 +13,15 @@ import { ResourcesComponent } from './resources/resources.component';
 import { DiscountTypeComponent } from './discount-type/discount-type.component'
 import { SalesSettingsComponent } from './sales_settings/sales_settings.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgxIntlTelInputModule} from "ngx-intl-tel-input";
+import {ReferralSourcesComponent} from "./referral-sources/referral-sources.component";
+import {AddReferralSourceComponent} from "./referral-sources/add/add-referral-source.component";
+import {EditReferralSourceComponent} from "./referral-sources/edit/edit-referral-source.component";
+import {PaymentTypesComponent} from "./payment-types/payment-types.component";
+import {AddPaymentTypesComponent} from "./payment-types/add/add-payment-types.component";
+import {EditPaymentTypesComponent} from "./payment-types/edit/edit-payment-types.component";
+import { CalendarSettingsComponent } from './calendar/calendar-settings.component';
+import { TaxesComponent } from './taxes/taxes.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +33,24 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ResourcesComponent,
     DiscountTypeComponent,
     SalesSettingsComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    ReferralSourcesComponent,
+    AddReferralSourceComponent,
+    EditReferralSourceComponent,
+    PaymentTypesComponent,
+    AddPaymentTypesComponent,
+    EditPaymentTypesComponent,
+    CalendarSettingsComponent,
+    TaxesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     TranslateModule,
     NgbModule,
-    SetupRoutingModule
+    SetupRoutingModule,
+    NgxIntlTelInputModule,
+    NgbModule
   ]
 })
 export class SetupModule { }
