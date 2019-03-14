@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { SearchComponent } from './search/search.component';
 import { EditProductComponent } from './layout/inventory/product/edit-product/edit-product.component';
-
+import { AddAppointmentComponent } from './layout/calendar/add-appointments/add-appointment.component';
 const routes: Routes = [
     { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard]},
     // { path: '', loadChildren: './layout/layout.module#LayoutModule'},
@@ -18,6 +18,7 @@ const routes: Routes = [
     { path: 'search', component: SearchComponent },
     { path: 'inventory/products/add', component: EditProductComponent },
     { path: 'inventory/products/:id/edit', component: EditProductComponent },
+    { path: 'appointment/add', component: AddAppointmentComponent, data: {title: 'Appointment'} },
     { path: '**', redirectTo: 'not-found' }
 ];
 

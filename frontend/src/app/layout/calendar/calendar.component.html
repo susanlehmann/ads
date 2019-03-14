@@ -157,3 +157,42 @@
 <ng-template #content let-modal>
 	<add-event [_clickEvent]="_clickEvent"></add-event>
 </ng-template>
+<div class="row">
+  <div id="inbox">
+    <div class="fab btn-group show-on-hover dropup">
+      <div data-toggle="tooltip" data-placement="left" title="Compose">
+        <button type="button" class="btn btn-black btn-io dropdown-toggle" data-toggle="dropdown">
+          <span class="fa-stack fa-1-7x">
+            <i class="fa fa-plus"></i>
+          </span>
+        </button>
+      </div>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li>
+          <span title="New Sale">
+            <i class="fa fa-copy"></i>
+          </span>
+          <div class="tooltip blocked">New Blocked Time</div>
+          <div class="tooltip sales">New Sale</div>
+          <div class="tooltip">New Appointment</div>
+        </li>
+        <li>
+          <span title="New Blocked Time">
+            <i class="fa fa-clock-o"></i>
+          </span>
+          <div class="tooltip blocked">New Blocked Time</div>
+          <div class="tooltip sales">New Sale</div>
+          <div class="tooltip">New Appointment</div>
+        </li>
+        <li>
+          <span title="New Appointment" [routerLink]="['/appointment/add']">
+            <i class="fa fa-calendar"></i>
+          </span>
+          <div class="tooltip blocked">New Blocked Time</div>
+          <div class="tooltip sales">New Sale</div>
+          <div class="tooltip">New Appointment</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
