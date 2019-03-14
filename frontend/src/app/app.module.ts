@@ -41,6 +41,7 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { OrderModule } from 'ngx-order-pipe';
 import { DataTableModule } from "angular-6-datatable";
 import { environment } from './../environments/environment.prod';
+import {Setup_company_detailService} from "./layout/setup/setup_company_detail.service";
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -152,6 +153,7 @@ const ngxUiLoaderConfigs = {
         TitleService,
         ServiceTypeService,
         BusinessTypeService,
+        Setup_company_detailService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     ],

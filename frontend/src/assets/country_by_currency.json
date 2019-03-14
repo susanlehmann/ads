@@ -1,0 +1,918 @@
+[
+  {
+    "country": "Afghanistan",
+    "currency_name": "Afghanistan Afghani - AFN"
+  },
+  {
+    "country": "Albania",
+    "currency_name": "Albanian Lek - ALL"
+  },
+  {
+    "country": "Algeria",
+    "currency_name": "Algerian Dinar - DZD"
+  },
+  {
+    "country": "American Samoa",
+    "currency_name": "US Dollar - USD"
+  },
+  {
+    "country": "Andorra",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Angola",
+    "currency_name": "Angolan Kwanza - AOA"
+  },
+  {
+    "country": "Anguilla",
+    "currency_name": "East Caribbean Dollar - XCD"
+  },
+  {
+    "country": "Antarctica",
+    "currency_name": "East Caribbean Dollar - XCD"
+  },
+  {
+    "country": "Antigua and Barbuda",
+    "currency_name": "East Caribbean Dollar - XCD"
+  },
+  {
+    "country": "Argentina",
+    "currency_name": "Argentine Peso - ARS"
+  },
+  {
+    "country": "Armenia",
+    "currency_name": "Armenian Dram - AMD"
+  },
+  {
+    "country": "Aruba",
+    "currency_name": "Aruban Guilder - AWG"
+  },
+  {
+    "country": "Australia",
+    "currency_name": "Australian Dollar - AUD"
+  },
+  {
+    "country": "Austria",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Azerbaijan",
+    "currency_name": "Azerbaijan New Manat - AZN"
+  },
+  {
+    "country": "Bahamas",
+    "currency_name": "Bahamian Dollar - BSD"
+  },
+  {
+    "country": "Bahrain",
+    "currency_name": "Bahraini Dinar - BHD"
+  },
+  {
+    "country": "Bangladesh",
+    "currency_name": "Bangladeshi Taka - BDT"
+  },
+  {
+    "country": "Barbados",
+    "currency_name": "Barbados Dollar - BBD"
+  },
+  {
+    "country": "Belarus",
+    "currency_name": "Belarussian Ruble - BYR"
+  },
+  {
+    "country": "Belgium",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Belize",
+    "currency_name": "Belize Dollar - BZD"
+  },
+  {
+    "country": "Benin",
+    "currency_name": "CFA Franc BCEAO - XOF"
+  },
+  {
+    "country": "Bermuda",
+    "currency_name": "Bermudian Dollar - BMD"
+  },
+  {
+    "country": "Bhutan",
+    "currency_name": "Bhutan Ngultrum - BTN"
+  },
+  {
+    "country": "Bolivia",
+    "currency_name": "Boliviano - BOB"
+  },
+  {
+    "country": "Bosnia and Herzegovina",
+    "currency_name": "Bosnia and Herzegovina Convertible Mark - BAM"
+  },
+  {
+    "country": "Botswana",
+    "currency_name": "Botswana Pula - BWP"
+  },
+  {
+    "country": "Bouvet Island",
+    "currency_name": "Norwegian Krone - NOK"
+  },
+  {
+    "country": "Brazil",
+    "currency_name": "Brazilian Real - BRL"
+  },
+  {
+    "country": "British Indian Ocean Territory",
+    "currency_name": "US Dollar - USD"
+  },
+  {
+    "country": "Bulgaria",
+    "currency_name": "Bulgarian Lev - BGN"
+  },
+  {
+    "country": "Burkina Faso",
+    "currency_name": "CFA Franc BCEAO"
+  },
+  {
+    "country": "Burundi",
+    "currency_name": "Burundi Franc - XOF"
+  },
+  {
+    "country": "Cambodia",
+    "currency_name": "Kampuchean Riel - KHR"
+  },
+  {
+    "country": "Cameroon",
+    "currency_name": "CFA Franc BEAC - XAF"
+  },
+  {
+    "country": "Canada",
+    "currency_name": "Canadian Dollar - CAD"
+  },
+  {
+    "country": "Cape Verde",
+    "currency_name": "Cape Verde Escudo - CVE"
+  },
+  {
+    "country": "Cayman Islands",
+    "currency_name": "Cayman Islands Dollar - KYD"
+  },
+  {
+    "country": "Central African Republic",
+    "currency_name": "CFA Franc BEAC - XAF"
+  },
+  {
+    "country": "Chad",
+    "currency_name": "Central African Cfa Franc - XAF"
+  },
+  {
+    "country": "Chile",
+    "currency_name": "Chilean Peso - CLP"
+  },
+  {
+    "country": "China",
+    "currency_name": "Yuan Renminbi - CNY"
+  },
+  {
+    "country": "Christmas Island",
+    "currency_name": "Australian Dollar - AUD"
+  },
+  {
+    "country": "Cocos (Keeling) Islands",
+    "currency_name": " Australian Dollar - AUD"
+  },
+  {
+    "country": "Colombia",
+    "currency_name": "Colombian Peso - COP"
+  },
+  {
+    "country": "Comoros",
+    "currency_name": "Comoros Franc - KMF"
+  },
+  {
+    "country": "Congo",
+    "currency_name": "CFA Franc BEAC - XAF"
+  },
+  {
+    "country": "Cook Islands",
+    "currency_name": "New Zealand Dollar - NZD"
+  },
+  {
+    "country": "Costa Rica",
+    "currency_name": "Costa Rican Colon - CRC"
+  },
+  {
+    "country": "Croatia",
+    "currency_name": "Croatian Kuna - HRK"
+  },
+  {
+    "country": "Cuba",
+    "currency_name": "Cuban Peso - CUP"
+  },
+  {
+    "country": "Cyprus",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Czech Republic",
+    "currency_name": "Czech Koruna - CZK"
+  },
+  {
+    "country": "Denmark",
+    "currency_name": "Danish Krone - DKK"
+  },
+  {
+    "country": "Djibouti",
+    "currency_name": "Djibouti Franc - DJF"
+  },
+  {
+    "country": "Dominica",
+    "currency_name": "East Caribbean Dollar - XCD"
+  },
+  {
+    "country": "Dominican Republic",
+    "currency_name": "Dominican Peso - DOP"
+  },
+  {
+    "country": "Ecuador",
+    "currency_name": "Ecuador Sucre - ECS"
+  },
+  {
+    "country": "Egypt",
+    "currency_name": "Egyptian Pound - EGP"
+  },
+  {
+    "country": "El Salvador",
+    "currency_name": "El Salvador Colon - SVC"
+  },
+  {
+    "country": "Equatorial Guinea",
+    "currency_name": "CFA Franc BEAC - XAF"
+  },
+  {
+    "country": "Eritrea",
+    "currency_name": "Eritrean Nakfa - ERN"
+  },
+  {
+    "country": "Estonia",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Ethiopia",
+    "currency_name": "Ethiopian Birr - ETB"
+  },
+  {
+    "country": "Falkland Islands",
+    "currency_name": "Falkland Pound - FKP"
+  },
+  {
+    "country": "Faroe Islands",
+    "currency_name": " Danish Krone - DKK"
+  },
+  {
+    "country": "Finland",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "France",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "French Guiana",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "French Polynesia",
+    "currency_name": "Cfp Franc - XPF"
+  },
+  {
+    "country": "French Southern territories",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Gabon",
+    "currency_name": "CFA Franc BEAC - XAF"
+  },
+  {
+    "country": "Gambia",
+    "currency_name": "Gambian Dalasi - GMD"
+  },
+  {
+    "country": "Georgia",
+    "currency_name": "Georgian Lari - GEL"
+  },
+  {
+    "country": "Germany",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Ghana",
+    "currency_name": "Ghanaian Cedi - GHS"
+  },
+  {
+    "country": "Gibraltar",
+    "currency_name": "Gibraltar Pound - GIP"
+  },
+  {
+    "country": "Greece",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Greenland",
+    "currency_name": "Danish Krone - DKK"
+  },
+  {
+    "country": "Grenada",
+    "currency_name": "East Carribean Dollar - XCD"
+  },
+  {
+    "country": "Guadeloupe",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Guam",
+    "currency_name": "United States Dollar - USD"
+  },
+  {
+    "country": "Guatemala",
+    "currency_name": "Guatemalan Quetzal - QTQ"
+  },
+  {
+    "country": "Guinea",
+    "currency_name": "Guinea Franc - GNF"
+  },
+  {
+    "country": "Guinea-Bissau",
+    "currency_name": "West African Cfa Franc - XOF"
+  },
+  {
+    "country": "Guyana",
+    "currency_name": "Guyana Dollar - GYD"
+  },
+  {
+    "country": "Haiti",
+    "currency_name": "Haitian Gourde - HTG"
+  },
+  {
+    "country": "Heard Island and McDonald Islands",
+    "currency_name": "Australian Dollar - AUD"
+  },
+  {
+    "country": "Holy See (Vatican City State)",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Honduras",
+    "currency_name": "Honduran Lempira - HNL"
+  },
+  {
+    "country": "Hong Kong",
+    "currency_name": "Hong Kong Dollar - HKD"
+  },
+  {
+    "country": "Hungary",
+    "currency_name": "Hungarian Forint - HUF"
+  },
+  {
+    "country": "Iceland",
+    "currency_name": "Iceland Krona - ISK"
+  },
+  {
+    "country": "India",
+    "currency_name": "Indian Rupee - INR"
+  },
+  {
+    "country": "Indonesia",
+    "currency_name": "Indonesian Rupiah - IDR"
+  },
+  {
+    "country": "Iran",
+    "currency_name": "Iranian Rial - IRR"
+  },
+  {
+    "country": "Iraq",
+    "currency_name": "Iraqi Dinar - IQD"
+  },
+  {
+    "country": "Ireland",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Israel",
+    "currency_name": "Israeli New Shekel - ILS"
+  },
+  {
+    "country": "Italy",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Ivory Coast",
+    "currency_name": "CFA Franc BCEAO - XOF"
+  },
+  {
+    "country": "Jamaica",
+    "currency_name": "Jamaican Dollar - JMD"
+  },
+  {
+    "country": "Japan",
+    "currency_name": "Japanese Yen - JPY"
+  },
+  {
+    "country": "Jordan",
+    "currency_name": "Jordanian Dinar - JOD"
+  },
+  {
+    "country": "Kenya",
+    "currency_name": "Kenyan Shilling - KES"
+  },
+  {
+    "country": "Kiribati",
+    "currency_name": "Australian Dollar - AUD"
+  },
+  {
+    "country": "Kuwait",
+    "currency_name": "Kuwaiti Dinar - KWD"
+  },
+  {
+    "country": "Kyrgyzstan",
+    "currency_name": "Som - KGS"
+  },
+  {
+    "country": "Laos",
+    "currency_name": "Lao Kip - LAK"
+  },
+  {
+    "country": "Latvia",
+    "currency_name": "Latvian Lats - LVL"
+  },
+  {
+    "country": "Lebanon",
+    "currency_name": "Lebanese Pound - LBP"
+  },
+  {
+    "country": "Lesotho",
+    "currency_name": "Lesotho Loti - LSL"
+  },
+  {
+    "country": "Liberia",
+    "currency_name": "Liberian Dollar - LRD"
+  },
+  {
+    "country": "Liechtenstein",
+    "currency_name": "Swiss Franc - CHF"
+  },
+  {
+    "country": "Lithuania",
+    "currency_name": "Lithuanian Litas - LTL"
+  },
+  {
+    "country": "Luxembourg",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Macao",
+    "currency_name": "Macanese Pataca - MOP"
+  },
+  {
+    "country": "Macedonia",
+    "currency_name": "Denar - MKD"
+  },
+  {
+    "country": "Madagascar",
+    "currency_name": "Malagasy Franc - MGF"
+  },
+  {
+    "country": "Malawi",
+    "currency_name": "Malawi Kwacha - MWK"
+  },
+  {
+    "country": "Malaysia",
+    "currency_name": "Malaysian Ringgit - MWK"
+  },
+  {
+    "country": "Maldives",
+    "currency_name": "Maldive Rufiyaa - MVR"
+  },
+  {
+    "country": "Mali",
+    "currency_name": "CFA Franc BCEAO - XOF"
+  },
+  {
+    "country": "Malta",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Marshall Islands",
+    "currency_name": "US Dollar - USD"
+  },
+  {
+    "country": "Martinique",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Mauritania",
+    "currency_name": "Mauritanian Ouguiya - MRO"
+  },
+  {
+    "country": "Mauritius",
+    "currency_name": "Mauritius Rupee - MUR"
+  },
+  {
+    "country": "Mayotte",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Mexico",
+    "currency_name": "Mexican Nuevo Peso - MXN"
+  },
+  {
+    "country": "Micronesia, Federated States of",
+    "currency_name": "United States Dollar - USD"
+  },
+  {
+    "country": "Moldova",
+    "currency_name": "Moldovan Leu - MDL"
+  },
+  {
+    "country": "Monaco",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Mongolia",
+    "currency_name": "Mongolian Tugrik - MNT"
+  },
+  {
+    "country": "Montserrat",
+    "currency_name": "East Caribbean Dollar - XCD"
+  },
+  {
+    "country": "Morocco",
+    "currency_name": "Moroccan Dirham - MAD"
+  },
+  {
+    "country": "Mozambique",
+    "currency_name": "Mozambique Metical - MZN"
+  },
+  {
+    "country": "Myanmar",
+    "currency_name": "Myanmar Kyat - MMK"
+  },
+  {
+    "country": "Namibia",
+    "currency_name": "Namibian Dollar - NAD"
+  },
+  {
+    "country": "Nauru",
+    "currency_name": "Australian Dollar - AUD"
+  },
+  {
+    "country": "Nepal",
+    "currency_name": "Nepalese Rupee - NPR"
+  },
+  {
+    "country": "Netherlands",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Netherlands Antilles",
+    "currency_name": "Netherlands Antillean Guilder - ANG"
+  },
+  {
+    "country": "New Caledonia",
+    "currency_name": "Cfp Franc - XPF"
+  },
+  {
+    "country": "New Zealand",
+    "currency_name": "New Zealand Dollar - NZD"
+  },
+  {
+    "country": "Nicaragua",
+    "currency_name": "Nicaraguan Cordoba Oro - NIO"
+  },
+  {
+    "country": "Niger",
+    "currency_name": "CFA Franc BCEAO - XOF"
+  },
+  {
+    "country": "Nigeria",
+    "currency_name": "Nigerian Naira - NGN"
+  },
+  {
+    "country": "Niue",
+    "currency_name": "New Zealand Dollar - NZD"
+  },
+  {
+    "country": "Norfolk Island",
+    "currency_name": "Australian Dollar - AUD"
+  },
+  {
+    "country": "North Korea",
+    "currency_name": "North Korean Won - KPW"
+  },
+  {
+    "country": "Northern Mariana Islands",
+    "currency_name": "US Dollar - USD"
+  },
+  {
+    "country": "Norway",
+    "currency_name": "Norwegian Krone - NOK"
+  },
+  {
+    "country": "Oman",
+    "currency_name": "Omani Rial - OMR"
+  },
+  {
+    "country": "Pakistan",
+    "currency_name": "Pakistan Rupee - PKR"
+  },
+  {
+    "country": "Palau",
+    "currency_name": "US Dollar - USD"
+  },
+  {
+    "country": "Panama",
+    "currency_name": "Panamanian Balboa - PAB"
+  },
+  {
+    "country": "Papua New Guinea",
+    "currency_name": "Papua New Guinea Kina - PGK"
+  },
+  {
+    "country": "Paraguay",
+    "currency_name": "Paraguay Guarani - PYG"
+  },
+  {
+    "country": "Peru",
+    "currency_name": "Peruvian Nuevo Sol - PEN"
+  },
+  {
+    "country": "Philippines",
+    "currency_name": "Philippine Peso - PHP"
+  },
+  {
+    "country": "Pitcairn",
+    "currency_name": "New Zealand Dollar - NZD"
+  },
+  {
+    "country": "Poland",
+    "currency_name": "Polish Zloty - PLN"
+  },
+  {
+    "country": "Portugal",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Puerto Rico",
+    "currency_name": "US Dollar - USD"
+  },
+  {
+    "country": "Qatar",
+    "currency_name": "Qatari Rial - QAR"
+  },
+  {
+    "country": "Reunion",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Romania",
+    "currency_name": "Romanian New Leu - RON"
+  },
+  {
+    "country": "Russian Federation",
+    "currency_name": "Russian Ruble - RUB"
+  },
+  {
+    "country": "Rwanda",
+    "currency_name": "Rwanda Franc - RWF"
+  },
+  {
+    "country": "Saint Helena",
+    "currency_name": "St. Helena Pound - SHP"
+  },
+  {
+    "country": "Saint Kitts and Nevis",
+    "currency_name": "East Caribbean Dollar - XCD"
+  },
+  {
+    "country": "Saint Lucia",
+    "currency_name": "East Caribbean Dollar - XCD"
+  },
+  {
+    "country": "Saint Pierre and Miquelon",
+    "currency_name": " Euro - EUR"
+  },
+  {
+    "country": "Saint Vincent and the Grenadines",
+    "currency_name": "East Caribbean Dollar - XCD"
+  },
+  {
+    "country": "Samoa",
+    "currency_name": "Samoan Tala - WST"
+  },
+  {
+    "country": "San Marino",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Sao Tome and Principe",
+    "currency_name": " Dobra - STD"
+  },
+  {
+    "country": "Saudi Arabia",
+    "currency_name": "Saudi Riyal - SAR"
+  },
+  {
+    "country": "Senegal",
+    "currency_name": "CFA Franc BCEAO - XOF"
+  },
+  {
+    "country": "Seychelles",
+    "currency_name": "Seychelles Rupee - SCR"
+  },
+  {
+    "country": "Sierra Leone",
+    "currency_name": "Sierra Leone Leone - SLL"
+  },
+  {
+    "country": "Singapore",
+    "currency_name": "Singapore Dollar - SGD"
+  },
+  {
+    "country": "Slovakia",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Slovenia",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Solomon Islands",
+    "currency_name": "Solomon Islands Dollar - SBD"
+  },
+  {
+    "country": "Somalia",
+    "currency_name": "Somali Shilling - SOS"
+  },
+  {
+    "country": "South Africa",
+    "currency_name": "South African Rand - ZAR"
+  },
+  {
+    "country": "South Georgia and the South Sandwich Islands",
+    "currency_name": "Pound Sterling - GBP"
+  },
+  {
+    "country": "South Korea",
+    "currency_name": "Korean Won - KRW"
+  },
+  {
+    "country": "South Sudan",
+    "currency_name": "South Sudan Pound - SSP"
+  },
+  {
+    "country": "Spain",
+    "currency_name": "Euro - EUR"
+  },
+  {
+    "country": "Sudan",
+    "currency_name": "Sudanese Pound - Sudan"
+  },
+  {
+    "country": "Suriname",
+    "currency_name": "Surinam Dollar - SDG"
+  },
+  {
+    "country": "Svalbard and Jan Mayen",
+    "currency_name": "Norwegian Krone - NOK"
+  },
+  {
+    "country": "Swaziland",
+    "currency_name": "Swaziland Lilangeni - SZL"
+  },
+  {
+    "country": "Sweden",
+    "currency_name": "Swedish Krona - SEK"
+  },
+  {
+    "country": "Switzerland",
+    "currency_name": "Swiss Franc - CHF"
+  },
+  {
+    "country": "Syria",
+    "currency_name": "Syrian Pound - SYP"
+  },
+  {
+    "country": "Tajikistan",
+    "currency_name": "Tajik Somoni - TJS"
+  },
+  {
+    "country": "Tanzania",
+    "currency_name": "Tanzanian Shilling - TZS"
+  },
+  {
+    "country": "Thailand",
+    "currency_name": "Thai Baht - THB"
+  },
+  {
+    "country": "Togo",
+    "currency_name": "CFA Franc BCEAO - XOF"
+  },
+  {
+    "country": "Tokelau",
+    "currency_name": "New Zealand Dollar - NZD"
+  },
+  {
+    "country": "Tonga",
+    "currency_name": "Tongan Pa'anga - TOP"
+  },
+  {
+    "country": "Trinidad and Tobago",
+    "currency_name": "Trinidad and Tobago Dollar - TTD"
+  },
+  {
+    "country": "Tunisia",
+    "currency_name": "Tunisian Dollar - TND"
+  },
+  {
+    "country": "Turkey",
+    "currency_name": "Turkish Lira - TRY"
+  },
+  {
+    "country": "Turkmenistan",
+    "currency_name": "Manat - TMT"
+  },
+  {
+    "country": "Turks and Caicos Islands",
+    "currency_name": "United States Dollar - USD"
+  },
+  {
+    "country": "Tuvalu",
+    "currency_name": "Australian Dollar - AUD"
+  },
+  {
+    "country": "Uganda",
+    "currency_name": "Uganda Shilling - UGX"
+  },
+  {
+    "country": "Ukraine",
+    "currency_name": "Ukraine Hryvnia - UAH"
+  },
+  {
+    "country": "United Arab Emirates",
+    "currency_name": "Arab Emirates Dirham - AED"
+  },
+  {
+    "country": "United Kingdom",
+    "currency_name": "British Pound - GBP"
+  },
+  {
+    "country": "United States",
+    "currency_name": "United States Dollar - USD"
+  },
+  {
+    "country": "United States Minor Outlying Islands",
+    "currency_name": "United States Dollar - USD"
+  },
+  {
+    "country": "Uruguay",
+    "currency_name": "Uruguayan Peso - UYU"
+  },
+  {
+    "country": "Uzbekistan",
+    "currency_name": "Uzbekistan Sum - UZS"
+  },
+  {
+    "country": "Vanuatu",
+    "currency_name": "Vanuatu Vatu - VUV"
+  },
+  {
+    "country": "Venezuela",
+    "currency_name": "Venezuelan Bolivar - VEF"
+  },
+  {
+    "country": "Vietnam",
+    "currency_name": "Vietnamese Dong - VND"
+  },
+  {
+    "country": "Virgin Islands, U.S.",
+    "currency_name": "United States Dollar - USD"
+  },
+  {
+      "country": "Wallis and Futuna",
+    "currency_name": "Cfp Franc - XPF"
+  },
+  {
+    "country": "Western Sahara",
+    "currency_name": "Moroccan Dirham - MAD"
+  },
+  {
+    "country": "Yemen",
+    "currency_name": "Yemeni Rial - YER"
+  },
+  {
+    "country": "Zambia",
+    "currency_name": "Zambian Kwacha - ZMW "
+  },
+  {
+    "country": "Zimbabwe",
+    "currency_name": "Zimbabwe Dollar - ZWD"
+  }
+]
