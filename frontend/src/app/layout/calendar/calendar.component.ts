@@ -1,88 +1,189 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { routerTransition } from '../../router.animations';
-import * as $ from 'jquery';
-import { EventSesrvice } from './event.service';
-import {NgbModal, NgbModalRef, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
-import { WeekComponents } from './box/week-components/week-components';
-import { DayComponents } from './box/day-components/day-components';
-declare var Date: any;
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { CalendarEvent, CalendarEventTimesChangedEvent, CalendarEventTitleFormatter, CalendarView } from 'angular-calendar';
+import { addHours } from 'date-fns';
+import { Subject } from 'rxjs';
+import { StaffService } from 'src/app/layout/staff/staff.service';
+import { CustomEventTitleFormatter } from './utils/custom-event-title-formatter.provider';
+import { colors } from './utils/colors';
 
 @Component({
 	selector: 'app-calendar',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [{
+		provide: CalendarEventTitleFormatter,
+		useClass: CustomEventTitleFormatter
+	}],
 	templateUrl: './calendar.component.html',
-	styleUrls: ['./calendar.component.scss'],
-	animations: [routerTransition()]
+	styleUrls: ['./calendar.component.scss']
 })
+
 export class CalendarComponent implements OnInit {
+	view: CalendarView = CalendarView.Week;
+	CalendarView = CalendarView;
+	hourSegments = 6;
+	weekStartsOn = 1;
+	selectedStaffId;
+	
+	viewDate: Date = new Date();
+	dayStartHour = "8";
+	dayEndHour = "24";
+	refresh: Subject<any> = new Subject();
+	events: CalendarEvent[];
 
-	closeResult: any;
-	modalOptions: NgbModalOptions;
-	switch: string = 'day';
-	componentData: any = null;
-	calendar: any;
+	currentStaffList: any[];
+	allStaff: any[];
 
-	constructor(protected eventService: EventSesrvice,
-	private modal: NgbModal,
-	private datePipe: DatePipe) {}
-
-
-	ngOnInit() {
-		this.loadSwith();
+	constructor(
+		private staffService: StaffService,
+	) {
 	}
 
-	private loadSwith(){
-		if(this.switch == 'week') {
-			this.componentData = {
-				component: WeekComponents,
-				inputs: {}
-			};
+	ngOnInit() {
+		this.getListStaff();
+	}
+
+	getListStaff() {
+		this.staffService.getList()
+			.subscribe((data: any) => {
+				this.allStaff = data.user
+					.map(s => {
+						return {
+							id: s.id,
+							name: s.firstName + s.lastName,
+							sortOrder: s.sort_order,
+							color: s.id % 2 == 0 ? colors.yellow : colors.blue,
+						}
+					})
+					.sort((a, b) => a.sortOrder - b.sortOrder);
+				// TODO: move to oninit later
+				this.changeStaff(this.selectedStaffId);
+				this.getListAppointments();
+			}, err => {});
+	}
+
+	getListAppointments(): void {
+		this.events = [
+			{
+				id: 1,
+				meta: {
+					staffs: this.allStaff,
+					user: this.currentStaffList[1]
+				  },
+				title: 'test event',
+				color: this.currentStaffList[1].color,
+				start: new Date(),
+				end: addHours(new Date(), 1), // an end date is always required for resizable events to work
+				resizable: {
+					beforeStart: true, // this allows you to configure the sides the event is resizable from
+					afterEnd: true
+				},
+				draggable: true,
+			},
+			{
+				id: 2,
+				meta: {
+					staffs: this.allStaff,
+					user: this.currentStaffList[0]
+				  },
+				title: 'test event 2',
+				color: this.currentStaffList[0].color,
+				start: addHours(new Date(), 1),
+				end: addHours(new Date(), 2),
+				resizable: {
+					beforeStart: true,
+					afterEnd: true
+				},
+				draggable: true,
+			},
+			{
+				id: 3,
+				meta: {
+					staffs: this.allStaff,
+					user: this.currentStaffList[1]
+				  },
+				title: 'test event 3',
+				color: this.currentStaffList[1].color,
+				start: addHours(new Date(), 2),
+				end: addHours(new Date(), 3),
+				resizable: {
+					beforeStart: true,
+					afterEnd: true
+				},
+				draggable: true,
+			},
+		];
+	}
+
+	changeStaff(staffId) {
+		if (!staffId) { // show all staff
+		  this.currentStaffList = this.allStaff;
 		} else {
-			this.componentData = {
-				component: DayComponents,
-				inputs: {}
-			};
-			this.calendar = Date.today().toString('dddd, MMM dd yyyy');
+		  staffId = parseInt(staffId, 10);
+		  this.currentStaffList = this.allStaff.filter(s => s.staffId === staffId);
 		}
 	}
 
-	openModal(content: NgbModalRef) {
-		this.modal.open(content, this.modalOptions).result.then((result) => {
-			this.closeResult = `Closed with: ${result}`;
-		}, (reason) => {
-			this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+	eventTimesChanged({
+		event,
+		newStart,
+		newEnd
+	}: CalendarEventTimesChangedEvent): void {
+		event.start = newStart;
+		event.end = newEnd;
+		// this.refresh.next();
+		this.events = [...this.events];
+		console.log(event);
+	}
+
+	userChanged({ event, newUser }) {
+		event.color = newUser.color;
+		event.meta.user = newUser;
+		// this.refresh.next();
+		this.events = [...this.events];
+	  }
+
+	dayHeaderClicked(evt): void {
+		console.log(evt);
+		this.view = CalendarView.Day;
+		this.viewDate = evt.day.date;
+	}
+
+	eventClicked(evt): void {
+		console.log(evt);
+	}
+
+	hourSegmentClicked(evt): void {
+		console.log(evt);
+		const diff = new Date().getTime() - new Date(evt).getTime();
+	}
+
+	isNow(date): boolean {
+		const diff = Math.abs(new Date().getTime() - new Date(date).getTime());
+		return diff < 300000;
+	}
+
+	dayHourSegmentClicked(evt): void {
+		this.setStaffCoordinate();
+
+		let found = this.currentStaffList.filter(s => {
+			return evt.event.screenX >= s.xStart && evt.event.screenX <= s.xEnd;
+		})[0];
+
+		if (found) {
+			console.log(found.name);
+		}
+		console.log(evt.date);
+	}
+
+	setStaffCoordinate(): void {
+		const firstStaffCoordinate = document.querySelector('.day-view-column-header').getBoundingClientRect() as DOMRectReadOnly;
+		let xStart = firstStaffCoordinate.x;
+		const width = firstStaffCoordinate.width;
+
+		this.currentStaffList.forEach(s => {
+			s.xStart = xStart;
+			s.xEnd = xStart += width;
 		});
 	}
 
-	private getDismissReason(reason: any): string {
-		if (reason === ModalDismissReasons.ESC) {
-			return 'by pressing ESC';
-		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-			return 'by clicking on a backdrop';
-		} else {
-			return `with: ${reason}`;
-		}
-	}
-
-	switchCalendar(value) {
-		this.switch = value;
-		if(value == 'week') {
-			this.componentData = {
-				component: WeekComponents,
-				inputs: {}
-			};
-		} else {
-			this.componentData = {
-				component: DayComponents,
-				inputs: {}
-			};
-		}
-	}
-
-	nextDay() {
-		this.calendar = Date.today().add(1).day().toString('dddd, MMM dd yyyy');
-	}
-	prevDay() {
-		this.calendar = Date.today().add(-1).day().toString('dddd, MMM dd yyyy');
-	}
 }

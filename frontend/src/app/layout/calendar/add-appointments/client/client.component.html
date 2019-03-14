@@ -1,0 +1,41 @@
+<div class="modal-header">
+	<div class="input-group">
+		<div class="input-group-prepend">
+			<div class="input-group-text">
+				<i class="fa fa-search"></i>
+			</div>
+		</div>
+		<input [(ngModel)]="form.searchClient" type="text" class="form-control input-underline input-lg" name="searchClient" placeholder="Search Client" #searchClient="ngModel" #searchClient (focus)="focusSearchClient()">
+	</div>
+</div>
+<div class="modal-body">
+	<div class="line-add" *ngIf="showAddClient">
+		<a href="javascript:void(0);" [routerLink]="['/clients/add']">+ Create new client</a>
+		<a href="javascript:void(0);" class="close" (click)="blurSearchClient()">+</a>
+	</div>
+	<div class="text-center" style="margin-top: 30px;" *ngIf="!showAddClient">
+	    <div class="box-icon mb-3">
+	    	<i class="fa fa-file-text-o fa-5x"></i>
+	    	<i class="fa fa-search fa-3x"></i>
+	    </div>
+	    <p>Use the search to add a client, or keep empty to save as walk-in.</p>
+  	</div>
+  	<!-- <div class="box-list-client" *ngIf="showAddClient && clients?.user.length > 0"> -->
+  	<div class="box-list-client">
+  		<table class="table table-hover">
+			<tbody>
+				<ng-container *ngIf="showAddClient && clients?.user.length > 0">
+					<tr *ngFor="let client of clients?.user; index as i" (click)="sendingData(client)">
+						<td>
+							<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
+						</td>
+						<td class="ba">
+							<span>{{client?.firstName}} {{client?.lastName}}</span>
+							<span>{{client?.phone}}</span>
+						</td>
+					</tr>
+				</ng-container>
+			</tbody>
+		</table>
+  	</div>
+</div>

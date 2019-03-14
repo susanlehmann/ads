@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\member\inventory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Stock_product;
 use Auth;
 class ProductCtroller extends Controller
 {
@@ -44,6 +45,19 @@ class ProductCtroller extends Controller
         $product = Product::create($input);
         if($product == true)
         {
+        $total = $request->initialstock_product * $request->supplyprice_product;
+        $input = [
+            'id_client_stock' => $request->ownerId,
+            'id_product'       => $product->id,
+            'id_create' => $request->ownerId,
+            'id_update' => $request->ownerId,
+            'stock_qty' => $request->initialstock_product,
+            'stock_price' => $request->supplyprice_product,
+            'reason_stock' => 'new_stock',
+            'total_stock' => $total,
+        ];
+        // $user->level = 0; // ko co column level
+        $stock = Stock_product::create($input);
             $msg = ['success' => 'Create a new service group successfully', 'id' => $product->id];
         }
         else

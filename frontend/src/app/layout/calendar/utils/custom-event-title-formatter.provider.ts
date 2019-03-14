@@ -34,4 +34,5 @@ export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
       this.locale
     )}</b> ${event.title}`;
   }
+
 }

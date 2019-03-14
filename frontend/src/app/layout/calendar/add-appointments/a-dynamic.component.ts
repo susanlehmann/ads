@@ -1,19 +1,19 @@
-import {Component, Input, ViewContainerRef, ViewChild, ReflectiveInjector, ComponentFactoryResolver} from '@angular/core';
-import { WeekComponents } from './../week-components/week-components';
-import { DayComponents } from './../day-components/day-components';
+import {Component, Input, ViewContainerRef, ViewChild, ReflectiveInjector, ComponentFactoryResolver, EventEmitter, Output} from '@angular/core';
+import { AppClientComponent } from './client/client.component';
 
 @Component({
-  selector: 'dynamic-component',
-  entryComponents: [WeekComponents, DayComponents], // Reference to the components must be here in order to dynamically create them
+  selector: 'a-dynamic-component',
+  entryComponents: [AppClientComponent], // Reference to the components must be here in order to dynamically create them
   template: `
     <div #dynamicComponentContainer></div>
   `,
 })
-export class DynamicComponent {
+export class A_DynamicComponent {
   currentComponent = null;
 
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef }) dynamicComponentContainer: ViewContainerRef;
   
+  @Output() outPutData: EventEmitter<any> = new EventEmitter<any>();
   // component: Class for the component you want to create
   // inputs: An object with key/value pairs mapped to input name/input value
   @Input() set componentData(data: {component: any, inputs: any }) {
