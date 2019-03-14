@@ -9,6 +9,10 @@ import { AddLocationComponent } from './locations/add/add-location.component';
 import { EditLocationComponent } from './locations/edit/edit-location.component';
 import { PageComponent } from './page/page.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { ResourcesComponent } from './resources/resources.component';
+import { DiscountTypeComponent } from './discount-type/discount-type.component'
+import { SalesSettingsComponent } from './sales_settings/sales_settings.component'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,12 +21,16 @@ import { CompanyDetailsComponent } from './company-details/company-details.compo
   	PageComponent,
   	AddLocationComponent,
     EditLocationComponent,
+    ResourcesComponent,
+    DiscountTypeComponent,
+    SalesSettingsComponent,
     CompanyDetailsComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     TranslateModule,
+    NgbModule,
     SetupRoutingModule
   ]
 })
