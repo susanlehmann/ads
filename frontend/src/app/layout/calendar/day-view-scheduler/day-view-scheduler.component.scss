@@ -20,3 +20,46 @@
         }
     }
 }
+
+.cal-hour-segment div {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 30;
+
+    div {
+        padding: calc(0.15em - 1px) 0.5em 0.15em 0.35em;
+        line-height: 28px;
+        color: #2B72BD;
+        background-color: #EBF5FD;
+        box-shadow: 0 2px 5px 0 rgba(164, 173, 186, .25);
+        
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        
+        transition: opacity 0.05s;
+        
+        opacity: 0.7
+    }
+}
+
+.cal-header.cal-past {
+    cursor: pointer;
+}
+
+.now-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    margin-top: -1px;
+    pointer-events: none;
+    border-bottom: 2px solid #F74969;
+}
+
+.cursor-cell {
+    cursor: cell;
+}

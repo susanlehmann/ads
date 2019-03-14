@@ -56,6 +56,11 @@ export class DayViewSchedulerComponent extends CalendarDayViewComponent {
     this.eventWidth = EVENT_WIDTH;
   }
 
+  isNow(date): boolean {
+		const diff = Math.abs(new Date().getTime() - new Date(date).getTime());
+		return diff < 300000;
+	}
+
   eventDragged(dayEvent: DayViewEvent, xPixels: number, yPixels: number): void {
     // super.dragEnded(dayEvent, { y: yPixels, x: 0 } as any); // original behaviour
 
