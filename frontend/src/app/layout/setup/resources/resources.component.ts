@@ -11,12 +11,15 @@ import { NotifierService } from 'angular-notifier';
 export class ResourcesComponent implements OnInit {
   modalOptions: NgbModalOptions;
   closeResult: string;
+  isCreate: boolean;
   constructor(private notifierService: NotifierService,
     private modal: NgbModal,
   ) {
     this.modalOptions = {
       backdrop: 'static',
       size: 'md',
+      windowClass: 'custom-modal',
+      backdropClass: 'custom-modal',
     };
   }
   openModal(content) {
@@ -26,7 +29,19 @@ export class ResourcesComponent implements OnInit {
       this.closeResult = `Dismissed`;
     });
   }
+  openCreateModal(content: NgbModalRef) {
+    this.isCreate = true;
+    // this.form.new();
+    this.openModal(content);
+  }
 
+  openUpdateModal(content: NgbModalRef, resourceID) {
+    this.isCreate = false;
+    // .subscribe((data:any) => {
+    //         this.form.updateData(data.category);
+    //         this.openModal(content);
+    //     });
+  }
 	ngOnInit() {
 
 	}
