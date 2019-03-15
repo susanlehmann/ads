@@ -1,35 +1,29 @@
 import { Component, EventEmitter, Injectable, Output, Input } from '@angular/core';
 import { CalendarDayViewComponent, CalendarUtils } from 'angular-calendar';
-import { DayView, DayViewEvent, GetDayViewArgs } from 'calendar-utils';
-
-// extend the interface to add the array of users
-interface DayViewScheduler extends DayView {
-  staffs: any[];
-}
+import { DayView, DayViewEvent } from 'calendar-utils';
 
 const HEADER_MARGIN_LEFT = 100;
 let EVENT_WIDTH: number;
 
 @Injectable()
 export class DayViewSchedulerCalendarUtils extends CalendarUtils {
+  staffs: any[];
 
-  getDayView(args: GetDayViewArgs): DayViewScheduler {
-    const view: DayViewScheduler = {
-      ...super.getDayView(args),
-      staffs: []
-    };
+  getDayView(args: any) {
+    const view = super.getDayView(args);
 
-    view.staffs = view.events[0].event.meta.staffs;
+    this.staffs = args.events[0].meta.staffs;
     // calculated base on number of displayed staffs
-    EVENT_WIDTH = (Math.round(document.querySelector('.main-container').clientWidth - HEADER_MARGIN_LEFT) / view.staffs.length);
+    EVENT_WIDTH = (Math.round(document.querySelector('.main-container').clientWidth - HEADER_MARGIN_LEFT) / this.staffs.length);
 
     view.events = view.events.map(dayViewEvent => {
-      const index = view.staffs.indexOf(dayViewEvent.event.meta.user);
-      dayViewEvent.left = index * EVENT_WIDTH; // change the column of the event
-      dayViewEvent.width = EVENT_WIDTH;
-      return dayViewEvent;
-    });
-    view.width = view.staffs.length * EVENT_WIDTH;
+      const index = this.staffs.indexOf(dayViewEvent.event.meta.user);
+      const mapped = { index: index, ...dayViewEvent };
+      mapped.left = index * EVENT_WIDTH; // change the column of the event
+      mapped.width = EVENT_WIDTH;
+      return mapped;
+    }).filter(e => e.index !== -1);
+    view.width = this.staffs.length * EVENT_WIDTH;
     return view;
   }
 }
@@ -47,7 +41,7 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
   ],
 })
 export class DayViewSchedulerComponent extends CalendarDayViewComponent {
-  view: DayViewScheduler;
+  view: DayView;
 
   @Output() userChanged = new EventEmitter();
   @Input() staffs;
@@ -69,11 +63,11 @@ export class DayViewSchedulerComponent extends CalendarDayViewComponent {
     }
     if (xPixels !== 0) {
       const columnsMoved = xPixels / EVENT_WIDTH;
-      const currentColumnIndex = this.view.staffs.findIndex(
+      const currentColumnIndex = this.staffs.findIndex(
         user => user.id === dayEvent.event.meta.user.id
       );
       const newIndex = currentColumnIndex + columnsMoved;
-      const newUser = this.view.staffs[newIndex];
+      const newUser = this.staffs[newIndex];
       if (newUser) {
         this.userChanged.emit({ event: dayEvent.event, newUser });
       }

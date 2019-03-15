@@ -31,11 +31,13 @@ export class CalendarComponent implements OnInit {
 	dayStartHour = "8";
 	dayEndHour = "24";
 	refresh: Subject<any> = new Subject();
+	allEvents: CalendarEvent[];
 	events: CalendarEvent[];
 
 	currentStaffList: any[];
 	allStaff: any[];
 	isToday = true;
+	staffList$ = this.staffService.getList();
 
 	constructor(
 		private staffService: StaffService,
@@ -44,17 +46,7 @@ export class CalendarComponent implements OnInit {
 	) {
 		this.staffFilter = 'all';
 		this.currentStaffList = [];
-		this.events = [
-			{
-				start: new Date(),
-				title: '',
-				cssClass: 'd-none',
-				meta: {
-					staffs: this.allStaff,
-				},
-
-			},
-		];
+		this.events = [this.getHiddenEvent(new Date())];
 	}
 
 	ngOnInit() {
@@ -77,9 +69,20 @@ export class CalendarComponent implements OnInit {
 		localStorage.setItem('calendarSearch', JSON.stringify(data));
 	}
 
+	// to pass list staffs for day-view
+	getHiddenEvent(date) {
+		return {
+			start: this.dateAdapter.startOfDay(date),
+			title: '',
+			cssClass: 'd-none',
+			meta: {
+				staffs: this.allStaff,
+			}
+		};
+	}
+
 	getListStaff() {
-		this.staffService.getList()
-			.subscribe((data: any) => {
+		this.staffList$.subscribe((data: any) => {
 				this.allStaff = data.user
 					.map(s =>
 						({
@@ -91,8 +94,8 @@ export class CalendarComponent implements OnInit {
 					.sort((a, b) => a.sortOrder - b.sortOrder);
 				// TODO: move to oninit later
 				this.getCalendarSearch();
-				this.changeStaff(this.staffFilter);
 				this.getListAppointments();
+				this.changeStaff(this.staffFilter);
 			}, err => {});
 	}
 
@@ -102,10 +105,14 @@ export class CalendarComponent implements OnInit {
 
 	viewDateChange(date) {
 		this.isToday = this.dateAdapter.startOfDay(date).getTime() === this.dateAdapter.startOfDay(new Date()).getTime();
+		const hiddenEvent = this.events.filter(e => e.cssClass === 'd-none' && e.start == this.dateAdapter.startOfDay(date))[0];
+		if (!hiddenEvent) {
+			this.events.push(this.getHiddenEvent(date));
+		}
 	}
 
 	getListAppointments(): void {
-		this.events = [...this.events,
+		this.allEvents = [this.getHiddenEvent(new Date()),
 			{
 				id: 1,
 				meta: {
@@ -152,6 +159,7 @@ export class CalendarComponent implements OnInit {
 				draggable: true,
 			},
 		];
+		this.events = this.allEvents;
 	}
 
 	switchToWeekView() {
@@ -160,6 +168,12 @@ export class CalendarComponent implements OnInit {
 			this.staffFilter = this.allStaff[0].id;
 		}
 		this.setCalendarSearch();
+	}
+
+	switchToDayView(): void {
+		this.view = CalendarView.Day;
+		this.events[0].meta.staffs = this.currentStaffList;
+		this.events = [...this.allEvents];
 	}
 
 	changeStaff(value?) {
@@ -180,13 +194,13 @@ export class CalendarComponent implements OnInit {
 		value = parseInt(value, 10);
 		this.currentStaffList = this.allStaff.filter(s => s.id === value);
 		this.events[0].meta.staffs = this.currentStaffList;
-		this.events = [this.events[0], ...this.events.filter(e => e.meta.user && e.meta.user.id === value)];
+		this.events = [this.events[0], ...this.allEvents.filter(e => e.meta.user && e.meta.user.id === value)];
 		
 	}
 
 	getWorkingStaffs() {
-		//TODO
-		return this.allStaff;
+		//TODO: test
+		return this.allStaff.filter(s => s.id % 2 === 0);
 	}
 
 	eventTimesChanged({
@@ -214,21 +228,14 @@ export class CalendarComponent implements OnInit {
 		this.viewDate = evt.day.date;
 	}
 
-	switchToDayView(): void {
-		this.view = CalendarView.Day;
-		this.events[0].meta.staffs = this.currentStaffList;
-		this.events = [...this.events];
-	}
-
 	eventClicked(evt): void {
 		console.log(evt);
 	}
 
 	hourSegmentClicked(evt): void {
-		const date = new Date(evt.date);
 		this.route.navigate(['appointment/add'], { queryParams: { 
-			start_date: date.toString('yyyy-MM-dd'),
-			start_time: date.toString('HHmm'),
+			start_date: evt.date.toString('yyyy-MM-dd'),
+			start_time: evt.date.toString('HHmm'),
 			staff_id: this.staffFilter,
 		 }});
 	}
@@ -247,8 +254,13 @@ export class CalendarComponent implements OnInit {
 
 		if (found) {
 			console.log(found.name);
+			console.log(evt.date);
+			this.route.navigate(['appointment/add'], { queryParams: { 
+				start_date: evt.date.toString('yyyy-MM-dd'),
+				start_time: evt.date.toString('HHmm'),
+				staff_id: found.id,
+			 }});
 		}
-		console.log(evt.date);
 	}
 
 	setStaffCoordinate(): void {
