@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarEvent, CalendarEventTimesChangedEvent, CalendarEventTitleFormatter, CalendarView, DateAdapter } from 'angular-calendar';
 import { addHours } from 'date-fns';
-import { Subject } from 'rxjs';
+import { Subject, forkJoin } from 'rxjs';
 import { StaffService } from 'src/app/layout/staff/staff.service';
 import { CustomEventTitleFormatter } from './utils/custom-event-title-formatter.provider';
 import { colors } from './utils/colors';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { AppointmentService } from 'src/app/shared/services/appointment.service';
 declare var Date: any;
 
 @Component({
@@ -37,20 +38,49 @@ export class CalendarComponent implements OnInit {
 	currentStaffList: any[];
 	allStaff: any[];
 	isToday = true;
-	staffList$ = this.staffService.getList();
+	loadData$;
 
 	constructor(
 		private staffService: StaffService,
+		private appointmentService: AppointmentService,
 		private route: Router,
 		private dateAdapter: DateAdapter
 	) {
+		this.loadData$ = forkJoin([this.staffService.getList(), this.appointmentService.getAllAppointments()]);
 		this.staffFilter = 'all';
 		this.currentStaffList = [];
 		this.events = [this.getHiddenEvent(new Date())];
+		this.getCalendarSearch();
 	}
 
 	ngOnInit() {
-		this.getListStaff();
+		this.loadData$.subscribe(rs => {
+			this.allStaff = rs[0].user.map(this.mapStaff).sort((a, b) => a.sortOrder - b.sortOrder);
+
+			const evts = rs[1].appoint.map(a => {
+				const info = JSON.parse(a.info_appoint)[0];
+				const staff = this.getStaffById(info.staff);
+				return {
+					id: a.id,
+					meta: {
+						user: staff
+					},
+					title: a.note_appoint,
+					color: staff.color,
+					start: new Date(a.created_at), // TODO test
+					end: addHours(new Date(a.created_at), 2),
+					resizable: {
+						beforeStart: true,
+						afterEnd: true
+					},
+					draggable: true,
+				};
+			});
+			this.allEvents = [this.getHiddenEvent(new Date()), ...evts];
+			this.events = this.allEvents;
+
+			this.changeStaff(this.staffFilter);
+		});	
 	}
 
 	getCalendarSearch() {
@@ -81,22 +111,13 @@ export class CalendarComponent implements OnInit {
 		};
 	}
 
-	getListStaff() {
-		this.staffList$.subscribe((data: any) => {
-				this.allStaff = data.user
-					.map(s =>
-						({
-							id: s.id,
-							name: s.firstName + s.lastName,
-							sortOrder: s.sort_order,
-							color: s.id % 2 == 0 ? colors.yellow : colors.blue,
-						}))
-					.sort((a, b) => a.sortOrder - b.sortOrder);
-				// TODO: move to oninit later
-				this.getCalendarSearch();
-				this.getListAppointments();
-				this.changeStaff(this.staffFilter);
-			}, err => {});
+	mapStaff(s) {
+		return {
+			id: s.id,
+			name: s.firstName + s.lastName,
+			sortOrder: s.sort_order,
+			color: s.id % 2 == 0 ? colors.yellow : colors.blue,
+		};
 	}
 
 	trackByStaffId(index, staff) {
@@ -111,55 +132,32 @@ export class CalendarComponent implements OnInit {
 		}
 	}
 
-	getListAppointments(): void {
-		this.allEvents = [this.getHiddenEvent(new Date()),
-			{
-				id: 1,
-				meta: {
-					user: this.allStaff[1]
-				  },
-				title: 'test event',
-				color: this.allStaff[1].color,
-				start: new Date(),
-				end: addHours(new Date(), 1), // an end date is always required for resizable events to work
-				resizable: {
-					beforeStart: true, // this allows you to configure the sides the event is resizable from
-					afterEnd: true
-				},
-				draggable: true,
+	getStaffById(id) {
+		const staff = this.allStaff.filter(s => s.id == id)[0];
+		if (staff) {
+			return staff;
+		}
+		throw Error('Staff not found');
+	}
+
+	mapAppointment(a) {
+		const info = JSON.parse(a.info_appoint);
+		const staff = this.getStaffById(info.staff);
+		return {
+			id: a.id,
+			meta: {
+				user: staff
 			},
-			{
-				id: 2,
-				meta: {
-					user: this.allStaff[0]
-				  },
-				title: 'test event 2',
-				color: this.allStaff[0].color,
-				start: addHours(new Date(), 1),
-				end: addHours(new Date(), 2),
-				resizable: {
-					beforeStart: true,
-					afterEnd: true
-				},
-				draggable: true,
+			title: a.note_appoint,
+			color: staff.color,
+			start: new Date(a.created_at), // TODO test
+			end: addHours(new Date(a.created_at), 2),
+			resizable: {
+				beforeStart: true,
+				afterEnd: true
 			},
-			{
-				id: 3,
-				meta: {
-					user: this.allStaff[1]
-				  },
-				title: 'test event 3',
-				color: this.allStaff[1].color,
-				start: addHours(new Date(), 2),
-				end: addHours(new Date(), 3),
-				resizable: {
-					beforeStart: true,
-					afterEnd: true
-				},
-				draggable: true,
-			},
-		];
-		this.events = this.allEvents;
+			draggable: true,
+		};
 	}
 
 	switchToWeekView() {

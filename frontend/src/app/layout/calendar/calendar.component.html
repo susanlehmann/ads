@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<div *ngIf="staffList$ | async" [ngSwitch]="view">
+<div *ngIf="loadData$ | async" [ngSwitch]="view">
   <mwl-day-view-scheduler *ngSwitchCase="'day'"
     [viewDate]="viewDate"
     [events]="events"
