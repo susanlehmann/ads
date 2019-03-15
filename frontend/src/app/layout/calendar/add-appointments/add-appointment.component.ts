@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgbModal, NgbModalRef, NgbDateStruct, NgbDateParserFormatter, NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 import { StaffService } from './../../staff/staff.service';
@@ -44,6 +44,7 @@ export class AddAppointmentComponent implements OnInit
 
 	constructor(
 		private route: Router,
+		private activatedRoute: ActivatedRoute,
 		private datePipe: DatePipe,
 		private staffService: StaffService,
 		private servService: ServicesService,
@@ -58,16 +59,32 @@ export class AddAppointmentComponent implements OnInit
 		this.loadStaff();
 		this.loadService();
 		this.getUser();
-		this.dateSelected = Date.today().toString('dddd, dd MMM yyyy');
+
 		this.times = data;
-		this.stepAppoinent = [
-			{
-				startTime: 800,
-				duration: "",
-				service: "",
-				staff: ""
+		this.activatedRoute.queryParams.subscribe((params: Params) => {
+			if(params.start_date == "undefined" || params.start_date == undefined){
+				this.dateSelected = Date.today().toString('dddd, dd MMM yyyy');
+				this.stepAppoinent = [
+					{
+						startTime: 800,
+						duration: "",
+						service: "",
+						staff: ""
+					}
+				];
+			} else {
+				this.dateSelected = this.datePipe.transform(new Date(params.start_date), 'EEEE, dd MMM yyyy');
+				this.stepAppoinent = [
+					{
+						startTime: Number(params.start_time),
+						duration: "",
+						service: "",
+						staff: params.staff_id
+					}
+				];
 			}
-		];
+		});
+		
 	}
 
 	onSubmit() :void {
@@ -169,7 +186,7 @@ export class AddAppointmentComponent implements OnInit
 			let data = JSON.parse(filters[0].price_options);
 			let nDuration = data[0].duration_service;
 			let xDuration = this.convertTime(nDuration);
-			if(index == 0) {
+			if(index == 0 && this.stepAppoinent[0].staff == "") {
 				this.stepAppoinent[0].duration = nDuration;
 			} else {
 				this.stepAppoinent[index].startTime = 800;				
@@ -189,7 +206,7 @@ export class AddAppointmentComponent implements OnInit
 		} else {
 			let nDuration = filters[0].duration_service;
 			let xDuration = this.convertTime(nDuration);
-			if(index == 0) {
+			if(index == 0 && this.stepAppoinent[0].staff == "") {
 				this.stepAppoinent[0].duration = nDuration;
 			} else {
 				this.stepAppoinent[index].startTime = 800;

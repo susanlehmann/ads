@@ -179,3 +179,17 @@ $breakpoint-iphone: 667px;
   	
   
 }
+
+/* 
+  ##Device = iPhone X (Landscape)
+  ##Screen = B/w 767px to 812px
+*/
+
+@media (min-width: 767px) and (max-width: 812px) {
+  	.iphoneX-content .col-md-6 {
+    	max-width: 100%;
+	    flex: 1 1 100%;
+	}
+  
+  
+}
