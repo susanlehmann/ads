@@ -5,6 +5,8 @@ import { Subject } from 'rxjs';
 import { StaffService } from 'src/app/layout/staff/staff.service';
 import { CustomEventTitleFormatter } from './utils/custom-event-title-formatter.provider';
 import { colors } from './utils/colors';
+import { Router } from '@angular/router';
+declare var Date: any;
 
 @Component({
 	selector: 'app-calendar',
@@ -36,6 +38,7 @@ export class CalendarComponent implements OnInit {
 
 	constructor(
 		private staffService: StaffService,
+		private route: Router,
 		private dateAdapter: DateAdapter
 	) {
 		this.staffFilter = 'all';
@@ -205,8 +208,12 @@ export class CalendarComponent implements OnInit {
 	}
 
 	hourSegmentClicked(evt): void {
-		console.log(evt);
-		const diff = new Date().getTime() - new Date(evt).getTime();
+		const date = new Date(evt.date);
+		this.route.navigate(['appointment/add'], { queryParams: { 
+			start_date: date.toString('yyyy-MM-dd'),
+			start_time: date.toString('HHmm'),
+			staff_id: this.staffFilter,
+		 }});
 	}
 
 	isNow(date): boolean {
