@@ -7,7 +7,7 @@
             <select name="lstStaff" class="form-control" [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' >
                 <option value="all" selected>All Staff</option>
                 <option value="working" selected>Working Staff</option>
-                <option value={{staff.staffId}} *ngFor="let staff of allStaff">{{staff.name}}</option>
+                <option value={{staff.id}} *ngFor="let staff of allStaff">{{staff.name}}</option>
             </select>
           </div>
           <div class="col-md-6"></div>

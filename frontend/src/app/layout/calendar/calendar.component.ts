@@ -164,7 +164,9 @@ export class CalendarComponent implements OnInit {
 		}
 
 		value = parseInt(value, 10);
-		this.currentStaffList = this.allStaff.filter(s => s.staffId === value);
+		this.currentStaffList = this.allStaff.filter(s => s.id === value);
+		this.events[0].meta.staffs = this.currentStaffList;
+		this.events = [this.events[0], ...this.events.filter(e => e.meta.user && e.meta.user.id === value)];
 		
 	}
 
