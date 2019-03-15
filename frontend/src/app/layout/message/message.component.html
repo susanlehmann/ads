@@ -5,7 +5,7 @@
                 <div class="col-lg-3 col-sm-6 col-md-4">
                 	<div class="row">
                 		<div class="input-group">
-							<input type="text" class="form-control " placeholder="Search by name, email or booking reference" [ngModel]='keyword' (ngModelChange)='changed($event)'>
+							<input type="text" class="form-control " placeholder="Search by name, email or booking reference" [ngModel]='keyword'>
 							<div class="input-group-prepend">
 								<div class="input-group-text">
 									<i class="fa fa-search"></i>
@@ -28,7 +28,7 @@
                         <th>{{'Status' | uppercase}}</th>
                     </tr>
                     </thead>
-                    <tbody cdkDropList (cdkDropListDropped)="onDrop($event)">
+                    <tbody>
 	                    <ng-container *ngIf="!listusers">
 	                        <tr style="background-color: #fff; cursor: default;">
 	                            <td colspan="6" style="padding-top:40px;">

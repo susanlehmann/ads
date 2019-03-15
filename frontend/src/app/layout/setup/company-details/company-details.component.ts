@@ -29,7 +29,6 @@ export class CompanyDetailsComponent implements OnInit {
     private businessType: BusinessTypeService,
     private setupService: Setup_company_detailService
   ) {
-    this.countryCurrency = countryCurrency;
     this.timeFomat = [{
       'value': '1',
       'text': '12-hours (e.g. 9:00pm)'
@@ -92,6 +91,7 @@ export class CompanyDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.countryCurrency = countryCurrency;
     this.timezone = data;
     this.loadBusinessType();
     this.getCompanyDetail();
