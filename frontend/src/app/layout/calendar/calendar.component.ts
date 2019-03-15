@@ -6,6 +6,7 @@ import { StaffService } from 'src/app/layout/staff/staff.service';
 import { CustomEventTitleFormatter } from './utils/custom-event-title-formatter.provider';
 import { colors } from './utils/colors';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 declare var Date: any;
 
 @Component({
@@ -42,7 +43,18 @@ export class CalendarComponent implements OnInit {
 		private dateAdapter: DateAdapter
 	) {
 		this.staffFilter = 'all';
-		this.getCalendarSearch();
+		this.currentStaffList = [];
+		this.events = [
+			{
+				start: new Date(),
+				title: '',
+				cssClass: 'd-none',
+				meta: {
+					staffs: this.allStaff,
+				},
+
+			},
+		];
 	}
 
 	ngOnInit() {
@@ -69,20 +81,23 @@ export class CalendarComponent implements OnInit {
 		this.staffService.getList()
 			.subscribe((data: any) => {
 				this.allStaff = data.user
-					.map(s => {
-						return {
+					.map(s =>
+						({
 							id: s.id,
 							name: s.firstName + s.lastName,
 							sortOrder: s.sort_order,
 							color: s.id % 2 == 0 ? colors.yellow : colors.blue,
-						}
-					})
+						}))
 					.sort((a, b) => a.sortOrder - b.sortOrder);
 				// TODO: move to oninit later
-				// this.changeStaff('all');
-				this.currentStaffList = this.allStaff;
+				this.getCalendarSearch();
+				this.changeStaff(this.staffFilter);
 				this.getListAppointments();
 			}, err => {});
+	}
+
+	trackByStaffId(index, staff) {
+		return staff.id;
 	}
 
 	viewDateChange(date) {
@@ -90,23 +105,14 @@ export class CalendarComponent implements OnInit {
 	}
 
 	getListAppointments(): void {
-		this.events = [
-			{
-				start: new Date(),
-				title: '',
-				cssClass: 'd-none',
-				meta: {
-					staffs: this.allStaff,
-				},
-
-			},
+		this.events = [...this.events,
 			{
 				id: 1,
 				meta: {
-					user: this.currentStaffList[1]
+					user: this.allStaff[1]
 				  },
 				title: 'test event',
-				color: this.currentStaffList[1].color,
+				color: this.allStaff[1].color,
 				start: new Date(),
 				end: addHours(new Date(), 1), // an end date is always required for resizable events to work
 				resizable: {
@@ -118,10 +124,10 @@ export class CalendarComponent implements OnInit {
 			{
 				id: 2,
 				meta: {
-					user: this.currentStaffList[0]
+					user: this.allStaff[0]
 				  },
 				title: 'test event 2',
-				color: this.currentStaffList[0].color,
+				color: this.allStaff[0].color,
 				start: addHours(new Date(), 1),
 				end: addHours(new Date(), 2),
 				resizable: {
@@ -133,10 +139,10 @@ export class CalendarComponent implements OnInit {
 			{
 				id: 3,
 				meta: {
-					user: this.currentStaffList[1]
+					user: this.allStaff[1]
 				  },
 				title: 'test event 3',
-				color: this.currentStaffList[1].color,
+				color: this.allStaff[1].color,
 				start: addHours(new Date(), 2),
 				end: addHours(new Date(), 3),
 				resizable: {
@@ -146,6 +152,14 @@ export class CalendarComponent implements OnInit {
 				draggable: true,
 			},
 		];
+	}
+
+	switchToWeekView() {
+		this.view = CalendarView.Week;
+		if (this.staffFilter === 'all' || this.staffFilter === 'working') {
+			this.staffFilter = this.allStaff[0].id;
+		}
+		this.setCalendarSearch();
 	}
 
 	changeStaff(value?) {
@@ -202,6 +216,7 @@ export class CalendarComponent implements OnInit {
 
 	switchToDayView(): void {
 		this.view = CalendarView.Day;
+		this.events[0].meta.staffs = this.currentStaffList;
 		this.events = [...this.events];
 	}
 

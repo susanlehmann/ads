@@ -7,7 +7,7 @@
             <select name="lstStaff" class="form-control" [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' >
                 <option value="all" selected>All Staff</option>
                 <option value="working" selected>Working Staff</option>
-                <option value={{staff.id}} *ngFor="let staff of allStaff">{{staff.name}}</option>
+                <option value={{staff.id}} *ngFor="let staff of allStaff; trackBy: trackByStaffId">{{staff.name}}</option>
             </select>
           </div>
           <div class="col-md-6"></div>
@@ -27,8 +27,8 @@
       </div>
       <div class="col-lg-4">
         <div class="box-button">
-          <span class="btn btn-info" (click)="view = CalendarView.Week; setCalendarSearch()" [class.active]="view === CalendarView.Week"><i class="fa fa-calendar"></i>Week</span>
-          <span class="btn btn-info" (click)="view = CalendarView.Day; setCalendarSearch()" [class.active]="view === CalendarView.Day"><i class="fa fa-calendar"></i>Day</span>
+          <span class="btn btn-info" (click)="switchToWeekView()" [class.active]="view === CalendarView.Week"><i class="fa fa-calendar"></i>Week</span>
+          <span class="btn btn-info" (click)="switchToDayView()" [class.active]="view === CalendarView.Day"><i class="fa fa-calendar"></i>Day</span>
         </div>
       </div>
     </div>
