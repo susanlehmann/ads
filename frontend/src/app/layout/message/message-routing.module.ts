@@ -2,9 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MessageComponent } from './message.component';
 
-const routes: Routes = [{
-  path: '', component: MessageComponent
-}];
+const routes: Routes = [
+	{
+		path: '', 
+		component: MessageComponent,
+		data: {
+			title: 'Messages'
+		}
+	}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
