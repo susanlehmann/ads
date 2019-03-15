@@ -40,6 +40,7 @@ export class OrderComponent implements OnInit {
   number_prod: number;
   _prod_selected: any = [];
   _total: any;
+  _price: number;
   arr_info_product: any = [];
   listorder: any = [];
   _order: any;
@@ -52,6 +53,7 @@ export class OrderComponent implements OnInit {
   items = [];
   suppliers: any;
   orderTotal;
+  orderTotal1;
   number_order: number;
   statusOrder = [{ id: 1, name: "ORDERED" }, { id: 2, name: "CANCEL" }, { id: 3, name: "RECEIVED" }];
   public datas: [];
@@ -76,7 +78,10 @@ export class OrderComponent implements OnInit {
 
   getnamecountry(as){
     let country = data.filter(s => s.code == as);
-    return country[0].name;
+    if(country.length > 0)
+      return country[0].name;
+    else
+      return "";
   }
 
   ngOnInit() {
@@ -88,6 +93,9 @@ export class OrderComponent implements OnInit {
   }
 
   openProduct(content: NgbModalRef) {
+    console.log('add product');
+    console.log(this.listcategories);
+    console.log(this.listpro);
     this.modal.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -106,12 +114,17 @@ export class OrderComponent implements OnInit {
   openSModal(content, supplier) {
     this._supplier = supplier;
     this.add = this.items.length;
+    console.log('addddd' + this.add);
     this.modal.dismissAll();
     this.openModal(content);
+  }
+  removeitem(){
+    this.items = [];
   }
   listpro: any;
   openProduct1(content, category) {
     this._category = category;
+    console.log('open product');
     this._listproducts = this.listproducts.filter(s => s.id_category == this._category.id);
     this.listpro = this._listproducts.length;
     this.modal.dismissAll();
@@ -134,7 +147,7 @@ export class OrderComponent implements OnInit {
   editOrder(content: NgbModalRef, order) {
     this._listorder1 = JSON.parse(order.info_product);
     this._order = order;
-    console.log(this._listorder1);
+    this._order.total_price1 = this._order.total_price;
     this.getNameSupplier(order.id_supplier);
     this.openModal(content);
   }
@@ -152,18 +165,36 @@ export class OrderComponent implements OnInit {
 
   sum() {
     this.orderTotal = this.items.reduce((acc, cur) => {
-      return acc + cur.quantity * cur.supplyprice_product;
+      if(cur.quantity == undefined) {
+        cur.quantity = 0;
+      }
+      if(cur.supplyprice_product == undefined) {
+        cur.supplyprice_product = 0;
+      }
+      this.orderTotal1 = acc + cur.quantity * cur.supplyprice_product;
+      return this.orderTotal1;
     }, 0)
+
+    // this.orderTotal1 = this.items.reduce((acc, cur) => {
+    //   if(cur.quantity == undefined) {
+    //     cur.quantity = 0;
+    //   }
+    //   if(cur.supplyprice_product == undefined) {
+    //     cur.supplyprice_product = 0;
+    //   }
+    //   return acc + cur.quantity * cur.supplyprice_product;
+    // }, 0)
   }
 
   sumEdit() {
-    this._order.total_price = this._listorder1.reduce((acc, cur) => {
+    this._order.total_price1 = this._listorder1.reduce((acc, cur) => {
       return acc + cur.qty_product_receive * cur.price_product;
     }, 0)
   }
 
   deleteProd(prod) {
     this.items = this.items.filter(i => i != prod);
+    this.sum();
   }
 
   selectedX(prods) {
@@ -222,7 +253,7 @@ export class OrderComponent implements OnInit {
     this.CategoryService.getList()
       .subscribe((cate: any) => {
         this.stopLoading();
-        this.listcategories = cate.category
+        this.listcategories = cate.category;
       }, err => {
 
       });
@@ -271,11 +302,11 @@ export class OrderComponent implements OnInit {
         this.OrderService.getList()
           .subscribe((listbrands: any) => {
             this.number_order = listbrands.order.length;
-            this.listorder = listbrands.order.map( v =>{
-              v.info_product =JSON.parse(v.info_product);
-              v.info_product.qty_product_receive = v.info_product.quantity;
-            });
+            this.listorder = listbrands.order;
+            console.log(c + "   " +  this.listorder[this.listorder.length - 1]);
             this.editOrder(c, this.listorder[this.listorder.length - 1]);
+            this.items = [];
+            this.orderTotal1 = 0;
           });
 
         this.notifierService.notify('success', 'A new order has been successfully added');
@@ -296,10 +327,11 @@ export class OrderComponent implements OnInit {
   }
 
   status_order(id_order, status) {
+    this.orderTotal1 = this._order.total_price1;
     this._order.info_product = this._listorder1;
+    this._price = this.orderTotal1;
+    this._order.total_price = this._order.total_price1;
     if (this.update(this._order)) {
-      // console.log(this._order);
-
       let arr = {
         'id': id_order,
         'status': status
@@ -307,10 +339,11 @@ export class OrderComponent implements OnInit {
       // console.log(arr);
       this.OrderService.status(arr)
         .subscribe((liststatus: any) => {
+          this._order.total_price1 = this._order.total_price;
           this._order = liststatus.order;
           this.getlist_order();
-
-          this.notifierService.notify('success', 'button click');
+          this._order.total_price1 = this._price;
+          this.notifierService.notify('success', 'update success');
         })
     }
 
