@@ -1,0 +1,70 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-9 col-md-9 col-sm-12" id="thank-you"> 
+			<div class="box-enable">
+				<div class="box-left">
+					<input type="checkbox" id="switch" [(ngModel)]="checkSwitch" (change)="switch($event)" /><label for="switch"></label>
+				</div>
+				<div class="box-right">
+					<p>Enable Client Notification Messages</p>
+					<span>Automatically send booking notifications for reminders, reschedules, cancelations and more.</span>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="box-content mt-4 mb-3" *ngIf="checkSwitch">
+				
+      			<ngb-tabset>
+			        <ngb-tab title="Reminders">
+			          	<ng-template ngbTabContent>
+			          		<setup-client-notifi-reminders [reminders]="checkSwitch"></setup-client-notifi-reminders>
+			          	</ng-template>
+			        </ngb-tab>
+			        <ngb-tab title="Confirmation">
+			          	<ng-template ngbTabContent>
+			          		<setup-client-notifi-confirmation [confirmation]="checkSwitch"></setup-client-notifi-confirmation>
+			          	</ng-template>
+			        </ngb-tab>
+			        <ngb-tab title="Reschedules">
+			          	<ng-template ngbTabContent>
+			          		<setup-client-notifi-reschedule [reschedule]="checkSwitch"></setup-client-notifi-reschedule>
+			          	</ng-template>
+			        </ngb-tab>
+			        <ngb-tab title="Cancellations">
+			          	<ng-template ngbTabContent>
+			          		<setup-client-notifi-cancellation [cancellation]="checkSwitch"></setup-client-notifi-cancellation>
+			          	</ng-template>
+			        </ngb-tab>
+			        <ngb-tab title="Thank Yous">
+			          	<ng-template ngbTabContent>
+			          		<setup-client-notifi-thank-you [thankyou]="checkSwitch"></setup-client-notifi-thank-you>
+			          	</ng-template>
+			        </ngb-tab>
+			    </ngb-tabset>
+			</div>
+			<div class="clearfix"></div>
+			<div class="box-button" [ngClass]="checkSwitch ? '' : 'mt-3'">
+				<span class="btn btn-black">Save Changes</span>
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-12" id="messtext-about">
+			<div class="content-text">
+				<p class="one">Messaging Settings</p>
+				<p>Message types setup here will be automatically sent to clients. All messages generated can be easily accessed on the messages page (in your main menu).</p>
+				<p>Adjust the settings for how and when messages are sent, and edit the templates to personalise the text.</p>
+				<p>Use the below tags to include appointment details inside messages:</p>
+				<span>CLIENT_FIRST_NAME</span>
+				<span>CLIENT_LAST_NAME</span>
+				<span>STAFF_FIRST_NAME</span>
+				<span>STAFF_LAST_NAME</span><br />
+				<span>BOOKING_DATE_TIME</span>
+				<span>BOOKING_DATE</span>
+				<span>BOOKING_TIME</span>
+				<span>BOOKING_REFERENCE</span><br />
+				<span>SERVICE_NAME</span>
+				<span>BUSINESS_NAME</span>
+				<span>LOCATION_NAME</span>
+				<span>LOCATION_PHONE</span>
+			</div>
+		</div>
+	</div>
+</div>

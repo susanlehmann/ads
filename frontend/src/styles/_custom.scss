@@ -321,3 +321,58 @@ textarea::-webkit-input-placeholder {
     outline: none;
     cursor: pointer;
 }
+
+.fixed-width {
+    .modal-md {
+        max-width: 570px;
+    }
+}
+
+.box-preview {
+    .panel {
+
+        .panel-heading {
+            position: relative;
+            text-align:center;
+
+            p {
+                font-family: "Roboto-Thin";
+                font-size: 2em;
+            }
+
+            span {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                right: 25px;
+                transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+                font-size: 3em;
+                font-family: "Roboto-Thin"; 
+            }
+        }
+
+        .panel-body {
+            .content-preview {
+                padding: 3.5em;
+                border: 1px solid #eee;
+                margin: 2.5em;
+                box-shadow: 2px 2px 6px #ccc;
+                p {
+                    span {
+                        display: block;
+                    }
+                }
+                span.btn-preview {
+                    padding: 10px 15px;
+                    background: #24334a;
+                    color: #fff;
+                    font-family: "Roboto-Bold";   
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}

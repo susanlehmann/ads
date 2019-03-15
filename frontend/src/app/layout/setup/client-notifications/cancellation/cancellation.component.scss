@@ -1,0 +1,84 @@
+#cancellation {
+    padding-left: 0px;
+}
+.custom-radios div {
+	display: block;
+    margin-bottom: 10px;
+
+    input[type="text"] {
+    	padding: 7px;
+	}
+}
+.custom-radios input[type="checkbox"] {
+	display: none;
+}
+.custom-radios input[type="checkbox"] + label {
+	color: #333;
+    font-size: 17px;
+    display: block;
+    margin-bottom: 0;
+    font-family: "Roboto-Thin";
+	&:hover{
+		cursor: pointer;
+	}
+}
+.custom-radios input[type="checkbox"] + label span {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin: -1px 4px 0 0;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid #ddd;
+	background-repeat: no-repeat;
+	background-position: center;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 4px;
+}
+.custom-radios input[type="checkbox"] + label span img {
+	opacity: 0;
+	transition: all .3s ease;
+}
+.custom-radios input[type="checkbox"]:checked + label span {
+  	opacity: 1;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: #4e4e4d;
+    border-radius: 4px;
+
+	&:before {
+		content: "\2713";
+		color: #fff;
+		font-size: 1em;
+		vertical-align: middle;
+		font-weight: bold;
+	}
+}
+
+.box-content {
+	.form-group {
+		label {
+			i {
+				padding-left: 10px;
+			}
+		}
+	}
+
+}
+
+.box-button {
+	.btn {
+		box-shadow: none;
+		border: 1px solid #eee;
+		padding: .65em 2em;
+		&:hover {
+	        -webkit-transform: translateY(0px);
+	        transform: translateY(0px);
+	    }
+	}
+		
+}

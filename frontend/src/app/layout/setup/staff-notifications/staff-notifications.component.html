@@ -1,0 +1,43 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-6 col-md-12 col-sm-12">
+			<div class="box-enable">
+				<div class="box-left">
+					<input type="checkbox" id="switch" [(ngModel)]="checkSwitch" (change)="switch($event)" /><label for="switch"></label>
+				</div>
+				<div class="box-right">
+					<p>Enable Staff Notificatinos</p>
+					<span>Automatically send booking notifications to staff members.</span>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="box-content mt-4 mb-3" *ngIf="checkSwitch">
+				<p>New online bookings</p>
+				<span>Send email notification with booking details each time an online booking is made</span>
+				<div class="custom-radios">
+                	<div>
+					    <input type="checkbox" id="staffMember" name="staffMember" [(ngModel)]="form.staffMember">
+					    <label for="staffMember">
+					    	<span></span>
+					    	SEND TO STAFF MEMBERS BOOKED
+					    </label>
+				  	</div>
+				  	<div>
+					    <input type="checkbox" id="specific" name="specific" [(ngModel)]="form.specific">
+					    <label for="specific">
+					    	<span></span>
+					    	SEND TO SPECIFIC EMAIL ADDRESS
+					    </label>
+				  	</div>
+				  	<div *ngIf="form.specific">
+				  		<input type="text" name="specificEmail" class="form-control" [(ngModel)]="form.specificEmail">
+				  	</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="box-button" [ngClass]="checkSwitch ? '' : 'mt-3'">
+				<span class="btn btn-black">Save Changes</span>
+			</div>
+		</div>
+	</div>
+</div>

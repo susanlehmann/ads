@@ -3,7 +3,7 @@
     <div class="col-sm-6"></div>
     <div class="col-sm-6 text-right">
       <div class="header">
-        <button style="text-transform: none;" class="btn btn-black" type="button"  (click)="addReferral(add_payment_types)">New Payment Type</button>
+        <button style="text-transform: none;" class="btn btn-black" type="button"  (click)="addReferral(add_cancel_reason)">New Cancellation Reason</button>
       </div>
     </div>
   </div>
@@ -14,19 +14,21 @@
         <table class="table table-hover">
           <thead>
           <tr>
-            <th class="pd-name">{{'PAYMENT TYPE' | translate}}</th>
+            <th class="pd-name">{{'NAME' | translate}}</th>
+            <th>{{'DATE ADDED' | translate}}</th>
             <th>{{'' | translate}}</th>
           </tr>
           </thead>
           <tbody>
           <ng-container >
-            <tr (click)="editReferral(edit_payment_types, 3)">
+            <tr (click)="editReferral(edit_cancel_reason, 3)">
               <td class="ba">
 									<span class="avatar">
 										<i class="fa fa-bars"></i>
 									</span>
-                <span></span>
+                <span>aa</span>
               </td>
+              <td>123</td>
               <td><i class="fa fa-lock" placement="bottom" ngbTooltip="This item can not be deleted"></i></td>
             </tr>
           </ng-container>
@@ -44,13 +46,13 @@
   </div>
   <div class="clearfix"></div>
   <div class="row">
-    <ng-template #add_payment_types let-c="close" let-d="dismiss">
-      <add-payment-types ></add-payment-types>
+    <ng-template #add_cancel_reason let-c="close" let-d="dismiss">
+      1
     </ng-template>
   </div>
   <div class="row">
-    <ng-template #edit_payment_types let-c="close" let-d="dismiss">
-      <edit-payment-types [inputBusiness]="inputReferral" ></edit-payment-types>
+    <ng-template #edit_cancel_reason let-c="close" let-d="dismiss">
+      2
     </ng-template>
   </div>
 </div>

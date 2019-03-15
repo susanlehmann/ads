@@ -22,6 +22,15 @@ import {AddPaymentTypesComponent} from "./payment-types/add/add-payment-types.co
 import {EditPaymentTypesComponent} from "./payment-types/edit/edit-payment-types.component";
 import { CalendarSettingsComponent } from './calendar/calendar-settings.component';
 import { TaxesComponent } from './taxes/taxes.component';
+import { StaffNotifiComponent } from './staff-notifications/staff-notifications.component';
+import { ClientNotifiComponent } from './client-notifications/client-notifications.component';
+import { CancellationReasonsComponent } from './cancellation-reasons/cancel-reasons.component';
+import { ClientNotifiCancellation } from './client-notifications/cancellation/cancellation.component';
+import { ClientNotifiConfirmation } from './client-notifications/confirmation/confirmation.component';
+import { ClientNotifiReminders } from './client-notifications/reminders/reminders.component';
+import { ClientNotifiReschedule } from './client-notifications/reschedule/reschedule.component';
+import { ClientNotifiThankYou } from './client-notifications/thank-you/thank-you.component';
+import { InvoiceReceiptComponent } from './invoices-receipts/invoices-receipts.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +50,16 @@ import { TaxesComponent } from './taxes/taxes.component';
     AddPaymentTypesComponent,
     EditPaymentTypesComponent,
     CalendarSettingsComponent,
-    TaxesComponent
+    TaxesComponent,
+    StaffNotifiComponent,
+    ClientNotifiComponent,
+    ClientNotifiCancellation,
+    ClientNotifiConfirmation,
+    ClientNotifiReminders,
+    ClientNotifiReschedule,
+    ClientNotifiThankYou,
+    CancellationReasonsComponent,
+    InvoiceReceiptComponent
   ],
   imports: [
     CommonModule,
