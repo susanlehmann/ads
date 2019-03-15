@@ -29,8 +29,8 @@ import { CustomCalendarDayViewComponent } from './custom-calendar-day-view/custo
     declarations: [
     	CalendarComponent, 
     	AddEventComponent,
-			DayViewSchedulerComponent,
-			CustomCalendarDayViewComponent,
+		DayViewSchedulerComponent,
+		CustomCalendarDayViewComponent
     ],
 	bootstrap:    [ CalendarComponent ],
 	providers: [ EventSesrvice ]
