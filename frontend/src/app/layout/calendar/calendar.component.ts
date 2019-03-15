@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { CalendarEvent, CalendarEventTimesChangedEvent, CalendarEventTitleFormatter, CalendarView } from 'angular-calendar';
+import { CalendarEvent, CalendarEventTimesChangedEvent, CalendarEventTitleFormatter, CalendarView, DateAdapter } from 'angular-calendar';
 import { addHours } from 'date-fns';
 import { Subject } from 'rxjs';
 import { StaffService } from 'src/app/layout/staff/staff.service';
@@ -22,7 +22,7 @@ export class CalendarComponent implements OnInit {
 	CalendarView = CalendarView;
 	hourSegments = 6;
 	weekStartsOn = 1;
-	selectedStaffId;
+	staffFilter: number | string;
 	
 	viewDate: Date = new Date();
 	dayStartHour = "8";
@@ -32,14 +32,34 @@ export class CalendarComponent implements OnInit {
 
 	currentStaffList: any[];
 	allStaff: any[];
+	isToday = true;
 
 	constructor(
 		private staffService: StaffService,
+		private dateAdapter: DateAdapter
 	) {
+		this.staffFilter = 'all';
+		this.getCalendarSearch();
 	}
 
 	ngOnInit() {
 		this.getListStaff();
+	}
+
+	getCalendarSearch() {
+		const cal: any = JSON.parse(localStorage.getItem('calendarSearch'));
+		if (cal) {
+			this.staffFilter = cal.staffFilter;
+			this.view = cal.viewType;
+		}
+	}
+
+	setCalendarSearch() {
+		const data = {
+			staffFilter: this.staffFilter,
+			viewType: this.view
+		};
+		localStorage.setItem('calendarSearch', JSON.stringify(data));
 	}
 
 	getListStaff() {
@@ -56,17 +76,30 @@ export class CalendarComponent implements OnInit {
 					})
 					.sort((a, b) => a.sortOrder - b.sortOrder);
 				// TODO: move to oninit later
-				this.changeStaff(this.selectedStaffId);
+				// this.changeStaff('all');
+				this.currentStaffList = this.allStaff;
 				this.getListAppointments();
 			}, err => {});
+	}
+
+	viewDateChange(date) {
+		this.isToday = this.dateAdapter.startOfDay(date).getTime() === this.dateAdapter.startOfDay(new Date()).getTime();
 	}
 
 	getListAppointments(): void {
 		this.events = [
 			{
-				id: 1,
+				start: new Date(),
+				title: '',
+				cssClass: 'd-none',
 				meta: {
 					staffs: this.allStaff,
+				},
+
+			},
+			{
+				id: 1,
+				meta: {
 					user: this.currentStaffList[1]
 				  },
 				title: 'test event',
@@ -82,7 +115,6 @@ export class CalendarComponent implements OnInit {
 			{
 				id: 2,
 				meta: {
-					staffs: this.allStaff,
 					user: this.currentStaffList[0]
 				  },
 				title: 'test event 2',
@@ -98,7 +130,6 @@ export class CalendarComponent implements OnInit {
 			{
 				id: 3,
 				meta: {
-					staffs: this.allStaff,
 					user: this.currentStaffList[1]
 				  },
 				title: 'test event 3',
@@ -114,13 +145,29 @@ export class CalendarComponent implements OnInit {
 		];
 	}
 
-	changeStaff(staffId) {
-		if (!staffId) { // show all staff
+	changeStaff(value?) {
+		this.setCalendarSearch();
+
+		if (value === 'all') { // show all staff
 		  this.currentStaffList = this.allStaff;
-		} else {
-		  staffId = parseInt(staffId, 10);
-		  this.currentStaffList = this.allStaff.filter(s => s.staffId === staffId);
+		  this.switchToDayView();
+		  return;
 		}
+
+		if (value === 'working') {
+			this.currentStaffList = this.getWorkingStaffs();
+			this.switchToDayView();
+			return;
+		}
+
+		value = parseInt(value, 10);
+		this.currentStaffList = this.allStaff.filter(s => s.staffId === value);
+		
+	}
+
+	getWorkingStaffs() {
+		//TODO
+		return this.allStaff;
 	}
 
 	eventTimesChanged({
@@ -146,6 +193,11 @@ export class CalendarComponent implements OnInit {
 		console.log(evt);
 		this.view = CalendarView.Day;
 		this.viewDate = evt.day.date;
+	}
+
+	switchToDayView(): void {
+		this.view = CalendarView.Day;
+		this.events = [...this.events];
 	}
 
 	eventClicked(evt): void {
