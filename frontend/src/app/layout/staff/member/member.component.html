@@ -2,14 +2,20 @@
     <div class="col-sm-12">
         <div class="card card-custom mb-3">
             <div class="card-header">
-                <input type="text" class="form-control col-sm-12 col-md-4" placeholder="Search by name, mobile number or email"
-                    [ngModel]='keyword' (ngModelChange)='changed($event)'>
-                <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
-                <div ngbDropdown class="d-inline-block pull-right mr-2">
-                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Options</button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button class="dropdown-item" ngbDropdownItem (click)="export('excel')">Download Excel</button>
-                        <button class="dropdown-item" ngbDropdownItem (click)="export('csv')">Download CSV</button>
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <input type="text" class="form-control " placeholder="Search by name, mobile number or email"
+                        [ngModel]='keyword' (ngModelChange)='changed($event)'>
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <button class="btn btn-primary pull-right" type="button" (click)="openCreateModal(content)">New Staff</button>
+                        <div ngbDropdown class="d-inline-block pull-right mr-2">
+                            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Options</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <button class="dropdown-item" ngbDropdownItem (click)="export('excel')">Download Excel</button>
+                                <button class="dropdown-item" ngbDropdownItem (click)="export('csv')">Download CSV</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -224,11 +230,11 @@
     <ngb-tab title="Commission">
         <ng-template ngbTabContent>
             
-            <div class="col-sm-6">
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <form role="form">
                     <br>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label class="control-label">Service Commission</label>
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
@@ -237,7 +243,7 @@
                                     <input [(ngModel)]="form.commissions.service" name="service" type="number" class="form-control" placeholder="0.0">
                                 </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                                 <label class="control-label">Product Commission</label>
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
@@ -248,7 +254,7 @@
                         </div>
                     </div>
                     <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label class="control-label">Voucher Sales Commission</label>
                                     <div class="form-group input-group">
                                         <div class="input-group-prepend">

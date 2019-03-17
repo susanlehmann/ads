@@ -19,7 +19,32 @@
     	}
     }
 }
+.none-backdrop {
+	background: none;
+}
 
+.repeat-modal {
+	.modal-dialog {
+	    left: 25%;
+	    position: absolute;
+	    right: 0;
+	    top: 15%;
+
+	    &::before{
+	    	content: "";
+	    	width: 0px;
+	    	height: 0px;
+	    	border-right: 5px solid transparent;
+	    	border-left: 5px solid transparent;
+	    	border-bottom: 5px solid #d7d7d7;
+	    	position: absolute;
+	    	top: -5px;
+		    left: 0;
+		    right: 0;
+		    margin: 0 auto;
+	    }
+	}
+}
 .delete-modal {
 	.modal-body {
 		height: auto !important;
@@ -131,4 +156,40 @@ $breakpoint-iphone: 667px;
 		}
 	}
 
+}
+
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+	.repeat-modal {
+		.modal-dialog {
+		    left: 10%;
+		    top: 20%;
+
+		    .modal-footer {
+		    	position: static;
+	    	}
+		}
+	}
+  	
+  
+}
+
+/* 
+  ##Device = iPhone X (Landscape)
+  ##Screen = B/w 767px to 812px
+*/
+
+@media (min-width: 767px) and (max-width: 812px) {
+  	.iphoneX-content .col-md-6 {
+    	max-width: 100%;
+	    flex: 1 1 100%;
+	}
+  
+  
 }

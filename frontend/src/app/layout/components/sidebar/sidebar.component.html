@@ -22,10 +22,6 @@
             <i class="fa fa-fw fa-wechat"></i>&nbsp;
             <span>{{ 'Clients' | translate }}</span>
         </a>
-        <!-- <a [routerLink]="['/message']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-envelope"></i>&nbsp;
-            <span>{{ 'Messages' | translate }}</span>
-        </a> -->
         <a [routerLink]="['/staff']" [routerLinkActive]="['router-link-active']" class="list-group-item"
             placement="right" ngbTooltip="{{collapsed ? 'Staff' : ''}}" container="body">
             <i class="fa fa-fw fa-user"></i>&nbsp;
@@ -41,18 +37,22 @@
             <i class="fa fa-fw fa-cubes"></i>&nbsp;
             <span>{{ 'Inventory' | translate }}</span>
         </a>
-        <!-- <a [routerLink]="['/analytic']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+         <!-- <a [routerLink]="['/analytic']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-line-chart"></i>&nbsp;
             <span>{{ 'Analytics' | translate }}</span>
-        </a>
-        <a [routerLink]="['/online_booking']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-cloud"></i>&nbsp;
-            <span>{{ 'Online Booking' | translate }}</span>
-        </a>-->
+        </a> -->
         <a [routerLink]="['/setup']" [routerLinkActive]="['router-link-active']" class="list-group-item" placement="right" ngbTooltip="{{collapsed ? 'Setup' : ''}}" container="body">
             <i class="fa fa-fw fa-gear"></i>&nbsp;
             <span>{{ 'Setup' | translate }}</span>
         </a> 
+        <a [routerLink]="['/online_booking']" [routerLinkActive]="['router-link-active']" class="list-group-item" placement="right" ngbTooltip="{{collapsed ? 'Online Booking' : ''}}" container="body">
+            <i class="fa fa-fw fa-cloud-download"></i>&nbsp;
+            <span>{{ 'Online Booking' | translate }}</span>
+        </a>
+        <a [routerLink]="['/message']" [routerLinkActive]="['router-link-active']" class="list-group-item" placement="right" ngbTooltip="{{collapsed ? 'Messages' : ''}}" container="body">
+            <i class="fa fa-fw fa-envelope"></i>&nbsp;
+            <span>{{ 'Messages' | translate }}</span>
+        </a>
         <li class="dropdown-divider"></li>
         <a [routerLink]="['/admin-settings']" [routerLinkActive]="['router-link-active']" class="list-group-item" placement="right" ngbTooltip="{{collapsed ? 'Administrator Settings' : ''}}" container="body">
             <i class="fa fa-fw fa-gears"></i>&nbsp;

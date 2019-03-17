@@ -1,36 +1,29 @@
 import { Component, EventEmitter, Injectable, Output, Input } from '@angular/core';
 import { CalendarDayViewComponent, CalendarUtils } from 'angular-calendar';
-import { DayView, DayViewEvent, GetDayViewArgs } from 'calendar-utils';
+import { DayView, DayViewEvent } from 'calendar-utils';
 
-const EVENT_WIDTH = 150;
-
-// extend the interface to add the array of users
-interface DayViewScheduler extends DayView {
-  users: any[];
-}
+const HEADER_MARGIN_LEFT = 100;
+let EVENT_WIDTH: number;
 
 @Injectable()
 export class DayViewSchedulerCalendarUtils extends CalendarUtils {
-  getDayView(args: GetDayViewArgs): DayViewScheduler {
-    const view: DayViewScheduler = {
-      ...super.getDayView(args),
-      users: []
-    };
-    view.events.forEach(({ event }) => {
-      // assumes user objects are the same references,
-      // if 2 users have the same structure but different object references this will fail
-      if (!view.users.includes(event.meta.user)) {
-        view.users.push(event.meta.user);
-      }
-    });
-    // resort the users
-    view.users.sort((a, b) =>  a.sortOrder - b.sortOrder);
+  staffs: any[];
+
+  getDayView(args: any) {
+    const view = super.getDayView(args);
+
+    this.staffs = args.events[0].meta.staffs;
+    // calculated base on number of displayed staffs
+    EVENT_WIDTH = (Math.round(document.querySelector('.main-container').clientWidth - HEADER_MARGIN_LEFT) / this.staffs.length);
+
     view.events = view.events.map(dayViewEvent => {
-      const index = view.users.indexOf(dayViewEvent.event.meta.user);
-      dayViewEvent.left = index * EVENT_WIDTH; // change the column of the event
-      return dayViewEvent;
-    });
-    view.width = view.users.length * EVENT_WIDTH;
+      const index = this.staffs.indexOf(dayViewEvent.event.meta.user);
+      const mapped = { index: index, ...dayViewEvent };
+      mapped.left = index * EVENT_WIDTH; // change the column of the event
+      mapped.width = EVENT_WIDTH;
+      return mapped;
+    }).filter(e => e.index !== -1);
+    view.width = this.staffs.length * EVENT_WIDTH;
     return view;
   }
 }
@@ -48,26 +41,33 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
   ],
 })
 export class DayViewSchedulerComponent extends CalendarDayViewComponent {
-  view: DayViewScheduler;
+  view: DayView;
 
   @Output() userChanged = new EventEmitter();
   @Input() staffs;
 
   ngOnInit() {
-    console.log(this.staffs);
+    this.eventWidth = EVENT_WIDTH;
   }
 
+  isNow(date): boolean {
+		const diff = Math.abs(new Date().getTime() - new Date(date).getTime());
+		return diff < 300000;
+	}
+
   eventDragged(dayEvent: DayViewEvent, xPixels: number, yPixels: number): void {
+    // super.dragEnded(dayEvent, { y: yPixels, x: 0 } as any); // original behaviour
+
     if (yPixels !== 0) {
       super.dragEnded(dayEvent, { y: yPixels, x: 0 } as any); // original behaviour
     }
     if (xPixels !== 0) {
       const columnsMoved = xPixels / EVENT_WIDTH;
-      const currentColumnIndex = this.view.users.findIndex(
-        user => user === dayEvent.event.meta.user
+      const currentColumnIndex = this.staffs.findIndex(
+        user => user.id === dayEvent.event.meta.user.id
       );
       const newIndex = currentColumnIndex + columnsMoved;
-      const newUser = this.view.users[newIndex];
+      const newUser = this.staffs[newIndex];
       if (newUser) {
         this.userChanged.emit({ event: dayEvent.event, newUser });
       }

@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule } from  'ngx-ui-loader';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
@@ -43,7 +44,11 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { OrderModule } from 'ngx-order-pipe';
 import { DataTableModule } from "angular-6-datatable";
 import { environment } from './../environments/environment.prod';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {Setup_company_detailService} from "./layout/setup/setup_company_detail.service";
+import { AddAppointmentComponent } from './layout/calendar/add-appointments/add-appointment.component';
+import { AddBoxComponent } from './layout/calendar/add-appointments/addbox/addbox.component';
+import { AppClientComponent } from './layout/calendar/add-appointments/client/client.component';
+import { AppointmentService } from './shared/services/appointment.service';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -132,9 +137,19 @@ const ngxUiLoaderConfigs = {
         PDFExportModule,
         NgxIntlTelInputModule,
         ModalModule.forRoot(),
-        DataTableModule
+        DataTableModule,
+        NgbModule.forRoot()
     ],
-    declarations: [AppComponent, SearchComponent, EditProductComponent, EditOrderComponent, CreateOrderComponent],
+    declarations: [
+        AppComponent,
+        SearchComponent,
+        EditProductComponent,
+        AddAppointmentComponent,
+        AddBoxComponent,
+        EditOrderComponent,
+        CreateOrderComponent,
+        AppClientComponent
+    ],
     providers: [
         AuthGuard,
         HttpcallService,
@@ -156,6 +171,8 @@ const ngxUiLoaderConfigs = {
         TitleService,
         ServiceTypeService,
         BusinessTypeService,
+        Setup_company_detailService,
+        AppointmentService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     ],

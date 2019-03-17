@@ -239,7 +239,7 @@
 
     <div class="modal-header">
         <h4 class="modal-title offset-sm-4" id="modal-basic-title">Create Order</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <button type="button" class="close" aria-label="Close" (click)="removeitem()" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -250,10 +250,33 @@
                   <div class="col-md-9">
                       <div class="card">
                           <div class="card-body" id="addOrderDetail">
-                              <ng-container *ngIf="add == 0; else elseTemplate">
-                                  <h1>haha</h1>
+                            <h3 *ngIf="items.length ==0">You haven't added any product to your order yet.</h3>
+                              <ng-container *ngIf="add == 0 && items.length !=0; else elseTemplate">
+                                  <div class="col-md-12 table-responsive" id="divTableData">
+                                      <table class="table table-hover" id="tableAddProduct">
+                                          <thead>
+                                              <tr>
+                                                  <th style="text-align:left">PRODUCT</th>
+                                                  <th style="text-align:left">ORDER QTY.</th>
+                                                  <th style="text-align:left">SUPPLY PRICE</th>
+                                                  <th style="text-align:left">TOTAL COST</th>
+                                                  <th></th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr *ngFor="let i of items">
+                                                <td>{{i.name_product}}</td>
+                                                <td><input type="number" name="qty" [(ngModel)]="i.quantity"  (change)="sum()" placeholder="0"></td>
+                                                <td><input type="number" name="price" [(ngModel)]="i.supplyprice_product" (change)="sum()"></td>
+                                                <td><span type="number" name="total">{{i.quantity * i.supplyprice_product || 0.00}}</span></td>
+                                                <!-- <td>{{i.quantity * i.supplyprice_product}}</td> -->
+                                                <td><button (click)="deleteProd(i)">x</button></td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
                               </ng-container>
-                              <ng-template #elseTemplate>
+                              <ng-template #elseTemplate >
                                 <div class="col-md-12 table-responsive" id="divTableData">
                                     <table class="table table-hover" id="tableAddProduct">
                                         <thead>
@@ -337,12 +360,14 @@
                           <div class="col-md-12" style="display: -webkit-inline-box;">
                               <div class="col-md-5" style="display: inline;padding-left: 0;">Order Total:</div>
                               <input type="hidden" id="OrderID" value="0">
-                              <ng-container *ngIf="orderTotal == undefined; else elseTemplate">
+                              <ng-container *ngIf="orderTotal1 == undefined; else elseTemplate">
                                   <div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">$0</h5></div>
                               </ng-container>
                               <ng-template #elseTemplate>
-                                  <div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">{{orderTotal}}</h5></div>
+                                  <div class="col-md-7" *ngIf="items != 0"><h5 style="text-align:right" id="TotalAmount">${{orderTotal1}}</h5></div>
                               </ng-template>
+
+                              <!--<div class="col-md-7"><h5 style="text-align:right" id="TotalAmount">{{orderTotal}}</h5></div>-->
                           </div>
                           <div class="col-md-12" style="margin-top:15px" id="divbtnCreateOrder">
                               <button type="button" id="btnCreateOrder" style="font-weight:bold" name="btnCreateOrder" class="btn btn-block btn-primary active" aria-pressed="true" (click)="create_oder(edit_order)">CREATE ORDER</button>
@@ -448,7 +473,7 @@
           </div>
       </div>
       <div class="col-12" id="divCategory" style="">
-        <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0" *ngIf="listpro != 0">
+        <div class="col-12 item-modal-wizard" step="1" categoryname="No Category" id-item-modal="0">
           <div class="row" *ngFor="let category of listcategories" (click)="openProduct1(product1, category)">
             <div class="col-6">
               <div class="col-12">
@@ -682,7 +707,7 @@
                   <div class="col-md-12" style="display: -webkit-inline-box;">
                       <div class="col-md-5" style="display: inline;padding-left: 0;">Order Total:</div>
                       <input type="hidden" id="OrderID" value="0">
-                      <div class="col-md-7"><h5 style="text-align:right" >${{ _order.total_price }}</h5></div>
+                      <div class="col-md-7"><h5 style="text-align:right" >${{ _order.total_price1 }}</h5></div>
                   </div>
                   <div class="col-md-12" style="margin-top: 15px;" id="divbtnReceiveStock">
                       <button type="button" id="btnReceiveStock" style="font-weight:bold" name="btnReceiveStock" class="btn btn-block btn-success active" aria-pressed="true" *ngIf=" _order.status_order == 1" (click)="status_order(_order.id,2)">RECEIVE STOCK </button>

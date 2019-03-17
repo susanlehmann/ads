@@ -4,11 +4,10 @@
       <div class="col-lg-4">
         <div class="row">
           <div class="col-md-6">
-            <select name="lstStaff" class="form-control">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+            <select name="lstStaff" class="form-control" [(ngModel)]="staffFilter" (ngModelChange)='changeStaff($event)' >
+                <option value="all" selected>All Staff</option>
+                <option value="working" selected>Working Staff</option>
+                <option value={{staff.id}} *ngFor="let staff of allStaff; trackBy: trackByStaffId">{{staff.name}}</option>
             </select>
           </div>
           <div class="col-md-6"></div>
@@ -18,36 +17,52 @@
           <div class="box-title">
             <div class="box-button">
               <span class="btn btn-info" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-              (viewDateChange)="activeDayIsOpen = false"><i class="fa fa-angle-left"></i></span>
-              <span class="btn btn-info active" mwlCalendarToday [(viewDate)]="viewDate">Today</span>
+              (viewDateChange)="viewDateChange($event)"><i class="fa fa-angle-left"></i></span>
+              <span class="btn btn-info" [class.active]="isToday" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="viewDateChange($event)">Today</span>
               <span class="btn btn-info">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
               <span class="btn btn-info" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-              (viewDateChange)="activeDayIsOpen = false"><i class="fa fa-angle-right"></i></span>
+              (viewDateChange)="viewDateChange($event)"><i class="fa fa-angle-right"></i></span>
             </div>
           </div>
       </div>
       <div class="col-lg-4">
         <div class="box-button">
-          <span class="btn btn-info" (click)="view = CalendarView.Week" [class.active]="view === CalendarView.Week"><i class="fa fa-calendar"></i>Week</span>
-          <span class="btn btn-info" (click)="view = CalendarView.Day" [class.active]="view === CalendarView.Day"><i class="fa fa-calendar"></i>Day</span>
+          <span class="btn btn-info" (click)="switchToWeekView()" [class.active]="view === CalendarView.Week"><i class="fa fa-calendar"></i>Week</span>
+          <span class="btn btn-info" (click)="switchToDayView()" [class.active]="view === CalendarView.Day"><i class="fa fa-calendar"></i>Day</span>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
-<div [ngSwitch]="view">
+<div *ngIf="loadData$ | async" [ngSwitch]="view">
   <mwl-day-view-scheduler *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [staffs]="currentStaffList"
+    [refresh]="refresh"
+    [dayStartHour]="dayStartHour" [dayEndHour]="dayEndHour"
+    [hourSegments]="hourSegments"
+    (hourSegmentClicked)="dayHourSegmentClicked($event)"
+    (userChanged)="userChanged($event)"
+    (eventClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-day-view-scheduler>
+
+  <!-- custom calendar day-view base on week-view -->
+  <!-- <app-custom-calendar-day-view *ngSwitchCase="'day'"
     [viewDate]="viewDate"
     [events]="events"
     [staffs]="staffs"
     [refresh]="refresh"
     [dayStartHour]="dayStartHour" [dayEndHour]="dayEndHour"
-    [hourSegments]="hourSegments"
-    (hourSegmentClicked)="dayHourSegmentClicked($event)"
-    (eventClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChanged($event)">
-  </mwl-day-view-scheduler>
+    [hourSegments]="hourSegments" [hourSegmentTemplate]="hourSegmentTemplate"
+    [headerTemplate]="headerTemplate"
+    
+    [eventTitleTemplate]="eventTitleTemplate"
+    [weekStartsOn]="weekStartsOn"
+    (userChanged)="userChanged($event)"
+    (eventTimesChanged)="eventTimesChanged($event)" (dayHeaderClicked)="dayHeaderClicked($event)"
+    (eventClicked)="eventClicked($event)" (hourSegmentClicked)="hourSegmentClicked($event)"></app-custom-calendar-day-view> -->
 
   <mwl-calendar-week-view *ngSwitchCase="'week'"
     [viewDate]="viewDate"
@@ -141,4 +156,50 @@
 
 <ng-template #content let-modal>
 	<add-event [_clickEvent]="_clickEvent"></add-event>
+</ng-template>
+<div class="row">
+  <div id="inbox">
+    <div class="fab btn-group show-on-hover dropup">
+      <div data-toggle="tooltip" data-placement="left" title="Compose">
+        <button type="button" class="btn btn-black btn-io dropdown-toggle" data-toggle="dropdown">
+          <span class="fa-stack fa-1-7x">
+            <i class="fa fa-plus"></i>
+          </span>
+        </button>
+      </div>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li>
+          <span title="New Sale">
+            <i class="fa fa-copy"></i>
+          </span>
+          <div class="tooltip sales">New Sale</div>
+          <div class="tooltip blocked">New Blocked Time</div>
+          <div class="tooltip">New Appointment</div>
+        </li>
+        <li>
+          <span title="New Blocked Time">
+            <i class="fa fa-clock-o"></i>
+          </span>
+          <div class="tooltip sales">New Sale</div>
+          <div class="tooltip blocked">New Blocked Time</div>
+          <div class="tooltip">New Appointment</div>
+        </li>
+        <li>
+          <span title="New Appointment" [routerLink]="['/appointment/add']">
+            <i class="fa fa-calendar"></i>
+          </span>
+          <div class="tooltip sales">New Sale</div>
+          <div class="tooltip blocked">New Blocked Time</div>
+          <div class="tooltip">New Appointment</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="text-center">
+    <i class="fa fa-spin fa-spinner fa-5x"></i> <br />
+    Loading events...
+  </div>
 </ng-template>

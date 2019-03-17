@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
 import { MessageRoutingModule } from './message-routing.module';
 import { MessageComponent } from './message.component';
 
@@ -8,6 +8,7 @@ import { MessageComponent } from './message.component';
   declarations: [MessageComponent],
   imports: [
     CommonModule,
+    FormsModule,
     MessageRoutingModule
   ]
 })

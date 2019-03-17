@@ -1,0 +1,65 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12" id="thankx">
+			<div class="custom-radios">
+            	<div>
+				    <input type="checkbox" id="enableThanks" name="enableThanks" [(ngModel)]="enableThanks">
+				    <label for="enableThanks">
+				    	<span></span>
+				    	Enable Thank You Messages
+				    </label>
+			  	</div>
+			</div>
+			<div class="box-content mt-4" *ngIf="enableThanks">
+				<div class="form-group mb-3">
+					<label for="emailSubject">EMAIL SUBJECT</label>
+					<input type="text" name="emailSubject" class="form-control" placeholder="Thank you for visiting" value="Thank you for visiting">
+				</div>
+				<div class="form-group">
+					<label for="emailSubject">EMAIL TEMPLATE
+						<i class="fa fa-question-circle-o hint-icon v-align-middle" data-placement="bottom" data-toggle="tooltip" title="" placement="bottom" ngbTooltip="Use variables on the right or include dynamic info in your message" data-original-title="Use variables on the right or include dynamic info in your message"></i>
+					</label>
+					<textarea class="form-control" rows="10" cols="20">
+Hi CLIENT_FIRST_NAME,
+
+We just wanted to say thanks for visiting us at BUSINESS_NAME for your appointment (reference BOOKING_REFERENCE).
+
+We hope you enjoyed your visit and look forward to seeing you return soon.
+
+If you wish to share any feedback please feel free to get in touch on LOCATION_PHONE.
+
+Warm regards,
+
+BUSINESS_NAME
+					</textarea>
+				</div>
+			</div>
+			<div class="box-button"  *ngIf="enableThanks">
+				<span class="btn btn-light mr-2" (click)="viewPreview(preview)">Preview message</span>
+				<span class="btn btn-light">Reset to default</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #preview let-c="close" let-d="dismiss">
+	<div class="box-preview">
+		<div class="panel">
+			<div class="panel-heading mb-3 pt-3">
+				<p>Preview template</p>
+				<span  (click)="c('click Close')">+</span>
+			</div>
+			<div class="panel-body mb-4">
+				<div class="content-preview">
+					<p>Hi John,</p>
+					<p>We just wanted to say thanks for visiting us at Jasmine Nails & Beauty for your appointment (reference A2ADD0D3DD).</p>
+					<p>We hope you enjoyed your visit and look forward to seeing you return soon.</p>
+					<p>If you wish to share any feedback please feel free to get in touch on 02086607272.</p>
+					<p>Warm regards,</p>
+					<p>Jasmine Nails & Beauty</p>
+					<span class="mt-4 btn-preview">RATE YOUR BOOKING</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template>

@@ -33,7 +33,7 @@ class OrderCtroller extends Controller
                     'id_product' => $value['id'],
                     'price_product' => $value['supplyprice_product'] ,
                     'qty_product' => $value['quantity'],
-                    'qty_product_receive' => $value['qty_product_receive']
+                    'qty_product_receive' => $value['quantity']
                 ];
             }
             $list_product = $arr_product;
@@ -86,6 +86,7 @@ class OrderCtroller extends Controller
                         'id_product' => $value['id_product'],
                         'price_product' => $value['price_product'] ,
                         'qty_product' => $value['qty_product'],
+                        'qty_product_receive' => $value['qty_product_receive']
                     ];
                 }
                 $list_product = $arr_product;

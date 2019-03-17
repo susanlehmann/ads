@@ -7,6 +7,7 @@ import { EditProductComponent } from './layout/inventory/product/edit-product/ed
 import { EditOrderComponent } from './layout/inventory/order/edit-order/edit-order.component';
 import { CreateOrderComponent } from './layout/inventory/order/create-order/create-order.component';
 
+import { AddAppointmentComponent } from './layout/calendar/add-appointments/add-appointment.component';
 const routes: Routes = [
     { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard]},
     // { path: '', loadChildren: './layout/layout.module#LayoutModule'},
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'inventory/order/new-order', component: EditOrderComponent, data: {title: 'New Order'} },
     { path: 'inventory/order/new-order/create-order', component: CreateOrderComponent },
     { path: 'inventory/products/:id/edit', component: EditProductComponent },
+    { path: 'appointment/add', component: AddAppointmentComponent, data: {title: 'Appointment'} },
     { path: '**', redirectTo: 'not-found' }
 ];
 

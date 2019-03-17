@@ -66,22 +66,19 @@
 							</ng-container>
 							<ng-container *ngIf="numberList > 0">
 								<tr *ngFor="let client of clients?.user; index as i" routerLink="/clients/detail/{{client.id}}">
-									<td>
+									<td style="padding-right: 10px;">
 										<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
 									</td>
 									<td class="ba">
 										<span>{{client?.firstName}} {{client?.lastName}}</span>
 										<span>{{client?.phone}}</span>
 									</td>
-									<td>
-										<i class="fa fa-2x" [ngClass]="client?.status == '1' ? 'fa-check-circle active' : 'fa-times-circle block'"></i>
-									</td>
 								</tr>
 							</ng-container>
 						</tbody>
 						<tfoot *ngIf="numberList > 0">
 							<tr>
-								<th colspan="3">
+								<th colspan="2">
 									Showing {{numberList}} of {{numberList}} results
 								</th>
 							</tr>
@@ -103,9 +100,6 @@
 								</th>
 								<th>
 									<span>{{'Gender' | translate}}</span>
-								</th>
-								<th>
-									<span>{{'Status' | translate}}</span>
 								</th>
 							</tr>
 						</thead>
@@ -130,15 +124,12 @@
 									<td>{{client?.phone}}</td>
 									<td>{{client?.email}}</td>
 									<td>{{client?.gender == '1' ? 'Male' : client?.gender == '2' ? 'Female' : 'Unknown'}}</td>
-									<td>
-										<i class="fa fa-2x" [ngClass]="client?.status == '1' ? 'fa-check-circle active' : 'fa-times-circle block'"></i>
-									</td>
 								</tr>
 							</ng-container>
 						</tbody>
 						<tfoot *ngIf="numberList > 0">
 							<tr>
-								<th colspan="5">
+								<th colspan="4">
 									Showing {{numberList}} of {{numberList}} results
 								</th>
 							</tr>

@@ -51,7 +51,8 @@ export class MemberComponent implements OnInit {
     ];
     this.modalOptions = {
       backdrop: 'static',
-      size: 'lg'
+      size: 'lg',
+      windowClass: 'iphoneX-content'
     };
     this.modalOptions1 = {
       backdrop: 'static',

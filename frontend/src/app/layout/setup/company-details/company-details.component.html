@@ -15,7 +15,8 @@
       </div>
       <div class="col-sm-12">
         <label class="control-label">DESCRIPTION</label>
-        <textarea style="padding-top: 25px; height: auto;" [(ngModel)]="form.description" class="form-control text optional" rows="3" maxlength="400"
+        <textarea style="padding-top: 25px; height: auto;" [(ngModel)]="form.description"
+                  class="form-control text optional" rows="3" maxlength="400"
                   name="description"
                   id="provider_description"></textarea>
       </div>
@@ -23,13 +24,15 @@
     <div class="row form-group">
       <div class="col-sm-12">
         <label class="control-label">ADDRESS</label>
-        <textarea [(ngModel)]="form.address" class="form-control text optional" name="address" id="provider_address"></textarea>
+        <textarea [(ngModel)]="form.address" class="form-control text optional" name="address"
+                  id="provider_address"></textarea>
       </div>
     </div>
     <div class="row form-group">
       <div class="col-sm-12">
         <label class="control-label">WEBSITE</label>
-        <input [(ngModel)]="form.website" class="string optional form-control" maxlength="255" size="255" type="text" name="website"
+        <input [(ngModel)]="form.website" class="string optional form-control" maxlength="255" size="255" type="text"
+               name="website"
                id="provider_website">
       </div>
     </div>
@@ -56,7 +59,7 @@
       <div class="col-sm-12">
         <label class="control-label">TIME ZONE</label>
         <select [(ngModel)]="form.timezoneSelect" name="timezone" class="form-control">
-          <option *ngFor="let p of timezone?.default" value={{p.code}} selected>{{p.name}}</option>
+          <option *ngFor="let p of timezone?.default" value={{p.name}} selected>{{p.gtm}}</option>
         </select>
       </div>
     </div>
@@ -64,28 +67,40 @@
       <div class="col-sm-12">
         <label class="control-label">TIME FORMAT</label>
         <select [(ngModel)]="form.timeFomatSelect" name="timeformat" class="form-control">
-          <option *ngFor="let p of timeFomat" value={{p}} selected>{{p}}</option>
+          <option *ngFor="let p of timeFomat" value={{p.value}} selected>{{p.text}}</option>
         </select>
       </div>
     </div>
+    <!--<div class="row form-group">-->
+    <!--<div class="col-sm-12">-->
+    <!--<label class="control-label">COUNTRY</label>-->
+    <!--<select [(ngModel)]="form.countrySelect" name="country" class="select optional disabled form-control" (change)="getCurreny()">-->
+    <!--<option *ngFor="let p of country" value={{p.value}} selected>{{p.text}}</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    <!--</div>-->
+
     <div class="row form-group">
       <div class="col-sm-12">
         <label class="control-label">COUNTRY</label>
-        <select [(ngModel)]="form.countrySelect" name="country" class="select optional disabled form-control">
-          <option *ngFor="let p of country" value={{p}} selected>{{p}}</option>
+        <select [(ngModel)]="form.countrySelect" name="country" class="select optional disabled form-control"
+                (change)="getCurreny()">
+          <option *ngFor="let p of countryCurrency?.default" value={{p.country}} selected>{{p.country}}</option>
         </select>
       </div>
     </div>
+
+
     <div class="row form-group">
       <div class="col-sm-12">
         <label class="control-label">CURRENCY</label>
-        <select [(ngModel)]="form.currencySelect" name="currency" class="select optional disabled form-control">
-          <option *ngFor="let p of currency" value={{p}} selected>{{p}}</option>
+        <select name="currency" [(ngModel)]="form.currencySelect" class="select optional disabled form-control">
+          <option *ngFor="let p of countryCurrency?.default" value="{{p.country}}">{{p.currency_name}}</option>
         </select>
       </div>
     </div>
     <div class="text-left">
-      <input type="submit" name="commit" (click)="save()" value="Save Changes" class="btn btn-black m-t-10">
+      <input type="submit" name="commit" (click)="saveCompany()" value="Save Changes" class="btn btn-black m-t-10">
     </div>
   </div>
   <div class="clearfix"></div>

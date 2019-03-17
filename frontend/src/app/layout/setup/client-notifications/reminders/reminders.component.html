@@ -1,0 +1,97 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12" id="xNext">
+			<div class="custom-radios">
+            	<div>
+				    <input type="checkbox" id="enableReminder" name="enableReminder" [(ngModel)]="enableReminder">
+				    <label for="enableReminder">
+				    	<span></span>
+				    	Enable Reminder Messages
+				    </label>
+			  	</div>
+			</div>
+			<div class="box-content mt-4" *ngIf="enableReminder">
+				<div class="form-group mb-3">
+					<label for="emailSubject">SEND BY</label>
+					<select name="sendBy" class="form-control">
+						<option value="email">Email</option>
+						<option value="sms">SMS</option>
+						<option value="email-sms">Email and SMS</option>
+					</select>
+				</div>
+				<div class="form-group mb-3">
+					<label for="emailSubject">REMINDER ADVANCE NOTICE</label>
+					<select name="sendBy" class="form-control">
+						<option value="2">2 hours</option>
+						<option value="3">3 hours</option>
+						<option value="24">24 hours</option>
+						<option value="48">28 hours</option>
+					</select>
+				</div>
+				<div class="form-group mb-3">
+					<label for="emailSubject">EMAIL SUBJECT</label>
+					<input type="text" name="emailSubject" class="form-control" placeholder="Your new appointment is confirmed" value="Your new appointment is confirmed">
+				</div>
+				<div class="form-group">
+					<label for="emailSubject">EMAIL TEMPLATE
+						<i class="fa fa-question-circle-o hint-icon v-align-middle" data-placement="bottom" data-toggle="tooltip" title="" placement="bottom" ngbTooltip="Use variables on the right or include dynamic info in your message" data-original-title="Use variables on the right or include dynamic info in your message"></i>
+					</label>
+					<textarea class="form-control" rows="10" cols="20">
+Hi CLIENT_FIRST_NAME,
+
+This is a friendly reminder about your appointment with booking reference BOOKING_REFERENCE. Here are the details:
+
+BUSINESS_NAME
+SERVICE_NAME
+BOOKING_DATE_TIME
+
+At this location:
+
+LOCATION_NAME
+924 Brighton Road
+Purley
+CR8 2LN
+LOCATION_PHONE
+
+Need to change your appointment? Please contact BUSINESS_NAME on LOCATION_PHONE.
+
+					</textarea>
+				</div>
+			</div>
+			<div class="box-button" *ngIf="enableReminder">
+				<span class="btn btn-light mr-2" (click)="viewPreview(preview)">Preview message</span>
+				<span class="btn btn-light">Reset to default</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #preview let-c="close" let-d="dismiss">
+	<div class="box-preview">
+		<div class="panel">
+			<div class="panel-heading mb-3 pt-3">
+				<p>Preview template</p>
+				<span (click)="c('click Close')">+</span>
+			</div>
+			<div class="panel-body mb-4">
+				<div class="content-preview">
+					<p>Hi John,</p>
+					<p>This is a friendly reminder about your appointment with booking reference A8EBDF2A0D. Here are the new details:</p>
+					<p>Jasmine Nails & Beauty </p>
+					<p>Full Leg & Bikini Line </p>
+					<p>Friday, 15 Mar 2019 at 8:00am </p>
+					<p>At this location:</p>
+					<p>
+						<span>Jasmine Nails & Beauty</span>
+						<span>924 Brighton Road</span>
+						<span>Purley</span>
+						<span>CR8 2LN</span>
+						<span>02086607272</span>
+					</p>
+					<p>Need to change your appointment? Please contact Jasmine Nails & Beauty on 02086607272.</p>
+					<span class="mt-4 btn-preview">MANAGE BOOKING</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template>

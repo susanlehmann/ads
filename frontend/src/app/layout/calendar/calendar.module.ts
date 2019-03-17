@@ -11,6 +11,7 @@ import { EventSesrvice } from './event.service';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DayViewSchedulerComponent } from './day-view-scheduler/day-view-scheduler.component';
+import { CustomCalendarDayViewComponent } from './custom-calendar-day-view/custom-calendar-day-view.component';
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import { DayViewSchedulerComponent } from './day-view-scheduler/day-view-schedul
     declarations: [
     	CalendarComponent, 
     	AddEventComponent,
-			DayViewSchedulerComponent,
+		DayViewSchedulerComponent,
+		CustomCalendarDayViewComponent
     ],
 	bootstrap:    [ CalendarComponent ],
 	providers: [ EventSesrvice ]
