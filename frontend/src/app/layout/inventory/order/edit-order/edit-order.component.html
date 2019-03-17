@@ -1,444 +1,269 @@
-<!-- Step 1: Choose supplier -->
-<div *ngIf="step == 1">
-<ng-container *ngIf="check == 0; else elseTemplate">
+<ng-template #receive *ngIf=" _order.status_order == 1">
   <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
     <header class="_2MOTTd _1o_KVJ">
-      <div class="qQ2mF7 _1eGgST hOEdLx _3FRRDB">
-        <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Select Supplier</h2>
-        <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF">
-          <span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt" [routerLink]="['/inventory/orders']" routerLinkActive="router-link-active">
-            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path>
-            </svg>
-          </span>
+        <div class="qQ2mF7 _1eGgST hOEdLx tSvWd9">
+            <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Order P{{order.id}}</h2>
+            <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF"><span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path></svg></span></div>
         </div>
-      </div>
     </header>
-    <div class="_26Q8ey" style="display: flex; flex-direction: column;">
-      <div class="_21M7Mi" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
-        <div class="_1mW557">
-          <div class="_2hndFf">
-            <div class="_3mmM_Q">
-              <div class="_6JCFil">
-                <span class="_2FSeuB _240vE8 xSKKTy fQO5_G">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                    <path d="M23 47H7c-1.7 0-3-1.3-3-3V13v-.2l2-7.9V3c0-1.7 1.3-3 3-3h12c1.7 0 3 1.3 3 3v1.9l2 7.9V44c0 1.7-1.3 3-3 3zM6 13.1V44c0 .6.4 1 1 1h16c.6 0 1-.4 1-1V13.1l-2-7.9V3c0-.6-.4-1-1-1H9c-.6 0-1 .4-1 1v2.2l-2 7.9z"></path>
-                    <path d="M5 12h20v2H5zM7 4h16v2H7zM41 47H23v-2h18c.6 0 1-.4 1-1V32.2l-1.9-5.8c0-.1-.1-.2-.1-.3v-2c0-.6-.4-1-1-1H26v-2h13c1.7 0 3 1.3 3 3v1.8l1.9 5.8c0 .1.1.2.1.3v12c0 1.7-1.3 3-3 3z"></path>
-                    <path d="M26 25h15v2H26zM26 31h17v2H26zM25 36H15c-.6 0-1-.4-1-1V20c0-.6.4-1 1-1h9v2h-8v13h9v2zM38 41h-9c-.6 0-1-.4-1-1v-4c0-.6.4-1 1-1h9c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1zm-8-2h7v-2h-7v2z"></path>
-                  </svg>
-                </span>
-                <h3 class="_1p62pX _1vx-Nb KprYqY">No Suppliers Found</h3>
-                <p class="_1p62pX _2m4SnS _3a3cYb">Setup your suppliers before creating purchase orders.</p>
-              </div>
+    <div class="_26Q8ey Pn9am0" style="display: flex; flex-direction: column;">
+        <div class="_21M7Mi tSvWd9 _2YZBIG" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
+            <div class="xP1JRl VK8byN"><i class="IhToKE LqKsYE _10B3mn"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v4h2V7c0-0.007-0.004-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.039-0.08c-0.019-0.038-0.031-0.08-0.057-0.117l-4-6C15.646,0.167,15.334,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.143,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.447,1,1,1h7v-2H2V8z M17.131,6H11V2h3.465L17.131,6z M5.535,2H9v4H2.869L5.535,2z"></path><path style="fill:#767676;" d="M23.707,18.293l-2-2C21.52,16.106,21.266,16,21,16h-1v-1c0-0.552-0.447-1-1-1h-8 c-0.553,0-1,0.448-1,1v7c0,0.552,0.447,1,1,1h1.277c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1h2.555 c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1H23c0.553,0,1-0.448,1-1v-3C24,18.735,23.895,18.48,23.707,18.293z M12,16h6v5 h-2.277c-0.346-0.596-0.984-1-1.723-1s-1.377,0.404-1.723,1H12V16z M22,21h-0.277c-0.346-0.596-0.984-1-1.723-1v-2h0.586 L22,19.414V21z"></path></g></g></svg></i>
+                <div class="BJziWW">
+                    <div class="_2PSSLB"><i class="IhToKE KVs5Uc _10B3mn"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v4h2V7c0-0.007-0.004-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.039-0.08c-0.019-0.038-0.031-0.08-0.057-0.117l-4-6C15.646,0.167,15.334,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.143,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.447,1,1,1h7v-2H2V8z M17.131,6H11V2h3.465L17.131,6z M5.535,2H9v4H2.869L5.535,2z"></path><path style="fill:#767676;" d="M23.707,18.293l-2-2C21.52,16.106,21.266,16,21,16h-1v-1c0-0.552-0.447-1-1-1h-8 c-0.553,0-1,0.448-1,1v7c0,0.552,0.447,1,1,1h1.277c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1h2.555 c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1H23c0.553,0,1-0.448,1-1v-3C24,18.735,23.895,18.48,23.707,18.293z M12,16h6v5 h-2.277c-0.346-0.596-0.984-1-1.723-1s-1.377,0.404-1.723,1H12V16z M22,21h-0.277c-0.346-0.596-0.984-1-1.723-1v-2h0.586 L22,19.414V21z"></path></g></g></svg></i>
+                        <div class="_1HzH5b">Stock Ordered</div>
+                    </div>Ordered 17 Mar 2019, 23:24 at ha noi by Giang MV</div>
             </div>
-          </div>
-          <div class="_1nM1bd" data-qa="loader-spinner-container">
-            <div class="_2Nn7vB" data-qa="loader-spinner"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-container>
-<ng-template #elseTemplate>
-  <div class="_2GveWK">
-    <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
-      <header class="_2MOTTd _1o_KVJ">
-        <div class="qQ2mF7 _1eGgST hOEdLx _3FRRDB">
-          <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Select Supplier</h2>
-          <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF">
-            <span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt" [routerLink]="['/inventory/orders']" routerLinkActive="router-link-active">
-              <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path>
-              </svg>
-            </span>
-          </div>
-        </div>
-      </header>
-      <div class="_26Q8ey" style="display: flex; flex-direction: column;">
-        <div class="_21M7Mi" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
-          <div class="_1mW557">
-            <div class="_2hndFf">
-              <ul class="o2WEj5 _2brVXU">
-                <span class="_2NPNd8 _44Rz2z">Select a supplier to order product stock from</span>
-                <li class="_44Rz2z _1FszNF" *ngFor="let supplier of listsuppliers">
-                  <ng-container *ngIf="numberList == 1; else elseTemplate">
-                    <div class="_1-pZhq" (click)="gostep3(supplier,location)">{{ supplier.name_supplier }}</div>
-                  </ng-container>
-                  <ng-template #elseTemplate>
-                    <div class="_1-pZhq" (click)="gostep2(supplier)">{{ supplier.name_supplier }}</div>
-                  </ng-template>
-                  <div class="_2Am3Zp">
-                    <span class="_2FSeuB _240vE8 RCcMXQ _3vTBXo _2SZcT5">
-                      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
-                      </svg>
-                    </span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="_1nM1bd" data-qa="loader-spinner-container">
-              <div class="_2Nn7vB" data-qa="loader-spinner"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>
-</div>
-<!-- Go to Step 2: Choice location -->
-<div *ngIf="step == 2">
-  <div class="_2GveWK">
-    <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
-      <header class="_2MOTTd _1o_KVJ">
-        <div class="qQ2mF7 _1eGgST hOEdLx _3FRRDB">
-          <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Select Location</h2>
-          <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF">
-            <span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt" [routerLink]="['/inventory/orders']" routerLinkActive="router-link-active">
-              <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path>
-              </svg>
-            </span>
-          </div>
-        </div>
-      </header>
-      <div class="_26Q8ey" style="display: flex; flex-direction: column;">
-        <div class="_21M7Mi" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
-          <div class="_1mW557">
-            <div class="_2hndFf">
-              <ul class="o2WEj5 _2brVXU">
-                <span class="_2NPNd8 _44Rz2z">Select a supplier to order product stock from</span>
-                <li class="_44Rz2z _1FszNF" *ngFor="let local of location">
-                  <div class="_1-pZhq" (click)="gostep3(selectedsupplier,local)">{{ local.name_location }}</div>
-                  <div class="_2Am3Zp">
-                    <span class="_2FSeuB _240vE8 RCcMXQ _3vTBXo _2SZcT5">
-                      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
-                      </svg>
-                    </span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="_1nM1bd" data-qa="loader-spinner-container">
-              <div class="_2Nn7vB" data-qa="loader-spinner"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Go to Step 3: Create Order -->
-<div *ngIf="step == 3">
-  <div class="_2GveWK">
-    <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
-      <header class="_2MOTTd _1o_KVJ">
-        <div class="qQ2mF7 _1eGgST hOEdLx _1Z2NI6">
-          <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Create Order</h2>
-          <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF">
-            <span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt" [routerLink]="['/inventory/orders']" routerLinkActive="router-link-active">
-              <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path>
-              </svg>
-            </span>
-          </div>
-        </div>
-      </header>
-      <div class="_26Q8ey Pn9am0" style="display: flex; flex-direction: column;">
-        <div class="_21M7Mi _2YZBIG" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
-          <div class="QRuMR4 _3U302c">
-            <div class="_1gvjFA">
-              <div class="Oevsm9">{{ selectedsupplier.name_supplier }}</div>
-            </div>
-            <div class="_2kNycV">
-              <div class="_159PWY">Deliver To</div>
-              <strong>{{ location.name_location }}</strong>
-              <div class="_2nu-sW">Default Address</div>
-              <div class="_2nu-sW">Default City</div>
-            </div>
-            <div class="GPGTEy">
-              <div class="A-SwpO">
-                <div>Order Total:</div>
-                <div class="_1jHgdQ">
-                  <ng-container *ngIf="orderTotal == undefined; else elseTemplate">
-                    <span>₫0</span>
-                  </ng-container>
-                  <ng-template #elseTemplate>
-                    <span>₫{{orderTotal}}</span>
-                  </ng-template>
+            <div class="_1Ipnu7 _3ubWil">
+                <button class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ"><span>Email Order</span></button><a class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ" href="https://shedul-uploads.s3.amazonaws.com/orders/39765/6da184a9-ae99-4e72-b480-a23d9715a89b.pdf" target="_blank">Download PDF</a></div>
+            <div class="QRuMR4 _3U302c">
+                <div class="_1gvjFA">
+                    <div class="Oevsm9">asd</div>
                 </div>
-              </div>
-              <ng-container *ngIf="items.length == 0; else elseTemplate">
-                <button class="llIfVd _2fOvjP _3V6zo- _36zpTJ _2DZ1oJ">Create Order</button>
-              </ng-container>
-              <ng-template #elseTemplate>
-                <button class="llIfVd _2fOvjP _1FszNF _3V6zo- _2DZ1oJ">Create Order</button>
-              </ng-template>
+                <div class="_2kNycV">
+                    <div role="button" class="_20voDv">Cancel Order</div>
+                    <div class="_159PWY">Deliver To</div><strong>ha noi</strong>
+                    <div class="_2nu-sW">Default Address</div>
+                    <div class="_2nu-sW">Default City</div>
+                </div>
+                <div class="GPGTEy">
+                    <div class="A-SwpO">
+                        <div>Order Total:</div>
+                        <div class="_1jHgdQ"><span>₫4</span></div>
+                    </div>
+                    <button class="llIfVd _2fOvjP _1FszNF _3V6zo- _2DZ1oJ">Receive Stock</button>
+                </div>
             </div>
-          </div>
-          <div class="_2uwdW_">
-            <ng-container *ngIf="items.length == 0; else elseTemplate1">
-              <div class="_1p62pX _2N2XlO _2LUoF4 d7Wx_q">You haven't added any product to your order yet.</div>
-            </ng-container>
-            <ng-template #elseTemplate1>
-              <table class="_3rpc36 rgy-io">
-                <thead>
-                  <tr>
-                    <th class="_3jHaBz">
-                      <div>Product</div>
-                    </th>
-                    <th class="_3jHaBz">
-                      <div>Order Qty.</div>
-                    </th>
-                    <th class="_3jHaBz">
-                      <div>Supply Price</div>
-                    </th>
-                    <th class="_3jHaBz uM9Wyc">
-                      <div>Total Cost</div>
-                    </th>
-                    <th class="_3jHaBz">
-                      <div></div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="_1A0eEb" *ngFor="let i of items">
-                    <td class="N3OZB6 _1vLxYz">
-                      <span>{{i.name_product}}</span>
-                    </td>
-                    <td class="N3OZB6 _1vLxYz">
-                      <div class="_1XOh8M _38RFH6" value="" type="number" min="0" pattern="\d*" placeholder="0">
-                        <div class="H9L5q0">
-                          <input class="JOAm_M _1FszNF" type="number" min="0" pattern="\d*" placeholder="0" value="" name="qty" [(ngModel)]="i.quantity" (change)="sum()">
-                        </div>
-                      </div>
-                    </td>
-                    <td class="N3OZB6 _1vLxYz">
-                      <div class="_1XOh8M _38RFH6" value="" type="number" min="0" placeholder="0.00">
-                        <div class="_3Fz-qw _1-8Wan">₫</div>
-                        <div class="H9L5q0">
-                          <input class="JOAm_M _1FszNF _2i-B9g" type="number" min="0" placeholder="0.00" value="" name="price" [(ngModel)]="i.supplyprice_product" (change)="sum()">
-                        </div>
-                      </div>
-                    </td>
-                    <td class="N3OZB6 _1vLxYz">
-                      <span class="_2RC8PK _1tRUAi">₫{{(i.quantity) * i.supplyprice_product || 0}}</span>
-                    </td><td class="N3OZB6 _1vLxYz">
-                      <div class="Lc1XIC">
-                        <div role="button" class="_1TG8o8 _27qf-R _27gKhW _1FszNF">
-                          <span class="_2FSeuB _240vE8 RCcMXQ _3vTBXo EDA0Qt" (click)="deleteProd(i)">
-                            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path>
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </ng-template>
-            <button class="_10B5NW _1FszNF _3ttzJg _2DZ1oJ" (click)="openProduct(category)">
-              <span class="_2FSeuB _240vE8 RCcMXQ _25R4LF _1w3FE_">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                  <path d="M26 22V8c0-1.11-.895-2-2-2-1.112 0-2 .895-2 2v14H8c-1.11 0-2 .895-2 2 0 1.112.895 2 2 2h14v14c0 1.11.895 2 2 2 1.112 0 2-.895 2-2V26h14c1.11 0 2-.895 2-2 0-1.112-.895-2-2-2H26z"></path>
-                </svg>
-              </span>Add Product
-            </button>
-          </div>
+            <div class="Z9s4nr">
+                <div class="xP1JRl _3hwl_N"><i class="IhToKE LqKsYE _10B3mn"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v4h2V7c0-0.007-0.004-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.039-0.08c-0.019-0.038-0.031-0.08-0.057-0.117l-4-6C15.646,0.167,15.334,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.143,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.447,1,1,1h7v-2H2V8z M17.131,6H11V2h3.465L17.131,6z M5.535,2H9v4H2.869L5.535,2z"></path><path style="fill:#767676;" d="M23.707,18.293l-2-2C21.52,16.106,21.266,16,21,16h-1v-1c0-0.552-0.447-1-1-1h-8 c-0.553,0-1,0.448-1,1v7c0,0.552,0.447,1,1,1h1.277c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1h2.555 c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1H23c0.553,0,1-0.448,1-1v-3C24,18.735,23.895,18.48,23.707,18.293z M12,16h6v5 h-2.277c-0.346-0.596-0.984-1-1.723-1s-1.377,0.404-1.723,1H12V16z M22,21h-0.277c-0.346-0.596-0.984-1-1.723-1v-2h0.586 L22,19.414V21z"></path></g></g></svg></i>
+                    <div class="BJziWW">
+                        <div class="_2PSSLB"><i class="IhToKE KVs5Uc _10B3mn"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v4h2V7c0-0.007-0.004-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.039-0.08c-0.019-0.038-0.031-0.08-0.057-0.117l-4-6C15.646,0.167,15.334,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.143,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.447,1,1,1h7v-2H2V8z M17.131,6H11V2h3.465L17.131,6z M5.535,2H9v4H2.869L5.535,2z"></path><path style="fill:#767676;" d="M23.707,18.293l-2-2C21.52,16.106,21.266,16,21,16h-1v-1c0-0.552-0.447-1-1-1h-8 c-0.553,0-1,0.448-1,1v7c0,0.552,0.447,1,1,1h1.277c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1h2.555 c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1H23c0.553,0,1-0.448,1-1v-3C24,18.735,23.895,18.48,23.707,18.293z M12,16h6v5 h-2.277c-0.346-0.596-0.984-1-1.723-1s-1.377,0.404-1.723,1H12V16z M22,21h-0.277c-0.346-0.596-0.984-1-1.723-1v-2h0.586 L22,19.414V21z"></path></g></g></svg></i>
+                            <div class="_1HzH5b">Stock Ordered</div>
+                        </div>Ordered 17 Mar 2019, 23:24 at ha noi by Giang MV</div>
+                </div>
+                <div class="_1Ipnu7 _2hqPd8">
+                    <button class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ"><span>Email Order</span></button><a class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ" href="https://shedul-uploads.s3.amazonaws.com/orders/39765/6da184a9-ae99-4e72-b480-a23d9715a89b.pdf" target="_blank">Download PDF</a></div>
+                <div class="_2uwdW_ _23VGTa">
+                    <table class="_3rpc36 rgy-io">
+                        <thead>
+                            <tr>
+                                <th class="_3jHaBz">
+                                    <div>Product</div>
+                                </th>
+                                <th class="_3jHaBz">
+                                    <div>Order Qty.</div>
+                                </th>
+                                <th class="_3jHaBz uM9Wyc">
+                                    <div>Supply Price</div>
+                                </th>
+                                <th class="_3jHaBz uM9Wyc">
+                                    <div>Total Cost</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="_1A0eEb">
+                                <td class="N3OZB6 _1vLxYz"><span>ádasd</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span>2</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span class="_30USZf _1tRUAi">₫2</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span class="_2RC8PK _1tRUAi">₫4</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class=""><span class="YD8xyG">
-        <button class="_2pk64b _17w36h _1FszNF _3V6zo- _2DZ1oJ" role="button" style="flex-grow: 1;">
-          <div class="_1pMHh4">
-            <div class="_30gVg5">
-              <div class="_2Uatr3">Create Order</div>
-            </div>
-            <div class="_2rNTew">
-              <div>Order total</div>
-              <span class="_2zMr_F">
-                <ng-container *ngIf="orderTotal == undefined; else elseTemplate">
-                  <span>₫0</span>
-                </ng-container>
-                <ng-template #elseTemplate>
-                  <span>₫{{orderTotal}}</span>
-                </ng-template>
-              </span>
-            </div>
-          </div>
-        </button>
-      </span></div>
     </div>
+    <div class=""><span class="YD8xyG tSvWd9"><button class="_2pk64b _17w36h _1FszNF _3V6zo- _2pk64b _2DZ1oJ" role="button" style="flex-grow: 1;"><div class="_1pMHh4"><div class="_30gVg5"><div class="_2Uatr3">Receive Stock</div></div><div class="_2rNTew"><div>Order total</div><span class="_2zMr_F">₫4</span></div>
   </div>
+  </button>
+  </span>
+  </div>
+  </div>
+</ng-template>
+<ng-template #confirm *ngIf=" _order.status_order == 2">
+  <div class="GVEv-Y" style="display: flex; flex-direction: column;">
+    <div class="_2GveWK">
+        <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
+            <header class="_2MOTTd _1o_KVJ">
+                <div class="qQ2mF7 _1eGgST hOEdLx tSvWd9">
+                    <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Receive Order P11</h2>
+                    <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF"><span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path></svg></span></div>
+                </div>
+            </header>
+            <div class="_26Q8ey Pn9am0" style="display: flex; flex-direction: column;">
+                <div class="_21M7Mi tSvWd9 _2YZBIG" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
+                    <div class="QRuMR4 _3U302c">
+                        <div class="_1gvjFA">
+                            <div class="Oevsm9">asd</div>
+                        </div>
+                        <div class="_2kNycV">
+                            <div class="_159PWY">Deliver To</div><strong>ha noi</strong>
+                            <div class="_2nu-sW">Default Address</div>
+                            <div class="_2nu-sW">Default City</div>
+                        </div>
+                        <div class="GPGTEy">
+                            <div class="A-SwpO">
+                                <div>Order Total:</div>
+                                <div class="_1jHgdQ"><span>₫4</span></div>
+                            </div>
+                            <button class="llIfVd _2fOvjP _1FszNF _3V6zo- _2DZ1oJ">Confirm</button>
+                        </div>
+                    </div>
+                    <div class="_2uwdW_">
+                        <table class="_3rpc36 rgy-io">
+                            <thead>
+                                <tr>
+                                    <th class="_3jHaBz">
+                                        <div>Product</div>
+                                    </th>
+                                    <th class="_3jHaBz">
+                                        <div>Order Qty.</div>
+                                    </th>
+                                    <th class="_3jHaBz">
+                                        <div>Received Qty.</div>
+                                    </th>
+                                    <th class="_3jHaBz">
+                                        <div>Supply Price</div>
+                                    </th>
+                                    <th class="_3jHaBz uM9Wyc">
+                                        <div>Total Cost</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="_1A0eEb">
+                                    <td class="N3OZB6 _1vLxYz"><span>ádasd</span></td>
+                                    <td class="N3OZB6 _1vLxYz"><span>2</span></td>
+                                    <td class="N3OZB6 _1vLxYz">
+                                        <div class="_1XOh8M _38RFH6" type="number" min="0" pattern="\d*" placeholder="0">
+                                            <div class="H9L5q0">
+                                                <input class="JOAm_M _1FszNF" type="number" min="0" pattern="\d*" placeholder="0" value="2">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="N3OZB6 _1vLxYz">
+                                        <div>
+                                            <div class="_1XOh8M _38RFH6" type="number" min="0" placeholder="0.00">
+                                                <div class="_3Fz-qw _1-8Wan">₫</div>
+                                                <div class="H9L5q0">
+                                                    <input class="JOAm_M _1FszNF _2i-B9g" type="number" min="0" placeholder="0.00" value="2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="N3OZB6 _1vLxYz">
+                                        <div><span class="_2RC8PK _1tRUAi">₫4</span></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class=""><span class="YD8xyG tSvWd9"><button class="_2pk64b _17w36h _1FszNF _3V6zo- _2pk64b _2DZ1oJ" role="button" style="flex-grow: 1;"><div class="_1pMHh4"><div class="_30gVg5"><div class="_2Uatr3">Confirm</div></div><div class="_2rNTew"><div>Order total</div><span class="_2zMr_F">₫4</span></div>
+        </div>
+        </button>
+        </span>
+    </div>
 </div>
-<ng-template #category let-modal>
+</div>
+</div>
+</ng-template>
+<ng-template #close *ngIf=" _order.status_order == 3">
   <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
     <header class="_2MOTTd _1o_KVJ">
-      <div class="qQ2mF7 _1eGgST hOEdLx">
-        <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Select Product</h2>
-        <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF">
-          <span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt" (click)="modal.dismiss('Cross click')">
-            <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path>
-            </svg>
-          </span>
+        <div class="qQ2mF7 _1eGgST hOEdLx tSvWd9">
+            <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Order P11</h2>
+            <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF"><span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path></svg></span></div>
         </div>
-      </div>
     </header>
-    <div class="_26Q8ey vpnZfd _28nVCS" style="display: flex; flex-direction: column;">
-      <div class="_21M7Mi" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
-        <div class="_2bMiqQ">
-          <div class="_1XOh8M _1jFEEZ" value="" placeholder="Scan barcode or search any item">
-            <div class="H9L5q0 _2itZ0v"><input class="JOAm_M _1FszNF" placeholder="Scan barcode or search any item" value="">
-              <span class="_2FSeuB _240vE8 RCcMXQ _1bHTmd">
-                <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.78 22.722l-4.328-4.328c1.073-1.307 1.72-2.983 1.72-4.808C21.17 9.398 17.77 6 13.585 6 9.395 6 6 9.398 6 13.586c0 4.187 3.394 7.585 7.586 7.585 1.825 0 3.497-.64 4.805-1.712l4.33 4.324c.294.294.768.294 1.06 0 .295-.29.295-.767 0-1.057zm-10.194-3.06c-3.354 0-6.08-2.726-6.08-6.076 0-3.35 2.726-6.08 6.08-6.08 3.35 0 6.08 2.73 6.08 6.08s-2.73 6.076-6.08 6.076z"></path>
-                </svg>
-              </span>
+    <div class="_26Q8ey Pn9am0" style="display: flex; flex-direction: column;">
+        <div class="_21M7Mi tSvWd9 _2YZBIG" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
+            <div class="xP1JRl VK8byN"><i class="IhToKE LqKsYE _2YR97g"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v7h2V7c0-0.007-0.003-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.038-0.08c-0.02-0.038-0.032-0.08-0.058-0.117l-4-6C15.646,0.167,15.335,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.144,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.448,1,1,1h12v-2H2V8z M17.132,6H11V2h3.465L17.132,6z M5.535,2H9v4H2.869L5.535,2z"></path><polygon style="fill:#767676;" points="22.293,16.287 18,20.58 15.707,18.287 14.293,19.701 18,23.408 23.707,17.701 "></polygon></g></g></svg></i>
+                <div class="BJziWW">
+                    <div class="_2PSSLB"><i class="IhToKE KVs5Uc _2YR97g"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v7h2V7c0-0.007-0.003-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.038-0.08c-0.02-0.038-0.032-0.08-0.058-0.117l-4-6C15.646,0.167,15.335,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.144,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.448,1,1,1h12v-2H2V8z M17.132,6H11V2h3.465L17.132,6z M5.535,2H9v4H2.869L5.535,2z"></path><polygon style="fill:#767676;" points="22.293,16.287 18,20.58 15.707,18.287 14.293,19.701 18,23.408 23.707,17.701 "></polygon></g></g></svg></i>
+                        <div class="_1HzH5b">Stock Received</div>
+                    </div>Received 18 Mar 2019, 00:36 at ha noi by Giang MV</div>
             </div>
-          </div>
-        </div>
-        <div class="_6zspNi">
-          <div class="_1mW557">
-            <div class="_2hndFf">
-              <ul class="o2WEj5 _2fjKn2">
-                <li class="_44Rz2z _37n7nJ _2A0Dgv _1FszNF" id="90066" *ngFor="let category of listcategories" (click)="openProduct1(product1, category)">
-                  <div class="_1-pZhq">
-                    <span class="_1p62pX _2N2XlO _2LUoF4">{{ category.name_category }}</span>
-                  </div>
-                  <div class="_2Am3Zp">
-                    <span class="_2FSeuB _240vE8 RCcMXQ _3vTBXo _2SZcT5">
-                      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
-                      </svg>
-                    </span>
-                  </div>
-                </li>
-                <li class="_44Rz2z _37n7nJ _2A0Dgv _1FszNF" (click)="openModalNoCategory(no_category)">
-                  <div class="_1-pZhq"><span class="_1p62pX _2N2XlO _2LUoF4">No Category</span>
-                  </div>
-                  <div class="_2Am3Zp">
-                    <span class="_2FSeuB _240vE8 RCcMXQ _3vTBXo _2SZcT5">
-                      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.187 16.9c-.25.253-.25.66 0 .91.248.253.652.253.9 0l7.285-7.355c.25-.25.25-.66 0-.91L7.088 2.19c-.25-.253-.652-.253-.9 0-.25.25-.25.658-.002.91L12.83 10l-6.643 6.9z"></path>
-                      </svg>
-                    </span>
-                  </div>
-                </li>
-              </ul>
+            <div class="_1Ipnu7 _3ubWil"><a class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ" href="https://shedul-uploads.s3.amazonaws.com/orders/39765/1efac81a-466f-4c29-8f94-58f23b0a557a.pdf" target="_blank">Download PDF</a></div>
+            <div class="QRuMR4 _3U302c">
+                <div class="_1gvjFA">
+                    <div class="Oevsm9">asd</div>
+                </div>
+                <div class="_2kNycV">
+                    <div class="_159PWY">Deliver To</div><strong>ha noi</strong>
+                    <div class="_2nu-sW">Default Address</div>
+                    <div class="_2nu-sW">Default City</div>
+                </div>
+                <div class="GPGTEy">
+                    <div class="A-SwpO">
+                        <div>Order Total:</div>
+                        <div class="_1jHgdQ"><span>₫4</span></div>
+                    </div>
+                    <button class="llIfVd _2fOvjP _1FszNF _3V6zo- _2DZ1oJ">Close</button>
+                </div>
             </div>
-          </div>
+            <div class="Z9s4nr">
+                <div class="xP1JRl _3hwl_N"><i class="IhToKE LqKsYE _2YR97g"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v7h2V7c0-0.007-0.003-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.038-0.08c-0.02-0.038-0.032-0.08-0.058-0.117l-4-6C15.646,0.167,15.335,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.144,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.448,1,1,1h12v-2H2V8z M17.132,6H11V2h3.465L17.132,6z M5.535,2H9v4H2.869L5.535,2z"></path><polygon style="fill:#767676;" points="22.293,16.287 18,20.58 15.707,18.287 14.293,19.701 18,23.408 23.707,17.701 "></polygon></g></g></svg></i>
+                    <div class="BJziWW">
+                        <div class="_2PSSLB"><i class="IhToKE KVs5Uc _2YR97g"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v7h2V7c0-0.007-0.003-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.038-0.08c-0.02-0.038-0.032-0.08-0.058-0.117l-4-6C15.646,0.167,15.335,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.144,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.448,1,1,1h12v-2H2V8z M17.132,6H11V2h3.465L17.132,6z M5.535,2H9v4H2.869L5.535,2z"></path><polygon style="fill:#767676;" points="22.293,16.287 18,20.58 15.707,18.287 14.293,19.701 18,23.408 23.707,17.701 "></polygon></g></g></svg></i>
+                            <div class="_1HzH5b">Stock Received</div>
+                        </div>Received 18 Mar 2019, 00:36 at ha noi by Giang MV</div>
+                </div>
+                <div class="_1Ipnu7 _2hqPd8"><a class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ" href="https://shedul-uploads.s3.amazonaws.com/orders/39765/1efac81a-466f-4c29-8f94-58f23b0a557a.pdf" target="_blank">Download PDF</a></div>
+                <div class="_2uwdW_ _23VGTa">
+                    <table class="_3rpc36 rgy-io">
+                        <thead>
+                            <tr>
+                                <th class="_3jHaBz">
+                                    <div>Product</div>
+                                </th>
+                                <th class="_3jHaBz">
+                                    <div>Order Qty.</div>
+                                </th>
+                                <th class="_3jHaBz">
+                                    <div>Received Qty.</div>
+                                </th>
+                                <th class="_3jHaBz uM9Wyc">
+                                    <div>Supply Price</div>
+                                </th>
+                                <th class="_3jHaBz uM9Wyc">
+                                    <div>Total Cost</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="_1A0eEb">
+                                <td class="N3OZB6 _1vLxYz"><span>ádasd</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span>2</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span>2</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span class="_30USZf _1tRUAi">₫2</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span class="_2RC8PK _1tRUAi">₫4</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="_3_3wUj">
+                <div>Order Total:</div>
+                <div class="_2OZJQO"><span>₫4</span></div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 </ng-template>
-<ng-template #product1 let-modalproduct>
-  <div class="_34dVbr _3guOuC _3OGGh2 e_LTHc">
-    <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
-      <header class="_2MOTTd _1o_KVJ">
-        <div class="qQ2mF7 _1eGgST hOEdLx">
-          <div role="button" class="_1TG8o8 _21aPEg _3EoQje _27gKhW _1FszNF">
-            <span class="_2FSeuB _240vE8 RCcMXQ _3vTBXo EDA0Qt" (click)="openProducts(category)">
-              <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.80367158,16.7638261 C9.06544281,17.0467987 9.06544281,17.5049548 8.80367158,17.7879275 C8.54229164,18.0704815 8.11774488,18.0709001 7.85597365,17.7879275 L0.196328421,9.51223382 C-0.0654428068,9.22926119 -0.0654428068,8.77068646 0.196328421,8.48771383 L7.85577801,0.212229473 C8.11754924,-0.0707431577 8.54170471,-0.0707431577 8.80347594,0.212229473 C9.06524716,0.495202104 9.06524716,0.953567534 8.80406287,1.23633087 L1.81841007,9.00007847 L8.80367158,16.7638261 Z"></path>
-              </svg>
-            </span>
-          </div>
-          <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">{{ _category.name_category }}</h2>
-          <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF">
-            <span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt" (click)="modalproduct.dismiss('Cross click')">
-              <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path>
-              </svg>
-            </span>
-          </div>
-        </div>
-      </header>
-      <div class="_26Q8ey vpnZfd _28nVCS" style="display: flex; flex-direction: column;">
-        <div class="_21M7Mi" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
-          <div class="_2bMiqQ">
-            <div class="_1XOh8M _1jFEEZ" value="" placeholder="Scan barcode or search any item">
-              <div class="H9L5q0 _2itZ0v">
-                <input class="JOAm_M _1FszNF" placeholder="Scan barcode or search any item" value="">
-                <span class="_2FSeuB _240vE8 RCcMXQ _1bHTmd">
-                  <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M23.78 22.722l-4.328-4.328c1.073-1.307 1.72-2.983 1.72-4.808C21.17 9.398 17.77 6 13.585 6 9.395 6 6 9.398 6 13.586c0 4.187 3.394 7.585 7.586 7.585 1.825 0 3.497-.64 4.805-1.712l4.33 4.324c.294.294.768.294 1.06 0 .295-.29.295-.767 0-1.057zm-10.194-3.06c-3.354 0-6.08-2.726-6.08-6.076 0-3.35 2.726-6.08 6.08-6.08 3.35 0 6.08 2.73 6.08 6.08s-2.73 6.076-6.08 6.076z"></path>
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="_6zspNi" *ngFor="let prodss of _listproducts">
-            <div class="_6zspNi">
-              <ul class="o2WEj5 _2fjKn2">
-                <li class="_44Rz2z _2A0Dgv _1FszNF" id="1591844">
-                  <div class="_1-pZhq" (click)="selectedX(prodss)">
-                    <div class="Lyyij9">{{ prodss.name_product }}</div>
-                    <span class="_1yGTAj">({{ prodss.initialstock_product || 0}} in stock)</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<ng-template #cancel let-modal>
+  <div class="modal-header" [ngClass]="isCreate ? '' : 'sticky'">
+    <h4 class="modal-title text-xs-center offset-sm-4" id="modal-basic-title" style="font-size: 24px;font-weight: 300;color: #24334A;">Cancel Order</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-</ng-template>
-<ng-template #no_category let-modalcategory>
-  <div class="_34dVbr _3guOuC _3OGGh2 e_LTHc">
-    <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
-      <header class="_2MOTTd _1o_KVJ">
-        <div class="qQ2mF7 _1eGgST hOEdLx">
-          <div role="button" class="_1TG8o8 _21aPEg _3EoQje _27gKhW _1FszNF">
-            <span class="_2FSeuB _240vE8 RCcMXQ _3vTBXo EDA0Qt" (click)="openProducts(category)">
-              <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.80367158,16.7638261 C9.06544281,17.0467987 9.06544281,17.5049548 8.80367158,17.7879275 C8.54229164,18.0704815 8.11774488,18.0709001 7.85597365,17.7879275 L0.196328421,9.51223382 C-0.0654428068,9.22926119 -0.0654428068,8.77068646 0.196328421,8.48771383 L7.85577801,0.212229473 C8.11754924,-0.0707431577 8.54170471,-0.0707431577 8.80347594,0.212229473 C9.06524716,0.495202104 9.06524716,0.953567534 8.80406287,1.23633087 L1.81841007,9.00007847 L8.80367158,16.7638261 Z"></path>
-              </svg>
-            </span>
-          </div>
-          <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">No Category</h2>
-          <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF">
-            <span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt" (click)="modalcategory.dismiss('Cross click')">
-              <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path>
-              </svg>
-            </span>
-          </div>
-        </div>
-      </header>
-      <div class="_26Q8ey vpnZfd _28nVCS" style="display: flex; flex-direction: column;">
-        <div class="_21M7Mi" style="display: flex; flex-direction: column; flex-shrink: 0; flex-grow: 1;">
-          <div class="_2bMiqQ">
-            <div class="_1XOh8M _1jFEEZ" value="" placeholder="Scan barcode or search any item">
-              <div class="H9L5q0 _2itZ0v">
-                <input class="JOAm_M _1FszNF" placeholder="Scan barcode or search any item" value="">
-                <span class="_2FSeuB _240vE8 RCcMXQ _1bHTmd">
-                  <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M23.78 22.722l-4.328-4.328c1.073-1.307 1.72-2.983 1.72-4.808C21.17 9.398 17.77 6 13.585 6 9.395 6 6 9.398 6 13.586c0 4.187 3.394 7.585 7.586 7.585 1.825 0 3.497-.64 4.805-1.712l4.33 4.324c.294.294.768.294 1.06 0 .295-.29.295-.767 0-1.057zm-10.194-3.06c-3.354 0-6.08-2.726-6.08-6.076 0-3.35 2.726-6.08 6.08-6.08 3.35 0 6.08 2.73 6.08 6.08s-2.73 6.076-6.08 6.076z"></path>
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="_6zspNi" *ngFor="let prodss of _listproducts">
-            <div class="_6zspNi">
-              <ul class="o2WEj5 _2fjKn2">
-                <li class="_44Rz2z _2A0Dgv _1FszNF" id="1591844">
-                  <div class="_1-pZhq" (click)="selectedX(prodss)">
-                    <div class="Lyyij9">{{ prodss.name_product }}</div>
-                    <span class="_1yGTAj">({{ prodss.initialstock_product || 0}} in stock)</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="modal-body">
+    <div style="font-size:16px;line-height: 22px;color: #67768C;">Are you sure you want to cancel this order? This action is permanent and cannot be undone.</div>
+  </div>
+  <div class="modal-footer" [ngClass]="isCreate ? '' : 'sticky'">
+    <button *ngIf="!isCreate" type="button" class="btn btn-delete" (click)="status_order(_order.id,0)"> CANCEL ORDER</button>
   </div>
 </ng-template>

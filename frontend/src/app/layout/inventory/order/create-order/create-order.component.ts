@@ -1,16 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { NotifierService } from 'angular-notifier';
-import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { OrderService } from '../order.service';
-import { Order } from '../model/order';
-import { Supplier } from '../../supplier/model/supplier';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SupplierService } from '../../supplier/supplier.service';
 import { CategoryService } from '../../category/category.service';
-import { Category } from '../../category/model/category';
-import { Product } from '../../product/model/product';
+import { NotifierService } from 'angular-notifier';
+import { LocationsService } from '../../../../shared/services/location.service';
 import { InventoryService } from '../../inventory.service';
-import * as data from '../../../../../assets/country.json';
-
+import { OrderService } from '../order.service';
+import { NgbModalOptions, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
@@ -19,74 +15,110 @@ import * as data from '../../../../../assets/country.json';
 export class CreateOrderComponent implements OnInit {
   @ViewChild('product') _prod: NgbModalRef;
   @ViewChild('totalAmount') _totalAmount: ElementRef;
-  closeResult: string;
-  isCreate: boolean;
-  loading: boolean;
-  form: Order;
-  public error = [];
-  listorders: Order[];
-  selectedId: string;
-  modalOptions: NgbModalOptions;
   listsuppliers: any = [];
-  //listproducts = [{name: 'deha'},{name: 'asaka'}]
-  //categoriess = [{name: 'demo'},{name: 'sad'}]
-  //order = [{name: 'kimkim', updatetime: '19 Feb 2019, 06:54'}]
-  listcategories: any = [];
   _supplier: any;
-  _category: any;
-  listproducts: any;
-  _listproducts: any;
-  _products: any;
-  number_prod: number;
-  _prod_selected: any = [];
-  _total: any;
-  arr_info_product: any = [];
-  listorder: any = [];
-  _order: any;
-  _listorder: any;
-  listinfoproduct: any = [];
-  country: any;
-  _listorder1: any;
-  _updatetime: any;
-  _totals: any;
-  items = [];
   suppliers: any;
-  orderTotal;
-  number_order: number;
-  statusOrder = [{ id: 1, name: "ORDERED" }, { id: 2, name: "CANCEL" }, { id: 3, name: "RECEIVED" }];
-  public datas: [];
-  add: any;
-  //statusOrder = [{id: 1, name: "ORDERED"}];
+  location: any=[];
+	numberList: number;
+  check: any;
+  step: number;
+  selectedsupplier: any;
+  modalOptions: NgbModalOptions;
+  closeResult: string;
+  listcategories: any;
+  listpro: any;
+  _category: any;
+  _listproducts:any;
+  listproducts: any;
+  items = [];
+  _prod_selected: any = [];
+  orderTotal: any;
+  number_order: any;
+  listorder: any;
   constructor(private notifierService: NotifierService,
-    private modal: NgbModal,
+    private locationService: LocationsService,
+    private categoryService: CategoryService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private inventoryService:InventoryService,
     private OrderService: OrderService,
+    private modal: NgbModal,
     private SupplierService: SupplierService,
-    private CategoryService: CategoryService,
-    private InventoryService: InventoryService,
-  ) {
-    this.form = new Order();
-    this.modalOptions = {
-      backdrop: 'static',
-      size: 'lg',
-      windowClass: 'custom-modal',
-      backdropClass: 'custom-modal',
-    };
-
-  }
-
-  getnamecountry(as){
-    let country = data.filter(s => s.code == as);
-    return country[0].name;
-  }
-
+  ) {}
   ngOnInit() {
     this.getSupplier();
+    this.loadLocation();
     this.getCategory();
     this.getProduct();
-    this.getlist_order();
-    this.assignCopy();
+    this.step = 1;
+
+  }
+// get item for view
+  getSupplier() {
+    this.SupplierService.getList()
+      .subscribe((reponse: any) => {
+        this.listsuppliers = reponse.supplier
+        this.check = this.listsuppliers.length;
+      }, err => {
+      });
+  }
+  loadLocation() {
+		var user = JSON.parse(localStorage.getItem('user'));
+		this.locationService.listLocation(user.id).subscribe(
+			success => {
+				this.location = success.location;
+        this.numberList = success.location.length;
+        // console.log(this.location);
+        // console.log(this.numberList);
+			},
+			error => {
+				console.log(error);
+			}
+		);
+  }
+  getCategory() {
+    this.categoryService.getList()
+      .subscribe((cate: any) => {
+        this.listcategories = cate.category
+      }, err => {
+
+      });
+  }
+  getProduct() {
+    this.inventoryService.getListProduct()
+      .subscribe((prod: any) => {
+        this.listproducts = prod.product;
+      }, err => {
+
+      });
+  }
+  getlist_order() {
+    this.OrderService.getList()
+      .subscribe((listbrands: any) => {
+        this.number_order = listbrands.order.length;
+        this.listorder = listbrands.order;
+      }), err => {
+      };
+  }
+  //end
+  // Step to forward at new-order
+  gostep2(supplier) {
+    this.step =  2;
+    this.selectedsupplier = supplier;
   }
 
+  gostep3(supplier,local){
+    // console.log(typeof(local));
+    this.step = 3;
+    this.selectedsupplier = supplier;
+    if(local.length > 0){
+      this.location = local[0];
+    } else {
+      this.location = local;
+    }
+
+  }
+  // end step forward
   openProduct(content: NgbModalRef) {
     this.modal.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -94,23 +126,7 @@ export class CreateOrderComponent implements OnInit {
       this.closeResult = `Dismissed`;
     });
   }
-  check: any;
-  openModal(content: NgbModalRef) {
-    this.modal.open(content, this.modalOptions).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed`;
-    });
-    this.check = this.listsuppliers.length;
-  }
-  openSModal(content, supplier) {
-    this._supplier = supplier;
-    this.add = this.items.length;
-    console.log(this.add);
-    this.modal.dismissAll();
-    this.openModal(content);
-  }
-  listpro: any;
+
   openProduct1(content, category) {
     this._category = category;
     this._listproducts = this.listproducts.filter(s => s.id_category == this._category.id);
@@ -118,17 +134,7 @@ export class CreateOrderComponent implements OnInit {
     this.modal.dismissAll();
     this.openModal(this._prod);
     this.openProduct(content);
-    // console.log(this.items.length)
-    //console.log(this.listproducts);
-    // console.log(this._listproducts);
   }
-
-  openProducts(content){
-    this.modal.dismissAll();
-    this.openModal(this._prod);
-    this.openProduct(content);
-  }
-
   openModalNoCategory(content, category) {
     this._category = category;
     //console.log(this.listproducts);
@@ -138,37 +144,21 @@ export class CreateOrderComponent implements OnInit {
     this.openProduct(content);
   }
 
-  editOrder(content: NgbModalRef, order) {
-    this._listorder1 = JSON.parse(order.info_product);
-    this._order = order;
-    console.log(this._listorder1);
-    // this.getNameSupplier(order.id_supplier);
-    this.openModal(content);
+  openModal(content: NgbModalRef) {
+    this.modal.open(content, this.modalOptions).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
+    this.check = this.listsuppliers.length;
   }
-
-  getNameproduct(id) {
-    let product = this.listproducts.filter(s => s.id == id);
-    return product[0].name_product;
+  openProducts(content){
+    this.modal.dismissAll();
+    this.openModal(this._prod);
+    this.openProduct(content);
   }
-
-  getNameSupplier(id) {
-    let supplier = this.listsuppliers.filter(s => s.id == id);
-    this.suppliers = supplier[0];
-    return supplier[0].name_supplier;
-  }
-
-  sum() {
-    this.orderTotal = this.items.reduce((acc, cur) => {
-      return acc + cur.quantity * cur.supplyprice_product;
-    }, 0)
-  }
-
-  sumEdit() {
-    this._order.total_price = this._listorder1.reduce((acc, cur) => {
-      return acc + cur.qty_product_receive * cur.price_product;
-    }, 0)
-  }
-
+  //end modal
+  //math for items product
   deleteProd(prod) {
     this.items = this.items.filter(i => i != prod);
   }
@@ -179,192 +169,39 @@ export class CreateOrderComponent implements OnInit {
     this.items.push(copy);
     console.table(this.items);
     this.modal.dismissAll();
-    this.openModal(this._prod);
+    console.log(this.items.length)
+    // this.openModal(this._prod);
   }
-
-  mathTotal(qty, id_product, supplyprice_product, index) {
-    let _total = Math.ceil(qty * supplyprice_product);
-    let arr = {
-      'index': index,
-      'id_product': id_product,
-      'qty': qty,
-      'total': _total,
-
-    };
-    this.arr_info_product.push(arr);
-    var groupByName = {};
-
-    this.arr_info_product.forEach(function (a) {
-      groupByName[a.index] = groupByName[a.index] || [];
-      groupByName[a.index].push({ id_product: a.id_product, qty: a.qty, total: a.total });
-    });
-
-    //console.log(groupByName);
-    //console.log(this.arr_info_product);
-    this.number_prod = null;
-
+  sum() {
+    this.orderTotal = this.items.reduce((acc, cur) => {
+      return acc + cur.quantity * cur.supplyprice_product;
+    }, 0)
   }
-
-  //openProducts(content){
-  //  this.modal.dismiss();
-  //  this.openProduct1(content, this._category);
-  //}
-
-  //openCreateModal(content: NgbModalRef) {
-  //  this.isCreate = true;
-  //  this.form.new();
-  //  this.openModal(content);
-  //}
-
-  getSupplier() {
-    this.SupplierService.getList()
-      .subscribe((reponse: any) => {
-        this.stopLoading();
-        this.listsuppliers = reponse.supplier
-      }, err => {
-      });
-  }
-
-  getCategory() {
-    this.CategoryService.getList()
-      .subscribe((cate: any) => {
-        this.stopLoading();
-        this.listcategories = cate.category
-      }, err => {
-
-      });
-  }
-
-  getProduct() {
-    this.InventoryService.getListProduct()
-      .subscribe((prod: any) => {
-        this.stopLoading();
-        this.listproducts = prod.product;
-      }, err => {
-
-      });
-  }
-
-  startLoading(): void {
-    this.loading = true;
-  }
-
-  stopLoading(): void {
-    this.loading = false;
-  }
-
-
-  getlist_order() {
-    this.OrderService.getList()
-      .subscribe((listbrands: any) => {
-        this.stopLoading();
-        this.number_order = listbrands.order.length;
-        this.listorder = listbrands.order;
-      }), err => {
-        this.stopLoading();
-      };
-  }
-
+  //end
+  //create-order
   create_oder(c) {
     var $listitem = {
       'info_product': this.items,
       'total_price': this.orderTotal,
-      'id_supplier': this._supplier.id
+      'id_supplier': this.selectedsupplier.id
     };
     this.OrderService.add($listitem)
       .subscribe((cate: any) => {
-        this.modal.dismissAll();
-
+        this.getlist_order();
         this.OrderService.getList()
           .subscribe((listbrands: any) => {
             this.number_order = listbrands.order.length;
-            this.listorder = listbrands.order
-            this.editOrder(c, this.listorder[this.listorder.length - 1]);
+            this.listorder = listbrands.order;
+            console.log(c + "   " +  this.listorder[this.listorder.length - 1]);
+            // this.editOrder(c, this.listorder[this.listorder.length - 1]);
+            this.notifierService.notify('success', 'A new order has been successfully added');
+            this.router.navigate(['/inventory/products', listbrands.id, 'view']);
+            this.items = [];
+            this.orderTotal = 0;
           });
-
-        this.notifierService.notify('success', 'A new order has been successfully added');
       }, err => {
-
       });
     //this.statusOrder.id = 1;
   }
-
-  update(data: any) {
-    data.total_product = this._order.total_price;
-    return this.OrderService.update(data)
-      .subscribe(
-        success => {
-          return true;
-        }
-      )
-  }
-
-  status_order(id_order, status) {
-    this._order.info_product = this._listorder1;
-    if (this.update(this._order)) {
-      // console.log(this._order);
-
-      let arr = {
-        'id': id_order,
-        'status': status
-      };
-      // console.log(arr);
-      this.OrderService.status(arr)
-        .subscribe((liststatus: any) => {
-          this._order = liststatus.order;
-          this.getlist_order();
-
-          this.notifierService.notify('success', 'button click');
-        })
-    }
-
-  }
-  send_email_order(mail: any) {
-    let $send = {
-      'email': mail
-    };
-    console.log($send);
-    this.OrderService.sent_email($send)
-      .subscribe((sendmail: any) => {
-        if (sendmail == true) {
-          this.notifierService.notify('success', 'send email success');
-        } else {
-          this.notifierService.notify('error', 'send email failed, email not found');
-        }
-        // this.supplier.email_supplier = sendmail.mail;
-        //console.log(this.supplier.email);
-      });
-  }
-  export_pdf_data(id: any) {
-    let link = this.OrderService.export_pdf(id);
-    var a = document.createElement('a');
-    a.href = link;
-    a.click();
-  }
-
-  // searchOrder(event) {
-  //   const query = {id_order: event.target.value};
-  //   this.OrderService.searchOrder(query).subscribe((list: any) => {
-  //     this.listorders = list.order.map(Order.toModel);
-  //   });
-  //  }
-  assignCopy(){
-    this.listorders = Object.assign([], this.items);
-  }
-  filterItem(value){
-    if(!value){
-        this.assignCopy();
-    } // when nothing has typed
-    this.listorders = Object.assign([], this.items).filter(
-       item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
-    )
-  }
-
-  //  searchProduct(event) {
-  //   const query = {name_product: event.target.value };
-  //   this.InventoryService.searchProduct(query).subscribe((list: any) => {
-  //     this.listproducts = list.product
-  //     .map(Product.toModel);
-  //     });
-  //   };
+  // end
 }

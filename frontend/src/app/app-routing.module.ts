@@ -20,8 +20,8 @@ const routes: Routes = [
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: 'search', component: SearchComponent },
     { path: 'inventory/products/add', component: EditProductComponent },
-    { path: 'inventory/order/new-order', component: EditOrderComponent, data: {title: 'New Order'} },
-    { path: 'inventory/order/new-order/create-order', component: CreateOrderComponent },
+    { path: 'inventory/orders/:id', component: EditOrderComponent, data: {title: 'New Order'} },
+    { path: 'inventory/order/new-order', component: CreateOrderComponent },
     { path: 'inventory/products/:id/edit', component: EditProductComponent },
     { path: 'appointment/add', component: AddAppointmentComponent, data: {title: 'Appointment'} },
     { path: '**', redirectTo: 'not-found' }
