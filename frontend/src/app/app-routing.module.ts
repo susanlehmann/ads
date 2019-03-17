@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { SearchComponent } from './search/search.component';
 import { EditProductComponent } from './layout/inventory/product/edit-product/edit-product.component';
+import { EditOrderComponent } from './layout/inventory/order/edit-order/edit-order.component';
+import { CreateOrderComponent } from './layout/inventory/order/create-order/create-order.component';
 
 const routes: Routes = [
     { path: '', loadChildren: './layout/layout.module#LayoutModule', canActivate: [AuthGuard]},
@@ -17,6 +19,8 @@ const routes: Routes = [
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: 'search', component: SearchComponent },
     { path: 'inventory/products/add', component: EditProductComponent },
+    { path: 'inventory/order/new-order', component: EditOrderComponent, data: {title: 'New Order'} },
+    { path: 'inventory/order/new-order/create-order', component: CreateOrderComponent },
     { path: 'inventory/products/:id/edit', component: EditProductComponent },
     { path: '**', redirectTo: 'not-found' }
 ];

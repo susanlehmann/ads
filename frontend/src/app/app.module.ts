@@ -35,12 +35,15 @@ import {
    FacebookLoginProvider
 } from 'angular-6-social-login';
 import { EditProductComponent } from './layout/inventory/product/edit-product/edit-product.component';
+import { EditOrderComponent } from './layout/inventory/order/edit-order/edit-order.component';
+import { CreateOrderComponent } from './layout/inventory/order/create-order/create-order.component';
 import { InventoryService } from './layout/inventory/inventory.service';
 import { NotifierService } from 'angular-notifier';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { OrderModule } from 'ngx-order-pipe';
 import { DataTableModule } from "angular-6-datatable";
 import { environment } from './../environments/environment.prod';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -89,7 +92,7 @@ const customNotifierOptions: NotifierOptions = {
           }
       }
     }
-    
+
 const baseUrl = environment.baseUrl;
 
 const ngxUiLoaderConfigs = {
@@ -115,6 +118,7 @@ const ngxUiLoaderConfigs = {
         NgxUiLoaderModule,
         NgxUiLoaderHttpModule.forRoot(ngxUiLoaderConfigs),
         HttpClientModule,
+        NgbModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -130,7 +134,7 @@ const ngxUiLoaderConfigs = {
         ModalModule.forRoot(),
         DataTableModule
     ],
-    declarations: [AppComponent, SearchComponent, EditProductComponent],
+    declarations: [AppComponent, SearchComponent, EditProductComponent, EditOrderComponent, CreateOrderComponent],
     providers: [
         AuthGuard,
         HttpcallService,

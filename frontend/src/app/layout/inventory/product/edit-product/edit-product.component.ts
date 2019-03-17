@@ -6,7 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgbModal, NgbModalRef, NgbModalOptions, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
-import { Stock } from '../model/stock';
+
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -15,7 +15,7 @@ import { Stock } from '../model/stock';
 export class EditProductComponent implements OnInit {
   form: Product;
   isAdd = true;
-  form1: Stock;
+
   brands;
   categories;
   suppliers;
@@ -31,7 +31,6 @@ export class EditProductComponent implements OnInit {
     private modal: BsModalService,
   ) {
     this.form = new Product();
-    this.form1 = new Stock();
     this.modalOptions = {
         backdrop: 'static',
         size: 'md',

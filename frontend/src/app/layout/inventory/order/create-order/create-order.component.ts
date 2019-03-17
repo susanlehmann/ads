@@ -1,22 +1,22 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { OrderService } from './order.service';
-import { Order } from './model/order';
-import { Supplier } from '../supplier/model/supplier';
-import { SupplierService } from '../supplier/supplier.service';
-import { CategoryService } from '../category/category.service';
-import { Category } from '../category/model/category';
-import { Product } from '../product/model/product';
-import { InventoryService } from '../inventory.service';
-import * as data from './../../../../assets/country.json';
+import { OrderService } from '../order.service';
+import { Order } from '../model/order';
+import { Supplier } from '../../supplier/model/supplier';
+import { SupplierService } from '../../supplier/supplier.service';
+import { CategoryService } from '../../category/category.service';
+import { Category } from '../../category/model/category';
+import { Product } from '../../product/model/product';
+import { InventoryService } from '../../inventory.service';
+import * as data from '../../../../../assets/country.json';
 
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  selector: 'app-create-order',
+  templateUrl: './create-order.component.html',
+  styleUrls: ['./create-order.component.scss']
 })
-export class OrderComponent implements OnInit {
+export class CreateOrderComponent implements OnInit {
   @ViewChild('product') _prod: NgbModalRef;
   @ViewChild('totalAmount') _totalAmount: ElementRef;
   closeResult: string;
@@ -151,11 +151,11 @@ export class OrderComponent implements OnInit {
     return product[0].name_product;
   }
 
-  // getNameSupplier(id) {
-  //   let supplier = this.listsuppliers.filter(s => s.id == id);
-  //   this.suppliers = supplier[0];
-  //   return supplier[0].name_supplier;
-  // }
+  getNameSupplier(id) {
+    let supplier = this.listsuppliers.filter(s => s.id == id);
+    this.suppliers = supplier[0];
+    return supplier[0].name_supplier;
+  }
 
   sum() {
     this.orderTotal = this.items.reduce((acc, cur) => {
