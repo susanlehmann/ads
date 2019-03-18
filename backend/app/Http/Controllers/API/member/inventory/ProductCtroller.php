@@ -43,7 +43,7 @@ class ProductCtroller extends Controller
         ];
         // $user->level = 0; // ko co column level
         $product = Product::create($input);
-        if($product == true)
+        if($request->enable_stock == 1 && $product == true)
         {
         $total = $request->initialstock_product * $request->supplyprice_product;
         $input = [

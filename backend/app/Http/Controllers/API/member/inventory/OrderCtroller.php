@@ -54,7 +54,7 @@ class OrderCtroller extends Controller
         $order = Order::create($input);
         if($order == true)
         {
-            $msg = ['success' => 'Create a new service group successfully'];
+            $msg = ['success' => 'Create a new service group successfully', 'id' => $order->id];
         }
         else
         {
@@ -67,9 +67,7 @@ class OrderCtroller extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data['order'] = Order::leftjoin('suppliers', 'products.id_supplier', '=', 'suppliers.id')
-        ->select('*', 'orders.id as id')
-        ->find($id);
+        $data['order'] = Order::find($id);
         return response()->json($data);
     }
 
