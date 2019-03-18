@@ -47,6 +47,7 @@ class OrderCtroller extends Controller
             // 'id_update' => $request->ownerId,
             'id_supplier' => $request->id_supplier,
             'info_product' => $info_product,
+            'id_location' => $request->id_location,
             'total_price' => $request->total_price,
             'status_order' => 1,
         ];
