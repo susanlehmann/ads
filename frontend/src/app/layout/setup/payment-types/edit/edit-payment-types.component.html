@@ -8,16 +8,15 @@
 </div>
 <div class="modal-body">
   <div class="form-group">
-    <label for="type_name">PAYMENT TYPE NAME</label>
-    <input type="text" name="type_name" class="form-control"
-           [(ngModel)]="formUpdate.type_name" #type_name="ngModel" #type_name>
+    <label for="payment_type">PAYMENT TYPE NAME</label>
+    <input type="text" name="payment_type" class="form-control"
+           [(ngModel)]="formUpdate.payment_type">
   </div>
-</div>
-<div class="modal-footer" style="border: none">
-  <span class="btn btn-delete pull-left" (click)="deleteModal(remove_businessType)">Delete</span>
   <span class="btn btn-black pull-right" (click)="onSubmit()">Save</span>
-  <span class="btn btn-white pull-right" (click)="close()">Cancel</span>
+  <span class="btn btn-black pull-right" (click)="close()" style="background-color: white; color: black">Cancel</span>
+  <span class="btn btn-delete pull-left" (click)="deleteModal(remove_businessType)">Delete</span>
 </div>
+
 <div class="row">
   <ng-template #remove_businessType let-c="close" let-d="dismiss">
     <div class="group-service">

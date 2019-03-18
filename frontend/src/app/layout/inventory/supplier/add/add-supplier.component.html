@@ -16,6 +16,9 @@
                                 <label class="control-label">SUPPLIER NAME</label>
                                 <input [(ngModel)]="form.name_supplier" type="text" class="form-control input-underline input-lg" name="name_supplier" placeholder="e.g. Jane" required #name_supplier="ngModel">
                                 <div class="alert alert-danger" [hidden]="!error.name_supplier"> {{ error.name_supplier }} </div>
+                              <div class="invalid-feedback">
+                                is required
+                              </div>
                             </div>
                         </div>
 

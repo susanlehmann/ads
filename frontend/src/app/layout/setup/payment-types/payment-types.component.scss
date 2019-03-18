@@ -2,8 +2,12 @@
   clear: both;
   margin: 5px 0;
 }
+
 .fa-1x {
   font-size: 1.5rem;
+}
+.visible-xs {
+  display: none!important;
 }
 .main-container {
   padding: 25px !important;
@@ -64,6 +68,11 @@
 
 }
 
+@media (min-width: 320px) and (max-width: 800px) {
+  .header{
+    margin-top: 20px;
+  }
+}
 .box-desktop{
   table {
     thead {
@@ -119,6 +128,22 @@
 
 .fab {
   cursor: pointer;
+}
+@media (max-width: 767px) {
+  .btn-plus {
+    padding: 9px 12px 8px;
+  }
+  .visible-xs {
+    display: block !important;
+  }
+  .hidden-xs {
+    display: none !important;
+  }
+  .btn-plus i {
+    font-size: 20px;
+    font-weight: 700;
+    vertical-align: sub;
+  }
 }
 .fab-backdrop {
   color: rgba(255, 255, 255, 0);

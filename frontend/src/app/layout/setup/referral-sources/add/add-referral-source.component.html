@@ -8,8 +8,8 @@
 </div>
 <div class="modal-body">
 	<div class="form-group">
-		<label for="type_name">NAME</label>
-		<input type="text" name="type_name" class="form-control" placeholder="e.g. Local promotion" [(ngModel)]="form.type_name" #type_name="ngModel" #type_name>
+		<label for="referral_name">NAME</label>
+		<input type="text" name="referral_name" class="form-control" placeholder="e.g. Local promotion" [(ngModel)]="form.referral_name">
 	</div>
   <div class="row form-group">
     <div class="col-sm-12 btn-switch">
@@ -20,8 +20,16 @@
       <label class="control-label">ACTIVE</label>
     </div>
   </div>
+  <!--<div class="modal-footer">-->
+    <div class="pull-left">
+    </div>
+    <input type="submit" name="commit" value="Save" id="save" (click)="onSubmit()" class="btn btn-black">
+    <input type="submit" name="cancel" value="Cancel" id="cancel" (click)="close()" class="btn btn-black">
+  <!--</div>-->
 </div>
-<div class="modal-footer" style="border: none">
-	<span class="btn btn-white" (click)="close()">Cancel</span>
-	<span class="btn btn-black" (click)="onSubmit()">Save</span>
-</div>
+<!--<div class="modal-footer" style="border: none">-->
+	<!--<span class="btn btn-white" (click)="close()">Cancel</span>-->
+	<!--<span class="btn btn-black" (click)="onSubmit()">Save</span>-->
+<!--</div>-->
+
+

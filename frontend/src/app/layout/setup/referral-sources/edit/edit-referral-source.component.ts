@@ -13,7 +13,7 @@ export class EditReferralSourceComponent implements OnInit {
 	
 	@Input() inputRef: any;
 	@Output() checkEditBusiness: EventEmitter<any> = new EventEmitter<any>();
-	@ViewChild('type_name') type_name: ElementRef;
+	@ViewChild('referral_name') referral_name: ElementRef;
 
 	formUpdate: any = {};
 	user: any;
@@ -66,12 +66,12 @@ export class EditReferralSourceComponent implements OnInit {
 
 	checkRequired() {
 		if(this.formUpdate.type_name == "" || this.formUpdate.type_name == null) {
-			this.notify.notify('warning', 'Business Type name is not empty !');
-			this.type_name.nativeElement.focus();
-			this.type_name.nativeElement.classList.add('required');
+			this.notify.notify('warning', 'Referral Source name is not empty !');
+			this.referral_name.nativeElement.focus();
+			this.referral_name.nativeElement.classList.add('required');
 			return false;
 		} else {
-			this.type_name.nativeElement.classList.remove('required');
+			this.referral_name.nativeElement.classList.remove('required');
 			return true;
 		}
 	}

@@ -80,6 +80,11 @@ export class AddSupplierComponent implements OnInit {
 	}
 
 	save(): void {
+    if (!this.form.firstName) {
+      this.notifierService.notify('error', 'First name is required');
+      document.querySelector('input[name="name_supplier"]').classList.add('is-invalid');
+      return;
+    }
 		if(this.isCreate) {
 			this.addsupplier(this.form);
 		} else {
@@ -93,8 +98,10 @@ export class AddSupplierComponent implements OnInit {
 	    } else {
 	      supplier.second_address = JSON.stringify(this.second_address);
 	    }
-	    supplier.mobilenumber_supplier = this.mobile.internationalNumber;
-	    supplier.telephone_supplier = this.telephone.internationalNumber;
+	    if(supplier.mobilenumber_supplier != undefined)
+	      supplier.mobilenumber_supplier = this.mobile.internationalNumber;
+      if(supplier.telephone_supplier != undefined)
+	      supplier.telephone_supplier = this.telephone.internationalNumber;
 	    supplier.postal_address = this.postal_address;
 	    this.spService.add(supplier).subscribe(
 	    	(data:any) => {
@@ -112,8 +119,10 @@ export class AddSupplierComponent implements OnInit {
 	    } else {
 	      supplier.second_address = JSON.stringify(this.second_address);
 	    }
-	    supplier.mobilenumber_supplier = this.mobile.internationalNumber;
-	    supplier.telephone_supplier = this.telephone.internationalNumber;
+      if(supplier.mobilenumber_supplier != undefined)
+	      supplier.mobilenumber_supplier = this.mobile.internationalNumber;
+      if(supplier.telephone_supplier != undefined)
+	      supplier.telephone_supplier = this.telephone.internationalNumber;
 	    supplier.postal_address = this.postal_address;
 	    this.spService.update(supplier).subscribe(
 	    	(data:any) => {
