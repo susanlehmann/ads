@@ -54,7 +54,7 @@ class OrderCtroller extends Controller
         $order = Order::create($input);
         if($order == true)
         {
-            $msg = ['success' => 'Create a new service group successfully'];
+            $msg = ['success' => 'Create a new service group successfully', 'id' => $order->id];
         }
         else
         {
