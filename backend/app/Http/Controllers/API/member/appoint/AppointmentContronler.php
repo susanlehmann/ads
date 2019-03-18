@@ -18,7 +18,7 @@ class AppointmentContronler extends Controller
 
     public function store(Request $request)
     { 
-        $arr_appoint = $request->info_appoint;
+        /*$arr_appoint = $request->info_appoint;
         foeach($arr_appoint as $value){
             $info_arr[] = [
                 'start_time' => $value->start_time,
@@ -29,22 +29,22 @@ class AppointmentContronler extends Controller
         }
 
         $info_appoint = json_encode($info_arr);
-
+      */
         $input = [
             'id_client_app' => $request->id_client,
             'id_create' => $request->ownerId,
             'id_update' => $request->ownerId,
             'id_customer' => $request->id_customer,
             'date_appoint' => $request->date_appoint,
-            'info_appoint' => $info_appoint,
+            'info_appoint' => $request->info_appoint,
             'note_appoint' => $request->note_appoint,
-            'status_supplier' => 1,
+            'status_appoint' => 1,
         ];
         // $user->level = 0; // ko co column level
         $appoint = Appointment::create($input);
         if($appoint == true)
         {
-            $msg = ['success' => 'Create a new appoint successfully'];
+            $msg = ['success' => $appoint];
         }
         else
         {
@@ -65,9 +65,9 @@ class AppointmentContronler extends Controller
     {
         $id = $request->id;
         if ($id != null) {
-    
+
             $arr_appoint = $request->info_appoint;
-            foeach($arr_appoint as $value){
+            foreach($arr_appoint as $value){
                 $info_arr[] = [
                     'start_time' => $value->start_time,
                     'end_time'   => $value->endtime,
