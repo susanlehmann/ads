@@ -226,6 +226,12 @@ export class CalendarComponent implements OnInit {
 		this.viewDate = evt.day.date;
 	}
 
+	staffHeaderClicked(evt): void {
+		this.view = CalendarView.Week;
+		this.staffFilter = evt;
+		this.changeStaff(evt);
+	}
+
 	eventClicked(evt): void {
 		console.log(evt);
 	}
