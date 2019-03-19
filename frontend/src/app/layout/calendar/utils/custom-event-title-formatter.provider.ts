@@ -5,34 +5,26 @@ declare var Date: any;
 export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
   constructor(@Inject(LOCALE_ID) private locale: string) {
     super();
+    this.locale = "en-GB";
+  }
+
+  getConvertedTime(start) {
+    const d = new DatePipe(this.locale).transform(start, 'h:mm');
+    return d;
   }
 
   // you can override any of the methods defined in the parent class
 
   month(event: CalendarEvent): string {
-    return `<b>${new DatePipe(this.locale).transform(
-      event.start,
-      'h:m a',
-      this.locale
-    )}</b> ${event.title}`;
+    return `${this.getConvertedTime(event.start)} <b>${event.title}</b>`;
   }
 
   week(event: CalendarEvent): string {
-    const d = new DatePipe(this.locale).transform(
-      event.start,
-      'h:m a',
-      this.locale
-    );
-    let b = new Date(event.start).toString('H:mm');
-    return `${b} <b>${event.title}</b>`;
+    return `${this.getConvertedTime(event.start)} <b>${event.title}</b>`;
   }
 
   day(event: CalendarEvent): string {
-    return `<b>${new DatePipe(this.locale).transform(
-      event.start,
-      'h:m a',
-      this.locale
-    )}</b> ${event.title}`;
+    return `${this.getConvertedTime(event.start)} <b>${event.title}</b>`;
   }
 
 }

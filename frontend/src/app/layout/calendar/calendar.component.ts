@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarEvent, CalendarEventTimesChangedEvent, CalendarEventTitleFormatter, CalendarView, DateAdapter } from 'angular-calendar';
-import { addHours } from 'date-fns';
+import { addHours, addMinutes } from 'date-fns';
 import { Subject, forkJoin } from 'rxjs';
 import { StaffService } from 'src/app/layout/staff/staff.service';
 import { CustomEventTitleFormatter } from './utils/custom-event-title-formatter.provider';
@@ -60,15 +60,16 @@ export class CalendarComponent implements OnInit {
 			const evts = rs[1].appoint.map(a => {
 				const info = JSON.parse(a.info_appoint)[0];
 				const staff = this.getStaffById(info.staff);
+				const converted = this.getStartAndEnd(a.date_appoint, info.startTime.toString(), info.duration);
 				return {
 					id: a.id,
 					meta: {
 						user: staff
 					},
-					title: a.note_appoint,
+					title: 'Walk-In',
 					color: staff.color,
-					start: new Date(a.created_at), // TODO test
-					end: addHours(new Date(a.created_at), 2),
+					start: converted.str,
+					end: converted.end,
 					resizable: {
 						beforeStart: true,
 						afterEnd: true
@@ -81,6 +82,17 @@ export class CalendarComponent implements OnInit {
 
 			this.changeStaff(this.staffFilter);
 		});	
+	}
+
+	getStartAndEnd(date: string, start: string, duration: number) {
+		const d = new Date(date);
+		const h = start.length == 4 ? start.slice(0, 2) : start.slice(0, 1);
+		const m = start.slice(0, -2);
+		d.setHours(h, m);
+		return {
+			str: d,
+			end: addMinutes(d, duration)
+		}
 	}
 
 	getCalendarSearch() {
