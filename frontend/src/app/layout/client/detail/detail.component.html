@@ -11,7 +11,8 @@
 					</div>
 					<div class="name">
 						<span>{{client_info?.firstName}} {{client_info?.lastName}}</span>
-						<span *ngIf="reload" class="new-client" [ngClass]="client_info?.status == '1' ? '' : 'block' ">{{client_info?.status == '1' ? 'New Client' : 'Blocked'}}</span>
+						<span *ngIf="reload && checkNew <= 5" class="new-client" [ngClass]="client_info?.status == '1' ? '' : 'block' ">{{client_info?.status == '1' ? 'New Client' : 'Blocked'}}</span>
+						<span *ngIf="reload && checkNew > 5" [ngClass]="client_info?.status == '1' ? '' : 'block' ">{{client_info?.status == '1' ? '' : 'Blocked'}}</span>
 						<span class="block_reason">{{client_info?.status !== '1' ? client_info?.block_reason : ''}}</span>
 					</div>
 					<div class="box-button">

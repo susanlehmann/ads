@@ -1,0 +1,70 @@
+<div class="modal-content full-screen">
+	<div class="modal-header">
+		<h3 class="title">View Appointment</h3>
+		<span class="back" (click)="goBack()">X</span>
+	</div>
+	<div class="modal-body" #modal_body>
+		<div class="row">
+			<div class="col-lg-6 col-md-8 col-sm-12 offset-lg-2 offset-md-0 offset-sm-0" id="content-booking">
+				<div class="row">
+					<div class="box-select-date col-lg-5 col-md-6 col-sm-12">
+						<div class="input-append">
+				          	<span>{{dateSelected}}</span>
+			          	</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-lg-12 col-md-12">
+					<div class="panel-content mt-3" *ngFor="let step of stepAppoinent">
+						<div class="" *ngIf="step?.service">
+							<div class="box-one">
+								<div class="row">
+									<div class="col-lg-2 col-md-3 box-time">
+										<select name="startTime{{i}}" class="form-control" [(ngModel)]="step.startTime">
+											<option *ngFor="let st of times?.default" value="{{st.hour}}{{st.minute}}">{{st.hour}}:{{st.minute}}</option>
+										</select>
+									</div>
+									<div class="col-lg-8 col-md-6 box-nd">
+										<p>{{ getNameService(step?.service) }}</p>
+										<span>{{ convertTime(step?.duration) }} with {{ getNameStaff(step?.staff) }}</span>
+									</div>
+									<div class="col-lg-2 col-md-3 box-price">
+										<p>price</p>
+										<span>price 2</span>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="box-two">
+								<div class="row ">
+									<div class="col-lg-8 col-md-6 box-2-nd offset-lg-2 offset-md-3 offset-sm-0">
+										<span>{{ convertTime(step?.duration) }}</span>
+									</div>
+									<div class="col-lg-2 col-md-3 box-2-price">
+										<p>price</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--end step -->
+					<div class="appointment-note mt-3">
+						<div class="form-group">
+							<label for="appointment-note">Appointment notes</label>
+							<textarea rows="3" name="note_appoint" placeholder="Add an appointment note (visible to staff only)" class="form-control" [(ngModel)]="form.note_appoint"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-12" id="box-client">
+				<div class="modal-footer">
+					<p>Total: £0 (0min)</p>
+					<div class="box-button">
+						<button class="btn btn-white">Express Checkout</button>
+						<button class="btn btn-black" (click)="onSubmit()">Save Appointment</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

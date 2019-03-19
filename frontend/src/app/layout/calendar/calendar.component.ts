@@ -251,6 +251,7 @@ export class CalendarComponent implements OnInit {
 
 	eventClicked(evt): void {
 		console.log(evt);
+		this.route.navigate(['appointment/view'], { queryParams: { appointmentId: evt.event.id } });
 	}
 
 	hourSegmentClicked(evt): void {

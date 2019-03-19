@@ -1,0 +1,168 @@
+<div class="modal-content full-screen">
+	<div class="modal-header">
+		<h3 class="title">Checkout</h3>
+		<span class="back" (click)="goBack()">X</span>
+	</div>
+	<div class="modal-body" #modal_body>
+		<div class="row">
+			<div class="col-lg-6 col-md-8 col-sm-12 offset-lg-2 offset-md-0 offset-sm-0" id="content-booking">
+				<div class="row">
+					<div class="box-select-date col-lg-5 col-md-6 col-sm-12">
+						<div class="input-append">
+					      	<input class="form-control" (click)="week_picker.open()" readonly
+					          name="week-picker" [(ngModel)]="form.datePicker" (ngModelChange)="changeDate($event)" ngbDatepicker #week_picker="ngbDatepicker">
+				          	<span>{{dateSelected}}</span>
+			          	</div>
+					</div>
+					<div class="box-select-repeat col-lg-2 col-md-6 col-sm-12 offset-lg-5 offset-md-0">
+						<a href="javascript:void(0);" (click)="openModal(content_repeat)"><i class="fa fa-refresh"></i>&nbsp;Repeat</a>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-lg-12 col-md-12">
+					<div class="panel-content" *ngFor="let app of stepAppoinent;let i = index" #panel_content [ngClass]="i > 0 && i < (stepAppoinent.length-1) ? 'dotter'+i : ''">
+						<span class="step">{{i+1}}</span>
+						<div class="row">
+							<div class="col-lg-3 col-md-5">
+								<div class="form-group">
+									<label for="startTime">Start time</label>
+									<select name="startTime{{i}}" class="form-control" [(ngModel)]="app.startTime" (change)="selectedTime()">
+										<option *ngFor="let st of times?.default" value="{{st.hour}}{{st.minute}}">{{st.text}}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="Duration">Duration</label>
+									<select name="duration{{i}}" class="form-control" [(ngModel)]="app.duration" #duration>
+										<option value="5">5min</option>
+						            	<option value="10">10min</option>
+						            	<option value="15">15min</option>
+						            	<option value="20">20min</option>
+						            	<option value="25">25min</option>
+						            	<option value="30">30min</option>
+						            	<option value="35">35min</option>
+						            	<option value="40">40min</option>
+						            	<option value="45">45min</option>
+						            	<option value="50">50min</option>
+						            	<option value="55">55min</option>
+						            	<option value="60">1h</option>
+						            	<option value="65">1h 5min</option>
+						            	<option value="70">1h 10min</option>
+						            	<option value="75">1h 15min</option>
+						            	<option value="80">1h 20min</option>
+						            	<option value="85">1h 25min</option>
+						            	<option value="90">1h 30min</option>
+						            	<option value="95">1h 35min</option>
+						            	<option value="100">1h 40min</option>
+						            	<option value="105">1h 45min</option>
+						            	<option value="110">1h 50min</option>
+						            	<option value="115">1h 55min</option>
+						            	<option value="120">2h</option>
+						            	<option value="135">2h 15min</option>
+						            	<option value="150">2h 30min</option>
+						            	<option value="165">2h 45min</option>
+						            	<option value="180">3h</option>
+						            	<option value="195">3h 15min</option>
+						            	<option value="210">3h 30min</option>
+						            	<option value="225">3h 45min</option>
+						            	<option value="240">4h</option>
+						            	<option value="270">4h 30min</option>
+						            	<option value="300">5h</option>
+						            	<option value="330">5h 30min</option>
+						            	<option value="360">6h</option>
+						            	<option value="390">6h 30min</option>
+						            	<option value="420">7h</option>
+						            	<option value="450">7h 30min</option>
+						            	<option value="480">8h</option>
+						            	<option value="540">9h</option>
+						            	<option value="600">10h</option>
+						            	<option value="660">11h</option>
+						            	<option value="720">12h</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-9 col-md-7">
+								<div class="form-group">
+									<label for="Service">Service</label>
+									<select name="Service{{i}}" class="form-control" [(ngModel)]="app.service" (change)="selectedService(i)">
+										<option value="" disabled="disabled" selected hidden>Select Service</option>
+										<option *ngFor="let sv of listService?.service" value="{{sv?.id}}">
+											{{sv?.name_service}} ( {{getPriceOptions(sv)}} )
+										</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="Staff">Staff</label>
+									<select name="Staff{{i}}" class="form-control"  [(ngModel)]="app.staff" (change)="selectStaff(i)">
+										<option value="" disabled="disabled" selected hidden>Select Staffs</option>
+										<option *ngFor="let u of listStaff?.user" value="{{u?.id}}">{{u?.firstName}}&nbsp;{{u?.lastName ? u?.lastName : ''}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<span class="close" *ngIf="i > 0" (click)="removeStep(app)">+</span>
+					</div>
+					<!--end step -->
+					<div class="appointment-note mt-3">
+						<div class="form-group">
+							<label for="appointment-note">Appointment notes</label>
+							<textarea rows="3" name="note_appoint" placeholder="Add an appointment note (visible to staff only)" class="form-control" [(ngModel)]="form.note_appoint"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-12" id="box-client">
+				<checkout-addbox *ngIf="dynamicComponent" [client]="dataClient" (removeApp)="outRemoveApp($event)" (bindClient)="bindClient($event)"></checkout-addbox>
+				<checkout-client (outPutData)="outPutData($event)" *ngIf="!dynamicComponent"></checkout-client>
+				<div class="modal-footer">
+					<p>Total: £0 (0min)</p>
+					<div class="box-button">
+						<button class="btn btn-white">Express Checkout</button>
+						<button class="btn btn-black" (click)="onSubmit()">Save Appointment</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<ng-template #content_repeat let-c="close" let-d="dismiss">
+    <div class="box-repeat">
+        <div class="modal-body">
+            <p>Frequency</p>
+            <select name="listRepeat" class="form-control" [(ngModel)]="repeater">
+            	<option value="no-repeat">Doesn't repeat</option>
+            	<option value="daily1">Daily</option>
+            	<option value="daily2">Every 2 days</option>
+            	<option value="daily3">Every 3 days</option>
+            	<option value="daily4">Every 4 days</option>
+            	<option value="daily5">Every 5 days</option>
+            	<option value="daily6">Every 6 days</option>
+            	<option value="daily7">Every 7 days</option>
+            	<option value="weekly1">Weekly</option>
+            	<option value="weekly2">Every 2 weeks</option>
+            	<option value="weekly3">Every 3 weeks</option>
+            	<option value="weekly4">Every 4 weeks</option>
+            	<option value="weekly5">Every 5 weeks</option>
+            	<option value="weekly6">Every 6 weeks</option>
+            	<option value="weekly7">Every 7 weeks</option>
+            	<option value="weekly8">Every 8 weeks</option>
+            	<option value="weekly9">Every 9 weeks</option>
+            	<option value="weekly10">Every 10 weeks</option>
+            	<option value="monthly1">Monthly</option>
+            	<option value="monthly2">Every 2 months</option>
+            	<option value="monthly3">Every 3 months</option>
+            	<option value="monthly4">Every 4 months</option>
+            	<option value="monthly5">Every 5 months</option>
+            	<option value="monthly6">Every 6 months</option>
+            	<option value="monthly7">Every 7 months</option>
+            	<option value="monthly8">Every 8 months</option>
+            	<option value="monthly9">Every 9 months</option>
+            	<option value="monthly10">Every 10 months</option>
+            	<option value="monthly11">Every 11 months</option>
+            </select>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-white" (click)="c('Close click')">Close</button>
+            <button type="button" class="btn btn-black">Apply Changes</button>
+        </div>
+    </div>
+</ng-template>

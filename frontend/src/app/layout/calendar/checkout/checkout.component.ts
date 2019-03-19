@@ -5,7 +5,6 @@ import { DatePipe } from '@angular/common';
 import { StaffService } from './../../staff/staff.service';
 import { ServicesService } from './../../../shared/services/serv.service';
 import { UserService } from './../../../shared/services/user.service';
-import { AppClientComponent  } from './client/client.component';
 import { AppointmentService } from './../../../shared/services/appointment.service';
 import { NotifierService } from 'angular-notifier';
 
@@ -13,15 +12,15 @@ import * as data from './../../../../assets/time.json';
 declare let Date: any;
 
 @Component({
-	selector: 'add-appointment',
-	templateUrl: './add-appointment.component.html',
-    styleUrls: ['./add-appointment.component.scss'],
+	selector: 'add-checkout',
+	templateUrl: './checkout.component.html',
+    styleUrls: ['./checkout.component.scss'],
     providers: [
     	{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter },
   	]
 })
 
-export class AddAppointmentComponent implements OnInit
+export class CheckoutComponent implements OnInit
 {
 	@ViewChild('duration') duration: ElementRef;
 	@ViewChild('panel_content') panel_content: ElementRef;
@@ -96,7 +95,7 @@ export class AddAppointmentComponent implements OnInit
 		}
 
 		this.form.ownerId = userInfo.id;
-		this.form.id_customer = this.clientAddBox ? this.clientAddBox.id : 0;
+		this.form.id_customer = this.clientAddBox.id;
 		this.form.info_appoint = JSON.stringify(this.stepAppoinent);
 		if(this.form.datePicker == "undefined" || this.form.datePicker == undefined ){
 			this.form.date_appoint = this.datePipe.transform(this.dateSelected, 'yyyy/MM/dd');
@@ -191,7 +190,7 @@ export class AddAppointmentComponent implements OnInit
 			} else {
 				this.stepAppoinent[index].startTime = 800;				
 				this.stepAppoinent[index].duration = nDuration;
-				this.stepAppoinent[index].service = this.stepAppoinent[index].service;
+				this.stepAppoinent[index].service = "";
 				this.stepAppoinent[index].staff = this.stepAppoinent[index].staff;
 				if(index == (this.stepAppoinent.length - 1)){
 					this.stepAppoinent.push({
@@ -211,7 +210,7 @@ export class AddAppointmentComponent implements OnInit
 			} else {
 				this.stepAppoinent[index].startTime = 800;
 				this.stepAppoinent[index].duration = nDuration;
-				this.stepAppoinent[index].service = this.stepAppoinent[index].service;
+				this.stepAppoinent[index].service = "";
 				this.stepAppoinent[index].staff = this.stepAppoinent[index].staff;
 				if(index == (this.stepAppoinent.length - 1)){
 					this.stepAppoinent.push({

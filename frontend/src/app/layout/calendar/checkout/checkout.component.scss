@@ -1,0 +1,333 @@
+
+.modal-content {
+
+	&.full-screen {
+		height: auto;
+	}
+	.modal-header {
+		min-height: 60px;
+    	position: fixed;
+    	top: 0;
+    	width: 100%;
+    	background: #fff;
+    	z-index:9;
+		h3 {
+			display: block;
+			text-align: center;
+		   	margin: 0 auto;
+			&.title {
+				margin-bottom: 0px;
+			}
+		}
+
+		span {
+		    font-size: 1.5em;
+    		margin-right: 15px;
+    		cursor: pointer;
+		}
+	}
+
+	.modal-body {
+		overflow: hidden;
+		margin-top: 60px;
+
+		&.onHover {
+			&::before{
+				content: "";
+				width: percentage(25*3)/100;
+				height: 100%;
+			    background: #6d6d6d;
+			    position: absolute;
+			    z-index: 999;
+			    left: 0;
+			    top: 0;
+			    opacity: 0.5;
+			}
+		}
+
+		#box-client {
+		    border-left: 1px solid #ccc;
+		    height: 100%;
+		    padding-top: 0;
+		    position: fixed;
+		    top: 60px;
+		    right: 0;
+	        padding-right: 0;
+    		padding-left: 0;
+    		overflow-y: auto;
+    		
+    		.modal-header {
+				margin-top: 60px;
+				width: 	percentage(100/4)/100;
+			}
+
+    		.input-group {
+				input {
+					border-radius: 4px;
+				    padding-left: 35px;
+				}
+			}
+
+			.input-group-text{
+				background: none;
+			    border: none;
+			    position: absolute;
+			    left: 0;
+			    z-index: 9;
+	    		.fa {
+	    			line-height: 1.5;
+				}
+			}
+
+			.modal-footer {
+				display: block;
+				justify-content:center;
+				text-align:center;
+				
+				.box-button {
+				    display: flex;
+				    justify-content: center;
+				    align-items: center;
+				    align-content: center;
+
+				    .btn {
+				    	&:first-child {
+				    		margin-right: 10px;
+			    		}
+			    	}
+				}
+			}
+
+			.modal-body {
+				.box-icon {
+					position: relative;
+					.fa-search {
+						position: absolute;
+					    bottom: 0;
+					    right: 0;
+					    left: 40px;
+					    z-index: 9;
+					}
+				}
+
+				.line-add {
+				    text-align: center;
+				    a {
+					    display: block;
+					    padding-bottom: 0.7rem;
+					}
+				    &::after {
+					    content: "";
+					    border-bottom: 1px solid #e8e8e8;
+					    position: absolute;
+					    width: 100%;
+					    display: block;
+					    left: 0;
+					}
+				}
+
+				.box-list-client {
+					table{ 
+						tbody {
+							tr {
+								td {
+								    align-items: center;
+					    			justify-content: center;
+					    			vertical-align: middle;
+					    			position: relative;
+									.avatar {
+										border: 1px solid #ddd;
+									    margin-right: 10px;
+									    display: inline-flex;
+									    border-radius: 50%;
+									    width: 30px;
+									    height: 30px;
+									    vertical-align: middle;
+									    justify-content: center;
+									    align-items: center;
+									    font-weight: 700;
+									    background: #eee;
+									    position: absolute;
+									    top: 25%;
+									    text-transform: uppercase;
+									}
+									span:not(avatar) {
+										&:first-child {
+											font-weight: 700;
+											line-height: 20px;
+										}
+										display: block;
+									}
+
+									i.active {
+										color: #39ce0b;
+									}
+
+									i.block {
+										color: #f00;
+									}
+								}
+								position: relative;
+								&:after {
+								    content: "\00bb";
+								    position: absolute;
+								    right: 30px;
+								    vertical-align: middle;
+								    justify-content: center;
+								    align-items: center;
+								    padding-top: 20px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		#content-booking {
+		    min-height: 60%;
+		    z-index: 1;
+		    .box-select-date{
+		    	padding-left: 30px;
+	    	}
+		    .box-select-repeat {
+			    display: flex;
+			    vertical-align: middle;
+			    justify-content: center;
+			    align-items: center;
+			}
+		    .input-append {
+		    	input {
+		    		opacity: 0;
+	    		}
+		    	span {
+		    		position: absolute;
+		    		top: 0;
+		    		font-size: 2em;
+		    		z-index: -1;
+
+		    		&::after {
+				        content: "\f078";
+					    font: normal normal normal 14px/1 FontAwesome;
+					    right: -35px;
+					    margin-left: 25px;
+					    top: 13px;
+					    position: absolute;
+	    			}
+	    		}
+	    	}
+	    	.panel-content {
+			    padding: 1.5rem 2rem;
+			    margin-top: 2rem;
+			    border: 1px solid #ccc;
+			    border-radius: 4px;
+			    box-shadow: 1px 1px 4px #ddd;
+			    position: relative;
+			    .form-group {
+			    	label {
+			    		display: block;
+		    		}
+		    	}
+
+		    	span {
+		    		position: absolute;
+		    		&.step {
+					    left: -6%;
+					    display: flex;
+					    top: 42%;
+					    padding: 0.2rem 0.65rem;
+					    border: 2px solid;
+					    border-radius: 50%;
+					    color: #2b72c3;
+				        font-weight: 600;
+	    			}
+	    			&.close {
+    				    top: 5px;
+					    right: 20px;
+					    color: #f00;
+					    font-family: "Roboto-Thin";
+					    font-size: 2em;
+					    transform: rotate(45deg);
+					    -moz-transform: rotate(45deg);
+					    -webkit-transform: rotate(45deg);
+					    -o-transform: rotate(45deg);
+					    cursor: pointer;
+    				}
+	    		}
+	    		&[class*="dotter"] {
+
+		    		&::before{
+		    			content: "";
+					    position: absolute;
+					    height: 190px;
+					    left: -40px;
+					    border: 1.5px dashed #ddd;
+					    top: 109px;
+		    		}
+	    		}
+			}
+		}
+	}	
+}
+
+.none-backdrop {
+    background: none;
+}
+
+
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+	
+  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+	.modal-content {
+		.modal-body {
+			#box-client {
+				position: static;
+			}
+		}
+
+		.modal-footer {
+			width: 100%;
+			z-index: 999;
+		}
+	}
+  	
+  
+}
