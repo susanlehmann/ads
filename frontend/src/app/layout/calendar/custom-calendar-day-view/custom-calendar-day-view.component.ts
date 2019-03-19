@@ -13,6 +13,7 @@ export class CustomCalendarDayViewComponent extends CalendarWeekViewComponent im
   // constructor(cdr, private utilss, locale, private dateAdapters) {
   //   super(cdr, utilss, locale, dateAdapters);
   // }
+  arrDays: any[] = ['1'];
 
    ngOnInit() {
   }

@@ -67,7 +67,10 @@
 							<ng-container *ngIf="numberList > 0">
 								<tr *ngFor="let client of clients?.user; index as i" routerLink="/clients/detail/{{client.id}}">
 									<td style="padding-right: 10px;">
-										<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
+										<span class="avatar">
+											{{client?.firstName | slice: 0:1}}
+											<i class="fa " [ngClass]="client?.status == '1' ? '' : 'fa-ban' "></i>
+										</span>
 									</td>
 									<td class="ba">
 										<span>{{client?.firstName}} {{client?.lastName}}</span>
@@ -118,7 +121,10 @@
 		                    <ng-container *ngIf="numberList > 0">
 								<tr *ngFor="let client of clients?.user; index as i" routerLink="/clients/detail/{{client.id}}">
 									<td class="ba">
-										<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
+										<span class="avatar">
+											{{client?.firstName | slice: 0:1}}
+											<i class="fa " [ngClass]="client?.status == '1' ? '' : 'fa-ban' "></i>
+										</span>
 										<span>{{client?.firstName}} {{client?.lastName}}</span>
 									</td>
 									<td>{{client?.phone}}</td>
