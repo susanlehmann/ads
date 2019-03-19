@@ -7,10 +7,6 @@ import { Supplier } from '../../supplier/model/supplier';
 import { SupplierService } from '../../supplier/supplier.service';
 import { CategoryService } from '../../category/category.service';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from '../../category/model/category';
-import { Product } from '../../product/model/product';
-import { InventoryService } from '../../inventory.service';
-import * as data from '../../../../../assets/country.json';
 import { LocationsService } from '../../../../shared/services/location.service';
 
 @Component({
@@ -29,10 +25,10 @@ export class EditOrderComponent implements OnInit {
   numberList: number;
   ordera: any;
   listproducts: any;
-  _order: any;
   orderTotal1: any;
-  _listorder1: any;
   _price: any;
+  locationss: any;
+  sup: any;
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -60,19 +56,10 @@ export class EditOrderComponent implements OnInit {
     private OrderService: OrderService,
     private route: ActivatedRoute,
     private SupplierService: SupplierService,
-    private CategoryService: CategoryService,
     private locationService: LocationsService
   ) {
     this.order = new Order();
   };
-  // getlist_order() {
-  //   this.OrderService.getList()
-  //     .subscribe((listbrands: any) => {
-  //       this.number_order = listbrands.order.length;
-  //       this.listorder = listbrands.order;
-  //     }), err => {
-  //     };
-  // }
   getSupplier() {
     this.SupplierService.getList()
       .subscribe((reponse: any) => {
@@ -82,15 +69,10 @@ export class EditOrderComponent implements OnInit {
   }
   getNameSupplier(id) {
     let supplier = this.listsuppliers.filter(s => s.id == id);
+    this.sup = supplier[0];
+    console.log(this.sup)
     return supplier[0].name_supplier;
   }
-  // getnamecountry(as){
-  //   let country = data.filter(s => s.code == as);
-  //   if(country.length > 0)
-  //     return country[0].name;
-  //   else
-  //     return "";
-  // }
   loadLocation() {
 		var user = JSON.parse(localStorage.getItem('user'));
 		this.locationService.listLocation(user.id).subscribe(
@@ -106,7 +88,8 @@ export class EditOrderComponent implements OnInit {
 	}
   getnamelocation(as){
     let locations = this.location.location.filter(s => s.id == as);
-    // console.log(this.location);
+    this.locationss = locations[0];
+    console.log(this.locationss.city_location);
     if (this.numberList > 0)
       return locations[0].name_location;
     else
@@ -120,7 +103,7 @@ export class EditOrderComponent implements OnInit {
     });
   }
   update(data: any) {
-    data.total_product = this._order.total_price;
+    data.total_product = this.ordera.total_price;
     return this.OrderService.update(data)
       .subscribe(
         success => {
@@ -128,12 +111,16 @@ export class EditOrderComponent implements OnInit {
         }
       )
   }
+  sumEdit() {
+    this.ordera.total_price = this.listorder.reduce((acc, cur) => {
+      return acc + cur.qty_product_receive * cur.price_product;
+    }, 0)
+  }
   status_order(id_order, status) {
-    this.orderTotal1 = this._order.total_price1;
-    this._order.info_product = this._listorder1;
+    this.orderTotal1 = this.ordera.total_price;
+    this.ordera.info_product = this.listorder;
     this._price = this.orderTotal1;
-    this._order.total_price = this._order.total_price1;
-    if (this.update(this._order)) {
+    if (this.update(this.ordera)) {
       let arr = {
         'id': id_order,
         'status': status
@@ -141,13 +128,33 @@ export class EditOrderComponent implements OnInit {
       // console.log(arr);
       this.OrderService.status(arr)
         .subscribe((liststatus: any) => {
-          this._order.total_price1 = this._order.total_price;
-          this._order = liststatus.order;
+          this.ordera = liststatus.ordera;
           // this.getlist_order();
-          this._order.total_price1 = this._price;
+          this.ordera.total_price = this._price;
           this.notifierService.notify('success', 'update success');
         })
     }
-
+  }
+  send_email_order(mail: any) {
+    let $send = {
+      'email': mail
+    };
+    console.log($send);
+    this.OrderService.sent_email($send)
+      .subscribe((sendmail: any) => {
+        if (sendmail == true) {
+          this.notifierService.notify('success', 'send email success');
+        } else {
+          this.notifierService.notify('error', 'send email failed, email not found');
+        }
+        // this.supplier.email_supplier = sendmail.mail;
+        //console.log(this.supplier.email);
+      });
+  }
+  export_pdf_data(id: any) {
+    let link = this.OrderService.export_pdf(id);
+    var a = document.createElement('a');
+    a.href = link;
+    a.click();
   }
 }
