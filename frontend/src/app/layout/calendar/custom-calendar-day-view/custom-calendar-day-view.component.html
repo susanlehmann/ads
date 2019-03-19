@@ -1,6 +1,6 @@
 <div class="cal-week-view" (click)="test()">
   <mwl-calendar-week-view-header
-    [days]="days"
+    [days]="arrDays"
     [locale]="locale"
     [customTemplate]="headerTemplate"
     (dayHeaderClicked)="dayHeaderClicked.emit($event)"
@@ -21,7 +21,7 @@
       <!-- test -->
       <div
         class="cal-day-column"
-        *ngFor="let day of staffs; trackBy:trackByWeekDayHeaderDate"
+        *ngFor="let day of arrDays; trackBy:trackByWeekDayHeaderDate"
         mwlDroppable
         dragOverClass="cal-drag-over"
         (drop)="eventDropped($event, day.date, true)">

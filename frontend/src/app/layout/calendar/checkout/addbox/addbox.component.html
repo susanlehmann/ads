@@ -1,0 +1,107 @@
+<div class="modal-header">
+	<div class="box-title">
+		<span class="avatar">{{client?.firstName | slice: 0:1}}</span>
+		<span class="title">{{client?.firstName}} {{client?.lastName}}</span>
+		<span class="menu">
+			<div ngbDropdown class="d-inline-block dropdown">
+	            <button ngbDropdownToggle>
+	            	<i class="fa fa-circle"></i>
+					<i class="fa fa-circle"></i>
+					<i class="fa fa-circle"></i>
+	            </button>
+	            <div ngbDropdownMenu>
+	                <button class="dropdown-item" (click)="routerEdit(client?.id)">Edit client details</button>
+	                <button class="dropdown-item" >Block client</button>
+	                <button class="dropdown-item" (click)="removeFromAppointment()">Remove from appointment</button>
+	            </div>
+	        </div>
+			
+		</span>
+	</div>
+</div>
+<div class="modal-body">
+	<div class="box-info">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12 x-content mb-3">
+				<p>1</p>
+				<span>Total Bookings</span>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12 x-content mb-3">
+				<p>£25</p>
+				<span>Total Sales</span>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-lg-12">
+				<ngb-tabset>
+					<ngb-tab title="Appointments">
+						<ng-template ngbTabContent>
+							<div class="col-md-12 form-content">
+								<div class="text-center">
+									<h1><i class="fa fa-2x fa-calendar"></i></h1>
+									<h3 class="text-capitalize">No Appointments</h3>
+									<p>The client has no upcoming or past appointments</p>
+								</div>
+							</div>
+						</ng-template>
+					</ngb-tab>
+					<ngb-tab title="Products">
+						<ng-template ngbTabContent>
+							<div class="col-md-12 form-content">
+								<div class="text-center">
+									<h1><i class="fa fa-2x fa-cubes"></i></h1>
+									<h3 class="text-capitalize">No Sales History</h3>
+									<p>Use the checkout feature to create a new sale for this client</p>
+								</div>
+							</div>
+						</ng-template>
+					</ngb-tab>
+					<ngb-tab title="Invoices">
+						<ng-template ngbTabContent>
+							<div class="col-md-12 form-content">
+								<div class="text-center">
+									<h1><i class="fa fa-2x fa-shopping-cart"></i></h1>
+									<h3 class="text-capitalize">No Sales History</h3>
+									<p>Use the checkout feature to create a new sale for this client</p>
+								</div>
+							</div>
+						</ng-template>
+					</ngb-tab>
+					<ngb-tab title="Info">
+						<ng-template ngbTabContent>
+							<div class="col-md-12 form-content">
+								<div class="form-group">
+									<label for="Mobile" *ngIf="client?.phone">Mobile</label>
+									<span>{{client?.phone}}</span>
+								</div>
+								<div class="form-group" *ngIf="client?.tele_phone">
+									<label for="Mobile">Telephone</label>
+									<span>{{client?.tele_phone}}</span>
+								</div>
+								<div class="form-group" *ngIf="client?.email">
+									<label for="Email">Email</label>
+									<span>{{client?.email}}</span>
+								</div>
+								<div class="form-group" *ngIf="client?.address || client?.suburb || client?.city || client?.state || client?.zip_postcode">
+									<label for="Address">Address</label>
+									<span>{{client?.address}}</span>
+									<span>{{client?.suburb}}</span>
+									<span>{{client?.city}}</span>
+									<span>{{client?.state}}</span>
+									<span>{{client?.zip_postcode}}</span>
+								</div>
+								<div class="form-group" *ngIf="client?.birthday">
+									<label for="birthday">Date of Birth</label>
+									<span>{{ getDateofBirth(client?.birthday) }}</span>
+								</div>
+								<div class="form-group" *ngIf="client?.gender">
+									<label for="gender">Gender</label>
+									<span>{{client?.gender == '1' ? 'Male' : client?.gender == '2' ? 'Female' : 'Unknown'}}</span>
+								</div>
+							</div>
+						</ng-template>
+					</ngb-tab>
+				</ngb-tabset>
+			</div>
+		</div>
+	</div>
+</div>

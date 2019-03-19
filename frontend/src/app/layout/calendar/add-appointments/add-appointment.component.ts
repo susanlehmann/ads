@@ -96,7 +96,7 @@ export class AddAppointmentComponent implements OnInit
 		}
 
 		this.form.ownerId = userInfo.id;
-		this.form.id_customer = this.clientAddBox.id;
+		this.form.id_customer = this.clientAddBox ? this.clientAddBox.id : 0;
 		this.form.info_appoint = JSON.stringify(this.stepAppoinent);
 		if(this.form.datePicker == "undefined" || this.form.datePicker == undefined ){
 			this.form.date_appoint = this.datePipe.transform(this.dateSelected, 'yyyy/MM/dd');
@@ -191,7 +191,7 @@ export class AddAppointmentComponent implements OnInit
 			} else {
 				this.stepAppoinent[index].startTime = 800;				
 				this.stepAppoinent[index].duration = nDuration;
-				this.stepAppoinent[index].service = "";
+				this.stepAppoinent[index].service = this.stepAppoinent[index].service;
 				this.stepAppoinent[index].staff = this.stepAppoinent[index].staff;
 				if(index == (this.stepAppoinent.length - 1)){
 					this.stepAppoinent.push({
@@ -211,7 +211,7 @@ export class AddAppointmentComponent implements OnInit
 			} else {
 				this.stepAppoinent[index].startTime = 800;
 				this.stepAppoinent[index].duration = nDuration;
-				this.stepAppoinent[index].service = "";
+				this.stepAppoinent[index].service = this.stepAppoinent[index].service;
 				this.stepAppoinent[index].staff = this.stepAppoinent[index].staff;
 				if(index == (this.stepAppoinent.length - 1)){
 					this.stepAppoinent.push({

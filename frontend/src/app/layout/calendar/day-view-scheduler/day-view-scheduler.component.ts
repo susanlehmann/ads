@@ -45,6 +45,8 @@ export class DayViewSchedulerComponent extends CalendarDayViewComponent {
 
   @Output() userChanged = new EventEmitter();
   @Input() staffs;
+  @Output()
+  staffHeaderClicked: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit() {
     this.eventWidth = EVENT_WIDTH;

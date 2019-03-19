@@ -92,14 +92,25 @@
 				    margin-right: 10px;
 				    display: inline-flex;
 				    border-radius: 50%;
-				    width: 30px;
-				    height: 30px;
+				    width: 40px;
+				    height: 40px;
 				    vertical-align: middle;
 				    justify-content: center;
 				    align-items: center;
 				    font-weight: 700;
 				    background: #eee;
+			        position: relative;
 				    text-transform: uppercase;
+
+				    i.fa-ban {
+				    	position: absolute;
+					    bottom: -2px;
+					    right: -2px;
+					    background: #fff;
+					    color: #f16647;
+					    padding: 3px;
+					    border-radius: 50%;
+				    }
 				}
 
 				i.active {
@@ -409,21 +420,33 @@ $breakpoint-iphone: 667px;
 		    			justify-content: center;
 		    			vertical-align: middle;
 		    			position: relative;
+		    			width: 20%;
+		    			&.ba {
+		    				width: 80%;
+		    			}
 						.avatar {
 							border: 1px solid #ddd;
-						    margin-right: 10px;
 						    display: inline-flex;
 						    border-radius: 50%;
-						    width: 30px;
-						    height: 30px;
+						    width: 40px;
+						    height: 40px;
 						    vertical-align: middle;
 						    justify-content: center;
 						    align-items: center;
 						    font-weight: 700;
 						    background: #eee;
-						    position: absolute;
+						    position: relative;
 						    top: 25%;
 						    text-transform: uppercase;
+						    i.fa-ban {
+						    	position: absolute;
+							    bottom: -2px;
+							    right: -2px;
+							    background: #fff;
+							    color: #f16647;
+							    padding: 3px;
+							    border-radius: 50%;
+						    }
 						}
 						span:not(avatar) {
 							&:first-child {
@@ -442,6 +465,10 @@ $breakpoint-iphone: 667px;
 						}
 					}
 					position: relative;
+				    min-height: 65px;
+    				line-height: 2;
+    				height: 65px;
+    				width: 100%;
 					&:after {
 					    content: "\00bb";
 					    position: absolute;

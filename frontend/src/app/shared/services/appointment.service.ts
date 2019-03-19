@@ -17,4 +17,7 @@ export class AppointmentService {
         return this.http.post(`${this.baseUrl}/user/appointment/list-appoint`, {id : this.currentUserId});
     }
 	
+	getAppointmentById(id: string) {
+		return this.http.post(`${this.baseUrl}/user/appointment/show-appoint`, {id : id});
+	}
 }

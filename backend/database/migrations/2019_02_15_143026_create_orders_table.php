@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->integer('id_customer')->nullable();
             $table->integer('id_supplier')->nullable();
             $table->text('info_product')->nullable();
+            $table->integer('id_location')->nullable();
             $table->decimal('total_price',18,2)->nullable();
             $table->integer('status_order')->nullable();
             $table->timestamps();

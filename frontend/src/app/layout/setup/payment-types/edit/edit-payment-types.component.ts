@@ -13,7 +13,7 @@ export class EditPaymentTypesComponent implements OnInit {
 	
 	@Input() inputBusiness: any;
 	@Output() checkEditBusiness: EventEmitter<any> = new EventEmitter<any>();
-	@ViewChild('type_name') type_name: ElementRef;
+	@ViewChild('payment_type') payment_type: ElementRef;
 
 	formUpdate: any = {};
 	user: any;
@@ -56,22 +56,22 @@ export class EditPaymentTypesComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		this.notify.notify('warning', 'Business Type name is not empty !');
-		// if(this.checkRequired()) {
-		// 	this.updateBusinessType(this.formUpdate);
-		// }
+		// this.notify.notify('warning', 'Business Type name is not empty !');
+		if(this.checkRequired()) {
+			this.updateBusinessType(this.formUpdate);
+		}
 		// this.addLocation(this.form);
 	}
 
 
 	checkRequired() {
 		if(this.formUpdate.type_name == "" || this.formUpdate.type_name == null) {
-			this.notify.notify('warning', 'Business Type name is not empty !');
-			this.type_name.nativeElement.focus();
-			this.type_name.nativeElement.classList.add('required');
+			this.notify.notify('warning', 'Payment type name is not empty !');
+			this.payment_type.nativeElement.focus();
+			this.payment_type.nativeElement.classList.add('required');
 			return false;
 		} else {
-			this.type_name.nativeElement.classList.remove('required');
+			this.payment_type.nativeElement.classList.remove('required');
 			return true;
 		}
 	}

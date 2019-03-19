@@ -19,6 +19,7 @@ export class DetailComponent implements OnInit {
   blockReason: any = "";
   textBlock: any = "";
   reload: boolean = false;
+  checkNew: number;
 
   	constructor(private route: Router,
   		private router: ActivatedRoute,
@@ -36,6 +37,9 @@ export class DetailComponent implements OnInit {
 		this.userService.getUserById(id).subscribe(
 			success => {
 				this.client_info = success;
+        let timeCreate = new Date(success.created_at).getTime();
+        let now = new Date().getTime();
+        this.checkNew = Number(new Date(now - timeCreate).toString('dd'));
         this.reload = true;
 			},
 			error => {}
@@ -43,6 +47,7 @@ export class DetailComponent implements OnInit {
 		// this.client_info = info[0];
 		// console.log(this.client_info);
 	}
+
 
 	goBack() {
 		this.route.navigate(['clients']);

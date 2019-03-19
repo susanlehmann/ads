@@ -11,7 +11,7 @@ import { NotifierService } from 'angular-notifier';
 export class AddReferralSourceComponent implements OnInit {
 	
 	@Output() checkAddBusiness: EventEmitter<any> = new EventEmitter<any>();
-	@ViewChild('type_name') type_name: ElementRef;
+	@ViewChild('referral_name') referral_name: ElementRef;
 
 	form: any = {};
 	user: any;
@@ -53,12 +53,12 @@ export class AddReferralSourceComponent implements OnInit {
 
 	checkRequired() {
 		if(this.form.type_name == "" || this.form.type_name == null) {
-			this.notify.notify('warning', 'Business type name is not empty !');
-			this.type_name.nativeElement.focus();
-			this.type_name.nativeElement.classList.add('required');
+			this.notify.notify('warning', 'Referral Source name is not empty !');
+			this.referral_name.nativeElement.focus();
+			this.referral_name.nativeElement.classList.add('required');
 			return false;
 		} else {
-			this.type_name.nativeElement.classList.remove('required');
+			this.referral_name.nativeElement.classList.remove('required');
 			return true;
 		}
 	}

@@ -49,6 +49,13 @@ import { AddAppointmentComponent } from './layout/calendar/add-appointments/add-
 import { AddBoxComponent } from './layout/calendar/add-appointments/addbox/addbox.component';
 import { AppClientComponent } from './layout/calendar/add-appointments/client/client.component';
 import { AppointmentService } from './shared/services/appointment.service';
+import { CheckoutComponent } from './layout/calendar/checkout/checkout.component';
+import { AddBoxCheckoutComponent } from './layout/calendar/checkout/addbox/addbox.component';
+import { AppCheckoutClientComponent } from './layout/calendar/checkout/client/client.component';
+import { TransfereService } from './shared/services/transfer.service';
+import { ViewAppointmentComponent } from './layout/calendar/view-appointments/view-appointment.component';
+import { ViewAddBoxComponent } from './layout/calendar/view-appointments/addbox/addbox.component';
+import { ViewAppClientComponent } from './layout/calendar/view-appointments/client/client.component';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -148,7 +155,13 @@ const ngxUiLoaderConfigs = {
         AddBoxComponent,
         EditOrderComponent,
         CreateOrderComponent,
-        AppClientComponent
+        AppClientComponent,
+        CheckoutComponent,
+        AddBoxCheckoutComponent,
+        AppCheckoutClientComponent,
+        ViewAppointmentComponent,
+        ViewAddBoxComponent,
+        ViewAppClientComponent,
     ],
     providers: [
         AuthGuard,
@@ -173,6 +186,7 @@ const ngxUiLoaderConfigs = {
         BusinessTypeService,
         Setup_company_detailService,
         AppointmentService,
+        TransfereService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     ],

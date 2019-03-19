@@ -109,27 +109,27 @@ class CustomerController extends Controller
     {    
         $id = $request->id;
         if ($id != null) {
-			$users1 = 0;
-			$users2 = 0;
-			if(strlen($request->email) > 0) {
-				$users1 = User::where('level',4)
-				->where('parent',$request->getuser['id'])
-				->where('email', $request->email)
-				->count();
-			}
+			// $users1 = 0;
+			// $users2 = 0;
+			// if(strlen($request->email) > 0) {
+			// 	$users1 = User::where('level',4)
+			// 	->where('parent',$request->getuser['id'])
+			// 	->where('email', $request->email)
+			// 	->count();
+			// }
 			
-			if(strlen($request->mobile) > 0) {
-				$users2 = User::where('level',4)
-				->where('parent',$request->getuser['id'])
-				->where('phone', $request->mobile)
-				->count();
-			}
+			// if(strlen($request->mobile) > 0) {
+			// 	$users2 = User::where('level',4)
+			// 	->where('parent',$request->getuser['id'])
+			// 	->where('phone', $request->mobile)
+			// 	->count();
+			// }
 
 			
 
-			if ($users1 > 0 || $users2 >0) {
-					$msg = ['existed' => 'client has already existed'];
-            } else {
+			// if ($users1 > 0 || $users2 >0) {
+			// 		$msg = ['existed' => 'client has already existed'];
+   //          } else {
                 $input = [
                     'id_user_update' => $request->getuser['id'],
                     'firstName' => $request->firstName,
@@ -163,7 +163,7 @@ class CustomerController extends Controller
                 {
                     $msg = ['error' => 'There was an error updating the account'];
                 }
-            }
+            // }
             return response()->json($msg);
         }
         

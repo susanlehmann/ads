@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarEvent, CalendarEventTimesChangedEvent, CalendarEventTitleFormatter, CalendarView, DateAdapter } from 'angular-calendar';
-import { addHours } from 'date-fns';
+import { addHours, addMinutes } from 'date-fns';
 import { Subject, forkJoin } from 'rxjs';
 import { StaffService } from 'src/app/layout/staff/staff.service';
 import { CustomEventTitleFormatter } from './utils/custom-event-title-formatter.provider';
@@ -39,6 +39,7 @@ export class CalendarComponent implements OnInit {
 	allStaff: any[];
 	isToday = true;
 	loadData$;
+	d;
 
 	constructor(
 		private staffService: StaffService,
@@ -56,31 +57,47 @@ export class CalendarComponent implements OnInit {
 	ngOnInit() {
 		this.loadData$.subscribe(rs => {
 			this.allStaff = rs[0].user.map(this.mapStaff).sort((a, b) => a.sortOrder - b.sortOrder);
+			let evts = [];
 
-			const evts = rs[1].appoint.map(a => {
-				const info = JSON.parse(a.info_appoint)[0];
-				const staff = this.getStaffById(info.staff);
-				return {
-					id: a.id,
-					meta: {
-						user: staff
-					},
-					title: a.note_appoint,
-					color: staff.color,
-					start: new Date(a.created_at), // TODO test
-					end: addHours(new Date(a.created_at), 2),
-					resizable: {
-						beforeStart: true,
-						afterEnd: true
-					},
-					draggable: true,
-				};
+			rs[1].appoint.forEach(a => {
+				const events = JSON.parse(a.info_appoint);
+				events.forEach(e => {
+					const staff = this.getStaffById(e.staff);
+					const converted = this.getStartAndEnd(a.date_appoint, e.startTime.toString(), e.duration);
+					evts.push({
+						id: a.id,
+						meta: {
+							user: staff
+						},
+						title: 'Walk-In',
+						color: staff.color,
+						start: converted.str,
+						end: converted.end,
+						resizable: {
+							beforeStart: true,
+							afterEnd: true
+						},
+						draggable: true,
+					});
+				});
+				
 			});
 			this.allEvents = [this.getHiddenEvent(new Date()), ...evts];
 			this.events = this.allEvents;
 
 			this.changeStaff(this.staffFilter);
 		});	
+	}
+
+	getStartAndEnd(date: string, start: string, duration: number) {
+		const d = new Date(date);
+		const h = start.length == 4 ? start.slice(0, 2) : start.slice(0, 1);
+		const m = start.slice(0, -2);
+		d.setHours(h, m);
+		return {
+			str: d,
+			end: addMinutes(d, duration)
+		}
 	}
 
 	getCalendarSearch() {
@@ -125,6 +142,10 @@ export class CalendarComponent implements OnInit {
 	}
 
 	viewDateChange(date) {
+		if (!(date instanceof Date)) {
+			date = new Date(date.year, date.month - 1, date.day);
+			this.viewDate = date;
+		}
 		this.isToday = this.dateAdapter.startOfDay(date).getTime() === this.dateAdapter.startOfDay(new Date()).getTime();
 		const hiddenEvent = this.events.filter(e => e.cssClass === 'd-none' && e.start == this.dateAdapter.startOfDay(date))[0];
 		if (!hiddenEvent) {
@@ -226,8 +247,15 @@ export class CalendarComponent implements OnInit {
 		this.viewDate = evt.day.date;
 	}
 
+	staffHeaderClicked(evt): void {
+		this.view = CalendarView.Week;
+		this.staffFilter = evt;
+		this.changeStaff(evt);
+	}
+
 	eventClicked(evt): void {
 		console.log(evt);
+		this.route.navigate(['appointment/view'], { queryParams: { appointmentId: evt.event.id } });
 	}
 
 	hourSegmentClicked(evt): void {

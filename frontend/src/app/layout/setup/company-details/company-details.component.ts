@@ -19,7 +19,7 @@ export class CompanyDetailsComponent implements OnInit {
   mobile: any;
   business: any;
   timezone: any;
-  countryCurrency: any[];
+  countryCurrency: any;
   country: any[];
   currency: any[];
   timeFomat: any[];

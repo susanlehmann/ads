@@ -1,0 +1,110 @@
+.input-group {
+	input {
+		border-radius: 4px;
+	    padding-left: 35px;
+	}
+}
+.input-group-text{
+	background: none;
+    border: none;
+    position: absolute;
+    left: 0;
+    z-index: 9;
+	.fa {
+		line-height: 1.5;
+	}
+}
+.box-icon {
+	position: relative;
+	.fa-search {
+		position: absolute;
+	    bottom: 0;
+	    right: 0;
+	    left: 40px;
+	    z-index: 9;
+	}
+}
+.line-add {
+    text-align: center;
+    a {
+	    display: block;
+	    padding-bottom: 0.7rem;
+
+	    &.close{
+	    	position: absolute;
+		    right: 25px;
+		    top: 5px;
+		    color: #f00;
+		    font-family: "Roboto-Thin";
+		    font-size: 2em;
+		    transform: rotate(45deg);
+		    -moz-transform: rotate(45deg);
+		    -webkit-transform: rotate(45deg);
+		    -o-transform: rotate(45deg);
+		    cursor: pointer;
+	    }
+	}
+    &::after {
+	    content: "";
+	    border-bottom: 1px solid #e8e8e8;
+	    position: absolute;
+	    width: 100%;
+	    display: block;
+	    left: 0;
+	}
+}
+.box-list-client {
+	table{ 
+		tbody {
+			tr {
+				td {
+				    align-items: center;
+	    			justify-content: center;
+	    			vertical-align: middle;
+	    			position: relative;
+					.avatar {
+						border: 1px solid #ddd;
+					    margin-right: 10px;
+					    display: inline-flex;
+					    border-radius: 50%;
+					    width: 30px;
+					    height: 30px;
+					    vertical-align: middle;
+					    justify-content: center;
+					    align-items: center;
+					    font-weight: 700;
+					    background: #eee;
+					    position: absolute;
+					    top: 25%;
+					    text-transform: uppercase;
+					}
+					span:not(avatar) {
+						&:first-child {
+							font-weight: 700;
+							line-height: 20px;
+						}
+						display: block;
+					}
+
+					i.active {
+						color: #39ce0b;
+					}
+
+					i.block {
+						color: #f00;
+					}
+				}
+				position: relative;
+				&:after {
+				    content: "\00bb";
+				    position: absolute;
+				    right: 30px;
+				    vertical-align: middle;
+				    justify-content: center;
+				    align-items: center;
+				    padding-top: 20px;
+				}
+			}
+		}
+	}
+}
