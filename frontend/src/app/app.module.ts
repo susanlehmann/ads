@@ -36,6 +36,8 @@ import {
    FacebookLoginProvider
 } from 'angular-6-social-login';
 import { EditProductComponent } from './layout/inventory/product/edit-product/edit-product.component';
+import { EditOrderComponent } from './layout/inventory/order/edit-order/edit-order.component';
+import { CreateOrderComponent } from './layout/inventory/order/create-order/create-order.component';
 import { InventoryService } from './layout/inventory/inventory.service';
 import { NotifierService } from 'angular-notifier';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
@@ -102,7 +104,7 @@ const customNotifierOptions: NotifierOptions = {
           }
       }
     }
-    
+
 const baseUrl = environment.baseUrl;
 
 const ngxUiLoaderConfigs = {
@@ -128,6 +130,7 @@ const ngxUiLoaderConfigs = {
         NgxUiLoaderModule,
         NgxUiLoaderHttpModule.forRoot(ngxUiLoaderConfigs),
         HttpClientModule,
+        NgbModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -145,11 +148,13 @@ const ngxUiLoaderConfigs = {
         NgbModule.forRoot()
     ],
     declarations: [
-        AppComponent, 
-        SearchComponent, 
+        AppComponent,
+        SearchComponent,
         EditProductComponent,
         AddAppointmentComponent,
         AddBoxComponent,
+        EditOrderComponent,
+        CreateOrderComponent,
         AppClientComponent,
         CheckoutComponent,
         AddBoxCheckoutComponent,

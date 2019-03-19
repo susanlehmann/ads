@@ -114,6 +114,7 @@ export class OrderComponent implements OnInit {
   openSModal(content, supplier) {
     this._supplier = supplier;
     this.add = this.items.length;
+    console.log(this.add);
     console.log('addddd' + this.add);
     this.modal.dismissAll();
     this.openModal(content);
@@ -135,6 +136,12 @@ export class OrderComponent implements OnInit {
     // console.log(this._listproducts);
   }
 
+  openProducts(content){
+    this.modal.dismissAll();
+    this.openModal(this._prod);
+    this.openProduct(content);
+  }
+
   openModalNoCategory(content, category) {
     this._category = category;
     //console.log(this.listproducts);
@@ -147,8 +154,9 @@ export class OrderComponent implements OnInit {
   editOrder(content: NgbModalRef, order) {
     this._listorder1 = JSON.parse(order.info_product);
     this._order = order;
+    console.log(this._listorder1);
+    // this.getNameSupplier(order.id_supplier);
     this._order.total_price1 = this._order.total_price;
-    this.getNameSupplier(order.id_supplier);
     this.openModal(content);
   }
 
@@ -157,11 +165,11 @@ export class OrderComponent implements OnInit {
     return product[0].name_product;
   }
 
-  getNameSupplier(id) {
-    let supplier = this.listsuppliers.filter(s => s.id == id);
-    this.suppliers = supplier[0];
-    return supplier[0].name_supplier;
-  }
+  // getNameSupplier(id) {
+  //   let supplier = this.listsuppliers.filter(s => s.id == id);
+  //   this.suppliers = supplier[0];
+  //   return supplier[0].name_supplier;
+  // }
 
   sum() {
     this.orderTotal = this.items.reduce((acc, cur) => {

@@ -5,7 +5,9 @@ import { InventoryService } from '../../inventory.service';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Stock } from '../model/stock';
+import { ExcelService } from '../../../../shared/services/export.service';
 import { forkJoin } from 'rxjs';
+
 
 @Component({
   selector: 'app-view-product',
@@ -16,12 +18,14 @@ export class ViewProductComponent implements OnInit {
   product: Product;
   stocks: Stock[];
   stockForm: Stock;
+  download: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private inventoryService: InventoryService,
     private notifierService: NotifierService,
     private modal: NgbModal,
+
   ) {
     this.product = new Product();
     this.stockForm = new Stock();
@@ -78,10 +82,6 @@ export class ViewProductComponent implements OnInit {
         });;
         this.documo = this.stocks.length;
     });
-  }
-
-  exported(){
-      this.notifierService.notify('warning', "Export couldn't be generated, try again later");
   }
 
 }
