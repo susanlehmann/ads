@@ -80,7 +80,7 @@ export class AddSupplierComponent implements OnInit {
 	}
 
 	save(): void {
-    if (!this.form.firstName) {
+    if (!this.form.name_supplier) {
       this.notifierService.notify('error', 'First name is required');
       document.querySelector('input[name="name_supplier"]').classList.add('is-invalid');
       return;
