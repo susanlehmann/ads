@@ -19,7 +19,8 @@
               <span class="btn btn-info" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
               (viewDateChange)="viewDateChange($event)"><i class="fa fa-angle-left"></i></span>
               <span class="btn btn-info" [class.active]="isToday" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="viewDateChange($event)">Today</span>
-              <span class="btn btn-info">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
+              <input class="form-control invisible position-absolute" ngbDatepicker name="dp" [(ngModel)]="d" (ngModelChange)="viewDateChange($event)"  #dp="ngbDatepicker">
+              <span class="btn btn-info" (click)="dp.open()">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</span>
               <span class="btn btn-info" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
               (viewDateChange)="viewDateChange($event)"><i class="fa fa-angle-right"></i></span>
             </div>

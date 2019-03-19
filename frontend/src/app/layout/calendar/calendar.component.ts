@@ -39,6 +39,7 @@ export class CalendarComponent implements OnInit {
 	allStaff: any[];
 	isToday = true;
 	loadData$;
+	d;
 
 	constructor(
 		private staffService: StaffService,
@@ -137,6 +138,10 @@ export class CalendarComponent implements OnInit {
 	}
 
 	viewDateChange(date) {
+		if (!(date instanceof Date)) {
+			date = new Date(date.year, date.month - 1, date.day);
+			this.viewDate = date;
+		}
 		this.isToday = this.dateAdapter.startOfDay(date).getTime() === this.dateAdapter.startOfDay(new Date()).getTime();
 		const hiddenEvent = this.events.filter(e => e.cssClass === 'd-none' && e.start == this.dateAdapter.startOfDay(date))[0];
 		if (!hiddenEvent) {
