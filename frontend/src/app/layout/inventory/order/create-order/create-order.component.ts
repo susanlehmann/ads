@@ -180,10 +180,12 @@ export class CreateOrderComponent implements OnInit {
   //end
   //create-order
   create_oder(c) {
+
     var $listitem = {
       'info_product': this.items,
       'total_price': this.orderTotal,
-      'id_supplier': this.selectedsupplier.id
+      'id_supplier': this.selectedsupplier.id,
+      'id_location': this.location.id
     };
     this.OrderService.add($listitem)
       .subscribe((cate: any) => {
@@ -195,7 +197,7 @@ export class CreateOrderComponent implements OnInit {
             console.log(c + "   " +  this.listorder[this.listorder.length - 1]);
             // this.editOrder(c, this.listorder[this.listorder.length - 1]);
             this.notifierService.notify('success', 'A new order has been successfully added');
-            this.router.navigate(['/inventory/products', listbrands.id, 'view']);
+            this.router.navigate(['/inventory/orders',cate.id]);
             this.items = [];
             this.orderTotal = 0;
           });

@@ -1,9 +1,9 @@
-<ng-template #receive *ngIf=" _order.status_order == 1">
+
   <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
     <header class="_2MOTTd _1o_KVJ">
         <div class="qQ2mF7 _1eGgST hOEdLx tSvWd9">
-            <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Order P{{order.id}}</h2>
-            <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF"><span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path></svg></span></div>
+            <h2 class="_1p62pX _2wRsul _3zrjGD _1qRCLp _1OSdXv">Order P{{ordera.id}}</h2>
+            <div role="button" class="_1TG8o8 _1jCX7X _148Kg3 _27gKhW _1FszNF" [routerLink]="[ '/inventory/orders']"><span class="_2FSeuB _240vE8 RCcMXQ _3G1j0F EDA0Qt"><svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M17 1.914L16.086 1 9 8.086 1.914 1 1 1.914 8.086 9 1 16.086l.914.914L9 9.914 16.086 17l.914-.914L9.914 9z"></path></svg></span></div>
         </div>
     </header>
     <div class="_26Q8ey Pn9am0" style="display: flex; flex-direction: column;">
@@ -12,16 +12,16 @@
                 <div class="BJziWW">
                     <div class="_2PSSLB"><i class="IhToKE KVs5Uc _10B3mn"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v4h2V7c0-0.007-0.004-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.039-0.08c-0.019-0.038-0.031-0.08-0.057-0.117l-4-6C15.646,0.167,15.334,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.143,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.447,1,1,1h7v-2H2V8z M17.131,6H11V2h3.465L17.131,6z M5.535,2H9v4H2.869L5.535,2z"></path><path style="fill:#767676;" d="M23.707,18.293l-2-2C21.52,16.106,21.266,16,21,16h-1v-1c0-0.552-0.447-1-1-1h-8 c-0.553,0-1,0.448-1,1v7c0,0.552,0.447,1,1,1h1.277c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1h2.555 c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1H23c0.553,0,1-0.448,1-1v-3C24,18.735,23.895,18.48,23.707,18.293z M12,16h6v5 h-2.277c-0.346-0.596-0.984-1-1.723-1s-1.377,0.404-1.723,1H12V16z M22,21h-0.277c-0.346-0.596-0.984-1-1.723-1v-2h0.586 L22,19.414V21z"></path></g></g></svg></i>
                         <div class="_1HzH5b">Stock Ordered</div>
-                    </div>Ordered 17 Mar 2019, 23:24 at ha noi by Giang MV</div>
+                    </div>Ordered {{ ordera.created_at | date: 'dd MMM yyyy,HH MM'}} at {{ getnamelocation(ordera.id_location) }} by {{ getNameSupplier(ordera.id_supplier) }}</div>
             </div>
             <div class="_1Ipnu7 _3ubWil">
                 <button class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ"><span>Email Order</span></button><a class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ" href="https://shedul-uploads.s3.amazonaws.com/orders/39765/6da184a9-ae99-4e72-b480-a23d9715a89b.pdf" target="_blank">Download PDF</a></div>
             <div class="QRuMR4 _3U302c">
                 <div class="_1gvjFA">
-                    <div class="Oevsm9">asd</div>
+                    <div class="Oevsm9">{{ getnamelocation(ordera.id_location) }}</div>
                 </div>
                 <div class="_2kNycV">
-                    <div role="button" class="_20voDv">Cancel Order</div>
+                    <div role="button" class="_20voDv" (click)="openModal(cancel)">Cancel Order</div>
                     <div class="_159PWY">Deliver To</div><strong>ha noi</strong>
                     <div class="_2nu-sW">Default Address</div>
                     <div class="_2nu-sW">Default City</div>
@@ -29,7 +29,7 @@
                 <div class="GPGTEy">
                     <div class="A-SwpO">
                         <div>Order Total:</div>
-                        <div class="_1jHgdQ"><span>₫4</span></div>
+                        <div class="_1jHgdQ"><span>₫{{ ordera.total_price }}</span></div>
                     </div>
                     <button class="llIfVd _2fOvjP _1FszNF _3V6zo- _2DZ1oJ">Receive Stock</button>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="BJziWW">
                         <div class="_2PSSLB"><i class="IhToKE KVs5Uc _10B3mn"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><g id="Frame_-_24px"><rect style="fill:none;" width="24" height="24"></rect></g><g id="Line_Icons"><g><path style="fill:#767676;" d="M2,8h16v4h2V7c0-0.007-0.004-0.012-0.004-0.018c-0.002-0.117-0.026-0.23-0.068-0.339 c-0.011-0.028-0.025-0.053-0.039-0.08c-0.019-0.038-0.031-0.08-0.057-0.117l-4-6C15.646,0.167,15.334,0,15,0H5 C4.666,0,4.354,0.167,4.168,0.445l-4,6C0.143,6.482,0.13,6.524,0.111,6.563C0.098,6.59,0.083,6.615,0.072,6.643 C0.03,6.752,0.006,6.865,0.004,6.982C0.004,6.988,0,6.993,0,7v12c0,0.552,0.447,1,1,1h7v-2H2V8z M17.131,6H11V2h3.465L17.131,6z M5.535,2H9v4H2.869L5.535,2z"></path><path style="fill:#767676;" d="M23.707,18.293l-2-2C21.52,16.106,21.266,16,21,16h-1v-1c0-0.552-0.447-1-1-1h-8 c-0.553,0-1,0.448-1,1v7c0,0.552,0.447,1,1,1h1.277c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1h2.555 c0.347,0.595,0.984,1,1.723,1s1.376-0.405,1.723-1H23c0.553,0,1-0.448,1-1v-3C24,18.735,23.895,18.48,23.707,18.293z M12,16h6v5 h-2.277c-0.346-0.596-0.984-1-1.723-1s-1.377,0.404-1.723,1H12V16z M22,21h-0.277c-0.346-0.596-0.984-1-1.723-1v-2h0.586 L22,19.414V21z"></path></g></g></svg></i>
                             <div class="_1HzH5b">Stock Ordered</div>
-                        </div>Ordered 17 Mar 2019, 23:24 at ha noi by Giang MV</div>
+                        </div>Ordered {{ ordera.created_at | date: 'dd MMM yyyy,HH MM'}} at {{ getnamelocation(ordera.id_location) }} by {{ getNameSupplier(ordera.id_supplier) }}</div>
                 </div>
                 <div class="_1Ipnu7 _2hqPd8">
                     <button class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ"><span>Email Order</span></button><a class="pLzaWE _1FszNF _3ttzJg _2DZ1oJ" href="https://shedul-uploads.s3.amazonaws.com/orders/39765/6da184a9-ae99-4e72-b480-a23d9715a89b.pdf" target="_blank">Download PDF</a></div>
@@ -62,11 +62,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="_1A0eEb">
-                                <td class="N3OZB6 _1vLxYz"><span>ádasd</span></td>
-                                <td class="N3OZB6 _1vLxYz"><span>2</span></td>
-                                <td class="N3OZB6 _1vLxYz"><span class="_30USZf _1tRUAi">₫2</span></td>
-                                <td class="N3OZB6 _1vLxYz"><span class="_2RC8PK _1tRUAi">₫4</span></td>
+                            <tr class="_1A0eEb" *ngFor="let a of listorder">
+                                <td class="N3OZB6 _1vLxYz"><span>{{a.name_product}}</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span>{{a.qty_product}}</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span class="_30USZf _1tRUAi">₫{{a.price_product}}</span></td>
+                                <td class="N3OZB6 _1vLxYz"><span class="_2RC8PK _1tRUAi">₫{{a.qty_product * a.price_product}}</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -74,15 +74,23 @@
             </div>
         </div>
     </div>
-    <div class=""><span class="YD8xyG tSvWd9"><button class="_2pk64b _17w36h _1FszNF _3V6zo- _2pk64b _2DZ1oJ" role="button" style="flex-grow: 1;"><div class="_1pMHh4"><div class="_30gVg5"><div class="_2Uatr3">Receive Stock</div></div><div class="_2rNTew"><div>Order total</div><span class="_2zMr_F">₫4</span></div>
+    <div class="">
+      <span class="YD8xyG tSvWd9">
+        <button class="_2pk64b _17w36h _1FszNF _3V6zo- _2pk64b _2DZ1oJ" role="button" style="flex-grow: 1;">
+          <div class="_1pMHh4">
+            <div class="_30gVg5">
+              <div class="_2Uatr3">Receive Stock</div>
+            </div>
+            <div class="_2rNTew">
+              <div>Order total</div>
+              <span class="_2zMr_F">₫{{ ordera.total_price }}</span>
+            </div>
+          </div>
+        </button>
+      </span>
+    </div>
   </div>
-  </button>
-  </span>
-  </div>
-  </div>
-</ng-template>
-<ng-template #confirm *ngIf=" _order.status_order == 2">
-  <div class="GVEv-Y" style="display: flex; flex-direction: column;">
+  <!-- <div class="GVEv-Y" style="display: flex; flex-direction: column;" *ngIf=" _order.status_order == 2">
     <div class="_2GveWK">
         <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
             <header class="_2MOTTd _1o_KVJ">
@@ -168,9 +176,8 @@
     </div>
 </div>
 </div>
-</div>
-</ng-template>
-<ng-template #close *ngIf=" _order.status_order == 3">
+</div> -->
+<!-- <ng-template #close *ngIf=" _order.status_order == 3">
   <div class="tCGsZl" style="display: flex; flex-direction: column; flex-shrink: 1; flex-grow: 1;">
     <header class="_2MOTTd _1o_KVJ">
         <div class="qQ2mF7 _1eGgST hOEdLx tSvWd9">
@@ -252,7 +259,7 @@
         </div>
     </div>
 </div>
-</ng-template>
+</ng-template> -->
 <ng-template #cancel let-modal>
   <div class="modal-header" [ngClass]="isCreate ? '' : 'sticky'">
     <h4 class="modal-title text-xs-center offset-sm-4" id="modal-basic-title" style="font-size: 24px;font-weight: 300;color: #24334A;">Cancel Order</h4>
