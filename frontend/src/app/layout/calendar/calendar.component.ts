@@ -57,26 +57,30 @@ export class CalendarComponent implements OnInit {
 	ngOnInit() {
 		this.loadData$.subscribe(rs => {
 			this.allStaff = rs[0].user.map(this.mapStaff).sort((a, b) => a.sortOrder - b.sortOrder);
+			let evts = [];
 
-			const evts = rs[1].appoint.map(a => {
-				const info = JSON.parse(a.info_appoint)[0];
-				const staff = this.getStaffById(info.staff);
-				const converted = this.getStartAndEnd(a.date_appoint, info.startTime.toString(), info.duration);
-				return {
-					id: a.id,
-					meta: {
-						user: staff
-					},
-					title: 'Walk-In',
-					color: staff.color,
-					start: converted.str,
-					end: converted.end,
-					resizable: {
-						beforeStart: true,
-						afterEnd: true
-					},
-					draggable: true,
-				};
+			rs[1].appoint.forEach(a => {
+				const events = JSON.parse(a.info_appoint);
+				events.forEach(e => {
+					const staff = this.getStaffById(e.staff);
+					const converted = this.getStartAndEnd(a.date_appoint, e.startTime.toString(), e.duration);
+					evts.push({
+						id: a.id,
+						meta: {
+							user: staff
+						},
+						title: 'Walk-In',
+						color: staff.color,
+						start: converted.str,
+						end: converted.end,
+						resizable: {
+							beforeStart: true,
+							afterEnd: true
+						},
+						draggable: true,
+					});
+				});
+				
 			});
 			this.allEvents = [this.getHiddenEvent(new Date()), ...evts];
 			this.events = this.allEvents;
